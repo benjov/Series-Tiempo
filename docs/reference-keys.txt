@@ -1,0 +1,11 @@
+fig:fig1
+fig:fig2
+fig:fig3
+fig:fig4
+fig:fig5
+eq:difflog
+eq:TC
+eq:TCDiffLog
+introducción
+a-la-naturaleza-de-los-datos-de-series-de-tiempo
+b-ejemplos-y-aplicaciones-de-las-series-de-tiempo

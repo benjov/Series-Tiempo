@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Introducción | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014),...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Introducción | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014),...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Introducción | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014),...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="active" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introducción" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Introducción<a class="anchor" aria-label="anchor" href="#introducci%C3%B3n"><i class="fas fa-link"></i></a>
+</h1>
+<p>Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgassner, Wolters, y Hassler (2012), Lutkepohl (2005), Wei (2019), entre otros. En algunos casos se incorpora información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).</p>
+<p>El objetivo de este documento es proporcionar un conjunto de apuntes o notas que sirvan de apoyo para la clase de Series de Tiempo en la Facultad de Economía de la UNAM. Por esta razón, no deben considerarse como notas exhaustivas o como un sustituto de la clase y los laboratorios. Asimismo, es deseable que los alumnos puedan aportar sus observaciones y correcciones a estas notas, las observaciones a estas notas son esperadas y siempre serán bienvenidas y agradecidas.</p>
+<p>Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo <a href="mailto:benjov@ciencias.unam.mx" class="email">benjov@ciencias.unam.mx</a> o <a href="mailto:omarxalpha@gmail.com" class="email">omarxalpha@gmail.com</a>.</p>
+<p>En estas notas se estudian los temas que típicamente son incluidos como parte de un curso estándar de análisis de series de tiempo y agrega otros tantos, los cuales son:</p>
+<ol style="list-style-type: decimal">
+<li><p>Modelos estacionarios univaraidos: <span class="math inline">\(AR(p)\)</span>, <span class="math inline">\(MA(q)\)</span>, <span class="math inline">\(ARMA(p, q)\)</span> y <span class="math inline">\(ARIMA(p, d, q)\)</span>, y filtros para eliminar estacionalidad, entre otros;</p></li>
+<li><p>Modelos no estacionarios univariados y Pruebas de raíz unitaria (o pruebas para determinar que una serie es estacionaria);</p></li>
+<li><p>Modelos multivariados, entre lo que se incluye a los Vectores Autoregresivos (VAR) y los procedimientos de Cointegración</p></li>
+<li><p>Modelación de series univariadas con errores con heterocedasticidad y autocorrelación: ARCH(r), GARCH(n), etc.;</p></li>
+<li><p>Modelos multivariados con errores con heterocedasticidad y autocorrelación: M-GARCH y M-GARCH-M;</p></li>
+<li><p>Casos particulares en los que las series incluidas en un modelo multivariado no son del mismo orden de integración, conocidos como modelos ADRL.</p></li>
+<li><p>Modelos de Datos Panel en series de tiempo, y</p></li>
+<li><p>Modelos no lineales como los de cambios de régimen.</p></li>
+</ol>
+<div id="a-la-naturaleza-de-los-datos-de-series-de-tiempo" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> a) La naturaleza de los datos de Series de Tiempo<a class="anchor" aria-label="anchor" href="#a-la-naturaleza-de-los-datos-de-series-de-tiempo"><i class="fas fa-link"></i></a>
+</h2>
+<p>El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está expuesto a observaciones de los mercados financieros, indicadores de empleo, índices o indicadores del nivel de producción, índices de precios, etc. En otros campos de las ciencias sociales se emplea el análisis de series de tiempo para analizar
+la evolución de la población, los nacimientos, o el número de personas con matriculas escolares. Finalmente, en las ciencias exactas se pueden encontrar casos como los de un epidemiólogo que puede estar interesado en el número de casos de influenza observados en algún periodo de tiempo dado y si a estos se les puede asociar con algún tipo de estacionalidad o si se trata del inicio de un fenómeno atípico.</p>
+<p>La primera aproximación que se suele tener a las series de tiempo es mediante el exámen de datos puestos en una gráfica, en la cual uno de los ejes es el tiempo y el otro es el valor tomado por la variable. No obstante, en este tipo de exámenes existen dos enfoques. Por un lado, existe el efoque de la importancia del tiempo, el cual consiste en reconocer cómo lo que sucede hoy es afectado por lo que pasó ayer o, en general, en periodos pasados, o cómo lo que pasa hoy afectará los eventos futuros. Por otro lado, existe el enfoque del análisis frecuentista o de frecuencia, mediante el cual se busca reconocer la importancia que tiene para los investigadores los ciclos (estacionales, de crisis económicas, etc.)</p>
+</div>
+<div id="b-ejemplos-y-aplicaciones-de-las-series-de-tiempo" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> b) Ejemplos y aplicaciones de las Series de Tiempo<a class="anchor" aria-label="anchor" href="#b-ejemplos-y-aplicaciones-de-las-series-de-tiempo"><i class="fas fa-link"></i></a>
+</h2>
+<p>Un primer ejemplo que puede ilustrar la presencia de los dos tipos de
+enfoques antes mencionadas es la Figura <a href="introducci%C3%B3n.html#fig:fig1">1.1</a>. En esta figura se muestra la evolución del Indicador Global de la Actividad Económica (IGAE) en su versión global o del total de la economía y en su versión únicamente para las actividades primarias entre enero de 2002 y mayo de 2021.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig1"></span>
+<img src="bookdown-demo_files/figure-html/fig1-1.png" alt="Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2021" width="672"><p class="caption">
+Figure 1.1: Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2021
+</p>
+</div>
+<p>Como se puede observar, el IGAE del total de la economía muestra, principalmente, que el enfoque del tiempo es más relevante. Es decir, que existe cierta persistencia en el indicador, lo que significa que la economía crece en razón del crecimiento reportado en periodos pasados. No obstante, lo que no podemos reconocer es que los eventos futuros tienen un efecto en el desempeño de la economía hoy día. Así, no es común observar cambios abruptos
+del indicador, salvo por la crisis global de 2008 y la reciente crisis causada
+por la Covid-19.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig2"></span>
+<img src="bookdown-demo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2021" width="672"><p class="caption">
+Figure 1.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2021
+</p>
+</div>
+<p>Por el contrario, el IGAE de las actividades primarias muestra una presencia
+significativa de la importancia de la frecuencia. No pasa desapercibido que
+existen muchos ciclos en la evolución del indicador. Algo que suena común
+en las actividades primarias, cuya producción depende de eventos que son
+ciclícos agrícolas asociados con el clima u otros factores determinantes de la
+oferta de productos agrícolas. Otro factor que puede incluir en el indicador
+son elementos de demanda, más que los de oferta. Por ejemplo, el consumo
+de alimentos típicos de algunas temporadas del año.</p>
+<p>Como segundo ejemplo, en la Figura <a href="introducci%C3%B3n.html#fig:fig2">1.2</a> se ilustra la evolución reciente del índice de Confianza del Consumidor (ICC) en dos de sus versiones: i) el Índice global y ii) el Índice de confianza de los consumidores cuando estos consideran la situación actual en la economía en relación el año anterior.</p>
+<p>Destacamos que el ICC mide las expectativas de los consumidores en
+razón de la información pasada y de la esperada, segun dichos consumidores.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig3"></span>
+<img src="bookdown-demo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2021 " width="672"><p class="caption">
+Figure 1.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2021
+</p>
+</div>
+<p>Así, es probable que las dos series de tiempo exhiban un gran peso para los
+eventos pasados, pero a la vez, un componente -probablemente menor- del
+componente de frecuencia. Esto último en razón de que los consumidores
+suelen considerar en sus expectativas de consumo los periódos cíclicos de la
+economía: temporadas navideñaas, pagos de colegiaturas, etc. Este sengundo
+ejemplo tambien ilustra que la confianza del consumidor no necesariamente
+está directamente correlacionada con el desempeño de la economía.</p>
+<p>Como tercer ejemplo se muestra la evolución de dos series. La Figura <a href="introducci%C3%B3n.html#fig:fig3">1.3</a> ilustra el comportamiento reciente de dos indicadores que son referencia para los inversionistas. Por un lado, se ubica el índice de Precios y Cotizaciones de la BMV (IPC), el cuál refleja el valor de las acciones de empresas que cotizan en la BMV y el volumen de acciones comercializadas, en conjunto. De esta forma, se ha interpretado que el IPC refleja el rendimiento del capital promedio invertido en las empresas que cotizan en la BMV.</p>
+<p>Por otro lado, en la Figura <a href="introducci%C3%B3n.html#fig:fig3">1.3</a> se presenta la evolución del Tipo de Cambio (TDC){indicador financiero que se suele utilizar como medio de reserva de valor. Esto, en razón de que el TDC es conocido como un instrumento que en momentos de crisis toma valores contraciclicos de la economía mexicana. No obstante, ambos indicadores no son comparables. Para hacerlos comparbles
+en la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> se presentan en versión índice con una base en el primer mes de la muestra.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig4"></span>
+<img src="bookdown-demo_files/figure-html/fig4-1.png" alt="Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2021 " width="672"><p class="caption">
+Figure 1.4: Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2021
+</p>
+</div>
+<p>En la perspectiva de la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> se puede apreciar que el TDC no es tan rentable, ya que una inversión en la BMV mediante el IPC, en el largo plazo, muestra más redimientos. Asimismo, la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> ilustra que en ambas series se observa un dominio de la condición de tiempo y no uno de frecuencia. Es decir, tanto el IPC como el TDC no responden a condiciones como ciclos o temporadas que si son observables en actividades económicas como las
+primarias.</p>
+<p>Finalmente, la Figura <a href="introducci%C3%B3n.html#fig:fig5">1.5</a> ilustra un característica que también resulta de gran interés en el analásis de series de tiempo: los datos de alta frecuencia y de comportamiento no regular. Como se puede observar, en la Figura <a href="introducci%C3%B3n.html#fig:fig5">1.5</a> se muestran las diferencias logarítmicas de las series de IGAE de la actividad total, el IPC y el TDC.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig5"></span>
+<img src="bookdown-demo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2021 " width="672"><p class="caption">
+Figure 1.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2021
+</p>
+</div>
+<p>Dichas diferencia se pueden interpretar como una tasa de crecimiento de las series por las siguientes razones. Consideremos una serie de tiempo dada por <span class="math inline">\(y_t\)</span>, cuya versión logarítmica es <span class="math inline">\(ln(y_t\)</span>). De esta forma, la diferencia logarítmica esta dada por la ecuación <a href="introducci%C3%B3n.html#eq:difflog">(1.1)</a>:</p>
+<p><span class="math display" id="eq:difflog">\[\begin{equation}
+   \Delta ln(y_t) = ln(y_t) - ln(y_{t-1}) = ln \left( \frac{y_t}{y_{t-1}} \right)
+   \tag{1.1}
+\end{equation}\]</span></p>
+<p>Ahora bien, si retomamos la definición de tasa de crecimiento (TC) de una serie de tiempo <span class="math inline">\(y_t\)</span> entre el periodo <span class="math inline">\(t\)</span> y <span class="math inline">\(t-1\)</span> podemos obtener que:</p>
+<p><span class="math display" id="eq:TC">\[\begin{equation}
+    TC = \frac{y_t - y_{t-1}}{y_{t-1}} = \frac{y_t}{y_{t-1}} - 1
+    \tag{1.2}
+\end{equation}\]</span></p>
+<p>De esta forma, si tomamos el logarítmo de la expresión de la ecuación <a href="introducci%C3%B3n.html#eq:TC">(1.2)</a> obtenemos la siguiente aproximación:</p>
+<p><span class="math display" id="eq:TCDiffLog">\[\begin{equation}
+    \frac{y_t}{y_{t-1}} -1  \approx ln \left( \frac{y_t}{y_{t-1}} \right) = ln(y_t) - ln(y_{t-1})
+    \tag{1.3}
+\end{equation}\]</span></p>
+<p>La ecuación <a href="introducci%C3%B3n.html#eq:TCDiffLog">(1.3)</a> es cierta cuando los valores de <span class="math inline">\(y_t\)</span> y <span class="math inline">\(y_{t-1}\)</span> son muy parecidos, es decir, cuando las variaciones no son tan abruptas. Otra forma de interpretar la ecuación <a href="introducci%C3%B3n.html#eq:TCDiffLog">(1.3)</a> es que para tasas de crecimiento pequeñas, se puede utilizar como una buena aproximación a la diferencia logarítmica mostrada en la ecuación <a href="introducci%C3%B3n.html#eq:difflog">(1.1)</a>.</p>
+<p>En la Figura <a href="introducci%C3%B3n.html#fig:fig5">1.5</a> se reportan las diferencias logarítmicas del IGAE, IPC y TDC, todos, como una media de distitntos tipos de redimientos. Es decir, podemos decir que un capitalista promedio (suponiendo que solo puede invertir en la actividad económica, en la bolsa o en el dólar), puede observar que le es más redituable en función de sus preferencias.</p>
+<p>Notése que la dinámica de las variaciones de cada una de las series es significativamente diferente. Destaca que el TDC es una de las variables que, en general, no muestra grandes cambios a lo largo del tiempo. No obstante, se han observado cambios radicales, cuando menos en el año 2008. Lo anterior, son caracteristicas que se han observado para el IPC. En cambio, el IGAE muestra un comportamiento más estable o estacionario.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Análisis de Series de Tiempo</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducci%C3%B3n"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="nav-link" href="#a-la-naturaleza-de-los-datos-de-series-de-tiempo"><span class="header-section-number">1.1</span> a) La naturaleza de los datos de Series de Tiempo</a></li>
+<li><a class="nav-link" href="#b-ejemplos-y-aplicaciones-de-las-series-de-tiempo"><span class="header-section-number">1.2</span> b) Ejemplos y aplicaciones de las Series de Tiempo</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-07.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
