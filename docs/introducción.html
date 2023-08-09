@@ -44,6 +44,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="active" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
 </ul>
 
         <div class="book-extra">
@@ -69,24 +70,23 @@
 <li><p>Modelos de Datos Panel en series de tiempo, y</p></li>
 <li><p>Modelos no lineales como los de cambios de régimen.</p></li>
 </ol>
-<div id="a-la-naturaleza-de-los-datos-de-series-de-tiempo" class="section level2" number="1.1">
+<div id="la-naturaleza-de-los-datos-de-series-de-tiempo" class="section level2" number="1.1">
 <h2>
-<span class="header-section-number">1.1</span> a) La naturaleza de los datos de Series de Tiempo<a class="anchor" aria-label="anchor" href="#a-la-naturaleza-de-los-datos-de-series-de-tiempo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> La naturaleza de los datos de Series de Tiempo<a class="anchor" aria-label="anchor" href="#la-naturaleza-de-los-datos-de-series-de-tiempo"><i class="fas fa-link"></i></a>
 </h2>
-<p>El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está expuesto a observaciones de los mercados financieros, indicadores de empleo, índices o indicadores del nivel de producción, índices de precios, etc. En otros campos de las ciencias sociales se emplea el análisis de series de tiempo para analizar
-la evolución de la población, los nacimientos, o el número de personas con matriculas escolares. Finalmente, en las ciencias exactas se pueden encontrar casos como los de un epidemiólogo que puede estar interesado en el número de casos de influenza observados en algún periodo de tiempo dado y si a estos se les puede asociar con algún tipo de estacionalidad o si se trata del inicio de un fenómeno atípico.</p>
-<p>La primera aproximación que se suele tener a las series de tiempo es mediante el exámen de datos puestos en una gráfica, en la cual uno de los ejes es el tiempo y el otro es el valor tomado por la variable. No obstante, en este tipo de exámenes existen dos enfoques. Por un lado, existe el efoque de la importancia del tiempo, el cual consiste en reconocer cómo lo que sucede hoy es afectado por lo que pasó ayer o, en general, en periodos pasados, o cómo lo que pasa hoy afectará los eventos futuros. Por otro lado, existe el enfoque del análisis frecuentista o de frecuencia, mediante el cual se busca reconocer la importancia que tiene para los investigadores los ciclos (estacionales, de crisis económicas, etc.)</p>
+<p>El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está expuesto a información recopilada de los mercados financieros, indicadores de empleo, índices o indicadores del nivel de producción, índices de precios, etc. En otros campos de las ciencias sociales se emplea el análisis de series de tiempo para analizar la evolución de la población, los nacimientos, o el número de personas con matriculas escolares. Finalmente, en las ciencias exactas se pueden encontrar casos como los de un epidemiólogo que puede estar interesado en el número de casos de influenza observados en algún periodo de tiempo dado y si a estos se les puede asociar con algún tipo de estacionalidad o si se trata del inicio de un fenómeno atípico.</p>
+<p>La primera aproximación que se suele tener a las series de tiempo es mediante el examen de datos puestos en una gráfica, en la cual uno de los ejes es el tiempo y el otro es el valor tomado por la variable. No obstante, en este tipo de exámenes existen dos enfoques. Por un lado, existe el efoque de la importancia del tiempo, el cual consiste en reconocer cómo lo que sucede hoy es afectado por lo que pasó ayer o, en general, en periodos pasados, o cómo lo que pasa hoy afectará los eventos futuros. Por otro lado, existe el enfoque del análisis frecuentista o de frecuencia, mediante el cual se busca reconocer la importancia que tiene para los investigadores los ciclos –por ejemplo, ciclos estacionales, momentos de crisis económicas, etc.–</p>
 </div>
-<div id="b-ejemplos-y-aplicaciones-de-las-series-de-tiempo" class="section level2" number="1.2">
+<div id="ejemplos-y-aplicaciones-de-las-series-de-tiempo" class="section level2" number="1.2">
 <h2>
-<span class="header-section-number">1.2</span> b) Ejemplos y aplicaciones de las Series de Tiempo<a class="anchor" aria-label="anchor" href="#b-ejemplos-y-aplicaciones-de-las-series-de-tiempo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> Ejemplos y aplicaciones de las Series de Tiempo<a class="anchor" aria-label="anchor" href="#ejemplos-y-aplicaciones-de-las-series-de-tiempo"><i class="fas fa-link"></i></a>
 </h2>
 <p>Un primer ejemplo que puede ilustrar la presencia de los dos tipos de
-enfoques antes mencionadas es la Figura <a href="introducci%C3%B3n.html#fig:fig1">1.1</a>. En esta figura se muestra la evolución del Indicador Global de la Actividad Económica (IGAE) en su versión global o del total de la economía y en su versión únicamente para las actividades primarias entre enero de 2002 y mayo de 2021.</p>
+enfoques antes mencionadas es la Figura <a href="introducci%C3%B3n.html#fig:fig1">1.1</a>. En esta figura se muestra la evolución del Indicador Global de la Actividad Económica (IGAE) en su versión global o del total de la economía y en su versión únicamente para las actividades primarias entre enero de 2002 y mayo de 2023.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig1"></span>
-<img src="bookdown-demo_files/figure-html/fig1-1.png" alt="Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2021" width="672"><p class="caption">
-Figure 1.1: Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2021
+<img src="bookdown-demo_files/figure-html/fig1-1.png" alt="Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023" width="672"><p class="caption">
+Figure 1.1: Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023
 </p>
 </div>
 <p>Como se puede observar, el IGAE del total de la economía muestra, principalmente, que el enfoque del tiempo es más relevante. Es decir, que existe cierta persistencia en el indicador, lo que significa que la economía crece en razón del crecimiento reportado en periodos pasados. No obstante, lo que no podemos reconocer es que los eventos futuros tienen un efecto en el desempeño de la economía hoy día. Así, no es común observar cambios abruptos
@@ -94,41 +94,28 @@ del indicador, salvo por la crisis global de 2008 y la reciente crisis causada
 por la Covid-19.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig2"></span>
-<img src="bookdown-demo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2021" width="672"><p class="caption">
-Figure 1.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2021
+<img src="bookdown-demo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023" width="672"><p class="caption">
+Figure 1.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023
 </p>
 </div>
-<p>Por el contrario, el IGAE de las actividades primarias muestra una presencia
-significativa de la importancia de la frecuencia. No pasa desapercibido que
-existen muchos ciclos en la evolución del indicador. Algo que suena común
-en las actividades primarias, cuya producción depende de eventos que son
-ciclícos agrícolas asociados con el clima u otros factores determinantes de la
-oferta de productos agrícolas. Otro factor que puede incluir en el indicador
-son elementos de demanda, más que los de oferta. Por ejemplo, el consumo
-de alimentos típicos de algunas temporadas del año.</p>
+<p>Por el contrario, el IGAE de las actividades primarias muestra una presencia significativa de la importancia de la frecuencia. No pasa desapercibido que existen muchos ciclos en la evolución del indicador. Algo que suena común
+en las actividades primarias, cuya producción depende de eventos que son ciclícos agrícolas asociados con el clima u otros factores determinantes de la oferta de productos agrícolas. Otro factor que puede incluir en el indicador
+son elementos de demanda, más que los de oferta. Por ejemplo, el consumo de alimentos típicos de algunas temporadas del año.</p>
 <p>Como segundo ejemplo, en la Figura <a href="introducci%C3%B3n.html#fig:fig2">1.2</a> se ilustra la evolución reciente del índice de Confianza del Consumidor (ICC) en dos de sus versiones: i) el Índice global y ii) el Índice de confianza de los consumidores cuando estos consideran la situación actual en la economía en relación el año anterior.</p>
-<p>Destacamos que el ICC mide las expectativas de los consumidores en
-razón de la información pasada y de la esperada, segun dichos consumidores.</p>
+<p>Destacamos que el ICC mide las expectativas de los consumidores en razón de la información pasada y de la esperada, segun dichos consumidores.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig3"></span>
-<img src="bookdown-demo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2021 " width="672"><p class="caption">
-Figure 1.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2021
+<img src="bookdown-demo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023" width="672"><p class="caption">
+Figure 1.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023
 </p>
 </div>
-<p>Así, es probable que las dos series de tiempo exhiban un gran peso para los
-eventos pasados, pero a la vez, un componente -probablemente menor- del
-componente de frecuencia. Esto último en razón de que los consumidores
-suelen considerar en sus expectativas de consumo los periódos cíclicos de la
-economía: temporadas navideñaas, pagos de colegiaturas, etc. Este sengundo
-ejemplo tambien ilustra que la confianza del consumidor no necesariamente
-está directamente correlacionada con el desempeño de la economía.</p>
+<p>Así, es probable que las dos series de tiempo exhiban un gran peso para los eventos pasados, pero a la vez, un componente –probablemente menor– del componente de frecuencia. Esto último en razón de que los consumidores suelen considerar en sus expectativas de consumo los periódos cíclicos de la economía: temporadas navideñaas, pagos de colegiaturas, etc. Este sengundo ejemplo tambien ilustra que la confianza del consumidor no necesariamente está directamente correlacionada con el desempeño de la economía.</p>
 <p>Como tercer ejemplo se muestra la evolución de dos series. La Figura <a href="introducci%C3%B3n.html#fig:fig3">1.3</a> ilustra el comportamiento reciente de dos indicadores que son referencia para los inversionistas. Por un lado, se ubica el índice de Precios y Cotizaciones de la BMV (IPC), el cuál refleja el valor de las acciones de empresas que cotizan en la BMV y el volumen de acciones comercializadas, en conjunto. De esta forma, se ha interpretado que el IPC refleja el rendimiento del capital promedio invertido en las empresas que cotizan en la BMV.</p>
-<p>Por otro lado, en la Figura <a href="introducci%C3%B3n.html#fig:fig3">1.3</a> se presenta la evolución del Tipo de Cambio (TDC){indicador financiero que se suele utilizar como medio de reserva de valor. Esto, en razón de que el TDC es conocido como un instrumento que en momentos de crisis toma valores contraciclicos de la economía mexicana. No obstante, ambos indicadores no son comparables. Para hacerlos comparbles
-en la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> se presentan en versión índice con una base en el primer mes de la muestra.</p>
+<p>Por otro lado, en la Figura <a href="introducci%C3%B3n.html#fig:fig3">1.3</a> se presenta la evolución del Tipo de Cambio (TDC) –indicador financiero que se suele utilizar como medio de reserva de valor–. Esto, en razón de que el TDC es conocido como un instrumento que en momentos de crisis toma valores contraciclicos de la economía mexicana. No obstante, ambos indicadores no son comparables. Para hacerlos comparbles en la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> se presentan en versión índice con una base en el primer mes de la muestra.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig4"></span>
-<img src="bookdown-demo_files/figure-html/fig4-1.png" alt="Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2021 " width="672"><p class="caption">
-Figure 1.4: Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2021
+<img src="bookdown-demo_files/figure-html/fig4-1.png" alt="Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2023 " width="672"><p class="caption">
+Figure 1.4: Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2023
 </p>
 </div>
 <p>En la perspectiva de la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> se puede apreciar que el TDC no es tan rentable, ya que una inversión en la BMV mediante el IPC, en el largo plazo, muestra más redimientos. Asimismo, la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> ilustra que en ambas series se observa un dominio de la condición de tiempo y no uno de frecuencia. Es decir, tanto el IPC como el TDC no responden a condiciones como ciclos o temporadas que si son observables en actividades económicas como las
@@ -136,8 +123,8 @@ primarias.</p>
 <p>Finalmente, la Figura <a href="introducci%C3%B3n.html#fig:fig5">1.5</a> ilustra un característica que también resulta de gran interés en el analásis de series de tiempo: los datos de alta frecuencia y de comportamiento no regular. Como se puede observar, en la Figura <a href="introducci%C3%B3n.html#fig:fig5">1.5</a> se muestran las diferencias logarítmicas de las series de IGAE de la actividad total, el IPC y el TDC.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig5"></span>
-<img src="bookdown-demo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2021 " width="672"><p class="caption">
-Figure 1.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2021
+<img src="bookdown-demo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023" width="672"><p class="caption">
+Figure 1.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023
 </p>
 </div>
 <p>Dichas diferencia se pueden interpretar como una tasa de crecimiento de las series por las siguientes razones. Consideremos una serie de tiempo dada por <span class="math inline">\(y_t\)</span>, cuya versión logarítmica es <span class="math inline">\(ln(y_t\)</span>). De esta forma, la diferencia logarítmica esta dada por la ecuación <a href="introducci%C3%B3n.html#eq:difflog">(1.1)</a>:</p>
@@ -163,13 +150,13 @@ Figure 1.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indica
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Análisis de Series de Tiempo</a></div>
-<div class="empty"></div>
+<div class="next"><a href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#introducci%C3%B3n"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="nav-link" href="#a-la-naturaleza-de-los-datos-de-series-de-tiempo"><span class="header-section-number">1.1</span> a) La naturaleza de los datos de Series de Tiempo</a></li>
-<li><a class="nav-link" href="#b-ejemplos-y-aplicaciones-de-las-series-de-tiempo"><span class="header-section-number">1.2</span> b) Ejemplos y aplicaciones de las Series de Tiempo</a></li>
+<li><a class="nav-link" href="#la-naturaleza-de-los-datos-de-series-de-tiempo"><span class="header-section-number">1.1</span> La naturaleza de los datos de Series de Tiempo</a></li>
+<li><a class="nav-link" href="#ejemplos-y-aplicaciones-de-las-series-de-tiempo"><span class="header-section-number">1.2</span> Ejemplos y aplicaciones de las Series de Tiempo</a></li>
 </ul>
 
       <div class="book-extra">
@@ -186,7 +173,7 @@ Figure 1.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indica
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-07.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
