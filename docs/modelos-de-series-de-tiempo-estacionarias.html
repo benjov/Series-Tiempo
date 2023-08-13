@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="3.1 Definición de ergodicidad y estacionariedad A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="3.1 Definición de ergodicidad y estacionariedad A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="3.1 Definición de ergodicidad y estacionariedad A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="active" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-de-series-de-tiempo-estacionarias" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias<a class="anchor" aria-label="anchor" href="#modelos-de-series-de-tiempo-estacionarias"><i class="fas fa-link"></i></a>
+</h1>
+<div id="definición-de-ergodicidad-y-estacionariedad" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Definición de ergodicidad y estacionariedad<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-de-ergodicidad-y-estacionariedad"><i class="fas fa-link"></i></a>
+</h2>
+<p>A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y ocuparemos a <span class="math inline">\(X_t\)</span> en lugar de <span class="math inline">\(Z_t\)</span> como objeto de nuestro análisis. Con <span class="math inline">\(X_t\)</span> denotaremos a una serie de tiempo, ya que con <span class="math inline">\(Z_t\)</span> denotareemos a una variable, sin que ella fuera necesariamente una serie de tiempo en los términos que a continuación discutimos. Asimismo, iniciaremos por establecer una serie de definiciones.</p>
+<p>De esta forma, definiremos a una <em>serie de tiempo</em> como un vector de variables aleatorias de dimensión <span class="math inline">\(T\)</span>, dado como:
+<span class="math display" id="eq:Serie0">\[\begin{equation}
+    X_1, X_2, X_3, \ldots ,X_T
+    \tag{3.1}
+\end{equation}\]</span></p>
+<p>Cada una de las <span class="math inline">\(X_t\)</span> (<span class="math inline">\(t = 1, 2, \ldots, T\)</span>) consideradas como una variable aleatoria. Así, también podemos denotar a la serie de tiempo como:
+<span class="math display" id="eq:Serie">\[\begin{equation}
+    \{ X_t \}^T_{t = 1}
+    \tag{3.2}
+\end{equation}\]</span></p>
+<p>Es decir, definiremos a <em>una serie de tiempo como una realización de un proceso estocástico</em> –o un Proceso Generador de Datos (PGD). Consideremos una muestra de los múlples posibles resultados de muestras de tamaño <span class="math inline">\(T\)</span>, la colección dada por:
+<span class="math display" id="eq:Serie1">\[\begin{equation}
+    \{X^{(1)}_1, X^{(1)}_2, \ldots, X^{(1)}_T\}
+    \tag{3.3}
+\end{equation}\]</span></p>
+<p>Digamos que la ecuación <a href="modelos-de-series-de-tiempo-estacionarias.html#eq:Serie1">(3.3)</a> es una de las tantas posibles resultantes del proceso estocástico o PGD. Eventualmente podríamos estar dispuestos a observar este proceso indefinidamente, de forma tal que estemos interesados en observar a la secuencia dada por <span class="math inline">\(\{ X^{(1)}_t \}^{\infty}_{t = 1}\)</span>, lo cual no dejaría se ser sólo una de las tantas realizaciones o secuencias del proceso estocástico original.</p>
+<p>Tan solo por poner un ejemplo, podríamos observar las siguientes realizaciones del mismo PGD:
+<span class="math display">\[\begin{eqnarray*}
+    &amp; \{X^{(2)}_1, X^{(2)}_2, \ldots, X^{(2)}_T\} &amp; \\
+    &amp; \{X^{(3)}_1, X^{(3)}_2, \ldots, X^{(3)}_T\} &amp; \\
+    &amp; \{X^{(4)}_1, X^{(4)}_2, \ldots, X^{(4)}_T\} &amp; \\
+    &amp; \vdots &amp; \\
+    &amp; \{X^{(j)}_1, X^{(j)}_2, \ldots, X^{(j)}_T\} &amp;
+\end{eqnarray*}\]</span></p>
+<p>Donde <span class="math inline">\(j \in \mathbb{Z}\)</span>. En lo subsecuente, diremos que una serie de tiempo es una realización del proceso estocástico subyacente. Considerando, en consecuencia, al proceso estocástico con todas sus posibilidades de realización.</p>
+<p>Para hacer más sencilla la notación no distinguiremos entre el proceso en sí mismo y una de sus realizaciones, es decir, siempre escribiremos a una serie de tiempo como la secuencia mostrada en la ecuación <a href="modelos-de-series-de-tiempo-estacionarias.html#eq:Serie">(3.2)</a>, o más precisamente como la siguiente realización:
+<span class="math display" id="eq:Serie2">\[\begin{equation}
+    \{ X_1, X_2, \ldots, X_T \}
+    \tag{3.4}
+\end{equation}\]</span></p>
+<p>O simplemente:
+<span class="math display" id="eq:Serie3">\[\begin{equation}
+    X_1, X_2, \ldots, X_T
+    \tag{3.5}
+\end{equation}\]</span></p>
+<p>El proceso estocástico de dimensión <span class="math inline">\(T\)</span> puede ser completamente descrito por su función de distribución multivaraida de dimensión <span class="math inline">\(T\)</span>. No obstante, esto no resulta ser práctico cuando se opere más adelante en el curso. Por ello, en el curso, y en general casi todos los textos lo hacen, sólo nos enfocaremos en sus primer y segundo momentos, es decir, en sus medias o valores esperados:
+<span class="math display">\[\begin{equation*}
+    \mathbb{E}[X_t]
+\end{equation*}\]</span></p>
+<p>Para <span class="math inline">\(t = 1, 2, \ldots, T\)</span>; o:
+<span class="math display">\[\begin{equation*}
+\left[
+    \begin{array}{c}
+    \mathbb{E}[X_1] \\
+    \mathbb{E}[X_2] \\
+    \vdots \\
+    \mathbb{E}[X_T]
+    \end{array}
+\right]
+\end{equation*}\]</span></p>
+<p>o,
+<span class="math display">\[\begin{equation*}
+\left[
+    \begin{array}{c}
+    \mathbb{E}[X_1], \mathbb{E}[X_2], \ldots, \mathbb{E}[X_T]
+    \end{array}
+\right]
+\end{equation*}\]</span></p>
+<p>De sus variazas:
+<span class="math display">\[\begin{equation*}
+    Var[X_t] = \mathbb{E}[(X_t - \mathbb{E}[X_t])^2]
+\end{equation*}\]</span></p>
+<p>Para <span class="math inline">\(t = 1, 2, \ldots, T\)</span>, y de sus <span class="math inline">\(T(T-1)/2\)</span> covarianzas:
+<span class="math display">\[\begin{equation*}
+    Cov[X_t,X_s] = \mathbb{E}[(X_t - \mathbb{E}[X_t])(X_s - \mathbb{E}[X_s])]
+\end{equation*}\]</span></p>
+<p>Para <span class="math inline">\(t &lt; s\)</span>. Por lo tanto, en la forma matricial podemos escribir lo siguiente:
+<span class="math display">\[\begin{equation*}
+\left[
+    \begin{array}{c c c c}
+    Var[X_1] &amp; Cov[X_1,X_2] &amp; \cdots &amp; Cov[X_1,X_T] \\
+    Cov[X_2,X_1] &amp; Var[X_2] &amp; \cdots &amp; Cov[X_2,X_T] \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    Cov[X_T,X_1] &amp; Cov[X_T,X_2] &amp; \cdots &amp; Var[X_T] \\
+    \end{array}
+\right]
+\end{equation*}\]</span></p>
+<p><span class="math display" id="eq:MATCOV">\[\begin{equation}
+= \left[
+    \begin{array}{c c c c}
+    \sigma_1^2 &amp; \rho_{12} &amp; \cdots &amp; \rho_{1T} \\
+    \rho_{21} &amp; \sigma_2^2 &amp; \cdots &amp; \rho_{2T} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \rho_{T1} &amp; \rho_{T2} &amp; \cdots &amp; \sigma_T^2 \\
+    \end{array}
+\right]
+    \tag{3.6}
+\end{equation}\]</span></p>
+<p>Donde es claro que en la matriz de la ecuación <a href="modelos-de-series-de-tiempo-estacionarias.html#eq:MATCOV">(3.6)</a> existen <span class="math inline">\(T(T-1)/2\)</span> covarianzas distintas, ya que se cumple que <span class="math inline">\(Cov[X_t,X_s] = Cov[X_s,X_t]\)</span>, para <span class="math inline">\(t \neq s\)</span>.</p>
+<p>A menudo, esas covarianzas son denominadas como autocovarianzas puesto que ellas son covarianzas entre variables aleatorias pertenecientes al mismo proceso estocástico pero en un momento <span class="math inline">\(t\)</span> diferente. Si el proceso estocástico tiene una distribución normal multivariada, su función de distribución estará totalmente descrita por sus momentos de primer y segundo orden.</p>
+<p>Ahora introduciremos el concepto de ergodicidad, el cual indica que los momentos muestrales, los cuales son calculados en la base de una serie de tiempo con un número finito de observaciones, en la medida que <span class="math inline">\(T \rightarrow \infty\)</span> sus correspondientes momentos muestrales, tienden a los verdaderos valores poblacionales, los cuales definiremos como <span class="math inline">\(\mu\)</span>, para la media, y <span class="math inline">\(\sigma^2_X\)</span> para la varianza.</p>
+<p>Este concepto sólo es cierto si asumimos que, por ejemplo, el valor esperado y la varianza son como se dice a continuación para todo <span class="math inline">\(t = 1, 2, \ldots, T\)</span>:
+<span class="math display" id="eq:ESPERANZA">\[\begin{eqnarray}
+    \mathbb{E}[X_t] = \mu_t = \mu \\
+    \label{MEDIA}
+    \tag{3.7}
+\end{eqnarray}\]</span>
+<span class="math display" id="eq:VARIANZA">\[\begin{eqnarray}
+    Var[X_t] = \sigma^2_X
+    \tag{3.8}
+\end{eqnarray}\]</span></p>
+<p>Mas formalmente, se dice que el PGD o el proceso estocástico es ergódico en la media si:
+<span class="math display" id="eq:LIM1">\[\begin{equation}
+    \displaystyle\lim_{T \to \infty}{\mathbb{E} \left[ \left( \frac{1}{T} \sum^{T}_{t = 1} (X_t - \mu) \right) ^2 \right]} = 0
+    \tag{3.9}
+\end{equation}\]</span></p>
+<p>y ergódico en la varianza si:
+<span class="math display" id="eq:LIM2">\[\begin{equation}
+    \displaystyle\lim_{T \to \infty}{\mathbb{E} \left[ \left( \frac{1}{T} \sum^{T}_{t = 1} (X_t - \mu) ^2 - \sigma^2_X \right) ^2 \right]} = 0
+    \tag{3.10}
+\end{equation}\]</span></p>
+<p>Estas condiciones se les conoce como <em>propiedades de consistencia</em> para las variables aleatorias. Sin embargo, éstas no pueden ser probadas. Por ello se les denomina como un supuesto que pueden cumplir algunas de las series. Más importante aún: <strong>un proceso estocástico que tiende a estar en equilibrio estadístico en un orden ergódico, es estacionario</strong>.</p>
+<p>Podemos distinguir dos tipos de estacionariedad. Si asumimos que la función común de distribución del proceso estocástico no cambia a lo largo del tiempo, se dice que el proceso es <em>estrictamente estacionario</em>. Como este concepto es dificil de aplicar en la práctica, solo consideraremos a la <em>estacionariedad débil</em> o estacionariedad en sus momentos.</p>
+<p>Definiremos a la estacionariedad por sus momentos del correspondiente proceso estocástico dado por <span class="math inline">\(\{X_t\}\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Estacionariedad en media</em>: Un proceso estocástico es estacionario en media si <span class="math inline">\(E[X_t] = \mu_t = \mu\)</span> es constante para todo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><em>Estacionariedad en varianza</em>: Un proceso estocástico es estacionario en varianza si <span class="math inline">\(Var[X_t] = \mathbb{E}[(X_t - \mu_t)^2] = \sigma^2_X = \gamma(0)\)</span> es constante y finita para todo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><em>Estacionariedad en covarianza</em>: Un proceso estocástico es estacionario en covarianza si <span class="math inline">\(Cov[X_t,X_s] = \mathbb{E}[(X_t - \mu_t)(X_s - \mu_s)] = \gamma(|s-t|)\)</span> es sólo una función del tiempo y de la distancia entre las dos variables aleatorias. Por lo que no depende del tiempo denotado por <span class="math inline">\(t\)</span> (no depende de la información contemporánea).</p></li>
+<li><p><em>Estacionariedad débil</em>: Como la estacionariedad en varianza resulta de forma inmediata de la estacionariedad en covarianza cuando se asume que <span class="math inline">\(s = t\)</span>, un proceso estocástico es débilmente estacionario cuando es estacionario en media y covarianza.</p></li>
+</ol>
+<p>Puesto que resulta poco factible asumir una estacionariedad diferente a la débil, es adelante siempre que digamos que un proceso es estacionario se referirá al caso débil y sólo diremos que el proceso es estacionario, sin el apelativo de débil.</p>
+<p>Ahora veamos un ejemplo de lo anterior. Supongamos una serie de tiempo denotada por: <span class="math inline">\(\{U_t\}^T_{t = 0}\)</span>. Decimos que el proceso estocástico <span class="math inline">\(\{U_t\}\)</span> es un <em>proceso estocástico puramente aleatorio</em> o es un <em>proceso estocástico de ruido blanco o caminata aleatoria</em>, si éste tiene las siguientes propiedades:
+1. <span class="math inline">\(\mathbb{E}[U_t] = 0\)</span>, <span class="math inline">\(\forall t\)</span>;
+2. <span class="math inline">\(Var[U_t] = \mathbb{E}[(U_t - \mu_t)^2] = \mathbb{E}[(U_t - \mu)^2] = \mathbb{E}[(U_t)^2] = \sigma^2\)</span>, <span class="math inline">\(\forall t\)</span>, y
+3. <span class="math inline">\(Cov[U_t,U_s] = \mathbb{E}[(U_t - \mu_t)(U_s - \mu_s)] = \mathbb{E}[(U_t - \mu)(U_s - \mu)] = \mathbb{E}[U_t U_s] = 0\)</span>, <span class="math inline">\(\forall t \neq s\)</span>.</p>
+<p>En otras palabras, un proceso <span class="math inline">\(U_t\)</span> es un ruido blanco si su valor esperado (promedio) es cero (0), tiene una varianza finita y constante, y además no le importa la historia pasada. Así, su valor presente no se ve influenciado por sus valores pasados no importando respecto de que periodo se tome referencia.</p>
+<p>En apariencia, por sus propiedades, este proceso es débilmente estacionario –o simplemente, estacionario–. Todas las variables aleatorias tienen una media de cero, una varianza <span class="math inline">\(\sigma^2\)</span> y no existe correlación entre ellas.</p>
+<p>Propongamos un ejemplo para ilustrar la teoría previa. Supongamos que definimos un nuevo proceso estocástico <span class="math inline">\(\{X_t\}\)</span> como:
+<span class="math display" id="eq:em1">\[\begin{equation}
+    X_t = \left\{ \begin{array}{l} U_0  \mbox{ para } t = 0 \\ X_{t-1} + U_t \mbox{ para } t = 1, 2, 3, \ldots \end{array}\right.
+    \tag{3.11}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\{ U_t \}\)</span> es un proceso puramente aleatorio. Este proceso estocástico, o caminata aleatoria sin tendencia (ajuste - drift), puede ser reescrito como:
+<span class="math display" id="eq:em2">\[\begin{equation}
+    X_t = \sum^t_{j = 0} U_j
+    \tag{3.12}
+\end{equation}\]</span></p>
+<p>Tratemos de dar más claridad al ejemplo, para ello asumamos que generamos a <span class="math inline">\(\{U_t\}\)</span> por medio del lanzamiento de una moneda. Donde obtenemos una cara (águila) con una probabilidad de <span class="math inline">\(0.5\)</span>, en cuyo caso decimos que la variable aleatoria <span class="math inline">\(U_t\)</span> tomará el valor de <span class="math inline">\(+1\)</span>, y una cruz (sol) con una probabilidad de <span class="math inline">\(0.5\)</span>, en cuyo caso decimos que la variable aleatoria <span class="math inline">\(U_t\)</span> toma el valor de <span class="math inline">\(-1\)</span>.</p>
+<p>Este planteamiento cumple con las propiedas enunciadas ya que:
+1. <span class="math inline">\(\mathbb{E}[U_t] = 0.5 \times -1 + 0.5 \times 1 = 0\)</span>, <span class="math inline">\(\forall t\)</span>
+2. <span class="math inline">\(Var[U_t] = \mathbb{E}[(U_t - 0)^2] = \frac{1}{2}((-1)^2) + \frac{1}{2}((1)^2) = 1\)</span>, <span class="math inline">\(\forall t\)</span>
+3. <span class="math inline">\(Cov[U_t,U_s] = \mathbb{E}[(U_t - 0)(U_s - 0)] = \mathbb{E}[U_t \cdot U_s] = 0\)</span>, <span class="math inline">\(\forall t \neq s\)</span>.</p>
+<p>Retomando a nuestro proceso <span class="math inline">\(X_t\)</span>, diremos que el caso de <span class="math inline">\(X_0 = 0\)</span>, para <span class="math inline">\(t = 0\)</span>. Si verificamos cúales son sus primeros y segundos momentos de <span class="math inline">\(\{X_t\}\)</span> tenemos:
+<span class="math display" id="eq:em3">\[\begin{equation}
+    \mathbb{E}[X_t] = \mathbb{E}\left[ \sum^t_{j=1} U_j \right] = \sum^t_{j=1} \mathbb{E}[U_j] = 0
+    \tag{3.13}
+\end{equation}\]</span></p>
+<p>En cuanto a la varianza:
+<span class="math display" id="eq:em4">\[\begin{eqnarray}
+    Var[X_t] &amp; = &amp; Var \left[ \sum^t_{j=1} U_j \right] \nonumber \\
+    &amp; = &amp; \sum^t_{j=1} Var[U_j] + 2 * \sum_{j \neq k} Cov[U_j,U_k] \nonumber \\
+    &amp; = &amp; \sum^t_{j=1} 1 \nonumber \\
+    &amp; = &amp; t
+    \tag{3.14}
+\end{eqnarray}\]</span></p>
+<p>Lo anterior, dado que hemos supuesto que en la caminata aleatoria todas la variables aleatorias son independientes, es decir, <span class="math inline">\(Cov[U_t,U_s] = E[U_t \cdot U_s] = 0\)</span>. Por su parte, la covarianza del proceso estocástico se puede ver como:
+<span class="math display">\[\begin{eqnarray*}
+    Cov[X_t,X_s] &amp; = &amp; \mathbb{E} \left[ \left( \sum^t_{j=1} U_j - 0 \right) \left( \sum^s_{i=1} U_i - 0 \right) \right] \\
+    &amp; = &amp; \mathbb{E}[(U_1 + U_2 + \ldots + U_t)(U_1 + U_2 + \ldots + U_s)] \\
+    &amp; = &amp; \sum^t_{j=1} \sum^s_{i=1} \mathbb{E}[U_j U_i] \\
+    &amp; = &amp; \mathbb{E}[U^2_1] + \mathbb{E}[U^2_2] + \ldots + \mathbb{E}[U^2_k] \\
+    &amp; = &amp; \sigma^2 + \sigma^2 + \ldots + \sigma^2 \\
+    &amp; = &amp; 1 + 1 + 1 + 1 \\
+    &amp; = &amp; min(t,s)
+\end{eqnarray*}\]</span></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig31"></span>
+<img src="bookdown-demo_files/figure-html/fig31-1.png" alt="Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1$" width="672"><p class="caption">
+Figure 3.1: Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1$
+</p>
+</div>
+<p>Así, el proceso estocástico dado por la caminata alaeatoria sin un término de ajuste es estacionario en media, pero no en varianza o en covarianza, y consecuentemente, en general no estacionario, condición que contraria al caso del proceso simple descrito en <span class="math inline">\(U_t\)</span>.</p>
+<p>Es facil ver que muchas de las posibilidades de realización de este proceso estocástico (series de tiempo) pueden tomar cualquiera de las rutas consideradas en el Figura <a href="modelos-de-series-de-tiempo-estacionarias.html#fig:fig31">3.1</a>.</p>
+</div>
+<div id="función-de-autocorrelación" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Función de autocorrelación<a class="anchor" aria-label="anchor" href="#funci%C3%B3n-de-autocorrelaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para ampliar la discusión, es posible calcular la fuerza o intensidad de la dependencia de las variables aleatorias dentro de un proceso estocástico, ello mediante el uso de las autocovarianzas. Cuando las covarianzas son normalizadas respecto de la varianza, el resultado es un término que es independiente de las unidad de medida aplicada, y se conoce como la <em>función de autocorrelación</em>.</p>
+<p>Para procesos estacionarios, dicha función de autocorrelación esta dada por:
+<span class="math display" id="eq:em5">\[\begin{equation}
+    \rho(\tau) = \frac{\mathbb{E}[(X_t - \mu)(X_{t+\tau} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \frac{\gamma(\tau)}{\gamma(0)}
+    \tag{3.15}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\tau = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Dicha función tiene las siguientes propiedades:</p>
+<ol style="list-style-type: decimal">
+<li>
+<span class="math inline">\(\rho(0) = 1\)</span>. Es fácil demostrar que la función <span class="math inline">\(\rho(0)\)</span> es:</li>
+</ol>
+<p><span class="math display">\[\begin{equation}
+    \rho(0) = \frac{\mathbb{E}[(X_t - \mu)(X_{t + 0} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \frac{\mathbb{E}[(X_t - \mu)^2]}{\mathbb{E}[(X_t - \mu)^2]} = 1
+\end{equation}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>
+<span class="math inline">\(\rho(\tau) = \rho(-\tau)\)</span>. Partiendo de la definción de <span class="math inline">\(\rho(\tau)\)</span> podemos ver que la distancia que existe entre <span class="math inline">\(t\)</span> y <span class="math inline">\(t + \tau\)</span> es <span class="math inline">\(\tau\)</span>, de esta forma la autocorrelación de la variable <span class="math inline">\(X\)</span> entre los periodos antes señalados debería ser la misma para el caso en que <span class="math inline">\(\rho(-\tau)\)</span>. Partamos de la ecuación para ver más claramente:</li>
+</ol>
+<p><span class="math display">\[\begin{equation}
+    \rho(\tau) = \frac{\mathbb{E}[(X_t - \mu)(X_{t + \tau} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \frac{\mathbb{E}[(X_t - \mu)(X_{t - \tau} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \rho(-\tau)
+\end{equation}\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>
+<span class="math inline">\(\lvert\rho(\tau)\lvert \leq 1\)</span>, para todo <span class="math inline">\(\tau\)</span>.</li>
+</ol>
+<p>Derivado de las propiedades 1 y 2 antes descritas se puede concluir que sólo es necesario conocer la función de autocorrelación para el caso de <span class="math inline">\(\tau = 1, 2, 3, \ldots\)</span>, ya que de estos casos podemos derivar los valores de la función de autocorrelación complementarios de <span class="math inline">\(\tau = \ldots, -3, -2, -1\)</span>.</p>
+<p>Partiendo de los supuestos de ergodicidad en relación a la media, varianza y covarianzas de un proceso estacionario, podemos estimar dichos paramétros con las siguientes formulaciones o propuestas de estimadores puntuales:
+<span class="math display" id="eq:em6">\[\begin{equation}
+    \hat{\mu} = \frac{1}{T} \sum^T_{t=1} X_t
+    \tag{3.16}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:em7">\[\begin{equation}
+    \hat{\gamma}(0) = \frac{1}{T} \sum^T_{t=1} (X_t - \hat{\mu})^2 = \hat{\sigma}^2
+    \tag{3.17}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:em8">\[\begin{equation}
+    \hat{\gamma}(\tau) = \frac{1}{T} \sum^{T - \tau}_{t=1} (X_t - \hat{\mu})(X_{t+\tau} - \hat{\mu}) \mbox{, para } \tau = 1, 2, \ldots, T-1
+    \tag{3.18}
+\end{equation}\]</span></p>
+<p>No hacemos la demostración en estas notas –sería deseable que el alumno revisará la afimación– pero estos últimos son estimadores consistentes de <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\gamma(0)\)</span> y <span class="math inline">\(\gamma(\tau)\)</span>. Por su parte, un estimador consistente de la función de autocorrelación estará dado por:
+<span class="math display" id="eq:eqautocorr">\[\begin{equation}
+\hat{\rho}(\tau) = \frac{\sum^{T - \tau}_{t=1} (X_t - \hat{\mu})(X_{t+\tau} - \hat{\mu})}{\sum^T_{t=1} (X_t - \hat{\mu})^2} = \frac{\hat{\gamma}(\tau)}{\hat{\gamma}(0)}
+\tag{3.19}
+\end{equation}\]</span></p>
+<p>El estimador de la ecuación <a href="modelos-de-series-de-tiempo-estacionarias.html#eq:eqautocorr">(3.19)</a> es asintóticamente insesgado. Por ejemplo, para el caso de un proceso de ruido blanco o caminata aleatoria, su varianza puede ser aproximada por el valor dado <span class="math inline">\(1/T\)</span>. Ésta tiene, asintóticamente, una distribución normal. Dado esto, el intervalo de confianza al <span class="math inline">\(95\%\)</span> será el dado por <span class="math inline">\(\pm 2/\sqrt{T}\)</span>, en el cual se encuentra la mayoría de los coeficientes de autocorrelación estimados.</p>
+<p>Ahora discutamos algunos ejemplos o aplicaciones. Cuando se realiza la evaluación de la estimación de un modelo de series de tiempo es importante saber si los residuales del modelo realmente tienen propiedades de un proceso puramente aleatorio, en partícular, si ellos no están correlacionados entre sí. Así, la hipotésis a probar será:
+<span class="math display" id="eq:eqautocorr1">\[\begin{equation}
+    H_0 : \rho(\tau) = 0 \mbox{, para todo } \tau = 1, 2, \ldots, m \mbox{ y } m &lt; T
+    \tag{3.20}
+\end{equation}\]</span></p>
+<p>Esta expresión se puede interpretar como una prueba respecto de si la correlación entre la información de periodos atrás es cero con la información contemporánea. Para hacer una pruena global de la hipotésis de sí un número <span class="math inline">\(m\)</span> de coeficientes de autocovarianzas son cero Box y Pierce (1970) desarrollarón la siguiente estadística:
+<span class="math display" id="eq:eqautocorr2">\[\begin{equation}
+    Q^* = T \sum_{j = 1}^{m} \hat{\rho} (j)^2
+    \tag{3.21}
+\end{equation}\]</span></p>
+<p>Bajo la hipotésis nula esta estadística se distribulle asintóticamente como una chi cuadrado (<span class="math inline">\(\chi^2\)</span>) con <span class="math inline">\(m-k\)</span> grados de libertad y con <span class="math inline">\(k\)</span> que representa al número de paramétros estimados.</p>
+<p>Haciendo una aplicación estricta de la distribución de esta estadística, sabemos que esta se mantiene asintóticamente. Greta, Ljung y Box (1978) propusieron la siguiente modificación de la estadística para muestras pequeñas:
+<span class="math display" id="eq:eqautocorr3">\[\begin{equation}
+    Q = T(T + 2) \sum_{j = 1}^{m} \frac{\hat{\rho} (j)^2}{T - j}
+    \tag{3.22}
+\end{equation}\]</span></p>
+<p>La cual también se distribulle asintóticamente como <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(m-k\)</span> grados de libertad.</p>
+<p>También es intuitivamente claro que la hipótesis nula de no autocorrelación de residuales debería ser rechazada si alguno de los valores <span class="math inline">\(\hat{\rho} (j)\)</span> es muy grande, es decir, si <span class="math inline">\(Q\)</span> o <span class="math inline">\(Q^*\)</span> es muy grande. O más precisamente, si estas estadísticas son más grandes que los correspondientes valores críticos de la distribución <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(m-k\)</span> grados de libertad a algún grado dado de signficancia.</p>
+<p>Una alternativa para esta prueba es una del tipo Multiplicadores de Lagrange (o LM) desarrollada por Breusch (1978) y Godfrey (1978). La cual, al igual que las estadísticas <span class="math inline">\(Q\)</span> y <span class="math inline">\(Q^*\)</span>, la hipotesis nula está dada por:</p>
+<blockquote>
+<p><span class="math inline">\(H_0\)</span>: Los residuales no están autocorrelacionados.</p>
+</blockquote>
+<blockquote>
+<p><span class="math inline">\(H_a\)</span>: Los residuales muestran alguna acutocorrelación de forma autoregresiva o de medias móviles.</p>
+</blockquote>
+<p>La prueba consiste en realizar una regresión auxiliar en la cual los residuales se estiman en función de las variables explicativas del modelo original y en los residuales mismos pero rezagados hasta el término <span class="math inline">\(m\)</span> (regresión auxiliar). La prueba resulta en una estadìstica con una distribución <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(m\)</span> grados de libertad la cual está dada por la expresión:
+<span class="math display" id="eq:eqautocorr4">\[\begin{equation}
+    LM = T \times R^2
+    \tag{3.23}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(R^2\)</span> es el resultante de la regresión auxiliar y <span class="math inline">\(T\)</span> es el número de observaciones totales.</p>
+<p>En comparación con una prueba Durbin - Watson que es comúnmente usada en la econometría tradicional, para probar autocorrelación de los residuales, las estadísticas <span class="math inline">\(Q\)</span>, <span class="math inline">\(Q^*\)</span> y <span class="math inline">\(LM\)</span> tienen las siguientes ventajas:</p>
+<ol style="list-style-type: decimal">
+<li>Permiten corroborar la existencia de autocorrelación para cualquier orden, y no solo para un primer orden (es decir, para cualquier valor de <span class="math inline">\(\tau = 1, 2, 3, \ldots\)</span>);</li>
+<li>Los resultados se mantienen aún y cuando exista una probable variable endógena en forma rezagada, y</li>
+<li>No depende del orden o la forma en que se acomoden las observaciones, algo que es muy probalble que ocurra en la econometría tradicional.</li>
+</ol>
+<p>El hecho de los residuales no estén autocorrelacionados no implica que estos sean independientes y normalmente distribuidos. La ausencia de autocorrelación no implica una independencia estocástica si las variables son normalmente distribuidas.</p>
+<p>A menudo se asume que estos residuales están distribuidos normalmente, ya que la mayoría de las pruebas estadísticas tienen este supuesto detrás. No obstante, ello también depende de los otros momentos de la distribución, específicamente del tercer y cuarto momento. Los cuales expresan como:
+<span class="math display">\[\begin{equation*}
+    \mathbb{E}[(X_t - \mathbb{E}[X_t])^i] \mbox{, } i = 3, 4
+\end{equation*}\]</span></p>
+<p>El tercer momento es necesario para determinar el sesgo, el cual esta dado como:
+<span class="math display" id="eq:eqautocorr6">\[\begin{equation}
+    \hat{S} = \frac{1}{T} \frac{\sum_{t = 1}^{T} (X_t - \hat{\mu})^3}{\sqrt{\hat{\gamma}(0)^3}}
+    \tag{3.24}
+\end{equation}\]</span></p>
+<p>Para distribuciones simetricas (como en el caso de la distribución normal) el valor teórico para el sesgo es cero.</p>
+<p>La curtosis, la cual esta dada en función del cuarto momento, se puede expresar como:
+<span class="math display" id="eq:eqautocorr7">\[\begin{equation}
+    \hat{K} = \frac{1}{T} \frac{\sum_{t = 1}^{T} (X_t - \hat{\mu})^4}{\hat{\gamma}(0)^2}
+    \tag{3.25}
+\end{equation}\]</span></p>
+<p>Para el caso de una distribución normal, esta estadística toma el valor de 3. Valores más grandes que 3 indican que la distribución tienen colas anchas. En tales casos se ubican a los datos financieros.</p>
+<p>Usando el valor de las estadísticas para medir el sesgo y la curtosis, <span class="math inline">\(S\)</span> y <span class="math inline">\(K\)</span>, respectivamente, Jarque y Bera (1980) propusieron una prueba de normalidad, la cual puede ser aplicada a series de tiempo en niveles o en diferencias indistintamente. Dicha prueba se expresa como:
+<span class="math display" id="eq:eqautocorr8">\[\begin{equation}
+    JB = \frac{T}{6} \left(\hat{S} + \frac{1}{4} (\hat{K} - 3)^2 \right)
+    \tag{3.26}
+\end{equation}\]</span></p>
+<p>La cual tiene una distribución <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(2\)</span> grados de libertad y donde <span class="math inline">\(T\)</span> es el tamaño de la muestra. La hipótesis de que las observaciones están distribuidas de forma normal se rechaza si los valores de la estadística de prueba es más grande que los correspondientes valores criticos en tablas.</p>
+<p>Veamos un ejemplo para ilustrar el uso de la función de autocorrelación. Tomemos como variable al número de pasajeros transportados por el sistema de transporte del metro de la CDMX.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Los datos y algoritmo está disponible en el repositorio de GitHub y corresponde a la Clase 3.&lt;/p&gt;"><sup>1</sup></a> Los datos empleados fueron tomados del INEGI y son una serie de tiempo en el periodo que va de enero de 2000 a junio de 2019, es decir, 234 observaciones. Como se puede apreciar en la Figura <a href="modelos-de-series-de-tiempo-estacionarias.html#fig:fig32">3.2</a>, el número de pasajeros por mes ha oscilado significativamente a lo largo de tiempo. Incluso podemos observar un cambio estructural de la serie entre 2011 y 2012. Asimismo, podemos ubicar una caida atípica que ocurrió en septiembre de 2017.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"BD/Base_Transporte.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"Datos"</span>, col_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Datos</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Periodo</span>, y <span class="op">=</span> <span class="va">Pax_Metro</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co">#geom_point(size = 1.0, color = "darkblue") + </span></span>
+<span>  <span class="co">#theme_bw() + </span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Tiempo"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Millones de pasajeros"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.caption <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Pasajeros Transportados en el Metro de la CDMX"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"(Ene-2000 a Jul-2021)"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="st">"Fuente: Elaboración propia con información del INEGI, \nhttps://www.inegi.org.mx/app/indicadores/?tm=0&amp;t=1090"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig32"></span>
+<img src="bookdown-demo_files/figure-html/fig32-1.png" alt="Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023" width="672"><p class="caption">
+Figure 3.2: Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023
+</p>
+</div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"Pax_Metro.png"</span>, width <span class="op">=</span> <span class="fl">20</span>, height <span class="op">=</span> <span class="fl">15</span>, units <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span></code></pre></div>
+<p>A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro <a href="modelos-de-series-de-tiempo-estacionarias.html#tab:foo">2.1</a>. En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura <a href="modelos-de-series-de-tiempo-estacionarias.html#fig:fig33">3.3</a> se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza desntro de las cuales no se puede rechazar la hipotésis nula de que <span class="math inline">\(H_0: \hat{\rho}(p) = 0\)</span>, para todo <span class="math inline">\(\tau = 1, 2, \ldots, T-1\)</span>.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:foo">Table 2.1: </span> Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 200 a junio de 2019</caption>
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Estadística</th>
+<th align="center">Valor</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\hat{\mu} = \frac{1}{T} \sum^T_{t=1} X_t\)</span></td>
+<td align="center">124.3000</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\hat{\gamma}(0) = \frac{1}{T} \sum^T_{t=1} (X_t - \hat{\mu})^2\)</span></td>
+<td align="center">103.6400</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\hat{\gamma}(1) = \frac{1}{T} \sum^{T - 1}_{t=1} (X_t - \hat{\mu})(X_{t+1} - \hat{\mu})\)</span></td>
+<td align="center">63.1100</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\hat{\gamma}(2) = \frac{1}{T} \sum^{T - 2}_{t=1} (X_t - \hat{\mu})(X_{t+2} - \hat{\mu})\)</span></td>
+<td align="center">72.9100</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\hat{\gamma}(3) = \frac{1}{T} \sum^{T - 3}_{t=1} (X_t - \hat{\mu})(X_{t+3} - \hat{\mu})\)</span></td>
+<td align="center">63.6900</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\hat{\rho}(1) = \frac{\sum^{T - 1}_{t=1} (X_t - \hat{\mu})(X_{t+1} - \hat{\mu})}{\sum^T_{t=1} (X_t - \hat{\mu})^2} = \frac{\hat{\gamma}(1)}{\hat{\gamma}(0)}\)</span></td>
+<td align="center">0.6089</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\hat{\rho}(2) = \frac{\sum^{T - 2}_{t=1} (X_t - \hat{\mu})(X_{t+2} - \hat{\mu})}{\sum^T_{t=1} (X_t - \hat{\mu})^2} = \frac{\hat{\gamma}(2)}{\hat{\gamma}(0)}\)</span></td>
+<td align="center">0.7035</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\hat{\rho}(3) = \frac{\sum^{T - 3}_{t=1} (X_t - \hat{\mu})(X_{t+3} - \hat{\mu})}{\sum^T_{t=1} (X_t - \hat{\mu})^2} = \frac{\hat{\gamma}(3)}{\hat{\gamma}(0)}\)</span></td>
+<td align="center">0.6145</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(Q^* = T \sum_{j = 1}^{1} \hat{\rho} (j)^2\)</span></td>
+<td align="center">86.7577</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(Q^* = T \sum_{j = 1}^{2} \hat{\rho} (j)^2\)</span></td>
+<td align="center">290.9279</td>
+</tr>
+</tbody>
+</table></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Pax_Metro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">$</span><span class="va">Pax_Metro</span>, </span>
+<span>                start <span class="op">=</span> <span class="fl">2000</span>, </span>
+<span>                freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">Pax_Metro</span>, </span>
+<span>    lag.max <span class="op">=</span> <span class="fl">150</span>, </span>
+<span>    xlab <span class="op">=</span> <span class="st">'Resagos k en meses'</span>, </span>
+<span>    main<span class="op">=</span><span class="st">"Funcion de Autocorrelación del número de pasajeros del metro"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig33"></span>
+<img src="bookdown-demo_files/figure-html/fig33-1.png" alt="unción de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023" width="672"><p class="caption">
+Figure 3.3: unción de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023
+</p>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#modelos-de-series-de-tiempo-estacionarias"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
+<li><a class="nav-link" href="#definici%C3%B3n-de-ergodicidad-y-estacionariedad"><span class="header-section-number">3.1</span> Definición de ergodicidad y estacionariedad</a></li>
+<li><a class="nav-link" href="#funci%C3%B3n-de-autocorrelaci%C3%B3n"><span class="header-section-number">3.2</span> Función de autocorrelación</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-13.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
