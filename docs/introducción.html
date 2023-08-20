@@ -46,6 +46,7 @@
 <li><a class="active" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
 <li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
 <li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
+<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
 </ul>
 
         <div class="book-extra">
@@ -86,7 +87,7 @@
 enfoques antes mencionadas es la Figura <a href="introducci%C3%B3n.html#fig:fig1">1.1</a>. En esta figura se muestra la evolución del Indicador Global de la Actividad Económica (IGAE) en su versión global o del total de la economía y en su versión únicamente para las actividades primarias entre enero de 2002 y mayo de 2023.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig1"></span>
-<img src="bookdown-demo_files/figure-html/fig1-1.png" alt="Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023" width="672"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig1-1.png" alt="Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023" width="672"><p class="caption">
 Figure 1.1: Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023
 </p>
 </div>
@@ -95,7 +96,7 @@ del indicador, salvo por la crisis global de 2008 y la reciente crisis causada
 por la Covid-19.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig2"></span>
-<img src="bookdown-demo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023" width="672"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023" width="672"><p class="caption">
 Figure 1.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023
 </p>
 </div>
@@ -106,7 +107,7 @@ son elementos de demanda, más que los de oferta. Por ejemplo, el consumo de ali
 <p>Destacamos que el ICC mide las expectativas de los consumidores en razón de la información pasada y de la esperada, segun dichos consumidores.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig3"></span>
-<img src="bookdown-demo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023" width="672"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023" width="672"><p class="caption">
 Figure 1.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023
 </p>
 </div>
@@ -115,7 +116,7 @@ Figure 1.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (P
 <p>Por otro lado, en la Figura <a href="introducci%C3%B3n.html#fig:fig3">1.3</a> se presenta la evolución del Tipo de Cambio (TDC) –indicador financiero que se suele utilizar como medio de reserva de valor–. Esto, en razón de que el TDC es conocido como un instrumento que en momentos de crisis toma valores contraciclicos de la economía mexicana. No obstante, ambos indicadores no son comparables. Para hacerlos comparbles en la Figura <a href="introducci%C3%B3n.html#fig:fig4">1.4</a> se presentan en versión índice con una base en el primer mes de la muestra.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig4"></span>
-<img src="bookdown-demo_files/figure-html/fig4-1.png" alt="Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2023 " width="672"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig4-1.png" alt="Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2023 " width="672"><p class="caption">
 Figure 1.4: Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2023
 </p>
 </div>
@@ -124,7 +125,7 @@ primarias.</p>
 <p>Finalmente, la Figura <a href="introducci%C3%B3n.html#fig:fig5">1.5</a> ilustra un característica que también resulta de gran interés en el analásis de series de tiempo: los datos de alta frecuencia y de comportamiento no regular. Como se puede observar, en la Figura <a href="introducci%C3%B3n.html#fig:fig5">1.5</a> se muestran las diferencias logarítmicas de las series de IGAE de la actividad total, el IPC y el TDC.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig5"></span>
-<img src="bookdown-demo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023" width="672"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023" width="672"><p class="caption">
 Figure 1.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023
 </p>
 </div>
@@ -174,7 +175,7 @@ Figure 1.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indica
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-13.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
