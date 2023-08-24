@@ -141,7 +141,7 @@
 
 \title{Notas de Clase: Series de Tiempo}
 \author{Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres}
-\date{2023-08-20}
+\date{2023-08-23}
 
 \begin{document}
 \maketitle
@@ -169,6 +169,10 @@ by Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres
 Estas son notas de clase de la materia de Análisis de Series de Tiempo en la Facultad de Economía de la Universidad Nacional Autónoma de México.
 
 Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo \href{mailto:benjov@ciencias.unam.mx}{\nolinkurl{benjov@ciencias.unam.mx}} o \href{mailto:omarxalpha@gmail.com}{\nolinkurl{omarxalpha@gmail.com}}.
+
+La versión PDF de estas notas se encuentra en: \url{https://github.com/benjov/Series-Tiempo/blob/main/docs/Notas-Series-Tiempo.pdf}
+
+Las tablas de datos empleadas en los diferentes ejemplos se encuentran en: \url{https://github.com/benjov/Series-Tiempo/tree/main/BD}
 
 \hypertarget{introducciuxf3n}{%
 \chapter{Introducción}\label{introducciuxf3n}}
@@ -214,6 +218,30 @@ La primera aproximación que se suele tener a las series de tiempo es mediante e
 Un primer ejemplo que puede ilustrar la presencia de los dos tipos de
 enfoques antes mencionadas es la Figura \ref{fig:fig1}. En esta figura se muestra la evolución del Indicador Global de la Actividad Económica (IGAE) en su versión global o del total de la economía y en su versión únicamente para las actividades primarias entre enero de 2002 y mayo de 2023.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+
+\NormalTok{Base\_1 }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_1\_TimeSeries.xlsx"}\NormalTok{)}
+\NormalTok{IGAE\_2013 }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Base\_1}\SpecialCharTok{$}\NormalTok{IGAE\_2013, }\AttributeTok{start =} \DecValTok{2002}\NormalTok{, }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+\NormalTok{IGAE\_PRIM\_2013 }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Base\_1}\SpecialCharTok{$}\NormalTok{IGAE\_PRIM\_2013, }\AttributeTok{start =} \DecValTok{2002}\NormalTok{, }\AttributeTok{freq =} \DecValTok{12}\NormalTok{) }
+\NormalTok{ICC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Base\_1}\SpecialCharTok{$}\NormalTok{ICC, }\AttributeTok{start =} \DecValTok{2002}\NormalTok{, }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+\NormalTok{ICC\_LAG }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Base\_1}\SpecialCharTok{$}\NormalTok{ICC\_LAG, }\AttributeTok{start =} \DecValTok{2002}\NormalTok{, }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+\NormalTok{IPC\_BMV }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Base\_1}\SpecialCharTok{$}\NormalTok{IPC\_BMV, }\AttributeTok{start =} \DecValTok{2002}\NormalTok{, }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+\NormalTok{TDC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Base\_1}\SpecialCharTok{$}\NormalTok{TDC, }\AttributeTok{start =} \DecValTok{2002}\NormalTok{, }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(IGAE\_2013, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Indice"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{60}\NormalTok{,}\DecValTok{160}\NormalTok{)) }
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =}\NormalTok{ T) }
+\CommentTok{\# Indicador Global de la Actividad Económica, Act. Prim., base 2008}
+\FunctionTok{plot}\NormalTok{(IGAE\_PRIM\_2013, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }
+     \AttributeTok{ylab =} \StringTok{"Indice"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{60}\NormalTok{,}\DecValTok{160}\NormalTok{))}
+\CommentTok{\# Leyenda}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"IGAE"}\NormalTok{,}\StringTok{"IGAE Act. Prim."}\NormalTok{), }\AttributeTok{cex =} \FloatTok{0.8}\NormalTok{, }
+       \AttributeTok{lty =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{figure}
 
 {\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig1-1} 
@@ -223,9 +251,30 @@ enfoques antes mencionadas es la Figura \ref{fig:fig1}. En esta figura se muestr
 \caption{Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023}\label{fig:fig1}
 \end{figure}
 
-Como se puede observar, el IGAE del total de la economía muestra, principalmente, que el enfoque del tiempo es más relevante. Es decir, que existe cierta persistencia en el indicador, lo que significa que la economía crece en razón del crecimiento reportado en periodos pasados. No obstante, lo que no podemos reconocer es que los eventos futuros tienen un efecto en el desempeño de la economía hoy día. Así, no es común observar cambios abruptos
-del indicador, salvo por la crisis global de 2008 y la reciente crisis causada
-por la Covid-19.
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+Como se puede observar, el IGAE del total de la economía muestra, principalmente, que el enfoque del tiempo es más relevante. Es decir, que existe cierta persistencia en el indicador, lo que significa que la economía crece en razón del crecimiento reportado en periodos pasados. No obstante, lo que no podemos reconocer es que los eventos futuros tienen un efecto en el desempeño de la economía hoy día. Así, no es común observar cambios abruptos del indicador, salvo por la crisis global de 2008 y la reciente crisis causada por la Covid-19.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(ICC, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Indice"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{29}\NormalTok{, }\DecValTok{50}\NormalTok{))}
+\CommentTok{\# Comando que indica a R que sin borrar la grafica anterior, }
+\CommentTok{\# grafique la siguiente.}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =}\NormalTok{ T) }
+\CommentTok{\# Indice ??Como considera usted la situacion economica del pais }
+\CommentTok{\# hoy en dia comparada con la de hace 12 meses?, base enero 2003}
+\FunctionTok{plot}\NormalTok{(ICC\_LAG, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Indice"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{29}\NormalTok{,}\DecValTok{50}\NormalTok{))}
+\CommentTok{\# Leyenda}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"ICC"}\NormalTok{,}\StringTok{"ICC lag"}\NormalTok{), }\AttributeTok{cex =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1}\NormalTok{, }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -236,13 +285,30 @@ por la Covid-19.
 \caption{Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023}\label{fig:fig2}
 \end{figure}
 
-Por el contrario, el IGAE de las actividades primarias muestra una presencia significativa de la importancia de la frecuencia. No pasa desapercibido que existen muchos ciclos en la evolución del indicador. Algo que suena común
-en las actividades primarias, cuya producción depende de eventos que son ciclícos agrícolas asociados con el clima u otros factores determinantes de la oferta de productos agrícolas. Otro factor que puede incluir en el indicador
-son elementos de demanda, más que los de oferta. Por ejemplo, el consumo de alimentos típicos de algunas temporadas del año.
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+Por el contrario, el IGAE de las actividades primarias muestra una presencia significativa de la importancia de la frecuencia. No pasa desapercibido que existen muchos ciclos en la evolución del indicador. Algo que suena común en las actividades primarias, cuya producción depende de eventos que son ciclícos agrícolas asociados con el clima u otros factores determinantes de la oferta de productos agrícolas. Otro factor que puede incluir en el indicador son elementos de demanda, más que los de oferta. Por ejemplo, el consumo de alimentos típicos de algunas temporadas del año.
 
 Como segundo ejemplo, en la Figura \ref{fig:fig2} se ilustra la evolución reciente del índice de Confianza del Consumidor (ICC) en dos de sus versiones: i) el Índice global y ii) el Índice de confianza de los consumidores cuando estos consideran la situación actual en la economía en relación el año anterior.
 
 Destacamos que el ICC mide las expectativas de los consumidores en razón de la información pasada y de la esperada, segun dichos consumidores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+
+\CommentTok{\# Indice de Precios y Cotizaciones de la Bolsa Mexicana de Valores}
+\FunctionTok{plot}\NormalTok{(IPC\_BMV, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Indice"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Indice de Precios y }\SpecialCharTok{\textbackslash{}n}\StringTok{Cotizaciones BMV"}\NormalTok{)}
+\CommentTok{\# Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera}
+\FunctionTok{plot}\NormalTok{(TDC, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Pesos X Dolar"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Tipo de Cambio"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -253,11 +319,38 @@ Destacamos que el ICC mide las expectativas de los consumidores en razón de la 
 \caption{índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023}\label{fig:fig3}
 \end{figure}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 Así, es probable que las dos series de tiempo exhiban un gran peso para los eventos pasados, pero a la vez, un componente --probablemente menor-- del componente de frecuencia. Esto último en razón de que los consumidores suelen considerar en sus expectativas de consumo los periódos cíclicos de la economía: temporadas navideñaas, pagos de colegiaturas, etc. Este sengundo ejemplo tambien ilustra que la confianza del consumidor no necesariamente está directamente correlacionada con el desempeño de la economía.
 
 Como tercer ejemplo se muestra la evolución de dos series. La Figura \ref{fig:fig3} ilustra el comportamiento reciente de dos indicadores que son referencia para los inversionistas. Por un lado, se ubica el índice de Precios y Cotizaciones de la BMV (IPC), el cuál refleja el valor de las acciones de empresas que cotizan en la BMV y el volumen de acciones comercializadas, en conjunto. De esta forma, se ha interpretado que el IPC refleja el rendimiento del capital promedio invertido en las empresas que cotizan en la BMV.
 
 Por otro lado, en la Figura \ref{fig:fig3} se presenta la evolución del Tipo de Cambio (TDC) --indicador financiero que se suele utilizar como medio de reserva de valor--. Esto, en razón de que el TDC es conocido como un instrumento que en momentos de crisis toma valores contraciclicos de la economía mexicana. No obstante, ambos indicadores no son comparables. Para hacerlos comparbles en la Figura \ref{fig:fig4} se presentan en versión índice con una base en el primer mes de la muestra.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IPC\_BMV\_I }\OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\NormalTok{IPC\_BMV}\SpecialCharTok{/}\NormalTok{IPC\_BMV[}\DecValTok{1}\NormalTok{]}
+\NormalTok{TDC\_I }\OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\NormalTok{TDC}\SpecialCharTok{/}\NormalTok{TDC[}\DecValTok{1}\NormalTok{]}
+\CommentTok{\# Indice del indice de Precios y Cotizaciones de la Bolsa Mexicana }
+\CommentTok{\# de Valores}
+\FunctionTok{plot}\NormalTok{(IPC\_BMV\_I, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Indice"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{,}\DecValTok{740}\NormalTok{))}
+\CommentTok{\# Comando que indica a R que sin borrar la grafica anterior, }
+\CommentTok{\# grafique la siguiente.}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =}\NormalTok{ T)}
+\CommentTok{\# Indice del Tipo de Cambio para Solventar Obligaciones en }
+\CommentTok{\# Moneda Extranjera}
+\FunctionTok{plot}\NormalTok{(TDC\_I, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Indice"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{,}\DecValTok{740}\NormalTok{))}
+\CommentTok{\# Leyenda}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"Indice del IPC"}\NormalTok{,}\StringTok{"Indice del TDC"}\NormalTok{), }\AttributeTok{cex =} \FloatTok{0.8}\NormalTok{, }
+       \AttributeTok{lty =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -268,10 +361,34 @@ Por otro lado, en la Figura \ref{fig:fig3} se presenta la evolución del Tipo de
 \caption{Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos enero de 2002 = 100), pesos por dólar (Panel izquierdo), Ene.2002-May.2023 }\label{fig:fig4}
 \end{figure}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
 En la perspectiva de la Figura \ref{fig:fig4} se puede apreciar que el TDC no es tan rentable, ya que una inversión en la BMV mediante el IPC, en el largo plazo, muestra más redimientos. Asimismo, la Figura \ref{fig:fig4} ilustra que en ambas series se observa un dominio de la condición de tiempo y no uno de frecuencia. Es decir, tanto el IPC como el TDC no responden a condiciones como ciclos o temporadas que si son observables en actividades económicas como las
 primarias.
 
 Finalmente, la Figura \ref{fig:fig5} ilustra un característica que también resulta de gran interés en el analásis de series de tiempo: los datos de alta frecuencia y de comportamiento no regular. Como se puede observar, en la Figura \ref{fig:fig5} se muestran las diferencias logarítmicas de las series de IGAE de la actividad total, el IPC y el TDC.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\CommentTok{\# Indicador Global de la Actividad Econ?mica, base 2008}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(IGAE\_2013), }\AttributeTok{lag =} \DecValTok{1}\NormalTok{), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }
+     \AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Var. \%"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Indicador Global de la Actividad Economica"}\NormalTok{) }
+\CommentTok{\# Indice de Precios y Cotizaciones de la Bolsa Mexicana de Valores}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(IPC\_BMV), }\AttributeTok{lag =} \DecValTok{1}\NormalTok{), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }
+     \AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Var. \%"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Indice de Precios y Cotizaciones BMV"}\NormalTok{)}
+\CommentTok{\# Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(TDC), }\AttributeTok{lag =} \DecValTok{1}\NormalTok{), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{, }
+     \AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Pesos X Dolar"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Tipo de Cambio"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -282,7 +399,13 @@ Finalmente, la Figura \ref{fig:fig5} ilustra un característica que también res
 \caption{Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023}\label{fig:fig5}
 \end{figure}
 
-Dichas diferencia se pueden interpretar como una tasa de crecimiento de las series por las siguientes razones. Consideremos una serie de tiempo dada por \(y_t\), cuya versión logarítmica es \(ln(y_t\)). De esta forma, la diferencia logarítmica esta dada por la ecuación \eqref{eq:difflog}:
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Dichas diferencias se pueden interpretar como una tasa de crecimiento de las series por las siguientes razones. Consideremos una serie de tiempo dada por \(y_t\), cuya versión logarítmica es \(ln(y_t\)). De esta forma, la diferencia logarítmica esta dada por la ecuación \eqref{eq:difflog}:
 
 \begin{equation}
    \Delta ln(y_t) = ln(y_t) - ln(y_{t-1}) = ln \left( \frac{y_t}{y_{t-1}} \right)
@@ -464,7 +587,7 @@ Conjuntando éste último resultado de la ecuación \eqref{eq:SUM2} con la ecuac
     \label{eq:SOLITER}
 \end{equation}
 
-De esta forma la ecuación \eqref{eq:SOLITER} es una solición para la ecuación \eqref{eq:SUM}, que es una ecuación de un proceso de una Ecuación en Diferencia plantenado en la ecuación \eqref{eq:EDPO}. Está solución aún no es general, en el sentido de que sea válida para cualquiel tipo de proceso: convergente o divergente. Dicha convergencia o divengencia estará determinada por el paramétro \(a_1\). No debe pasar desapercibido que cuando \(t \rightarrow \infty\) o cuando la muestra es muy grande (lo que es equivalente), podemos decir que la solución solo puede converger a la siguiente expresión cuando se considera que \(|a_1| < 1\):
+De esta forma la ecuación \eqref{eq:SOLITER} es una solución para la ecuación \eqref{eq:SUM}, que es una ecuación de un proceso de una Ecuación en Diferencia plantenado en la ecuación \eqref{eq:EDPO}. Está solución aún no es general, en el sentido de que sea válida para cualquiel tipo de proceso: convergente o divergente. Dicha convergencia o divengencia estará determinada por el paramétro \(a_1\). No debe pasar desapercibido que cuando \(t \rightarrow \infty\) o cuando la muestra es muy grande (lo que es equivalente), podemos decir que la solución solo puede converger a la siguiente expresión cuando se considera que \(|a_1| < 1\):
 \begin{equation}
     Z_t = a_0 \left( \frac{1}{1 - a_1} \right)
     \label{eq:trayec}
@@ -495,7 +618,7 @@ Así, juntando la ecuación \eqref{eq:PROC01} y ecuación \eqref{eq:eqs} tenemos
 \label{eq:SOLGEN}
 \end{equation}
 
-No debe pasar desapercibido que está solución es la misma que la mostrada en la ecuación (\eqref{eq:SOLITER}, por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones \eqref{eq:SOLITER} y \eqref{eq:SOLGEN}. Ambas convergen a la expresión como la ecuación \eqref{eq:trayec}, con la misma condición de convergencia \(|a_1| < 1\). Para ilustrar estas ecuaciones veámos algunos ejemplos al respecto.
+No debe pasar desapercibido que está solución es la misma que la mostrada en la ecuación \eqref{eq:SOLITER}, por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones \eqref{eq:SOLITER} y \eqref{eq:SOLGEN}. Ambas convergen a la expresión como la ecuación \eqref{eq:trayec}, con la misma condición de convergencia \(|a_1| < 1\). Para ilustrar estas ecuaciones veámos algunos ejemplos al respecto.
 
 Consideremos que tenemos un proceso \(Z_t\) que es descrito por una ecuación en diferencia lineal de primer orden dada por:
 \begin{equation}
@@ -523,19 +646,40 @@ Siguiendo la expresión mostrada en la ecuación \eqref{eq:SOLGEN}, obtenemos:
 
 Donde asumiremos que el valor inicial es \(Z_0 = 10\) y que la ecuación converge al valor de \(1.3333333 \ldots\), cuando \(t\) es muy grande o tiende a infinito. Ahora simulemos el comportamiento de ambos procesos y estableceremos los resultados del Cuadro \ref{tab:table1}. Notemos que el segundo proceso converge de una forma más rapida que el primero. El Cuadro \ref{tab:table1} se ilustra en las siguientes dos Figura \ref{fig:fig21} y Figura \ref{fig:fig22}.
 
-\hypertarget{ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior}{%
-\subsection{Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior}\label{ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
 
-Como un segundo caso a estudiar se ubica el caso de las Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior. Primero, sea una ecuación como la siguiente, la cual es lineal y de segundo orden, ya que tiene asociado un término de \(Z_t\) rezagado dos periódos:
-\begin{equation}
-    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2}
-    \label{eq:EDSO}
-\end{equation}
+\NormalTok{Tiempo }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{100}\NormalTok{)}
+\NormalTok{Zt }\OtherTok{=} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{101}\NormalTok{)}
+\NormalTok{Zt2 }\OtherTok{=} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{,}\DecValTok{101}\NormalTok{)}
+\NormalTok{Zt[}\DecValTok{1}\NormalTok{] }\OtherTok{=} \DecValTok{10}
+\NormalTok{Zt2[}\DecValTok{1}\NormalTok{] }\OtherTok{=} \DecValTok{10}
 
-Table: \label{tab:foo} Dos ejemplos de procesos de Ecuaciones Lineales de Primer Orden convengentes
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{101}\NormalTok{))\{}
+\NormalTok{  Zt[i] }\OtherTok{=} \DecValTok{2}\FloatTok{+0.9}\SpecialCharTok{*}\NormalTok{Zt[i}\DecValTok{{-}1}\NormalTok{]}
+\NormalTok{  Zt2[i] }\OtherTok{=} \DecValTok{2} \SpecialCharTok{{-}} \FloatTok{0.5}\SpecialCharTok{*}\NormalTok{Zt2[i}\DecValTok{{-}1}\NormalTok{]}
+\NormalTok{\}}
+\NormalTok{lista }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{, }\DecValTok{97}\SpecialCharTok{:}\DecValTok{101}\NormalTok{)}
+\NormalTok{Tiempo1 }\OtherTok{=}\NormalTok{ Tiempo[lista]}
+\NormalTok{Zt1}\OtherTok{=}\NormalTok{Zt[lista]}
+\NormalTok{Zt21}\OtherTok{=}\NormalTok{Zt2[lista]}
+
+\NormalTok{tabla1 }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(Tiempo1, Zt1, Zt21)}
+\FunctionTok{colnames}\NormalTok{(tabla1) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Tiempo"}\NormalTok{, }\StringTok{"$Z\_t =2+0.9Z\_\{t{-}1\}$"}\NormalTok{, }
+                      \StringTok{"$Z\_t = 2{-}0.5Z\_\{t{-}1\}$"}\NormalTok{)}
+
+\FunctionTok{kable}\NormalTok{(tabla1, }
+      \AttributeTok{caption =} \StringTok{"Dos ejemplos de Ecuaciones Lineales de Primer Orden"}\NormalTok{, }
+      \AttributeTok{format =} \StringTok{"pandoc"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{font\_size =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{longtable}[]{@{}rrr@{}}
-\caption{\label{tab:table1}Dos ejemplos de Procesos de Ecuaciones Lineales de Primer Orden Convergentes}\tabularnewline
+\caption{\label{tab:table1}Dos ejemplos de Ecuaciones Lineales de Primer Orden}\tabularnewline
 \toprule\noalign{}
 Tiempo & \(Z_t =2+0.9Z_{t-1}\) & \(Z_t = 2-0.5Z_{t-1}\) \\
 \midrule\noalign{}
@@ -569,6 +713,17 @@ Tiempo & \(Z_t =2+0.9Z_{t-1}\) & \(Z_t = 2-0.5Z_{t-1}\) \\
 100 & 19.99973 & 1.333333 \\
 \end{longtable}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabla }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{( Tiempo, Zt, Zt2 )}
+
+\FunctionTok{ggplot}\NormalTok{( }\AttributeTok{data =}\NormalTok{ tabla , }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Tiempo, }\AttributeTok{y =}\NormalTok{ Zt) )}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{col=}\StringTok{"blue4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{col=} \StringTok{"blue4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\FunctionTok{expression}\NormalTok{(Z[t]))}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{figure}
 
 {\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig21-1} 
@@ -578,6 +733,15 @@ Tiempo & \(Z_t =2+0.9Z_{t-1}\) & \(Z_t = 2-0.5Z_{t-1}\) \\
 \caption{Evolución del proceso dado por $Z_t =2+0.9Z_{t-1}$}\label{fig:fig21}
 \end{figure}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ tabla , }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Tiempo, }\AttributeTok{y=}\NormalTok{Zt2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{col=}\StringTok{"red4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{col=} \StringTok{"red4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\FunctionTok{expression}\NormalTok{(Z[t]))}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{figure}
 
 {\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig22-1} 
@@ -586,6 +750,15 @@ Tiempo & \(Z_t =2+0.9Z_{t-1}\) & \(Z_t = 2-0.5Z_{t-1}\) \\
 
 \caption{Evolución del proceso dado por $Z_t =2-0.5Z_{t-1}$}\label{fig:fig22}
 \end{figure}
+
+\hypertarget{ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior}{%
+\subsection{Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior}\label{ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior}}
+
+Como un segundo caso a estudiar se ubica el caso de las Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior. Primero, sea una ecuación como la siguiente, la cual es lineal y de segundo orden, ya que tiene asociado un término de \(Z_t\) rezagado dos periódos:
+\begin{equation}
+    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2}
+    \label{eq:EDSO}
+\end{equation}
 
 Donde \(t = \ldots, -2, -1, 0, 1, 2, \ldots\) y \(a_1, a_2 \neq 0\). Reordenando la ecuación \eqref{eq:EDSO} podemos escribir:
 \begin{eqnarray}
@@ -788,8 +961,31 @@ Donde \(t = \ldots, -2, -1, 0, 1, 2, \ldots\) y \(a_p \neq 0\). La ecuación \eq
     \label{eq:EDOP2}
 \end{eqnarray}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t }\OtherTok{=} \FunctionTok{ts}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{100}\NormalTok{))}
+
+\NormalTok{Zt }\OtherTok{=} \DecValTok{10{-}450}\SpecialCharTok{*}\NormalTok{(}\FloatTok{0.4}\SpecialCharTok{\^{}}\NormalTok{t)}\SpecialCharTok{+}\DecValTok{440}\SpecialCharTok{*}\NormalTok{(}\FloatTok{0.5}\SpecialCharTok{\^{}}\NormalTok{t)}
+
+\NormalTok{tabla\_2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{( t, Zt) }
+
+\NormalTok{lista }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{, }\DecValTok{97}\SpecialCharTok{:}\DecValTok{101}\NormalTok{)}
+\NormalTok{t1 }\OtherTok{=}\NormalTok{ t[lista]}
+\NormalTok{Zt1}\OtherTok{=}\NormalTok{Zt[lista]}
+
+
+\NormalTok{tabla1 }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(Tiempo1, Zt1)}
+\FunctionTok{colnames}\NormalTok{(tabla1) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Tiempo"}\NormalTok{, }\StringTok{"$Z\_t =10{-}450(0.4)\^{}t+440(0.5)\^{}t$"}\NormalTok{)}
+
+\FunctionTok{kable}\NormalTok{(tabla1, }
+      \AttributeTok{caption =} \StringTok{"Un ejemplo de Ecuación de Segundo Orden"}\NormalTok{, }
+      \AttributeTok{format =} \StringTok{"pandoc"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{font\_size =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{longtable}[]{@{}rr@{}}
-\caption{\label{tab:table2}Un ejemplo de proceso de Ecuación de Segundo Orden convengente}\tabularnewline
+\caption{\label{tab:table2}Un ejemplo de Ecuación de Segundo Orden}\tabularnewline
 \toprule\noalign{}
 Tiempo & \(Z_t =10-450(0.4)^t+440(0.5)^t\) \\
 \midrule\noalign{}
@@ -822,6 +1018,15 @@ Tiempo & \(Z_t =10-450(0.4)^t+440(0.5)^t\) \\
 99 & 10.00000 \\
 100 & 10.00000 \\
 \end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ tabla\_2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ t, }\AttributeTok{y=}\NormalTok{Zt)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{col=}\StringTok{"green4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{col=} \StringTok{"green4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\FunctionTok{expression}\NormalTok{(Z[t]))}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -924,6 +1129,23 @@ Para \(\forall i = 1, 2, \ldots, p\). Cuando la raíces son imaginarias, las dos
 \end{eqnarray}
 
 Para \(\forall i \neq j\) y \(i, j = 1, 2, \ldots, p\). Cuando \(g_1 = g_2 = \ldots = g_p = g\), la condición de la ecuación \eqref{eq:COND3} se resume a que \(|g| < 1\). En resumen, las condiciones descritas en las ecuaciones \eqref{eq:COND3} y \eqref{eq:COND4} se puden ilustrar con un circulo unitario como el de la Figura \ref{fig:fig24} en que sí las raíces se ubican dentro de éste, podemos decir que el proceso es convergente en el largo plazo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Crear datos para el círculo}
+\NormalTok{theta }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\SpecialCharTok{*}\NormalTok{pi, }\AttributeTok{length.out=}\DecValTok{100}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{cos}\NormalTok{(theta)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{sin}\NormalTok{(theta)}
+\NormalTok{circle\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x, y)}
+
+\CommentTok{\# Dibujar el círculo}
+\FunctionTok{ggplot}\NormalTok{(circle\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x, }\AttributeTok{y=}\NormalTok{y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_fixed}\NormalTok{(}\AttributeTok{ratio=}\DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlim}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.5}\NormalTok{, }\FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.5}\NormalTok{, }\FloatTok{1.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -1186,9 +1408,16 @@ Definiremos a la estacionariedad por sus momentos del correspondiente proceso es
 Puesto que resulta poco factible asumir una estacionariedad diferente a la débil, es adelante siempre que digamos que un proceso es estacionario se referirá al caso débil y sólo diremos que el proceso es estacionario, sin el apelativo de débil.
 
 Ahora veamos un ejemplo de lo anterior. Supongamos una serie de tiempo denotada por: \(\{U_t\}^T_{t = 0}\). Decimos que el proceso estocástico \(\{U_t\}\) es un \emph{proceso estocástico puramente aleatorio} o es un \emph{proceso estocástico de ruido blanco o caminata aleatoria}, si éste tiene las siguientes propiedades:
-1. \(\mathbb{E}[U_t] = 0\), \(\forall t\);
-2. \(Var[U_t] = \mathbb{E}[(U_t - \mu_t)^2] = \mathbb{E}[(U_t - \mu)^2] = \mathbb{E}[(U_t)^2] = \sigma^2\), \(\forall t\), y
-3. \(Cov[U_t,U_s] = \mathbb{E}[(U_t - \mu_t)(U_s - \mu_s)] = \mathbb{E}[(U_t - \mu)(U_s - \mu)] = \mathbb{E}[U_t U_s] = 0\), \(\forall t \neq s\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(\mathbb{E}[U_t] = 0\), \(\forall t\);
+\item
+  \(Var[U_t] = \mathbb{E}[(U_t - \mu_t)^2] = \mathbb{E}[(U_t - \mu)^2] = \mathbb{E}[(U_t)^2] = \sigma^2\), \(\forall t\), y
+\item
+  \(Cov[U_t,U_s] = \mathbb{E}[(U_t - \mu_t)(U_s - \mu_s)] = \mathbb{E}[(U_t - \mu)(U_s - \mu)] = \mathbb{E}[U_t U_s] = 0\), \(\forall t \neq s\).
+\end{enumerate}
 
 En otras palabras, un proceso \(U_t\) es un ruido blanco si su valor esperado (promedio) es cero (0), tiene una varianza finita y constante, y además no le importa la historia pasada. Así, su valor presente no se ve influenciado por sus valores pasados no importando respecto de que periodo se tome referencia.
 
@@ -1209,9 +1438,16 @@ Donde \(\{ U_t \}\) es un proceso puramente aleatorio. Este proceso estocástico
 Tratemos de dar más claridad al ejemplo, para ello asumamos que generamos a \(\{U_t\}\) por medio del lanzamiento de una moneda. Donde obtenemos una cara (águila) con una probabilidad de \(0.5\), en cuyo caso decimos que la variable aleatoria \(U_t\) tomará el valor de \(+1\), y una cruz (sol) con una probabilidad de \(0.5\), en cuyo caso decimos que la variable aleatoria \(U_t\) toma el valor de \(-1\).
 
 Este planteamiento cumple con las propiedas enunciadas ya que:
-1. \(\mathbb{E}[U_t] = 0.5 \times -1 + 0.5 \times 1 = 0\), \(\forall t\)
-2. \(Var[U_t] = \mathbb{E}[(U_t - 0)^2] = \frac{1}{2}((-1)^2) + \frac{1}{2}((1)^2) = 1\), \(\forall t\)
-3. \(Cov[U_t,U_s] = \mathbb{E}[(U_t - 0)(U_s - 0)] = \mathbb{E}[U_t \cdot U_s] = 0\), \(\forall t \neq s\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(\mathbb{E}[U_t] = 0.5 \times -1 + 0.5 \times 1 = 0\), \(\forall t\)
+\item
+  \(Var[U_t] = \mathbb{E}[(U_t - 0)^2] = \frac{1}{2}((-1)^2) + \frac{1}{2}((1)^2) = 1\), \(\forall t\)
+\item
+  \(Cov[U_t,U_s] = \mathbb{E}[(U_t - 0)(U_s - 0)] = \mathbb{E}[U_t \cdot U_s] = 0\), \(\forall t \neq s\).
+\end{enumerate}
 
 Retomando a nuestro proceso \(X_t\), diremos que el caso de \(X_0 = 0\), para \(t = 0\). Si verificamos cúales son sus primeros y segundos momentos de \(\{X_t\}\) tenemos:
 \begin{equation}
@@ -1239,14 +1475,50 @@ Lo anterior, dado que hemos supuesto que en la caminata aleatoria todas la varia
     & = & min(t,s)
 \end{eqnarray*}
 
-\textbackslash begin\{figure\}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\CommentTok{\# Utilizaremos una función guardada en un archivo a parte}
+\CommentTok{\# Llamamos a la función:}
+\FunctionTok{source}\NormalTok{(}\StringTok{"Caminata.R"}\NormalTok{)}
 
-\{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig31-1}
+\CommentTok{\# Definimos argumentos de la función}
+\NormalTok{Opciones }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\CommentTok{\#}
+\NormalTok{Soporte }\OtherTok{\textless{}{-}} \DecValTok{10000}
 
-\}
+\CommentTok{\# Vamos a réplicar el proceso con estos parámetros}
+\NormalTok{Rango }\OtherTok{\textless{}{-}} \DecValTok{200}
+\CommentTok{\#}
+\NormalTok{Caminos }\OtherTok{\textless{}{-}} \DecValTok{10}
 
-\textbackslash caption\{Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1\$\}\label{fig:fig31}
-\textbackslash end\{figure\}
+\CommentTok{\#}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Caminos)\{}
+\NormalTok{  TT }\OtherTok{\textless{}{-}} \FunctionTok{data.matrix}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{Caminata}\NormalTok{(Opciones, Soporte)[}\DecValTok{1}\NormalTok{]))}
+  \CommentTok{\#}
+\NormalTok{  G\_t }\OtherTok{\textless{}{-}} \FunctionTok{data.matrix}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{Caminata}\NormalTok{(Opciones, Soporte)[}\DecValTok{2}\NormalTok{]))}
+  \CommentTok{\#}
+  \FunctionTok{plot}\NormalTok{(TT, G\_t, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Ganancias"}\NormalTok{, }
+       \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Rango,Rango))}
+  \CommentTok{\#}
+  \FunctionTok{par}\NormalTok{(}\AttributeTok{new =} \ConstantTok{TRUE}\NormalTok{)}
+  \CommentTok{\#}
+\NormalTok{  i }\OtherTok{\textless{}{-}}\NormalTok{ i }\SpecialCharTok{+}\DecValTok{1}
+\NormalTok{\}}
+\CommentTok{\#}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{new =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig31-1} 
+
+}
+
+\caption{Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1}\label{fig:fig31}
+\end{figure}
 
 Así, el proceso estocástico dado por la caminata alaeatoria sin un término de ajuste es estacionario en media, pero no en varianza o en covarianza, y consecuentemente, en general no estacionario, condición que contraria al caso del proceso simple descrito en \(U_t\).
 
@@ -1368,7 +1640,6 @@ En comparación con una prueba Durbin - Watson que es comúnmente usada en la ec
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Permiten corroborar la existencia de autocorrelación para cualquier orden, y no solo para un primer orden (es decir, para cualquier valor de \(\tau = 1, 2, 3, \ldots\));
 \item
@@ -1416,7 +1687,8 @@ Veamos un ejemplo para ilustrar el uso de la función de autocorrelación. Tomem
 \FunctionTok{library}\NormalTok{(dplyr)}
 \FunctionTok{library}\NormalTok{(readxl)}
 
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }
+                    \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Datos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Periodo, }\AttributeTok{y =}\NormalTok{ Pax\_Metro)) }\SpecialCharTok{+} 
   \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{linewidth =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{color =} \StringTok{"darkblue"}\NormalTok{) }\SpecialCharTok{+}
@@ -1457,7 +1729,7 @@ A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora es
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\caption{\label{tab:foo} Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 200 a junio de 2019}\tabularnewline
+\caption{\label{tab:foo} Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2019}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Estadística
@@ -1497,7 +1769,7 @@ Valor
 \FunctionTok{acf}\NormalTok{(Pax\_Metro, }
     \AttributeTok{lag.max =} \DecValTok{150}\NormalTok{, }
     \AttributeTok{xlab =} \StringTok{\textquotesingle{}Resagos k en meses\textquotesingle{}}\NormalTok{, }
-    \AttributeTok{main=}\StringTok{"Funcion de Autocorrelación del número de pasajeros del metro"}\NormalTok{)}
+    \AttributeTok{main =} \StringTok{"Funcion de Autocorrelación del número de pasajeros del metro"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1507,13 +1779,15 @@ Valor
 
 }
 
-\caption{unción de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023}\label{fig:fig33}
+\caption{Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023}\label{fig:fig33}
 \end{figure}
 
 \hypertarget{procesos-estacionarios-univariados}{%
 \chapter{Procesos estacionarios univariados}\label{procesos-estacionarios-univariados}}
 
-En este capítulo analizaremos el método o metodología de análisis de series de tiempo propuesto por Box y Jenkins (1970). Los modelos propuestos dentro de está metodología o conjunto de métodos se han vuelto indispensables para efectos de realizar pronósticos de corto plazo.
+En este capítulo analizaremos el método o metodología de análisis de series de tiempo propuesto por Box y Jenkins (1970). Los modelos
+propuestos dentro de está metodología o conjunto de métodos se han vuelto indispensables para efectos de realizar pronósticos de corto
+plazo.
 
 En este sentido, se analizarán los métodos más importantes en series de tiempo: procesos autoregresivos (AR) y procesos de medias móviles (MA). Asimismo, se realizará un análisis de los procesos que resultan de la combinación de ambos, conocida como ARMA, los cuales son más comúnmente usados para realizar pronósticos.
 
@@ -1525,34 +1799,34 @@ Los procesos autoregresivos tienen su origen en el trabajo de Cochrane y Orcutt 
 \hypertarget{ar1}{%
 \subsection{AR(1)}\label{ar1}}
 
-Como primer caso analizaremos al proceso autoregresivo de primer orden, \(AR(1)\), el cual podemos definir como una Ecuación Lineal en Diferencia Estocástica de Primer Orden. Diremos que una Ecuación Lineal en Diferencia de Primer Orden es estocástica si en su representación analítica considera un componente estocástico como en la ecuación (\ref{EDO_Est}) descrita a continuación:
+Como primer caso analizaremos al proceso autoregresivo de primer orden, \(AR(1)\), el cual podemos definir como una Ecuación Lineal en Diferencia Estocástica de Primer Orden. Diremos que una Ecuación Lineal en Diferencia de Primer Orden es estocástica si en su representación analítica considera un componente estocástico como en la ecuación \eqref{eq:EDOEst} descrita a continuación:
 \begin{equation}
     X_t = a_0 + a_1 X_{t-1} + U_t
-    \label{EDO_Est}
+    \label{eq:EDOEst}
 \end{equation}
 
-Donde \(a_0\) es un término constante, \(U_t\) es un proceso estacionario, con media cero (0), una varianza finita y constante (\(\sigma^2\)) y una covarianza que depende de la distancia entre \(t\) y cualquier \(t-s\) (\(\gamma_s\))--que no depende de los valores pasados o futuros de la variable--, \(X_0\) es el valor inicial del proceso \(X_t\). No obstante, en ocasiones vamos a asumir que la covarianza será cero (0), por lo que en esos casos tendremos un proceso puramente aleatorio. Considerando la ecuación (\ref{EDO_Est} y un proceso de sustitución sucesivo podemos establecer lo siguiente, empezando con \(X_1\):
+Donde \(a_0\) es un término constante, \(U_t\) es un proceso estacionario, con media cero (0), una varianza finita y constante (\(\sigma^2\)) y una covarianza que depende de la distancia entre \(t\) y cualquier \(t-s\) (\(\gamma_s\))--que no depende de los valores pasados o futuros de la variable--, \(X_0\) es el valor inicial del proceso \(X_t\). No obstante, en ocasiones vamos a asumir que la covarianza será cero (0), por lo que en esos casos tendremos un proceso puramente aleatorio. Considerando la ecuación \eqref{eq:EDOEst} y un proceso de sustitución sucesivo podemos establecer lo siguiente, empezando con \(X_1\):
 \begin{eqnarray*}
     X_{1} & = & a_0 + a_1 X_{0} + U_{1}
 \end{eqnarray*}
 
 Para \(X_2\):
 \begin{eqnarray*}
-X_{2} & = & a_0 + a_1 X_{1} + U_{2} \\
+    X_{2} & = & a_0 + a_1 X_{1} + U_{2} \\
     & = & a_0 + a_1 (a_0 + a_1 X_{0} + U_{1}) + U_{2} \\
     & = & a_0 + a_1 a_0 + a_1^2 X_{0} + a_1 U_{1} + U_{2}
 \end{eqnarray*}
 
 Para \(X_3\):
 \begin{eqnarray*}
-X_{3} & = & a_0 + \alpha X_{2} + U_{3} \\
+    X_{3} & = & a_0 + \alpha X_{2} + U_{3} \\
     & = & a_0 + a_1 (a_0 + a_1 a_0 + a_1^2 X_{0} + a_1 U_{1} + U_{2}) + U_{3} \\
     & = & a_0 + a_1 a_0 + a_1^2 a_0 + a_1^3 X_{0} + a_1^2 U_{1} + a_1 U_{2} + U_{3}
 \end{eqnarray*}
 
 Así, para cualquier \(X_t\), \(t = 1, 2, 3, \ldots\), obtendríamos:
 \begin{eqnarray}
-X_{t} & = & a_0 + a_1 X_{t - 1} + U_{t} \nonumber \\
+    X_{t} & = & a_0 + a_1 X_{t - 1} + U_{t} \nonumber \\
     & = & a_0 + a_1 (a_0 + a_1 a_0 + a_1^2 a_0 + \ldots + a_1^{t-2} a_0 + a_1^{t-1} X_{0} \nonumber \\
     &   & + a_1^{t-2} U_{1} + \ldots + a_1 U_{t - 2} + U_{t - 1}) + U_{t} \nonumber \\
     & = & a_0 + a_1 a_0 + a_1^2 a_0 + a_1^3 a_0 + \ldots + a_1^{t-1} a_0 + a_1^{t} X_{0} \nonumber \\
@@ -1560,18 +1834,18 @@ X_{t} & = & a_0 + a_1 X_{t - 1} + U_{t} \nonumber \\
     & = & (1 + a_1 + a_1^2 + a_1^3 + \ldots + a_1^{t-1}) a_0 + a_1^{t} X_{0} \nonumber \\
     &   & + a_1^{t-1} U_{1} + \ldots + a_1^2 U_{t - 2} + a_1 U_{t - 1} + U_{t}  \nonumber\\
     & = & \frac{1 - a_1^t}{1 - a_1} a_0 + a_1^{t} X_{0} + \sum^{t-1}_{j = 0} a_1^{j} U_{t - j} 
-    \label{EDO_S_Sol}
+    \label{eq:EDOSSol}
 \end{eqnarray}
 
-De esta forma en la ecuación (\ref{EDO_S_Sol}) observamos un proceso que es explicado por dos partes: una que depende del tiempo y otra que depende de un proceso estocástico. Asimismo, debe notarse que la condición de convergencia es idéntica que en el caso de ecuaciones en diferencia estudiadas al inicio del curso: \$ \textbar a\_1\textbar{} \textless{} 1\$, por lo que cuando \(t \to \infty\), la expresión (\ref{EDO_S_Sol}) será la siguiente:
+De esta forma en la ecuación \eqref{eq:EDOSSol} observamos un proceso que es explicado por dos partes: una que depende del tiempo y otra que depende de un proceso estocástico. Asimismo, debe notarse que la condición de convergencia es idéntica que en el caso de ecuaciones en diferencia estudiadas al inicio del curso: \$ \textbar a\_1\textbar{} \textless{} 1\$, por lo que cuando \(t \to \infty\), la expresión \eqref{eq:EDOSSol} será la siguiente:
 \begin{equation}
     X_t = a_0 \frac{1}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^{j} U_{t - j}
-    \label{EDO_S_LP}
+    \label{eq:EDOSLP}
 \end{equation}
 
 Así, desaparece la parte dependiente del tiempo y únicamente prevalece la parte que es dependiente del proceso estocástico. Esta es la solución de largo plazo del proceso \(AR(1)\), la cual depende del proceso estocástico. Notemos, además, que esta solución implica que la variable o la serie de tiempo \(X_t\) es tambien un proceso estocástico que hereda las propiedades de \(U_t\). Así, \(X_t\) es también un proceso estocástico estacionario, como demostraremos más adelante.
 
-Observemos que la ecuación (\ref{EDO_S_LP}) se puede reescribir si consideramos la formulación que en la literatura se denomina como la descomposición de Wold, en la cual se define que es posible asumir que \(\psi_j = a_1^j\) y se considera el caso en el cual \$ \textbar a\_1\textbar{} \textless{} 1 \$, de esta forma tendremos que por ejemplo cuando:
+Observemos que la ecuación \eqref{eq:EDOSLP} se puede reescribir si consideramos la formulación que en la literatura se denomina como la descomposición de Wold, en la cual se define que es posible asumir que \(\psi_j = a_1^j\) y se considera el caso en el cual \$ \textbar a\_1\textbar{} \textless{} 1 \$, de esta forma tendremos que por ejemplo cuando:
 \begin{equation*}
     \sum^{\infty}_{j = 0} \psi^2_j = \sum^{\infty}_{j = 0} a_1^{2j} = \frac{1}{1 - a_1^2} 
 \end{equation*}
@@ -1582,7 +1856,7 @@ Alternativamente y de forma similar a las ecuaciones en diferencia estudiadas pr
     X_t - a_1 L X_t & = & a_0 + U_t \nonumber \\
     (1 - a_1 L) X_t & = & a_0 + U_t \nonumber \\
     X_t & = & \frac{a_0}{1 - a_1 L} + \frac{1}{1 - a_1 L} U_t
-    \label{AR_1}
+    \label{eq:AR01}
 \end{eqnarray}
 
 En esta última ecuación retomamos el siguiente término para reescribirlo como:
@@ -1590,37 +1864,42 @@ En esta última ecuación retomamos el siguiente término para reescribirlo como
     \frac{1}{1 - a_1 L} = 1 + a_1 L + a_1^2 L^2 + a_1^3 L^3 + \ldots 
 \end{equation}
 
-Tomando este resultado para sustituirlo en ecuación (\ref{AR_1}), obtenemos la siguiente expresión:
+Tomando este resultado para sustituirlo en ecuación \eqref{eq:AR01}, obtenemos la siguiente expresión:
 \begin{eqnarray}
-X_t & = & (1 + a_1 L + a_1^2 L^2 + a_1^3 L^3 + \ldots) a_0 + (1 + a_1 L + a_1^2 L^2 + a_1^3 L^3 + \ldots) U_t \nonumber \\
+    X_t & = & (1 + a_1 L + a_1^2 L^2 + a_1^3 L^3 + \ldots) a_0 + (1 + a_1 L + a_1^2 L^2 + a_1^3 L^3 + \ldots) U_t \nonumber \\
     & = & (1 + a_1 + a_1^2 + a_1^3 + \ldots) a_0 + U_t + a_1 U_{t-1} + a_1^2 U_{t-2} + a_1^3 U_{t-3} + \ldots \nonumber \\
     & = & \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-j}
-    \label{AR1_Sol}
+    \label{eq:AR1Sol}
 \end{eqnarray}
 
 Donde la condición de convergencia y estabilidad del proceso descrito en esta ecuación es que \$ \textbar a\_1\textbar{} \textless{} 1 \$. Por lo que hemos demostrado que mediante el uso del operador de rezago es posible llegar al mismo resultado que obtuvimos mediante el procedimiento de sustituciones iterativas.
 
-La ecuación (\ref{AR1_Sol}) se puede interpretar como sigue. La solución o trayectoria de equilibrio de un AR(1) se divide en dos partes. La primera es una constante que depende de los valores de \(a_0\) y \(a_1\). La segunda parte es la suma ponderada de las desviaciones o errores observados y acumulados en el tiempo hasta el momento \(t\).
+La ecuación \eqref{eq:AR1Sol} se puede interpretar como sigue. La solución o trayectoria de equilibrio de un AR(1) se divide en dos
+partes. La primera es una constante que depende de los valores de \(a_0\) y \(a_1\). La segunda parte es la suma ponderada de las desviaciones o errores observados y acumulados en el tiempo hasta el momento \(t\).
 
 Ahora obtendremos los momentos que describen a la serie de tiempo cuando se trata de un porceso \(AR(1)\). Para ello debemos obtener la media, la varianza y las covarianzas de \(X_t\). Para los siguientes resultados debemos recordar y tener en mente que si \(U_t\) es un proceso puramente aleatorio, entonces:
 
 \begin{enumerate}
-    \item $\mathbb{E}[U_t] = 0$ para todo $t$
-    \item $Var[U_t] = \sigma^2$ para todo $t$
-    \item $Cov[U_t, U_s] = 0$ para todo $t \neq s$
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(\mathbb{E}[U_t] = 0\) para todo \(t\)
+\item
+  \(Var[U_t] = \sigma^2\) para todo \(t\)
+\item
+  \(Cov[U_t, U_s] = 0\) para todo \(t \neq s\)
 \end{enumerate}
 
-Dicho lo anterior y partiendo de la ecuación (\ref{AR1_Sol}), el primer momento o valor esperado de la serie de tiempo será el siguiente:
+Dicho lo anterior y partiendo de la ecuación \eqref{eq:AR1Sol}, el primer momento o valor esperado de la serie de tiempo será el siguiente:
 \begin{eqnarray}
-\mathbb{E}[X_t] & = & \mathbb{E} \left[ \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-j} \right] \nonumber \\
+    \mathbb{E}[X_t] & = & \mathbb{E} \left[ \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-j} \right] \nonumber \\
     & = & \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j \mathbb{E}[U_{t-j}] \nonumber \\
     & = & \frac{a_0}{1 - a_1} = \mu
-    \label{AR1_m1}
+    \label{eq:AR1m1}
 \end{eqnarray}
 
-Respecto de la varianza podemos escribir la siguiente expresión a partir de la ecuación (\ref{AR1_Sol}):
+Respecto de la varianza podemos escribir la siguiente expresión a partir de la ecuación \eqref{eq:AR1Sol}:
 \begin{eqnarray}
-Var[X_t] & = & \mathbb{E}[(X_t - \mu)^2] \nonumber \\
+    Var[X_t] & = & \mathbb{E}[(X_t - \mu)^2] \nonumber \\
     & = & \mathbb{E} \left[ \left( \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-j} - \frac{a_0}{1 - a_1} \right)^2 \right] \nonumber \\
     & = & \mathbb{E}[(U_{t} + a_1 U_{t-1} + a_1^2 U_{t-2} + a_1^3 U_{t-3} + \ldots)^2] \nonumber \\
     & = & \mathbb{E}[U^2_{t} + a_1^2 U^2_{t-1} + a_1^4 U^2_{t-2} + a_1^6 U^2_{t-3} + \ldots \nonumber \\
@@ -1629,34 +1908,37 @@ Var[X_t] & = & \mathbb{E}[(X_t - \mu)^2] \nonumber \\
     & = & \sigma^2 + a_1^2 \sigma^2 + a_1^4 \sigma^2 + a_1^6 \sigma^2 + \ldots \nonumber \\
     & = & \sigma^2 (1 + a_1^2 + a_1^4 + a_1^6 + \ldots) \nonumber \\
     & = & \sigma^2 \frac{1}{1 - a_1^2} = \gamma(0)
-    \label{AR1_Var}
+    \label{eq:AR1Var}
 \end{eqnarray}
 
 Previo a analizar la covarianza de la serie recordemos que para el proceso puramente aleatorio \(U_t\) su varianza y covarianza puede verse como \(\mathbb{E}[U_t, U_s] = \sigma^2\), para \(t = s\), y \(\mathbb{E}[U_t, U_s] = 0\), para cualquier otro caso, respectivamente.
 
-Dicho lo anterior, partiendo de la ecuación (\ref{AR1_Sol}) la covarianza de la serie estará dada por:
+Dicho lo anterior, partiendo de la ecuación \eqref{eq:AR1Sol} la covarianza de la serie estará dada por:
 \begin{eqnarray}
-Cov(X_t, X_{t-\tau}) & = & \mathbb{E}[(X_t - \mu)(X_{t-\tau} - \mu)] \nonumber \\
+    Cov(X_t, X_{t-\tau}) & = & \mathbb{E}[(X_t - \mu)(X_{t-\tau} - \mu)] \nonumber \\
     & = & \mathbb{E} \left[ \left( \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-j} - \frac{a_0}{1 - a_1} \right) \right. \nonumber \\
     &   & \left. \times \left( \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-\tau-j} - \frac{a_0}{1 - a_1} \right) \right] \nonumber \\
     & = & a_1^{\tau} \mathbb{E}[U^2_{t-\tau} + a_1 U^2_{t-\tau-1} + a_1^2 U^2_{t-\tau-2} + a_1^3 U^2_{t-\tau-3} + \ldots] \nonumber \\
     & = & a_1^{\tau} \sigma^2 \frac{1}{1 - a_1^2} = \gamma(\tau)
-    \label{AR1_Cov}
+    \label{eq:AR1Cov}
 \end{eqnarray}
 
-Notése que con estos resultados en las ecuaciones (\ref{AR1_Var}) y (\ref{AR1_Cov}) podemos construir la función de autocorrelación teórica como sigue:
+Notése que con estos resultados en las ecuaciones \eqref{eq:AR1Var} y \eqref{eq:AR1Cov} podemos construir la función de autocorrelación
+teórica como sigue:
 \begin{eqnarray}
-\rho(\tau) & = & \frac{\gamma(\tau)}{\gamma(0)} \nonumber \\
+    \rho(\tau) & = & \frac{\gamma(\tau)}{\gamma(0)} \nonumber \\
     & = & a_1^\tau
 \end{eqnarray}
 
-Donde \(\tau = 1, 2, 3, \ldots\) y \$ \textbar a\_1\textbar{} \textless{} 1\$. Este último resultado significa que cuando el proceso autoregresivo es de orden 1 (es decir, AR(1)) la función de autocorrelación teóricamente es igual al parámetro \(a_1\) elevado al número de rezagos considerados. No obstante, note que esto no significa que la autocorrelación observada sea como lo expresa en planteamiento anterior. Por el contrario, una observación sencilla mostraría que la autocorrelación observada sería ligeramente distinta a la autocorrelación teórica.
+Donde \(\tau = 1, 2, 3, \ldots\) y \$ \textbar a\_1\textbar{} \textless{} 1 \$. Este último resultado significa que cuando el proceso autoregresivo es de orden 1
+(es decir, AR(1)) la función de autocorrelación teóricamente es igual al parámetro \(a_1\) elevado al número de rezagos considerados. No obstante, note que esto no significa que la autocorrelación observada sea como lo expresa en planteamiento anterior. Por el contrario, una observación sencilla mostraría que la autocorrelación observada sería ligeramente distinta a la autocorrelación teórica.
 
-Ahora veámos algunos ejemplos. En el primer ejemplo simularemos una serie y mostraremos el analísis de un proceso construído considerando un proceso puramente aleatorio como componente \(U_t\).\footnote{ El procedimiento e implementación del ejercicio está en el archivo R denominado Clase 4 del repositorio de GitHub.} Por su parte, en un segundo ejemplo aplicaremos el análisis a una serie de tiempo de una variable económica observada.\footnote{ El procedimiento e implementación del ejercicio está en el archivo R denominado Clase 5 del repositorio de GitHub.}
+Ahora veámos algunos ejemplos. En el primer ejemplo simularemos una serie y mostraremos el analísis de un proceso construído considerando un proceso puramente aleatorio como componente \(U_t\). Por su parte, en un segundo ejemplo aplicaremos el análisis a una serie de tiempo de una variable económica observada.
 
-Para el primer ejemplo consideremos un proceso dado por la forma de un \(AR(1)\) como en la ecuación (\ref{AR_1}) cuya solución esta dada por la ecuación (\ref{AR1_Sol}). En especifico, supongamos que el término o componente estocástico \(U_t\) es una serie generada a partir de numeros aleatorios de una función normal con media \(0\) y desviación estándar \(4\). Los detalles del proceso simulado se muestra en las siguientes gráficas.
+Para el primer ejemplo consideremos un proceso dado por la forma de un \(AR(1)\) como en la ecuación \eqref{eq:AR01} cuya solución esta dada por la ecuación \eqref{eq:AR1Sol}. En especifico, supongamos que el término o componente estocástico \(U_t\) es una serie generada a partir de numeros aleatorios de una función normal con media \(0\) y desviación estándar \(4\). Los detalles del proceso simulado se muestra en las siguientes gráficas.
 
-La Figura \ref{fig:fig41} ilustra el comportamiento que se debería observar en una serie considerando el procedimiento iterativo de construcción. Por su parte, la Figura \ref{fig:fig42}\} ilustra el proceso o trayectoria de la solución de la serie de tiempo. Finalmente, las Figuras \ref{fig:fig43}\} y \ref{fig:fig44}\} muestran el correlograma calculado considerando una función de autocorrelación aplicada al porceso real y una función de autocorrelación aplicada al proceso teórico, respectivamente.
+La Figura \ref{fig:fig41} ilustra el comportamiento que se debería observar en una serie considerando el procedimiento iterativo de
+construcción. Por su parte, la Figura \ref{fig:fig42} ilustra el proceso o trayectoria de la solución de la serie de tiempo. Finalmente, las Figuras \ref{fig:fig43} y \ref{fig:fig44} muestran el correlograma calculado considerando una función de autocorrelación aplicada al porceso real y una función de autocorrelación aplicada al proceso teórico, respectivamente.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1704,7 +1986,8 @@ La Figura \ref{fig:fig41} ilustra el comportamiento que se debería observar en 
   \CommentTok{\#theme\_bw() + }
   \FunctionTok{xlab}\NormalTok{(}\StringTok{"Tiempo"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{ylab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_t$"}\NormalTok{)) }\SpecialCharTok{+} 
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }
+                                  \AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.subtitle =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.caption =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.margin =} \FunctionTok{unit}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\StringTok{"cm"}\NormalTok{)) }\SpecialCharTok{+}
@@ -1715,14 +1998,6 @@ La Figura \ref{fig:fig41} ilustra el comportamiento que se debería observar en 
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## i Please use `linewidth` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.
-\end{verbatim}
 
 \begin{figure}
 
@@ -1746,7 +2021,8 @@ La Figura \ref{fig:fig41} ilustra el comportamiento que se debería observar en 
   \CommentTok{\#theme\_bw() + }
   \FunctionTok{xlab}\NormalTok{(}\StringTok{"Tiempo"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{ylab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_t$"}\NormalTok{)) }\SpecialCharTok{+} 
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }
+                                  \AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.subtitle =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.caption =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.margin =} \FunctionTok{unit}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\StringTok{"cm"}\NormalTok{)) }\SpecialCharTok{+}
@@ -1793,7 +2069,8 @@ La Figura \ref{fig:fig41} ilustra el comportamiento que se debería observar en 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{barplot}\NormalTok{(X\_t}\SpecialCharTok{$}\NormalTok{rho[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{], }\AttributeTok{names.arg =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{border=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{density =} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{), }
+\FunctionTok{barplot}\NormalTok{(X\_t}\SpecialCharTok{$}\NormalTok{rho[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{], }\AttributeTok{names.arg =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }
+        \AttributeTok{border=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{density =} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{), }
         \AttributeTok{ylab =} \StringTok{"Autocorrelacion"}\NormalTok{, }
         \AttributeTok{xlab=}\StringTok{"Rezagos"}\NormalTok{, }
         \AttributeTok{main=}\StringTok{"Funcion de Autocorrelacion Teórica"}\NormalTok{)}
@@ -1809,7 +2086,8 @@ La Figura \ref{fig:fig41} ilustra el comportamiento que se debería observar en 
 \caption{Funcion de Autocorrelacion Teórica}\label{fig:fig44}
 \end{figure}
 
-Recordemos que una trayectoria de equilibrio o solución de un \(AR(1)\) es como se muestra en la ecuación (\ref{AR1_Sol}). Así, nuestra serie simulada cumple con la característica de que los errores son más relevantes cuando la serie es corta. Por el contrario, los errores son menos relevantes, cuando la serie es muy larga. La Figura \ref{fig:fig45}\} ilustra esta observación de la trayectoria de equilibrio.
+Recordemos que una trayectoria de equilibrio o solución de un \(AR(1)\) es como se muestra en la ecuación \eqref{eq:AR1Sol}. Así, nuestra serie simulada cumple con la característica de que los errores son más relevantes cuando la serie es corta. Por el contrario, los errores son menos relevantes, cuando la serie es muy larga. La Figura \ref{fig:fig45} ilustra esta observación de la trayectoria de
+equilibrio.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1819,7 +2097,8 @@ Recordemos que una trayectoria de equilibrio o solución de un \(AR(1)\) es como
   \CommentTok{\#theme\_bw() + }
   \FunctionTok{xlab}\NormalTok{(}\StringTok{"Tiempo"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{ylab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_t$"}\NormalTok{)) }\SpecialCharTok{+} 
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }
+                                  \AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.subtitle =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.caption =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.margin =} \FunctionTok{unit}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\StringTok{"cm"}\NormalTok{)) }\SpecialCharTok{+}
@@ -1868,7 +2147,8 @@ Para decidir cómo analizar la serie de pasajeros en el metro de la CDMX en la F
 \FunctionTok{library}\NormalTok{(readxl)}
 \FunctionTok{library}\NormalTok{(stats)}
 
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }
+                    \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \CommentTok{\# En Niveles}
 \NormalTok{Pax\_Metro }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro, }\AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
@@ -1879,7 +2159,8 @@ Para decidir cómo analizar la serie de pasajeros en el metro de la CDMX en la F
                 \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
 \CommentTok{\# Diferencias mensuales:}
-\NormalTok{Pax\_DLMetro }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{( }\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{( }\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro), }\DecValTok{1}\NormalTok{ ),}
+\NormalTok{Pax\_DLMetro }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{( }\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro) }\SpecialCharTok{{-}} 
+                   \FunctionTok{lag}\NormalTok{( }\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro), }\DecValTok{1}\NormalTok{ ),}
                  \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
 \CommentTok{\#}
@@ -1914,7 +2195,8 @@ Para decidir cómo analizar la serie de pasajeros en el metro de la CDMX en la F
 \end{Highlighting}
 \end{Shaded}
 
-A continuación, estimaremos una \(AR(1)\) para la serie en niveles bajo la transformación logaritmica (\(PaxLMetro_t\)) y en diferencias logarítmitcas (\(PaxDLMetro_t\)). Para el primer caso obtenemos el siguiente resultado:
+A continuación, estimaremos una \(AR(1)\) para la serie en niveles bajo la transformación logaritmica (\(PaxLMetro_t\)) y en diferencias
+logarítmitcas (\(PaxDLMetro_t\)). Para el primer caso obtenemos el siguiente resultado:
 
 \begin{center}
 \begin{tabular}{ c c c c c c } 
@@ -1952,16 +2234,17 @@ En ambos casos observamos que el parámetro asociado al componente AR es signifi
 Una vez analizado el caso de \(AR(1)\) analizaremos el caso del \(AR(2)\). La ecuación generalizada del proceso autoregresivo de orden 2 (denotado como \(AR(2)\)) puede ser escrito como:
 \begin{equation}
     X_t = a_0 + a_1 X_{t-1} + a_2 X_{t-2} + U_t
-    \label{AR2_Eq}
+    \label{eq:AR2Eq}
 \end{equation}
 
-Donde \(U_t\) denota un proceso puramente aleatorio con media cero (\(0\)), varianza constante (\(\sigma^2\)) y autocovarianza cero (\(Cov(U_t, U_s) = 0\), con \(t \neq s\)), y un parametro \(a_2 \neq 0\). Así, utilizando el operador rezago podemos reescribir la ecuación (\ref{AR2_Eq}) como:
-\begin{eqnarray*}
+Donde \(U_t\) denota un proceso puramente aleatorio con media cero (\(0\)), varianza constante (\(\sigma^2\)) y autocovarianza cero (\(Cov(U_t, U_s) = 0\), con \(t \neq s\)), y un parametro \(a_2 \neq 0\). Así, utilizando el operador rezago podemos reescribir la ecuación
+\eqref{eq:AR2Eq} como:
+\begin{eqnarray*}     
     X_t - a_1 X_{t-1} - a_2 X_{t-2} & = & a_0 + U_t \\
     (1 - a_1 L^1 - a_2 L^2) X_t & = & a_0 + U_t
 \end{eqnarray*}
 
-Donde, vamos a denotar a \(\alpha (L) = (1 - a_1 L^1 - a_2 L^2)\), y lo llamaremos como un polinomio que depende del operador rezago y que es distinto de cero. De esta forma podemos reescribir a la ecuación (\ref{AR2_Eq}) como:
+Donde, vamos a denotar a \(\alpha (L) = (1 - a_1 L^1 - a_2 L^2)\), y lo llamaremos como un polinomio que depende del operador rezago y que es distinto de cero. De esta forma podemos reescribir a la ecuación \eqref{eq:AR2Eq} como:
 \begin{equation}
     \alpha(L) X_t = a_0 + U_t
 \end{equation}
@@ -1971,7 +2254,7 @@ Ahora, supongamos que existe el inverso multiplicativo del polinomio \(\alpha(L)
     \alpha^{-1}(L) \alpha(L) = 1    
 \end{equation}
 
-Así, podemos escribir la solución a la ecuación (\ref{AR2_Eq}) como:
+Así, podemos escribir la solución a la ecuación \eqref{eq:AR2Eq} como:
 \begin{equation*}
     X_t = \alpha^{-1}(L) \delta + \alpha^{-1}(L) U_t
 \end{equation*}
@@ -1984,10 +2267,10 @@ Si utilizamos el hecho que \(\alpha^{-1}(L)\) se puede descomponer a través del
 Por lo tanto, el inverso multiplicativo \(\alpha^{-1}(L)\) se puede ver como:
 \begin{equation}
     1 = (1 - a_1 L^1 - a_2 L^2) (\psi_0 + \psi_1 L + \psi_2 L^2 + \ldots)
-    \label{InvAlpha}
+    \label{eq:InvAlpha}
 \end{equation}
 
-Desarrollando la ecuación (\ref{InvAlpha}) tenemos la sigueinte expresión:
+Desarrollando la ecuación \eqref{eq:InvAlpha} tenemos la sigueinte expresión:
 
 \begin{center}
 \begin{tabular}{ c c c c c c c c c c c } 
@@ -1997,7 +2280,7 @@ Desarrollando la ecuación (\ref{InvAlpha}) tenemos la sigueinte expresión:
 \end{tabular}
 \end{center}
 
-Ahora, podemos agrupar todos los términos en función del exponente asociado al operador rezago \(L\). La siguiente es una solución partícular y es una de las múltiples que podrían existir que cumpla con la ecuación (\ref{InvAlpha}). Sin embargo, para efectos del análisis sólo necesitamos una de esas soluciones. Utilizaremos las siguientes condiciones que deben cumplirse en una de las posibles soluciones:
+Ahora, podemos agrupar todos los términos en función del exponente asociado al operador rezago \(L\). La siguiente es una solución partícular y es una de las múltiples que podrían existir que cumpla con la ecuación \eqref{eq:InvAlpha}. Sin embargo, para efectos del análisis sólo necesitamos una de esas soluciones. Utilizaremos las siguientes condiciones que deben cumplirse en una de las posibles soluciones:
 
 \begin{center}
 \begin{tabular}{ c c c c } 
@@ -2011,18 +2294,20 @@ Ahora, podemos agrupar todos los términos en función del exponente asociado al
 
 De esta forma podemos observar que en el límite siempre obtendremos una ecuación del tipo \(\psi_j - a_1 \psi_{j-1} - a_2 \psi_{j-2} = 0\) asociada a cada uno de los casos en que exista un \(L^j\), donde \(j \neq 0, 1\), y la cual siempre podremos resolver conociendo que las condiciones iniciales son: \(\psi_0 = 1\) y \(\psi_1 = a_1\).
 
-Así, de las relaciones antes mencionadas y considerando que \(\alpha^{-1} (L)\) aplicada a una constante como \(a_0\), tendrá como resultado otra constante. De esta forma podemos escribir que la solución del proceso AR(2) en la ecuación (\ref{AR2_Eq}) será dada por una expresión como sigue:
+Así, de las relaciones antes mencionadas y considerando que \(\alpha^{-1} (L)\) aplicada a una constante como \(a_0\), tendrá como
+resultado otra constante. De esta forma podemos escribir que la solución del proceso AR(2) en la ecuación \eqref{eq:AR2Eq} será dada por una expresión como sigue:
 \begin{equation}
     X_t = \frac{\delta}{1 - a_1 - a_2} + \sum^{\infty}_{j = 0} \psi_{t - j} U_{t - j}
-    \label{AR2_Eq_Sol}
+    \label{eq:AR2EqSol}
 \end{equation}
 
-Donde todos los parametros \(\psi_i\) está determinado por los parámtros \(a_0\), \(a_1\) y \(a_2\). En particular, \(\psi_0 = 1\) y \(\psi_1 = a_1\) como describimos anteriormente. Al igual que en el caso del \(AR(1)\), en la ecuación (\ref{AR2_Eq_Sol}) las condiciones de estabilidad estarán dadas por las soluciones del siguiente polinomio característico:\footnote{Note que raíces son equivalentes al inversio de las del polinomio dado por $\lambda^2 a_2 - \lambda a_1 - 1 = 0$.}
+Donde todos los parametros \(\psi_i\) está determinado por los parámetros \(a_0\), \(a_1\) y \(a_2\). En particular, \(\psi_0 = 1\) y \(\psi_1 = a_1\) como describimos anteriormente. Al igual que en el caso del \(AR(1)\), en la ecuación \eqref{eq:AR2EqSol} las condiciones de estabilidad estarán dadas por las soluciones del siguiente polinomio característico:\footnote{Note que raíces son equivalentes al inversio de las del polinomio dado por $\lambda^2 a_2 - \lambda a_1 - 1 = 0$.}
 \begin{equation}
     \lambda^2 - \lambda a_1 - a_2 = 0
 \end{equation}
 
-Así, la condición de estabilidad de la trayectoria es que \$ \textbar{}\lambda\_i\textbar{} \textless{} 1\$, para \(i = 1, 2\). Es decir, es necesario que cada una de las raíces sea, en valor absoluto, siempre menor que la unidad. Estas son las condiciones de estabilidad para el proceso \(AR(2)\).
+Así, la condición de estabilidad de la trayectoria es que \$ \textbar{} \lambda\_i \textbar{} \textless{} 1 \$, para \(i = 1, 2\). Es decir, es necesario que cada
+una de las raíces sea, en valor absoluto, siempre menor que la unidad. Estas son las condiciones de estabilidad para el proceso \(AR(2)\).
 
 Finalmente, al igual que en un \(AR(1)\), a continuación determinamos los momentos de una serie que sigue un proceso \(AR(2)\). Iniciamos con la determinación de la media de la serie:
 \begin{equation}
@@ -2047,7 +2332,7 @@ Donde \(\tau = 0, 1, 2, 3, \ldots\) y que \(\mathbb{E}[U_{t} X_{t - \tau}] = 0\)
 \end{center}
 
 Donde debe ser claro que \(\mathbb{E}[(X_{t} - \mu)(X_{t - \tau} - \mu)] = \mathbb{E}[X_{t} X_{t - \tau}] = \gamma(\tau)\). Así, en general cuando \(\tau \neq 0\):
-\begin{equation}
+\begin{equation}    
     \gamma(\tau) = a_1 \gamma(\tau - 1) + a_2 \gamma(\tau - 2)
 \end{equation}
 
@@ -2078,7 +2363,7 @@ Así, para cada una de las series que analicemos en diferencias logarítmicas la
 
 Donde \(k = 1, 2, 3, \ldots\) y \(log(.)\) es la función logaritmo natural. Por convención, decimos que la serie está en niveles si ésta se analiza sin heacerle ninguna transformación o se analiza en logarimos. Cuando la serie se analiza en diferencias significa que la diferencia se hace sin aplicar logaritmos. Y cuando la serie analizada está en diferenncias logarítmicas también diremos que esta en diferencias. Sin embargo, lo común es hacer un análisis en logaritmos y en difereencias logarítmicas.
 
-Primero, para decidir si se realizará un AR(2) para la serie en niveles o en diferencias analizaremos su gráfica. La serie en niveles, en niveles bajo una transformación logarítmica y en diferencias logarítmicas mensuales de los pasajeros en vuelos nacionales se muestra en la Figura \ref{fig:fig47}\}.
+Primero, para decidir si se realizará un AR(2) para la serie en niveles o en diferencias analizaremos su gráfica. La serie en niveles, en niveles bajo una transformación logarítmica y en diferencias logarítmicas mensuales de los pasajeros en vuelos nacionales se muestra en la Figura \ref{fig:fig47}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2087,7 +2372,8 @@ Primero, para decidir si se realizará un AR(2) para la serie en niveles o en di
 \FunctionTok{library}\NormalTok{(readxl)}
 \FunctionTok{library}\NormalTok{(stats)}
 
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }
+                    \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \CommentTok{\# En Niveles}
 \NormalTok{Pax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Nal, }
@@ -2100,7 +2386,8 @@ Primero, para decidir si se realizará un AR(2) para la serie en niveles o en di
                \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
 \CommentTok{\# Diferencias mensuales:}
-\NormalTok{DLPax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Nal) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Nal), }\DecValTok{1}\NormalTok{),}
+\NormalTok{DLPax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Nal) }\SpecialCharTok{{-}} 
+                \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Nal), }\DecValTok{1}\NormalTok{),}
                 \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
 \CommentTok{\#}
@@ -2135,7 +2422,7 @@ Primero, para decidir si se realizará un AR(2) para la serie en niveles o en di
 \end{Highlighting}
 \end{Shaded}
 
-A continuación, estimaremos un \(AR(2)\) para la serie en niveles bajo una transformación logarítmica (\(LPaxNal_t\)) y en diferencias logarítmitcas (\(DLPax_Nal_t\)). Para el primer caso obtenemos el siguiente resultado:
+A continuación, estimaremos un \(AR(2)\) para la serie en niveles bajo una transformación logarítmica (\(LPaxNal_t\)) y en diferencias logaritmitcas (\(DLPax_Nal_t\)). Para el primer caso obtenemos el siguiente resultado:
 
 \begin{center}
 \begin{tabular}{ c c c c c c } 
@@ -2169,7 +2456,7 @@ Para el segundo caso obtenemos el siguiente resultado:
 \end{tabular}
 \end{center}
 
-Para ambos casos entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \ref{fig:fig48}\} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
+Para ambos casos entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \ref{fig:fig48} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2177,9 +2464,11 @@ Para ambos casos entre parentésis indicamos los errores estándar y reportamos 
 
 \FunctionTok{source}\NormalTok{(}\StringTok{"plot.armaroots.R"}\NormalTok{)}
 
-\NormalTok{AR\_LPax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(LPax\_Nal, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
+\NormalTok{AR\_LPax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(LPax\_Nal, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }
+                     \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
 
-\NormalTok{AR\_DLPax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(DLPax\_Nal, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
+\NormalTok{AR\_DLPax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(DLPax\_Nal, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }
+                      \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
 
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
 
@@ -2213,10 +2502,10 @@ Para ambos casos entre parentésis indicamos los errores estándar y reportamos 
 Veremos ahora una generalización de los procesos autoregresivos (AR). Esta generalización es conocida como un proceso \(AR(p)\) y que puede ser descrito por la siguiente ecuación en diferencia estocástica:
 \begin{equation}
     X_t = a_0 + a_1 X_{t-1} + a_2 X_{t-2} + a_3 X_{t-3} + \ldots + a_p X_{t-p} + U_t
-    \label{ARp_Eq}
+    \label{eq:ARpEq}
 \end{equation}
 
-Donde \(a_p \neq 0\), y \(U_t\) es un proceso puramente aleatorio con media cero (0), varianza constante (\(\sigma^2\)) y covarianza cero (0). Usando el operador rezago, \(L^k\), para \(k = 0, 1, 2, \ldots, p\), obtenemos la siguiente expresión de la ecuación (\ref{ARp_Eq}):
+Donde \(a_p \neq 0\), y \(U_t\) es un proceso puramente aleatorio con media cero (0), varianza constante (\(\sigma^2\)) y covarianza cero (0). Usando el operador rezago, \(L^k\), para \(k = 0, 1, 2, \ldots, p\), obtenemos la siguiente expresión de la ecuación \eqref{eq:ARpEq}:
 \begin{equation}
     (1 - a_1 L - a_2 L^2 - a_3 L^3 - \ldots - a_p L^p) X_t = a_0 + U_t
 \end{equation}
@@ -2224,7 +2513,7 @@ Donde \(a_p \neq 0\), y \(U_t\) es un proceso puramente aleatorio con media cero
 Definamos el polinomio \(\alpha(L)\) como:
 \begin{equation}
     \alpha(L) = 1 - a_1 L - a_2 L^2 - a_3 L^3 - \ldots - a_p L^p
-    \label{Pol_A}
+    \label{eq:PolA}
 \end{equation}
 
 De forma similar que en los procesos \(AR(1)\) y \(AR(2)\), las condiciones de estabilidad del proceso \(AR(p)\) estarán dadas por la solución de la ecuación característica:
@@ -2232,7 +2521,7 @@ De forma similar que en los procesos \(AR(1)\) y \(AR(2)\), las condiciones de e
     \lambda^p - a_1 \lambda^{p-1} - a_2 \lambda^{p-2} - a_3 \lambda^{p-3} - \ldots - a_p = 0
 \end{equation}
 
-Así, solo si el polinomio anterior tiene raíces cuyo valor absoluto sea menor a uno (\$ \textbar{}\lambda\_i\textbar{} \textless{} 1\$) y si \(1 - a_1 L - a_2 L^2 - a_3 L^3 - \ldots - a_p L^p < 1\) podremos decir que el proceso es convergente y estable. Lo anterior significa que la ecuación (\ref{Pol_A}) puede expresarse en términos de la descomposición de Wold o como la suma infinita de términos como:
+Así, solo si el polinomio anterior tiene raíces cuyo valor absoluto sea menor a uno (\$ \textbar{} \lambda\_i \textbar{} \textless{} 1 \$) y si \(1 - a_1 L - a_2 L^2 - a_3 L^3 - \ldots - a_p L^p < 1\) podremos decir que el proceso es convergente y estable. Lo anterior significa que la ecuación \eqref{eq:PolA} puede expresarse en términos de la descomposición de Wold o como la suma infinita de términos como:
 \begin{equation}
     \frac{1}{1 - a_1 L  - a_2 L^2 - a_3 L^3  - \ldots - a_p L^p} = \psi_0 + \psi_1 L + \psi_2 L^2 + \psi_3 L^3 + \ldots
 \end{equation}
@@ -2240,10 +2529,10 @@ Así, solo si el polinomio anterior tiene raíces cuyo valor absoluto sea menor 
 Donde, por construcción de \(\alpha(L) \alpha^{-1}(L) = 1\) implica que \(\psi_0 = 1\). De forma similar a los proceso AR(1) y AR(2), es posible determinar el valor de los coefieentes \(\psi_j\) en términos de los coefientes \(a_i\). Así, la solución del proceso \(AR(p)\) estará dada por:
 \begin{equation}
     X_t = \frac{a_0}{1 - a_1  - a_2 - a_3  - \ldots - a_p} + \sum^{\infty}_{j = 0} \psi_j U_{t-j}
-    \label{ARp_Eq_Sol}
+    \label{eq:ARpEqSol}
 \end{equation}
 
-Considerando la solución de la ecuación (\ref{ARp_Eq}) expresada en la ecuación (\ref{ARp_Eq_Sol}) podemos determinar los momentos del proceso y que estarán dados por una media como:
+Considerando la solución de la ecuación (\eqref{eq:ARpEq}) expresada en la ecuación \eqref{eq:ARpEqSol} podemos determinar los momentos del proceso y que estarán dados por una media como:
 \begin{equation}
     \mathbb{E}[X_t] = \mu = \frac{a_o}{1 - a_1  - a_2 - a_3  - \ldots - a_p}
 \end{equation}
@@ -2264,10 +2553,10 @@ Donde \(\tau = 0, 1, 2, \ldots, p\) y \(a_0 = 0\), lo que implica que \(\mu = 0\
 De esta forma, es fácil observar que la ecuación general para \(p > 0\) estará dada por:
 \begin{equation}
     \gamma(p) - a_1 \gamma(\tau - 1) - a_2 \gamma(\tau - 2) - \ldots - a_p \gamma(\tau - p) = 0
-    \label{Gamma_p}
+    \label{eq:Gammap}
 \end{equation}
 
-Dividiendo la ecuación (\ref{Gamma_p}) por \(\gamma(0)\), se obtiene la siguiente ecuación:
+Dividiendo la ecuación \eqref{eq:Gammap} por \(\gamma(0)\), se obtiene la siguiente ecuación:
 \begin{equation}
     \rho(p) - a_1 \rho(\tau - 1) + a_2 \rho(\tau - 2) + \ldots + a_p \rho(\tau - p) = 0
 \end{equation}
@@ -2311,19 +2600,19 @@ Lo anterior se puede expresar como un conjunto de vectores y matrices de la sigu
     \right]
 \end{equation}
 
-De lo anterior podemos escribir la siguiente ecuación que es una forma alternativa para expresar los valores de los coefientes \(a_i\) de la la solución del proceso \(AR(p)\):
+De lo anterior podemos escribir la siguiente ecuación que es una forma alternativa para expresar los valores de los coefientes \(a_i\) de la solución del proceso \(AR(p)\):
 \begin{equation}
-    \mathbf{\rho} = \mathbf{R} \mathbf{a}
+    \boldsymbol{\rho} = \mathbf{R} \mathbf{a}
 \end{equation}
 
 Es decir, podemos obtener la siguiente expresión:
 \begin{equation}
-    \mathbf{a} = \mathbf{R}^{-1} \mathbf{\rho}
+    \mathbf{a} = \mathbf{R}^{-1} \boldsymbol{\rho}
 \end{equation}
 
 Ahora veámos un ejemplo. Utilizaremos la serie de Pasajeros en vuelos internacionales de salida para estimar un \(AR(p)\) mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación consideremos una transformación de la serie en logaritmos y una más en diferencias logaritmicas; lo anterior con el objeto de obtener un conjunto de series de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
 
-Primero, para decidir si se realizará un \(AR(p)\) para la serie en niveles o en diferencias análizaremos su gráfica. La serie de e Pasajeros en vuelos internacionales de salidas se muestra en la Figura \ref{fig:fig49}\}. En está se muestra la gráfica de la serie en niveles (sin transformación logaritmica y con transformación logaritmica) y en diferencias logaritmicas mensuales (es decir, con diferencia respecto del mes inmediato anterior).
+Primero, para decidir si se realizará un \(AR(p)\) para la serie en niveles o en diferencias análizaremos su gráfica. La serie de Pasajeros en vuelos internacionales de salidas se muestra en la Figura \ref{fig:fig49}. En está se muestra la gráfica de la serie en niveles (sin transformación logaritmica y con transformación logaritmica) y en diferencias logaritmicas mensuales (es decir, con diferencia respecto del mes inmediato anterior).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2332,7 +2621,8 @@ Primero, para decidir si se realizará un \(AR(p)\) para la serie en niveles o e
 \FunctionTok{library}\NormalTok{(readxl)}
 \FunctionTok{library}\NormalTok{(stats)}
 
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte.xlsx"}\NormalTok{, }
+                    \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \CommentTok{\# En Niveles}
 \NormalTok{Pax\_Int }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Int, }
@@ -2381,7 +2671,7 @@ Primero, para decidir si se realizará un \(AR(p)\) para la serie en niveles o e
 \end{Highlighting}
 \end{Shaded}
 
-De la gráfica en la Figura \ref{fig:fig49}\} observamos que quizá le mejor forma de estimar un AR(p) es mediante la serie en diferencias, ya que ésta es la que parece ser una serie estacionaria. A continuación, estimaremos una AR(4) para la serie en diferencias logarimitcas (\(DLPaxInt_t\)):
+De la gráfica en la Figura \ref{fig:fig49} observamos que quizá la mejor forma de estimar un \(AR(p)\) es mediante la serie en diferencias, ya que ésta es la que parece ser una serie estacionaria. A continuación, estimaremos una AR(4) para la serie en diferencias logarimitcas (\(DLPaxInt_t\)):
 
 \begin{center}
 \begin{tabular}{ c c c c c c } 
@@ -2402,7 +2692,8 @@ De la gráfica en la Figura \ref{fig:fig49}\} observamos que quizá le mejor for
 \end{tabular}
 \end{center}
 
-Entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \ref{fig:fig410}\} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que el AR(4) representan una solución convergente y estable.
+Entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las
+soluciones serán convergentes, para ello en la Figura \ref{fig:fig410} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que el AR(4) representan una solución convergente y estable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2410,9 +2701,11 @@ Entre parentésis indicamos los errores estándar y reportamos el estadístico d
 
 \FunctionTok{source}\NormalTok{(}\StringTok{"plot.armaroots.R"}\NormalTok{)}
 
-\NormalTok{AR\_LPax\_Int }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(LPax\_Int, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
+\NormalTok{AR\_LPax\_Int }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(LPax\_Int, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }
+                     \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
 
-\NormalTok{AR\_DLPax\_Int }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(DLPax\_Int, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
+\NormalTok{AR\_DLPax\_Int }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(DLPax\_Int, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }
+                      \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
 
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
 
@@ -2449,7 +2742,7 @@ Entre parentésis indicamos los errores estándar y reportamos el estadístico d
 Una vez planteado el proceso generalizado de \(AR(p)\), iniciamos el planteamiento de los proceso de medias móviles, denotados como \(MA(q)\). Iniciemos con el planteamiento del proceso \(MA(1)\), que se puede escribir como una ecuación como la siguiente:
 \begin{equation}
     X_t = \mu + U_t - b_1 U_{t-1}
-    \label{MA1_Eq}
+    \label{eq:MA1Eq}
 \end{equation}
 
 O como:
@@ -2457,7 +2750,9 @@ O como:
     X_t - \mu = (1 - b_1 L) U_{t}
 \end{equation}
 
-Donde \(U_t\) es un proceso puramente aleatorio, es decir, con \(\mathbb{E}[U_t] = 0\), \(Var[U_t] = \sigma^2\), y \(Cov[U_t, U_s] = 0\). Así, un proceso \(MA(1)\) puede verse como un proceso AR con una descomposición de Wold en la que \(\psi_0 = 1\), \(\psi_1 = - b_1\) y \(\psi_j = 0\) para todo \(j > 1\).
+Donde \(U_t\) es un proceso puramente aleatorio, es decir, con \(\mathbb{E}[U_t] = 0\), \(Var[U_t] = \sigma^2\), y \(Cov[U_t, U_s] = 0\).
+Así, un proceso \(MA(1)\) puede verse como un proceso AR con una descomposición de Wold en la que \(\psi_0 = 1\), \(\psi_1 = - b_1\) y
+\(\psi_j = 0\) para todo \(j > 1\).
 
 Al igual que los procesos autoregresivos, determinaremos los momentos de un proceso \(MA(1)\). En el caso de la media observamos que será:
 \begin{eqnarray}
@@ -2482,10 +2777,10 @@ De esta forma, la varianza del proceso es constante en cualquier periodo \(t\). 
     &   & + b_1^2 U_{t - 1} U_{t + \tau - 1}] \nonumber \\
     & = & \mathbb{E}[U_t U_{t + \tau}] - b_1 \mathbb{E}[U_t U_{t + \tau - 1}] \nonumber \\
     &   & - b_1 \mathbb{E}[U_{t - 1} U_{t + \tau}] + b_1^2 \mathbb{E}[U_{t - 1} U_{t + \tau - 1}]
-    \label{MA1_Cov}
+    \label{eq:MA1Cov}
 \end{eqnarray}
 
-Si hacemos sustituciones de diferentes valores de \(\tau\) en la ecuación (\ref{MA1_Cov}) notaremos que la covarianza será distinta de cero únicamente para el caso de \(\tau = 1, -1\). En ambos casos tendremos como resultado:
+Si hacemos sustituciones de diferentes valores de \(\tau\) en la ecuación \eqref{eq:MA1Cov} notaremos que la covarianza será distinta de cero únicamente para el caso de \(\tau = 1, -1\). En ambos casos tendremos como resultado:
 \begin{eqnarray}
     \mathbb{E}[(x_t - \mu)(x_{t + 1} - \mu)] & = & \mathbb{E}[(x_t - \mu)(x_{t - 1} - \mu)] \nonumber \\
     & = & - b_1 \mathbb{E}[U_t U_{t}] \nonumber \\
@@ -2500,13 +2795,13 @@ De esta forma tendremos que las funciones de autocorrelación estarán dadas por
     \rho(\tau) & = & 0 \text{ para todo } \tau > 1 \nonumber 
 \end{eqnarray}
 
-Ahora regresando a la ecuación (\ref{MA1_Eq}), su solución la podemos expresar como:
+Ahora regresando a la ecuación \eqref{eq:MA1Eq}, su solución la podemos expresar como:
 \begin{eqnarray}
     U_ t & = & - \frac{\mu}{1 - b_1} + \frac{1}{1 - b_1 L} X_t \nonumber \\
     & = & - \frac{\mu}{1 - b_1} + X_t + b_1 X_{t-1} + b_1^2 X_{t-2} + \ldots \nonumber
 \end{eqnarray}
 
-Donde la condición para que se cumpla esta ecuación es que \$ \textbar b\_1\textbar{} \textless{} 1\$. La manera de interpretar esta condición es como una condición de estabilidad de la solución y cómo una condición de invertibilidad. Notemos que un \(MA(1)\) (y en general un \(MA(q)\)) es equivalente a un \(AR(\infty)\), es decir, cuando se invierte un MA se genera un AR con infinitos rezagos.
+Donde la condición para que se cumpla esta ecuación es que \$ \textbar{} b\_1 \textbar{} \textless{} 1 \$. La manera de interpretar esta condición es como una condición de estabilidad de la solución y cómo una condición de invertibilidad. Notemos que un \(MA(1)\) (y en general un \(MA(q)\)) es equivalente a un \(AR(\infty)\), es decir, cuando se invierte un MA se genera un AR con infinitos rezagos.
 
 En esta sección no desarrollaremos un ejemplo, primero explicaremos en qué consiste una modelación del tipo \(MA(q)\) y después platearemos un ejemplo en concreto.
 
@@ -2516,17 +2811,17 @@ En esta sección no desarrollaremos un ejemplo, primero explicaremos en qué con
 En general, el proceso de medias móviles de orden \(q\), \(MA(q)\), puede ser escrito como:
 \begin{equation}
     X_t = \mu + U_t - b_1 U_{t-1} - b_2 U_{t-2} - \ldots - b_q U_{t-q}
-    \label{MAq_EQ}
+    \label{eq:MAqEQ}
 \end{equation}
 
-Podemos reescribir la ecuación (\ref{MAq_EQ}) utilizando el operador rezago, así tendrémos el proceso de \(MA(q)\) como:
+Podemos reescribir la ecuación \eqref{eq:MAqEQ} utilizando el operador rezago, así tendrémos el proceso de \(MA(q)\) como:
 \begin{eqnarray}
     X_t - \mu & = & (1 - b_1 L - b_2 L^2 - \ldots - b_q L^q) U_{t} \nonumber \\
     X_t - \mu & = & \beta(L) U_t
-    \label{MAq_Red}
+    \label{eq:MAqRed}
 \end{eqnarray}
 
-Donde \(U_t\) es un proceso puramente aleatorio con \(\mathbb{E}[U_t] = 0\), \(Var[U_t] = \mathbb{E}[U_t^2] = 0\) y \(Cov[U_t, U_s] = \mathbb{E}[U_t, U_s] = 0\), y \(\beta(L) = 1 - b_1 L - b_2 L^2 - \ldots - b_q L^q\) es un polinomio del operador rezago \(L\). la ecuación (\ref{MAq_Red}) puede ser interpretada como un proceso \(AR(q)\) sobre la serie \(U_t\).
+Donde \(U_t\) es un proceso puramente aleatorio con \(\mathbb{E}[U_t] = 0\), \(Var[U_t] = \mathbb{E}[U_t^2] = 0\) y \(Cov[U_t, U_s] = \mathbb{E}[U_t, U_s] = 0\), y \(\beta(L) = 1 - b_1 L - b_2 L^2 - \ldots - b_q L^q\) es un polinomio del operador rezago \(L\). la ecuación \eqref{eq:MAqRed} puede ser interpretada como un proceso \(AR(q)\) sobre la serie \(U_t\).
 
 Ahora determinemos los momentos de un proceso \(MA(q)\):
 \begin{eqnarray}
@@ -2564,23 +2859,23 @@ La expresión anterior se puede desarrollar para múltiples casos de \(\tau = 1,
 
 Donde \(\gamma(\tau) = 0\) para todo \(\tau > q\). Es decir, todas las autocovarianzas y autocorrelaciones con ordenes superiores a \(q\) son cero (0). De esta forma, esta caracterítica teórica permite identificar el orden de \(MA(q)\) visualizando la función de autocorrelación y verificando a partir de cual valor de rezago la autocorrelación es no significaiva.
 
-Regresando al problema original que es el de determinar una solución para la eucación (\ref{MAq_EQ}), tenemos que dicha solución estará dada por un \(AR(\infty)\) en términos de \(U_t\):
+Regresando al problema original que es el de determinar una solución para la eucación \eqref{eq:MAqEQ}, tenemos que dicha solución estará dada por un \(AR(\infty)\) en términos de \(U_t\):
 \begin{eqnarray}
     U_t & = & - \frac{\mu}{1 - b_1 - b_2 - \ldots - b_q} + \beta(L)^{-1} X_t \nonumber \\
     &   & - \frac{\mu}{1 - b_1 - b_2 - \ldots - b_q} + \sum_{j = 0}^{\infty} c_j X_{t-j} 
-    \label{MAq_Eq_Sol}
+    \label{eq:MAqEQSol}
 \end{eqnarray}
 
-Donde se cumple que: \(1 = (1 - b_1 L^1 - b_2 L^2 - \ldots - b_q L^q)(1 - c_1 L - c_2 L^2 - \ldots)\) y los coeficientes \(c_j\) se pueden determinar por un método de coeficientes indeterminados y en términos de los valores \(b_i\). De igual forma que en el caso de la ecuación (\ref{ARp_Eq}), en la ecuación (\ref{MAq_Eq_Sol}) se deben cumplir condiciones de estabilidad asociadas con las raíces del polinomio carácterististico dado por:
+Donde se cumple que: \(1 = (1 - b_1 L^1 - b_2 L^2 - \ldots - b_q L^q)(1 - c_1 L - c_2 L^2 - \ldots)\) y los coeficientes \(c_j\) se pueden determinar por un método de coeficientes indeterminados y en términos de los valores \(b_i\). De igual forma que en el caso de la ecuación \eqref{eq:ARpEq}, en la ecuación \eqref{eq:MAqEQSol} se deben cumplir condiciones de estabilidad asociadas con las raíces del polinomio carácterististico dado por:
 \begin{equation}
     1 - b_1 x - b_2 x^2 - \ldots b_q x^q = 0
 \end{equation}
 
-El cual debe cumplir que \$ \textbar x\_i\textbar{} \textless{} 1\$ y que \(1 - b_1 - b_2 - \ldots b_q < 1\).
+El cual debe cumplir que \$ \textbar{} x\_i \textbar{} \textless{} 1 \$ y que \(1 - b_1 - b_2 - \ldots b_q < 1\).
 
 Ahora veamos un ejemplo del proceso \(MA(q)\), para lo cual retomaremos la serie de Pasajeros transportados en el metro de la CDMX (\(PaxMetro\)). Estimaremos el \(MA(q)\) mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación consideremos una transformación de la serie en logaritmos y una más en diferencias logaritmicas; lo anterior con el objeto de obtener un conjunto de series de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
 
-La serie de Pasajeros transportados en el metro de la CDMX se muestra en la Figura \ref{fig:fig46}\} se muestra la gráfica de la serie en niveles (sin transformación logarítmica y con transformación logarítmica) y en diferencias logarítmicas mensuales (es decir, con una diferencia respecto del mes inmediato anterior). Utilizaremos la serie en diferencias, ya que es la que parece ser estacionaria. Esta serie tiene la peculiaridad de que tiene un salto a la baja y uno al alza entre septiembre de 2017 y octubre de 2017. Para controlar ese efecto, en nuestro modelo \(MA(q)\) incluiremos dos variables dummies para dichos meses.
+La serie de Pasajeros transportados en el metro de la CDMX se muestra en la Figura \ref{fig:fig46} se muestra la gráfica de la serie en niveles (sin transformación logarítmica y con transformación logarítmica) y en diferencias logarítmicas mensuales (es decir, con una diferencia respecto del mes inmediato anterior). Utilizaremos la serie en diferencias, ya que es la que parece ser estacionaria. Esta serie tiene la peculiaridad de que tiene un salto a la baja y uno al alza entre septiembre de 2017 y octubre de 2017. Para controlar ese efecto, en nuestro modelo \(MA(q)\) incluiremos dos variables dummies para dichos meses.
 
 A continuación, estimaremos una \(MA(4)\) para la serie en diferencias:
 
@@ -2607,7 +2902,7 @@ A continuación, estimaremos una \(MA(4)\) para la serie en diferencias:
 \end{tabular}
 \end{center}
 
-Entre parentésis indicamos los errores estándar y al final reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si la solución serán convergente, para ello en la Figura \ref{fig:fig411}\} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
+Entre parentésis indicamos los errores estándar y al final reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si la solución serán convergente, para ello en la Figura \ref{fig:fig411} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2616,7 +2911,8 @@ Entre parentésis indicamos los errores estándar y al final reportamos el estad
 \FunctionTok{library}\NormalTok{(readxl)}
 \FunctionTok{library}\NormalTok{(stats)}
 
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte\_ARIMA.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte\_ARIMA.xlsx"}\NormalTok{, }
+                    \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \FunctionTok{source}\NormalTok{(}\StringTok{"maroots.R"}\NormalTok{)}
 
@@ -2630,7 +2926,8 @@ Entre parentésis indicamos los errores estándar y al final reportamos el estad
                  \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
                  \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
-\NormalTok{DLPax\_Metro }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro), }\DecValTok{1}\NormalTok{),}
+\NormalTok{DLPax\_Metro }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro) }\SpecialCharTok{{-}} 
+                  \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Metro), }\DecValTok{1}\NormalTok{),}
                   \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
                   \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
@@ -2650,7 +2947,8 @@ Entre parentésis indicamos los errores estándar y al final reportamos el estad
                        \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
 
 \NormalTok{MA\_LPax\_Metro\_2 }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(LPax\_Metro, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{4}\NormalTok{),}
-                       \AttributeTok{xreg =} \FunctionTok{cbind}\NormalTok{(D\_Abr2020, D\_Sep2017, D\_May2020),}
+                       \AttributeTok{xreg =} \FunctionTok{cbind}\NormalTok{(D\_Abr2020, D\_Sep2017, }
+\NormalTok{                                    D\_May2020),}
                        \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
 
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
@@ -2691,10 +2989,10 @@ En este sentido, para cerrar esta sección veámos el caso de la especificación
 Dicho lo anterior vamos a empezar con el análisis de un \(ARMA(1, 1)\). Un proceso \(ARMA(1, 1)\) puede verse como:
 \begin{equation}
     X_t = \delta + a_1 X_{t - 1} + U_t - b_1 U_{t - 1}
-    \label{ARMA11_Eq}
+    \label{eq:ARMA11Eq}
 \end{equation}
 
-Aplicando el operado rezago podemos rescribir la ecuación (\ref{ARMA11_Eq}) como:
+Aplicando el operado rezago podemos rescribir la ecuación \eqref{eq:ARMA11Eq} como:
 \begin{equation}
     (1 - a_1 L) X_t = \delta + (1 - b_1 L) U_t
 \end{equation}
@@ -2704,13 +3002,13 @@ Donde \(U_t\) es un proceso pueramente aleatorio como en los casos de \(AR(p)\) 
 Así, el modelo \(ARIMA (p, q)\) también tiene una representación de Wold que estará dada por las siguientes expresiones:
 \begin{equation}
     X_t = \frac{\delta}{1 - a_1} + \frac{1 - b_1 L}{1 - a_1 L} U_t
-    \label{ARMA11_Prev}
+    \label{eq:ARMA11Prev}
 \end{equation}
 
-Donde \(a_1 \neq b_1\), puesto que en caso contrario \(X_t\) sería un proceso puramente aleatorio con una media \(\mu = \frac{\delta}{1 - a_1}\). Así, podemos reescribir la descomposición de Wold a partir del componente de la ecuación (\ref{ARMA11_Prev}):
+Donde \(a_1 \neq b_1\), puesto que en caso contrario \(X_t\) sería un proceso puramente aleatorio con una media \(\mu = \frac{\delta}{1 - a_1}\). Así, podemos reescribir la descomposición de Wold a partir del componente de la ecuación \eqref{eq:ARMA11Prev}:
 \begin{equation}
     \frac{1 - b_1 L}{1 - a_1 L} = \psi_0 + \psi_1 L + \psi_2 L^2 + \psi_3 L^3 + \ldots 
-    \label{ARMA11_EQ_Wold}
+    \label{eq:ARMA11EqWold}
 \end{equation}
 
 Está ecuación es equivalente a la expresión:
@@ -2733,13 +3031,13 @@ De esta forma podemos establecer el siguiente sistema de coeficientes indetermin
 \end{tabular}
 \end{center}
 
-Así, la solución a la ecuación (\ref{ARMA11_Eq}) estará dada por la siguiente generalización:
+Así, la solución a la ecuación \eqref{eq:ARMA11Eq} estará dada por la siguiente generalización:
 \begin{equation}
     X_t = \frac{\delta}{1 - a_1} + U_t + (a_1 - b_1) U_{t - 1} + a_1(a_1 - b_1) U_{t - 2} + a_1^2(a_1 - b_1) U_{t - 3} + \ldots
-    \label{ARMA11_Sol}
+    \label{eq:ARMA11Sol}
 \end{equation}
 
-En la ecuación (\ref{ARMA11_Sol}) las condiciones de estabilidad y de invertibilidad del sistema (de un MA a un AR, y viceversa) estarán dadas por: \$ \textbar a\_1\textbar{} \textless{} 1\$ y \$ \textbar b\_1\textbar{} \textless{} 1\$. Adicionalmente, la ecuación (\ref{ARMA11_Sol}) expresa cómo una serie que tiene un comportamiento \(ARMA(1, 1)\) es equivalente a una serie modelada bajo un \(MA(\infty)\).
+En la ecuación \eqref{eq:ARMA11Sol} las condiciones de estabilidad y de invertibilidad del sistema (de un MA a un AR, y viceversa) estarán dadas por: \$ \textbar{} a\_1 \textbar{} \textless{} 1 \$ y \$ \textbar{} b\_1 \textbar{} \textless{} 1 \$. Adicionalmente, la ecuación \eqref{eq:ARMA11Sol} expresa cómo una serie que tiene un comportamiento \(ARMA(1, 1)\) es equivalente a una serie modelada bajo un \(MA(\infty)\).
 
 Al igual que en los demás modelos, ahora determinaremos los momentos del proceso \(ARMA(1, 1)\). La media estará dada por:
 \begin{eqnarray}
@@ -2755,10 +3053,10 @@ Para determinar la varianza tomaremos una estrategía similar a los casos de \(A
 \begin{eqnarray}
     \mathbb{E}[X_{t-\tau} X_t] & = & \mathbb{E}[(X_{t-\tau}) \cdot (a_1 X_{t-1} + U_t - b_1 U_{t-1})] \nonumber \\
     & = & a_1 \mathbb{E}[X_{t-\tau} X_{t-1}] + \mathbb{E}[X_{t-\tau} U_t] - b_1 \mathbb{E}[X_{t-\tau} U_{t-1}]
-    \label{ARMA11_Cov}
+    \label{eq:ARMA11Cov}
 \end{eqnarray}
 
-De la ecuación (\ref{ARMA11_Cov}) podemos determinar una expresión para el caso de \(\tau = 0\):
+De la ecuación \eqref{eq:ARMA11Cov} podemos determinar una expresión para el caso de \(\tau = 0\):
 \begin{eqnarray}
     \mathbb{E}[X_{t} X_t] & = & \gamma(0) \nonumber \\
     & = & a_1 \gamma(1) + \mathbb{E}[U_t X_t] - b_1 \mathbb{E}[X_t U_{t-1}] \nonumber \\
@@ -2767,8 +3065,7 @@ De la ecuación (\ref{ARMA11_Cov}) podemos determinar una expresión para el cas
     & = & a_1 \gamma(1) + (1 - b_1 (a_1 - b_1)) \sigma^2
 \end{eqnarray}
 
-Para el caso en que \(\tau = 1\):
-\begin{eqnarray}
+Para el caso en que \(\tau = 1\): \begin{eqnarray}
     \mathbb{E}[X_{t-1} X_t] & = & \gamma(1) \nonumber \\
     & = & a_1 \gamma(0) + \mathbb{E}[X_{t-1} U_t] - b_1 \mathbb{E}[X_{t-1} U_{t-1}] \nonumber \\
     & = & a_1 \gamma(0) - b_1 \sigma^2
@@ -2800,18 +3097,19 @@ La especificación general de un \(ARMA(p, q)\) (donde \(p, q \in \mathbb{N}\)) 
 \begin{eqnarray}
     X_t & = & \delta + a_1 X_{t - 1} + a_2 X_{t - 2} + \ldots + a_p X_{t - p} \nonumber \\
     &   & + U_t - b_1 U_{t - 1} - b_2  U_{t - 2} - \ldots - b_q  U_{t - q}
-    \label{ARMApq_Eq}
+    \label{eq:ARMApqEq}
 \end{eqnarray}
 
-Donde \(U_t\) es un proceso puramente aleatorio, y \(X_t\) puede ser modelada en niveles o en diferencias (ya sea en logaritmos o sin transformación logarítmica).
+Donde \(U_t\) es un proceso puramente aleatorio, y \(X_t\) puede ser modelada en niveles o en diferencias (ya sea en logaritmos o sin
+transformación logarítmica).
 
-Mediante el uso del operador rezago se puede escribir la ecuación (\ref{ARMApq_Eq}) como:
+Mediante el uso del operador rezago se puede escribir la ecuación \eqref{eq:ARMApqEq} como:
 \begin{equation}
     (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p) X_t = \delta + (1 - b_1 L - b_2 L^2 - \ldots - b_q L^q) U_t 
-    \label{ARMApq_EQLag}
+    \label{eq:ARMApqEqLag}
 \end{equation}
 
-En la ecuación (\ref{ARMApq_EQLag}) definamos dos polinomios: \(\alpha(L) = (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p)\) y \(\beta(L) = (1 - b_1 L - b_2 L^2 - \ldots - b_q L^q)\). Así, podemos reescribir la ecuación (\ref{ARMApq_EQLag}) como:
+En la ecuación \eqref{eq:ARMApqEqLag} definamos dos polinomios: \(\alpha(L) = (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p)\) y \(\beta(L) = (1 - b_1 L - b_2 L^2 - \ldots - b_q L^q)\). Así, podemos reescribir la ecuación \eqref{eq:ARMApqEqLag} como:
 \begin{equation}
     \alpha(L) X_t = \delta + \beta(L) U_t 
 \end{equation}
@@ -2821,17 +3119,17 @@ Asumiendo que existe el polinomio inverso tal que: \(\alpha(L)^{-1}\alpha(L) = 1
     X_t & = & \alpha(L)^{-1} \delta + \alpha(L)^{-1} \beta(L) U_t \nonumber \\
     & = & \frac{\delta}{1 - a_1 - a_2 - \ldots - a_p} + \frac{\beta(L)}{\alpha(L)} U_t \nonumber \\
     & = & \frac{\delta}{1 - a_1 - a_2 - \ldots - a_p} + U_t + \psi_1 L U_t + \psi_2 L^2 U_t + \ldots
-    \label{ARMApq_Wold}
+    \label{eq:ARMApqWold}
 \end{eqnarray}
 
-Donde la ecuación (\ref{ARMApq_Wold}) nos permite interpretar que un ARMA(p, q) se puede reexpresar e interpreetar como un \(MA(\infty)\) y donde las condiciones para la estabilidad de la solución y la invertibilidad es que las ráices de los polinomios característicos \(\alpha(L)\) y \(\beta(L)\) son en valor absoluto menores a 1.
+Donde la ecuación \eqref{eq:ARMApqWold} nos permite interpretar que un ARMA(p, q) se puede reexpresar e interpreetar como un \(MA(\infty)\) y donde las condiciones para la estabilidad de la solución y la invertibilidad es que las ráices de los polinomios característicos \(\alpha(L)\) y \(\beta(L)\) son en valor absoluto menores a 1.
 
-Adicionalmente, la fracción en la ecuación (\ref{ARMApq_Wold}) se puede descomponer como en la forma de Wold:
+Adicionalmente, la fracción en la ecuación \eqref{eq:ARMApqWold} se puede descomponer como en la forma de Wold:
 \begin{equation}
     \frac{\beta(L)}{\alpha(L)} = 1 + \psi_1 L + \psi_2 L^2 + \ldots
 \end{equation}
 
-Bajo los supuestos de estacionariedad del componente \(U_t\), los valores de la media y varianza de un proceso \(ARMA(p, q)\) serán como describimos ahora. Para el caso de la media podemos partir de la ecuación (\ref{ARMApq_Wold}) para generar:
+Bajo los supuestos de estacionariedad del componente \(U_t\), los valores de la media y varianza de un proceso \(ARMA(p, q)\) serán como describimos ahora. Para el caso de la media podemos partir de la ecuación \eqref{eq:ARMApqWold} para generar:
 \begin{eqnarray}
     \mathbb{E}[X_t] & = & \mathbb{E}\left[ \frac{\delta}{1 - a_1 - a_2 - \ldots - a_p} + U_t + \psi_1 U_{t-1} + \psi_2 U_{t-2} + \ldots \right] \nonumber \\
     & = & \frac{\delta}{1 - a_1 - a_2 - \ldots - a_p} \nonumber \\
@@ -2849,7 +3147,7 @@ Sin pérdida de generalidad podemos asumir que \(\delta = 0\), lo que implica qu
     &   & + \mathbb{E}[X_{t-\tau} U_{t}] - b_1  \mathbb{E}[X_{t-\tau} U_{t-1}] - \ldots  - b_q  \mathbb{E}[X_{t-\tau} U_{t-q}] 
 \end{eqnarray}
 
-Ahora veámos un ejemplo. Utilizaremos la serie de Pasajeros en vuelos nacionales de salida para estimar un \(ARMA(p, q)\) mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación consideremos una transformación de la serie en diferencias logaritmicas, ya que según la gráfica en la Figura (\ref{fig:fig47}\}) esa es la que puede ser estacionaria.
+Ahora veámos un ejemplo. Utilizaremos la serie de Pasajeros en vuelos nacionales de salida para estimar un \(ARMA(p, q)\) mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación consideremos una transformación de la serie en diferencias logaritmicas, ya que según la gráfica en la Figura \ref{fig:fig47} esa es la que puede ser estacionaria.
 
 A continuación, estimaremos una \(ARMA(1, 1)\) para la serie en diferencias logarimitcas (\(DLPaxNal_t\)). También incorporaremos al análisis variables exogénas tales como dummies de estacionalidad. En particular, utilizaremos los meses de enero, febrero, julio y diciembre. No debe pasar desapercibido que un análisis de estacionalidad más formal debeería considerar todos los meses para separar del término de error la parte que puedee ser explicada por los ciclos estacionales.
 
@@ -2878,20 +3176,36 @@ Así obtenemos el siguiente resultado:
 \end{tabular}
 \end{center}
 
-Donde entre parentésis indicamos los errores estándar. Adicionalmente, reportamos el estadístico de Akaike (AIC). Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \ref{G_Roots_ARMA11} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que tenemos una solución convergente y estable. Por su parte la Figura (\ref{G_Residuals_ARMA11}) muestra los residuales de la estimación del \(ARMA(1, 1)\).
+Donde entre parentésis indicamos los errores estándar. Adicionalmente, reportamos el estadístico de Akaike (AIC). Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \ref{fig:fig412} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que tenemos una solución convergente y estable. Por su parte la Figura \ref{fig:fig413} muestra los residuales de la estimación del \(ARMA(1, 1)\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Plots/G\_Roots\_ARMA11.png"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
-  \centering
-    \includegraphics[width = 1.0 \textwidth]{Plots/G_Roots_ARMA11}
-  \caption{Inveso de las Raíces del polinomio característico de un ARMA(1,1)}
-  \label{G_Roots_ARMA11}
+
+{\centering \includegraphics[width=0.95\linewidth]{Plots/G_Roots_ARMA11} 
+
+}
+
+\caption{Inveso de las Raíces del polinomio característico de un ARMA(1,1)}\label{fig:fig412}
 \end{figure}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Plots/G\_Residuals\_ARMA11.png"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
 \begin{figure}
-\centering
-    \includegraphics[width = 1.0 \textwidth]{Plots/G_Residuals_ARMA11}
-    \caption{Residuales de un $ARMA(1, 1)$ de la serie $DLPaxNal_t$}
-    \label{G_Residuals_ARMA11}
+
+{\centering \includegraphics[width=0.95\linewidth]{Plots/G_Residuals_ARMA11} 
+
+}
+
+\caption{Residuales de un $ARMA(1, 1)$ de la serie $DLPaxNal_t$}\label{fig:fig413}
 \end{figure}
 
 En lo que resta de este capítulo, utilizaremos la serie en diferencias logarítmicas de los pasajeros en vuelos nacionales de salida, \(DLPaxNal_t\), para discutir los ejemplos que ilustran cada uno de los puntos teóricos que a continuación exponemos.
@@ -2904,12 +3218,12 @@ Ahora introduciremos el concepto de Función de Autocorrelación Parcial (PACF, 
 La idea es construir una métrica de la correlación que existe entre las diferentes varibles aleatorias, si para tal efecto se ha controlado el efecto del resto de la información. Así, podemos definir la ecuación que puede responder a este planteamiento como:
 \begin{equation}
     X_t = \phi_{k1} X_{t-1} + \phi_{k2} X_{t-2} + \ldots + \phi_{kk} X_{t-k} + U_t
-    \label{PACF_Eq}
+    \label{eq:PACFEq}
 \end{equation}
 
 Donde \(\phi_{ki}\) es el coeficiente de la variable dada con el rezago \(i\) si el proceso tiene un órden \(k\). Así, los coeficientes \(\phi_{kk}\) son los coeficientes de la autocorrelación parcial (considerando un proceso AR(k)). Observemos que la autocorrelaicón parcial mide la correlación entre \(X_t\) y \(X_{t-k}\) que se mantiene cuando el efecto de las variables \(X_{t-1}\), \(X_{t-2}\), \(\ldots\) y \(X_{t-k-1}\) en \(X_{t}\) y \(X_{t-k}\) ha sido eliminado.
 
-Dada la expresión considerada en la ecuación (\ref{PACF_Eq}), podemos resolver el problema de establecer el valor de cada \(\phi_{ki}\) mediante la solución del sistema que se representa en lo siguiente:
+Dada la expresión considerada en la ecuación \eqref{eq:PACFEq}, podemos resolver el problema de establecer el valor de cada \(\phi_{ki}\) mediante la solución del sistema que se representa en lo siguiente:
 \begin{equation}
     \left[ 
     \begin{array}{c}
@@ -2944,7 +3258,7 @@ Del cual se puede derivar una solución, resoviendo por el método de cramer, o 
 
 Posterior al análisis analítico platearemos un enfoque para interpretar las funciones de autocorrelación y autocorrelación parcial. Este enfoque pretende aportar al principio de parcimonia, en el cual podemos identificar el número de parámetros que posiblemente puede describir mejor a la serie en un modelo ARMA(p, q).
 
-En el Cuadro \ref{ACF_PACF} se muestra un resumen de las caranterísticas que debemos observar para determinar el número de parámetros de cada uno de los componentes AR y MA. Lo anterior por observación de las funciones de autocorrelación y autocorrelación parcial. Este enfoque no es el más formal, más adelante implemtaremos uno más formal y que puede ser más claro de cómo determinar el númeto de parámetros.
+En el siguiente cuadro mostramos un resumen de las caranterísticas que debemos observar para determinar el número de parámetros de cada uno de los componentes AR y MA. Lo anterior por observación de las funciones de autocorrelación y autocorrelación parcial. Este enfoque no es el más formal, más adelante implemtaremos uno más formal y que puede ser más claro de cómo determinar el númeto de parámetros.
 
 \begin{table}
 \centering
@@ -2956,18 +3270,25 @@ En el Cuadro \ref{ACF_PACF} se muestra un resumen de las caranterísticas que de
     MA(q) & Rompimienttos en la función & No hay rompimientos \\
     AR(p) & No hay rompimientos & Rompimienttos en la función \\
     \hline
-    \end{tabular}
+\end{tabular}
 \caption{Relación entre la Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $X_t$.}
-\label{ACF_PACF}
 \end{table}
 
-Continuando con el ejemplo en la Figura (\ref{G_ACF_PACF}) mostramos tanto la Función de Autocorrelación como la Función de Autocorrelación Parcial. En esta identificamos que ambas gráficas muestran que el modelo que explica a la variable \(DLPaxNal_t\) tiene tanto componentes AR como MA. Sin embargo, dado lo errático del comportamiento de ambas funciones, resulta complicado determinar cuál sería un buen número de parametros \(p\) y \(q\) a considerar en el \(ARMA(p,q)\). Por esta razón a continuación platearemos algunas pruebas más formales para determinar dichos parámetros.
+Continuando con el ejemplo en la Figura \ref{fig:fig414} mostramos tanto la Función de Autocorrelación como la Función de Autocorrelación Parcial. En esta identificamos que ambas gráficas muestran que el modelo que explica a la variable \(DLPaxNal_t\) tiene tanto componentes AR como MA. Sin embargo, dado lo errático del comportamiento de ambas funciones, resulta complicado determinar cuál sería un buen número de parametros \(p\) y \(q\) a considerar en el \(ARMA(p,q)\). Por esta razón a continuación platearemos algunas pruebas más formales para determinar dichos parámetros.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Plots/G\_ACF\_PACF.png"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
-  \centering
-    \includegraphics[width = 1.0 \textwidth]{Plots/G_ACF_PACF}
-  \caption{Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $DLPaxNal_t$.}
-  \label{G_ACF_PACF}
+
+{\centering \includegraphics[width=0.95\linewidth]{Plots/G_ACF_PACF} 
+
+}
+
+\caption{Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $DLPaxNal_t$}\label{fig:fig414}
 \end{figure}
 
 \hypertarget{selecciuxf3n-de-las-constantes-p-q-d-en-un-arp-un-maq-un-armap-q-o-un-arimap-d-q}{%
@@ -2980,22 +3301,27 @@ Otra duda que debe quedar hasta el momento es ¿cómo determinar el orden \(p\) 
 Los criterios de información más comunes son los siguientes:
 
 \begin{enumerate}
-\item FPE (Final Prediction Error):
-\begin{equation}
-    FPE = \frac{T+m}{T-m}\frac{1}{T}\sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2
-\end{equation}
-\item Akaike:
-\begin{equation}
-    AIC = ln \left[ \frac{1}{T} \sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2 \right] + m \frac{2}{T}
-\end{equation}
-\item Schwarz:
-\begin{equation}
-    SC = ln \left[ \frac{1}{T} \sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2 \right] + m \frac{ln(T)}{T}
-\end{equation}
-\item Hannan - Quinn:
-\begin{equation}
-    HQ = ln \left[ \frac{1}{T} \sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2 \right] + m \frac{2 ln(ln(T))}{T}
-\end{equation}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  FPE (Final Prediction Error):
+  \begin{equation}
+   FPE = \frac{T+m}{T-m}\frac{1}{T}\sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2
+  \end{equation}
+\item
+  Akaike:
+  \begin{equation}
+   AIC = ln \left[ \frac{1}{T} \sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2 \right] + m \frac{2}{T}
+  \end{equation}
+\item
+  Schwarz:
+  \begin{equation}
+   SC = ln \left[ \frac{1}{T} \sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2 \right] + m \frac{ln(T)}{T}
+  \end{equation}
+\item
+  Hannan - Quinn:
+  \begin{equation}
+   HQ = ln \left[ \frac{1}{T} \sum_{t=1}^{T} \left( \hat{U}_t^{(p)} \right) ^2 \right] + m \frac{2 ln(ln(T))}{T}
+  \end{equation}
 \end{enumerate}
 
 Donde \(\hat{U}_t^{(p)}\) son los residuales estimados mediante un proceso ARIMA y \(m\) es el número de parametros estimados: \(m = p + q + 0 + 1\) (ya que asumimos que \(d = 0\)). Una propiedad que no se debe perder de vista es que los criterios de información cumplen la siguiente relación:
@@ -3009,7 +3335,7 @@ Ahora veamos un ejemplo de estimación del número de rezagos optimo de un \(ARM
 
 Como mencionamos, las gráficas de las funciones de autocorrelación permiten observar el valor de la correlación existente entre la variable en el momento \(t\) con cada uno de los rezagos. Incluso la Función de Autocorrelación Parcial puede ayudar a determinar el número máximo de rezagos que se debe incluir en el proceso \(AR(p)\). No obstante, una métrica más formal es el uso de los criterios de información. En nuestro caso, dado lo discutido, sólo utilizareemos el criterio de Akaike.
 
-Al respecto, en el Cuadro (\ref{Selec_ARMApq}) reportamos el criterio de Akaike que resultan de aplicar dicho criterio a los residuales resultantes de cada combinación de procesos \(ARMA(p, q)\). La forma de escoger será aquel modelo que reporta el criterio de Akaike menor. En la cuarta columna de la tabla se señala el valor del criterio de información que resulta ser el mínimo de todos los posibles.
+Al respecto, en el siguiente cuadro reportamos el criterio de Akaike que resultan de aplicar dicho criterio a los residuales resultantes de cada combinación de procesos \(ARMA(p, q)\). La forma de escoger será aquel modelo que reporta el criterio de Akaike menor. En la cuarta columna de la tabla se señala el valor del criterio de información que resulta ser el mínimo de todos los posibles.
 
 \begin{table}
 \centering
@@ -3031,21 +3357,28 @@ Al respecto, en el Cuadro (\ref{Selec_ARMApq}) reportamos el criterio de Akaike 
 \hline
 \end{tabular}
 \caption{Criterio de Akike para diferentes modelos $ARMA(p, q)$ de la serie $DLPaxNal_t$.}
-\label{Selec_ARMApq}
 \end{table}
 
-El Cuadro (\ref{Selec_ARMApq}) reporta los resultados para 36 diferentes modelos, todos incluyen variables exogenas. Como resultado del análisis concluimos que el modelo más adecuado es el 24, el cual considera un \(ARMA(4, 6)\), con variables dummies para controlar la estacionalidad de los meses de enero, febrero, julio y diciembre. En el Cuadro (\ref{Result_ARMApq}) mostramos los resutados del modelo.
+El cuadro anterior reporta los resultados para 36 diferentes modelos, todos incluyen variables exogenas. Como resultado del análisis concluimos que el modelo más adecuado es el 24, el cual considera un \(ARMA(4, 6)\), con variables dummies para controlar la estacionalidad de los meses de enero, febrero, julio y diciembre. Más adelante mostramos los resultados del modelo.
 
-No obstante, una inspección de los residuales del modelo nos permite sospechar que requiere de incluir un par de dummies más. Ambas, asociadas con la caída del transporte aéreo en 2009, principalmente asociado con la crisis mundial de ese año. La Figura (\ref{G_Residuals_ARMA46}) muestra los residuales mencionados.
+No obstante, una inspección de los residuales del modelo nos permite sospechar que requiere de incluir un par de dummies más. Ambas, asociadas con la caída del transporte aéreo en 2009, principalmente asociado con la crisis mundial de ese año. La Figura \ref{fig:fig415} muestra los residuales mencionados.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Plots/G\_Residuals\_ARMA46.png"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
-  \centering
-    \includegraphics[width = 1.0 \textwidth]{Plots/G_Residuals_ARMA46}
-  \caption{Residuales del ARMA(4, 6) de una serie $DLPaxNal_t$.}
-  \label{G_Residuals_ARMA46}
+
+{\centering \includegraphics[width=0.95\linewidth]{Plots/G_Residuals_ARMA46} 
+
+}
+
+\caption{Residuales del ARMA(4, 6) de una serie $DLPaxNal_t$}\label{fig:fig415}
 \end{figure}
 
-Una vez incluidas dos dummies más para mayo y junio de 2009, analizamos un total de 36 modelos ARMA y determinamos que el orden que minimizza el criterio de Akaike es un \(ARMA(4, 6)\). El Cuadro (\ref{Result_ARMApq}) muestra los resultados para este nuevo modelo. No lo motramos en esta sección, pero ambos modelos reportados tienen raices de sus respectivos polinomios característicos menores a 1 en valor absoluto. En la Figura \ref{G_Residuals_ARMA46_D} mostramos los residuales ahora ajustados por las dummies de mayo y junio de 2009.
+Una vez incluidas dos dummies más para mayo y junio de 2009, analizamos un total de 36 modelos ARMA y determinamos que el orden que minimiza el criterio de Akaike es un \(ARMA(4, 6)\). El siguiente cuadro muestra los resultados para este nuevo modelo. No lo motramos en esta sección, pero ambos modelos reportados tienen raices de sus respectivos polinomios característicos menores a 1 en valor absoluto. En la Figura \ref{fig:fig416} mostramos los residuales ahora ajustados por las dummies de mayo y junio de 2009.
 
 \begin{table}
 \centering
@@ -3079,14 +3412,21 @@ Una vez incluidas dos dummies más para mayo y junio de 2009, analizamos un tota
     \multicolumn{5}{ l }{Nota: El método de estimación fue máxima verosimilitud.} \\
 \end{tabular}
 \caption{Criterio de Akike para diferentes modelos ARMA(p, q) de la serie $DLPaxNal_t$.}
-\label{Result_ARMApq}
 \end{table}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Plots/G\_Residuals\_ARMA46\_D.png"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
 \begin{figure}
-  \centering
-    \includegraphics[width = 1.0 \textwidth]{Plots/G_Residuals_ARMA46_D}
-  \caption{Residuales del ARMA(4, 6) de una serie $DLPaxNal_t$.}
-  \label{G_Residuals_ARMA46_D}
+
+{\centering \includegraphics[width=0.95\linewidth]{Plots/G_Residuals_ARMA46_D} 
+
+}
+
+\caption{Residuales del ARMA(4, 6) de una serie $DLPaxNal_t$}\label{fig:fig416}
 \end{figure}
 
 \hypertarget{pronuxf3sticos}{%
@@ -3095,12 +3435,12 @@ Una vez incluidas dos dummies más para mayo y junio de 2009, analizamos un tota
 Para pronósticar el valor de la serie es necesario determinar cuál es el valor esperado de la serie en un momento \(t + \tau\) condicional en que ésta se comporta como un \(AR(p)\), un \(MA(q)\) o un \(ARMA(p, q)\) y a que los valores antes de \(t\) están dados. Por lo que el pronóstico de la serie estará dado por una expresión:
 \begin{eqnarray}
     \mathbb{E}_t[X_{t+\tau}] = \delta + a_1 \mathbb{E}_t[X_{t+\tau-1}] + a_2 \mathbb{E}_t[X_{t+\tau-2}] + \ldots + + a_p \mathbb{E}_t[X_{t+\tau-p}]
-    \label{ARMApq_For}
+    \label{eq:ARMApqFor}
 \end{eqnarray}
 
-Lo anterior para todo \(\tau = 0, 1, 2, \ldots\) y considerando que los componentes MA(q) en la eucación (\ref{ARMApq_For}) son cero dado que para todo valor \(t + \tau\) es cierto que \(\mathbb{E}_t[U_{t+\tau}]\).
+Lo anterior para todo \(\tau = 0, 1, 2, \ldots\) y considerando que los componentes MA(q) en la eucación (\eqref{eq:ARMApqFor}) son cero dado que para todo valor \(t + \tau\) es cierto que \(\mathbb{E}_t[U_{t+\tau}]\).
 
-Continuando con el ejemplo, en la Figura (\ref{fig:fig412}\}) mostramos el resultado del pronóstico de la serie a partir del modelo ARMA(4, 6) que hemos discutido anteriormente.
+Continuando con el ejemplo, en la Figura \ref{fig:fig417} mostramos el resultado del pronóstico de la serie a partir del modelo ARMA(4, 6) que hemos discutido anteriormente.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3109,7 +3449,8 @@ Continuando con el ejemplo, en la Figura (\ref{fig:fig412}\}) mostramos el resul
 \FunctionTok{library}\NormalTok{(readxl)}
 \FunctionTok{library}\NormalTok{(stats)}
 
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte\_ARIMA.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Base\_Transporte\_ARIMA.xlsx"}\NormalTok{, }
+                    \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \NormalTok{Pax\_Nal }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos}\SpecialCharTok{$}\NormalTok{Pax\_Nal, }
               \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
@@ -3160,7 +3501,10 @@ Continuando con el ejemplo, en la Figura (\ref{fig:fig412}\}) mostramos el resul
             \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
 \NormalTok{ARMA\_Ex\_DLPax\_Nal\_2 }\OtherTok{\textless{}{-}} \FunctionTok{arima}\NormalTok{(DLPax\_Nal, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{),}
-                             \AttributeTok{xreg =} \FunctionTok{cbind}\NormalTok{(D\_Ene, D\_Feb, D\_Jul, D\_Dic, D\_Mar2020, D\_Abr2020, D\_Jun2020, D\_Jul2020, D\_Mar2021),}
+                             \AttributeTok{xreg =} \FunctionTok{cbind}\NormalTok{(D\_Ene, D\_Feb, D\_Jul, }
+\NormalTok{                                          D\_Dic, D\_Mar2020, }
+\NormalTok{                                          D\_Abr2020, D\_Jun2020, }
+\NormalTok{                                          D\_Jul2020, D\_Mar2021),}
                              \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3172,7 +3516,8 @@ Continuando con el ejemplo, en la Figura (\ref{fig:fig412}\}) mostramos el resul
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Predict\_Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Predict\_Base\_Transporte\_ARIMA.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Predict\_Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Predict\_Base\_Transporte\_ARIMA.xlsx"}\NormalTok{, }
+                            \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \NormalTok{D\_Mar2020\_f }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Predict\_Datos}\SpecialCharTok{$}\NormalTok{D\_Mar2020, }
                 \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2022}\NormalTok{, }\DecValTok{7}\NormalTok{), }
@@ -3211,10 +3556,13 @@ Continuando con el ejemplo, en la Figura (\ref{fig:fig412}\}) mostramos el resul
             \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
 
 \NormalTok{DLPax\_Nal\_f }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(ARMA\_Ex\_DLPax\_Nal\_2, }\AttributeTok{n.ahead =} \DecValTok{24}\NormalTok{, }
-                      \AttributeTok{newxreg =} \FunctionTok{cbind}\NormalTok{(D\_Ene\_f, D\_Feb\_f, D\_Jul\_f, D\_Dic\_f, }
-\NormalTok{                                      D\_Mar2020\_f, D\_Abr2020\_f, D\_Jun2020\_f, D\_Jul2020\_f, D\_Mar2021\_f))}
+                      \AttributeTok{newxreg =} \FunctionTok{cbind}\NormalTok{(D\_Ene\_f, D\_Feb\_f, D\_Jul\_f, }
+\NormalTok{                                      D\_Dic\_f, D\_Mar2020\_f, }
+\NormalTok{                                      D\_Abr2020\_f, D\_Jun2020\_f, }
+\NormalTok{                                      D\_Jul2020\_f, D\_Mar2021\_f))}
 
-\NormalTok{Pronostico\_Arima }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Pronostico\_Arima.xlsx"}\NormalTok{, }\AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Pronostico\_Arima }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Pronostico\_Arima.xlsx"}\NormalTok{, }
+                               \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
 \NormalTok{Pronostico\_Arima}\SpecialCharTok{$}\NormalTok{Pax\_Nal\_f }\OtherTok{\textless{}{-}}\NormalTok{ Pronostico\_Arima}\SpecialCharTok{$}\NormalTok{Pax\_Nal}
 
@@ -3235,7 +3583,8 @@ Continuando con el ejemplo, en la Figura (\ref{fig:fig412}\}) mostramos el resul
   \FunctionTok{guides}\NormalTok{(}\AttributeTok{col =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{nrow =} \DecValTok{1}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{xlab}\NormalTok{(}\StringTok{"Tiempo"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{ylab}\NormalTok{(}\StringTok{"Pasajeros"}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }
+                                  \AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.subtitle =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.caption =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.margin =} \FunctionTok{unit}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\StringTok{"cm"}\NormalTok{)) }\SpecialCharTok{+}
@@ -3253,11 +3602,11 @@ Continuando con el ejemplo, en la Figura (\ref{fig:fig412}\}) mostramos el resul
 
 \begin{figure}
 
-{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig412-1} 
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig417-1} 
 
 }
 
-\caption{Pronóstico de la serie $PaxNAl_t$ a partir de una ARMA(4,6) en diferencias logaritmicas}\label{fig:fig412}
+\caption{Pronóstico de la serie $PaxNAl_t$ a partir de una ARMA(4,6) en diferencias logaritmicas}\label{fig:fig417}
 \end{figure}
 
 \begin{Shaded}

@@ -153,8 +153,11 @@ Definiremos a la estacionariedad por sus momentos del correspondiente proceso es
 Puesto que resulta poco factible asumir una estacionariedad diferente a la débil, es adelante siempre que digamos que un proceso es estacionario se referirá al caso débil y sólo diremos que el proceso es estacionario, sin el apelativo de débil. 
 
 Ahora veamos un ejemplo de lo anterior. Supongamos una serie de tiempo denotada por: $\{U_t\}^T_{t = 0}$. Decimos que el proceso estocástico $\{U_t\}$ es un _proceso estocástico puramente aleatorio_ o es un _proceso estocástico de ruido blanco o caminata aleatoria_, si éste tiene las siguientes propiedades: 
+
 1. $\mathbb{E}[U_t] = 0$, $\forall t$;
+
 2. $Var[U_t] = \mathbb{E}[(U_t - \mu_t)^2] = \mathbb{E}[(U_t - \mu)^2] = \mathbb{E}[(U_t)^2] = \sigma^2$, $\forall t$,  y
+
 3. $Cov[U_t,U_s] = \mathbb{E}[(U_t - \mu_t)(U_s - \mu_s)] = \mathbb{E}[(U_t - \mu)(U_s - \mu)] = \mathbb{E}[U_t U_s] = 0$, $\forall t \neq s$.
 
 En otras palabras, un proceso $U_t$ es un ruido blanco si su valor esperado (promedio) es cero (0), tiene una varianza finita y constante, y además no le importa la historia pasada. Así, su valor presente no se ve influenciado por sus valores pasados no importando respecto de que periodo se tome referencia.
@@ -176,8 +179,11 @@ Donde $\{ U_t \}$ es un proceso puramente aleatorio. Este proceso estocástico, 
 Tratemos de dar más claridad al ejemplo, para ello asumamos que generamos a $\{U_t\}$ por medio del lanzamiento de una moneda. Donde obtenemos una cara (águila) con una probabilidad de $0.5$, en cuyo caso decimos que la variable aleatoria $U_t$ tomará el valor de $+1$, y una cruz (sol) con una probabilidad de $0.5$, en cuyo caso decimos que la variable aleatoria $U_t$ toma el valor de $-1$.
 
 Este planteamiento cumple con las propiedas enunciadas ya que:
+
 1. $\mathbb{E}[U_t] = 0.5 \times -1 + 0.5 \times 1 = 0$, $\forall t$
+
 2. $Var[U_t] = \mathbb{E}[(U_t - 0)^2] = \frac{1}{2}((-1)^2) + \frac{1}{2}((1)^2) = 1$, $\forall t$
+
 3. $Cov[U_t,U_s] = \mathbb{E}[(U_t - 0)(U_s - 0)] = \mathbb{E}[U_t \cdot U_s] = 0$, $\forall t \neq s$.
 
 Retomando a nuestro proceso $X_t$, diremos que el caso de $X_0 = 0$, para $t = 0$. Si verificamos cúales son sus primeros y segundos momentos de $\{X_t\}$ tenemos:
@@ -206,7 +212,7 @@ Lo anterior, dado que hemos supuesto que en la caminata aleatoria todas la varia
     & = & min(t,s)
 \end{eqnarray*}
 
-```{r fig31, echo=FALSE, message=FALSE, warning=FALSE, results='asis', fig.cap="Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1$", fig.align='center'}
+```{r fig31, warning=FALSE, fig.cap="Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1", fig.align='center'}
 
 set.seed(1234)
 # Utilizaremos una función guardada en un archivo a parte
@@ -230,7 +236,8 @@ for(i in 1:Caminos){
   #
   G_t <- data.matrix(data.frame(Caminata(Opciones, Soporte)[2]))
   #
-  plot(TT, G_t, col = "blue", type = "l", ylab = "Ganancias", xlab = "Tiempo", ylim = c(-Rango,Rango))
+  plot(TT, G_t, col = "blue", type = "l", ylab = "Ganancias", 
+       xlab = "Tiempo", ylim = c(-Rango,Rango))
   #
   par(new = TRUE)
   #
@@ -338,7 +345,9 @@ Donde $R^2$ es el resultante de la regresión auxiliar y $T$ es el número de ob
 En comparación con una prueba Durbin - Watson que es comúnmente usada en la econometría tradicional, para probar autocorrelación de los residuales, las estadísticas $Q$, $Q^*$ y $LM$ tienen las siguientes ventajas:
 
 1. Permiten corroborar la existencia de autocorrelación para cualquier orden, y no solo para un primer orden (es decir, para cualquier valor de $\tau = 1, 2, 3, \ldots$);
+
 2. Los resultados se mantienen aún y cuando exista una probable variable endógena en forma rezagada, y
+
 3. No depende del orden o la forma en que se acomoden las observaciones, algo que es muy probalble que ocurra en la econometría tradicional.
 
 El hecho de los residuales no estén autocorrelacionados no implica que estos sean independientes y normalmente distribuidos. La ausencia de autocorrelación no implica una independencia estocástica si las variables son normalmente distribuidas.
@@ -380,7 +389,8 @@ library(ggplot2)
 library(dplyr)
 library(readxl)
 
-Datos <- read_excel("BD/Base_Transporte.xlsx", sheet = "Datos", col_names = TRUE)
+Datos <- read_excel("BD/Base_Transporte.xlsx", 
+                    sheet = "Datos", col_names = TRUE)
 
 ggplot(data = Datos, aes(x = Periodo, y = Pax_Metro)) + 
   geom_line(linewidth = 0.5, color = "darkblue") +
@@ -404,9 +414,9 @@ ggsave("Pax_Metro.png", width = 20, height = 15, units = "cm")
 
 A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro \@ref(tab:foo). En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura \@ref(fig:fig33) se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza desntro de las cuales no se puede rechazar la hipotésis nula de que $H_0: \hat{\rho}(p) = 0$, para todo $\tau = 1, 2, \ldots, T-1$.
 
-Table: (\#tab:foo) Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 200 a junio de 2019
+Table: (\#tab:foo) Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2019
 
-|Estadística|Valor|
+| Estadística | Valor |
 |:---:|:---:|
 | $\hat{\mu} = \frac{1}{T} \sum^T_{t=1} X_t$ | 124.3000 |
 | $\hat{\gamma}(0) = \frac{1}{T} \sum^T_{t=1} (X_t - \hat{\mu})^2$ | 103.6400 |
@@ -419,7 +429,7 @@ Table: (\#tab:foo) Estadísticas descriptivas del número de pasajeros en el Met
 | $Q^* = T \sum_{j = 1}^{1} \hat{\rho} (j)^2$ | 86.7577 |
 | $Q^* = T \sum_{j = 1}^{2} \hat{\rho} (j)^2$ | 290.9279 |
 
-```{r fig33, fig.cap = "unción de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023", fig.align='center'}
+```{r fig33, fig.cap = "Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023", fig.align='center'}
 
 Pax_Metro <- ts(Datos$Pax_Metro, 
                 start = 2000, 
@@ -428,6 +438,6 @@ Pax_Metro <- ts(Datos$Pax_Metro,
 acf(Pax_Metro, 
     lag.max = 150, 
     xlab = 'Resagos k en meses', 
-    main="Funcion de Autocorrelación del número de pasajeros del metro")
+    main = "Funcion de Autocorrelación del número de pasajeros del metro")
 
 ```

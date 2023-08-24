@@ -183,7 +183,7 @@ S_{t} &amp; = &amp; a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
     Z_t = a_0 \left( \frac{1 - a^{t}_1}{1 - a_1} \right) + a^t_1 Z_0
     \tag{2.14}
 \end{equation}\]</span></p>
-<p>De esta forma la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.14)</a> es una solición para la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SUM">(2.9)</a>, que es una ecuación de un proceso de una Ecuación en Diferencia plantenado en la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:EDPO">(2.4)</a>. Está solución aún no es general, en el sentido de que sea válida para cualquiel tipo de proceso: convergente o divergente. Dicha convergencia o divengencia estará determinada por el paramétro <span class="math inline">\(a_1\)</span>. No debe pasar desapercibido que cuando <span class="math inline">\(t \rightarrow \infty\)</span> o cuando la muestra es muy grande (lo que es equivalente), podemos decir que la solución solo puede converger a la siguiente expresión cuando se considera que <span class="math inline">\(|a_1| &lt; 1\)</span>:
+<p>De esta forma la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.14)</a> es una solución para la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SUM">(2.9)</a>, que es una ecuación de un proceso de una Ecuación en Diferencia plantenado en la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:EDPO">(2.4)</a>. Está solución aún no es general, en el sentido de que sea válida para cualquiel tipo de proceso: convergente o divergente. Dicha convergencia o divengencia estará determinada por el paramétro <span class="math inline">\(a_1\)</span>. No debe pasar desapercibido que cuando <span class="math inline">\(t \rightarrow \infty\)</span> o cuando la muestra es muy grande (lo que es equivalente), podemos decir que la solución solo puede converger a la siguiente expresión cuando se considera que <span class="math inline">\(|a_1| &lt; 1\)</span>:
 <span class="math display" id="eq:trayec">\[\begin{equation}
     Z_t = a_0 \left( \frac{1}{1 - a_1} \right)
     \tag{2.15}
@@ -209,7 +209,7 @@ S_{t} &amp; = &amp; a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
     Z_t = a_0 \frac{1 - a^t_1}{1 - a_1} + a^t_1 Z_0
 \tag{2.19}
 \end{equation}\]</span></p>
-<p>No debe pasar desapercibido que está solución es la misma que la mostrada en la ecuación (<a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.14)</a>, por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.14)</a> y <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN">(2.19)</a>. Ambas convergen a la expresión como la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:trayec">(2.15)</a>, con la misma condición de convergencia <span class="math inline">\(|a_1| &lt; 1\)</span>. Para ilustrar estas ecuaciones veámos algunos ejemplos al respecto.</p>
+<p>No debe pasar desapercibido que está solución es la misma que la mostrada en la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.14)</a>, por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.14)</a> y <a href="elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN">(2.19)</a>. Ambas convergen a la expresión como la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:trayec">(2.15)</a>, con la misma condición de convergencia <span class="math inline">\(|a_1| &lt; 1\)</span>. Para ilustrar estas ecuaciones veámos algunos ejemplos al respecto.</p>
 <p>Consideremos que tenemos un proceso <span class="math inline">\(Z_t\)</span> que es descrito por una ecuación en diferencia lineal de primer orden dada por:
 <span class="math display" id="eq:ex1">\[\begin{equation}
     Z_t = 2 + 0.9 Z_{t-1}
@@ -230,21 +230,38 @@ S_{t} &amp; = &amp; a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
     Z_t = 2 \left( \frac{1 - (-0.5)^{t}}{1 + 0.5} \right) + (-0.5)^t Z_0
 \tag{2.23}
 \end{equation}\]</span></p>
-<p>Donde asumiremos que el valor inicial es <span class="math inline">\(Z_0 = 10\)</span> y que la ecuación converge al valor de <span class="math inline">\(1.3333333 \ldots\)</span>, cuando <span class="math inline">\(t\)</span> es muy grande o tiende a infinito. Ahora simulemos el comportamiento de ambos procesos y estableceremos los resultados del Cuadro <a href="elementos-de-ecuaciones-en-diferencia.html#tab:table1">2.2</a>. Notemos que el segundo proceso converge de una forma más rapida que el primero. El Cuadro <a href="elementos-de-ecuaciones-en-diferencia.html#tab:table1">2.2</a> se ilustra en las siguientes dos Figura <a href="elementos-de-ecuaciones-en-diferencia.html#fig:fig21">2.1</a> y Figura <a href="elementos-de-ecuaciones-en-diferencia.html#fig:fig22">2.2</a>.</p>
-</div>
-<div id="ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior" class="section level3" number="2.1.2">
-<h3>
-<span class="header-section-number">2.1.2</span> Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior<a class="anchor" aria-label="anchor" href="#ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior"><i class="fas fa-link"></i></a>
-</h3>
-<p>Como un segundo caso a estudiar se ubica el caso de las Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior. Primero, sea una ecuación como la siguiente, la cual es lineal y de segundo orden, ya que tiene asociado un término de <span class="math inline">\(Z_t\)</span> rezagado dos periódos:
-<span class="math display" id="eq:EDSO">\[\begin{equation}
-    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2}
-    \tag{2.24}
-\end{equation}\]</span></p>
-<p>Table: (#tab:foo) Dos ejemplos de procesos de Ecuaciones Lineales de Primer Orden convengentes</p>
+<p>Donde asumiremos que el valor inicial es <span class="math inline">\(Z_0 = 10\)</span> y que la ecuación converge al valor de <span class="math inline">\(1.3333333 \ldots\)</span>, cuando <span class="math inline">\(t\)</span> es muy grande o tiende a infinito. Ahora simulemos el comportamiento de ambos procesos y estableceremos los resultados del Cuadro <a href="elementos-de-ecuaciones-en-diferencia.html#tab:table1">2.1</a>. Notemos que el segundo proceso converge de una forma más rapida que el primero. El Cuadro <a href="elementos-de-ecuaciones-en-diferencia.html#tab:table1">2.1</a> se ilustra en las siguientes dos Figura <a href="elementos-de-ecuaciones-en-diferencia.html#fig:fig21">2.1</a> y Figura <a href="elementos-de-ecuaciones-en-diferencia.html#fig:fig22">2.2</a>.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Tiempo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">Zt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">Zt2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">Zt</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="va">Zt2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">10</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">101</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">Zt</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fl">2</span><span class="op">+</span><span class="fl">0.9</span><span class="op">*</span><span class="va">Zt</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">Zt2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span><span class="va">Zt2</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">lista</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">16</span>, <span class="fl">97</span><span class="op">:</span><span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">Tiempo1</span> <span class="op">=</span> <span class="va">Tiempo</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span><span class="va">Zt1</span><span class="op">=</span><span class="va">Zt</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span><span class="va">Zt21</span><span class="op">=</span><span class="va">Zt2</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">tabla1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Tiempo1</span>, <span class="va">Zt1</span>, <span class="va">Zt21</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tabla1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tiempo"</span>, <span class="st">"$Z_t =2+0.9Z_{t-1}$"</span>, </span>
+<span>                      <span class="st">"$Z_t = 2-0.5Z_{t-1}$"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tabla1</span>, </span>
+<span>      caption <span class="op">=</span> <span class="st">"Dos ejemplos de Ecuaciones Lineales de Primer Orden"</span>, </span>
+<span>      format <span class="op">=</span> <span class="st">"pandoc"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>font_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:table1">Table 2.2: </span>Dos ejemplos de Procesos de Ecuaciones Lineales de Primer Orden Convergentes</caption>
+<span id="tab:table1">Table 2.1: </span>Dos ejemplos de Ecuaciones Lineales de Primer Orden</caption>
 <thead><tr class="header">
 <th align="right">Tiempo</th>
 <th align="right"><span class="math inline">\(Z_t =2+0.9Z_{t-1}\)</span></th>
@@ -358,18 +375,40 @@ S_{t} &amp; = &amp; a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
 </tr>
 </tbody>
 </table></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tabla</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="va">Tiempo</span>, <span class="va">Zt</span>, <span class="va">Zt2</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span> data <span class="op">=</span> <span class="va">tabla</span> , <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Tiempo</span>, y <span class="op">=</span> <span class="va">Zt</span><span class="op">)</span> <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"blue4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col<span class="op">=</span> <span class="st">"blue4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Z</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig21"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig21-1.png" alt="Evolución del proceso dado por $Z_t =2+0.9Z_{t-1}$" width="672"><p class="caption">
 Figure 2.1: Evolución del proceso dado por <span class="math inline">\(Z_t =2+0.9Z_{t-1}\)</span>
 </p>
 </div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tabla</span> , <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Tiempo</span>, y<span class="op">=</span><span class="va">Zt2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col<span class="op">=</span> <span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Z</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig22"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig22-1.png" alt="Evolución del proceso dado por $Z_t =2-0.5Z_{t-1}$" width="672"><p class="caption">
 Figure 2.2: Evolución del proceso dado por <span class="math inline">\(Z_t =2-0.5Z_{t-1}\)</span>
 </p>
 </div>
+</div>
+<div id="ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior" class="section level3" number="2.1.2">
+<h3>
+<span class="header-section-number">2.1.2</span> Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior<a class="anchor" aria-label="anchor" href="#ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior"><i class="fas fa-link"></i></a>
+</h3>
+<p>Como un segundo caso a estudiar se ubica el caso de las Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior. Primero, sea una ecuación como la siguiente, la cual es lineal y de segundo orden, ya que tiene asociado un término de <span class="math inline">\(Z_t\)</span> rezagado dos periódos:
+<span class="math display" id="eq:EDSO">\[\begin{equation}
+    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2}
+    \tag{2.24}
+\end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span> y <span class="math inline">\(a_1, a_2 \neq 0\)</span>. Reordenando la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:EDSO">(2.24)</a> podemos escribir:
 <span class="math display" id="eq:EDSOSOL">\[\begin{eqnarray}
     Z_t - a_1 Z_{t-1} - a_2 Z_{t-2} &amp; = &amp; a_0 \nonumber \\
@@ -526,7 +565,7 @@ Donde: <span class="math inline">\(r = \sqrt{u^2 + v^2}\)</span>, a esta expresi
     Z_t = 10 - 450(0.4)^t + 440(0.5)^t
 \tag{2.45}
 \end{equation}\]</span></p>
-<p>La ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:Ejem01">(2.45)</a> anterior convergerá al valor de 10 cuando <span class="math inline">\(t \rightarrow \infty\)</span>. Para ilustrar la trayectoria de esta ecuación tomemos un cuadro similar al de los ejemplos anteriores. En el Cuadro <a href="elementos-de-ecuaciones-en-diferencia.html#tab:table2">2.3</a> y la Figura <a href="elementos-de-ecuaciones-en-diferencia.html#fig:fig23">2.3</a> mostramos los resultados de la trayectorua para 100 periodos.</p>
+<p>La ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:Ejem01">(2.45)</a> anterior convergerá al valor de 10 cuando <span class="math inline">\(t \rightarrow \infty\)</span>. Para ilustrar la trayectoria de esta ecuación tomemos un cuadro similar al de los ejemplos anteriores. En el Cuadro <a href="elementos-de-ecuaciones-en-diferencia.html#tab:table2">2.2</a> y la Figura <a href="elementos-de-ecuaciones-en-diferencia.html#fig:fig23">2.3</a> mostramos los resultados de la trayectorua para 100 periodos.</p>
 <p>Finalmente, discutiremos la solución para las Ecuaciones Lineales en Diferencia de Orden <span class="math inline">\(p\)</span>, donde <span class="math inline">\(p \geq 2\)</span>. En general una ecuación de este tipo se puede escribir como:
 <span class="math display" id="eq:EDOP">\[\begin{equation}
     Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2} + \ldots + a_p Z_{t-p}
@@ -539,9 +578,28 @@ Donde: <span class="math inline">\(r = \sqrt{u^2 + v^2}\)</span>, a esta expresi
     (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p) Z_t &amp; = &amp; a_0
     \tag{2.47}
 \end{eqnarray}\]</span></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Zt</span> <span class="op">=</span> <span class="fl">10</span><span class="op">-</span><span class="fl">450</span><span class="op">*</span><span class="op">(</span><span class="fl">0.4</span><span class="op">^</span><span class="va">t</span><span class="op">)</span><span class="op">+</span><span class="fl">440</span><span class="op">*</span><span class="op">(</span><span class="fl">0.5</span><span class="op">^</span><span class="va">t</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tabla_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="va">t</span>, <span class="va">Zt</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">lista</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">16</span>, <span class="fl">97</span><span class="op">:</span><span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">t1</span> <span class="op">=</span> <span class="va">t</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span><span class="va">Zt1</span><span class="op">=</span><span class="va">Zt</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span></span>
+<span></span>
+<span><span class="va">tabla1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Tiempo1</span>, <span class="va">Zt1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tabla1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tiempo"</span>, <span class="st">"$Z_t =10-450(0.4)^t+440(0.5)^t$"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tabla1</span>, </span>
+<span>      caption <span class="op">=</span> <span class="st">"Un ejemplo de Ecuación de Segundo Orden"</span>, </span>
+<span>      format <span class="op">=</span> <span class="st">"pandoc"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>font_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:table2">Table 2.3: </span>Un ejemplo de proceso de Ecuación de Segundo Orden convengente</caption>
+<span id="tab:table2">Table 2.2: </span>Un ejemplo de Ecuación de Segundo Orden</caption>
 <thead><tr class="header">
 <th align="right">Tiempo</th>
 <th align="right"><span class="math inline">\(Z_t =10-450(0.4)^t+440(0.5)^t\)</span></th>
@@ -633,6 +691,11 @@ Donde: <span class="math inline">\(r = \sqrt{u^2 + v^2}\)</span>, a esta expresi
 </tr>
 </tbody>
 </table></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tabla_2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">t</span>, y<span class="op">=</span><span class="va">Zt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"green4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col<span class="op">=</span> <span class="st">"green4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Z</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig23"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig23-1.png" alt="Evolución del proceso dado por $Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}$" width="672"><p class="caption">
@@ -716,6 +779,19 @@ Figure 2.3: Evolución del proceso dado por <span class="math inline">\(Z_t =3+0
     \tag{2.62}
 \end{eqnarray}\]</span></p>
 <p>Para <span class="math inline">\(\forall i \neq j\)</span> y <span class="math inline">\(i, j = 1, 2, \ldots, p\)</span>. Cuando <span class="math inline">\(g_1 = g_2 = \ldots = g_p = g\)</span>, la condición de la ecuación <a href="elementos-de-ecuaciones-en-diferencia.html#eq:COND3">(2.61)</a> se resume a que <span class="math inline">\(|g| &lt; 1\)</span>. En resumen, las condiciones descritas en las ecuaciones <a href="elementos-de-ecuaciones-en-diferencia.html#eq:COND3">(2.61)</a> y <a href="elementos-de-ecuaciones-en-diferencia.html#eq:COND4">(2.62)</a> se puden ilustrar con un circulo unitario como el de la Figura <a href="elementos-de-ecuaciones-en-diferencia.html#fig:fig24">2.4</a> en que sí las raíces se ubican dentro de éste, podemos decir que el proceso es convergente en el largo plazo.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Crear datos para el círculo</span></span>
+<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">*</span><span class="va">pi</span>, length.out<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span></span>
+<span><span class="va">circle_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Dibujar el círculo</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">circle_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a></span><span class="op">(</span>fill<span class="op">=</span><span class="cn">NA</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span>ratio<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig24"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig24-1.png" alt="Circulo unitario en el que se cumple que $|g_i|&lt;1$ y $(g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1$" width="384"><p class="caption">
@@ -831,7 +907,7 @@ Figure 2.4: Circulo unitario en el que se cumple que <span class="math inline">\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-20.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-08-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -146,7 +146,7 @@ Conjuntando éste último resultado de la ecuación \@ref(eq:SUM2) con la ecuaci
     (\#eq:SOLITER)
 \end{equation}
 
-De esta forma la ecuación \@ref(eq:SOLITER) es una solición para la ecuación \@ref(eq:SUM), que es una ecuación de un proceso de una Ecuación en Diferencia plantenado en la ecuación \@ref(eq:EDPO). Está solución aún no es general, en el sentido de que sea válida para cualquiel tipo de proceso: convergente o divergente. Dicha convergencia o divengencia estará determinada por el paramétro $a_1$. No debe pasar desapercibido que cuando $t \rightarrow \infty$ o cuando la muestra es muy grande (lo que es equivalente), podemos decir que la solución solo puede converger a la siguiente expresión cuando se considera que $|a_1| < 1$:
+De esta forma la ecuación \@ref(eq:SOLITER) es una solución para la ecuación \@ref(eq:SUM), que es una ecuación de un proceso de una Ecuación en Diferencia plantenado en la ecuación \@ref(eq:EDPO). Está solución aún no es general, en el sentido de que sea válida para cualquiel tipo de proceso: convergente o divergente. Dicha convergencia o divengencia estará determinada por el paramétro $a_1$. No debe pasar desapercibido que cuando $t \rightarrow \infty$ o cuando la muestra es muy grande (lo que es equivalente), podemos decir que la solución solo puede converger a la siguiente expresión cuando se considera que $|a_1| < 1$:
 \begin{equation}
     Z_t = a_0 \left( \frac{1}{1 - a_1} \right)
     (\#eq:trayec)
@@ -177,7 +177,7 @@ Así, juntando la ecuación \@ref(eq:PROC01) y ecuación \@ref(eq:eqs) tenemos l
 (\#eq:SOLGEN)
 \end{equation}
 
-No debe pasar desapercibido que está solución es la misma que la mostrada en la ecuación (\@ref(eq:SOLITER), por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones \@ref(eq:SOLITER) y \@ref(eq:SOLGEN). Ambas convergen a la expresión como la ecuación \@ref(eq:trayec), con la misma condición de convergencia $|a_1| < 1$. Para ilustrar estas ecuaciones veámos algunos ejemplos al respecto. 
+No debe pasar desapercibido que está solución es la misma que la mostrada en la ecuación \@ref(eq:SOLITER), por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones \@ref(eq:SOLITER) y \@ref(eq:SOLGEN). Ambas convergen a la expresión como la ecuación \@ref(eq:trayec), con la misma condición de convergencia $|a_1| < 1$. Para ilustrar estas ecuaciones veámos algunos ejemplos al respecto. 
 
 Consideremos que tenemos un proceso $Z_t$ que es descrito por una ecuación en diferencia lineal de primer orden dada por:
 \begin{equation}
@@ -205,17 +205,7 @@ Siguiendo la expresión mostrada en la ecuación \@ref(eq:SOLGEN), obtenemos:
 
 Donde asumiremos que el valor inicial es $Z_0 = 10$ y que la ecuación converge al valor de $1.3333333 \ldots$, cuando $t$ es muy grande o tiende a infinito. Ahora simulemos el comportamiento de ambos procesos y estableceremos los resultados del Cuadro \@ref(tab:table1). Notemos que el segundo proceso converge de una forma más rapida que el primero. El Cuadro \@ref(tab:table1) se ilustra en las siguientes dos Figura \@ref(fig:fig21) y Figura \@ref(fig:fig22).
 
-### Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior
-
-Como un segundo caso a estudiar se ubica el caso de las Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior. Primero, sea una ecuación como la siguiente, la cual es lineal y de segundo orden, ya que tiene asociado un término de $Z_t$ rezagado dos periódos:
-\begin{equation}
-    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2}
-    (\#eq:EDSO)
-\end{equation}
-
-Table: (\#tab:foo) Dos ejemplos de procesos de Ecuaciones Lineales de Primer Orden convengentes
-
-```{r table1, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+```{r table1, echo=TRUE, message=FALSE, warning=FALSE, results='asis'}
 library(knitr)
 library(tidyverse)
 library(kableExtra)
@@ -236,15 +226,18 @@ Zt1=Zt[lista]
 Zt21=Zt2[lista]
 
 tabla1 = data.frame(Tiempo1, Zt1, Zt21)
-colnames(tabla1) <- c("Tiempo", "$Z_t =2+0.9Z_{t-1}$", "$Z_t = 2-0.5Z_{t-1}$")
+colnames(tabla1) <- c("Tiempo", "$Z_t =2+0.9Z_{t-1}$", 
+                      "$Z_t = 2-0.5Z_{t-1}$")
 
-kable(tabla1, caption = "Dos ejemplos de Procesos de Ecuaciones Lineales de Primer Orden Convergentes ", format = "pandoc")%>%
+kable(tabla1, 
+      caption = "Dos ejemplos de Ecuaciones Lineales de Primer Orden", 
+      format = "pandoc") %>%
   kable_styling(font_size = 10)
 
 ```
 
 
-```{r fig21, echo=FALSE, message=FALSE, warning=FALSE, results='asis', fig.cap="Evolución del proceso dado por $Z_t =2+0.9Z_{t-1}$", fig.align='center', fig.height=3.5}
+```{r fig21, echo=TRUE, message=FALSE, warning=FALSE, results='asis', fig.cap="Evolución del proceso dado por $Z_t =2+0.9Z_{t-1}$", fig.align='center', fig.height=3.5}
 
 tabla <- data.frame( Tiempo, Zt, Zt2 )
 
@@ -255,14 +248,22 @@ ggplot( data = tabla , aes(x = Tiempo, y = Zt) )+
 
 ```
 
-```{r fig22, echo=FALSE, message=FALSE, warning=FALSE, results='asis', fig.cap="Evolución del proceso dado por $Z_t =2-0.5Z_{t-1}$", fig.align='center', fig.height=3.5}
+```{r fig22, echo=TRUE, message=FALSE, warning=FALSE, results='asis', fig.cap="Evolución del proceso dado por $Z_t =2-0.5Z_{t-1}$", fig.align='center', fig.height=3.5}
 
-ggplot(data = tabla , aes(x = Tiempo, y=Zt2))+
-  geom_line(col="red4")+
-  geom_point(col= "red4")+
+ggplot(data = tabla , aes(x = Tiempo, y=Zt2)) +
+  geom_line(col="red4") +
+  geom_point(col= "red4") +
   labs(y=expression(Z[t]))
 
 ```
+
+### Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior
+
+Como un segundo caso a estudiar se ubica el caso de las Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior. Primero, sea una ecuación como la siguiente, la cual es lineal y de segundo orden, ya que tiene asociado un término de $Z_t$ rezagado dos periódos:
+\begin{equation}
+    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2}
+    (\#eq:EDSO)
+\end{equation}
 
 Donde $t = \ldots, -2, -1, 0, 1, 2, \ldots$ y $a_1, a_2 \neq 0$. Reordenando la ecuación \@ref(eq:EDSO) podemos escribir:
 \begin{eqnarray}
@@ -465,7 +466,7 @@ Donde $t = \ldots, -2, -1, 0, 1, 2, \ldots$ y $a_p \neq 0$. La ecuación \@ref(e
     (\#eq:EDOP2)
 \end{eqnarray}
 
-```{r table2, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+```{r table2, echo=TRUE, message=FALSE, warning=FALSE, results='asis'}
 
 t = ts(c(0:100))
 
@@ -481,16 +482,18 @@ Zt1=Zt[lista]
 tabla1 = data.frame(Tiempo1, Zt1)
 colnames(tabla1) <- c("Tiempo", "$Z_t =10-450(0.4)^t+440(0.5)^t$")
 
-kable(tabla1, caption = "Un ejemplo de proceso de Ecuación de Segundo Orden convengente", format = "pandoc")%>%
+kable(tabla1, 
+      caption = "Un ejemplo de Ecuación de Segundo Orden", 
+      format = "pandoc")%>%
   kable_styling(font_size = 10)
 
 ```
 
-```{r fig23, echo=FALSE, message=FALSE, warning=FALSE, results='asis', fig.cap="Evolución del proceso dado por $Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}$", fig.align='center', fig.height=3.5}
+```{r fig23, echo=TRUE, message=FALSE, warning=FALSE, results='asis', fig.cap="Evolución del proceso dado por $Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}$", fig.align='center', fig.height=3.5}
 
-ggplot(data = tabla_2, aes(x = t, y=Zt))+
-  geom_line(col="green4")+
-  geom_point(col= "green4")+
+ggplot(data = tabla_2, aes(x = t, y=Zt)) +
+  geom_line(col="green4") +
+  geom_point(col= "green4") +
   labs(y=expression(Z[t]))
 
 ```
@@ -588,7 +591,7 @@ Para $\forall i = 1, 2, \ldots, p$. Cuando la raíces son imaginarias, las dos c
 
 Para $\forall i \neq j$ y $i, j = 1, 2, \ldots, p$. Cuando $g_1 = g_2 = \ldots = g_p = g$, la condición de la ecuación \@ref(eq:COND3) se resume a que $|g| < 1$. En resumen, las condiciones descritas en las ecuaciones \@ref(eq:COND3) y \@ref(eq:COND4) se puden ilustrar con un circulo unitario como el de la Figura \@ref(fig:fig24) en que sí las raíces se ubican dentro de éste, podemos decir que el proceso es convergente en el largo plazo.
 
-```{r fig24,fig.cap="Circulo unitario en el que se cumple que $|g_i|<1$ y $(g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} < 1$", echo=FALSE, fig.height=4.5, fig.width=4, message=FALSE, warning=FALSE, fig.align='center'}
+```{r fig24,fig.cap="Circulo unitario en el que se cumple que $|g_i|<1$ y $(g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} < 1$", echo=TRUE, fig.height=4.5, fig.width=4, message=FALSE, warning=FALSE, fig.align='center'}
 # Crear datos para el círculo
 theta <- seq(0, 2*pi, length.out=100)
 x <- cos(theta)
@@ -692,5 +695,4 @@ De tal forma que el producto de ambos procesos se puede escribir como:
 \end{equation}
 
 Es decir, que el producto de dos polinomios, uno de diferencias y otro más de medias móviles, resulta en uno de diferencias pero de mayor grado, en este caso de grado 4.
-
 
