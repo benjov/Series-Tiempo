@@ -345,6 +345,7 @@ logarítmitcas ($PaxDLMetro_t$). Para el primer caso obtenemos el siguiente resu
 \end{tabular}
 \end{center}
 ```
+
 ```{=tex}
 \begin{center}
 \begin{tabular}{ c c c c c c c } 
@@ -352,6 +353,7 @@ logarítmitcas ($PaxDLMetro_t$). Para el primer caso obtenemos el siguiente resu
 \end{tabular}
 \end{center}
 ```
+
 Para el segundo caso obtenemos el siguiente resultado:
 
 ```{=tex}
@@ -362,6 +364,7 @@ Para el segundo caso obtenemos el siguiente resultado:
 \end{tabular}
 \end{center}
 ```
+
 ```{=tex}
 \begin{center}
 \begin{tabular}{ c c c c c c c } 

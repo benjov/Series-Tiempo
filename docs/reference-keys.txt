@@ -164,6 +164,9 @@ fig:fig415
 fig:fig416
 eq:ARMApqFor
 fig:fig417
+fig:fig51
+fig:fig52
+fig:fig53
 introducción
 la-naturaleza-de-los-datos-de-series-de-tiempo
 ejemplos-y-aplicaciones-de-las-series-de-tiempo
@@ -189,3 +192,7 @@ armap-q
 función-de-autocorrelación-parcial
 selección-de-las-constantes-p-q-d-en-un-arp-un-maq-un-armap-q-o-un-arimap-d-q
 pronósticos
+desestacionalización-y-filtrado-de-series
+motivación
+filtro-hodrick-prescott
+filtro-hodrick-prescott-planteado-por-st-amant-van-norden

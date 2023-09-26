@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="5.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="5.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="5.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
+<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
+<li><a class="active" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="desestacionalización-y-filtrado-de-series" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Desestacionalización y filtrado de Series<a class="anchor" aria-label="anchor" href="#desestacionalizaci%C3%B3n-y-filtrado-de-series"><i class="fas fa-link"></i></a>
+</h1>
+<div id="motivación" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Motivación<a class="anchor" aria-label="anchor" href="#motivaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h2>
+<p>Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en el caso partícular que discutiremos en este curso, estará basado en un modelo ARIMA de la serie. Este enfoque está basado en el modelo X11 de la oficina del censo de Estados Unidos (Census Bureau) el cual es conocido como el modelo X13-ARIMA-SEATS. El modelo X13-ARIMA-SEATS es, como su nombre lo indica, la combinación de un modelo ARIMA con componentes estacionales (por la traducción literal de la palabra: seasonal).</p>
+<p>Un modelo ARIMA estacional emplea la serie en diferencias y como regresores los valores rezagados de las diferencia de la serie tantas veces como procesos estacionales <span class="math inline">\(s\)</span> existan en ésta, con el objeto de remover los efectos aditivos de la estacionalidad. Sólo para entender qué significa este mecanismo, recordemos que cuando se utiliza la primera direncia de la serie respecto del periodo inmediato anterior se remueve la tendencia. Por su parte, cuando se incluye la diferencia respecto del mes <span class="math inline">\(s\)</span> se está en el caso en que se modela la serie como una media móvil en términos del rezago <span class="math inline">\(s\)</span>.</p>
+<p>El modelo ARIMA estacional incluye como componentes autoregresivos y de medias móviles a los valores rezagados de la serie en el periodo <span class="math inline">\(s\)</span> en diferencias. El ARIMA(p, d, q)(P, D, Q) estacional puede ser expresado de la siguiente manera utilizando el operador rezago <span class="math inline">\(L\)</span>:
+<span class="math display">\[\begin{equation}
+    \Theta_P(L^s) \theta_p(L) (1 - L^s)^D (1 - L)^d X_t = \Psi_Q(L^s) \psi_q(L) U_t
+    (\#eq:ARIMA_seas)
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\Theta_P(.)\)</span>, <span class="math inline">\(\theta_p(.)\)</span>, <span class="math inline">\(\Psi_Q(.)\)</span> y <span class="math inline">\(\psi_q(.)\)</span> son polinomios de <span class="math inline">\(L\)</span> de orden <span class="math inline">\(P\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(Q\)</span> y <span class="math inline">\(q\)</span> respectivamente. En general, la representación es de una serie no estacionaria, aunque si <span class="math inline">\(D = d = 0\)</span> y las raíces del polinomio carácteristico (de los polinomios del lado izquierdo de la ecuación @ref(eq:ARIMA_seas) todas son más grandes que 1 en valor absoluto, el proceso modelado será estacionario.</p>
+<p>Si bien es cierto que existen otras formas de modelar la desestacionalización, como la modelación en diferencias con dummies para identificar ciertos patrones regulares, en los algorimtos disponibles como el X11 o X13-ARIMA-SEATS se emplea la formulación de la ecuación @ref(eq:ARIMA_seas). A continuación implementaremos la desestacionalización de una serie.</p>
+<p>Como ejemplo utilizaremos la serie del Índice Nacional de Precios al Consumidor (INPC). Podemos ver que la serie original del INPC y su ajuste estacional bajo una metodología X13-ARIMA-SEATS son como se muestra en la Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig51">5.1</a>.</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_INPC_Adj.png"</span><span class="op">)</span> </span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig51"></span>
+<img src="Plots/G_INPC_Adj.png" alt="Índice Nacional de Precios al Consumidor ($INPC_t$) y su serie desestacionalizada utilizando un proceso X13-ARIMA-SEATS" width="95%"><p class="caption">
+Figure 5.1: Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) y su serie desestacionalizada utilizando un proceso X13-ARIMA-SEATS
+</p>
+</div>
+El mismo procesamiento puede ser seguido para todas las series que busquemos analizar. En particular, en adelante, además del INPC que incluimos en la lista, utilzaremos las siguientes series, así como su versión desestacionalizada:
+</div>
+<div id="filtro-hodrick-prescott" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Filtro Hodrick-Prescott<a class="anchor" aria-label="anchor" href="#filtro-hodrick-prescott"><i class="fas fa-link"></i></a>
+</h2>
+<p>Como último tema de los procesos univariados y que no necesariamente aplican a series estacionarias, a continuación desarrollaremos el procedimiento conocido como filtro de Hodrick y Prescott (1997). El trabajo de estos autores era determinar una técnica de regresión que permitiera utilizar series agregadas o macroeconómicas para separarlas en dos componentes: uno de ciclo de negocios y otro de tendencia. En su trabajo orignal Hodrick y Prescott (1997) utilizaron datos trimestrales de alguna series como el Gross Domestic Product (GNP, por sus siglas enn Inglés), los agregados montearios M1, empleo, etc., de los Estados Unidos que fueron observados posteriormente a la Segunda Guerra Mundial.</p>
+<p>El marco conceptual de Hodrick y Prescott (1997) parte de suponer una serie <span class="math inline">\(X_t\)</span> que se puede descomponer en la suma de componente de crecimiento tendencial, <span class="math inline">\(g_t\)</span>, y su componente de ciclio de negocios, <span class="math inline">\(c_t\)</span>, de esta forma para <span class="math inline">\(t = 1, 2, \ldots, T\)</span> tenemos que:
+<span class="math display">\[\begin{equation}
+    X_t = g_t + c_t
+    (\#eq:HP_Eq)
+\end{equation}\]</span></p>
+<p>En la ecuación @ref(eq:HP_Eq) se asume que el ajuste de la ruta seguida por <span class="math inline">\(g_t\)</span> es resultado de la suma de los cuadrados de su segunda diferencia. En esa misma ecuación sumiremos que <span class="math inline">\(c_t\)</span> son las desviaciones de <span class="math inline">\(g_t\)</span>, las cuales en el largo plazo tienen una media igual a cero (0). Por esta razón, se suele decir que el filtro de Hodrick y Prescott represeta una una descomposición de la serie en su componente de crecimiento natural y de sus desviaciones transitorias que en promedio son cero, en el largo plazo.</p>
+<p>Estas consideraciones que hemos mencionado señalan que el procesimiento de Hodrick y Prescott (1997) implican resolver el siguiente problema minimización para determinar cada uno de los componentes en que <span class="math inline">\(X_t\)</span> se puede descomponer:
+<span class="math display">\[\begin{equation}
+    \min_{\{ g_t \}^T_{t = -1} } \left[ \sum^T_{t = 1} c^2_t + \lambda \sum^T_{t = 1} [ \Delta g_t - \Delta g_{t-1}]^2 \right]
+\end{equation}\]</span></p>
+Donde <span class="math inline">\(\Delta g_t = g_t - g_{t-1}\)</span> y <span class="math inline">\(\Delta g_{t-1} = g_{t-1} - g_{t-2}\)</span>; <span class="math inline">\(c_t = X_t - g_t\)</span>, y el parámetro <span class="math inline">\(\lambda\)</span> es un número positivo que penaliza la variabilidad en el crecimiento de las series. De acuerdo con el trabajo de Hodrick y Prescott (1997) la constante <span class="math inline">\(\lambda\)</span> debe tomar valores especificos de acuerdo con la periodicidad de la series. Así, <span class="math inline">\(\lambda\)</span> será:
+<p>En resumen, podemos decir que el filtro de Hodrick y Prescott (1997) es un algoritmo que mimiza las distancias o variaciones de la trayectoria de largo plazo. De esta forma, determina una trayectoria estable de largo plazo, por lo que las desviaciones respecto de esta trayectoria serán componentes de ciclos de negocio o cambios transitorios (tanto positivos como negativos).</p>
+<p>A contiuación, ilustraremos el filtro de Hodrick y Prescott (1997) para dos series desestacionalizadas: <span class="math inline">\(INPC_t\)</span> y <span class="math inline">\(TC_t\)</span>. Las Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig52">5.2</a> y Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig53">5.3</a> muestran los resultados de la implementación del filtro.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_INPC_HP.png"</span><span class="op">)</span> </span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig52"></span>
+<img src="Plots/G_INPC_HP.png" alt="Descomposición del Índice Nacional de Precios al Consumidor ($INPC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)" width="95%"><p class="caption">
+Figure 5.2: Descomposición del Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)
+</p>
+</div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_TC_HP.png"</span><span class="op">)</span> </span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig53"></span>
+<img src="Plots/G_TC_HP.png" alt="Descomposición del Tipo de Cambio FIX ($TC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)" width="95%"><p class="caption">
+Figure 5.3: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(TC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)
+</p>
+</div>
+<div id="filtro-hodrick-prescott-planteado-por-st-amant-van-norden" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden<a class="anchor" aria-label="anchor" href="#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><i class="fas fa-link"></i></a>
+</h3>
+<p>Método tradicional de HP consiste en minimizar la serie <span class="math inline">\(\{ \tau_t \}_{t=-1}^T\)</span>:</p>
+<p><span class="math display">\[\sum_{t=1}^T (y_t - \tau_t)^2 + \lambda \sum_{t=1}^{T} [(\tau_{t} - \tau_{t-1}) - (\tau_{t-1} - \tau_{t-2})]^2\]</span></p>
+<p>Donde <span class="math inline">\(\lambda\)</span> es una parámetro fijo (determinado ex-ante) y <span class="math inline">\(\tau_t\)</span> es un componente de tendencia de <span class="math inline">\(y_t\)</span>.</p>
+<p>Sin pérdida de generalidad, asumiremos que <span class="math inline">\(\tau_{-1}\)</span> y <span class="math inline">\(\tau_{0}\)</span> son cero (0). De esta manera, la forma matricial del filtro HP es:
+<span class="math display">\[(Y - G)'(Y - G) + \lambda G' K' K G\]</span></p>
+<p>La derivada de los anteriores:
+<span class="math display">\[-2 Y + 2 G + \lambda 2 K' K G = 0\]</span></p>
+<p>Despejando:
+<span class="math display">\[G_{hp} = [I_T + \lambda K' K]^{-1} Y\]</span></p>
+<p>Donde <span class="math inline">\(G\)</span> es el vector de tendencia, <span class="math inline">\(Y\)</span> es el vector de la serie de datos, <span class="math inline">\(\lambda\)</span> es la constante tradicional, y <span class="math inline">\(K\)</span> es de dimensión <span class="math inline">\(T \times T\)</span> y está dada por la expresión:
+<span class="math display">\[K =
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 \\
+-2 &amp; 1 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 \\
+1 &amp; -2 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; 1 &amp; -2 &amp; 1 &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp;  \vdots &amp;  \vdots &amp;  \vdots &amp;  \vdots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>Así:</p>
+<p><span class="math display">\[K' =
+\begin{pmatrix}
+1 &amp; -2 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; 1 &amp; -2 &amp; 1 &amp; \ldots &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; -2 &amp; \ldots &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp;  \vdots &amp;  \vdots &amp;  \vdots &amp;  \vdots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>Método modificado de HP consiste en minimizar los valores de la serie <span class="math inline">\(\{ \tau_t \}_{t=1}^T\)</span>:
+<span class="math display">\[\sum_{t=1}^T (y_t - \tau_t)^2 + \lambda \sum_{t=2}^{T-1} [(\tau_{t+1} - \tau_t) - (\tau_t - \tau_{t-1})]^2 + \lambda_{ss} \sum_{t=T-j}^{T} [\Delta \tau_t - u_{ss}]\]</span></p>
+<p>Donde <span class="math inline">\(\lambda\)</span> es una parámetro fijo (determinado ex-ante), <span class="math inline">\(\tau_t\)</span> es un componente de tendencia de <span class="math inline">\(y_t\)</span>, y los nuevos parámetros son <span class="math inline">\(u_{ss}\)</span> y <span class="math inline">\(\lambda_{ss}\)</span> ajustadas por el procedimiento de Marcet y Ravn (2004).</p>
+<p>Este procedimiento asume que parte del filtro HP y que esta versión tiene el problema de pérdida de información al final y al principio de la muestra. La razón es que es un procedimeinto univariado que requiere de mucha información futura y pasada para mejorar el ajuste.</p>
+<p>El compoenente adicional al filtro HP es un componente de castigo por desviaciones de la tasa de crecimiento de largo plazo, <span class="math inline">\(u_{ss}\)</span>.</p>
+<p>El proceso de selección de <span class="math inline">\(\lambda_{ss}\)</span> es e propuesto por Marcet y Ravn (2004), el cual consiste en utilizar un <span class="math inline">\(\lambda\)</span> convencional y el filtro HP convencional para estimar la siguiente función:
+<span class="math display">\[F(\lambda) = \frac{\sum_{t=2}^{T-1} ((\tau_{t+1} - \tau_t) - (\tau_t - \tau_{t-1}))^2}{\sum_{t=1}^T (y_t - \tau_t)^2}\]</span></p>
+<p>Entonces el valor de <span class="math inline">\(\lambda_{ss}\)</span> será aquel que:
+<span class="math display">\[F(\lambda_{ss}) = \frac{\sum_{t=2}^{T-1} ((\tau_{t+1} - \tau_t) - (\tau_t - \tau_{t-1}))^2}{\sum_{t=1}^T (y_t - \tau_t)^2} = F(\lambda)\]</span></p>
+<p>nota: Antón (2009) estimó <span class="math inline">\(\lambda_{ss} = 1096\)</span> para datos trimestrales del PIB.</p>
+<p>La forma matricial del filtro HP-SAVN es:
+<span class="math display">\[(Y - G)'(Y - G) + \lambda G' K' K G + \lambda_{ss} (L^j G + \overline{u}_{ss} M^j)\]</span></p>
+<p>Donde <span class="math inline">\(L^j = (0, 0, \ldots, 0, -1, 0, \ldots, 0, 1)\)</span>, en el cual el valor <span class="math inline">\(-1\)</span> es en la posición <span class="math inline">\(T-j-1\)</span>-ésima, y <span class="math inline">\(M^j\)</span> es un vector que toma valores de cero hasta antes de <span class="math inline">\(T-j\)</span> y de 1 después.</p>
+<p>La derivada de los anteriores:
+<span class="math display">\[-2 Y + 2 G + \lambda 2 K' K G + \lambda_{ss} L'^j = 0\]</span></p>
+<p>Despejando:
+<span class="math display">\[G_{SAVN} = \frac{1}{2} [I_T + \lambda K' K]^{-1} (2 Y - \lambda_{ss} L'^j)\]</span></p>
+<p><span class="math display">\[G_{SAVN} = [I_T + \lambda K' K]^{-1} Y - \frac{1}{2} [I_T + \lambda K' K]^{-1} \lambda_{ss} L'^j\]</span></p>
+<p>Donde <span class="math inline">\(G\)</span> es el vector de tendencia, <span class="math inline">\(Y\)</span> es el vector de la serie de datos, <span class="math inline">\(\lambda\)</span> es la constante tradicional, y <span class="math inline">\(K\)</span> es de dimensión <span class="math inline">\(T \times T\)</span> y está dada por la expresión:</p>
+<p><span class="math display">\[K' =
+\begin{pmatrix}
+1 &amp; -2 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; 1 &amp; -2 &amp; 1 &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp;  \vdots &amp;  \vdots &amp;  \vdots &amp;  \vdots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>Dicho lo anterior, podemos modificar <span class="math inline">\(F(\lambda)\)</span> para el filtro HP convencional como en forma matricial:
+<span class="math display">\[F(\lambda) = \frac{G' K' K G}{(Y - G)'(Y - G)}\]</span></p>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#desestacionalizaci%C3%B3n-y-filtrado-de-series"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="nav-link" href="#motivaci%C3%B3n"><span class="header-section-number">5.1</span> Motivación</a></li>
+<li>
+<a class="nav-link" href="#filtro-hodrick-prescott"><span class="header-section-number">5.2</span> Filtro Hodrick-Prescott</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><span class="header-section-number">5.2.1</span> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-09-25.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
