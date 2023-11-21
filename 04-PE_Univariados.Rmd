@@ -334,44 +334,26 @@ par(mfrow=c(1,1))
 
 ```
 
-A continuación, estimaremos una $AR(1)$ para la serie en niveles bajo la transformación logaritmica ($PaxLMetro_t$) y en diferencias
-logarítmitcas ($PaxDLMetro_t$). Para el primer caso obtenemos el siguiente resultado:
+A continuación, estimaremos una $AR(1)$ para la serie en niveles bajo la transformación logaritmica ($PaxLMetro_t$) y en diferencias logarítmitcas ($PaxDLMetro_t$). Para el primer caso obtenemos el siguiente resultado:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $PaxLMetro_t$ & $=$ & $4.7419$ & $+$ & $0.5916$  & $PaxLMetro_{t-1}$ \\ 
-    &  & $(0.0105)$ &  & $(0.0526)$ & 
-\end{tabular}
-\end{center}
-```
+Table: (\#tab:AR01) AR(1) para la variable $PaxLMetro_t$.
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.004335$ & y & $AIC$ & $=$ & $-602.73$ 
-\end{tabular}
-\end{center}
-```
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| $PaxLMetro_t$ | $=$ | $4.7419$ | $+$ | $0.5916$ | $PaxLMetro_{t-1}$ |
+|  |  | $(0.0105)$ |  | $(0.0526)$ |  |
+| $\hat{\sigma}^2$ | $=$ | $0.004335$ | $AIC$ | $=$ | $-602.73$ |
 
 Para el segundo caso obtenemos el siguiente resultado:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $PaxDLMetro_t$ & $=$ & $0.0007$ & $-$ & $0.6194$  & $PaxDLMetro_{t-1}$ \\ 
-    &  & $(0.0023)$ &  & $(0.0511)$ & 
-\end{tabular}
-\end{center}
-```
+Table: (\#tab:AR0101) AR(1) para la variable $PaxDLMetro_t$.
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.003344$ & y & AIC & $=$ & $-660.53$ 
-\end{tabular}
-\end{center}
-```
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| $PaxDLMetro_t$ | $=$ | $0.0007$ | $-$ | $0.6194$ | $PaxDLMetro_{t-1}$ |
+|  |  | $(0.0023)$ |  | $(0.0511)$ |  |
+| $\hat{\sigma}^2$ | $=$ | $0.003344$ | $AIC$ | $=$ | $-660.53$ |
+
 En ambos casos observamos que el parámetro asociado al componente AR es significativo y cumple con la restricción de ser en valor absoluto menor a 1, por lo que la solución asociada al procesp será convergente. También en ambos casos se reporta la estadística o Criterio de Información de Akaike (AIC, por sus siglas en inglés), misma que más adelante discutiremos su importancia y aplicación.
 
 ### AR(2)
@@ -417,29 +399,21 @@ Por lo tanto, el inverso multiplicativo $\alpha^{-1}(L)$ se puede ver como:
 
 Desarrollando la ecuación \@ref(eq:InvAlpha) tenemos la sigueinte expresión:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c c c c c } 
-    $1$ & $=$ & $\psi_0$ & $+$ & $\psi_1 L$ & $+$ & $\psi_2 L^2$ & $+$ & $\psi_3 L^3$ & $+$ & $\ldots$ \\
-    $ $ & $ $ & $ $ & $-$ & $a_1 \psi_0 L$ & $-$ & $a_1 \psi_1 L^2$ & $-$ & $a_1 \psi_2 L^3$ & $-$ & $\ldots$ \\
-    $ $ & $ $ & $ $ & $ $ & $ $ & $-$ & $a_2 \psi_0 L^2 $ & $-$ & $a_2 \psi_1 L^3$ & $-$ & $\ldots$
-\end{tabular}
-\end{center}
-```
+\begin{eqnarray*}
+  1 & = & \psi_0 + \psi_1 L + \psi_2 L^2 + \psi_3 L^3 + \ldots \\
+  &  &  - a_1 \psi_0 L - a_1 \psi_1 L^2 - a_1 \psi_2 L^3 - \ldots \\
+  &  &  - a_2 \psi_0 L^2 - a_2 \psi_1 L^3 - \ldots
+\end{eqnarray*}
 
 Ahora, podemos agrupar todos los términos en función del exponente asociado al operador rezago $L$. La siguiente es una solución partícular y es una de las múltiples que podrían existir que cumpla con la ecuación \@ref(eq:InvAlpha). Sin embargo, para efectos del análisis sólo necesitamos una de esas soluciones. Utilizaremos las siguientes condiciones que deben cumplirse en una de las posibles soluciones:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c } 
-    $L^0 :$ & $ $ & $\Rightarrow$ & $\psi_0 = 1$ \\
-    $L :$ & $\psi_1 - a_1 \psi_0 = 0$ & $\Rightarrow$ & $\psi_1 = a_1$ \\
-    $L^2 :$ & $\psi_2 - a_1 \psi_1 - a_2 \psi_0 = 0$ & $\Rightarrow$ & $\psi_2 = a^2_1 + a_2$ \\
-    $L^3 :$ & $\psi_3 - a_1 \psi_2 - a_2 \psi_1 = 0$ & $\Rightarrow$ & $\psi_3 = a^3_1 + 2 a_1 a_2$ \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$
-\end{tabular}
-\end{center}
-```
+\begin{eqnarray*}
+  L^0 & : & \Rightarrow \psi_0 = 1 \\
+  L^1 & : & \psi_1 - a_1 \psi_0 = 0 \Rightarrow \psi_1 = a_1 \\
+  L^2 & : & \psi_2 - a_1 \psi_1 - a_2 \psi_0 = 0 \Rightarrow \psi_2 = a^2_1 + a_2 \\
+  L^3 & : & \psi_3 - a_1 \psi_2 - a_2 \psi_1 = 0 \Rightarrow \psi_3 = a^3_1 + 2 a_1 a_2 \\
+  & \vdots & 
+\end{eqnarray*}
 
 De esta forma podemos observar que en el límite siempre obtendremos una ecuación del tipo $\psi_j - a_1 \psi_{j-1} - a_2 \psi_{j-2} = 0$ asociada a cada uno de los casos en que exista un $L^j$, donde $j \neq 0, 1$, y la cual siempre podremos resolver conociendo que las condiciones iniciales son: $\psi_0 = 1$ y $\psi_1 = a_1$.
 
@@ -470,17 +444,12 @@ Lo anterior es cierto puesto que $\mathbb{E}[U_{t - i}] = 0$, para todo $i = 0, 
 \end{eqnarray*}
 
 Donde $\tau = 0, 1, 2, 3, \ldots$ y que $\mathbb{E}[U_{t} X_{t - \tau}] = 0$ para todo $\tau \neq 0$.\footnote{ Es fácil demostrar está afirmación, sólo requiere de desarrollar la expresión y utilizar el hecho de que $U_t$ es un proceso pueramente aleatorio, por lo que la covarianza es cero (0).} Dicho esto, podemos derivar el valor del valor esperado para diferentes valores de $\tau$:
-
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c } 
-    $\tau = 0:$ & $\gamma(0)$ & $=$ & $\alpha_1 \gamma(1) + \alpha_2 \gamma(2) + \sigma^2$ \\
-    $\tau = 1:$ & $\gamma(1)$ & $=$ & $\alpha_1 \gamma(0) + \alpha_2 \gamma(1)$ \\
-    $\tau = 2:$ & $\gamma(2)$ & $=$ & $\alpha_1 \gamma(1) + \alpha_2 \gamma(0)$ \\
-    \vdots & \vdots & \vdots & \vdots
-\end{tabular}
-\end{center}
-```
+\begin{eqnarray*}
+    \tau = 0 & : & \gamma(0) = \alpha_1 \gamma(1) + \alpha_2 \gamma(2) + \sigma^2 \\
+    \tau = 1 & : & \gamma(1) = \alpha_1 \gamma(0) + \alpha_2 \gamma(1) \\
+    \tau = 2 & : & \gamma(2) = \alpha_1 \gamma(1) + \alpha_2 \gamma(0) \\
+    & \vdots & 
+\end{eqnarray*}
 
 Donde debe ser claro que $\mathbb{E}[(X_{t} - \mu)(X_{t - \tau} - \mu)] = \mathbb{E}[X_{t} X_{t - \tau}] = \gamma(\tau)$. Así, en general cuando $\tau \neq 0$: 
 \begin{equation}    
@@ -492,17 +461,13 @@ Realizando la sustitución recursiva y solucionando el sistema respectivo obtene
     Var[X_t] = \gamma(0) = \frac{1 - a_2}{(1 + a_2)[(1 - a_2)^2 - a^2_1]} \sigma^2
 \end{equation}
 
-```{=tex}
 \begin{equation}
     \gamma(1) = \frac{a_1}{(1 + a_2)[(1 - a_2)^2 - a^2_1]} \sigma^2
 \end{equation}
-```
-
-```{=tex}
+ 
 \begin{equation}
     \gamma(2) = \frac{a^2_1 + a_2 - a^2_2}{(1 + a_2)[(1 - a_2)^2 - a^2_1]} \sigma^2
 \end{equation}
-```
 
 Recordemos que las funciones de autocorrelación se obtienen de la división de cada unas de las funciones de covarianza ($\gamma(\tau)$) por la varianza ($\gamma(0)$). Así, podemos construir la siguiente expresión: 
 \begin{equation}
@@ -566,44 +531,27 @@ par(mfrow=c(1,1))
 
 A continuación, estimaremos un $AR(2)$ para la serie en niveles bajo una transformación logarítmica ($LPaxNal_t$) y en diferencias logaritmitcas ($DLPax_Nal_t$). Para el primer caso obtenemos el siguiente resultado:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $LPaxNal_t$ & $=$ & $14.6267$ & $+$ & $0.7637$  & $LPaxNal_{t-1}$ \\ 
-    &  & $(0.1816)$ &  & $(0.0637)$ & \\
-    &  &  & $+$ & $0.2025$ & $LPaxNal_{t-2}$ \\
-    &  &  &  & $(0.0646)$ &
-\end{tabular}
-\end{center}
-```
+Table: (\#tab:AR02) AR(2) para la variable $LPaxNal_t$.
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.01138$ & y & $AIC$ & $=$ & $-372.64$ 
-\end{tabular}
-\end{center}
-```
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| $LPaxNal_t$ | $=$ | $14.6267$ | $+$ | $0.7637$ | $LPaxNal_{t-1}$ |
+|  |  | $(0.1816)$ |  | $(0.0637)$ |  |
+|  |  | $0.2025$ | $LPaxNal_{t-2}$ |  |  |
+|  |  | $(0.0646)$ |  |  |  |
+| $\hat{\sigma}^2$ | $=$ | $0.01138$ | $AIC$ | $=$ | $-372.64$ |
+
 Para el segundo caso obtenemos el siguiente resultado:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxNal_t$ & $=$ & $0.0050$ & $-$ & $0.3205$  & $DLPaxNal_{t-1}$ \\ 
-    &  & $(0.0036)$ &  & $(0.0592)$ & \\
-    &  &  & $-$ & $0.4242$ & $DLPaxNal_{t-2}$ \\
-    &  &  &  & $(0.0591)$ &
-\end{tabular}
-\end{center}
-```
+Table: (\#tab:AR0201) AR(2) para la variable $DLPaxNal_t$.
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.009378$ & y & $AIC$ & $=$ & $-418.3$ 
-\end{tabular}
-\end{center}
-```
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| $DLPaxNal_t$ | $=$ | $0.0050$ | $+$ | $0.3205$ | $DLPaxNal_{t-1}$ |
+|  |  | $(0.0036)$ |  | $(0.0592)$ |  |
+|  |  | $0.4242$ | $DLPaxNal_{t-2}$ |  |  |
+|  |  | $(0.0591)$ |  |  |  |
+| $\hat{\sigma}^2$ | $=$ | $0.009378$ | $AIC$ | $=$ | $-418.3$ |
 
 Para ambos casos entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \@ref(fig:fig48) mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
 
@@ -795,28 +743,19 @@ par(mfrow=c(1,1))
 
 De la gráfica en la Figura \@ref(fig:fig49) observamos que quizá la mejor forma de estimar un $AR(p)$ es mediante la serie en diferencias, ya que ésta es la que parece ser una serie estacionaria. A continuación, estimaremos una AR(4) para la serie en diferencias logarimitcas ($DLPaxInt_t$):
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxInt_t$ & $=$ & $0.0050$ & $-$ & $0.2701$  & $DLPaxInt_{t-1}$ \\ 
-    &  & $(0.0052)$ &  & $(0.0655)$ & \\
-    &  &  & $-$ & $0.4326$ & $DLPaxNal_{t-2}$ \\
-    &  &  &  & $(0.0664)$ & \\
-    &  &  & $-$ & $0.1956$ & $DLPaxNal_{t-3}$ \\
-    &  &  &  & $(0.0664)$ & \\
-    &  &  & $-$ & $0.0316$ & $DLPaxNal_{t-4}$ \\
-    &  &  &  & $(0.0653)$ & 
-\end{tabular}
-\end{center}
-```
+Table: (\#tab:AR04) AR(4) para la variable $DLPaxInt_t$.
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.02371$ & y & $AIC$ & $=$ & $-198.16$ 
-\end{tabular}
-\end{center}
-```
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| $DLPaxInt_t$ | $=$ | $0.0050$ | $+$ | $0.2701$ | $DLPaxInt_{t-1}$ |
+|  |  | $(0.0052)$ |  | $(0.0655)$ |  |
+|  |  | $-0.4326$ | $DLPaxNal_{t-2}$ |  |  |
+|  |  | $(0.0664)$ |  |  |  |
+|  |  | $-0.1956$ | $DLPaxNal_{t-3}$ |  |  |
+|  |  | $(0.0664)$ |  |  |  |
+|  |  | $-0.0316$ | $DLPaxNal_{t-4}$ |  |  |
+|  |  | $(0.0653)$ |  |  |  |
+| $\hat{\sigma}^2$ | $=$ | $0.02371$ | $AIC$ | $=$ | $-198.16$ |
 
 Entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las
 soluciones serán convergentes, para ello en la Figura \@ref(fig:fig410) mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que el AR(4) representan una solución convergente y estable.
@@ -989,32 +928,23 @@ La serie de Pasajeros transportados en el metro de la CDMX se muestra en la Figu
 
 A continuación, estimaremos una $MA(4)$ para la serie en diferencias:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxMetro_t$ & $=$ & $0.0000$ & $-$ & $0.7804$  & $U_{t-1}$ \\ 
-    &  & $(0.0000)$ &  & $(0.0661)$ & \\
-    &  &  & $+$ & $0.3591$ & $U_{t-2}$ \\
-    &  &  &  & $(0.0826)$ & \\
-    &  &  & $-$ & $0.2775$ & $U_{t-3}$ \\
-    &  &  &  & $(0.0908)$ & \\
-    &  &  & $-$ & $0.1120$ & $U_{t-4}$ \\
-    &  &  &  & $(0.0769)$ & \\
-    &  &  & $-$ & $0.3789$ & $DSep2017$ \\
-    &  &  &  & $(0.0436)$ & \\
-    &  &  & $+$ & $0.3695$ & $DOct2017$ \\
-    &  &  &  & $(0.0434)$ & 
-\end{tabular}
-\end{center}
-```
+Table: (\#tab:MA04) MA(4) para la variable $DLPaxMetro_t$.
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.002176$ & y & $AIC$ & $=$ & $-749.94$ 
-\end{tabular}
-\end{center}
-```
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| $DLPaxMetro_t$ | $=$ | $0.0000$ | $-$ | $0.7804$ | $U_{t-1}$ |
+|  |  | $(0.0000)$ |  | $(0.0661)$ |  |
+|  | $+$ | $0.3591$ | $U_{t-2}$ |  |  |
+|  |  | $(0.0826)$ |  |  |  |
+|  | $-$| $0.2775$ | $U_{t-3}$ |  |  |
+|  |  | $(0.0908)$ |  |  |  |
+|  | $-$ | $0.1120$ | $U_{t-4}$ |  |  |
+|  |  | $(0.0769)$ |  |  |  |
+|  | $-$ | $0.3789$ | $DSep2017$ |  |  |
+|  |  | $(0.0436)$ |  |  |  |
+|  | $+$ | $0.3695$ | $DOct2017$ |  |  |
+|  |  | $(0.0434)$ |  |  |  |
+| $\hat{\sigma}^2$ | $=$ | $0.002176$ | $AIC$ | $=$ | $-749.94$ |
 
 Entre parentésis indicamos los errores estándar y al final reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si la solución serán convergente, para ello en la Figura \@ref(fig:fig411) mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
 
@@ -1118,19 +1048,14 @@ Está ecuación es equivalente a la expresión:
 \end{eqnarray}
 
 De esta forma podemos establecer el siguiente sistema de coeficientes indeterminados:
-
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c } 
-    $L^0 :$ & $ $ & $\Rightarrow$ & $\psi_0 = 1$ \\
-    $L^1 :$ & $\psi_1 - a_1 \psi_0 = - b_1$ & $\Rightarrow$ & $\psi_1 = a_1 - b_1$ \\
-    $L^2 :$ & $\psi_2 - a_1 \psi_1 = 0$ & $\Rightarrow$ & $\psi_2 = a_1(a_1 - b_1)$ \\
-    $L^3 :$ & $\psi_3 - a_1 \psi_2 = 0$ & $\Rightarrow$ & $\psi_3 = a^2_1(a_1 - b_1)$ \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
-    $L^j :$ & $\psi_j - a_1 \psi_{j - 1} = 0$ & $\Rightarrow$ & $\psi_j = a^{j - 1}_1(a_1 - b_1)$
-\end{tabular}
-\end{center}
-```
+\begin{eqnarray*}
+    L^0 & : & \Rightarrow \psi_0 = 1 \\
+    L^1 & : & \psi_1 - a_1 \psi_0 = - b_1 \Rightarrow \psi_1 = a_1 - b_1 \\
+    L^2 & : & \psi_2 - a_1 \psi_1 = 0 \Rightarrow \psi_2 = a_1(a_1 - b_1) \\
+    L^3 & : & \psi_3 - a_1 \psi_2 = 0 \Rightarrow \psi_3 = a^2_1(a_1 - b_1) \\
+     & \vdots &  \\
+    L^j & : & \psi_j - a_1 \psi_{j - 1} = 0 \Rightarrow \psi_j = a^{j - 1}_1(a_1 - b_1)
+\end{eqnarray*}
 
 Así, la solución a la ecuación \@ref(eq:ARMA11Eq) estará dada por la siguiente generalización: 
 \begin{equation}
@@ -1253,32 +1178,23 @@ A continuación, estimaremos una $ARMA(1, 1)$ para la serie en diferencias logar
 
 Así obtenemos el siguiente resultado:
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxNal_t$ & $=$ & $-0.0025$ & $+$ & $0.6018$  & $DLPaxNal_{t-1}$ \\ 
-    &  & $(0.0045)$ &  & $(0.0964)$ & \\
-    &  &  & $-$ & $0.9064$ & $U_{t-1}$ \\
-    &  &  &  & $(0.0397)$ & \\
-    &  &  & $-$ & $0.0867$ & $DEne_t$ \\
-    &  &  &  & $(0.0230)$ & \\
-    &  &  & $-$ & $0.0409$ & $DFeb_t$ \\
-    &  &  &  & $(0.0263)$ & \\
-    &  &  & $+$ & $0.1529$ & $DJul_t$ \\
-    &  &  &  & $(0.0245)$ & \\
-    &  &  & $+$ & $0.0628$ & $DDic_t$ \\
-    &  &  &  & $(0.0223)$ &
-\end{tabular}
-\end{center}
-```
+Table: (\#tab:ARMA01) ARMA(1, 1) para la variable $DLPaxNal_t$.
 
-```{=tex}
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.007096$ & y & $AIC$ & $=$ & $-475.12$ 
-\end{tabular}
-\end{center}
-```
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| $DLPaxNal_t$ | $=$ | $-0.0025$ | $-$ | $0.6018$ | $DLPaxNal_{t-1}$ |
+|  |  | $(0.0045)$ |  | $(0.0964)$ |  |
+|  | $-$ | $0.9064$ | $U_{t-1}$ |  |  |
+|  |  | $(0.0397)$ |  |  |  |
+|  | $-$| $0.0867$ | $DEne_t$ |  |  |
+|  |  | $(0.0230)$ |  |  |  |
+|  | $-$ | $0.0409$ | $DFeb_t$ |  |  |
+|  |  | $(0.0263)$ |  |  |  |
+|  | $+$ | $0.1529$ | $DJul_t$ |  |  |
+|  |  | $(0.0245)$ |  |  |  |
+|  | $+$ | $0.0628$ | $DDic_t$ |  |  |
+|  |  | $(0.0223)$ |  |  |  |
+| $\hat{\sigma}^2$ | $=$ | $0.007096$ | $AIC$ | $=$ | $-475.12$ |
 
 Donde entre parentésis indicamos los errores estándar. Adicionalmente, reportamos el estadístico de Akaike (AIC). Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \@ref(fig:fig412) mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que tenemos una solución convergente y estable. Por su parte la Figura \@ref(fig:fig413) muestra los residuales de la estimación del $ARMA(1, 1)$.
 
@@ -1345,21 +1261,12 @@ Posterior al análisis analítico platearemos un enfoque para interpretar las fu
 
 En el siguiente cuadro mostramos un resumen de las caranterísticas que debemos observar para determinar el número de parámetros de cada uno de los componentes AR y MA. Lo anterior por observación de las funciones de autocorrelación y autocorrelación parcial. Este enfoque no es el más formal, más adelante implemtaremos uno más formal y que puede ser más claro de cómo determinar el númeto de parámetros.
 
-```{=tex}
-\begin{table}
-\centering
-\begin{tabular}{| c | c | c |}
-    \hline
-    Modelo  & Función de Autocorrelación & Función de Autocorrelación \\
-     si: &   & Parcial \\
-    \hline
-    MA(q) & Rompimienttos en la función & No hay rompimientos \\
-    AR(p) & No hay rompimientos & Rompimienttos en la función \\
-    \hline
-\end{tabular}
-\caption{Relación entre la Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $X_t$.}
-\end{table}
-```
+Table: (\#tab:AcAcp) Relación entre la Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $X_t$.
+
+| Modelo | Función de Autocorrelación | Función de Autocorrelación Parcial |
+|:---:|:---:|:---:|
+| MA(q) | Rompimienttos en la función | No hay rompimientos |
+| AR(p) | No hay rompimientos | Rompimienttos en la función |
 
 Continuando con el ejemplo en la Figura \@ref(fig:fig414) mostramos tanto la Función de Autocorrelación como la Función de Autocorrelación Parcial. En esta identificamos que ambas gráficas muestran que el modelo que explica a la variable $DLPaxNal_t$ tiene tanto componentes AR como MA. Sin embargo, dado lo errático del comportamiento de ambas funciones, resulta complicado determinar cuál sería un buen número de parametros $p$ y $q$ a considerar en el $ARMA(p,q)$. Por esta razón a continuación platearemos algunas pruebas más formales para determinar dichos parámetros.
 
@@ -1410,29 +1317,21 @@ Como mencionamos, las gráficas de las funciones de autocorrelación permiten ob
 
 Al respecto, en el siguiente cuadro reportamos el criterio de Akaike que resultan de aplicar dicho criterio a los residuales resultantes de cada combinación de procesos $ARMA(p, q)$. La forma de escoger será aquel modelo que reporta el criterio de Akaike menor. En la cuarta columna de la tabla se señala el valor del criterio de información que resulta ser el mínimo de todos los posibles.
 
-```{=tex}
-\begin{table}
-\centering
-\begin{tabular}{|c | c | c | c | c |}
-\hline
-    Modelo & AR(p) & MA(p) & Akaike (AIC) & Óptimo \\
-\hline
-    1 & 1 & 1 & -475.1190 &  \\
-    2 & 1 & 2 & -473.4397 &  \\
-    3 & 1 & 3 & -483.1239 &  \\
-    4 & 1 & 4 & -482.4932 &  \\
-    5 & 1 & 5 & -506.9880 &  \\
-    6 & 1 & 6 & -533.9411 &  \\
-    7 & 2 & 1 & -473.4758 &  \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
-    24 & 4 & 6 & -752.8996 & * \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
-    36 & 6 & 6 & -752.2632 &  \\
-\hline
-\end{tabular}
-\caption{Criterio de Akike para diferentes modelos $ARMA(p, q)$ de la serie $DLPaxNal_t$.}
-\end{table}
-```
+Table: (\#tab:CIARMA) Criterio de Akike para diferentes modelos $ARMA(p, q)$ de la serie $DLPaxNal_t$.
+
+| Modelo | AR(p) | MA(p) | Akaike (AIC) | Óptimo |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | 1 | 1 | -475.1190 |  |
+| 2 | 1 | 2 | -473.4397 |  |
+| 3 | 1 | 3 | -483.1239 |  |
+| 4 | 1 | 4 | -482.4932 |  |
+| 5 | 1 | 5 | -506.9880 |  |
+| 6 | 1 | 6 | -533.9411 |  |
+| 7 | 2 | 1 | -473.4758 |  |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+| 24 | 4 | 6 | -752.8996 | * |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+| 36 | 6 | 6 | -752.2632 |  |
 
 El cuadro anterior reporta los resultados para 36 diferentes modelos, todos incluyen variables exogenas. Como resultado del análisis concluimos que el modelo más adecuado es el 24, el cual considera un $ARMA(4, 6)$, con variables dummies para controlar la estacionalidad de los meses de enero, febrero, julio y diciembre. Más adelante mostramos los resultados del modelo.
 
@@ -1446,41 +1345,30 @@ knitr::include_graphics("Plots/G_Residuals_ARMA46.png")
 
 Una vez incluidas dos dummies más para mayo y junio de 2009, analizamos un total de 36 modelos ARMA y determinamos que el orden que minimiza el criterio de Akaike es un $ARMA(4, 6)$. El siguiente cuadro muestra los resultados para este nuevo modelo. No lo motramos en esta sección, pero ambos modelos reportados tienen raices de sus respectivos polinomios característicos menores a 1 en valor absoluto. En la Figura \@ref(fig:fig416) mostramos los residuales ahora ajustados por las dummies de mayo y junio de 2009.
 
-```{=tex }
-\begin{table}
-\centering
-\begin{tabular}{|c | c | c | c | c |}
-\hline
-     & \multicolumn{2}{| c |}{Modelo 1} & \multicolumn{2}{| c |}{Modelo 2} \\
-\hline
-    Variable & Coeficiente & Error Est. & Coeficiente & Error Est. \\
-\hline
-    Constante & 0.0134 & 0.0033 & 0.0145 & 0.0029 \\
-    $DLPaxNal_{t-1}$ & 0.0004 & 0.0011 & 0.0014 & 0.0016 \\
-    $DLPaxNal_{t-2}$ & 0.9997 & 0.0019 & 0.9988 & 0.0024 \\
-    $DLPaxNal_{t-3}$ & 0.0001 & 0.0012 & 0.0002 & 0.0014 \\
-    $DLPaxNal_{t-4}$ & -0.9997 & 0.0004 & -0.9993 & 0.0009 \\
-    $\hat{U}_{t-1}$ & -0.2877 & 0.0670 & -0.1472 & 0.0633 \\
-    $\hat{U}_{t-2}$ & -1.2028 & 0.0608 & -1.3323 & 0.0625 \\
-    $\hat{U}_{t-3}$ & 0.2302 & 0.0765 & 0.1201 & 0.0756 \\
-    $\hat{U}_{t-4}$ & 1.2085 & 0.0645 & 1.3142 & 0.0642 \\
-    $\hat{U}_{t-5}$ & -0.2634 & 0.0708 & -0.1034 & 0.0717 \\
-    $\hat{U}_{t-6}$ & -0.2171 & 0.0606 & -0.3864 & 0.0657 \\
-    $DEne_{t}$ & -0.2904 & 0.0172 & -0.2865 & 0.0156 \\
-    $DFeb_{t}$ & -0.1312 & 0.0170 & -0.1273 & 0.0140 \\
-    $DJul_{t}$ & 0.3303 & 0.0173 & 0.3164 & 0.0156 \\
-    $Dic_{t}$ & -0.0118 & 0.0169 & -0.0138 & 0.0137 \\
-    $DMay2009_{t}$ &   &   & -0.3378 & 0.0360 \\
-    $DJun2009_{t}$ &   &   & 0.2371 & 0.0359 \\
-\hline
-    $\hat{\sigma}^2$ & 0.001841 &   & 0.001283 &  \\
-    AIC & -752.9 &   & -835.73 &  \\
-\hline
-    \multicolumn{5}{ l }{Nota: El método de estimación fue máxima verosimilitud.} \\
-\end{tabular}
-\caption{Criterio de Akike para diferentes modelos ARMA(p, q) de la serie $DLPaxNal_t$.}
-\end{table}
-```
+Table: (\#tab:ARMApq) Modelo $ARMA(p, q)$ de la serie $DLPaxNal_t$.
+
+| Variable | Coeficiente | Error Est. | Coeficiente | Error Est. |
+|:---:|:---:|:---:|:---:|:---:|
+|  | Modelo 1 | Modelo 2 |
+| Constante | 0.0134 | 0.0033 | 0.0145 | 0.0029 |
+| $DLPaxNal_{t-1}$ | 0.0004 | 0.0011 | 0.0014 | 0.0016 |
+| $DLPaxNal_{t-2}$ | 0.9997 | 0.0019 | 0.9988 | 0.0024 |
+| $DLPaxNal_{t-3}$ | 0.0001 | 0.0012 | 0.0002 | 0.0014 |
+| $DLPaxNal_{t-4}$ | -0.9997 | 0.0004 | -0.9993 | 0.0009 |
+| $\hat{U}_{t-1}$ | -0.2877 | 0.0670 | -0.1472 | 0.0633 |
+| $\hat{U}_{t-2}$ | -1.2028 | 0.0608 | -1.3323 | 0.0625 |
+| $\hat{U}_{t-3}$ | 0.2302 | 0.0765 | 0.1201 | 0.0756 |
+| $\hat{U}_{t-4}$ | 1.2085 | 0.0645 | 1.3142 | 0.0642 |
+| $\hat{U}_{t-5}$ | -0.2634 | 0.0708 | -0.1034 | 0.0717 |
+| $\hat{U}_{t-6}$ | -0.2171 | 0.0606 | -0.3864 | 0.0657 |
+| $DEne_{t}$ | -0.2904 | 0.0172 | -0.2865 | 0.0156 |
+| $DFeb_{t}$ | -0.1312 | 0.0170 | -0.1273 | 0.0140 |
+| $DJul_{t}$ | 0.3303 | 0.0173 | 0.3164 | 0.0156 |
+| $Dic_{t}$ | -0.0118 | 0.0169 | -0.0138 | 0.0137 |
+| $DMay2009_{t}$ |  |  | -0.3378 | 0.0360 |
+| $DJun2009_{t}$ |  |  | 0.2371 | 0.0359 |
+| $\hat{\sigma}^2$ | 0.001841 |   | 0.001283 |  |
+| AIC | -752.9 |  | -835.73 |  |
 
 ```{r fig416, out.width='95%', fig.cap = "Residuales del ARMA(4, 6) de una serie $DLPaxNal_t$", fig.align='center'}
 
@@ -1500,7 +1388,7 @@ Lo anterior para todo $\tau = 0, 1, 2, \ldots$ y considerando que los componente
 
 Continuando con el ejemplo, en la Figura \@ref(fig:fig417) mostramos el resultado del pronóstico de la serie a partir del modelo ARMA(4, 6) que hemos discutido anteriormente.
 
-```{r fig417, fig.cap = "Pronóstico de la serie $PaxNAl_t$ a partir de una ARMA(4,6) en diferencias logaritmicas", fig.align='center'}
+```{r fig417, warning=FALSE, message=FALSE, fig.cap = "Pronóstico de la serie $PaxNAl_t$ a partir de una ARMA(4,6) en diferencias logaritmicas", fig.align='center'}
 
 library(ggplot2)
 library(dplyr)

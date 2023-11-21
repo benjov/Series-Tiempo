@@ -141,7 +141,7 @@
 
 \title{Notas de Clase: Series de Tiempo}
 \author{Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres}
-\date{2023-09-25}
+\date{2023-11-20}
 
 \begin{document}
 \maketitle
@@ -1724,7 +1724,7 @@ Veamos un ejemplo para ilustrar el uso de la función de autocorrelación. Tomem
 \end{Highlighting}
 \end{Shaded}
 
-A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro \ref{tab:foo}. En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura \ref{fig:fig33} se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza desntro de las cuales no se puede rechazar la hipotésis nula de que \(H_0: \hat{\rho}(p) = 0\), para todo \(\tau = 1, 2, \ldots, T-1\).
+A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro \ref{tab:foo}. En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura \ref{fig:fig33} se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza dentro de las cuales no se puede rechazar la hipotésis nula de que \(H_0: \hat{\rho}(p) = 0\), para todo \(\tau = 1, 2, \ldots, T-1\).
 
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -2195,36 +2195,39 @@ Para decidir cómo analizar la serie de pasajeros en el metro de la CDMX en la F
 \end{Highlighting}
 \end{Shaded}
 
-A continuación, estimaremos una \(AR(1)\) para la serie en niveles bajo la transformación logaritmica (\(PaxLMetro_t\)) y en diferencias
-logarítmitcas (\(PaxDLMetro_t\)). Para el primer caso obtenemos el siguiente resultado:
+A continuación, estimaremos una \(AR(1)\) para la serie en niveles bajo la transformación logaritmica (\(PaxLMetro_t\)) y en diferencias logarítmitcas (\(PaxDLMetro_t\)). Para el primer caso obtenemos el siguiente resultado:
 
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $PaxLMetro_t$ & $=$ & $4.7419$ & $+$ & $0.5916$  & $PaxLMetro_{t-1}$ \\ 
-    &  & $(0.0105)$ &  & $(0.0526)$ & 
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.004335$ & y & $AIC$ & $=$ & $-602.73$ 
-\end{tabular}
-\end{center}
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{\label{tab:AR01} AR(1) para la variable \(PaxLMetro_t\).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(PaxLMetro_t\) & \(=\) & \(4.7419\) & \(+\) & \(0.5916\) & \(PaxLMetro_{t-1}\) \\
+& & \((0.0105)\) & & \((0.0526)\) & \\
+\(\hat{\sigma}^2\) & \(=\) & \(0.004335\) & \(AIC\) & \(=\) & \(-602.73\) \\
+\end{longtable}
 
 Para el segundo caso obtenemos el siguiente resultado:
 
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $PaxDLMetro_t$ & $=$ & $0.0007$ & $-$ & $0.6194$  & $PaxDLMetro_{t-1}$ \\ 
-    &  & $(0.0023)$ &  & $(0.0511)$ & 
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.003344$ & y & AIC & $=$ & $-660.53$ 
-\end{tabular}
-\end{center}
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\caption{\label{tab:AR0101} AR(1) para la variable \(PaxDLMetro_t\).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(PaxDLMetro_t\) & \(=\) & \(0.0007\) & \(-\) & \(0.6194\) & \(PaxDLMetro_{t-1}\) \\
+& & \((0.0023)\) & & \((0.0511)\) & \\
+\(\hat{\sigma}^2\) & \(=\) & \(0.003344\) & \(AIC\) & \(=\) & \(-660.53\) \\
+\end{longtable}
 
 En ambos casos observamos que el parámetro asociado al componente AR es significativo y cumple con la restricción de ser en valor absoluto menor a 1, por lo que la solución asociada al procesp será convergente. También en ambos casos se reporta la estadística o Criterio de Información de Akaike (AIC, por sus siglas en inglés), misma que más adelante discutiremos su importancia y aplicación.
 
@@ -2272,25 +2275,21 @@ Por lo tanto, el inverso multiplicativo \(\alpha^{-1}(L)\) se puede ver como:
 
 Desarrollando la ecuación \eqref{eq:InvAlpha} tenemos la sigueinte expresión:
 
-\begin{center}
-\begin{tabular}{ c c c c c c c c c c c } 
-    $1$ & $=$ & $\psi_0$ & $+$ & $\psi_1 L$ & $+$ & $\psi_2 L^2$ & $+$ & $\psi_3 L^3$ & $+$ & $\ldots$ \\
-    $ $ & $ $ & $ $ & $-$ & $a_1 \psi_0 L$ & $-$ & $a_1 \psi_1 L^2$ & $-$ & $a_1 \psi_2 L^3$ & $-$ & $\ldots$ \\
-    $ $ & $ $ & $ $ & $ $ & $ $ & $-$ & $a_2 \psi_0 L^2 $ & $-$ & $a_2 \psi_1 L^3$ & $-$ & $\ldots$
-\end{tabular}
-\end{center}
+\begin{eqnarray*}
+  1 & = & \psi_0 + \psi_1 L + \psi_2 L^2 + \psi_3 L^3 + \ldots \\
+  &  &  - a_1 \psi_0 L - a_1 \psi_1 L^2 - a_1 \psi_2 L^3 - \ldots \\
+  &  &  - a_2 \psi_0 L^2 - a_2 \psi_1 L^3 - \ldots
+\end{eqnarray*}
 
 Ahora, podemos agrupar todos los términos en función del exponente asociado al operador rezago \(L\). La siguiente es una solución partícular y es una de las múltiples que podrían existir que cumpla con la ecuación \eqref{eq:InvAlpha}. Sin embargo, para efectos del análisis sólo necesitamos una de esas soluciones. Utilizaremos las siguientes condiciones que deben cumplirse en una de las posibles soluciones:
 
-\begin{center}
-\begin{tabular}{ c c c c } 
-    $L^0 :$ & $ $ & $\Rightarrow$ & $\psi_0 = 1$ \\
-    $L :$ & $\psi_1 - a_1 \psi_0 = 0$ & $\Rightarrow$ & $\psi_1 = a_1$ \\
-    $L^2 :$ & $\psi_2 - a_1 \psi_1 - a_2 \psi_0 = 0$ & $\Rightarrow$ & $\psi_2 = a^2_1 + a_2$ \\
-    $L^3 :$ & $\psi_3 - a_1 \psi_2 - a_2 \psi_1 = 0$ & $\Rightarrow$ & $\psi_3 = a^3_1 + 2 a_1 a_2$ \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$
-\end{tabular}
-\end{center}
+\begin{eqnarray*}
+  L^0 & : & \Rightarrow \psi_0 = 1 \\
+  L^1 & : & \psi_1 - a_1 \psi_0 = 0 \Rightarrow \psi_1 = a_1 \\
+  L^2 & : & \psi_2 - a_1 \psi_1 - a_2 \psi_0 = 0 \Rightarrow \psi_2 = a^2_1 + a_2 \\
+  L^3 & : & \psi_3 - a_1 \psi_2 - a_2 \psi_1 = 0 \Rightarrow \psi_3 = a^3_1 + 2 a_1 a_2 \\
+  & \vdots & 
+\end{eqnarray*}
 
 De esta forma podemos observar que en el límite siempre obtendremos una ecuación del tipo \(\psi_j - a_1 \psi_{j-1} - a_2 \psi_{j-2} = 0\) asociada a cada uno de los casos en que exista un \(L^j\), donde \(j \neq 0, 1\), y la cual siempre podremos resolver conociendo que las condiciones iniciales son: \(\psi_0 = 1\) y \(\psi_1 = a_1\).
 
@@ -2321,15 +2320,12 @@ Lo anterior es cierto puesto que \(\mathbb{E}[U_{t - i}] = 0\), para todo \(i = 
 \end{eqnarray*}
 
 Donde \(\tau = 0, 1, 2, 3, \ldots\) y que \(\mathbb{E}[U_{t} X_{t - \tau}] = 0\) para todo \(\tau \neq 0\).\footnote{ Es fácil demostrar está afirmación, sólo requiere de desarrollar la expresión y utilizar el hecho de que $U_t$ es un proceso pueramente aleatorio, por lo que la covarianza es cero (0).} Dicho esto, podemos derivar el valor del valor esperado para diferentes valores de \(\tau\):
-
-\begin{center}
-\begin{tabular}{ c c c c } 
-    $\tau = 0:$ & $\gamma(0)$ & $=$ & $\alpha_1 \gamma(1) + \alpha_2 \gamma(2) + \sigma^2$ \\
-    $\tau = 1:$ & $\gamma(1)$ & $=$ & $\alpha_1 \gamma(0) + \alpha_2 \gamma(1)$ \\
-    $\tau = 2:$ & $\gamma(2)$ & $=$ & $\alpha_1 \gamma(1) + \alpha_2 \gamma(0)$ \\
-    \vdots & \vdots & \vdots & \vdots
-\end{tabular}
-\end{center}
+\begin{eqnarray*}
+    \tau = 0 & : & \gamma(0) = \alpha_1 \gamma(1) + \alpha_2 \gamma(2) + \sigma^2 \\
+    \tau = 1 & : & \gamma(1) = \alpha_1 \gamma(0) + \alpha_2 \gamma(1) \\
+    \tau = 2 & : & \gamma(2) = \alpha_1 \gamma(1) + \alpha_2 \gamma(0) \\
+    & \vdots & 
+\end{eqnarray*}
 
 Donde debe ser claro que \(\mathbb{E}[(X_{t} - \mu)(X_{t - \tau} - \mu)] = \mathbb{E}[X_{t} X_{t - \tau}] = \gamma(\tau)\). Así, en general cuando \(\tau \neq 0\):
 \begin{equation}    
@@ -2424,37 +2420,35 @@ Primero, para decidir si se realizará un AR(2) para la serie en niveles o en di
 
 A continuación, estimaremos un \(AR(2)\) para la serie en niveles bajo una transformación logarítmica (\(LPaxNal_t\)) y en diferencias logaritmitcas (\(DLPax_Nal_t\)). Para el primer caso obtenemos el siguiente resultado:
 
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $LPaxNal_t$ & $=$ & $14.6267$ & $+$ & $0.7637$  & $LPaxNal_{t-1}$ \\ 
-    &  & $(0.1816)$ &  & $(0.0637)$ & \\
-    &  &  & $+$ & $0.2025$ & $LPaxNal_{t-2}$ \\
-    &  &  &  & $(0.0646)$ &
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.01138$ & y & $AIC$ & $=$ & $-372.64$ 
-\end{tabular}
-\end{center}
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{\label{tab:AR02} AR(2) para la variable \(LPaxNal_t\).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(LPaxNal_t\) & \(=\) & \(14.6267\) & \(+\) & \(0.7637\) & \(LPaxNal_{t-1}\) \\
+& & \((0.1816)\) & & \((0.0637)\) & \\
+& & \(0.2025\) & \(LPaxNal_{t-2}\) & & \\
+& & \((0.0646)\) & & & \\
+\(\hat{\sigma}^2\) & \(=\) & \(0.01138\) & \(AIC\) & \(=\) & \(-372.64\) \\
+\end{longtable}
 
 Para el segundo caso obtenemos el siguiente resultado:
 
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxNal_t$ & $=$ & $0.0050$ & $-$ & $0.3205$  & $DLPaxNal_{t-1}$ \\ 
-    &  & $(0.0036)$ &  & $(0.0592)$ & \\
-    &  &  & $-$ & $0.4242$ & $DLPaxNal_{t-2}$ \\
-    &  &  &  & $(0.0591)$ &
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.009378$ & y & $AIC$ & $=$ & $-418.3$ 
-\end{tabular}
-\end{center}
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{\label{tab:AR0201} AR(2) para la variable \(DLPaxNal_t\).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(DLPaxNal_t\) & \(=\) & \(0.0050\) & \(+\) & \(0.3205\) & \(DLPaxNal_{t-1}\) \\
+& & \((0.0036)\) & & \((0.0592)\) & \\
+& & \(0.4242\) & \(DLPaxNal_{t-2}\) & & \\
+& & \((0.0591)\) & & & \\
+\(\hat{\sigma}^2\) & \(=\) & \(0.009378\) & \(AIC\) & \(=\) & \(-418.3\) \\
+\end{longtable}
 
 Para ambos casos entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \ref{fig:fig48} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
 
@@ -2673,24 +2667,23 @@ Primero, para decidir si se realizará un \(AR(p)\) para la serie en niveles o e
 
 De la gráfica en la Figura \ref{fig:fig49} observamos que quizá la mejor forma de estimar un \(AR(p)\) es mediante la serie en diferencias, ya que ésta es la que parece ser una serie estacionaria. A continuación, estimaremos una AR(4) para la serie en diferencias logarimitcas (\(DLPaxInt_t\)):
 
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxInt_t$ & $=$ & $0.0050$ & $-$ & $0.2701$  & $DLPaxInt_{t-1}$ \\ 
-    &  & $(0.0052)$ &  & $(0.0655)$ & \\
-    &  &  & $-$ & $0.4326$ & $DLPaxNal_{t-2}$ \\
-    &  &  &  & $(0.0664)$ & \\
-    &  &  & $-$ & $0.1956$ & $DLPaxNal_{t-3}$ \\
-    &  &  &  & $(0.0664)$ & \\
-    &  &  & $-$ & $0.0316$ & $DLPaxNal_{t-4}$ \\
-    &  &  &  & $(0.0653)$ & 
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.02371$ & y & $AIC$ & $=$ & $-198.16$ 
-\end{tabular}
-\end{center}
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{\label{tab:AR04} AR(4) para la variable \(DLPaxInt_t\).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(DLPaxInt_t\) & \(=\) & \(0.0050\) & \(+\) & \(0.2701\) & \(DLPaxInt_{t-1}\) \\
+& & \((0.0052)\) & & \((0.0655)\) & \\
+& & \(-0.4326\) & \(DLPaxNal_{t-2}\) & & \\
+& & \((0.0664)\) & & & \\
+& & \(-0.1956\) & \(DLPaxNal_{t-3}\) & & \\
+& & \((0.0664)\) & & & \\
+& & \(-0.0316\) & \(DLPaxNal_{t-4}\) & & \\
+& & \((0.0653)\) & & & \\
+\(\hat{\sigma}^2\) & \(=\) & \(0.02371\) & \(AIC\) & \(=\) & \(-198.16\) \\
+\end{longtable}
 
 Entre parentésis indicamos los errores estándar y reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si las
 soluciones serán convergentes, para ello en la Figura \ref{fig:fig410} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que el AR(4) representan una solución convergente y estable.
@@ -2879,28 +2872,27 @@ La serie de Pasajeros transportados en el metro de la CDMX se muestra en la Figu
 
 A continuación, estimaremos una \(MA(4)\) para la serie en diferencias:
 
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxMetro_t$ & $=$ & $0.0000$ & $-$ & $0.7804$  & $U_{t-1}$ \\ 
-    &  & $(0.0000)$ &  & $(0.0661)$ & \\
-    &  &  & $+$ & $0.3591$ & $U_{t-2}$ \\
-    &  &  &  & $(0.0826)$ & \\
-    &  &  & $-$ & $0.2775$ & $U_{t-3}$ \\
-    &  &  &  & $(0.0908)$ & \\
-    &  &  & $-$ & $0.1120$ & $U_{t-4}$ \\
-    &  &  &  & $(0.0769)$ & \\
-    &  &  & $-$ & $0.3789$ & $DSep2017$ \\
-    &  &  &  & $(0.0436)$ & \\
-    &  &  & $+$ & $0.3695$ & $DOct2017$ \\
-    &  &  &  & $(0.0434)$ & 
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.002176$ & y & $AIC$ & $=$ & $-749.94$ 
-\end{tabular}
-\end{center}
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{\label{tab:MA04} MA(4) para la variable \(DLPaxMetro_t\).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(DLPaxMetro_t\) & \(=\) & \(0.0000\) & \(-\) & \(0.7804\) & \(U_{t-1}\) \\
+& & \((0.0000)\) & & \((0.0661)\) & \\
+& \(+\) & \(0.3591\) & \(U_{t-2}\) & & \\
+& & \((0.0826)\) & & & \\
+& \(-\) & \(0.2775\) & \(U_{t-3}\) & & \\
+& & \((0.0908)\) & & & \\
+& \(-\) & \(0.1120\) & \(U_{t-4}\) & & \\
+& & \((0.0769)\) & & & \\
+& \(-\) & \(0.3789\) & \(DSep2017\) & & \\
+& & \((0.0436)\) & & & \\
+& \(+\) & \(0.3695\) & \(DOct2017\) & & \\
+& & \((0.0434)\) & & & \\
+\(\hat{\sigma}^2\) & \(=\) & \(0.002176\) & \(AIC\) & \(=\) & \(-749.94\) \\
+\end{longtable}
 
 Entre parentésis indicamos los errores estándar y al final reportamos el estadístico de Akaike, AIC. Finalmente, podemos determinar si la solución serán convergente, para ello en la Figura \ref{fig:fig411} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que ambas propuesta de AR(2) representan una solución convergente y estable.
 
@@ -3019,17 +3011,14 @@ Está ecuación es equivalente a la expresión:
 \end{eqnarray}
 
 De esta forma podemos establecer el siguiente sistema de coeficientes indeterminados:
-
-\begin{center}
-\begin{tabular}{ c c c c } 
-    $L^0 :$ & $ $ & $\Rightarrow$ & $\psi_0 = 1$ \\
-    $L^1 :$ & $\psi_1 - a_1 \psi_0 = - b_1$ & $\Rightarrow$ & $\psi_1 = a_1 - b_1$ \\
-    $L^2 :$ & $\psi_2 - a_1 \psi_1 = 0$ & $\Rightarrow$ & $\psi_2 = a_1(a_1 - b_1)$ \\
-    $L^3 :$ & $\psi_3 - a_1 \psi_2 = 0$ & $\Rightarrow$ & $\psi_3 = a^2_1(a_1 - b_1)$ \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
-    $L^j :$ & $\psi_j - a_1 \psi_{j - 1} = 0$ & $\Rightarrow$ & $\psi_j = a^{j - 1}_1(a_1 - b_1)$
-\end{tabular}
-\end{center}
+\begin{eqnarray*}
+    L^0 & : & \Rightarrow \psi_0 = 1 \\
+    L^1 & : & \psi_1 - a_1 \psi_0 = - b_1 \Rightarrow \psi_1 = a_1 - b_1 \\
+    L^2 & : & \psi_2 - a_1 \psi_1 = 0 \Rightarrow \psi_2 = a_1(a_1 - b_1) \\
+    L^3 & : & \psi_3 - a_1 \psi_2 = 0 \Rightarrow \psi_3 = a^2_1(a_1 - b_1) \\
+     & \vdots &  \\
+    L^j & : & \psi_j - a_1 \psi_{j - 1} = 0 \Rightarrow \psi_j = a^{j - 1}_1(a_1 - b_1)
+\end{eqnarray*}
 
 Así, la solución a la ecuación \eqref{eq:ARMA11Eq} estará dada por la siguiente generalización:
 \begin{equation}
@@ -3153,28 +3142,27 @@ A continuación, estimaremos una \(ARMA(1, 1)\) para la serie en diferencias log
 
 Así obtenemos el siguiente resultado:
 
-\begin{center}
-\begin{tabular}{ c c c c c c } 
-    $DLPaxNal_t$ & $=$ & $-0.0025$ & $+$ & $0.6018$  & $DLPaxNal_{t-1}$ \\ 
-    &  & $(0.0045)$ &  & $(0.0964)$ & \\
-    &  &  & $-$ & $0.9064$ & $U_{t-1}$ \\
-    &  &  &  & $(0.0397)$ & \\
-    &  &  & $-$ & $0.0867$ & $DEne_t$ \\
-    &  &  &  & $(0.0230)$ & \\
-    &  &  & $-$ & $0.0409$ & $DFeb_t$ \\
-    &  &  &  & $(0.0263)$ & \\
-    &  &  & $+$ & $0.1529$ & $DJul_t$ \\
-    &  &  &  & $(0.0245)$ & \\
-    &  &  & $+$ & $0.0628$ & $DDic_t$ \\
-    &  &  &  & $(0.0223)$ &
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{ c c c c c c c } 
-    $\hat{\sigma}^2$ & $=$ & $0.007096$ & y & $AIC$ & $=$ & $-475.12$ 
-\end{tabular}
-\end{center}
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{\label{tab:ARMA01} ARMA(1, 1) para la variable \(DLPaxNal_t\).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(DLPaxNal_t\) & \(=\) & \(-0.0025\) & \(-\) & \(0.6018\) & \(DLPaxNal_{t-1}\) \\
+& & \((0.0045)\) & & \((0.0964)\) & \\
+& \(-\) & \(0.9064\) & \(U_{t-1}\) & & \\
+& & \((0.0397)\) & & & \\
+& \(-\) & \(0.0867\) & \(DEne_t\) & & \\
+& & \((0.0230)\) & & & \\
+& \(-\) & \(0.0409\) & \(DFeb_t\) & & \\
+& & \((0.0263)\) & & & \\
+& \(+\) & \(0.1529\) & \(DJul_t\) & & \\
+& & \((0.0245)\) & & & \\
+& \(+\) & \(0.0628\) & \(DDic_t\) & & \\
+& & \((0.0223)\) & & & \\
+\(\hat{\sigma}^2\) & \(=\) & \(0.007096\) & \(AIC\) & \(=\) & \(-475.12\) \\
+\end{longtable}
 
 Donde entre parentésis indicamos los errores estándar. Adicionalmente, reportamos el estadístico de Akaike (AIC). Finalmente, podemos determinar si las soluciones serán convergentes, para ello en la Figura \ref{fig:fig412} mostramos las raíces asociadas a cada uno de los polinomios. De la inspección visual podemos concluir que tenemos una solución convergente y estable. Por su parte la Figura \ref{fig:fig413} muestra los residuales de la estimación del \(ARMA(1, 1)\).
 
@@ -3260,19 +3248,36 @@ Posterior al análisis analítico platearemos un enfoque para interpretar las fu
 
 En el siguiente cuadro mostramos un resumen de las caranterísticas que debemos observar para determinar el número de parámetros de cada uno de los componentes AR y MA. Lo anterior por observación de las funciones de autocorrelación y autocorrelación parcial. Este enfoque no es el más formal, más adelante implemtaremos uno más formal y que puede ser más claro de cómo determinar el númeto de parámetros.
 
-\begin{table}
-\centering
-\begin{tabular}{| c | c | c |}
-    \hline
-    Modelo  & Función de Autocorrelación & Función de Autocorrelación \\
-     si: &   & Parcial \\
-    \hline
-    MA(q) & Rompimienttos en la función & No hay rompimientos \\
-    AR(p) & No hay rompimientos & Rompimienttos en la función \\
-    \hline
-\end{tabular}
-\caption{Relación entre la Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $X_t$.}
-\end{table}
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{\label{tab:AcAcp} Relación entre la Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie \(X_t\).}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Modelo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Función de Autocorrelación
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Función de Autocorrelación Parcial
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Modelo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Función de Autocorrelación
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Función de Autocorrelación Parcial
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+MA(q) & Rompimienttos en la función & No hay rompimientos \\
+AR(p) & No hay rompimientos & Rompimienttos en la función \\
+\end{longtable}
 
 Continuando con el ejemplo en la Figura \ref{fig:fig414} mostramos tanto la Función de Autocorrelación como la Función de Autocorrelación Parcial. En esta identificamos que ambas gráficas muestran que el modelo que explica a la variable \(DLPaxNal_t\) tiene tanto componentes AR como MA. Sin embargo, dado lo errático del comportamiento de ambas funciones, resulta complicado determinar cuál sería un buen número de parametros \(p\) y \(q\) a considerar en el \(ARMA(p,q)\). Por esta razón a continuación platearemos algunas pruebas más formales para determinar dichos parámetros.
 
@@ -3337,27 +3342,30 @@ Como mencionamos, las gráficas de las funciones de autocorrelación permiten ob
 
 Al respecto, en el siguiente cuadro reportamos el criterio de Akaike que resultan de aplicar dicho criterio a los residuales resultantes de cada combinación de procesos \(ARMA(p, q)\). La forma de escoger será aquel modelo que reporta el criterio de Akaike menor. En la cuarta columna de la tabla se señala el valor del criterio de información que resulta ser el mínimo de todos los posibles.
 
-\begin{table}
-\centering
-\begin{tabular}{|c | c | c | c | c |}
-\hline
-    Modelo & AR(p) & MA(p) & Akaike (AIC) & Óptimo \\
-\hline
-    1 & 1 & 1 & -475.1190 &  \\
-    2 & 1 & 2 & -473.4397 &  \\
-    3 & 1 & 3 & -483.1239 &  \\
-    4 & 1 & 4 & -482.4932 &  \\
-    5 & 1 & 5 & -506.9880 &  \\
-    6 & 1 & 6 & -533.9411 &  \\
-    7 & 2 & 1 & -473.4758 &  \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
-    24 & 4 & 6 & -752.8996 & * \\
-    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
-    36 & 6 & 6 & -752.2632 &  \\
-\hline
-\end{tabular}
-\caption{Criterio de Akike para diferentes modelos $ARMA(p, q)$ de la serie $DLPaxNal_t$.}
-\end{table}
+\begin{longtable}[]{@{}ccccc@{}}
+\caption{\label{tab:CIARMA} Criterio de Akike para diferentes modelos \(ARMA(p, q)\) de la serie \(DLPaxNal_t\).}\tabularnewline
+\toprule\noalign{}
+Modelo & AR(p) & MA(p) & Akaike (AIC) & Óptimo \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Modelo & AR(p) & MA(p) & Akaike (AIC) & Óptimo \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 1 & 1 & -475.1190 & \\
+2 & 1 & 2 & -473.4397 & \\
+3 & 1 & 3 & -483.1239 & \\
+4 & 1 & 4 & -482.4932 & \\
+5 & 1 & 5 & -506.9880 & \\
+6 & 1 & 6 & -533.9411 & \\
+7 & 2 & 1 & -473.4758 & \\
+\(\vdots\) & \(\vdots\) & \(\vdots\) & \(\vdots\) & \(\vdots\) \\
+24 & 4 & 6 & -752.8996 & * \\
+\(\vdots\) & \(\vdots\) & \(\vdots\) & \(\vdots\) & \(\vdots\) \\
+36 & 6 & 6 & -752.2632 & \\
+\end{longtable}
 
 El cuadro anterior reporta los resultados para 36 diferentes modelos, todos incluyen variables exogenas. Como resultado del análisis concluimos que el modelo más adecuado es el 24, el cual considera un \(ARMA(4, 6)\), con variables dummies para controlar la estacionalidad de los meses de enero, febrero, julio y diciembre. Más adelante mostramos los resultados del modelo.
 
@@ -3380,39 +3388,39 @@ No obstante, una inspección de los residuales del modelo nos permite sospechar 
 
 Una vez incluidas dos dummies más para mayo y junio de 2009, analizamos un total de 36 modelos ARMA y determinamos que el orden que minimiza el criterio de Akaike es un \(ARMA(4, 6)\). El siguiente cuadro muestra los resultados para este nuevo modelo. No lo motramos en esta sección, pero ambos modelos reportados tienen raices de sus respectivos polinomios característicos menores a 1 en valor absoluto. En la Figura \ref{fig:fig416} mostramos los residuales ahora ajustados por las dummies de mayo y junio de 2009.
 
-\begin{table}
-\centering
-\begin{tabular}{|c | c | c | c | c |}
-\hline
-     & \multicolumn{2}{| c |}{Modelo 1} & \multicolumn{2}{| c |}{Modelo 2} \\
-\hline
-    Variable & Coeficiente & Error Est. & Coeficiente & Error Est. \\
-\hline
-    Constante & 0.0134 & 0.0033 & 0.0145 & 0.0029 \\
-    $DLPaxNal_{t-1}$ & 0.0004 & 0.0011 & 0.0014 & 0.0016 \\
-    $DLPaxNal_{t-2}$ & 0.9997 & 0.0019 & 0.9988 & 0.0024 \\
-    $DLPaxNal_{t-3}$ & 0.0001 & 0.0012 & 0.0002 & 0.0014 \\
-    $DLPaxNal_{t-4}$ & -0.9997 & 0.0004 & -0.9993 & 0.0009 \\
-    $\hat{U}_{t-1}$ & -0.2877 & 0.0670 & -0.1472 & 0.0633 \\
-    $\hat{U}_{t-2}$ & -1.2028 & 0.0608 & -1.3323 & 0.0625 \\
-    $\hat{U}_{t-3}$ & 0.2302 & 0.0765 & 0.1201 & 0.0756 \\
-    $\hat{U}_{t-4}$ & 1.2085 & 0.0645 & 1.3142 & 0.0642 \\
-    $\hat{U}_{t-5}$ & -0.2634 & 0.0708 & -0.1034 & 0.0717 \\
-    $\hat{U}_{t-6}$ & -0.2171 & 0.0606 & -0.3864 & 0.0657 \\
-    $DEne_{t}$ & -0.2904 & 0.0172 & -0.2865 & 0.0156 \\
-    $DFeb_{t}$ & -0.1312 & 0.0170 & -0.1273 & 0.0140 \\
-    $DJul_{t}$ & 0.3303 & 0.0173 & 0.3164 & 0.0156 \\
-    $Dic_{t}$ & -0.0118 & 0.0169 & -0.0138 & 0.0137 \\
-    $DMay2009_{t}$ &   &   & -0.3378 & 0.0360 \\
-    $DJun2009_{t}$ &   &   & 0.2371 & 0.0359 \\
-\hline
-    $\hat{\sigma}^2$ & 0.001841 &   & 0.001283 &  \\
-    AIC & -752.9 &   & -835.73 &  \\
-\hline
-    \multicolumn{5}{ l }{Nota: El método de estimación fue máxima verosimilitud.} \\
-\end{tabular}
-\caption{Criterio de Akike para diferentes modelos ARMA(p, q) de la serie $DLPaxNal_t$.}
-\end{table}
+\begin{longtable}[]{@{}ccccc@{}}
+\caption{\label{tab:ARMApq} Modelo \(ARMA(p, q)\) de la serie \(DLPaxNal_t\).}\tabularnewline
+\toprule\noalign{}
+Variable & Coeficiente & Error Est. & Coeficiente & Error Est. \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Variable & Coeficiente & Error Est. & Coeficiente & Error Est. \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& Modelo 1 & Modelo 2 & & \\
+Constante & 0.0134 & 0.0033 & 0.0145 & 0.0029 \\
+\(DLPaxNal_{t-1}\) & 0.0004 & 0.0011 & 0.0014 & 0.0016 \\
+\(DLPaxNal_{t-2}\) & 0.9997 & 0.0019 & 0.9988 & 0.0024 \\
+\(DLPaxNal_{t-3}\) & 0.0001 & 0.0012 & 0.0002 & 0.0014 \\
+\(DLPaxNal_{t-4}\) & -0.9997 & 0.0004 & -0.9993 & 0.0009 \\
+\(\hat{U}_{t-1}\) & -0.2877 & 0.0670 & -0.1472 & 0.0633 \\
+\(\hat{U}_{t-2}\) & -1.2028 & 0.0608 & -1.3323 & 0.0625 \\
+\(\hat{U}_{t-3}\) & 0.2302 & 0.0765 & 0.1201 & 0.0756 \\
+\(\hat{U}_{t-4}\) & 1.2085 & 0.0645 & 1.3142 & 0.0642 \\
+\(\hat{U}_{t-5}\) & -0.2634 & 0.0708 & -0.1034 & 0.0717 \\
+\(\hat{U}_{t-6}\) & -0.2171 & 0.0606 & -0.3864 & 0.0657 \\
+\(DEne_{t}\) & -0.2904 & 0.0172 & -0.2865 & 0.0156 \\
+\(DFeb_{t}\) & -0.1312 & 0.0170 & -0.1273 & 0.0140 \\
+\(DJul_{t}\) & 0.3303 & 0.0173 & 0.3164 & 0.0156 \\
+\(Dic_{t}\) & -0.0118 & 0.0169 & -0.0138 & 0.0137 \\
+\(DMay2009_{t}\) & & & -0.3378 & 0.0360 \\
+\(DJun2009_{t}\) & & & 0.2371 & 0.0359 \\
+\(\hat{\sigma}^2\) & 0.001841 & & 0.001283 & \\
+AIC & -752.9 & & -835.73 & \\
+\end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3506,16 +3514,7 @@ Continuando con el ejemplo, en la Figura \ref{fig:fig417} mostramos el resultado
 \NormalTok{                                          D\_Abr2020, D\_Jun2020, }
 \NormalTok{                                          D\_Jul2020, D\_Mar2021),}
                              \AttributeTok{method =} \StringTok{"ML"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning in arima(DLPax_Nal, order = c(6, 0, 6), xreg = cbind(D_Ene, D_Feb, :
-## possible convergence problem: optim gave code = 1
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{Predict\_Datos }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"BD/Predict\_Base\_Transporte\_ARIMA.xlsx"}\NormalTok{, }
                             \AttributeTok{sheet =} \StringTok{"Datos"}\NormalTok{, }\AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
@@ -3596,10 +3595,6 @@ Continuando con el ejemplo, en la Figura \ref{fig:fig417} mostramos el resultado
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Warning: Removed 24 rows containing missing values (`geom_line()`).
-\end{verbatim}
-
 \begin{figure}
 
 {\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig417-1} 
@@ -3614,10 +3609,6 @@ Continuando con el ejemplo, en la Figura \ref{fig:fig417} mostramos el resultado
 \FunctionTok{ggsave}\NormalTok{(}\StringTok{"Pax\_Nal\_f.png"}\NormalTok{, }\AttributeTok{width =} \DecValTok{20}\NormalTok{, }\AttributeTok{height =} \DecValTok{15}\NormalTok{, }\AttributeTok{units =} \StringTok{"cm"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: Removed 24 rows containing missing values (`geom_line()`).
-\end{verbatim}
 
 \hypertarget{desestacionalizaciuxf3n-y-filtrado-de-series}{%
 \chapter{Desestacionalización y filtrado de Series}\label{desestacionalizaciuxf3n-y-filtrado-de-series}}
@@ -3812,6 +3803,2489 @@ Donde \(G\) es el vector de tendencia, \(Y\) es el vector de la serie de datos, 
 
 Dicho lo anterior, podemos modificar \(F(\lambda)\) para el filtro HP convencional como en forma matricial:
 \[F(\lambda) = \frac{G' K' K G}{(Y - G)'(Y - G)}\]
+
+\hypertarget{procesos-basados-en-vectores-autoregresivos}{%
+\chapter{Procesos Basados en Vectores Autoregresivos}\label{procesos-basados-en-vectores-autoregresivos}}
+
+\chapter{Procesos basados en Vectores Autoregresivos}
+
+En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más series. Como primer aproximación desarrollaremos el concepto de Causalidad de Granger. Mediante esta metodología discutiremos cuando dos series se causan estadísticamente. Posteriormente, introduciremos una técnica más sofisticada conocida como la metodología de Vectores Autoregresivos (VAR), la cual es una generalización de los procesos Autoregresivos (AR) que analizamos al principio del curso.
+
+\hypertarget{causalidad-de-granger}{%
+\section{Causalidad de Granger}\label{causalidad-de-granger}}
+
+Hasta ahora hemos supuesto que una serie puede ser explicada únicamente con la información contenida en ella misma. No obstante, en adelante trataremos de analizar el caso en el que buscamos determinar relaciones entre variables y cómo el comportamiento de una serie influye en las demás. Algunas relaciones más importantes son las llamadas causalidad. En este caso analizaremos el procedimiento de Granger (1969), conocido como causalidad de Granger. En adelante asumiremos que las series involucradas son debílmente estacionarias.
+
+Sean \(X\) y \(Y\) dos series debílmente estacionarias. Definamos a \(I_t\) un conjunto de toda la información disponible hasta el momento \(t\). Asimismo, digamos que \(\overline{X}_t\) y \(\overline{Y}_t\) son los conjuntos de toda la información disponible (actual y pasada) de \(X\) y \(Y\), respectivamente. Es decir:
+\begin{eqnarray*}
+    \overline{X}_t & := & \{ X_t, X_{t-1}, X_{t-2}, \ldots \} \\
+    \overline{Y}_t & := & \{ Y_t, Y_{t-1}, Y_{t-2}, \ldots \} \\
+    I_t & := & \overline{X}_t + \overline{Y}_t
+\end{eqnarray*}
+
+Adicionalmnete, definamos \(\sigma^2(*)\) como la varianza del término de error estimado de una regresión dada. Dicho lo anterior, digamos que:
+
+\begin{enumerate}
+
+\item Existe Causalidad de Granger o $X$ causa a $Y$ si y solo si, una regresión lineal da como resultado que: 
+    \begin{equation}
+        \sigma^2 (Y_{t+1} | I_t) < \sigma^2 (Y_{t+1} | I_t - X_t)    
+    \end{equation}
+
+Es decir, que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de toda la información aplicada a un pronóstico de $Y_{t+1}$ es MENOR que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de la información de $Y$ aplicada a un pronóstico de $Y_{t+1}$.
+
+\item Existe Causalidad de Granger Instantanéa o $X$ causa de forma instantanéa a $Y$ si y solo si, una regresión lineal da como resultado:
+    \begin{equation}
+        \sigma^2 (Y_{t+1} | \{ I_t, X_{t+1} \}) < \sigma^2 (Y_{t+1} | I_t)
+    \end{equation}
+
+\end{enumerate}
+
+La definición anterior aplica de igual forma si se reemplaza a \(X\) por \(Y\) y a \(Y\) por \(X\), respectivamente. De acuerdo a la definición anterior, existen 5 diferentes posibilidades de relaciones causales entre las dos series:
+
+\begin{enumerate}
+\item $X$ y $Y$ son independientes: $(X, Y)$;
+
+\item Existe solo causalidad instantanéa: $(X - Y)$;
+
+\item $X$ causa a $Y$: $(X \longrightarrow Y)$;
+
+\item $Y$ causa a $X$: $(X \longleftarrow Y)$, y
+
+\item Ambas series se causan: $(X \longleftrightarrow Y)$.
+
+\end{enumerate}
+
+Por lo anterior, representaremos mediante un \(AR(p)\) con variables exógenas lo siguiente:
+\begin{equation}
+    A(L) 
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{11}(L) & a_{12}(L) \\ a_{21}(L) & a_{22}(L)
+    \end{bmatrix}
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+    \label{eq:GrangerEq}
+\end{equation}
+
+O en su versión \(MA(q)\) con variables exógenas:
+\begin{equation}
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    B(L)
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    b_{11}(L) & b_{12}(L) \\ b_{21}(L) & b_{22}(L)
+    \end{bmatrix}
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+\end{equation}
+
+Para determinar el test de causalidad utilizaremos una especificación similar a la de la ecuación \eqref{eq:GrangerEq}. Para probar si \(X\) causa a \(Y\) consideraremos la siguiente regresión:
+\begin{equation}
+    Y_t = \alpha_0 + \sum^{k_1}_{k = 1} a^k_{11} Y_{t-k} + \sum^{k_2}_{k = k_0} a^k_{12} X_{t-k} + U_{1,t}
+\end{equation}
+
+Donde \(k_0 = 1\) y, en general, se asume que \(k_1 = k_2\). Asimismo, el valor de estas constantes se puede determinar con el cirterio de Akaike (o cualquier otro criterio de información). No obstante, algunos autores sugieren que una buena práctica es considerar valores de \(k_1\) y \(k_2\) 4, 8, 12 y 16.
+
+Dicho lo anterior, el test de causalidad de Granger se establece con una prueba F (similar a la definiada en el Apéndice de estas notas), en la cual se prueba la siguiente hipótesis nula:
+\begin{equation}
+    H_0: a^1_{12} = a^2_{12} = \ldots = a^{k2}_{12} = 0
+\end{equation}
+
+Ahora veámos un ejemplo. Consideremos como variables analizadas al Índice Nacional de Precios al Consumidor (\(INPC_t\)), al Tipo de Cambio (\(TDC_t\)) y al rendimiento anual de los Cetes a 28 días (\(CETE28_t\)), todas desestacionalizadas para el periodo de enero de 2000 a julio de 2019. Dado que la metodología de Granger supone que las series son estacionarias, utilizaremos las diferencias logaritmicas de cada una de las tres series (es decir, utilizaremos una transformación del tipo \(ln(X_t) - ln(X_{t-1})\)). La Figura \ref{fig:fig61} muestra las series en su transformación de diferencias logarítmicas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(MASS)}
+\FunctionTok{library}\NormalTok{(strucchange)}
+\FunctionTok{library}\NormalTok{(zoo)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+\FunctionTok{library}\NormalTok{(urca)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(vars)}
+
+\CommentTok{\#}
+\FunctionTok{load}\NormalTok{(}\StringTok{"BD/Datos\_Ad.RData"}\NormalTok{)}
+
+\CommentTok{\#}
+\NormalTok{INPC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{INPC\_Ad, }
+           \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+           \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{DLINPC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{INPC\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{INPC\_Ad), }\DecValTok{1}\NormalTok{), }
+             \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+             \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{TC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{TC\_Ad, }
+         \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+         \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{DLTC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{TC\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{TC\_Ad), }\DecValTok{1}\NormalTok{), }
+           \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+           \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{CETE28 }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{CETE28\_Ad, }
+             \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+             \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{DLCETE28 }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{CETE28\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{CETE28\_Ad), }\DecValTok{1}\NormalTok{), }
+               \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+               \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\CommentTok{\#png("Plots/DLGranger.png", width = 800, height = 1200)}
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(DLINPC, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Diferencias Logarítmicas del INPC"}\NormalTok{,}
+     \AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(DLTC, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Diferencias Logarítmicas del Tipo de Cambio"}\NormalTok{,}
+     \AttributeTok{col =} \StringTok{"darkblue"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(DLCETE28, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Diferencias Logarítmicas de los Cetes a 28 dias"}\NormalTok{,}
+     \AttributeTok{col =} \StringTok{"darkred"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig61-1} 
+
+}
+
+\caption{Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$.}\label{fig:fig61}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+
+\CommentTok{\#dev.off()}
+\end{Highlighting}
+\end{Shaded}
+
+Por simplicidad, en el Cuadro \ref{tab:Granger} se muestra el resultado de aplicar el test de Granger a diferentes especificaciones, con rezagos 4, 8, 12 y 16, sólo para la serie de Tipo de Cambio en diferencias logarítmicas. En cada una de las pruebas se compara el modelo considerado como regresor a la variable que es candidata de causar, respecto del modelo si considerar a dicha variable.
+
+\begin{longtable}[]{@{}cccc@{}}
+\caption{\label{tab:Granger} Prueba de si \(DLINPC_t\) Granger causa a \(DLTC_t\).}\tabularnewline
+\toprule\noalign{}
+Rezagos & Estadiística F & Probabilidad (\(>\)F) & Significancia \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Rezagos & Estadiística F & Probabilidad (\(>\)F) & Significancia \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+4 & 3.2621 & 0.01265 & * \\
+8 & 1.9079 & 0.06030 & \\
+12 & 2.2577 & 0.01067 & * \\
+16 & 1.6735 & 0.05495 & * \\
+Notas: & *** & signif. & al 0.1\% \\
+& ** & signif. & al 1\% \\
+& * & signif. & al 5\% \\
+\end{longtable}
+
+De acuerdo con el Cuadro \ref{tab:Granger}, podemos concluir que existe información estadísticamente significativa para concluir que la inflación causa a la tasa de depreciación cambiaria, ambas medidas como las diferencias logaritmicas. El resto de los resultados para las otras combinaciones de causalidad se encuentran en el R Markdown llamado Clase 13 ubicado en el repositorio de GitHub.
+
+\hypertarget{definiciuxf3n-y-representaciuxf3n-del-sistema-o-modelo-varp}{%
+\section{Definición y representación del Sistema o Modelo VAR(p)}\label{definiciuxf3n-y-representaciuxf3n-del-sistema-o-modelo-varp}}
+
+En esta sección ampliaremos la discusión planteada en el apartado anterior. En el sentido de que en la sección pasada nuestra discusión se limito al análisis de causalidad entre dos variables a la vez, que si bien es posible extenderlo a más variables es un procedimiento limitado a casos particulares por las siguientes razones.
+
+El procediento de causalidad de Granger supone que es posible identificar un sistema de ecuaciones que debe conformarse una vez que se ha identificado el sentido de la causalidad. Así, el proceso anterior necesita del conocimiento previo de las relaciones que existen entre las varibles.
+
+Adicionalmente, no resuleve el problema más general qué esta relacionado con cómo identificar la causalidad cuando se tienen múltiples variables con múltiples sentidos de causalidad. En esta sección analizaremos una mejor aproximación al probelma de cómo identificar la causalidad múltiple. Por lo tanto, como mécanismo para solucionar el problema planteado, analizaremos el caso de un Sistema o Modelo de Vectores Autoregresivos conocido como VAR.
+
+El primer supuesto del que partiremos es que existe algún grado de endogenidad entre las variables considerdas en el análisis. Adicionalmente, el segundo supuesto que estableceremos es que requerimos que las variables que tengamos consideradas sean estacionarias.
+
+Por lo anterior diremos que un VAR es un procedimiento que sigue fundado en el supuesto de que las variables consideredas son estacionarias, sin que hasta el momento hallamos podido establecer un mécanismo de detección de dicha estacionariedad. Así, hasta este momento del curso hemos pasado de modelo univariados a modelo múltivariados, pero no hemos podido dejar de asumir que las series son estacionarias.
+
+Ahora bien, iniciaremos con el establecimiento de la representación del proceso. Digamos que tenemos un proceso estocástico \(\mathbf{X}\) estacionario de dimensión \(k\). De esta forma la expresión reducida del modelo o el proceso \(VAR(p)\) estará dado por:
+\begin{equation}
+    \mathbf{X}_t = \mathbf{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
+    \label{eq:VARp}
+\end{equation}
+
+Donde cada uno de las \(A_i\), \(i = 1, 2, \ldots, p\), son matrices cuadradas de dimensión \(k\) y \(\mathbf{U}_t\) representa un vector de dimensión \(k \times 1\) con los residuales en el momento del tiempo \(t\) que son un proceso pueramente aleatorio. También se incorpora un vector de términos constantes denominado como \(\mathbf{\delta}\), el cual es de dimensión \(k \times 1\).
+
+Así, la ecuación \eqref{eq:VARp} supone la siguiente estructura de vectores:
+\begin{equation*}
+    \mathbf{X}_t = 
+    \begin{bmatrix}
+    X_{1t} \\ X_{2t} \\ \vdots \\ X_{kt}
+    \end{bmatrix}
+\end{equation*}
+
+Para cualquier \(i = 1, 2, \ldots, p\):
+\begin{equation*}
+    \mathbf{X}_{t-i} = 
+    \begin{bmatrix}
+    X_{1t-i} \\ X_{2t-i} \\ \vdots \\ X_{kt-i}
+    \end{bmatrix}
+\end{equation*}
+
+\begin{equation*}
+    \mathbf{\delta} = 
+    \begin{bmatrix}
+    \delta_{1} \\ \delta_{2} \\ \vdots \\ \delta_{k}
+    \end{bmatrix}
+\end{equation*}
+
+También, la ecuación \eqref{eq:VARp} supone que cada matriz \(A_i\), \(i = 1, 2, \ldots, p\), esta definida de la siguiente forma:
+\begin{equation*}
+    \mathbf{A}_i = 
+    \begin{bmatrix}
+    a^{(i)}_{11} & a^{(i)}_{12} & \ldots & a^{(i)}_{1k} \\ a^{(i)}_{21} & a^{(i)}_{22} & \ldots & a^{(i)}_{2k} \\ \vdots & \vdots & \ddots & \vdots \\ a^{(i)}_{k1} & a^{(i)}_{k2} & \ldots & a^{(i)}_{kk}
+    \end{bmatrix}
+\end{equation*}
+
+Retomando la ecuación \eqref{eq:VARp} y considerando que podemos ocupar el operador rezago \(L^j\) de forma analóga al caso del modelo \(AR(p)\), pero aplicado a un vector, tenemos las siguientes ecuaciones:
+\begin{eqnarray}
+    \mathbf{X}_t - A_1 \mathbf{X}_{t-1} - A_2 \mathbf{X}_{t-2} - \ldots - A_p \mathbf{X}_{t-p} & = & \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t-p} & = & \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
+    (I_k - A_1 L - A_2 L^2 - \ldots - A_p L^p) \mathbf{X}_t & = & \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{A}(L) \mathbf{X}_t & = & \mathbf{\delta} + \mathbf{U}_{t}
+    \label{eq:VARCorto}
+\end{eqnarray}
+
+Adicionalmente, requeriremos que dado que \(\mathbf{U}_t\) es un proceso pueramente aleatorio, este debe cumplir con las siguientes condiciones:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  El valor esperado del término de error es cero:
+  \begin{equation}
+     \mathbb{E}[\mathbf{U}_t] = 0
+    \end{equation}
+\item
+  Existe una matriz de varianzas y covarianzas entre los términos de error contemporáneos dada por:
+  \begin{eqnarray}
+     \mathbb{E}[\mathbf{U}_t \mathbf{U}_t'] 
+     & = &
+     \mathbb{E} \left[
+     \begin{bmatrix}
+     U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+     \end{bmatrix}
+     \begin{bmatrix}
+     U^{(t)}_{1} & U^{(t)}_{2} & \ldots & U^{(t)}_{k}
+     \end{bmatrix}
+     \right] \nonumber \\
+     & = & \mathbb{E}
+     \begin{bmatrix}
+     U^{(t)}_{1} U^{(t)}_{1} & U^{(t)}_{1} U^{(t)}_{2} & \ldots & U^{(t)}_{1} U^{(t)}_{k} \\
+     U^{(t)}_{2} U^{(t)}_{1} & U^{(t)}_{2} U^{(t)}_{2} & \ldots & U^{(t)}_{2} U^{(t)}_{k} \\
+     \vdots & \vdots & \ldots & \vdots \\
+     U^{(t)}_{k} U^{(t)}_{1} & U^{(t)}_{k} U^{(t)}_{2} & \ldots & U^{(t)}_{k} U^{(t)}_{k}
+     \end{bmatrix} \nonumber \\
+     & = & \begin{bmatrix}
+     \sigma^2_1 & \rho_{12} & \ldots & \rho_{1k} \\
+     \rho_{21} & \sigma^2_2 & \ldots & \rho_{2k} \\
+     \vdots & \vdots & \ldots & \vdots \\
+     \rho_{k1} & \rho_{k2} & \ldots & \sigma^2_k
+     \end{bmatrix} \nonumber \\
+     & = & \mathbf{\Sigma}_{UU}
+     \label{eq:SigmaVAR}
+    \end{eqnarray}
+\item
+  La matriz de varianzas y covarianzas no comtemporáneas es nula. Es decir, que para todo \(t \neq s\):
+  \begin{eqnarray}
+      \mathbb{E} [\mathbf{U}_t \mathbf{U}_s'] 
+      & = &
+      \mathbb{E} \left[
+      \begin{bmatrix}
+      U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+      \end{bmatrix}
+      \begin{bmatrix}
+      U^{(s)}_{1} & U^{(s)}_{2} & \ldots & U^{(s)}_{k}
+      \end{bmatrix}
+      \right] \nonumber \\
+      & =  & \mathbb{E}
+      \begin{bmatrix}
+      U^{(t)}_{1} U^{(s)}_{1} & U^{(t)}_{1} U^{(s)}_{2} & \ldots & U^{(t)}_{1} U^{(s)}_{k} \\
+      U^{(t)}_{2} U^{(s)}_{1} & U^{(t)}_{2} U^{(s)}_{2} & \ldots & U^{(t)}_{2} U^{(s)}_{k} \\
+      \vdots & \vdots & \ldots & \vdots \\
+      U^{(t)}_{k} U^{(s)}_{1} & U^{(t)}_{k} U^{(s)}_{2} & \ldots & U^{(t)}_{k} U^{(s)}_{k}
+      \end{bmatrix} \nonumber \\
+      & = & \mathbf{0}
+      \label{eq:RhoVAR}
+  \end{eqnarray}
+\end{enumerate}
+
+Las ecuaciones \eqref{eq:SigmaVAR} y \eqref{eq:RhoVAR} significan que los residuales \(\mathbf{U}_t\) pueden estar correlacionados entre ellos solo en el caso de que la información sea contemporánea, pero no tienen información en común entre residuales de otros periodos.
+
+Al igual que en el caso del modelo o especificación \(AR(p)\) en la especificación del modelo \(VAR(p)\) existen condiciones de estabilidad. Dichas condiciones están dadas por lo siguiente, definamos el siguiente polinomio que resulta de tomar la matriz \(\mathbf{A}(L)\) en la ecuación \eqref{eq:VARCorto}:
+\begin{equation}
+    Det[I_t - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
+\end{equation}
+
+Donde las raíces del polinomio cumplen que \(|z| \leq 1\), es decir, se ubican dentro del circulo unitario.
+
+La ecuación \eqref{eq:VARCorto} puede ser rexpresada en una forma similar al un proceso de MA. Al respecto, de forma similar a la siguiente ecuación podemos construir un modelo \(VARMA(p,q)\), el cual no estudiamos es este curso.
+
+Reromando el primer planteamiento, podemos escribir:
+\begin{eqnarray}
+    \mathbf{X}_t & = & \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
+    & = & \mu + \beta(L) \mathbf{U}_t
+    \label{eq:VARMAq}
+\end{eqnarray}
+
+Por el lado de las matrices que representan la autocovarianza, estás resultan de resolver lo siguiente:
+\begin{equation}
+    \Gamma_X(\tau) = E[(\mathbf{X}_t - \mu)(\mathbf{X}_{t-\tau} - \mu)'] 
+\end{equation}
+
+Ahora, sin pérdida de generalidad digamos que la especificación VAR(p) en la ecuación \eqref{eq:VARp} no tiene constante, por lo que \(\delta = 0\), lo que implica que \(\mu = 0\). De esta forma las matrices de autocovarianza resultan de:
+\begin{eqnarray*}
+    \Gamma_X(\tau) & = & E[(\mathbf{X}_t)(\mathbf{X}_{t-\tau})'] \\
+    & = & A_1 E[(\mathbf{X}_{t-1})(\mathbf{X}_{t-\tau})'] + A_2 E[(\mathbf{X}_{t-2})(\mathbf{X}_{t-\tau})'] \\
+    &   & + \ldots + A_p E[(\mathbf{X}_{t-p})(\mathbf{X}_{t-\tau})'] + E[(\mathbf{U}_t(\mathbf{X}_{t-\tau})']
+\end{eqnarray*}
+
+Finalmente, al igual que en el caso \(AR(p)\) requerimos de una métrica que nos permita determinar el número de rezagos óptimo \(p\) en el \(VAR(p)\). Así, establecemos criterios de información similares a los del \(AR(p)\) dados por:
+
+1.Final Prediction Error (FPE):
+\begin{equation}
+        FPE(p) = \left[ \frac{T + kp + 1}{T - kp - 1} \right]^k |\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)|
+        \end{equation}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Akaike Criterion (AIC):
+  \begin{equation}
+       AIC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2}{T}
+       \end{equation}
+\item
+  Hannan - Quinn Criterion (HQ):
+  \begin{equation}
+       HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(2))}{T}
+       \end{equation}
+\item
+  Schwartz Criterion (SC):
+  \begin{equation}
+       SC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{ln(T)}{T}
+       \end{equation}
+\end{enumerate}
+
+Donde la matriz de varianzas y covarianzas contemporáneas estará dada por:
+\begin{equation*}
+            \mathbf{\Sigma}_{\hat{U}\hat{U}}(p) = \mathbb{E} \left[
+            \begin{bmatrix}
+            U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+            \end{bmatrix}
+            \begin{bmatrix}
+            U^{(t)}_{1} & U^{(t)}_{2} & \ldots & U^{(t)}_{k}
+            \end{bmatrix}
+            \right]
+        \end{equation*}
+
+Ahora veámos un ejemplo de estimación de \(VAR(p)\). Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción Industrial de los Estados Unidos, todas desestacionalizadas y para el período de enero de 2000 a julio de 2019. Dado que el supuesto estacionariedad sigue presente en nuestro análisis, emplearemos cada una de las series en su versión de diferencias logaritmicas. Las Figuras \ref{fig:fig62} y \ref{fig:fig63} muestra las series referidas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(MASS)}
+\FunctionTok{library}\NormalTok{(strucchange)}
+\FunctionTok{library}\NormalTok{(zoo)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+\FunctionTok{library}\NormalTok{(urca)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(vars)}
+
+\CommentTok{\#}
+\FunctionTok{load}\NormalTok{(}\StringTok{"BD/Datos\_Ad.RData"}\NormalTok{)}
+
+\CommentTok{\#}
+\NormalTok{DLINPC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{INPC\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{INPC\_Ad), }\DecValTok{1}\NormalTok{), }
+             \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+             \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{DLTC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{TC\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{TC\_Ad), }\DecValTok{1}\NormalTok{), }
+           \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+           \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{DLCETE28 }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{CETE28\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{CETE28\_Ad), }\DecValTok{1}\NormalTok{), }
+               \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+               \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{DLIGAE }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{IGAE\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{IGAE\_Ad), }\DecValTok{1}\NormalTok{), }
+             \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+             \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{DLIPI }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{IPI\_Ad) }\SpecialCharTok{{-}} \FunctionTok{lag}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos\_Ad}\SpecialCharTok{$}\NormalTok{IPI\_Ad), }\DecValTok{1}\NormalTok{), }
+            \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+            \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(DLINPC, DLTC, DLCETE28, DLIGAE, DLIPI))}
+
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos[}\DecValTok{2} \SpecialCharTok{:} \DecValTok{282}\NormalTok{, ], }
+            \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Datos, }\AttributeTok{plot.type =} \StringTok{"s"}\NormalTok{, }
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \AttributeTok{main =} \StringTok{"Series en Diferencias logaritmicas"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Variacion"}\NormalTok{)}
+
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomright"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"INPC"}\NormalTok{, }\StringTok{"TC"}\NormalTok{, }\StringTok{"CETES28"}\NormalTok{, }\StringTok{"IGAE"}\NormalTok{, }\StringTok{"IPI"}\NormalTok{),}
+       \AttributeTok{cex =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1}\NormalTok{, }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"purple"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig62-1} 
+
+}
+
+\caption{Series en diferencias logarítmicas (Forma 1)}\label{fig:fig62}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Datos, }\AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }
+     \AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Series en Diferencias logaritmicas"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig63-1} 
+
+}
+
+\caption{Series en diferencias logarítmicas (Forma 2)}\label{fig:fig63}
+\end{figure}
+
+Dicho lo anterior, a continuación mostraremos la tabla que resume el valor de los distintos criterios de información una especificación de un \(VAR(p)\) con constante. Notése que es posible especificar un \(VAR(p)\) con tendencia, caso que no aplica hasta este momento, ya que nuestro análisis de estacionariedad es claro respecto a la media constante (más adelante relajaremos este supuesto), lo cual elimina la poisiblidad de incluir una tendencia.
+
+En el Cuadro \ref{tab:SelectVAR} reportamos los resultados de aplicar una prueba de criterios de información para diferentes valores de reagos. Del cual se concluye que el número óptimo de residuales es 2 (según el crietrio AIC y el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es una buena práctica utilizarlo como referente principal.
+
+\begin{longtable}[]{@{}ccccc@{}}
+\caption{\label{tab:SelectVAR} Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series \(DLINPC_t\), \(DLTC_t\), \(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
+\toprule\noalign{}
+Rezagos & AIC & HQ & SC & FPE \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Rezagos & AIC & HQ & SC & FPE \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & -4.636412e+01 & -4.617847e+01 & -4.590430e+01 & 7.317262e-21 \\
+2 & -4.639541e+01 & -4.605506e+01 & -4.555241e+01 & 7.094216e-21 \\
+3 & -4.635305e+01 & -4.585799e+01 & -4.512686e+01 & 7.407479e-21 \\
+\(\vdots\) & \(\vdots\) & \(\vdots\) & \(\vdots\) & \(\vdots\) \\
+\end{longtable}
+
+De esta forma, justificamos la estimación de un \(VAR(2)\). Los resultados del mismo se repotartan en los siguientes cuadros, en los que se reporta el resultado de una de las ecuaciones. Los resultados restantes se encuentran en el Scrip Clase 14 que se encuentra en repositorio de GitHub. Primero mostraremos los resutlados de las raíces del polinomio caracteristico en el Cuadro \ref{tab:RootsVAR}, seguido de un cuadro para la ecuación del IGAE en el Cuadro @ref(tab:IGAE\_VAR) (por simplicidad se omiten las otras cuatro ecuaciones del VAR(2)), y del Cuadro \ref{tab:SigmaVARp} con la matriz \(\mathbf{\Sigma}_{\hat{U}\hat{U}}\) estimada del VAR.
+
+\begin{longtable}[]{@{}ccccc@{}}
+\caption{\label{tab:RootsVAR} Raíces del polinomio característico de un VAR(2).}\tabularnewline
+\toprule\noalign{}
+Rezagos & AIC & HQ & SC & FPE \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Rezagos & AIC & HQ & SC & FPE \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0.7452 & 0.4403 & 0.4403 & 0.3503 & 0.3503 \\
+0.3342 & 0.3342 & 0.3339 & 0.3339 & 0.06951 \\
+\end{longtable}
+
+\begin{longtable}[]{@{}ccccc@{}}
+\caption{\label{tab:IGAEVAR} Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series \(DLINPC_t\), \(DLTC_t\), \(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
+\toprule\noalign{}
+Variable & Coeficiente & Error Est. & Estad. t & Prob.(\(>\) t) \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Variable & Coeficiente & Error Est. & Estad. t & Prob.(\(>\) t) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(DLINPC_{t-1}\) & -0.2584978 & 0.1658396 & -1.559 & 0.120493 \\
+\(DLTC_{t-1}\) & 0.0022016 & 0.0152876 & 0.144 & 0.885620 \\
+\(DLCETE28_{t-1}\) & 0.0009547 & 0.0049115 & 0.194 & 0.846054 \\
+\(DLIGAE_{t-1}\) & -0.2351453 & 0.0699797 & -3.360 & 0.000917 *** \\
+\(DLIPI_{t-1}\) & 0.2442406 & 0.0600502 & 4.067 & 6.62e-05 *** \\
+\(DLINPC_{t-2}\) & -0.0775039 & 0.1694809 & -0.457 & 0.647904 \\
+\(DLTC_{t-2}\) & -0.0413316 & 0.0144650 & -2.857 & 0.004680 ** \\
+\(DLCETE28_{t-2}\) & 0.0005341 & 0.0048058 & 0.111 & 0.911612 \\
+\(DLIGAE_{t-2}\) & -0.0646890 & 0.0693711 & -0.933 & 0.352092 \\
+\(DLIPI_{t-2}\) & 0.1796286 & 0.0620861 & 2.893 & 0.004195 ** \\
+\(\delta_4\) & 0.0030377 & 0.0008077 & 3.761 & 0.000217 *** \\
+& Notas: & *** & signif. & al 0.1\% \\
+& & ** & signif. & al 1\% \\
+& & * & signif. & al 5\% \\
+\end{longtable}
+
+\begin{longtable}[]{@{}cccccc@{}}
+\caption{\label{tab:SigmaVARp} Matriz \(\mathbf{\Sigma}_{\hat{U}\hat{U}}\) estimada del VAR(2).}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(DLINPC_t\) & \(DLTC_t\) & \(DLCE28_t\) & \(DLIGAE_t\) & \(DLIGAE_t\) \\
+\(DLINPC_t\) & 3.95e-06 & 3.19e-06 & -1.83e-06 & -5.29-07 & 1.34e-06 \\
+\(DLTC_t\) & 3.19e-06 & 5.04e-04 & 4.27e-04 & 9.81e-06 & 1.61e-05 \\
+\(DLCE28_t\) & -1.83e-06 & 4.27e-04 & 4.63e-03 & 1.26e-05 & 2.76e-05 \\
+\(DLIGAE_t\) & -5.29e-07 & 9.81e-06 & 1.26e-05 & 2.43e-05 & 8.75e-06 \\
+\(DLIGAE_t\) & 1.34e-06 & 1.61e-05 & 2.76e-05 & 8.75e-06 & 3.13e-05 \\
+\end{longtable}
+
+Finalmente, en el Cuadro \ref{tab:DiagnosVAR} reportamos las pruebas de diagnóstico del VAR(2). Incluímos las pruebas de normalidad, autocorrelación parcial y de heterocedásticidad.
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\caption{\label{tab:DiagnosVAR} Pruebas de diagnóstico sobre los residuales del VAR(2).}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Estadística (rezagos)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Coeficiente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+p-value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Conclusión
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Estadística (rezagos)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Coeficiente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+p-value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Conclusión
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Correlación Serial (\(\chi^2 (2)\)) & 59.436 & 0.1696 & Existe autocorrelación serial \\
+Correlación Serial (\(\chi^2 (4)\)) & 127.17 & 0.03461 & No existe autocorrelación serial \\
+Correlación Serial (\(\chi^2 (6)\)) & 183.14 & 0.03393 & No existe autocorrelación serial \\
+Normalidad - JB (\(\chi^2\)) & 2335 & 0.0000 & Los residuales no son normales \\
+ARCH (\(\chi^2 (2)\)) & 691.58 & 0.0000 & Los residuales no son homocedásticos \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{VARselect}\NormalTok{(Datos, }\AttributeTok{lag.max =} \DecValTok{12}\NormalTok{, }\AttributeTok{type =} \StringTok{"const"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $selection
+## AIC(n)  HQ(n)  SC(n) FPE(n) 
+##      2      1      1      2 
+## 
+## $criteria
+##                                    1                             2
+## AIC(n) -43.4369385930444451560106245 -43.4878280980991220872056147
+## HQ(n)  -43.2759374580961733158801508 -43.1926593506939511257769482
+## SC(n)  -43.0360414131631969780755753 -42.7528499349835016118959174
+## FPE(n)   0.0000000000000000001366449   0.0000000000000000001298899
+##                                    3                             4
+## AIC(n) -43.4268489491758202802884625 -43.3868843889051234441467386
+## HQ(n)  -42.9975125893137573029889609 -42.8233804165861613455490442
+## SC(n)  -42.3577898028258275076041173 -41.9837442593207583740877453
+## FPE(n)   0.0000000000000000001381225   0.0000000000000000001438821
+##                                   5                             6
+## AIC(n) -43.293163285544032703455741 -43.2431704133633161291072611
+## HQ(n)  -42.595491700768178588987212 -42.4113312161305699987678963
+## SC(n)  -41.555942172725302441449458 -41.1718683173102135697263293
+## FPE(n)   0.000000000000000000158246   0.0000000000000000001667106
+##                                    7                             8
+## AIC(n) -43.2902076769675190348607430 -43.2419352439015938216471113
+## HQ(n)  -42.3242008672778737832231855 -42.1417608217550565541387186
+## SC(n)  -40.8848245976800441781051632 -40.5024711813797466675168835
+## FPE(n)   0.0000000000000000001595179   0.0000000000000000001680601
+##                                    9                            10
+## AIC(n) -43.2201406224138153788771888 -43.1788072276712782127106038
+## HQ(n)  -41.9857985878103789900706033 -41.8102975806109569134605408
+## SC(n)  -40.1465955766575959273723129 -39.7711811986806935692584375
+## FPE(n)   0.0000000000000000001726236   0.0000000000000000001810365
+##                                   11                            12
+## AIC(n) -43.1191364389135785017970193 -43.0502244962885995960277796
+## HQ(n)  -41.6164591793963580812487635 -41.4133796243144800541813311
+## SC(n)  -39.3774294266886144555428473 -38.9744365008292632523989596
+## FPE(n)   0.0000000000000000001936459   0.0000000000000000002093856
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{VAR\_p }\OtherTok{\textless{}{-}} \FunctionTok{VAR}\NormalTok{(Datos, }\AttributeTok{p =} \DecValTok{2}\NormalTok{, }\AttributeTok{type =} \StringTok{"const"}\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(VAR\_p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## VAR Estimation Results:
+## ========================= 
+## Endogenous variables: DLINPC, DLTC, DLCETE28, DLIGAE, DLIPI 
+## Deterministic variables: const 
+## Sample size: 279 
+## Log Likelihood: 4142.895 
+## Roots of the characteristic polynomial:
+##  0.53  0.53 0.4501 0.4501 0.4425 0.4425 0.3251 0.3251 0.1677 0.1677
+## Call:
+## VAR(y = Datos, p = 2, type = "const")
+## 
+## 
+## Estimation results for equation DLINPC: 
+## ======================================= 
+## DLINPC = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value           Pr(>|t|)    
+## DLINPC.l1    0.387061   0.063100   6.134 0.0000000030610259 ***
+## DLTC.l1     -0.004611   0.005286  -0.872             0.3839    
+## DLCETE28.l1  0.001229   0.002078   0.592             0.5546    
+## DLIGAE.l1   -0.022088   0.015077  -1.465             0.1441    
+## DLIPI.l1     0.009878   0.019363   0.510             0.6104    
+## DLINPC.l2   -0.006707   0.063621  -0.105             0.9161    
+## DLTC.l2      0.009608   0.005496   1.748             0.0816 .  
+## DLCETE28.l2  0.001827   0.002051   0.891             0.3737    
+## DLIGAE.l2    0.006544   0.014289   0.458             0.6473    
+## DLIPI.l2    -0.015245   0.019632  -0.777             0.4381    
+## const        0.002325   0.000294   7.908 0.0000000000000688 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.002176 on 268 degrees of freedom
+## Multiple R-Squared: 0.1783,  Adjusted R-squared: 0.1476 
+## F-statistic: 5.815 on 10 and 268 DF,  p-value: 0.00000006289 
+## 
+## 
+## Estimation results for equation DLTC: 
+## ===================================== 
+## DLTC = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value   Pr(>|t|)    
+## DLINPC.l1   -1.344803   0.745382  -1.804    0.07233 .  
+## DLTC.l1      0.315786   0.062442   5.057 0.00000079 ***
+## DLCETE28.l1 -0.039912   0.024542  -1.626    0.10506    
+## DLIGAE.l1    0.379306   0.178102   2.130    0.03411 *  
+## DLIPI.l1    -0.514827   0.228727  -2.251    0.02521 *  
+## DLINPC.l2    0.071779   0.751538   0.096    0.92398    
+## DLTC.l2     -0.183813   0.064926  -2.831    0.00499 ** 
+## DLCETE28.l2  0.030125   0.024228   1.243    0.21481    
+## DLIGAE.l2    0.070713   0.168797   0.419    0.67561    
+## DLIPI.l2    -0.166610   0.231909  -0.718    0.47312    
+## const        0.006463   0.003473   1.861    0.06388 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.0257 on 268 degrees of freedom
+## Multiple R-Squared: 0.1425,  Adjusted R-squared: 0.1105 
+## F-statistic: 4.454 on 10 and 268 DF,  p-value: 0.000008102 
+## 
+## 
+## Estimation results for equation DLCETE28: 
+## ========================================= 
+## DLCETE28 = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value Pr(>|t|)  
+## DLINPC.l1    3.933798   1.861561   2.113   0.0355 *
+## DLTC.l1      0.112997   0.155945   0.725   0.4693  
+## DLCETE28.l1  0.113300   0.061292   1.849   0.0656 .
+## DLIGAE.l1   -0.588758   0.444803  -1.324   0.1868  
+## DLIPI.l1     1.174496   0.571237   2.056   0.0407 *
+## DLINPC.l2   -2.213087   1.876936  -1.179   0.2394  
+## DLTC.l2      0.117661   0.162151   0.726   0.4687  
+## DLCETE28.l2  0.063398   0.060509   1.048   0.2957  
+## DLIGAE.l2   -0.237974   0.421565  -0.565   0.5729  
+## DLIPI.l2     1.110203   0.579183   1.917   0.0563 .
+## const       -0.007514   0.008674  -0.866   0.3872  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.06419 on 268 degrees of freedom
+## Multiple R-Squared: 0.08823, Adjusted R-squared: 0.05421 
+## F-statistic: 2.593 on 10 and 268 DF,  p-value: 0.005122 
+## 
+## 
+## Estimation results for equation DLIGAE: 
+## ======================================= 
+## DLIGAE = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value       Pr(>|t|)    
+## DLINPC.l1    0.719855   0.393617   1.829         0.0685 .  
+## DLTC.l1     -0.218508   0.032974  -6.627 0.000000000188 ***
+## DLCETE28.l1  0.007718   0.012960   0.596         0.5520    
+## DLIGAE.l1    0.037559   0.094051   0.399         0.6900    
+## DLIPI.l1     0.389894   0.120785   3.228         0.0014 ** 
+## DLINPC.l2   -0.737653   0.396868  -1.859         0.0642 .  
+## DLTC.l2      0.073830   0.034286   2.153         0.0322 *  
+## DLCETE28.l2 -0.013542   0.012794  -1.058         0.2908    
+## DLIGAE.l2   -0.142845   0.089138  -1.603         0.1102    
+## DLIPI.l2    -0.154835   0.122465  -1.264         0.2072    
+## const        0.001637   0.001834   0.893         0.3729    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.01357 on 268 degrees of freedom
+## Multiple R-Squared: 0.3272,  Adjusted R-squared: 0.3021 
+## F-statistic: 13.03 on 10 and 268 DF,  p-value: < 0.00000000000000022 
+## 
+## 
+## Estimation results for equation DLIPI: 
+## ====================================== 
+## DLIPI = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value      Pr(>|t|)    
+## DLINPC.l1    0.042383   0.326611   0.130        0.8968    
+## DLTC.l1     -0.163742   0.027361  -5.985 0.00000000693 ***
+## DLCETE28.l1  0.012143   0.010754   1.129        0.2598    
+## DLIGAE.l1    0.098821   0.078041   1.266        0.2065    
+## DLIPI.l1     0.067742   0.100224   0.676        0.4997    
+## DLINPC.l2   -0.524835   0.329309  -1.594        0.1122    
+## DLTC.l2      0.053353   0.028449   1.875        0.0618 .  
+## DLCETE28.l2 -0.016237   0.010616  -1.529        0.1273    
+## DLIGAE.l2   -0.088483   0.073964  -1.196        0.2326    
+## DLIPI.l2    -0.082982   0.101618  -0.817        0.4149    
+## const        0.002361   0.001522   1.551        0.1220    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.01126 on 268 degrees of freedom
+## Multiple R-Squared: 0.1978,  Adjusted R-squared: 0.1679 
+## F-statistic:  6.61 on 10 and 268 DF,  p-value: 0.000000003715 
+## 
+## 
+## 
+## Covariance matrix of residuals:
+##                 DLINPC          DLTC    DLCETE28       DLIGAE       DLIPI
+## DLINPC    0.0000047345 -0.0000001939 0.000004559  0.000006652  0.00000700
+## DLTC     -0.0000001939  0.0006606619 0.000369751 -0.000035441 -0.00003174
+## DLCETE28  0.0000045591  0.0003697510 0.004120747  0.000063618  0.00008525
+## DLIGAE    0.0000066522 -0.0000354410 0.000063618  0.000184234  0.00011641
+## DLIPI     0.0000069998 -0.0000317443 0.000085254  0.000116407  0.00012685
+## 
+## Correlation matrix of residuals:
+##             DLINPC      DLTC DLCETE28   DLIGAE   DLIPI
+## DLINPC    1.000000 -0.003466  0.03264  0.22524  0.2856
+## DLTC     -0.003466  1.000000  0.22409 -0.10159 -0.1097
+## DLCETE28  0.032640  0.224095  1.00000  0.07301  0.1179
+## DLIGAE    0.225240 -0.101585  0.07301  1.00000  0.7615
+## DLIPI     0.285629 -0.109656  0.11792  0.76147  1.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Diagnostic tests}
+
+\DocumentationTok{\#\#\#\# Normalidad:}
+
+\FunctionTok{normality.test}\NormalTok{(VAR\_p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $JB
+## 
+##  JB-Test (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 36186, df = 10, p-value < 0.00000000000000022
+## 
+## 
+## $Skewness
+## 
+##  Skewness only (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 1261, df = 5, p-value < 0.00000000000000022
+## 
+## 
+## $Kurtosis
+## 
+##  Kurtosis only (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 34925, df = 5, p-value < 0.00000000000000022
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# Autocorrelacion Serial:}
+
+\DocumentationTok{\#\#\#\# LAGS = 2:}
+
+\FunctionTok{serial.test}\NormalTok{(VAR\_p, }\AttributeTok{lags.bg =} \DecValTok{2}\NormalTok{, }\AttributeTok{type =} \StringTok{"BG"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Breusch-Godfrey LM test
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 74.839, df = 50, p-value = 0.013
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# LAGS = 4:}
+
+\FunctionTok{serial.test}\NormalTok{(VAR\_p, }\AttributeTok{lags.bg =} \DecValTok{4}\NormalTok{, }\AttributeTok{type =} \StringTok{"BG"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Breusch-Godfrey LM test
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 131.69, df = 100, p-value = 0.01849
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# LAGS = 6:}
+
+\FunctionTok{serial.test}\NormalTok{(VAR\_p, }\AttributeTok{lags.bg =} \DecValTok{6}\NormalTok{, }\AttributeTok{type =} \StringTok{"BG"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Breusch-Godfrey LM test
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 201.63, df = 150, p-value = 0.003147
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# Homocedasticidad:}
+
+\FunctionTok{arch.test}\NormalTok{(VAR\_p, }\AttributeTok{lags.multi =} \DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  ARCH (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 2122.4, df = 1350, p-value < 0.00000000000000022
+\end{verbatim}
+
+\hypertarget{anuxe1lisis-de-impulso-respuesta}{%
+\section{Análisis de Impulso-Respuesta}\label{anuxe1lisis-de-impulso-respuesta}}
+
+Una de las grandes ventajas que aporta el análisis de los modelos VAR es el análisis de Impulso-Respuesta. Dicho análisis busca cuantificar el efecto que tiene en \(\mathbf{X}_t\) una innovación o cambio en los residuales de cualquiera de las variables en un momento definido. Partamos dela ecuación \eqref{eq:VARMAq} de forma que tenemos:
+\begin{eqnarray}
+    \mathbf{X}_t & = & \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
+    & = & \mu + \mathbf{B}(L) \mathbf{U}_t \nonumber \\
+    & = & \mu + \Psi_0 \mathbf{U}_t + \Psi_1 \mathbf{U}_{t-1} + \Psi_2 \mathbf{U}_{t-2} + \Psi_3 \mathbf{U}_{t-3} + \ldots
+\end{eqnarray}
+
+Donde \(\Psi_0 = I\) y cada una de las \(\Psi_i = - \mathbf{B}_i\), \(i = 1, 2, \ldots\). De esta forma se verifica el efecto que tiene en \(\mathbf{X}_t\) cada las innovaciones pasadas. Por lo que el análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas matrices en las que hemos descompuesto a \(\mathbf{B}(L)\).
+
+Retomando el modelo \(VAR(2)\) anteriormente estimado, en la Figura \ref{fig:fig64} reportamos las gráficas de Impulso-respuesta de la serie \(DLTC_t\) ante cambios en los residuales del resto de las series y de la propia serie.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IR\_DLINPC }\OtherTok{\textless{}{-}} \FunctionTok{irf}\NormalTok{(VAR\_p, }\AttributeTok{n.ahead =} \DecValTok{12}\NormalTok{, }\AttributeTok{boot =} \ConstantTok{TRUE}\NormalTok{, }
+                 \AttributeTok{ci =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{response =} \StringTok{"DLINPC"}\NormalTok{)}
+
+\NormalTok{IR\_DLINPC}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Impulse response coefficients
+## $DLINPC
+##                 DLINPC
+##  [1,]  0.0021759002410
+##  [2,]  0.0008094393250
+##  [3,]  0.0002429936391
+##  [4,]  0.0001048999556
+##  [5,]  0.0000430519256
+##  [6,]  0.0000257195308
+##  [7,]  0.0000108405478
+##  [8,]  0.0000011471582
+##  [9,] -0.0000014256627
+## [10,] -0.0000009999499
+## [11,] -0.0000003443770
+## [12,] -0.0000001512886
+## [13,] -0.0000001157354
+## 
+## $DLTC
+##                 DLINPC
+##  [1,]  0.0000000000000
+##  [2,] -0.0000826837093
+##  [3,]  0.0003117546911
+##  [4,]  0.0002648974979
+##  [5,]  0.0000587162871
+##  [6,] -0.0000289491380
+##  [7,] -0.0000105463736
+##  [8,]  0.0000105785893
+##  [9,]  0.0000076216336
+## [10,] -0.0000004038885
+## [11,] -0.0000021138204
+## [12,] -0.0000004691794
+## [13,]  0.0000003771599
+## 
+## $DLCETE28
+##                  DLINPC
+##  [1,]  0.00000000000000
+##  [2,]  0.00006486928725
+##  [3,]  0.00013182636385
+##  [4,]  0.00003487943931
+##  [5,]  0.00004740702286
+##  [6,]  0.00003336371156
+##  [7,]  0.00001571609856
+##  [8,]  0.00000377046957
+##  [9,]  0.00000005672766
+## [10,]  0.00000025569500
+## [11,]  0.00000033794064
+## [12,]  0.00000004626880
+## [13,] -0.00000011376620
+## 
+## $DLIGAE
+##                  DLINPC
+##  [1,]  0.00000000000000
+##  [2,] -0.00021156780483
+##  [3,] -0.00017900748374
+##  [4,] -0.00001453803984
+##  [5,]  0.00004387550079
+##  [6,]  0.00001348412556
+##  [7,] -0.00000660541189
+##  [8,] -0.00000344927548
+##  [9,]  0.00000223865243
+## [10,]  0.00000206681740
+## [11,]  0.00000008258756
+## [12,] -0.00000046595182
+## [13,] -0.00000009698431
+## 
+## $DLIPI
+##                  DLINPC
+##  [1,]  0.00000000000000
+##  [2,]  0.00007038187903
+##  [3,] -0.00011077803202
+##  [4,] -0.00003218007799
+##  [5,] -0.00001697303009
+##  [6,]  0.00000048565947
+##  [7,]  0.00001045292187
+##  [8,]  0.00000469541763
+##  [9,]  0.00000035996398
+## [10,] -0.00000051048646
+## [11,]  0.00000005294854
+## [12,]  0.00000026647657
+## [13,]  0.00000009015073
+## 
+## 
+## Lower Band, CI= 0.95 
+## $DLINPC
+##                DLINPC
+##  [1,]  0.001864170847
+##  [2,]  0.000499776775
+##  [3,]  0.000002450675
+##  [4,] -0.000078104730
+##  [5,] -0.000075950781
+##  [6,] -0.000037958817
+##  [7,] -0.000025483439
+##  [8,] -0.000012332298
+##  [9,] -0.000011329253
+## [10,] -0.000007641493
+## [11,] -0.000004043746
+## [12,] -0.000001841703
+## [13,] -0.000001172170
+## 
+## $DLTC
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000286990353
+##  [3,]  0.000061870696
+##  [4,]  0.000078542144
+##  [5,] -0.000039820370
+##  [6,] -0.000095870183
+##  [7,] -0.000050900347
+##  [8,] -0.000019789658
+##  [9,] -0.000005574237
+## [10,] -0.000008547257
+## [11,] -0.000009189057
+## [12,] -0.000004530429
+## [13,] -0.000001945539
+## 
+## $DLCETE28
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000230649362
+##  [3,] -0.000196536071
+##  [4,] -0.000126449052
+##  [5,] -0.000058700460
+##  [6,] -0.000023095154
+##  [7,] -0.000007659372
+##  [8,] -0.000008557329
+##  [9,] -0.000008242220
+## [10,] -0.000005060508
+## [11,] -0.000002432306
+## [12,] -0.000001136291
+## [13,] -0.000001066601
+## 
+## $DLIGAE
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000410323921
+##  [3,] -0.000418493922
+##  [4,] -0.000146714896
+##  [5,] -0.000044408954
+##  [6,] -0.000035327961
+##  [7,] -0.000035119635
+##  [8,] -0.000022423812
+##  [9,] -0.000012260613
+## [10,] -0.000003350492
+## [11,] -0.000003212534
+## [12,] -0.000004039474
+## [13,] -0.000002483970
+## 
+## $DLIPI
+##                 DLINPC
+##  [1,]  0.0000000000000
+##  [2,] -0.0001982996896
+##  [3,] -0.0003103493634
+##  [4,] -0.0001445269721
+##  [5,] -0.0001147657072
+##  [6,] -0.0000494580078
+##  [7,] -0.0000148574620
+##  [8,] -0.0000103989132
+##  [9,] -0.0000059299583
+## [10,] -0.0000046364719
+## [11,] -0.0000029746270
+## [12,] -0.0000012355125
+## [13,] -0.0000008043852
+## 
+## 
+## Upper Band, CI= 0.95 
+## $DLINPC
+##               DLINPC
+##  [1,] 0.002423055334
+##  [2,] 0.001069138548
+##  [3,] 0.000514403106
+##  [4,] 0.000299906999
+##  [5,] 0.000185297033
+##  [6,] 0.000101768840
+##  [7,] 0.000056864142
+##  [8,] 0.000028728717
+##  [9,] 0.000018624195
+## [10,] 0.000012817976
+## [11,] 0.000006987585
+## [12,] 0.000004523406
+## [13,] 0.000002520736
+## 
+## $DLTC
+##               DLINPC
+##  [1,] 0.000000000000
+##  [2,] 0.000137344529
+##  [3,] 0.000583804216
+##  [4,] 0.000433186162
+##  [5,] 0.000171212748
+##  [6,] 0.000036307348
+##  [7,] 0.000034282255
+##  [8,] 0.000038723787
+##  [9,] 0.000024964010
+## [10,] 0.000009783037
+## [11,] 0.000003517692
+## [12,] 0.000003748501
+## [13,] 0.000003845745
+## 
+## $DLCETE28
+##               DLINPC
+##  [1,] 0.000000000000
+##  [2,] 0.000304305857
+##  [3,] 0.000373465696
+##  [4,] 0.000167853443
+##  [5,] 0.000127305791
+##  [6,] 0.000089751434
+##  [7,] 0.000049983292
+##  [8,] 0.000025579016
+##  [9,] 0.000012448007
+## [10,] 0.000006485072
+## [11,] 0.000004515005
+## [12,] 0.000002515525
+## [13,] 0.000001179168
+## 
+## $DLIGAE
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000006014034
+##  [3,]  0.000035752798
+##  [4,]  0.000101880979
+##  [5,]  0.000107697317
+##  [6,]  0.000067291001
+##  [7,]  0.000019302644
+##  [8,]  0.000009260325
+##  [9,]  0.000010330953
+## [10,]  0.000010351320
+## [11,]  0.000004299667
+## [12,]  0.000002280664
+## [13,]  0.000001077557
+## 
+## $DLIPI
+##                DLINPC
+##  [1,] 0.0000000000000
+##  [2,] 0.0002938283073
+##  [3,] 0.0001164391542
+##  [4,] 0.0000642643310
+##  [5,] 0.0000621769713
+##  [6,] 0.0000441663489
+##  [7,] 0.0000332198998
+##  [8,] 0.0000181489496
+##  [9,] 0.0000082995640
+## [10,] 0.0000034179891
+## [11,] 0.0000034672138
+## [12,] 0.0000024110405
+## [13,] 0.0000009791902
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot(IR\_DLINPC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IR\_DLTC }\OtherTok{\textless{}{-}} \FunctionTok{irf}\NormalTok{(VAR\_p, }\AttributeTok{n.ahead =} \DecValTok{12}\NormalTok{, }\AttributeTok{boot =} \ConstantTok{TRUE}\NormalTok{, }
+               \AttributeTok{ci =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{response =} \StringTok{"DLTC"}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(IR\_DLTC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig64-1} 
+
+}
+
+\caption{Impulso - Respuesta en $DLTC_t$}\label{fig:fig64-1}
+\end{figure}
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig64-2} 
+
+}
+
+\caption{Impulso - Respuesta en $DLTC_t$}\label{fig:fig64-2}
+\end{figure}
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig64-3} 
+
+}
+
+\caption{Impulso - Respuesta en $DLTC_t$}\label{fig:fig64-3}
+\end{figure}
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig64-4} 
+
+}
+
+\caption{Impulso - Respuesta en $DLTC_t$}\label{fig:fig64-4}
+\end{figure}
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig64-5} 
+
+}
+
+\caption{Impulso - Respuesta en $DLTC_t$}\label{fig:fig64-5}
+\end{figure}
+
+Los resultados muestran que la respuesta de \(DLTC_t\) ante impulsos en los términos de error fue estadísticamente significativo sólo para alguunos de los casos y en periodos cortos de tiempo. El resto de los resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase 15 que se ubica en el repositorio de GitHub.
+
+\hypertarget{procesos-no-estacionarios}{%
+\chapter{Procesos No Estacionarios}\label{procesos-no-estacionarios}}
+
+\hypertarget{definiciuxf3n-y-formas-de-no-estacionariedad}{%
+\section{Definición y formas de No Estacionariedad}\label{definiciuxf3n-y-formas-de-no-estacionariedad}}
+
+Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la definición de estacionariedad y plantearemos pruebas para determinar cuando una serie es estacionaria bajo tres diferentes especificiones:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Estacionariedad al rededor de una tendencia determinística;
+\item
+  Estacionariedad al rededor de una media, y
+\item
+  Estacionariedad al rededor del cero.
+\end{enumerate}
+
+A continuación discutiremos cómo es posible que una serie sea estacionaria al rededor de una tendencia determinística. Diremos que una tendencia es determinística si ésta puede ser aproximada o modelada por un polinomio en función de \(t\), la cual incluye posibles transformaciones logarítmicas.
+
+Bajo este enfoque, el proceso está lejos de cumplir con la defición de estacionariedad que hemos establecido en capítulos previos, pero relajaremos el supuesto y reconoceremos que una serie puede ser estacionaria en varianza bajo una tendencia determinística. Así, diremos que la serie será descrita por una ecuación dada por:
+\begin{equation}
+    Y_t = \sum^m_{j = 0} \delta_j t^j + X_t
+    \label{eq:YTrend}
+\end{equation}
+
+Donde \(X_t\) es un proceso \(ARMA(p, q)\) con media cero, que se puede ver como:
+\begin{equation}
+    \alpha(L) X_t = \beta(L) U_t
+\end{equation}
+
+Entonces, los momentos y variaza de la ecuación \eqref{eq:YTrend} estaran dados por:
+\begin{equation}
+    \mathbb{E}[Y_t] = \sum^m_{j = 0} \delta_j t^j = \mu_t
+    \label{eq:ETrend}
+\end{equation}
+
+Dada la ecuación \eqref{eq:ETrend} podemos plantear la siguiente ecuación de covarainzas:
+\begin{eqnarray}
+    \mathbb{E}[(Y_t - \mu_t) \cdot (Y_{t+\tau} - \mu_{t+\tau})] & = & \mathbb{E}[X_t \cdot X_{t+\tau}] \nonumber \\
+    & = & \gamma_X(\tau)
+    \label{eq:CovTrend}
+\end{eqnarray}
+
+Utilizando el resultado de la ecuación \eqref{eq:CovTrend} podemos establecer que:
+\begin{equation}
+    \mathbb{E}[(Y_t - \mu_t)^2] = \mathbb{E}[X_t^2] = \sigma_X^2
+    \label{eq:VarTrend}
+\end{equation}
+
+Así, las ecuaciones \eqref{eq:ETrend} y \eqref{eq:VarTrend} significan que el proceso descrito por la ecuación \eqref{eq:YTrend} es estacionario pero en varianza. De esta forma a partir de este momento diremos que una serie será estacionaria al rededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones \eqref{eq:YTrend}, \eqref{eq:ETrend} y \eqref{eq:VarTrend}.
+
+Dicho lo anterior estudiaremos el concepto de raíz unitaria de un proceso estocástico o de una serie de tiempo. Partamos de platear que un proceso AR(1) tiene raíz unitaria cuando el cual el coeficiente \(a_1 = 1\), es decir:
+\begin{equation}
+    Y_t = Y_{t-1} + U_t
+    \label{eq:UR1}
+\end{equation}
+
+Donde \(U_t\) es un proceso pueramente aleatorio con media cero, varianza constante y autocovarianza cero (0), al cual nos referiremos simplemente como ruido blanco. Supongamos ahora que incluímos un término constante en la ecuación \eqref{eq:UR1}, de forma que tenemos:
+\begin{equation}
+    Y_t = \delta + Y_{t-1} + U_t
+    \label{eq:UR2}
+\end{equation}
+
+Tomando a la ecuación \eqref{eq:UR2} y suponiendo que existe un valor inicial \(Y_0\) de la serie podemos plantear la sguiente secuencia de expresiones:
+\begin{eqnarray*}
+    Y_1 & = & \delta + Y_0 + U_1 \\
+    Y_2 & = & \delta + Y_1 + U_2 \\
+    & = & \delta + (\delta + Y_0 + U_1) + U_2 \\
+    & = & 2 \times \delta + Y_0 + U_1 + U_2
+\end{eqnarray*}
+
+Si repitieramos la sustitución sucesiva anterior hasta el momento \(t\) encontrariamos que la ecuación de la solución general que describe a un \(AR(1)\) con término constante que tiene raíz unitaria es de la forma:
+\begin{equation}
+    Y_t = t \delta + Y_0 + \sum_{i=1}^t U_i
+    \label{eq:UR3}
+\end{equation}
+
+La ecuación \eqref{eq:UR3} es equivalente a la ecuación \eqref{eq:YTrend}. A la ecuación \eqref{eq:UR3} también se le conoce como proceso con Drift o con término constante, indistintamente, ya que el componente de Drift suele asociarse a la posibilidad de incorporar el efecto de los residuales pasados, lo cual es posible simplemente agregando una constante.s
+
+Si revisamos el comportamiento de sus momentos y varianza de la ecuación \eqref{eq:UR3} encontramos que:
+\begin{eqnarray*}
+    \mathbb{E}[Y_t] & = & Y_0 + \delta t = \mu_t \\
+    Var[Y_t] & = & t \sigma^2 = \gamma(0, t) \\
+    Cov(Y_t, Y_{t+\tau}) & = & (t - \tau) \sigma^2 = \gamma(t, \tau)
+\end{eqnarray*}
+
+De esta forma, la ecuación \eqref{eq:UR3} no describe un proceso estacionario, sólo podría ser estacionario si \(t = 1\), en cualquier otro caso sería no estacionario en varianza. Ahora hagamos un resumen y acordemos notación que se utilizará en esta sección. Supongamos un proceso o serie de tiempo que es decrito por la siguiente ecuación:
+\begin{equation}
+    Y_t = \delta + Y_{t-1} + X_t
+    \label{eq:UR4}
+\end{equation}
+
+Donde \(X_t\) es un \(ARMA(p, q)\) con media cero. Si definimos a \(\Delta Y_t = Y_t - Y_{t-1}\), entonces la ecuación \eqref{eq:UR4} la podemos escribir como:
+\begin{equation}
+    \Delta Y_t = \delta + X_t
+    \label{eq:UR5}
+\end{equation}
+
+A la ecuación \eqref{eq:UR5} la denominaremos como un proceso estacionario en diferencias o simplemente como un proceso integrado. Así utilizaremos la siguiente definición.
+
+Sea un proceso estocástico \(Y\), decimos que este es integrado de orden \(d\), \(I(d)\), si este puede transformarse a uno estacionacionario, que sea invertible, mediante la diferenciación del mismo \(d\)-veces, es decir:
+\begin{equation}
+    (1 - L)^d Y_t = \delta + X_t
+    \label{eq:UR6}
+\end{equation}
+
+Donde \(X_t\) es un proceso \(ARMA(p, q)\). De lo cual se infiere que en la ecuación \eqref{eq:UR6} \(Y_t\) será una \(ARIMA(p, d, q)\), el cual contiene \(d\) raíces unitarias. A estos procesos también se les conoce como procesos con tendencia estocástica.
+
+Dada la discusión annterior, a continuación platearemos un resumen de cuales son los dos casos a los cuales nos referiremos como procesos que no son estacionarios en media, pero que si lo son en varianza. Estos casos son:
+\begin{eqnarray}
+    Y_t & = & Y_0 + \delta t + U_t \\
+    Y_t & = & Y_0 + \delta + \sum_{i = 1}^t U_t
+\end{eqnarray}
+
+Ambos casos no son estacionarios en media, pero si lo son en varianza. De ambos podemos decir que los choques o innovaciones del término de error tienen un efecto transitorio en el primero, pero permanentes en el segundo.
+
+\hypertarget{pruebas-de-rauxedces-unitarias}{%
+\section{Pruebas de Raíces Unitarias}\label{pruebas-de-rauxedces-unitarias}}
+
+En esta sección plantearemos una serie de pruebas estadísticas para determinar cuando una serie puede ser estacionaria bajo tres posibles casos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Estacionariedad al rededor de una tendencia determinística;
+\item
+  Estacionariedad al rededor de una media, y
+\item
+  Estacionariedad al rededor del cero.
+\end{enumerate}
+
+\hypertarget{dickey---fuller-df}{%
+\section{Dickey - Fuller (DF)}\label{dickey---fuller-df}}
+
+Partamos de una forma del proceso \(Y_t\) dada por:
+\begin{equation}
+    Y_t = \sum_{j = 0}^m \delta_j t^j + X_t
+    \label{eq:URDFG}
+\end{equation}
+
+Donde \(X_t\) es un \(ARMA(p, q)\) con media cero. Esta prueba asume que \(m = 1\), por lo que utilizaremos un modelo del tipo:
+\begin{equation}
+    Y_t = \alpha + \delta t + \rho Y_{t-1} + U_t
+    \label{eq:URDF}
+\end{equation}
+
+Si, el \(AR(1)\) planteado tiene raíz unitaria, es decir, \(\rho = 1\), entonces tendríamos:
+\begin{eqnarray*}
+    Y_t & = & \alpha + \delta t + Y_{t-1} + U_t \\
+    \Delta Y_t & = & \alpha + \delta t + U_t
+\end{eqnarray*}
+
+De esta forma, para determinar si una serie tiene raíz unitaria basta con probar la hipótesis nula de que \(H_0 : \rho = 1\), junto con las diferentes combinaciones que impliquen restricciones respecto a \(\delta\) y \(\alpha\).
+
+En resumen, la prueba DF consiste en asumir un modelo general dado por la ecuación \eqref{eq:URDF} y probar tres especificaciones distintas que serían válidas bajo \(H_0 : \rho = 1\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Modelo A: con intercepto y tendencia:
+  \begin{equation*}
+   \Delta Y_t = \alpha + \delta t + \beta Y_{t-1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \beta = \rho - 1 = 0\) contra \(H_a : \beta < 0\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario al rededor de una tendencia determinística.
+\item
+  Modelo B: con intercepto:
+  \begin{equation*}
+   \Delta Y_t = \alpha + \beta Y_{t-1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \beta = \rho - 1 = 0\) contra \(H_a : \beta < 0\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario al rededor de una constante.
+\item
+  Modelo C: sin intercepto y tendencia:
+  \begin{equation*}
+   \Delta Y_t = \beta Y_{t-1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \beta = \rho - 1 = 0\) contra \(H_a : \beta < 0\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.
+\end{enumerate}
+
+\hypertarget{dickey---fuller-aumentada-adf}{%
+\subsection{Dickey - Fuller Aumentada (ADF)}\label{dickey---fuller-aumentada-adf}}
+
+A diferencia de un modelo AR(1) para el caso de una prueba DF como en la ecuación \eqref{eq:URDF}, en una prueba ADF se asume que el proceso es un AR(p) de la forma (por simplicidad hemos omitido el término constante y el término de tendencia determinística):
+\begin{equation}
+    Y_t = a_1 Y_{t-1} + a_2 Y_{t-2} + \ldots + a_p Y_{t-p} + U_t
+    \label{eq:URADF}
+\end{equation}
+
+Haciendo una sustitución de términos similar a las que hemos planteado en otras secciones podemos reexpresar la ecuación \eqref{eq:URADF} en su versión en diferencias siguiendo el proceso:
+\begin{equation}
+    Y_t = \rho Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + + \theta_{p-1} \Delta Y_{t-p+1} + U_t 
+\end{equation}
+
+Donde \(\rho = \theta_0 = \sum_{j = 1}^p a_j\), \(\theta_i = - \sum_{j = i + 1}^p a_j\), \(i = 1, 2, \ldots, p-1\). Así, si el proceso AR(p) tiene raíz unitaria entonces ceremos que:
+\begin{eqnarray*}
+    1 - a_1 - a_2 - \ldots - a_p & = & 0 \\
+    \rho & = & 1
+\end{eqnarray*}
+
+De donde podemos establecer que el modelo general de una prueba ADF será:
+\begin{equation}
+    \Delta Y_{t-1} = \alpha + \beta t + (\rho - 1) Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_k \Delta Y_{t-k} + U_t
+\end{equation}
+
+Donde \(U_t\) es un proceso puramente aleatorio y \(k\) es elegido de tal manera que los residuales sean un proceso puramente aleatorio. En resumen, la prueba DF consiste en asumir un modelo general dado por la ecuación \eqref{eq:URADF}, que incluya constante y tendencia, y probar tres especificaciones distintas que serían válidas bajo \(H_0 : \rho = 1\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Modelo A: con intercepto y tendencia:
+  \begin{equation*}
+  \Delta Y_t = \alpha + \delta t + \beta Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_{p-1} \Delta Y_{t-p+1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \beta = \rho - 1 = 0\) contra \(H_a : \beta < 0\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario al rededor de una tendencia determinística.
+\item
+  Modelo B: con intercepto:
+  \begin{equation*}
+   \Delta Y_t = \alpha + \beta Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_{p-1} \Delta Y_{t-p+1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \beta = \rho - 1 = 0\) contra \(H_a : \beta < 0\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario al rededor de una constante.
+\item
+  Modelo C: sin intercepto y tendencia:
+  \begin{equation*}
+   \Delta Y_t = \beta Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_{p-1} \Delta Y_{t-p+1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \beta = \rho - 1 = 0\) contra \(H_a : \beta < 0\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.
+\end{enumerate}
+
+\hypertarget{phillips---perron-pp}{%
+\subsection{Phillips - Perron (PP)}\label{phillips---perron-pp}}
+
+Una tercera prueba es la de PP, la cual también está basada en una AR(1) dado por la ecuación:
+\begin{equation}
+    Y_t = d \eta + \rho Y_{t-1} + U_t
+    \label{eq:URPP}
+\end{equation}
+
+Donde \(d\) incluye a cualquiera de los componentes determinísticos como constante y tendencia. Al igual que los casos pasados, la hipótesis a probar era \(H_0 : \rho = 1\) contra la alternativa \(H_a : | \rho | < 1\), y asumimos una estructura MA(q) es el término de error de la forma \(U_t = \psi(L) \varepsilon_t = \psi_0 \varepsilon_t + \psi_1 \varepsilon_{t-1} + \ldots + \psi_p \varepsilon_{t-p}\), con \(\varepsilon_t\) es un ruido blanco con media cero y varianza \(\sigma^2\). En este modelo se elige el valor \(p\) que hace que el componente sea un MA(p). Las tablas estadísticas de PP para esta prueba pueden utilizar una estadística \(Z_\tau\) o \(Z_\rho\), las cuales se pueden emplear indistintamente.
+
+En resumen, la prueba PP consiste en asumir un modelo general dado por la ecuación \eqref{eq:URPP} y probar dos especificaciones distintas que serían válidas bajo \(H_0 : \rho = 1\), ambas considerando un compenente Drift:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Modelo A: con intercepto y tendencia:
+  \begin{equation*}
+   Y_t = \alpha + \delta t + \rho Y_{t-1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \rho = 1\) contra \(H_a : | \rho | < 1\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario al rededor de una tendencia determinística.
+\item
+  Modelo B: con intercepto:
+  \begin{equation*}
+   Y_t = \alpha + \rho Y_{t-1} + U_t
+    \end{equation*}
+  Buscamos probar si \(H_0 : \rho = 1\) contra \(H_a : | \rho | < 1\), por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario al rededor de una constante.
+\end{enumerate}
+
+\hypertarget{kwiatkowsky---phillips---schmidt---shin-kpss}{%
+\subsection{Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)}\label{kwiatkowsky---phillips---schmidt---shin-kpss}}
+
+La prueba KPSS considera que el proceso es estacionario bajo la hipótesis nula, lo cual hace una diferencia respecto de las anteriores pruebas. El modelo considerado es:
+\begin{equation}
+    Y_t = \delta t + \xi_t + U_t
+\end{equation}
+
+Donde \(U_t\) es un proceso estacionario y \(\xi_t\) es un ruido blanco descrito por la forma: \(\xi_t = \xi_{t-1} + \varepsilon_t\), donde \(\varepsilon_t\) es un proceso normalmente distribuido con media cero y varianza \(\sigma^2_\varepsilon\).
+
+Así, bajo la hipótesis nula \(H_0 : \sigma^2_\varepsilon = 0\), \(\xi\) se vuelve una constante y el proceso puede tener una tendencia estacionaria. Dado el planteamiento de la prueba, los valores críticos al 95\% son:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  0.146, para un modelo con tendencia
+\item
+  0.463, para un modelo con constante
+\end{enumerate}
+
+\hypertarget{ejemplo-con-aplicaciuxf3n-de-todas-las-pruebas-de-rauxedces-unitarias}{%
+\subsection{Ejemplo con aplicación de todas las pruebas de raíces unitarias}\label{ejemplo-con-aplicaciuxf3n-de-todas-las-pruebas-de-rauxedces-unitarias}}
+
+A continuación, mostraremos como ejemplo la aplicación de las pruebas de raíces unitarias a la serie de Tipo de Cambio en forma logaritmica y de diferencias logaritmicas. Asumamos que determinamos el valor de los rezagos de la prueba con el criterio de \(p = int\{ 4 (T/100)^{1/4} \}\). En la práctica, existen otras formas de determinar el valor de \(p\), como el criterio de AIC, pero es decisión del investigador cual usar.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(MASS)}
+\FunctionTok{library}\NormalTok{(strucchange)}
+\FunctionTok{library}\NormalTok{(zoo)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+\FunctionTok{library}\NormalTok{(urca)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(vars)}
+
+\CommentTok{\#}
+\FunctionTok{load}\NormalTok{(}\StringTok{"BD/Datos\_Ad.RData"}\NormalTok{)}
+
+\CommentTok{\#}
+\DocumentationTok{\#\# Conversion a series de tiempo:}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos\_Ad[}\DecValTok{7}\SpecialCharTok{:} \DecValTok{11}\NormalTok{], }
+            \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+            \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{LDatos }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(Datos)}
+
+\NormalTok{DLDatos }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos, }\AttributeTok{base =} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)), }
+                \AttributeTok{lag =} \DecValTok{1}\NormalTok{, }
+                \AttributeTok{differences =} \DecValTok{1}\NormalTok{)}
+
+\NormalTok{DaLDatos }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos, }\AttributeTok{base =} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)), }
+                 \AttributeTok{lag =} \DecValTok{12}\NormalTok{, }
+                 \AttributeTok{differences =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(LDatos, }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \AttributeTok{main =} \StringTok{"Series en Logaritmos"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig71-1} 
+
+}
+
+\caption{Series en Logaritmos}\label{fig:fig71}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(DLDatos, }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \AttributeTok{main =} \StringTok{"Series en Diferencias Logaritmicas"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig72-1} 
+
+}
+
+\caption{Series en Diferencias Logaritmicas}\label{fig:fig72}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(DaLDatos, }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \AttributeTok{main =} \StringTok{"Series en Diferencias Anuales Logaritmicas"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig73-1} 
+
+}
+
+\caption{Series en Diferencias Anuales Logaritmicas}\label{fig:fig73}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(DLDatos, DaLDatos), }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \AttributeTok{main =} \StringTok{"Comparacion de Series en Diferencias"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig74-1} 
+
+}
+
+\caption{Comparacion de Series en Diferencias Anuales}\label{fig:fig74}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(LDatos, DLDatos), }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \AttributeTok{main =} \StringTok{"Comparacion de Series en Diferencias"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig75-1} 
+
+}
+
+\caption{Comparacion de Series en Diferencias}\label{fig:fig75}
+\end{figure}
+
+En el Cuadro (\ref{Result_UR}) mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie \(LTC_t\), considerando \(p = int \{ 4 (234/100)^{(1/4)} \} = 4\) para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Dickey{-}Fuller:}
+
+\DocumentationTok{\#\#\# NIVELES: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"trend"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.083973 -0.015415 -0.002526  0.009332  0.170645 
+## 
+## Coefficients:
+##                Estimate  Std. Error t value Pr(>|t|)  
+## (Intercept)  0.08700923  0.04029878   2.159   0.0317 *
+## z.lag.1     -0.03844435  0.01852595  -2.075   0.0389 *
+## tt           0.00011203  0.00006246   1.794   0.0740 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02705 on 278 degrees of freedom
+## Multiple R-squared:  0.01629,    Adjusted R-squared:  0.00921 
+## F-statistic: 2.301 on 2 and 278 DF,  p-value: 0.102
+## 
+## 
+## Value of test-statistic is: -2.0752 2.1124 2.3013 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -3.98 -3.42 -3.13
+## phi2  6.15  4.71  4.05
+## phi3  8.34  6.30  5.36
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"drift"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.089442 -0.014571 -0.002497  0.009620  0.171964 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)
+## (Intercept)  0.020316   0.015600   1.302    0.194
+## z.lag.1     -0.006946   0.005925  -1.172    0.242
+## 
+## Residual standard error: 0.02716 on 279 degrees of freedom
+## Multiple R-squared:  0.004903,   Adjusted R-squared:  0.001336 
+## F-statistic: 1.375 on 1 and 279 DF,  p-value: 0.242
+## 
+## 
+## Value of test-statistic is: -1.1724 1.5477 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.44 -2.87 -2.57
+## phi1  6.47  4.61  3.79
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"none"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.089736 -0.014701 -0.003293  0.010359  0.169748 
+## 
+## Coefficients:
+##          Estimate Std. Error t value Pr(>|t|)
+## z.lag.1 0.0007280  0.0006161   1.181    0.238
+## 
+## Residual standard error: 0.0272 on 280 degrees of freedom
+## Multiple R-squared:  0.004961,   Adjusted R-squared:  0.001407 
+## F-statistic: 1.396 on 1 and 280 DF,  p-value: 0.2384
+## 
+## 
+## Value of test-statistic is: 1.1815 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# DIFERENCIAS: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"trend"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.09095 -0.01306 -0.00158  0.01055  0.17069 
+## 
+## Coefficients:
+##                 Estimate   Std. Error t value            Pr(>|t|)    
+## (Intercept)  0.002881589  0.003163345   0.911               0.363    
+## z.lag.1     -0.736373275  0.058071315 -12.680 <0.0000000000000002 ***
+## tt          -0.000009351  0.000019483  -0.480               0.632    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02634 on 277 degrees of freedom
+## Multiple R-squared:  0.3673, Adjusted R-squared:  0.3628 
+## F-statistic: 80.41 on 2 and 277 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic is: -12.6805 53.6071 80.4095 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -3.98 -3.42 -3.13
+## phi2  6.15  4.71  4.05
+## phi3  8.34  6.30  5.36
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"drift"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.090664 -0.013492 -0.001331  0.010702  0.169754 
+## 
+## Coefficients:
+##              Estimate Std. Error t value            Pr(>|t|)    
+## (Intercept)  0.001566   0.001577   0.993               0.322    
+## z.lag.1     -0.735658   0.057972 -12.690 <0.0000000000000002 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02631 on 278 degrees of freedom
+## Multiple R-squared:  0.3668, Adjusted R-squared:  0.3645 
+## F-statistic:   161 on 1 and 278 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic is: -12.6899 80.5185 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.44 -2.87 -2.57
+## phi1  6.47  4.61  3.79
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"none"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.089121 -0.011916  0.000311  0.012192  0.171310 
+## 
+## Coefficients:
+##         Estimate Std. Error t value            Pr(>|t|)    
+## z.lag.1 -0.73093    0.05777  -12.65 <0.0000000000000002 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02631 on 279 degrees of freedom
+## Multiple R-squared:  0.3646, Adjusted R-squared:  0.3623 
+## F-statistic: 160.1 on 1 and 279 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic is: -12.6515 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Augmented Dickey {-} Fuller}
+
+\DocumentationTok{\#\#\# NIVELES: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"trend"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.077054 -0.014133 -0.002281  0.011551  0.167611 
+## 
+## Coefficients:
+##                Estimate  Std. Error t value    Pr(>|t|)    
+## (Intercept)  0.10899655  0.04255838   2.561      0.0110 *  
+## z.lag.1     -0.04919274  0.01969939  -2.497      0.0131 *  
+## tt           0.00015118  0.00006679   2.263      0.0244 *  
+## z.diff.lag1  0.32887766  0.06112000   5.381 0.000000162 ***
+## z.diff.lag2 -0.12845492  0.06432008  -1.997      0.0468 *  
+## z.diff.lag3 -0.01064885  0.06462312  -0.165      0.8692    
+## z.diff.lag4  0.05690285  0.06350714   0.896      0.3711    
+## z.diff.lag5 -0.01668349  0.06151762  -0.271      0.7864    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02597 on 268 degrees of freedom
+## Multiple R-squared:  0.1196, Adjusted R-squared:  0.09662 
+## F-statistic: 5.202 on 7 and 268 DF,  p-value: 0.00001414
+## 
+## 
+## Value of test-statistic is: -2.4972 2.5862 3.2058 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -3.98 -3.42 -3.13
+## phi2  6.15  4.71  4.05
+## phi3  8.34  6.30  5.36
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"drift"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.081102 -0.013688 -0.002598  0.011536  0.167963 
+## 
+## Coefficients:
+##              Estimate Std. Error t value    Pr(>|t|)    
+## (Intercept)  0.019078   0.015382   1.240      0.2160    
+## z.lag.1     -0.006575   0.005837  -1.126      0.2610    
+## z.diff.lag1  0.306455   0.060772   5.043 0.000000845 ***
+## z.diff.lag2 -0.156749   0.063575  -2.466      0.0143 *  
+## z.diff.lag3 -0.034594   0.064238  -0.539      0.5907    
+## z.diff.lag4  0.038455   0.063463   0.606      0.5451    
+## z.diff.lag5 -0.041998   0.060954  -0.689      0.4914    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02617 on 269 degrees of freedom
+## Multiple R-squared:  0.1028, Adjusted R-squared:  0.08277 
+## F-statistic: 5.136 on 6 and 269 DF,  p-value: 0.00005131
+## 
+## 
+## Value of test-statistic is: -1.1265 1.2978 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.44 -2.87 -2.57
+## phi1  6.47  4.61  3.79
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"none"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.080975 -0.014773 -0.002006  0.011681  0.165789 
+## 
+## Coefficients:
+##               Estimate Std. Error t value    Pr(>|t|)    
+## z.lag.1      0.0006247  0.0006081   1.027      0.3052    
+## z.diff.lag1  0.3052416  0.0608250   5.018 0.000000947 ***
+## z.diff.lag2 -0.1599301  0.0635869  -2.515      0.0125 *  
+## z.diff.lag3 -0.0366726  0.0642802  -0.571      0.5688    
+## z.diff.lag4  0.0367316  0.0635108   0.578      0.5635    
+## z.diff.lag5 -0.0449750  0.0609677  -0.738      0.4613    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.0262 on 270 degrees of freedom
+## Multiple R-squared:  0.1027, Adjusted R-squared:  0.08271 
+## F-statistic: 5.148 on 6 and 270 DF,  p-value: 0.00004979
+## 
+## 
+## Value of test-statistic is: 1.0273 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# DIFERENCIAS: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"trend"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression trend 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.069846 -0.013941 -0.001969  0.011796  0.166553 
+## 
+## Coefficients:
+##                Estimate  Std. Error t value         Pr(>|t|)    
+## (Intercept)  0.00398042  0.00326372   1.220           0.2237    
+## z.lag.1     -0.96600985  0.13032157  -7.413 0.00000000000164 ***
+## tt          -0.00001242  0.00001981  -0.627           0.5310    
+## z.diff.lag1  0.27428705  0.11800103   2.324           0.0209 *  
+## z.diff.lag2  0.11502927  0.10628825   1.082           0.2801    
+## z.diff.lag3  0.07837533  0.09095430   0.862           0.3896    
+## z.diff.lag4  0.09775877  0.07423509   1.317           0.1890    
+## z.diff.lag5  0.07280186  0.06082666   1.197           0.2324    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02605 on 267 degrees of freedom
+## Multiple R-squared:  0.3901, Adjusted R-squared:  0.3741 
+## F-statistic: 24.39 on 7 and 267 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic is: -7.4125 18.3632 27.5402 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau3 -3.98 -3.42 -3.13
+## phi2  6.15  4.71  4.05
+## phi3  8.34  6.30  5.36
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"drift"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression drift 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.070858 -0.014250 -0.001793  0.011998  0.165361 
+## 
+## Coefficients:
+##              Estimate Std. Error t value         Pr(>|t|)    
+## (Intercept)  0.002197   0.001601   1.372           0.1711    
+## z.lag.1     -0.963143   0.130094  -7.403 0.00000000000172 ***
+## z.diff.lag1  0.272137   0.117818   2.310           0.0217 *  
+## z.diff.lag2  0.113463   0.106139   1.069           0.2860    
+## z.diff.lag3  0.077366   0.090837   0.852           0.3951    
+## z.diff.lag4  0.097369   0.074148   1.313           0.1903    
+## z.diff.lag5  0.072725   0.060758   1.197           0.2324    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02602 on 268 degrees of freedom
+## Multiple R-squared:  0.3892, Adjusted R-squared:  0.3755 
+## F-statistic: 28.46 on 6 and 268 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic is: -7.4034 27.41 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau2 -3.44 -2.87 -2.57
+## phi1  6.47  4.61  3.79
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.df}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"none"}\NormalTok{, }\AttributeTok{lags =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ############################################### 
+## # Augmented Dickey-Fuller Test Unit Root Test # 
+## ############################################### 
+## 
+## Test regression none 
+## 
+## 
+## Call:
+## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.069424 -0.012002  0.000317  0.013820  0.167787 
+## 
+## Coefficients:
+##             Estimate Std. Error t value         Pr(>|t|)    
+## z.lag.1     -0.92780    0.12773  -7.264 0.00000000000407 ***
+## z.diff.lag1  0.24302    0.11608   2.094           0.0372 *  
+## z.diff.lag2  0.08889    0.10479   0.848           0.3970    
+## z.diff.lag3  0.05875    0.08997   0.653           0.5143    
+## z.diff.lag4  0.08492    0.07371   1.152           0.2503    
+## z.diff.lag5  0.06500    0.06060   1.073           0.2844    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02607 on 269 degrees of freedom
+## Multiple R-squared:  0.3849, Adjusted R-squared:  0.3712 
+## F-statistic: 28.05 on 6 and 269 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic is: -7.2639 
+## 
+## Critical values for test statistics: 
+##       1pct  5pct 10pct
+## tau1 -2.58 -1.95 -1.62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# PP: Phillips {-} Perron Test}
+
+\DocumentationTok{\#\#\# NIVELES: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.pp}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"Z{-}tau"}\NormalTok{, }\AttributeTok{model =} \StringTok{"trend"}\NormalTok{, }\AttributeTok{use.lag =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ################################## 
+## # Phillips-Perron Unit Root Test # 
+## ################################## 
+## 
+## Test regression with intercept and trend 
+## 
+## 
+## Call:
+## lm(formula = y ~ y.l1 + trend)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.083973 -0.015415 -0.002526  0.009332  0.170645 
+## 
+## Coefficients:
+##               Estimate Std. Error t value            Pr(>|t|)    
+## (Intercept) 0.10275012 0.04851421   2.118              0.0351 *  
+## y.l1        0.96155565 0.01852595  51.903 <0.0000000000000002 ***
+## trend       0.00011203 0.00006246   1.794              0.0740 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02705 on 278 degrees of freedom
+## Multiple R-squared:  0.9903, Adjusted R-squared:  0.9902 
+## F-statistic: 1.416e+04 on 2 and 278 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic, type: Z-tau  is: -2.5039 
+## 
+##            aux. Z statistics
+## Z-tau-mu              1.1638
+## Z-tau-beta            2.2617
+## 
+## Critical values for Z statistics: 
+##                      1pct      5pct     10pct
+## critical values -3.994127 -3.427199 -3.136601
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.pp}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"Z{-}tau"}\NormalTok{, }\AttributeTok{model =} \StringTok{"constant"}\NormalTok{, }\AttributeTok{use.lag =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ################################## 
+## # Phillips-Perron Unit Root Test # 
+## ################################## 
+## 
+## Test regression with intercept 
+## 
+## 
+## Call:
+## lm(formula = y ~ y.l1)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.089442 -0.014571 -0.002497  0.009620  0.171964 
+## 
+## Coefficients:
+##             Estimate Std. Error t value            Pr(>|t|)    
+## (Intercept) 0.020316   0.015600   1.302               0.194    
+## y.l1        0.993054   0.005925 167.617 <0.0000000000000002 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02716 on 279 degrees of freedom
+## Multiple R-squared:  0.9902, Adjusted R-squared:  0.9901 
+## F-statistic: 2.81e+04 on 1 and 279 DF,  p-value: < 0.00000000000000022
+## 
+## 
+## Value of test-statistic, type: Z-tau  is: -1.2297 
+## 
+##          aux. Z statistics
+## Z-tau-mu            1.3459
+## 
+## Critical values for Z statistics: 
+##                      1pct     5pct     10pct
+## critical values -3.455219 -2.87195 -2.572274
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# DIFERENCIAS: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.pp}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"Z{-}tau"}\NormalTok{, }\AttributeTok{model =} \StringTok{"trend"}\NormalTok{, }\AttributeTok{use.lag =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ################################## 
+## # Phillips-Perron Unit Root Test # 
+## ################################## 
+## 
+## Test regression with intercept and trend 
+## 
+## 
+## Call:
+## lm(formula = y ~ y.l1 + trend)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.09095 -0.01306 -0.00158  0.01055  0.17069 
+## 
+## Coefficients:
+##                 Estimate   Std. Error t value   Pr(>|t|)    
+## (Intercept)  0.001572438  0.001579672   0.995      0.320    
+## y.l1         0.263626725  0.058071315   4.540 0.00000841 ***
+## trend       -0.000009351  0.000019483  -0.480      0.632    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02634 on 277 degrees of freedom
+## Multiple R-squared:  0.07036,    Adjusted R-squared:  0.06365 
+## F-statistic: 10.48 on 2 and 277 DF,  p-value: 0.00004089
+## 
+## 
+## Value of test-statistic, type: Z-tau  is: -12.3906 
+## 
+##            aux. Z statistics
+## Z-tau-mu              1.2352
+## Z-tau-beta           -0.4753
+## 
+## Critical values for Z statistics: 
+##                      1pct      5pct     10pct
+## critical values -3.994237 -3.427252 -3.136632
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.pp}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"Z{-}tau"}\NormalTok{, }\AttributeTok{model =} \StringTok{"constant"}\NormalTok{, }\AttributeTok{use.lag =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ################################## 
+## # Phillips-Perron Unit Root Test # 
+## ################################## 
+## 
+## Test regression with intercept 
+## 
+## 
+## Call:
+## lm(formula = y ~ y.l1)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.090664 -0.013492 -0.001331  0.010702  0.169754 
+## 
+## Coefficients:
+##             Estimate Std. Error t value   Pr(>|t|)    
+## (Intercept) 0.001566   0.001577   0.993      0.322    
+## y.l1        0.264342   0.057972   4.560 0.00000768 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.02631 on 278 degrees of freedom
+## Multiple R-squared:  0.06959,    Adjusted R-squared:  0.06624 
+## F-statistic: 20.79 on 1 and 278 DF,  p-value: 0.000007682
+## 
+## 
+## Value of test-statistic, type: Z-tau  is: -12.4037 
+## 
+##          aux. Z statistics
+## Z-tau-mu             0.969
+## 
+## Critical values for Z statistics: 
+##                      1pct      5pct     10pct
+## critical values -3.455298 -2.871985 -2.572293
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# KPSS: }
+
+\DocumentationTok{\#\#\# NIVELES: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.kpss}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"tau"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: tau with 5 lags. 
+## 
+## Value of test-statistic is: 0.3433 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.119 0.146  0.176 0.216
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.kpss}\NormalTok{(LDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"mu"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 5 lags. 
+## 
+## Value of test-statistic is: 4.429 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# DIFERENCIAS: Tipo de cambio}
+
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.kpss}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"tau"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: tau with 5 lags. 
+## 
+## Value of test-statistic is: 0.0701 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.119 0.146  0.176 0.216
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{ur.kpss}\NormalTok{(DLDatos[, }\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"mu"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 5 lags. 
+## 
+## Value of test-statistic is: 0.0801 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739
+\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 

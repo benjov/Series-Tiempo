@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
+<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
+<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="active" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="procesos-basados-en-vectores-autoregresivos" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos<a class="anchor" aria-label="anchor" href="#procesos-basados-en-vectores-autoregresivos"><i class="fas fa-link"></i></a>
+</h1>
+<p>En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más series. Como primer aproximación desarrollaremos el concepto de Causalidad de Granger. Mediante esta metodología discutiremos cuando dos series se causan estadísticamente. Posteriormente, introduciremos una técnica más sofisticada conocida como la metodología de Vectores Autoregresivos (VAR), la cual es una generalización de los procesos Autoregresivos (AR) que analizamos al principio del curso.</p>
+<div id="causalidad-de-granger" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Causalidad de Granger<a class="anchor" aria-label="anchor" href="#causalidad-de-granger"><i class="fas fa-link"></i></a>
+</h2>
+<p>Hasta ahora hemos supuesto que una serie puede ser explicada únicamente con la información contenida en ella misma. No obstante, en adelante trataremos de analizar el caso en el que buscamos determinar relaciones entre variables y cómo el comportamiento de una serie influye en las demás. Algunas relaciones más importantes son las llamadas causalidad. En este caso analizaremos el procedimiento de Granger (1969), conocido como causalidad de Granger. En adelante asumiremos que las series involucradas son debílmente estacionarias.</p>
+<p>Sean <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> dos series debílmente estacionarias. Definamos a <span class="math inline">\(I_t\)</span> un conjunto de toda la información disponible hasta el momento <span class="math inline">\(t\)</span>. Asimismo, digamos que <span class="math inline">\(\overline{X}_t\)</span> y <span class="math inline">\(\overline{Y}_t\)</span> son los conjuntos de toda la información disponible (actual y pasada) de <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, respectivamente. Es decir:
+<span class="math display">\[\begin{eqnarray*}
+    \overline{X}_t &amp; := &amp; \{ X_t, X_{t-1}, X_{t-2}, \ldots \} \\
+    \overline{Y}_t &amp; := &amp; \{ Y_t, Y_{t-1}, Y_{t-2}, \ldots \} \\
+    I_t &amp; := &amp; \overline{X}_t + \overline{Y}_t
+\end{eqnarray*}\]</span></p>
+Adicionalmnete, definamos <span class="math inline">\(\sigma^2(*)\)</span> como la varianza del término de error estimado de una regresión dada. Dicho lo anterior, digamos que:
+La definición anterior aplica de igual forma si se reemplaza a <span class="math inline">\(X\)</span> por <span class="math inline">\(Y\)</span> y a <span class="math inline">\(Y\)</span> por <span class="math inline">\(X\)</span>, respectivamente. De acuerdo a la definición anterior, existen 5 diferentes posibilidades de relaciones causales entre las dos series:
+<p>Por lo anterior, representaremos mediante un <span class="math inline">\(AR(p)\)</span> con variables exógenas lo siguiente:
+<span class="math display" id="eq:GrangerEq">\[\begin{equation}
+    A(L)
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{11}(L) &amp; a_{12}(L) \\ a_{21}(L) &amp; a_{22}(L)
+    \end{bmatrix}
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+    \tag{6.1}
+\end{equation}\]</span></p>
+<p>O en su versión <span class="math inline">\(MA(q)\)</span> con variables exógenas:
+<span class="math display">\[\begin{equation}
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    B(L)
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    b_{11}(L) &amp; b_{12}(L) \\ b_{21}(L) &amp; b_{22}(L)
+    \end{bmatrix}
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+\end{equation}\]</span></p>
+<p>Para determinar el test de causalidad utilizaremos una especificación similar a la de la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:GrangerEq">(6.1)</a>. Para probar si <span class="math inline">\(X\)</span> causa a <span class="math inline">\(Y\)</span> consideraremos la siguiente regresión:
+<span class="math display">\[\begin{equation}
+    Y_t = \alpha_0 + \sum^{k_1}_{k = 1} a^k_{11} Y_{t-k} + \sum^{k_2}_{k = k_0} a^k_{12} X_{t-k} + U_{1,t}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(k_0 = 1\)</span> y, en general, se asume que <span class="math inline">\(k_1 = k_2\)</span>. Asimismo, el valor de estas constantes se puede determinar con el cirterio de Akaike (o cualquier otro criterio de información). No obstante, algunos autores sugieren que una buena práctica es considerar valores de <span class="math inline">\(k_1\)</span> y <span class="math inline">\(k_2\)</span> 4, 8, 12 y 16.</p>
+<p>Dicho lo anterior, el test de causalidad de Granger se establece con una prueba F (similar a la definiada en el Apéndice de estas notas), en la cual se prueba la siguiente hipótesis nula:
+<span class="math display">\[\begin{equation}
+    H_0: a^1_{12} = a^2_{12} = \ldots = a^{k2}_{12} = 0
+\end{equation}\]</span></p>
+<p>Ahora veámos un ejemplo. Consideremos como variables analizadas al Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>), al Tipo de Cambio (<span class="math inline">\(TDC_t\)</span>) y al rendimiento anual de los Cetes a 28 días (<span class="math inline">\(CETE28_t\)</span>), todas desestacionalizadas para el periodo de enero de 2000 a julio de 2019. Dado que la metodología de Granger supone que las series son estacionarias, utilizaremos las diferencias logaritmicas de cada una de las tres series (es decir, utilizaremos una transformación del tipo <span class="math inline">\(ln(X_t) - ln(X_{t-1})\)</span>). La Figura <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig61">6.1</a> muestra las series en su transformación de diferencias logarítmicas.</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">strucchange</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://zoo.R-Forge.R-project.org/">zoo</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/">sandwich</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">urca</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">lmtest</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"BD/Datos_Ad.RData"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#</span></span>
+<span><span class="va">INPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">INPC_Ad</span>, </span>
+<span>           start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>           freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DLINPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">INPC_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">INPC_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>             start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>             freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">TC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">TC_Ad</span>, </span>
+<span>         start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>         freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DLTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">TC_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">TC_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>           start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>           freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">CETE28</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">CETE28_Ad</span>, </span>
+<span>             start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>             freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DLCETE28</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">CETE28_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">CETE28_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>               start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>               freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="co">#png("Plots/DLGranger.png", width = 800, height = 1200)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DLINPC</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Diferencias Logarítmicas del INPC"</span>,</span>
+<span>     col <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DLTC</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Diferencias Logarítmicas del Tipo de Cambio"</span>,</span>
+<span>     col <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DLCETE28</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Diferencias Logarítmicas de los Cetes a 28 dias"</span>,</span>
+<span>     col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig61"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig61-1.png" alt="Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$." width="672"><p class="caption">
+Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
+</p>
+</div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#dev.off()</span></span></code></pre></div>
+<p>Por simplicidad, en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:Granger">6.1</a> se muestra el resultado de aplicar el test de Granger a diferentes especificaciones, con rezagos 4, 8, 12 y 16, sólo para la serie de Tipo de Cambio en diferencias logarítmicas. En cada una de las pruebas se compara el modelo considerado como regresor a la variable que es candidata de causar, respecto del modelo si considerar a dicha variable.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:Granger">Table 6.1: </span> Prueba de si <span class="math inline">\(DLINPC_t\)</span> Granger causa a <span class="math inline">\(DLTC_t\)</span>.</caption>
+<thead><tr class="header">
+<th align="center">Rezagos</th>
+<th align="center">Estadiística F</th>
+<th align="center">Probabilidad (<span class="math inline">\(&gt;\)</span>F)</th>
+<th align="center">Significancia</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">3.2621</td>
+<td align="center">0.01265</td>
+<td align="center">*</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">1.9079</td>
+<td align="center">0.06030</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">12</td>
+<td align="center">2.2577</td>
+<td align="center">0.01067</td>
+<td align="center">*</td>
+</tr>
+<tr class="even">
+<td align="center">16</td>
+<td align="center">1.6735</td>
+<td align="center">0.05495</td>
+<td align="center">*</td>
+</tr>
+<tr class="odd">
+<td align="center">Notas:</td>
+<td align="center">***</td>
+<td align="center">signif.</td>
+<td align="center">al 0.1%</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">**</td>
+<td align="center">signif.</td>
+<td align="center">al 1%</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">*</td>
+<td align="center">signif.</td>
+<td align="center">al 5%</td>
+</tr>
+</tbody>
+</table></div>
+<p>De acuerdo con el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:Granger">6.1</a>, podemos concluir que existe información estadísticamente significativa para concluir que la inflación causa a la tasa de depreciación cambiaria, ambas medidas como las diferencias logaritmicas. El resto de los resultados para las otras combinaciones de causalidad se encuentran en el R Markdown llamado Clase 13 ubicado en el repositorio de GitHub.</p>
+</div>
+<div id="definición-y-representación-del-sistema-o-modelo-varp" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Definición y representación del Sistema o Modelo VAR(p)<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-varp"><i class="fas fa-link"></i></a>
+</h2>
+<p>En esta sección ampliaremos la discusión planteada en el apartado anterior. En el sentido de que en la sección pasada nuestra discusión se limito al análisis de causalidad entre dos variables a la vez, que si bien es posible extenderlo a más variables es un procedimiento limitado a casos particulares por las siguientes razones.</p>
+<p>El procediento de causalidad de Granger supone que es posible identificar un sistema de ecuaciones que debe conformarse una vez que se ha identificado el sentido de la causalidad. Así, el proceso anterior necesita del conocimiento previo de las relaciones que existen entre las varibles.</p>
+<p>Adicionalmente, no resuleve el problema más general qué esta relacionado con cómo identificar la causalidad cuando se tienen múltiples variables con múltiples sentidos de causalidad. En esta sección analizaremos una mejor aproximación al probelma de cómo identificar la causalidad múltiple. Por lo tanto, como mécanismo para solucionar el problema planteado, analizaremos el caso de un Sistema o Modelo de Vectores Autoregresivos conocido como VAR.</p>
+<p>El primer supuesto del que partiremos es que existe algún grado de endogenidad entre las variables considerdas en el análisis. Adicionalmente, el segundo supuesto que estableceremos es que requerimos que las variables que tengamos consideradas sean estacionarias.</p>
+<p>Por lo anterior diremos que un VAR es un procedimiento que sigue fundado en el supuesto de que las variables consideredas son estacionarias, sin que hasta el momento hallamos podido establecer un mécanismo de detección de dicha estacionariedad. Así, hasta este momento del curso hemos pasado de modelo univariados a modelo múltivariados, pero no hemos podido dejar de asumir que las series son estacionarias.</p>
+<p>Ahora bien, iniciaremos con el establecimiento de la representación del proceso. Digamos que tenemos un proceso estocástico <span class="math inline">\(\mathbf{X}\)</span> estacionario de dimensión <span class="math inline">\(k\)</span>. De esta forma la expresión reducida del modelo o el proceso <span class="math inline">\(VAR(p)\)</span> estará dado por:
+<span class="math display" id="eq:VARp">\[\begin{equation}
+    \mathbf{X}_t = \mathbf{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
+    \tag{6.2}
+\end{equation}\]</span></p>
+<p>Donde cada uno de las <span class="math inline">\(A_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, p\)</span>, son matrices cuadradas de dimensión <span class="math inline">\(k\)</span> y <span class="math inline">\(\mathbf{U}_t\)</span> representa un vector de dimensión <span class="math inline">\(k \times 1\)</span> con los residuales en el momento del tiempo <span class="math inline">\(t\)</span> que son un proceso pueramente aleatorio. También se incorpora un vector de términos constantes denominado como <span class="math inline">\(\mathbf{\delta}\)</span>, el cual es de dimensión <span class="math inline">\(k \times 1\)</span>.</p>
+<p>Así, la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> supone la siguiente estructura de vectores:
+<span class="math display">\[\begin{equation*}
+    \mathbf{X}_t =
+    \begin{bmatrix}
+    X_{1t} \\ X_{2t} \\ \vdots \\ X_{kt}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>Para cualquier <span class="math inline">\(i = 1, 2, \ldots, p\)</span>:
+<span class="math display">\[\begin{equation*}
+    \mathbf{X}_{t-i} =
+    \begin{bmatrix}
+    X_{1t-i} \\ X_{2t-i} \\ \vdots \\ X_{kt-i}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p><span class="math display">\[\begin{equation*}
+    \mathbf{\delta} =
+    \begin{bmatrix}
+    \delta_{1} \\ \delta_{2} \\ \vdots \\ \delta_{k}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>También, la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> supone que cada matriz <span class="math inline">\(A_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, p\)</span>, esta definida de la siguiente forma:
+<span class="math display">\[\begin{equation*}
+    \mathbf{A}_i =
+    \begin{bmatrix}
+    a^{(i)}_{11} &amp; a^{(i)}_{12} &amp; \ldots &amp; a^{(i)}_{1k} \\ a^{(i)}_{21} &amp; a^{(i)}_{22} &amp; \ldots &amp; a^{(i)}_{2k} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a^{(i)}_{k1} &amp; a^{(i)}_{k2} &amp; \ldots &amp; a^{(i)}_{kk}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>Retomando la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> y considerando que podemos ocupar el operador rezago <span class="math inline">\(L^j\)</span> de forma analóga al caso del modelo <span class="math inline">\(AR(p)\)</span>, pero aplicado a un vector, tenemos las siguientes ecuaciones:
+<span class="math display" id="eq:VARCorto">\[\begin{eqnarray}
+    \mathbf{X}_t - A_1 \mathbf{X}_{t-1} - A_2 \mathbf{X}_{t-2} - \ldots - A_p \mathbf{X}_{t-p} &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t-p} &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
+    (I_k - A_1 L - A_2 L^2 - \ldots - A_p L^p) \mathbf{X}_t &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{A}(L) \mathbf{X}_t &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t}
+    \tag{6.3}
+\end{eqnarray}\]</span></p>
+<p>Adicionalmente, requeriremos que dado que <span class="math inline">\(\mathbf{U}_t\)</span> es un proceso pueramente aleatorio, este debe cumplir con las siguientes condiciones:</p>
+<ol style="list-style-type: decimal">
+<li><p>El valor esperado del término de error es cero:
+<span class="math display">\[\begin{equation}
+   \mathbb{E}[\mathbf{U}_t] = 0
+  \end{equation}\]</span></p></li>
+<li><p>Existe una matriz de varianzas y covarianzas entre los términos de error contemporáneos dada por:
+<span class="math display" id="eq:SigmaVAR">\[\begin{eqnarray}
+   \mathbb{E}[\mathbf{U}_t \mathbf{U}_t']
+   &amp; = &amp;
+   \mathbb{E} \left[
+   \begin{bmatrix}
+   U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+   \end{bmatrix}
+   \begin{bmatrix}
+   U^{(t)}_{1} &amp; U^{(t)}_{2} &amp; \ldots &amp; U^{(t)}_{k}
+   \end{bmatrix}
+   \right] \nonumber \\
+   &amp; = &amp; \mathbb{E}
+   \begin{bmatrix}
+   U^{(t)}_{1} U^{(t)}_{1} &amp; U^{(t)}_{1} U^{(t)}_{2} &amp; \ldots &amp; U^{(t)}_{1} U^{(t)}_{k} \\
+   U^{(t)}_{2} U^{(t)}_{1} &amp; U^{(t)}_{2} U^{(t)}_{2} &amp; \ldots &amp; U^{(t)}_{2} U^{(t)}_{k} \\
+   \vdots &amp; \vdots &amp; \ldots &amp; \vdots \\
+   U^{(t)}_{k} U^{(t)}_{1} &amp; U^{(t)}_{k} U^{(t)}_{2} &amp; \ldots &amp; U^{(t)}_{k} U^{(t)}_{k}
+   \end{bmatrix} \nonumber \\
+   &amp; = &amp; \begin{bmatrix}
+   \sigma^2_1 &amp; \rho_{12} &amp; \ldots &amp; \rho_{1k} \\
+   \rho_{21} &amp; \sigma^2_2 &amp; \ldots &amp; \rho_{2k} \\
+   \vdots &amp; \vdots &amp; \ldots &amp; \vdots \\
+   \rho_{k1} &amp; \rho_{k2} &amp; \ldots &amp; \sigma^2_k
+   \end{bmatrix} \nonumber \\
+   &amp; = &amp; \mathbf{\Sigma}_{UU}
+   \tag{6.4}
+  \end{eqnarray}\]</span></p></li>
+<li><p>La matriz de varianzas y covarianzas no comtemporáneas es nula. Es decir, que para todo <span class="math inline">\(t \neq s\)</span>:
+<span class="math display" id="eq:RhoVAR">\[\begin{eqnarray}
+    \mathbb{E} [\mathbf{U}_t \mathbf{U}_s']
+    &amp; = &amp;
+    \mathbb{E} \left[
+    \begin{bmatrix}
+    U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+    \end{bmatrix}
+    \begin{bmatrix}
+    U^{(s)}_{1} &amp; U^{(s)}_{2} &amp; \ldots &amp; U^{(s)}_{k}
+    \end{bmatrix}
+    \right] \nonumber \\
+    &amp; =  &amp; \mathbb{E}
+    \begin{bmatrix}
+    U^{(t)}_{1} U^{(s)}_{1} &amp; U^{(t)}_{1} U^{(s)}_{2} &amp; \ldots &amp; U^{(t)}_{1} U^{(s)}_{k} \\
+    U^{(t)}_{2} U^{(s)}_{1} &amp; U^{(t)}_{2} U^{(s)}_{2} &amp; \ldots &amp; U^{(t)}_{2} U^{(s)}_{k} \\
+    \vdots &amp; \vdots &amp; \ldots &amp; \vdots \\
+    U^{(t)}_{k} U^{(s)}_{1} &amp; U^{(t)}_{k} U^{(s)}_{2} &amp; \ldots &amp; U^{(t)}_{k} U^{(s)}_{k}
+    \end{bmatrix} \nonumber \\
+    &amp; = &amp; \mathbf{0}
+    \tag{6.5}
+\end{eqnarray}\]</span></p></li>
+</ol>
+<p>Las ecuaciones <a href="procesos-basados-en-vectores-autoregresivos.html#eq:SigmaVAR">(6.4)</a> y <a href="procesos-basados-en-vectores-autoregresivos.html#eq:RhoVAR">(6.5)</a> significan que los residuales <span class="math inline">\(\mathbf{U}_t\)</span> pueden estar correlacionados entre ellos solo en el caso de que la información sea contemporánea, pero no tienen información en común entre residuales de otros periodos.</p>
+<p>Al igual que en el caso del modelo o especificación <span class="math inline">\(AR(p)\)</span> en la especificación del modelo <span class="math inline">\(VAR(p)\)</span> existen condiciones de estabilidad. Dichas condiciones están dadas por lo siguiente, definamos el siguiente polinomio que resulta de tomar la matriz <span class="math inline">\(\mathbf{A}(L)\)</span> en la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARCorto">(6.3)</a>:
+<span class="math display">\[\begin{equation}
+    Det[I_t - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
+\end{equation}\]</span></p>
+<p>Donde las raíces del polinomio cumplen que <span class="math inline">\(|z| \leq 1\)</span>, es decir, se ubican dentro del circulo unitario.</p>
+<p>La ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARCorto">(6.3)</a> puede ser rexpresada en una forma similar al un proceso de MA. Al respecto, de forma similar a la siguiente ecuación podemos construir un modelo <span class="math inline">\(VARMA(p,q)\)</span>, el cual no estudiamos es este curso.</p>
+<p>Reromando el primer planteamiento, podemos escribir:
+<span class="math display" id="eq:VARMAq">\[\begin{eqnarray}
+    \mathbf{X}_t &amp; = &amp; \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
+    &amp; = &amp; \mu + \beta(L) \mathbf{U}_t
+    \tag{6.6}
+\end{eqnarray}\]</span></p>
+<p>Por el lado de las matrices que representan la autocovarianza, estás resultan de resolver lo siguiente:
+<span class="math display">\[\begin{equation}
+    \Gamma_X(\tau) = E[(\mathbf{X}_t - \mu)(\mathbf{X}_{t-\tau} - \mu)']
+\end{equation}\]</span></p>
+<p>Ahora, sin pérdida de generalidad digamos que la especificación VAR(p) en la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> no tiene constante, por lo que <span class="math inline">\(\delta = 0\)</span>, lo que implica que <span class="math inline">\(\mu = 0\)</span>. De esta forma las matrices de autocovarianza resultan de:
+<span class="math display">\[\begin{eqnarray*}
+    \Gamma_X(\tau) &amp; = &amp; E[(\mathbf{X}_t)(\mathbf{X}_{t-\tau})'] \\
+    &amp; = &amp; A_1 E[(\mathbf{X}_{t-1})(\mathbf{X}_{t-\tau})'] + A_2 E[(\mathbf{X}_{t-2})(\mathbf{X}_{t-\tau})'] \\
+    &amp;   &amp; + \ldots + A_p E[(\mathbf{X}_{t-p})(\mathbf{X}_{t-\tau})'] + E[(\mathbf{U}_t(\mathbf{X}_{t-\tau})']
+\end{eqnarray*}\]</span></p>
+<p>Finalmente, al igual que en el caso <span class="math inline">\(AR(p)\)</span> requerimos de una métrica que nos permita determinar el número de rezagos óptimo <span class="math inline">\(p\)</span> en el <span class="math inline">\(VAR(p)\)</span>. Así, establecemos criterios de información similares a los del <span class="math inline">\(AR(p)\)</span> dados por:</p>
+<p>1.Final Prediction Error (FPE):
+<span class="math display">\[\begin{equation}
+        FPE(p) = \left[ \frac{T + kp + 1}{T - kp - 1} \right]^k |\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)|
+        \end{equation}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Akaike Criterion (AIC):
+<span class="math display">\[\begin{equation}
+     AIC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2}{T}
+     \end{equation}\]</span></p></li>
+<li><p>Hannan - Quinn Criterion (HQ):
+<span class="math display">\[\begin{equation}
+     HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(2))}{T}
+     \end{equation}\]</span></p></li>
+<li><p>Schwartz Criterion (SC):
+<span class="math display">\[\begin{equation}
+     SC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{ln(T)}{T}
+     \end{equation}\]</span></p></li>
+</ol>
+<p>Donde la matriz de varianzas y covarianzas contemporáneas estará dada por:
+<span class="math display">\[\begin{equation*}
+            \mathbf{\Sigma}_{\hat{U}\hat{U}}(p) = \mathbb{E} \left[
+            \begin{bmatrix}
+            U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+            \end{bmatrix}
+            \begin{bmatrix}
+            U^{(t)}_{1} &amp; U^{(t)}_{2} &amp; \ldots &amp; U^{(t)}_{k}
+            \end{bmatrix}
+            \right]
+        \end{equation*}\]</span></p>
+<p>Ahora veámos un ejemplo de estimación de <span class="math inline">\(VAR(p)\)</span>. Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción Industrial de los Estados Unidos, todas desestacionalizadas y para el período de enero de 2000 a julio de 2019. Dado que el supuesto estacionariedad sigue presente en nuestro análisis, emplearemos cada una de las series en su versión de diferencias logaritmicas. Las Figuras <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig62">6.2</a> y <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig63">6.3</a> muestra las series referidas.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">strucchange</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://zoo.R-Forge.R-project.org/">zoo</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sandwich.R-Forge.R-project.org/">sandwich</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">urca</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">lmtest</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"BD/Datos_Ad.RData"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#</span></span>
+<span><span class="va">DLINPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">INPC_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">INPC_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>             start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>             freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DLTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">TC_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">TC_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>           start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>           freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DLCETE28</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">CETE28_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">CETE28_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>               start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>               freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DLIGAE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">IGAE_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">IGAE_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>             start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>             freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DLIPI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">IPI_Ad</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">IPI_Ad</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>            freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">DLINPC</span>, <span class="va">DLTC</span>, <span class="va">DLCETE28</span>, <span class="va">DLIGAE</span>, <span class="va">DLIPI</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">[</span><span class="fl">2</span> <span class="op">:</span> <span class="fl">282</span>, <span class="op">]</span>, </span>
+<span>            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2</span><span class="op">)</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"s"</span>, </span>
+<span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"black"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logaritmicas"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylab <span class="op">=</span> <span class="st">"Variacion"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"INPC"</span>, <span class="st">"TC"</span>, <span class="st">"CETES28"</span>, <span class="st">"IGAE"</span>, <span class="st">"IPI"</span><span class="op">)</span>,</span>
+<span>       cex <span class="op">=</span> <span class="fl">0.6</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1</span>, </span>
+<span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"black"</span>, <span class="st">"purple"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig62"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig62-1.png" alt="Series en diferencias logarítmicas (Forma 1)" width="672"><p class="caption">
+Figure 6.2: Series en diferencias logarítmicas (Forma 1)
+</p>
+</div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"m"</span>, </span>
+<span>     col <span class="op">=</span> <span class="st">"darkgreen"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logaritmicas"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig63"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig63-1.png" alt="Series en diferencias logarítmicas (Forma 2)" width="672"><p class="caption">
+Figure 6.3: Series en diferencias logarítmicas (Forma 2)
+</p>
+</div>
+<p>Dicho lo anterior, a continuación mostraremos la tabla que resume el valor de los distintos criterios de información una especificación de un <span class="math inline">\(VAR(p)\)</span> con constante. Notése que es posible especificar un <span class="math inline">\(VAR(p)\)</span> con tendencia, caso que no aplica hasta este momento, ya que nuestro análisis de estacionariedad es claro respecto a la media constante (más adelante relajaremos este supuesto), lo cual elimina la poisiblidad de incluir una tendencia.</p>
+<p>En el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:SelectVAR">6.2</a> reportamos los resultados de aplicar una prueba de criterios de información para diferentes valores de reagos. Del cual se concluye que el número óptimo de residuales es 2 (según el crietrio AIC y el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es una buena práctica utilizarlo como referente principal.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:SelectVAR">Table 6.2: </span> Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
+<thead><tr class="header">
+<th align="center">Rezagos</th>
+<th align="center">AIC</th>
+<th align="center">HQ</th>
+<th align="center">SC</th>
+<th align="center">FPE</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">-4.636412e+01</td>
+<td align="center">-4.617847e+01</td>
+<td align="center">-4.590430e+01</td>
+<td align="center">7.317262e-21</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">-4.639541e+01</td>
+<td align="center">-4.605506e+01</td>
+<td align="center">-4.555241e+01</td>
+<td align="center">7.094216e-21</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">-4.635305e+01</td>
+<td align="center">-4.585799e+01</td>
+<td align="center">-4.512686e+01</td>
+<td align="center">7.407479e-21</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>De esta forma, justificamos la estimación de un <span class="math inline">\(VAR(2)\)</span>. Los resultados del mismo se repotartan en los siguientes cuadros, en los que se reporta el resultado de una de las ecuaciones. Los resultados restantes se encuentran en el Scrip Clase 14 que se encuentra en repositorio de GitHub. Primero mostraremos los resutlados de las raíces del polinomio caracteristico en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:RootsVAR">6.3</a>, seguido de un cuadro para la ecuación del IGAE en el Cuadro @ref(tab:IGAE_VAR) (por simplicidad se omiten las otras cuatro ecuaciones del VAR(2)), y del Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:SigmaVARp">6.5</a> con la matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:RootsVAR">Table 6.3: </span> Raíces del polinomio característico de un VAR(2).</caption>
+<thead><tr class="header">
+<th align="center">Rezagos</th>
+<th align="center">AIC</th>
+<th align="center">HQ</th>
+<th align="center">SC</th>
+<th align="center">FPE</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.7452</td>
+<td align="center">0.4403</td>
+<td align="center">0.4403</td>
+<td align="center">0.3503</td>
+<td align="center">0.3503</td>
+</tr>
+<tr class="even">
+<td align="center">0.3342</td>
+<td align="center">0.3342</td>
+<td align="center">0.3339</td>
+<td align="center">0.3339</td>
+<td align="center">0.06951</td>
+</tr>
+</tbody>
+</table></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:IGAEVAR">Table 6.4: </span> Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
+<thead><tr class="header">
+<th align="center">Variable</th>
+<th align="center">Coeficiente</th>
+<th align="center">Error Est.</th>
+<th align="center">Estad. t</th>
+<th align="center">Prob.(<span class="math inline">\(&gt;\)</span> t)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(DLINPC_{t-1}\)</span></td>
+<td align="center">-0.2584978</td>
+<td align="center">0.1658396</td>
+<td align="center">-1.559</td>
+<td align="center">0.120493</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLTC_{t-1}\)</span></td>
+<td align="center">0.0022016</td>
+<td align="center">0.0152876</td>
+<td align="center">0.144</td>
+<td align="center">0.885620</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(DLCETE28_{t-1}\)</span></td>
+<td align="center">0.0009547</td>
+<td align="center">0.0049115</td>
+<td align="center">0.194</td>
+<td align="center">0.846054</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLIGAE_{t-1}\)</span></td>
+<td align="center">-0.2351453</td>
+<td align="center">0.0699797</td>
+<td align="center">-3.360</td>
+<td align="center">0.000917 ***</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(DLIPI_{t-1}\)</span></td>
+<td align="center">0.2442406</td>
+<td align="center">0.0600502</td>
+<td align="center">4.067</td>
+<td align="center">6.62e-05 ***</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLINPC_{t-2}\)</span></td>
+<td align="center">-0.0775039</td>
+<td align="center">0.1694809</td>
+<td align="center">-0.457</td>
+<td align="center">0.647904</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(DLTC_{t-2}\)</span></td>
+<td align="center">-0.0413316</td>
+<td align="center">0.0144650</td>
+<td align="center">-2.857</td>
+<td align="center">0.004680 **</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLCETE28_{t-2}\)</span></td>
+<td align="center">0.0005341</td>
+<td align="center">0.0048058</td>
+<td align="center">0.111</td>
+<td align="center">0.911612</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(DLIGAE_{t-2}\)</span></td>
+<td align="center">-0.0646890</td>
+<td align="center">0.0693711</td>
+<td align="center">-0.933</td>
+<td align="center">0.352092</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLIPI_{t-2}\)</span></td>
+<td align="center">0.1796286</td>
+<td align="center">0.0620861</td>
+<td align="center">2.893</td>
+<td align="center">0.004195 **</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\delta_4\)</span></td>
+<td align="center">0.0030377</td>
+<td align="center">0.0008077</td>
+<td align="center">3.761</td>
+<td align="center">0.000217 ***</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Notas:</td>
+<td align="center">***</td>
+<td align="center">signif.</td>
+<td align="center">al 0.1%</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">**</td>
+<td align="center">signif.</td>
+<td align="center">al 1%</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">*</td>
+<td align="center">signif.</td>
+<td align="center">al 5%</td>
+</tr>
+</tbody>
+</table></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:SigmaVARp">Table 6.5: </span> Matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR(2).</caption>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"><span class="math inline">\(DLINPC_t\)</span></td>
+<td align="center"><span class="math inline">\(DLTC_t\)</span></td>
+<td align="center"><span class="math inline">\(DLCE28_t\)</span></td>
+<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
+<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLINPC_t\)</span></td>
+<td align="center">3.95e-06</td>
+<td align="center">3.19e-06</td>
+<td align="center">-1.83e-06</td>
+<td align="center">-5.29-07</td>
+<td align="center">1.34e-06</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(DLTC_t\)</span></td>
+<td align="center">3.19e-06</td>
+<td align="center">5.04e-04</td>
+<td align="center">4.27e-04</td>
+<td align="center">9.81e-06</td>
+<td align="center">1.61e-05</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLCE28_t\)</span></td>
+<td align="center">-1.83e-06</td>
+<td align="center">4.27e-04</td>
+<td align="center">4.63e-03</td>
+<td align="center">1.26e-05</td>
+<td align="center">2.76e-05</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
+<td align="center">-5.29e-07</td>
+<td align="center">9.81e-06</td>
+<td align="center">1.26e-05</td>
+<td align="center">2.43e-05</td>
+<td align="center">8.75e-06</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
+<td align="center">1.34e-06</td>
+<td align="center">1.61e-05</td>
+<td align="center">2.76e-05</td>
+<td align="center">8.75e-06</td>
+<td align="center">3.13e-05</td>
+</tr>
+</tbody>
+</table></div>
+<p>Finalmente, en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:DiagnosVAR">6.6</a> reportamos las pruebas de diagnóstico del VAR(2). Incluímos las pruebas de normalidad, autocorrelación parcial y de heterocedásticidad.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:DiagnosVAR">Table 6.6: </span> Pruebas de diagnóstico sobre los residuales del VAR(2).</caption>
+<colgroup>
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Estadística (rezagos)</th>
+<th align="center">Coeficiente</th>
+<th align="center">p-value</th>
+<th align="center">Conclusión</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Correlación Serial (<span class="math inline">\(\chi^2 (2)\)</span>)</td>
+<td align="center">59.436</td>
+<td align="center">0.1696</td>
+<td align="center">Existe autocorrelación serial</td>
+</tr>
+<tr class="even">
+<td align="center">Correlación Serial (<span class="math inline">\(\chi^2 (4)\)</span>)</td>
+<td align="center">127.17</td>
+<td align="center">0.03461</td>
+<td align="center">No existe autocorrelación serial</td>
+</tr>
+<tr class="odd">
+<td align="center">Correlación Serial (<span class="math inline">\(\chi^2 (6)\)</span>)</td>
+<td align="center">183.14</td>
+<td align="center">0.03393</td>
+<td align="center">No existe autocorrelación serial</td>
+</tr>
+<tr class="even">
+<td align="center">Normalidad - JB (<span class="math inline">\(\chi^2\)</span>)</td>
+<td align="center">2335</td>
+<td align="center">0.0000</td>
+<td align="center">Los residuales no son normales</td>
+</tr>
+<tr class="odd">
+<td align="center">ARCH (<span class="math inline">\(\chi^2 (2)\)</span>)</td>
+<td align="center">691.58</td>
+<td align="center">0.0000</td>
+<td align="center">Los residuales no son homocedásticos</td>
+</tr>
+</tbody>
+</table></div>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">Datos</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $selection
+## AIC(n)  HQ(n)  SC(n) FPE(n) 
+##      2      1      1      2 
+## 
+## $criteria
+##                                    1                             2
+## AIC(n) -43.4369385930444451560106245 -43.4878280980991220872056147
+## HQ(n)  -43.2759374580961733158801508 -43.1926593506939511257769482
+## SC(n)  -43.0360414131631969780755753 -42.7528499349835016118959174
+## FPE(n)   0.0000000000000000001366449   0.0000000000000000001298899
+##                                    3                             4
+## AIC(n) -43.4268489491758202802884625 -43.3868843889051234441467386
+## HQ(n)  -42.9975125893137573029889609 -42.8233804165861613455490442
+## SC(n)  -42.3577898028258275076041173 -41.9837442593207583740877453
+## FPE(n)   0.0000000000000000001381225   0.0000000000000000001438821
+##                                   5                             6
+## AIC(n) -43.293163285544032703455741 -43.2431704133633161291072611
+## HQ(n)  -42.595491700768178588987212 -42.4113312161305699987678963
+## SC(n)  -41.555942172725302441449458 -41.1718683173102135697263293
+## FPE(n)   0.000000000000000000158246   0.0000000000000000001667106
+##                                    7                             8
+## AIC(n) -43.2902076769675190348607430 -43.2419352439015938216471113
+## HQ(n)  -42.3242008672778737832231855 -42.1417608217550565541387186
+## SC(n)  -40.8848245976800441781051632 -40.5024711813797466675168835
+## FPE(n)   0.0000000000000000001595179   0.0000000000000000001680601
+##                                    9                            10
+## AIC(n) -43.2201406224138153788771888 -43.1788072276712782127106038
+## HQ(n)  -41.9857985878103789900706033 -41.8102975806109569134605408
+## SC(n)  -40.1465955766575959273723129 -39.7711811986806935692584375
+## FPE(n)   0.0000000000000000001726236   0.0000000000000000001810365
+##                                   11                            12
+## AIC(n) -43.1191364389135785017970193 -43.0502244962885995960277796
+## HQ(n)  -41.6164591793963580812487635 -41.4133796243144800541813311
+## SC(n)  -39.3774294266886144555428473 -38.9744365008292632523989596
+## FPE(n)   0.0000000000000000001936459   0.0000000000000000002093856</code></pre>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">VAR_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">Datos</span>, p <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## VAR Estimation Results:
+## ========================= 
+## Endogenous variables: DLINPC, DLTC, DLCETE28, DLIGAE, DLIPI 
+## Deterministic variables: const 
+## Sample size: 279 
+## Log Likelihood: 4142.895 
+## Roots of the characteristic polynomial:
+##  0.53  0.53 0.4501 0.4501 0.4425 0.4425 0.3251 0.3251 0.1677 0.1677
+## Call:
+## VAR(y = Datos, p = 2, type = "const")
+## 
+## 
+## Estimation results for equation DLINPC: 
+## ======================================= 
+## DLINPC = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value           Pr(&gt;|t|)    
+## DLINPC.l1    0.387061   0.063100   6.134 0.0000000030610259 ***
+## DLTC.l1     -0.004611   0.005286  -0.872             0.3839    
+## DLCETE28.l1  0.001229   0.002078   0.592             0.5546    
+## DLIGAE.l1   -0.022088   0.015077  -1.465             0.1441    
+## DLIPI.l1     0.009878   0.019363   0.510             0.6104    
+## DLINPC.l2   -0.006707   0.063621  -0.105             0.9161    
+## DLTC.l2      0.009608   0.005496   1.748             0.0816 .  
+## DLCETE28.l2  0.001827   0.002051   0.891             0.3737    
+## DLIGAE.l2    0.006544   0.014289   0.458             0.6473    
+## DLIPI.l2    -0.015245   0.019632  -0.777             0.4381    
+## const        0.002325   0.000294   7.908 0.0000000000000688 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.002176 on 268 degrees of freedom
+## Multiple R-Squared: 0.1783,  Adjusted R-squared: 0.1476 
+## F-statistic: 5.815 on 10 and 268 DF,  p-value: 0.00000006289 
+## 
+## 
+## Estimation results for equation DLTC: 
+## ===================================== 
+## DLTC = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value   Pr(&gt;|t|)    
+## DLINPC.l1   -1.344803   0.745382  -1.804    0.07233 .  
+## DLTC.l1      0.315786   0.062442   5.057 0.00000079 ***
+## DLCETE28.l1 -0.039912   0.024542  -1.626    0.10506    
+## DLIGAE.l1    0.379306   0.178102   2.130    0.03411 *  
+## DLIPI.l1    -0.514827   0.228727  -2.251    0.02521 *  
+## DLINPC.l2    0.071779   0.751538   0.096    0.92398    
+## DLTC.l2     -0.183813   0.064926  -2.831    0.00499 ** 
+## DLCETE28.l2  0.030125   0.024228   1.243    0.21481    
+## DLIGAE.l2    0.070713   0.168797   0.419    0.67561    
+## DLIPI.l2    -0.166610   0.231909  -0.718    0.47312    
+## const        0.006463   0.003473   1.861    0.06388 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.0257 on 268 degrees of freedom
+## Multiple R-Squared: 0.1425,  Adjusted R-squared: 0.1105 
+## F-statistic: 4.454 on 10 and 268 DF,  p-value: 0.000008102 
+## 
+## 
+## Estimation results for equation DLCETE28: 
+## ========================================= 
+## DLCETE28 = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## DLINPC.l1    3.933798   1.861561   2.113   0.0355 *
+## DLTC.l1      0.112997   0.155945   0.725   0.4693  
+## DLCETE28.l1  0.113300   0.061292   1.849   0.0656 .
+## DLIGAE.l1   -0.588758   0.444803  -1.324   0.1868  
+## DLIPI.l1     1.174496   0.571237   2.056   0.0407 *
+## DLINPC.l2   -2.213087   1.876936  -1.179   0.2394  
+## DLTC.l2      0.117661   0.162151   0.726   0.4687  
+## DLCETE28.l2  0.063398   0.060509   1.048   0.2957  
+## DLIGAE.l2   -0.237974   0.421565  -0.565   0.5729  
+## DLIPI.l2     1.110203   0.579183   1.917   0.0563 .
+## const       -0.007514   0.008674  -0.866   0.3872  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.06419 on 268 degrees of freedom
+## Multiple R-Squared: 0.08823, Adjusted R-squared: 0.05421 
+## F-statistic: 2.593 on 10 and 268 DF,  p-value: 0.005122 
+## 
+## 
+## Estimation results for equation DLIGAE: 
+## ======================================= 
+## DLIGAE = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value       Pr(&gt;|t|)    
+## DLINPC.l1    0.719855   0.393617   1.829         0.0685 .  
+## DLTC.l1     -0.218508   0.032974  -6.627 0.000000000188 ***
+## DLCETE28.l1  0.007718   0.012960   0.596         0.5520    
+## DLIGAE.l1    0.037559   0.094051   0.399         0.6900    
+## DLIPI.l1     0.389894   0.120785   3.228         0.0014 ** 
+## DLINPC.l2   -0.737653   0.396868  -1.859         0.0642 .  
+## DLTC.l2      0.073830   0.034286   2.153         0.0322 *  
+## DLCETE28.l2 -0.013542   0.012794  -1.058         0.2908    
+## DLIGAE.l2   -0.142845   0.089138  -1.603         0.1102    
+## DLIPI.l2    -0.154835   0.122465  -1.264         0.2072    
+## const        0.001637   0.001834   0.893         0.3729    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.01357 on 268 degrees of freedom
+## Multiple R-Squared: 0.3272,  Adjusted R-squared: 0.3021 
+## F-statistic: 13.03 on 10 and 268 DF,  p-value: &lt; 0.00000000000000022 
+## 
+## 
+## Estimation results for equation DLIPI: 
+## ====================================== 
+## DLIPI = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const 
+## 
+##              Estimate Std. Error t value      Pr(&gt;|t|)    
+## DLINPC.l1    0.042383   0.326611   0.130        0.8968    
+## DLTC.l1     -0.163742   0.027361  -5.985 0.00000000693 ***
+## DLCETE28.l1  0.012143   0.010754   1.129        0.2598    
+## DLIGAE.l1    0.098821   0.078041   1.266        0.2065    
+## DLIPI.l1     0.067742   0.100224   0.676        0.4997    
+## DLINPC.l2   -0.524835   0.329309  -1.594        0.1122    
+## DLTC.l2      0.053353   0.028449   1.875        0.0618 .  
+## DLCETE28.l2 -0.016237   0.010616  -1.529        0.1273    
+## DLIGAE.l2   -0.088483   0.073964  -1.196        0.2326    
+## DLIPI.l2    -0.082982   0.101618  -0.817        0.4149    
+## const        0.002361   0.001522   1.551        0.1220    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Residual standard error: 0.01126 on 268 degrees of freedom
+## Multiple R-Squared: 0.1978,  Adjusted R-squared: 0.1679 
+## F-statistic:  6.61 on 10 and 268 DF,  p-value: 0.000000003715 
+## 
+## 
+## 
+## Covariance matrix of residuals:
+##                 DLINPC          DLTC    DLCETE28       DLIGAE       DLIPI
+## DLINPC    0.0000047345 -0.0000001939 0.000004559  0.000006652  0.00000700
+## DLTC     -0.0000001939  0.0006606619 0.000369751 -0.000035441 -0.00003174
+## DLCETE28  0.0000045591  0.0003697510 0.004120747  0.000063618  0.00008525
+## DLIGAE    0.0000066522 -0.0000354410 0.000063618  0.000184234  0.00011641
+## DLIPI     0.0000069998 -0.0000317443 0.000085254  0.000116407  0.00012685
+## 
+## Correlation matrix of residuals:
+##             DLINPC      DLTC DLCETE28   DLIGAE   DLIPI
+## DLINPC    1.000000 -0.003466  0.03264  0.22524  0.2856
+## DLTC     -0.003466  1.000000  0.22409 -0.10159 -0.1097
+## DLCETE28  0.032640  0.224095  1.00000  0.07301  0.1179
+## DLIGAE    0.225240 -0.101585  0.07301  1.00000  0.7615
+## DLIPI     0.285629 -0.109656  0.11792  0.76147  1.0000</code></pre>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Diagnostic tests</span></span>
+<span></span>
+<span><span class="co">#### Normalidad:</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/normality.html">normality.test</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $JB
+## 
+##  JB-Test (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 36186, df = 10, p-value &lt; 0.00000000000000022
+## 
+## 
+## $Skewness
+## 
+##  Skewness only (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 1261, df = 5, p-value &lt; 0.00000000000000022
+## 
+## 
+## $Kurtosis
+## 
+##  Kurtosis only (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 34925, df = 5, p-value &lt; 0.00000000000000022</code></pre>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### Autocorrelacion Serial:</span></span>
+<span></span>
+<span><span class="co">#### LAGS = 2:</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Breusch-Godfrey LM test
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 74.839, df = 50, p-value = 0.013</code></pre>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### LAGS = 4:</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">4</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Breusch-Godfrey LM test
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 131.69, df = 100, p-value = 0.01849</code></pre>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### LAGS = 6:</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Breusch-Godfrey LM test
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 201.63, df = 150, p-value = 0.003147</code></pre>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### Homocedasticidad:</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/arch.html">arch.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.multi <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  ARCH (multivariate)
+## 
+## data:  Residuals of VAR object VAR_p
+## Chi-squared = 2122.4, df = 1350, p-value &lt; 0.00000000000000022</code></pre>
+</div>
+<div id="análisis-de-impulso-respuesta" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Análisis de Impulso-Respuesta<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-de-impulso-respuesta"><i class="fas fa-link"></i></a>
+</h2>
+<p>Una de las grandes ventajas que aporta el análisis de los modelos VAR es el análisis de Impulso-Respuesta. Dicho análisis busca cuantificar el efecto que tiene en <span class="math inline">\(\mathbf{X}_t\)</span> una innovación o cambio en los residuales de cualquiera de las variables en un momento definido. Partamos dela ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARMAq">(6.6)</a> de forma que tenemos:
+<span class="math display">\[\begin{eqnarray}
+    \mathbf{X}_t &amp; = &amp; \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
+    &amp; = &amp; \mu + \mathbf{B}(L) \mathbf{U}_t \nonumber \\
+    &amp; = &amp; \mu + \Psi_0 \mathbf{U}_t + \Psi_1 \mathbf{U}_{t-1} + \Psi_2 \mathbf{U}_{t-2} + \Psi_3 \mathbf{U}_{t-3} + \ldots
+\end{eqnarray}\]</span></p>
+<p>Donde <span class="math inline">\(\Psi_0 = I\)</span> y cada una de las <span class="math inline">\(\Psi_i = - \mathbf{B}_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots\)</span>. De esta forma se verifica el efecto que tiene en <span class="math inline">\(\mathbf{X}_t\)</span> cada las innovaciones pasadas. Por lo que el análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas matrices en las que hemos descompuesto a <span class="math inline">\(\mathbf{B}(L)\)</span>.</p>
+<p>Retomando el modelo <span class="math inline">\(VAR(2)\)</span> anteriormente estimado, en la Figura <a href="#fig:fig64"><strong>??</strong></a> reportamos las gráficas de Impulso-respuesta de la serie <span class="math inline">\(DLTC_t\)</span> ante cambios en los residuales del resto de las series y de la propia serie.</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">IR_DLINPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/irf.html">irf</a></span><span class="op">(</span><span class="va">VAR_p</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, boot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                 ci <span class="op">=</span> <span class="fl">0.95</span>, response <span class="op">=</span> <span class="st">"DLINPC"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">IR_DLINPC</span></span></code></pre></div>
+<pre><code>## 
+## Impulse response coefficients
+## $DLINPC
+##                 DLINPC
+##  [1,]  0.0021759002410
+##  [2,]  0.0008094393250
+##  [3,]  0.0002429936391
+##  [4,]  0.0001048999556
+##  [5,]  0.0000430519256
+##  [6,]  0.0000257195308
+##  [7,]  0.0000108405478
+##  [8,]  0.0000011471582
+##  [9,] -0.0000014256627
+## [10,] -0.0000009999499
+## [11,] -0.0000003443770
+## [12,] -0.0000001512886
+## [13,] -0.0000001157354
+## 
+## $DLTC
+##                 DLINPC
+##  [1,]  0.0000000000000
+##  [2,] -0.0000826837093
+##  [3,]  0.0003117546911
+##  [4,]  0.0002648974979
+##  [5,]  0.0000587162871
+##  [6,] -0.0000289491380
+##  [7,] -0.0000105463736
+##  [8,]  0.0000105785893
+##  [9,]  0.0000076216336
+## [10,] -0.0000004038885
+## [11,] -0.0000021138204
+## [12,] -0.0000004691794
+## [13,]  0.0000003771599
+## 
+## $DLCETE28
+##                  DLINPC
+##  [1,]  0.00000000000000
+##  [2,]  0.00006486928725
+##  [3,]  0.00013182636385
+##  [4,]  0.00003487943931
+##  [5,]  0.00004740702286
+##  [6,]  0.00003336371156
+##  [7,]  0.00001571609856
+##  [8,]  0.00000377046957
+##  [9,]  0.00000005672766
+## [10,]  0.00000025569500
+## [11,]  0.00000033794064
+## [12,]  0.00000004626880
+## [13,] -0.00000011376620
+## 
+## $DLIGAE
+##                  DLINPC
+##  [1,]  0.00000000000000
+##  [2,] -0.00021156780483
+##  [3,] -0.00017900748374
+##  [4,] -0.00001453803984
+##  [5,]  0.00004387550079
+##  [6,]  0.00001348412556
+##  [7,] -0.00000660541189
+##  [8,] -0.00000344927548
+##  [9,]  0.00000223865243
+## [10,]  0.00000206681740
+## [11,]  0.00000008258756
+## [12,] -0.00000046595182
+## [13,] -0.00000009698431
+## 
+## $DLIPI
+##                  DLINPC
+##  [1,]  0.00000000000000
+##  [2,]  0.00007038187903
+##  [3,] -0.00011077803202
+##  [4,] -0.00003218007799
+##  [5,] -0.00001697303009
+##  [6,]  0.00000048565947
+##  [7,]  0.00001045292187
+##  [8,]  0.00000469541763
+##  [9,]  0.00000035996398
+## [10,] -0.00000051048646
+## [11,]  0.00000005294854
+## [12,]  0.00000026647657
+## [13,]  0.00000009015073
+## 
+## 
+## Lower Band, CI= 0.95 
+## $DLINPC
+##                DLINPC
+##  [1,]  0.001864170847
+##  [2,]  0.000499776775
+##  [3,]  0.000002450675
+##  [4,] -0.000078104730
+##  [5,] -0.000075950781
+##  [6,] -0.000037958817
+##  [7,] -0.000025483439
+##  [8,] -0.000012332298
+##  [9,] -0.000011329253
+## [10,] -0.000007641493
+## [11,] -0.000004043746
+## [12,] -0.000001841703
+## [13,] -0.000001172170
+## 
+## $DLTC
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000286990353
+##  [3,]  0.000061870696
+##  [4,]  0.000078542144
+##  [5,] -0.000039820370
+##  [6,] -0.000095870183
+##  [7,] -0.000050900347
+##  [8,] -0.000019789658
+##  [9,] -0.000005574237
+## [10,] -0.000008547257
+## [11,] -0.000009189057
+## [12,] -0.000004530429
+## [13,] -0.000001945539
+## 
+## $DLCETE28
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000230649362
+##  [3,] -0.000196536071
+##  [4,] -0.000126449052
+##  [5,] -0.000058700460
+##  [6,] -0.000023095154
+##  [7,] -0.000007659372
+##  [8,] -0.000008557329
+##  [9,] -0.000008242220
+## [10,] -0.000005060508
+## [11,] -0.000002432306
+## [12,] -0.000001136291
+## [13,] -0.000001066601
+## 
+## $DLIGAE
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000410323921
+##  [3,] -0.000418493922
+##  [4,] -0.000146714896
+##  [5,] -0.000044408954
+##  [6,] -0.000035327961
+##  [7,] -0.000035119635
+##  [8,] -0.000022423812
+##  [9,] -0.000012260613
+## [10,] -0.000003350492
+## [11,] -0.000003212534
+## [12,] -0.000004039474
+## [13,] -0.000002483970
+## 
+## $DLIPI
+##                 DLINPC
+##  [1,]  0.0000000000000
+##  [2,] -0.0001982996896
+##  [3,] -0.0003103493634
+##  [4,] -0.0001445269721
+##  [5,] -0.0001147657072
+##  [6,] -0.0000494580078
+##  [7,] -0.0000148574620
+##  [8,] -0.0000103989132
+##  [9,] -0.0000059299583
+## [10,] -0.0000046364719
+## [11,] -0.0000029746270
+## [12,] -0.0000012355125
+## [13,] -0.0000008043852
+## 
+## 
+## Upper Band, CI= 0.95 
+## $DLINPC
+##               DLINPC
+##  [1,] 0.002423055334
+##  [2,] 0.001069138548
+##  [3,] 0.000514403106
+##  [4,] 0.000299906999
+##  [5,] 0.000185297033
+##  [6,] 0.000101768840
+##  [7,] 0.000056864142
+##  [8,] 0.000028728717
+##  [9,] 0.000018624195
+## [10,] 0.000012817976
+## [11,] 0.000006987585
+## [12,] 0.000004523406
+## [13,] 0.000002520736
+## 
+## $DLTC
+##               DLINPC
+##  [1,] 0.000000000000
+##  [2,] 0.000137344529
+##  [3,] 0.000583804216
+##  [4,] 0.000433186162
+##  [5,] 0.000171212748
+##  [6,] 0.000036307348
+##  [7,] 0.000034282255
+##  [8,] 0.000038723787
+##  [9,] 0.000024964010
+## [10,] 0.000009783037
+## [11,] 0.000003517692
+## [12,] 0.000003748501
+## [13,] 0.000003845745
+## 
+## $DLCETE28
+##               DLINPC
+##  [1,] 0.000000000000
+##  [2,] 0.000304305857
+##  [3,] 0.000373465696
+##  [4,] 0.000167853443
+##  [5,] 0.000127305791
+##  [6,] 0.000089751434
+##  [7,] 0.000049983292
+##  [8,] 0.000025579016
+##  [9,] 0.000012448007
+## [10,] 0.000006485072
+## [11,] 0.000004515005
+## [12,] 0.000002515525
+## [13,] 0.000001179168
+## 
+## $DLIGAE
+##                DLINPC
+##  [1,]  0.000000000000
+##  [2,] -0.000006014034
+##  [3,]  0.000035752798
+##  [4,]  0.000101880979
+##  [5,]  0.000107697317
+##  [6,]  0.000067291001
+##  [7,]  0.000019302644
+##  [8,]  0.000009260325
+##  [9,]  0.000010330953
+## [10,]  0.000010351320
+## [11,]  0.000004299667
+## [12,]  0.000002280664
+## [13,]  0.000001077557
+## 
+## $DLIPI
+##                DLINPC
+##  [1,] 0.0000000000000
+##  [2,] 0.0002938283073
+##  [3,] 0.0001164391542
+##  [4,] 0.0000642643310
+##  [5,] 0.0000621769713
+##  [6,] 0.0000441663489
+##  [7,] 0.0000332198998
+##  [8,] 0.0000181489496
+##  [9,] 0.0000082995640
+## [10,] 0.0000034179891
+## [11,] 0.0000034672138
+## [12,] 0.0000024110405
+## [13,] 0.0000009791902</code></pre>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#plot(IR_DLINPC)</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">IR_DLTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/irf.html">irf</a></span><span class="op">(</span><span class="va">VAR_p</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, boot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>               ci <span class="op">=</span> <span class="fl">0.95</span>, response <span class="op">=</span> <span class="st">"DLTC"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">IR_DLTC</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig64-1"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig64-1.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
+Figure 6.4: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig64-2"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig64-2.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
+Figure 6.5: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig64-3"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig64-3.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
+Figure 6.6: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig64-4"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig64-4.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
+Figure 6.7: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig64-5"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig64-5.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
+Figure 6.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+</p>
+</div>
+<p>Los resultados muestran que la respuesta de <span class="math inline">\(DLTC_t\)</span> ante impulsos en los términos de error fue estadísticamente significativo sólo para alguunos de los casos y en periodos cortos de tiempo. El resto de los resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase 15 que se ubica en el repositorio de GitHub.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></div>
+<div class="next"><a href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#procesos-basados-en-vectores-autoregresivos"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="nav-link" href="#causalidad-de-granger"><span class="header-section-number">6.1</span> Causalidad de Granger</a></li>
+<li><a class="nav-link" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-varp"><span class="header-section-number">6.2</span> Definición y representación del Sistema o Modelo VAR(p)</a></li>
+<li><a class="nav-link" href="#an%C3%A1lisis-de-impulso-respuesta"><span class="header-section-number">6.3</span> Análisis de Impulso-Respuesta</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-11-20.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

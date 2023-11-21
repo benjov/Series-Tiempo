@@ -412,7 +412,7 @@ ggsave("Pax_Metro.png", width = 20, height = 15, units = "cm")
 
 ```
 
-A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro \@ref(tab:foo). En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura \@ref(fig:fig33) se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza desntro de las cuales no se puede rechazar la hipotésis nula de que $H_0: \hat{\rho}(p) = 0$, para todo $\tau = 1, 2, \ldots, T-1$.
+A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro \@ref(tab:foo). En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura \@ref(fig:fig33) se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza dentro de las cuales no se puede rechazar la hipotésis nula de que $H_0: \hat{\rho}(p) = 0$, para todo $\tau = 1, 2, \ldots, T-1$.
 
 Table: (\#tab:foo) Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2019
 

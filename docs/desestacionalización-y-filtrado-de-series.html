@@ -48,6 +48,8 @@
 <li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
 <li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
 <li><a class="active" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
 </ul>
 
         <div class="book-extra">
@@ -73,7 +75,7 @@
 <p>Donde <span class="math inline">\(\Theta_P(.)\)</span>, <span class="math inline">\(\theta_p(.)\)</span>, <span class="math inline">\(\Psi_Q(.)\)</span> y <span class="math inline">\(\psi_q(.)\)</span> son polinomios de <span class="math inline">\(L\)</span> de orden <span class="math inline">\(P\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(Q\)</span> y <span class="math inline">\(q\)</span> respectivamente. En general, la representación es de una serie no estacionaria, aunque si <span class="math inline">\(D = d = 0\)</span> y las raíces del polinomio carácteristico (de los polinomios del lado izquierdo de la ecuación @ref(eq:ARIMA_seas) todas son más grandes que 1 en valor absoluto, el proceso modelado será estacionario.</p>
 <p>Si bien es cierto que existen otras formas de modelar la desestacionalización, como la modelación en diferencias con dummies para identificar ciertos patrones regulares, en los algorimtos disponibles como el X11 o X13-ARIMA-SEATS se emplea la formulación de la ecuación @ref(eq:ARIMA_seas). A continuación implementaremos la desestacionalización de una serie.</p>
 <p>Como ejemplo utilizaremos la serie del Índice Nacional de Precios al Consumidor (INPC). Podemos ver que la serie original del INPC y su ajuste estacional bajo una metodología X13-ARIMA-SEATS son como se muestra en la Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig51">5.1</a>.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_INPC_Adj.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig51"></span>
@@ -101,7 +103,7 @@ El mismo procesamiento puede ser seguido para todas las series que busquemos ana
 Donde <span class="math inline">\(\Delta g_t = g_t - g_{t-1}\)</span> y <span class="math inline">\(\Delta g_{t-1} = g_{t-1} - g_{t-2}\)</span>; <span class="math inline">\(c_t = X_t - g_t\)</span>, y el parámetro <span class="math inline">\(\lambda\)</span> es un número positivo que penaliza la variabilidad en el crecimiento de las series. De acuerdo con el trabajo de Hodrick y Prescott (1997) la constante <span class="math inline">\(\lambda\)</span> debe tomar valores especificos de acuerdo con la periodicidad de la series. Así, <span class="math inline">\(\lambda\)</span> será:
 <p>En resumen, podemos decir que el filtro de Hodrick y Prescott (1997) es un algoritmo que mimiza las distancias o variaciones de la trayectoria de largo plazo. De esta forma, determina una trayectoria estable de largo plazo, por lo que las desviaciones respecto de esta trayectoria serán componentes de ciclos de negocio o cambios transitorios (tanto positivos como negativos).</p>
 <p>A contiuación, ilustraremos el filtro de Hodrick y Prescott (1997) para dos series desestacionalizadas: <span class="math inline">\(INPC_t\)</span> y <span class="math inline">\(TC_t\)</span>. Las Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig52">5.2</a> y Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig53">5.3</a> muestran los resultados de la implementación del filtro.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_INPC_HP.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig52"></span>
@@ -109,7 +111,7 @@ Donde <span class="math inline">\(\Delta g_t = g_t - g_{t-1}\)</span> y <span cl
 Figure 5.2: Descomposición del Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)
 </p>
 </div>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_TC_HP.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig53"></span>
@@ -185,15 +187,9 @@ Figure 5.3: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(
 </div>
 </div>
 </div>
-
-
-
-
-
-
   <div class="chapter-nav">
 <div class="prev"><a href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></div>
-<div class="empty"></div>
+<div class="next"><a href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -218,7 +214,7 @@ Figure 5.3: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-09-25.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-11-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
