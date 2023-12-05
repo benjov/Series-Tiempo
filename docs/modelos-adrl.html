@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Modelos ADRL | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="9.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 9.1 muestra un esquema o diagrama de cómo podríamos...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Modelos ADRL | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="9.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 9.1 muestra un esquema o diagrama de cómo podríamos...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Modelos ADRL | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="9.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 9.1 muestra un esquema o diagrama de cómo podríamos...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
+<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
+<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
+<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
+<li><a class="active" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-adrl" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Modelos ADRL<a class="anchor" aria-label="anchor" href="#modelos-adrl"><i class="fas fa-link"></i></a>
+</h1>
+<div id="teoría" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Teoría<a class="anchor" aria-label="anchor" href="#teor%C3%ADa"><i class="fas fa-link"></i></a>
+</h2>
+<p>Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura <a href="modelos-adrl.html#fig:fig91">9.1</a> muestra un esquema o diagrama de cómo podríamos proceder para seleccionar el modelo correcto.</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/TimeSeries_Models.png"</span><span class="op">)</span> </span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig91"></span>
+<img src="Plots/TimeSeries_Models.png" alt="Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)" width="95%"><p class="caption">
+Figure 9.1: Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)
+</p>
+</div>
+<p>En este caso incorporaremos a los modelos autogregressive distributed lag models (ARDL, por sus siglas en inglés). En estos casos el procedimiento de Johansen no podría aplicarse directamennte cuando las variables incluidas son de un orden mixto o cuando simplemente todas no son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.</p>
+<p>Este tipo de modelos toma suficientes rezagos para capturar el mecanismo generador de datos. También es posible llegar a una especificación del mecanismo corrector de errores a partir de una trasformación lineal del ARDL.</p>
+<p>Consideremos la siguiente ecuación:
+<span class="math display" id="eq:EqARDL">\[\begin{equation}
+    Y_t = \alpha + \delta X_t + \gamma Z_t + U_t
+    \tag{9.1}
+\end{equation}\]</span></p>
+<p>Dada la ecuación <a href="modelos-adrl.html#eq:EqARDL">(9.1)</a> podemos establecer su forma de mecanismo corrector de errores en forma ARDL dada por:
+<span class="math display">\[\begin{eqnarray*}
+    \Delta Y_t &amp; = &amp; \alpha + \sum_{i = 1}^p \beta_i \Delta Y_{t-i} + \sum_{i = 1}^p \delta_i \Delta X_{t-i} + \sum_{i = 1}^p \gamma_i \Delta Z_{t-i} \\
+    &amp;  &amp; + \lambda_1 Y_{t-1} + \lambda_2 X_{t-1} + \lambda_3 Z_{t-1} + U_t
+\end{eqnarray*}\]</span></p>
+<p>Donde los coeficientes <span class="math inline">\(\beta_i\)</span>, <span class="math inline">\(\delta_i\)</span>, <span class="math inline">\(\gamma_i\)</span> representan la dinámica de corto plazo y las <span class="math inline">\(\lambda\)</span>’s la dinámica de largo plazo.</p>
+<p>La hipótesis nula (<span class="math inline">\(H_0\)</span>) es que las <span class="math inline">\(\lambda_1 + \lambda_2 + \lambda_3 = 0\)</span>, es decir, que no existe relación de largo plazo.</p>
+<p>En la práctica estimamos una especificación con rezafos distribuidos:
+<span class="math display">\[\begin{equation}
+    Y_t = \alpha + \sum_{i = 1}^p \beta_i Y_{t-i} + \sum_{i = 1}^p \delta_i X_{t-i} + \sum_{i = 1}^p \gamma_i Z_{t-i} + U_t
+\end{equation}\]</span></p>
+<p>Además de verificar si las series involucradas son estacionarias y decidir el número de reagos <span class="math inline">\(p\)</span> mediante criterios de información.</p>
+</div>
+<div id="ejemplo" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo"><i class="fas fa-link"></i></a>
+</h2>
+<div id="descripción-del-problema" class="section level3" number="9.2.1">
+<h3>
+<span class="header-section-number">9.2.1</span> DESCRIPCIÓN DEL PROBLEMA<a class="anchor" aria-label="anchor" href="#descripci%C3%B3n-del-problema"><i class="fas fa-link"></i></a>
+</h3>
+<p>Supongamos que queremos modelar el logaritmo de dinero (M2) como una función de LRY (logarithm of real income), IBO (bond rate) e IDE (bank deposit rate).</p>
+<ul>
+<li><p>El problema es que la aplicación de una regresión de MCO en datos no estacionarios daría lugar a una regresión espúria.</p></li>
+<li><p>Los parámetros estimados serían consistentes solo si las series estuvieran cointegradas.</p></li>
+</ul>
+</div>
+<div id="importamos-datos-desde-un-dataset-de-r" class="section level3" number="9.2.2">
+<h3>
+<span class="header-section-number">9.2.2</span> Importamos Datos desde un dataset de R:<a class="anchor" aria-label="anchor" href="#importamos-datos-desde-un-dataset-de-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>A data frame with 55 rows and 5 variables. Time period from 1974:Q1 until 1987:Q3.</p>
+<p>LRM: logarithm of real money, M2</p>
+<p>LRY: logarithm of real income</p>
+<p>LPY: logarithm of price deflator</p>
+<p>IBO: bond rate</p>
+<p>IDE: bank deposit rate</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://zoo.R-Forge.R-project.org/">zoo</a></span><span class="op">)</span> </span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/xts">xts</a></span><span class="op">)</span> </span></code></pre></div>
+<pre><code>## 
+## ######################### Warning from 'xts' package ##########################
+## #                                                                             #
+## # The dplyr lag() function breaks how base R's lag() function is supposed to  #
+## # work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #
+## # source() into this session won't work correctly.                            #
+## #                                                                             #
+## # Use stats::lag() to make sure you're not using dplyr::lag(), or you can add #
+## # conflictRules('dplyr', exclude = 'lag') to your .Rprofile to stop           #
+## # dplyr from breaking base R's lag() function.                                #
+## #                                                                             #
+## # Code in packages is not affected. It's protected by R's namespace mechanism #
+## # Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #
+## #                                                                             #
+## ###############################################################################</code></pre>
+<pre><code>## 
+## Attaching package: 'xts'</code></pre>
+<pre><code>## The following objects are masked from 'package:dplyr':
+## 
+##     first, last</code></pre>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Natsiopoulos/ARDL">ARDL</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## To cite the ARDL package in publications:
+## 
+## Use this reference to refer to the validity of the ARDL package.
+## 
+##   Natsiopoulos, Kleanthis, and Tzeremes, Nickolaos G. (2022). ARDL
+##   bounds test for cointegration: Replicating the Pesaran et al. (2001)
+##   results for the UK earnings equation using R. Journal of Applied
+##   Econometrics, 37(5), 1079-1090. https://doi.org/10.1002/jae.2919
+## 
+## Use this reference to cite this specific version of the ARDL package.
+## 
+##   Kleanthis Natsiopoulos and Nickolaos Tzeremes (2023). ARDL: ARDL, ECM
+##   and Bounds-Test for Cointegration. R package version 0.2.4.
+##   https://CRAN.R-project.org/package=ARDL</code></pre>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">denmark</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">denmark</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "LRM" "LRY" "LPY" "IBO" "IDE"</code></pre>
+</div>
+<div id="procedimiento" class="section level3" number="9.2.3">
+<h3>
+<span class="header-section-number">9.2.3</span> Procedimiento:<a class="anchor" aria-label="anchor" href="#procedimiento"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Calculamos un auto ADRL para determinar la combinación óptima de rezagos.</li>
+</ol>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/auto_ardl.html">auto_ardl</a></span><span class="op">(</span><span class="va">LRM</span> <span class="op">~</span> <span class="va">LRY</span> <span class="op">+</span> <span class="va">IBO</span> <span class="op">+</span> <span class="va">IDE</span>, data <span class="op">=</span> <span class="va">denmark</span>, max_order <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "best_model" "best_order" "top_orders"</code></pre>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="va">models</span><span class="op">$</span><span class="va">top_orders</span></span></code></pre></div>
+<pre><code>##    LRM LRY IBO IDE       AIC
+## 1    3   1   3   2 -251.0259
+## 2    3   1   3   3 -250.1144
+## 3    2   2   0   0 -249.6266
+## 4    3   2   3   2 -249.1087
+## 5    3   2   3   3 -248.1858
+## 6    2   2   0   1 -247.7786
+## 7    2   1   0   0 -247.5643
+## 8    2   2   1   1 -246.6885
+## 9    3   3   3   3 -246.3061
+## 10   2   2   1   2 -246.2709
+## 11   2   1   1   1 -245.8736
+## 12   2   2   2   2 -245.7722
+## 13   1   1   0   0 -245.6620
+## 14   2   1   2   2 -245.1712
+## 15   3   1   2   2 -245.0996
+## 16   1   0   0   0 -244.4317
+## 17   1   1   0   1 -243.7702
+## 18   5   5   5   5 -243.3120
+## 19   4   1   3   2 -243.0728
+## 20   4   1   3   3 -242.4378</code></pre>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="va">models</span><span class="op">$</span><span class="va">best_order</span></span></code></pre></div>
+<pre><code>## LRM LRY IBO IDE 
+##   3   1   3   2</code></pre>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="va">models</span><span class="op">$</span><span class="va">best_model</span></span></code></pre></div>
+<pre><code>## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Coefficients:
+## (Intercept)    L(LRM, 1)    L(LRM, 2)    L(LRM, 3)          LRY    L(LRY, 1)  
+##      2.6202       0.3192       0.5326      -0.2687       0.6728      -0.2574  
+##         IBO    L(IBO, 1)    L(IBO, 2)    L(IBO, 3)          IDE    L(IDE, 1)  
+##     -1.0785      -0.1062       0.2877      -0.9947       0.1255      -0.3280  
+##   L(IDE, 2)  
+##      1.4079</code></pre>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="va">BestMod</span> <span class="op">&lt;-</span> <span class="va">models</span><span class="op">$</span><span class="va">best_model</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">BestMod</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##             Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)   2.6202     0.5678   4.615 0.00004187 ***
+## L(LRM, 1)     0.3192     0.1367   2.336   0.024735 *  
+## L(LRM, 2)     0.5326     0.1324   4.024   0.000255 ***
+## L(LRM, 3)    -0.2687     0.1021  -2.631   0.012143 *  
+## LRY           0.6728     0.1312   5.129 0.00000832 ***
+## L(LRY, 1)    -0.2574     0.1472  -1.749   0.088146 .  
+## IBO          -1.0785     0.3217  -3.353   0.001790 ** 
+## L(IBO, 1)    -0.1062     0.5858  -0.181   0.857081    
+## L(IBO, 2)     0.2877     0.5691   0.505   0.616067    
+## L(IBO, 3)    -0.9947     0.3925  -2.534   0.015401 *  
+## IDE           0.1255     0.5545   0.226   0.822161    
+## L(IDE, 1)    -0.3280     0.7213  -0.455   0.651847    
+## L(IDE, 2)     1.4079     0.5520   2.550   0.014803 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.0191 on 39 degrees of freedom
+## Multiple R-squared:  0.988,  Adjusted R-squared:  0.9843 
+## F-statistic: 266.8 on 12 and 39 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>UECM (Unrestricted Error Correction Model) of the underlying ARDL.</li>
+</ol>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">UECM_BestMod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/uecm.html">uecm</a></span><span class="op">(</span><span class="va">BestMod</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">UECM_BestMod</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##              Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)   2.62019    0.56777   4.615 0.00004187 ***
+## L(LRM, 1)    -0.41685    0.09166  -4.548 0.00005154 ***
+## L(LRY, 1)     0.41538    0.11761   3.532    0.00108 ** 
+## L(IBO, 1)    -1.89172    0.39111  -4.837 0.00002093 ***
+## L(IDE, 1)     1.20534    0.44690   2.697    0.01028 *  
+## d(L(LRM, 1)) -0.26394    0.10192  -2.590    0.01343 *  
+## d(L(LRM, 2))  0.26867    0.10213   2.631    0.01214 *  
+## d(LRY)        0.67280    0.13116   5.129 0.00000832 ***
+## d(IBO)       -1.07852    0.32170  -3.353    0.00179 ** 
+## d(L(IBO, 1))  0.70701    0.46874   1.508    0.13953    
+## d(L(IBO, 2))  0.99468    0.39251   2.534    0.01540 *  
+## d(IDE)        0.12546    0.55445   0.226    0.82216    
+## d(L(IDE, 1)) -1.40786    0.55204  -2.550    0.01480 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.0191 on 39 degrees of freedom
+## Multiple R-squared:  0.7458, Adjusted R-squared:  0.6676 
+## F-statistic: 9.537 on 12 and 39 DF,  p-value: 0.00000003001</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>RECM (Restricted Error Correction Model) of the underlying ARDL
+Obs: allowing the constant to join the short-run relationship (case 2), instead of the long-run (case 3)</li>
+</ol>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">RECM_BestMod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/recm.html">recm</a></span><span class="op">(</span><span class="va">UECM_BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">RECM_BestMod</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##              Estimate Std. Error t value    Pr(&gt;|t|)    
+## d(L(LRM, 1)) -0.26394    0.09008  -2.930    0.005405 ** 
+## d(L(LRM, 2))  0.26867    0.09127   2.944    0.005214 ** 
+## d(LRY)        0.67280    0.11591   5.805 0.000000703 ***
+## d(IBO)       -1.07852    0.30025  -3.592    0.000837 ***
+## d(L(IBO, 1))  0.70701    0.44359   1.594    0.118300    
+## d(L(IBO, 2))  0.99468    0.36491   2.726    0.009242 ** 
+## d(IDE)        0.12546    0.48290   0.260    0.796248    
+## d(L(IDE, 1)) -1.40786    0.48867  -2.881    0.006160 ** 
+## ect          -0.41685    0.07849  -5.311 0.000003633 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.01819 on 43 degrees of freedom
+##   (0 observations deleted due to missingness)
+## Multiple R-squared:  0.7613, Adjusted R-squared:  0.7113 
+## F-statistic: 15.24 on 9 and 43 DF,  p-value: 0.00000000009545</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>long-run levels relationship (cointegration)</li>
+</ol>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/bounds_f_test.html">bounds_f_test</a></span><span class="op">(</span><span class="va">BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Bounds F-test (Wald) for no cointegration
+## 
+## data:  d(LRM) ~ L(LRM, 1) + L(LRY, 1) + L(IBO, 1) + L(IDE, 1) + d(L(LRM,     1)) + d(L(LRM, 2)) + d(LRY) + d(IBO) + d(L(IBO, 1)) + d(L(IBO,     2)) + d(IDE) + d(L(IDE, 1))
+## F = 5.1168, p-value = 0.004418
+## alternative hypothesis: Possible cointegration
+## null values:
+##    k    T 
+##    3 1000</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Long-run multipliers (with standard errors, t-statistics and p-values)</li>
+</ol>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/multipliers.html">multipliers</a></span><span class="op">(</span><span class="va">BestMod</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##          Term   Estimate Std. Error   t value           Pr(&gt;|t|)
+## 1 (Intercept)  6.2856579  0.7719160  8.142930 0.0000000006107445
+## 2         LRY  0.9964676  0.1239310  8.040503 0.0000000008358472
+## 3         IBO -4.5381160  0.5202961 -8.722180 0.0000000001058619
+## 4         IDE  2.8915201  0.9950853  2.905801 0.0060092393605960</code></pre>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="va">Result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/coint_eq.html">coint_eq</a></span><span class="op">(</span><span class="va">BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="make-the-plot" class="section level3" number="9.2.4">
+<h3>
+<span class="header-section-number">9.2.4</span> Make the plot<a class="anchor" aria-label="anchor" href="#make-the-plot"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/zoo/man/merge.zoo.html">cbind.zoo</a></span><span class="op">(</span>LRM <span class="op">=</span> <span class="va">denmark</span><span class="op">[</span>,<span class="st">"LRM"</span><span class="op">]</span>, <span class="va">Result</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xts/man/xts.html">xts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, legend.loc <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig92"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig92-1.png" alt="Gráfica de la ecuación de cointegración" width="95%"><p class="caption">
+Figure 9.2: Gráfica de la ecuación de cointegración
+</p>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#modelos-adrl"><span class="header-section-number">9</span> Modelos ADRL</a></li>
+<li><a class="nav-link" href="#teor%C3%ADa"><span class="header-section-number">9.1</span> Teoría</a></li>
+<li>
+<a class="nav-link" href="#ejemplo"><span class="header-section-number">9.2</span> Ejemplo</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#descripci%C3%B3n-del-problema"><span class="header-section-number">9.2.1</span> DESCRIPCIÓN DEL PROBLEMA</a></li>
+<li><a class="nav-link" href="#importamos-datos-desde-un-dataset-de-r"><span class="header-section-number">9.2.2</span> Importamos Datos desde un dataset de R:</a></li>
+<li><a class="nav-link" href="#procedimiento"><span class="header-section-number">9.2.3</span> Procedimiento:</a></li>
+<li><a class="nav-link" href="#make-the-plot"><span class="header-section-number">9.2.4</span> Make the plot</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2023-12-04.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

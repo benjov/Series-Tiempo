@@ -1,0 +1,152 @@
+# Modelos ADRL
+
+## Teoría
+
+Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura \@ref(fig:fig91) muestra un esquema o diagrama de cómo podríamos proceder para seleccionar el modelo correcto.
+
+```{r fig91, out.width='95%', fig.cap = "Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)", fig.align='center'}
+
+knitr::include_graphics("Plots/TimeSeries_Models.png") 
+
+```
+
+En este caso incorporaremos a los modelos autogregressive distributed lag models (ARDL, por sus siglas en inglés). En estos casos el procedimiento de Johansen no podría aplicarse directamennte cuando las variables incluidas son de un orden mixto o cuando simplemente todas no son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.
+
+Este tipo de modelos toma suficientes rezagos para capturar el mecanismo generador de datos. También es posible llegar a una especificación del mecanismo corrector de errores a partir de una trasformación lineal del ARDL. 
+
+Consideremos la siguiente ecuación:
+\begin{equation}
+    Y_t = \alpha + \delta X_t + \gamma Z_t + U_t
+    (\#eq:EqARDL)
+\end{equation}
+
+Dada la ecuación \@ref(eq:EqARDL) podemos establecer su forma de mecanismo corrector de errores en forma ARDL dada por:
+\begin{eqnarray*}
+    \Delta Y_t & = & \alpha + \sum_{i = 1}^p \beta_i \Delta Y_{t-i} + \sum_{i = 1}^p \delta_i \Delta X_{t-i} + \sum_{i = 1}^p \gamma_i \Delta Z_{t-i} \\ 
+    &  & + \lambda_1 Y_{t-1} + \lambda_2 X_{t-1} + \lambda_3 Z_{t-1} + U_t
+\end{eqnarray*}
+
+Donde los coeficientes $\beta_i$, $\delta_i$, $\gamma_i$ representan la dinámica de corto plazo y las $\lambda$'s la dinámica de largo plazo.
+
+La hipótesis nula ($H_0$) es que las $\lambda_1 + \lambda_2 + \lambda_3 = 0$, es decir, que no existe relación de largo plazo.
+
+En la práctica estimamos una especificación con rezafos distribuidos:
+\begin{equation}
+    Y_t = \alpha + \sum_{i = 1}^p \beta_i Y_{t-i} + \sum_{i = 1}^p \delta_i X_{t-i} + \sum_{i = 1}^p \gamma_i Z_{t-i} + U_t
+\end{equation}
+
+Además de verificar si las series involucradas son estacionarias y decidir el número de reagos $p$ mediante criterios de información.
+
+## Ejemplo
+
+### DESCRIPCIÓN DEL PROBLEMA
+
+Supongamos que queremos modelar el logaritmo de dinero (M2) como una función de LRY (logarithm of real income), IBO (bond rate) e IDE (bank deposit rate). 
+
+* El problema es que la aplicación de una regresión de MCO en datos no estacionarios daría lugar a una regresión espúria. 
+
+* Los parámetros estimados serían consistentes solo si las series estuvieran cointegradas.
+ 
+### Importamos Datos desde un dataset de R:
+
+A data frame with 55 rows and 5 variables. Time period from 1974:Q1 until 1987:Q3.
+
+LRM: logarithm of real money, M2
+
+LRY: logarithm of real income
+
+LPY: logarithm of price deflator
+
+IBO: bond rate
+
+IDE: bank deposit rate
+
+```{r warning=FALSE}
+
+library(zoo) 
+library(xts) 
+library(ARDL)
+
+#
+data(denmark)
+
+names(denmark)
+
+```
+
+### Procedimiento:
+
+1. Calculamos un auto ADRL para determinar la combinación óptima de rezagos.
+
+```{r warning=FALSE}
+
+models <- auto_ardl(LRM ~ LRY + IBO + IDE, data = denmark, max_order = 5)
+
+names(models)
+
+#
+models$top_orders
+
+#
+models$best_order
+
+#
+models$best_model
+
+#
+BestMod <- models$best_model
+
+summary(BestMod)
+
+```
+
+2. UECM (Unrestricted Error Correction Model) of the underlying ARDL.
+```{r warning=FALSE}
+
+UECM_BestMod <- uecm(BestMod)
+
+summary(UECM_BestMod)
+
+```
+
+3. RECM (Restricted Error Correction Model) of the underlying ARDL
+Obs: allowing the constant to join the short-run relationship (case 2), instead of the long-run (case 3)
+
+```{r warning=FALSE}
+
+RECM_BestMod <- recm(UECM_BestMod, case = 2)
+
+summary(RECM_BestMod)
+
+```
+
+4. long-run levels relationship (cointegration) 
+
+```{r warning=FALSE}
+
+bounds_f_test(BestMod, case = 2)
+
+```
+
+5. Long-run multipliers (with standard errors, t-statistics and p-values)
+
+```{r warning=FALSE}
+
+multipliers(BestMod)
+
+#
+Result <- coint_eq(BestMod, case = 2)
+
+```
+
+### Make the plot
+
+```{r fig92, out.width='95%', fig.cap = "Gráfica de la ecuación de cointegración", fig.align='center'}
+
+Datos <- cbind.zoo(LRM = denmark[,"LRM"], Result)
+
+Datos <- xts(Datos)
+
+plot(Datos, legend.loc = "right")
+
+```

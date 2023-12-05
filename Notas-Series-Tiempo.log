@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.11.19)  20 NOV 2023 23:45
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.2)  4 DEC 2023 21:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -401,31 +401,30 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count316
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2023-11-09 v7.01f Hypertext links for LaTeX
-(/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+Package: hyperref 2023-11-26 v7.01g Hypertext links for LaTeX
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-)
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode not found.
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+(/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2023-11-09 v2.55 Cross-referencing by name of section
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
@@ -439,28 +438,28 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 \Hy@linkcounter=\count318
 \Hy@pagecounter=\count319
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2023-11-09 v7.01f Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2023-11-26 v7.01g Hyperref: PDFDocEncoding definition (HO)
 ) (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count320
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2023-11-09 v7.01f Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2023-11-26 v7.01g Hyperref: PDF Unicode definition (HO)
 )
-Package hyperref Info: Option `unicode' set `true' on input line 4054.
-Package hyperref Info: Hyper figures OFF on input line 4171.
-Package hyperref Info: Link nesting OFF on input line 4176.
-Package hyperref Info: Hyper index ON on input line 4179.
-Package hyperref Info: Plain pages OFF on input line 4186.
-Package hyperref Info: Backreferencing OFF on input line 4191.
+Package hyperref Info: Option `unicode' set `true' on input line 4064.
+Package hyperref Info: Hyper figures OFF on input line 4181.
+Package hyperref Info: Link nesting OFF on input line 4186.
+Package hyperref Info: Hyper index ON on input line 4189.
+Package hyperref Info: Plain pages OFF on input line 4196.
+Package hyperref Info: Backreferencing OFF on input line 4201.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4438.
+Package hyperref Info: Bookmarks ON on input line 4448.
 \c@Hy@tempcnt=\count321
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4776.
+LaTeX Info: Redefining \url on input line 4786.
 \XeTeXLinkMargin=\dimen197
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -470,13 +469,13 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 \Fld@menulength=\count322
 \Field@Width=\dimen198
 \Fld@charsize=\dimen199
-Package hyperref Info: Hyper figures OFF on input line 6055.
-Package hyperref Info: Link nesting OFF on input line 6060.
-Package hyperref Info: Hyper index ON on input line 6063.
-Package hyperref Info: backreferencing OFF on input line 6070.
-Package hyperref Info: Link coloring OFF on input line 6075.
-Package hyperref Info: Link coloring with OCG OFF on input line 6080.
-Package hyperref Info: PDF/A mode OFF on input line 6085.
+Package hyperref Info: Hyper figures OFF on input line 6065.
+Package hyperref Info: Link nesting OFF on input line 6070.
+Package hyperref Info: Hyper index ON on input line 6073.
+Package hyperref Info: backreferencing OFF on input line 6080.
+Package hyperref Info: Link coloring OFF on input line 6085.
+Package hyperref Info: Link coloring with OCG OFF on input line 6090.
+Package hyperref Info: PDF/A mode OFF on input line 6095.
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
@@ -487,7 +486,7 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2023-11-09 v7.01f Hyperref driver for XeTeX
+File: hxetex.def 2023-11-26 v7.01g Hyperref driver for XeTeX
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
@@ -1507,9 +1506,6 @@ File: Notas-Series-Tiempo_files/figure-latex/fig74-1.pdf Graphic file (type pdf)
 [149] [150]
 File: Notas-Series-Tiempo_files/figure-latex/fig75-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig75-1.pdf>
-
-LaTeX Warning: Reference `Result_UR' on page 151 undefined on input line 5470.
-
 [151]
 Underfull \vbox (badness 1648) has occurred while \output is active []
 
@@ -1603,9 +1599,226 @@ Overfull \hbox (38.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## F-statistic: 2.81e+04 on 1 and 279 DF,  p-value: < 0.00000000000000022[] 
  []
 
-[164] [165] [166]
+[164] [165] [166] [167] [168
+
+]
+Chapter 9.
+
+Overfull \hbox (0.44151pt too wide) in paragraph at lines 6296--6296
+[]\TU/lmr/bx/n/14.4 Definición y propiedades del proceso de coin-
+ []
+
+[169] [170]
+Overfull \hbox (321.35463pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 9.2.  COINTEGRACIÓN PARA MODELOS DE MÁS DE UNA ECUACIÓN O PARA MODELOS BASADOS EN VECTORES AUTOREGRESIVOS \TU/lmr/m/n/10 171
+ []
+
+[171]
+File: Notas-Series-Tiempo_files/figure-latex/fig81-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig81-1.pdf>
+[172]
+File: Notas-Series-Tiempo_files/figure-latex/fig82-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig82-1.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/fig83-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig83-1.pdf>
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+[173] [174] [175]
+File: Notas-Series-Tiempo_files/figure-latex/fig84-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig84-1.pdf>
+[176] [177] [178
+
+]
+Chapter 10.
+File: Plots/TimeSeries_Models.png Graphic file (type bmp)
+<Plots/TimeSeries_Models.png>
+[179] [180]
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## ######################### Warning from 'xts' package ##########################[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## #                                                                             #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # The dplyr lag() function breaks how base R's lag() function is supposed to  #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # source() into this session won't work correctly.                            #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## #                                                                             #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # Use stats::lag() to make sure you're not using dplyr::lag(), or you can add #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # conflictRules('dplyr', exclude = 'lag') to your .Rprofile to stop           #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # dplyr from breaking base R's lag() function.                                #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## #                                                                             #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # Code in packages is not affected. It's protected by R's namespace mechanism #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## # Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## #                                                                             #[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 6661--6661
+[]\TU/lmtt/m/n/10 ## ###############################################################################[] 
+ []
+
+[181]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6695--6695
+[]\TU/lmtt/m/n/10 ## Use this reference to refer to the validity of the ARDL package.[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6695--6695
+[]\TU/lmtt/m/n/10 ##   Natsiopoulos, Kleanthis, and Tzeremes, Nickolaos G. (2022). ARDL[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 6695--6695
+[]\TU/lmtt/m/n/10 ##   bounds test for cointegration: Replicating the Pesaran et al. (2001)[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6695--6695
+[]\TU/lmtt/m/n/10 ##   results for the UK earnings equation using R. Journal of Applied[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6695--6695
+[]\TU/lmtt/m/n/10 ##   Econometrics, 37(5), 1079-1090. https://doi.org/10.1002/jae.2919[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 6695--6695
+[]\TU/lmtt/m/n/10 ## Use this reference to cite this specific version of the ARDL package.[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 6695--6695
+[]\TU/lmtt/m/n/10 ##   Kleanthis Natsiopoulos and Nickolaos Tzeremes (2023). ARDL: ARDL, ECM[] 
+ []
+
+[182]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6798--6798
+[]\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 6798--6798
+[]\TU/lmtt/m/n/10 ## (Intercept)    L(LRM, 1)    L(LRM, 2)    L(LRM, 3)          LRY    L(LRY, 1)[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 6798--6798
+[]\TU/lmtt/m/n/10 ##      2.6202       0.3192       0.5326      -0.2687       0.6728      -0.2574[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 6798--6798
+[]\TU/lmtt/m/n/10 ##         IBO    L(IBO, 1)    L(IBO, 2)    L(IBO, 3)          IDE    L(IDE, 1)[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 6798--6798
+[]\TU/lmtt/m/n/10 ##     -1.0785      -0.1062       0.2877      -0.9947       0.1255      -0.3280[] 
+ []
+
+[183]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6843--6843
+[]\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 6843--6843
+[]\TU/lmtt/m/n/10 ## F-statistic: 266.8 on 12 and 39 DF,  p-value: < 0.00000000000000022[] 
+ []
+
+[184]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6895--6895
+[]\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
+ []
+
+[185]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6945--6945
+[]\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
+ []
+
+
+Overfull \hbox (568.5pt too wide) in paragraph at lines 6971--6971
+[]\TU/lmtt/m/n/10 ## data:  d(LRM) ~ L(LRM, 1) + L(LRY, 1) + L(IBO, 1) + L(IDE, 1) + d(L(LRM,     1)) + d(L(LRM, 2)) + d(LRY) + d(IBO) + d(L(IBO, 1)) + d(L(IBO,     2)) + d(IDE) + d(L(IDE, 1))[] 
+ []
+
+[186]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6993--6993
+[]\TU/lmtt/m/n/10 ##          Term   Estimate Std. Error   t value           Pr(>|t|)[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6993--6993
+[]\TU/lmtt/m/n/10 ## 1 (Intercept)  6.2856579  0.7719160  8.142930 0.0000000006107445[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6993--6993
+[]\TU/lmtt/m/n/10 ## 2         LRY  0.9964676  0.1239310  8.040503 0.0000000008358472[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6993--6993
+[]\TU/lmtt/m/n/10 ## 3         IBO -4.5381160  0.5202961 -8.722180 0.0000000001058619[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 6993--6993
+[]\TU/lmtt/m/n/10 ## 4         IDE  2.8915201  0.9950853  2.905801 0.0060092393605960[] 
+ []
+
+File: Notas-Series-Tiempo_files/figure-latex/fig92-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig92-1.pdf>
 No file Notas-Series-Tiempo.bbl.
-[167] (./Notas-Series-Tiempo.aux)
+[187] (./Notas-Series-Tiempo.aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-11-09>
@@ -1614,15 +1827,15 @@ L3 programming layer <2023-11-09>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Notas-Series-Tiempo.out' has not changed.
-(rerunfilecheck)             Checksum: ABB895763D2630B8C036DF4CA1672543;7095.
+(rerunfilecheck)             Checksum: FBDC233C34E87867280D6DC4D4FE91C9;8626.
  ) 
 Here is how much of TeX's memory you used:
- 19745 strings out of 476929
- 371956 string characters out of 5805656
- 1976186 words of memory out of 5000000
- 41247 multiletter control sequences out of 15000+600000
+ 19859 strings out of 476929
+ 376219 string characters out of 5805663
+ 1977186 words of memory out of 5000000
+ 41355 multiletter control sequences out of 15000+600000
  566175 words of font info for 111 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,14n,120p,849b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,14n,120p,849b,485s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Notas-Series-Tiempo.pdf (167 pages).
+Output written on Notas-Series-Tiempo.pdf (187 pages).

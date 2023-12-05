@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Importamos Datos desde un dataset de R: | Notas de Clase: Series de Tiempo</title>
+  <meta name="description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Importamos Datos desde un dataset de R: | Notas de Clase: Series de Tiempo" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
+  <meta name="github-repo" content="https://github.com/benjov/Series-Tiempo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Importamos Datos desde un dataset de R: | Notas de Clase: Series de Tiempo" />
+  
+  <meta name="twitter:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
+  
+
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres" />
+
+
+<meta name="date" content="2023-12-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="modelos-adrl.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Análisis de Series de Tiempo</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contexto-del-documento"><i class="fa fa-check"></i>Contexto del documento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html#la-naturaleza-de-los-datos-de-series-de-tiempo"><i class="fa fa-check"></i><b>1.1</b> La naturaleza de los datos de Series de Tiempo</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción.html"><a href="introducción.html#ejemplos-y-aplicaciones-de-las-series-de-tiempo"><i class="fa fa-check"></i><b>1.2</b> Ejemplos y aplicaciones de las Series de Tiempo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="elementos-de-ecuaciones-en-diferencia.html"><a href="elementos-de-ecuaciones-en-diferencia.html"><i class="fa fa-check"></i><b>2</b> Elementos de Ecuaciones en Diferencia</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="elementos-de-ecuaciones-en-diferencia.html"><a href="elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-para-procesos-deterministas"><i class="fa fa-check"></i><b>2.1</b> Ecuaciones en Diferencia para procesos deterministas</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="elementos-de-ecuaciones-en-diferencia.html"><a href="elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-lineales-de-primer-orden"><i class="fa fa-check"></i><b>2.1.1</b> Ecuaciones en Diferencia Lineales de Primer Orden</a></li>
+<li class="chapter" data-level="2.1.2" data-path="elementos-de-ecuaciones-en-diferencia.html"><a href="elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior"><i class="fa fa-check"></i><b>2.1.2</b> Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="elementos-de-ecuaciones-en-diferencia.html"><a href="elementos-de-ecuaciones-en-diferencia.html#operador-de-rezago-l"><i class="fa fa-check"></i><b>2.2</b> Operador de rezago L</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modelos-de-series-de-tiempo-estacionarias.html"><a href="modelos-de-series-de-tiempo-estacionarias.html"><i class="fa fa-check"></i><b>3</b> Modelos de Series de Tiempo Estacionarias</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modelos-de-series-de-tiempo-estacionarias.html"><a href="modelos-de-series-de-tiempo-estacionarias.html#definición-de-ergodicidad-y-estacionariedad"><i class="fa fa-check"></i><b>3.1</b> Definición de ergodicidad y estacionariedad</a></li>
+<li class="chapter" data-level="3.2" data-path="modelos-de-series-de-tiempo-estacionarias.html"><a href="modelos-de-series-de-tiempo-estacionarias.html#función-de-autocorrelación"><i class="fa fa-check"></i><b>3.2</b> Función de autocorrelación</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html"><i class="fa fa-check"></i><b>4</b> Procesos estacionarios univariados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#procesos-autoregresivos-ar"><i class="fa fa-check"></i><b>4.1</b> Procesos Autoregresivos (AR)</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#ar1"><i class="fa fa-check"></i><b>4.1.1</b> AR(1)</a></li>
+<li class="chapter" data-level="4.1.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#ar2"><i class="fa fa-check"></i><b>4.1.2</b> AR(2)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#arp"><i class="fa fa-check"></i><b>4.1.3</b> AR(p)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#procesos-de-medias-móviles-ma"><i class="fa fa-check"></i><b>4.2</b> Procesos de Medias Móviles (MA)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#ma1"><i class="fa fa-check"></i><b>4.2.1</b> MA(1)</a></li>
+<li class="chapter" data-level="4.2.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#maq"><i class="fa fa-check"></i><b>4.2.2</b> MA(q)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#procesos-armap-q-y-arimap-d-q"><i class="fa fa-check"></i><b>4.3</b> Procesos ARMA(p, q) y ARIMA(p, d, q)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#arma1-1"><i class="fa fa-check"></i><b>4.3.1</b> ARMA(1, 1)</a></li>
+<li class="chapter" data-level="4.3.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#armap-q"><i class="fa fa-check"></i><b>4.3.2</b> ARMA(p, q)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#función-de-autocorrelación-parcial"><i class="fa fa-check"></i><b>4.4</b> Función de Autocorrelación Parcial</a></li>
+<li class="chapter" data-level="4.5" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#selección-de-las-constantes-p-q-d-en-un-arp-un-maq-un-armap-q-o-un-arimap-d-q"><i class="fa fa-check"></i><b>4.5</b> Selección de las constantes p, q, d en un AR(p), un MA(q), un ARMA(p, q) o un ARIMA(p, d, q)</a></li>
+<li class="chapter" data-level="4.6" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#pronósticos"><i class="fa fa-check"></i><b>4.6</b> Pronósticos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html"><i class="fa fa-check"></i><b>5</b> Desestacionalización y filtrado de Series</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html#motivación"><i class="fa fa-check"></i><b>5.1</b> Motivación</a></li>
+<li class="chapter" data-level="5.2" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.2</b> Filtro Hodrick-Prescott</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><i class="fa fa-check"></i><b>5.2.1</b> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html"><i class="fa fa-check"></i><b>6</b> Procesos Basados en Vectores Autoregresivos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html#causalidad-de-granger"><i class="fa fa-check"></i><b>6.1</b> Causalidad de Granger</a></li>
+<li class="chapter" data-level="6.2" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html#definición-y-representación-del-sistema-o-modelo-varp"><i class="fa fa-check"></i><b>6.2</b> Definición y representación del Sistema o Modelo VAR(p)</a></li>
+<li class="chapter" data-level="6.3" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html#análisis-de-impulso-respuesta"><i class="fa fa-check"></i><b>6.3</b> Análisis de Impulso-Respuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html"><i class="fa fa-check"></i><b>7</b> Procesos No Estacionarios</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#definición-y-formas-de-no-estacionariedad"><i class="fa fa-check"></i><b>7.1</b> Definición y formas de No Estacionariedad</a></li>
+<li class="chapter" data-level="7.2" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#pruebas-de-raíces-unitarias"><i class="fa fa-check"></i><b>7.2</b> Pruebas de Raíces Unitarias</a></li>
+<li class="chapter" data-level="7.3" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#dickey---fuller-df"><i class="fa fa-check"></i><b>7.3</b> Dickey - Fuller (DF)</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#dickey---fuller-aumentada-adf"><i class="fa fa-check"></i><b>7.3.1</b> Dickey - Fuller Aumentada (ADF)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#phillips---perron-pp"><i class="fa fa-check"></i><b>7.3.2</b> Phillips - Perron (PP)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#kwiatkowsky---phillips---schmidt---shin-kpss"><i class="fa fa-check"></i><b>7.3.3</b> Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)</a></li>
+<li class="chapter" data-level="7.3.4" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#ejemplo-con-aplicación-de-todas-las-pruebas-de-raíces-unitarias"><i class="fa fa-check"></i><b>7.3.4</b> Ejemplo con aplicación de todas las pruebas de raíces unitarias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="cointegración.html"><a href="cointegración.html"><i class="fa fa-check"></i><b>8</b> Cointegración</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="cointegración.html"><a href="cointegración.html#definición-y-propiedades-del-proceso-de-cointegración"><i class="fa fa-check"></i><b>8.1</b> Definición y propiedades del proceso de cointegración</a></li>
+<li class="chapter" data-level="8.2" data-path="cointegración.html"><a href="cointegración.html#cointegración-para-modelos-de-más-de-una-ecuación-o-para-modelos-basados-en-vectores-autoregresivos"><i class="fa fa-check"></i><b>8.2</b> Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos</a></li>
+<li class="chapter" data-level="8.3" data-path="cointegración.html"><a href="cointegración.html#ejemplo-de-cointegración"><i class="fa fa-check"></i><b>8.3</b> Ejemplo de cointegración</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modelos-adrl.html"><a href="modelos-adrl.html"><i class="fa fa-check"></i><b>9</b> Modelos ADRL</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="modelos-adrl.html"><a href="modelos-adrl.html#teoría"><i class="fa fa-check"></i><b>9.1</b> Teoría</a></li>
+<li class="chapter" data-level="9.2" data-path="modelos-adrl.html"><a href="modelos-adrl.html#ejemplo"><i class="fa fa-check"></i><b>9.2</b> Ejemplo</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="modelos-adrl.html"><a href="modelos-adrl.html#descripción-del-problema"><i class="fa fa-check"></i><b>9.2.1</b> DESCRIPCIÓN DEL PROBLEMA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="importamos-datos-desde-un-dataset-de-r.html"><a href="importamos-datos-desde-un-dataset-de-r.html"><i class="fa fa-check"></i><b>10</b> Importamos Datos desde un dataset de R:</a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="importamos-datos-desde-un-dataset-de-r.html"><a href="importamos-datos-desde-un-dataset-de-r.html#procedimiento"><i class="fa fa-check"></i><b>10.0.1</b> Procedimiento:</a></li>
+<li class="chapter" data-level="10.0.2" data-path="importamos-datos-desde-un-dataset-de-r.html"><a href="importamos-datos-desde-un-dataset-de-r.html#make-the-plot"><i class="fa fa-check"></i><b>10.0.2</b> Make the plot</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas de Clase: Series de Tiempo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="importamos-datos-desde-un-dataset-de-r" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Importamos Datos desde un dataset de R:<a href="importamos-datos-desde-un-dataset-de-r.html#importamos-datos-desde-un-dataset-de-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>A data frame with 55 rows and 5 variables. Time period from 1974:Q1 until 1987:Q3.</p>
+<p>LRM: logarithm of real money, M2</p>
+<p>LRY: logarithm of real income</p>
+<p>LPY: logarithm of price deflator</p>
+<p>IBO: bond rate</p>
+<p>IDE: bank deposit rate</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb127-1" tabindex="-1"></a><span class="fu">library</span>(zoo) </span>
+<span id="cb127-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb127-2" tabindex="-1"></a><span class="fu">library</span>(xts) </span></code></pre></div>
+<pre><code>## 
+## ######################### Warning from &#39;xts&#39; package ##########################
+## #                                                                             #
+## # The dplyr lag() function breaks how base R&#39;s lag() function is supposed to  #
+## # work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #
+## # source() into this session won&#39;t work correctly.                            #
+## #                                                                             #
+## # Use stats::lag() to make sure you&#39;re not using dplyr::lag(), or you can add #
+## # conflictRules(&#39;dplyr&#39;, exclude = &#39;lag&#39;) to your .Rprofile to stop           #
+## # dplyr from breaking base R&#39;s lag() function.                                #
+## #                                                                             #
+## # Code in packages is not affected. It&#39;s protected by R&#39;s namespace mechanism #
+## # Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #
+## #                                                                             #
+## ###############################################################################</code></pre>
+<pre><code>## 
+## Attaching package: &#39;xts&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     first, last</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb131-1" tabindex="-1"></a><span class="fu">library</span>(ARDL)</span></code></pre></div>
+<pre><code>## To cite the ARDL package in publications:
+## 
+## Use this reference to refer to the validity of the ARDL package.
+## 
+##   Natsiopoulos, Kleanthis, and Tzeremes, Nickolaos G. (2022). ARDL
+##   bounds test for cointegration: Replicating the Pesaran et al. (2001)
+##   results for the UK earnings equation using R. Journal of Applied
+##   Econometrics, 37(5), 1079-1090. https://doi.org/10.1002/jae.2919
+## 
+## Use this reference to cite this specific version of the ARDL package.
+## 
+##   Kleanthis Natsiopoulos and Nickolaos Tzeremes (2023). ARDL: ARDL, ECM
+##   and Bounds-Test for Cointegration. R package version 0.2.4.
+##   https://CRAN.R-project.org/package=ARDL</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb133-1" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb133-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb133-2" tabindex="-1"></a><span class="fu">data</span>(denmark)</span>
+<span id="cb133-3"><a href="importamos-datos-desde-un-dataset-de-r.html#cb133-3" tabindex="-1"></a></span>
+<span id="cb133-4"><a href="importamos-datos-desde-un-dataset-de-r.html#cb133-4" tabindex="-1"></a><span class="fu">names</span>(denmark)</span></code></pre></div>
+<pre><code>## [1] &quot;LRM&quot; &quot;LRY&quot; &quot;LPY&quot; &quot;IBO&quot; &quot;IDE&quot;</code></pre>
+<div id="procedimiento" class="section level3 hasAnchor" number="10.0.1">
+<h3><span class="header-section-number">10.0.1</span> Procedimiento:<a href="importamos-datos-desde-un-dataset-de-r.html#procedimiento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Calculamos un auto ADRL para determinar la combinación óptima de rezagos.</li>
+</ol>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb135-1" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">auto_ardl</span>(LRM <span class="sc">~</span> LRY <span class="sc">+</span> IBO <span class="sc">+</span> IDE, <span class="at">data =</span> denmark, <span class="at">max_order =</span> <span class="dv">5</span>)</span>
+<span id="cb135-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb135-2" tabindex="-1"></a></span>
+<span id="cb135-3"><a href="importamos-datos-desde-un-dataset-de-r.html#cb135-3" tabindex="-1"></a><span class="fu">names</span>(models)</span></code></pre></div>
+<pre><code>## [1] &quot;best_model&quot; &quot;best_order&quot; &quot;top_orders&quot;</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb137-1" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb137-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb137-2" tabindex="-1"></a>models<span class="sc">$</span>top_orders</span></code></pre></div>
+<pre><code>##    LRM LRY IBO IDE       AIC
+## 1    3   1   3   2 -251.0259
+## 2    3   1   3   3 -250.1144
+## 3    2   2   0   0 -249.6266
+## 4    3   2   3   2 -249.1087
+## 5    3   2   3   3 -248.1858
+## 6    2   2   0   1 -247.7786
+## 7    2   1   0   0 -247.5643
+## 8    2   2   1   1 -246.6885
+## 9    3   3   3   3 -246.3061
+## 10   2   2   1   2 -246.2709
+## 11   2   1   1   1 -245.8736
+## 12   2   2   2   2 -245.7722
+## 13   1   1   0   0 -245.6620
+## 14   2   1   2   2 -245.1712
+## 15   3   1   2   2 -245.0996
+## 16   1   0   0   0 -244.4317
+## 17   1   1   0   1 -243.7702
+## 18   5   5   5   5 -243.3120
+## 19   4   1   3   2 -243.0728
+## 20   4   1   3   3 -242.4378</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb139-1" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb139-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb139-2" tabindex="-1"></a>models<span class="sc">$</span>best_order</span></code></pre></div>
+<pre><code>## LRM LRY IBO IDE 
+##   3   1   3   2</code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb141-1" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb141-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb141-2" tabindex="-1"></a>models<span class="sc">$</span>best_model</span></code></pre></div>
+<pre><code>## 
+## Time series regression with &quot;zooreg&quot; data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Coefficients:
+## (Intercept)    L(LRM, 1)    L(LRM, 2)    L(LRM, 3)          LRY    L(LRY, 1)  
+##      2.6202       0.3192       0.5326      -0.2687       0.6728      -0.2574  
+##         IBO    L(IBO, 1)    L(IBO, 2)    L(IBO, 3)          IDE    L(IDE, 1)  
+##     -1.0785      -0.1062       0.2877      -0.9947       0.1255      -0.3280  
+##   L(IDE, 2)  
+##      1.4079</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb143-1" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb143-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb143-2" tabindex="-1"></a>BestMod <span class="ot">&lt;-</span> models<span class="sc">$</span>best_model</span>
+<span id="cb143-3"><a href="importamos-datos-desde-un-dataset-de-r.html#cb143-3" tabindex="-1"></a></span>
+<span id="cb143-4"><a href="importamos-datos-desde-un-dataset-de-r.html#cb143-4" tabindex="-1"></a><span class="fu">summary</span>(BestMod)</span></code></pre></div>
+<pre><code>## 
+## Time series regression with &quot;zooreg&quot; data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##             Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)   2.6202     0.5678   4.615 0.00004187 ***
+## L(LRM, 1)     0.3192     0.1367   2.336   0.024735 *  
+## L(LRM, 2)     0.5326     0.1324   4.024   0.000255 ***
+## L(LRM, 3)    -0.2687     0.1021  -2.631   0.012143 *  
+## LRY           0.6728     0.1312   5.129 0.00000832 ***
+## L(LRY, 1)    -0.2574     0.1472  -1.749   0.088146 .  
+## IBO          -1.0785     0.3217  -3.353   0.001790 ** 
+## L(IBO, 1)    -0.1062     0.5858  -0.181   0.857081    
+## L(IBO, 2)     0.2877     0.5691   0.505   0.616067    
+## L(IBO, 3)    -0.9947     0.3925  -2.534   0.015401 *  
+## IDE           0.1255     0.5545   0.226   0.822161    
+## L(IDE, 1)    -0.3280     0.7213  -0.455   0.651847    
+## L(IDE, 2)     1.4079     0.5520   2.550   0.014803 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0191 on 39 degrees of freedom
+## Multiple R-squared:  0.988,  Adjusted R-squared:  0.9843 
+## F-statistic: 266.8 on 12 and 39 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>UECM (Unrestricted Error Correction Model) of the underlying ARDL.</li>
+</ol>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb145-1" tabindex="-1"></a>UECM_BestMod <span class="ot">&lt;-</span> <span class="fu">uecm</span>(BestMod)</span>
+<span id="cb145-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb145-2" tabindex="-1"></a></span>
+<span id="cb145-3"><a href="importamos-datos-desde-un-dataset-de-r.html#cb145-3" tabindex="-1"></a><span class="fu">summary</span>(UECM_BestMod)</span></code></pre></div>
+<pre><code>## 
+## Time series regression with &quot;zooreg&quot; data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##              Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)   2.62019    0.56777   4.615 0.00004187 ***
+## L(LRM, 1)    -0.41685    0.09166  -4.548 0.00005154 ***
+## L(LRY, 1)     0.41538    0.11761   3.532    0.00108 ** 
+## L(IBO, 1)    -1.89172    0.39111  -4.837 0.00002093 ***
+## L(IDE, 1)     1.20534    0.44690   2.697    0.01028 *  
+## d(L(LRM, 1)) -0.26394    0.10192  -2.590    0.01343 *  
+## d(L(LRM, 2))  0.26867    0.10213   2.631    0.01214 *  
+## d(LRY)        0.67280    0.13116   5.129 0.00000832 ***
+## d(IBO)       -1.07852    0.32170  -3.353    0.00179 ** 
+## d(L(IBO, 1))  0.70701    0.46874   1.508    0.13953    
+## d(L(IBO, 2))  0.99468    0.39251   2.534    0.01540 *  
+## d(IDE)        0.12546    0.55445   0.226    0.82216    
+## d(L(IDE, 1)) -1.40786    0.55204  -2.550    0.01480 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0191 on 39 degrees of freedom
+## Multiple R-squared:  0.7458, Adjusted R-squared:  0.6676 
+## F-statistic: 9.537 on 12 and 39 DF,  p-value: 0.00000003001</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>RECM (Restricted Error Correction Model) of the underlying ARDL
+Obs: allowing the constant to join the short-run relationship (case 2), instead of the long-run (case 3)</li>
+</ol>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb147-1" tabindex="-1"></a>RECM_BestMod <span class="ot">&lt;-</span> <span class="fu">recm</span>(UECM_BestMod, <span class="at">case =</span> <span class="dv">2</span>)</span>
+<span id="cb147-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb147-2" tabindex="-1"></a></span>
+<span id="cb147-3"><a href="importamos-datos-desde-un-dataset-de-r.html#cb147-3" tabindex="-1"></a><span class="fu">summary</span>(RECM_BestMod)</span></code></pre></div>
+<pre><code>## 
+## Time series regression with &quot;zooreg&quot; data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##              Estimate Std. Error t value    Pr(&gt;|t|)    
+## d(L(LRM, 1)) -0.26394    0.09008  -2.930    0.005405 ** 
+## d(L(LRM, 2))  0.26867    0.09127   2.944    0.005214 ** 
+## d(LRY)        0.67280    0.11591   5.805 0.000000703 ***
+## d(IBO)       -1.07852    0.30025  -3.592    0.000837 ***
+## d(L(IBO, 1))  0.70701    0.44359   1.594    0.118300    
+## d(L(IBO, 2))  0.99468    0.36491   2.726    0.009242 ** 
+## d(IDE)        0.12546    0.48290   0.260    0.796248    
+## d(L(IDE, 1)) -1.40786    0.48867  -2.881    0.006160 ** 
+## ect          -0.41685    0.07849  -5.311 0.000003633 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.01819 on 43 degrees of freedom
+##   (0 observations deleted due to missingness)
+## Multiple R-squared:  0.7613, Adjusted R-squared:  0.7113 
+## F-statistic: 15.24 on 9 and 43 DF,  p-value: 0.00000000009545</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>long-run levels relationship (cointegration)</li>
+</ol>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb149-1" tabindex="-1"></a><span class="fu">bounds_f_test</span>(BestMod, <span class="at">case =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+##  Bounds F-test (Wald) for no cointegration
+## 
+## data:  d(LRM) ~ L(LRM, 1) + L(LRY, 1) + L(IBO, 1) + L(IDE, 1) + d(L(LRM,     1)) + d(L(LRM, 2)) + d(LRY) + d(IBO) + d(L(IBO, 1)) + d(L(IBO,     2)) + d(IDE) + d(L(IDE, 1))
+## F = 5.1168, p-value = 0.004418
+## alternative hypothesis: Possible cointegration
+## null values:
+##    k    T 
+##    3 1000</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Long-run multipliers (with standard errors, t-statistics and p-values)</li>
+</ol>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb151-1" tabindex="-1"></a><span class="fu">multipliers</span>(BestMod)</span></code></pre></div>
+<pre><code>##          Term   Estimate Std. Error   t value           Pr(&gt;|t|)
+## 1 (Intercept)  6.2856579  0.7719160  8.142930 0.0000000006107445
+## 2         LRY  0.9964676  0.1239310  8.040503 0.0000000008358472
+## 3         IBO -4.5381160  0.5202961 -8.722180 0.0000000001058619
+## 4         IDE  2.8915201  0.9950853  2.905801 0.0060092393605960</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb153-1" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb153-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb153-2" tabindex="-1"></a>Result <span class="ot">&lt;-</span> <span class="fu">coint_eq</span>(BestMod, <span class="at">case =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<div id="make-the-plot" class="section level3 hasAnchor" number="10.0.2">
+<h3><span class="header-section-number">10.0.2</span> Make the plot<a href="importamos-datos-desde-un-dataset-de-r.html#make-the-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="importamos-datos-desde-un-dataset-de-r.html#cb154-1" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">cbind.zoo</span>(<span class="at">LRM =</span> denmark[,<span class="st">&quot;LRM&quot;</span>], Result)</span>
+<span id="cb154-2"><a href="importamos-datos-desde-un-dataset-de-r.html#cb154-2" tabindex="-1"></a></span>
+<span id="cb154-3"><a href="importamos-datos-desde-un-dataset-de-r.html#cb154-3" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">xts</span>(Datos)</span>
+<span id="cb154-4"><a href="importamos-datos-desde-un-dataset-de-r.html#cb154-4" tabindex="-1"></a></span>
+<span id="cb154-5"><a href="importamos-datos-desde-un-dataset-de-r.html#cb154-5" tabindex="-1"></a><span class="fu">plot</span>(Datos, <span class="at">legend.loc =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig92"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig92-1.png" alt="Gráfica de la ecuación de cointegración" width="95%" />
+<p class="caption">
+Figure 10.1: Gráfica de la ecuación de cointegración
+</p>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="modelos-adrl.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-ADRL.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Notas-Series-Tiempo.pdf", "Notas-Series-Tiempo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

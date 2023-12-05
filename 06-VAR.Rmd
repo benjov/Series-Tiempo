@@ -540,7 +540,7 @@ Una de las grandes ventajas que aporta el análisis de los modelos VAR es el an�
 
 Donde $\Psi_0 = I$ y cada una de las $\Psi_i = - \mathbf{B}_i$, $i = 1, 2, \ldots$. De esta forma se verifica el efecto que tiene en $\mathbf{X}_t$ cada las innovaciones pasadas. Por lo que el análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas matrices en las que hemos descompuesto a $\mathbf{B}(L)$.
 
-Retomando el modelo $VAR(2)$ anteriormente estimado, en la Figura \@ref(fig:fig64) reportamos las gráficas de Impulso-respuesta de la serie $DLTC_t$ ante cambios en los residuales del resto de las series y de la propia serie.
+Retomando el modelo $VAR(2)$ anteriormente estimado, en las siguientes figuras reportamos las gráficas de Impulso-respuesta de la serie $DLTC_t$ ante cambios en los residuales del resto de las series y de la propia serie.
 
 ```{r warning=FALSE, message=FALSE, fig.align='center'}
 

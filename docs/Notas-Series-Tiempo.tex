@@ -141,7 +141,7 @@
 
 \title{Notas de Clase: Series de Tiempo}
 \author{Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres}
-\date{2023-11-20}
+\date{2023-12-04}
 
 \begin{document}
 \maketitle
@@ -5467,7 +5467,7 @@ A continuación, mostraremos como ejemplo la aplicación de las pruebas de raíc
 \caption{Comparacion de Series en Diferencias}\label{fig:fig75}
 \end{figure}
 
-En el Cuadro (\ref{Result_UR}) mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie \(LTC_t\), considerando \(p = int \{ 4 (234/100)^{(1/4)} \} = 4\) para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS.
+En los siguientes mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie \(LTC_t\), considerando \(p = int \{ 4 (234/100)^{(1/4)} \} = 4\) para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6286,6 +6286,740 @@ En el Cuadro (\ref{Result_UR}) mostramos los resultados de aplicar las pruebas d
 ##                 10pct  5pct 2.5pct  1pct
 ## critical values 0.347 0.463  0.574 0.739
 \end{verbatim}
+
+\hypertarget{cointegraciuxf3n}{%
+\chapter{Cointegración}\label{cointegraciuxf3n}}
+
+Hasta ahora en el curso hemos usado el supuesto de que las series son estacionarias para el conjunto de técnicas \(ARMA(p,q)\) y \(VAR(p)\). No obstante, dado que relajamos el supuesto de estacionariedad (incluyendo la estacionariedad en varianza) y que establecimos una serie de pruebas para determinar cuando una serie es estadísticamente estacionaria, ahora podemos plantear una técnica llamada Cointegración. Para esta técnica consideraremos sólo series que son \(I(1)\) y reconoceremos que se originó con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen (1988).
+
+\hypertarget{definiciuxf3n-y-propiedades-del-proceso-de-cointegraciuxf3n}{%
+\section{Definición y propiedades del proceso de cointegración}\label{definiciuxf3n-y-propiedades-del-proceso-de-cointegraciuxf3n}}
+
+Cointegración puede ser caracterizada o definida en palabras sencillas como que dos o más variables tienen una relación común estable en el largo plazo. Es decir, estas no suelen tomar caminos o trayectorias diferentes, excepto por periodos de tiempo transitorios y eventuales. A continuación, utilizaremos la definición de Engle y Grnager (1984) de cointegración.
+
+Sea \(\mathbf{Y}\) un vector de k-series de tiempo, decimos que los elementos en \(\mathbf{Y}\) están cointegrados en un orden (d, c), es decir, \(\mathbf{Y} \sim CI(d, c)\), si todos los elementos de \(\mathbf{Y}\) son series integradas de orden d, I(d), y si existe al menos una combinación lineal no trivial \(\mathbf{Z}\) de esas variables que es de orden I(d - c), donde \(d \geq c > 0\), si y sólo si:
+\begin{equation}
+    \boldsymbol{\beta}_i' \mathbf{Y}_t = \mathbf{Y}_{it} \sim I(d-c)
+\end{equation}
+
+Donde \(i = 1, 2, \ldots, r\) y \(r < k\).
+
+A los diferentes vectores \(\boldsymbol{\beta}_i\) se les denomina como vectores de cointegración. El rango de la matriz de vectores de cointegración \(r\) es el número de vectores de cointegración linealmente independientes. En general diremos que los vectores de la matriz de cointegración \(\boldsymbol{\beta}\) tendrá la forma de:
+\begin{equation}
+    \boldsymbol{\beta}' \mathbf{Y}_t = \mathbf{Z}_t
+\end{equation}
+
+Antes de continuar hagamos algunas observaciones. Si todas las variables de \(\mathbf{Y}\) son I(1) y \(0 \leq r < k\), diremos que las series no cointegran si \(r = 0\). Si esto pasa, entonces, como demostraremos más adelante, la mejor opción será estimar un modelo VAR(p) en diferencias. Adicionalmente, asumiremos que \(c = d = 1\), por lo que la relación de cointegración, en su caso, generará combinaciones lineales \(\mathbf{Z}\) estacionarias.
+
+\hypertarget{cointegraciuxf3n-para-modelos-de-muxe1s-de-una-ecuaciuxf3n-o-para-modelos-basados-en-vectores-autoregresivos}{%
+\section{Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos}\label{cointegraciuxf3n-para-modelos-de-muxe1s-de-una-ecuaciuxf3n-o-para-modelos-basados-en-vectores-autoregresivos}}
+
+Sean \(Y_1, Y_2, \ldots, Y_k\) son series que forman \(\mathbf{Y}\) y que todas son I(1), entonces los siguientes casos son posibles:
+1. Si \(r = 1\) entonces se trata de un caso de cointegración de Granger.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Si \(r \geq 1\) entonces se trata de un caso de cointegración múltiple de Johansen.
+\end{enumerate}
+
+Por lo anterior, en este curso analizaremos el caso de Cointegración de Johansen. Ahora plantearemos la forma de estimar el proceso de cointegración. El primer paso para ello es determinar un modelo VAR(p) con las k-series no estacionarias (series en niveles). Alegimos el valor de \(p\) mediante el uso de los criterios de información. De esta forma tendremos una especificación similar a:
+\begin{equation}
+    \mathbf{Y}_t = \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
+    \label{eq:VARCI}
+\end{equation}
+
+Donde \(\mathbf{U}_t\) es un término de error k-dimensional puramente aleatorio; \(\mathbf{D}_t\) contiene los compeoentes deterministicos de constante y tendencia, y \(\mathbf{A}_i\), \(i = 1, 2, \ldots, p\), son matrices de \(k \times k\) coeficientes. Notemos que el VAR(p) involucrado en este caso, a diferencia del VAR anteriormente estudiado, puede incluir un término de tendencia. Esto en razón de que hemos relajado el concepto de estacionariedad.
+
+Si reescribimos la ecuación \eqref{eq:VARCI} en su forma de Vector Corrector de Errores (VEC, por sus siglas en inglés) tenemos:
+\begin{eqnarray}
+    \mathbf{Y}_t - \mathbf{Y}_{t-1} & = & \Delta \mathbf{Y}_t \nonumber \\
+    & = & \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t - \mathbf{Y}_{t-1} + \mathbf{U}_t \nonumber \\
+    & = & (\mathbf{A}_1 - \mathbf{I}) \mathbf{Y}_{t-1} + \mathbf{A}_2 \mathbf{Y}_{t-2} + \ldots + \mathbf{A}_p \mathbf{Y}_{t-p} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
+    & = & \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
+    & = & - \left( \mathbf{I} - \sum_{j=1}^{p} \mathbf{A}_j \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
+    \Delta \mathbf{Y}_t & = & - \Pi \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
+    \label{eq:VARVEC}
+\end{eqnarray}
+
+Donde \(\mathbf{A}_j^* = - \sum_{i=j+1}^p \mathbf{A}_i\), \(i = 1, 2, \ldots, p-1\), y la matriz \(\Pi\) representa todas las relaciones de largo plazo entre las variables, por lo que la matriz es de rango completo \(k \times k\). Por lo tanto, tenemos que dicha matriz en la ecuación \eqref{eq:VARVEC} se puede factorizar como:
+\begin{equation}
+    \Pi_{(k \times k)} = \Gamma_{(k \times r)} \boldsymbol{\beta}_{(r \times k)}'
+    \label{Pi_Matrix}
+\end{equation}
+
+Donde \(\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}\) son \(r\) combinaciones linealmente independientes que son estacionarias.
+
+Dada la ecuación \eqref{eq:VARVEC} podemos establecer la aproximación de Johansen (1988) que se realiza mediante una estimación por Máxima Verosimilitud de la ecuación:
+\begin{equation}
+    \Delta \mathbf{Y}_t + \Gamma \boldsymbol{\beta}' \mathbf{Y}_{t-1} = \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
+\end{equation}
+
+Donde una vez estimado el sistema:
+\begin{equation}
+    \boldsymbol{\beta} = [v_1, v_2, \ldots, v_r]
+\end{equation}
+
+Cada \(v_i\), \(i = 1, 2, \ldots, r\), es un vector propio que asociado a los \(r\) valores propios positivos, mismos que estás asociados con la prueba de hipótesis de cointegración. Dicha hipótesis está basada en dos estadísticas con las que se determina el rango \(r\) de \(\Pi\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Prueba de Traza:
+  \(H_0 :\) Existen al menos \(r\) valores propios positivos o Existen al menos \(r\) relaciones de largo plazo estacionarias.
+\item
+  Prueba del valor propio máximo o \(\lambda_{max}\):
+  \(H_0 :\) Existen \(r\) valores propios positivos o Existen \(r\) relaciones de largo plazo estacionarias.
+\end{enumerate}
+
+\hypertarget{ejemplo-de-cointegraciuxf3n}{%
+\section{Ejemplo de cointegración}\label{ejemplo-de-cointegraciuxf3n}}
+
+Para ejemplificar el procedimiento de cointegración utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, IGAE e Índice de Producción Industrial de Estados Unidos. Quizá el marco teórico de la relación entre las variables no sea del todo correcta, pero dejando de lado ese problema estimaremos si las 5 series cointegran.
+
+En el Scrip Clase 17 y Clase 18 del GitHub se encuentra el desarrollo de este ejemplo. Por principio, probaremos que todas las series son I(1), lo cual es cierto (ver Scrip para mayores detalles). En las Figuras \ref{fig:fig81}, \ref{fig:fig82} y \ref{fig:fig83} se muestran las series en niveles y en diferencias, con lo cual ilustramos como es viable que las series sean I(1).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(MASS)}
+\FunctionTok{library}\NormalTok{(strucchange)}
+\FunctionTok{library}\NormalTok{(zoo)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+\FunctionTok{library}\NormalTok{(urca)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(vars)}
+
+\CommentTok{\#}
+\FunctionTok{load}\NormalTok{(}\StringTok{"BD/Datos\_Ad.RData"}\NormalTok{)}
+
+\CommentTok{\#}
+\DocumentationTok{\#\# Conversion a series de tiempo:}
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos\_Ad[}\DecValTok{7}\SpecialCharTok{:} \DecValTok{11}\NormalTok{], }
+            \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+            \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{LDatos }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(Datos)}
+
+\NormalTok{DLDatos }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(Datos, }\AttributeTok{base =} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)), }
+                \AttributeTok{lag =} \DecValTok{1}\NormalTok{, }
+                \AttributeTok{differences =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(LDatos, }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \CommentTok{\#main = "Series en Logaritmos", }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig81-1} 
+
+}
+
+\caption{Series en niveles (logatirmos) para la prueba de Cointegración}\label{fig:fig81}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(DLDatos, }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \CommentTok{\#main = "Series en Diferencias Logaritmicas", }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig82-1} 
+
+}
+
+\caption{Series en Diferencias Logaritmicas para la prueba de Cointegración}\label{fig:fig82}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(LDatos, DLDatos), }
+     \AttributeTok{plot.type =} \StringTok{"m"}\NormalTok{, }\AttributeTok{nc =} \DecValTok{2}\NormalTok{,}
+     \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkred"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+     \CommentTok{\#main = "Comparacion de Series en Diferencias", }
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig83-1} 
+
+}
+
+\caption{Comparacion de Series en Diferencias para la prueba de Cointegración}\label{fig:fig83}
+\end{figure}
+
+Posteriormente, determinamos cuál es el orden adecuado de un VAR(p) en niveles. En el Cuadro \ref{tab:SelectVARVEC} mostramos los resultados de los criterios de información para determinar el número de rezagos óptimos, el cual resultó en \(p = 3\) para los criterios AIC y FPE, \(p = 2\) para el criterio HQ y \(p = 1\) para el citerio SC. Por lo tanto decidiremos utilizar un VAR(3) con tendencia y constante. Notese que es posible elegir otros modelos de VAR que incluyan: solo tendencia, solo constante o ninguno de estos elementos.
+
+\begin{longtable}[]{@{}ccccc@{}}
+\caption{\label{tab:SelectVARVEC} Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante y tendencia de las series \(LINPC_t\), \(LTC_t\), \(LCETE28_t\), \(LIGAE_t\) y \(LIPI_t\).}\tabularnewline
+\toprule\noalign{}
+Rezagos & AIC & HQ & SC & FPE \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Rezagos & AIC & HQ & SC & FPE \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & -4.606707e+01 & -4.585260e+01 & -4.553568e+01 & 9.848467e-21 \\
+2 & -4.643287e+01 & -4.606521e+01 & -4.552191e+01 & 6.834064e-21 \\
+3 & -4.647783e+01 & -4.595697e+01 & -4.518730e+01 & 6.539757e-21 \\
+4 & -4.645834e+01 & -4.578428e+01 & -4.478824e+01 & 6.679778e-21 \\
+\vdots & \vdots & \vdots & \vdots & \vdots \\
+\end{longtable}
+
+El mismo número de rezagos los utilizaremos para probar la Cointegración ya sea por una estadística de la Traza o por una de el máximo valor propio. Derivado de la exploración de los resultados sólo mostraremos uno de los caso en que las series cointegran y sólo para el caso de la prueba de la traza (el otro caso está disponible en el código incluido en GitHub). En el Cuadro \ref{tab:TrazaTest} reportamos los resultados del Test de Cointegración para un modelo con 3 rezagos.
+
+Cuadro: \label{tab:TrazaTest} Prueba de la traza para cointegración considerando un VAR(p) con término constante y tendencia de las series \(LINPC_t\), \(LTC_t\), \(LCETE28_t\), \(LIGAE_t\) y \(LIPI_t\).
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule\noalign{}
+r \(\leq\) & Estadística & 10\% & 5\% & 1\% \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+4 & 3.38 & 10.49 & 12.25 & 16.26 \\
+3 & 17.09 & 22.76 & 25.32 & 30.45 \\
+2 & 31.66 & 39.06 & 42.44 & 48.45 \\
+1 & 56.88 & 59.14 & 62.99 & 70.05 \\
+0 & 89.69 & 83.20 & 87.31 & 96.58 \\
+\end{longtable}
+
+Los resutados del Cuadro \ref{tab:TrazaTest} indican que aceptamos la hipótesis nula para el caso de \(r \leq 1\) al \(5\%\), por lo que podemos concluir que existe evidencia estadística para probar que existen al menos 1 vector de cointegración. Por lo que dicho vector es:
+\begin{equation}
+    \boldsymbol{\beta} = \left[ 
+    \begin{matrix}
+    1.00000000 \\
+    0.151162436 \\
+    -0.042650912 \\
+    0.163804862 \\
+    0.229295743 \\
+    -0.004350646 \\
+    \end{matrix} \right]
+\end{equation}
+
+Donde el vector esta normalizado para la serie \(LINPC_t\), por lo que concluímos que la relación de largo plazo que encontramos cointegra estará dada por:
+\begin{eqnarray*}
+    LINPC_t & = & -0.151162436 LTC_t + 0.042650912 LCETE28_t \\
+    &  & - 0.163804862 LIGAE_t - 0.229295743 LIPI_t \\
+    &  & + 0.004350646 t
+\end{eqnarray*}
+
+Considerando lo anterior, podemos determinar \(\hat{U}_t\) para esta ecuación de cointegración. En la Figura \ref{fig:fig84} mostramos los residuales estimados. Derivado de la impección visual parecería que estos no son estacionarios, condición que debería ser cierta. De esta forma, una prueba deseable es aplicar todas la pruebas de raíces unitarias a esta serie para mostrar que es I(0). En el Scrip llamado Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre esta serie y se encuentra que es posible que no sea estacionaria.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TT }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{282}\NormalTok{), }
+         \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{), }
+         \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{U }\OtherTok{\textless{}{-}}\NormalTok{ LDatos[ , }\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \FloatTok{0.2100057} \SpecialCharTok{*}\NormalTok{LDatos[ , }\DecValTok{2}\NormalTok{] }\SpecialCharTok{+} \FloatTok{0.4812626}\SpecialCharTok{*}\NormalTok{LDatos[ , }\DecValTok{3}\NormalTok{] }\SpecialCharTok{{-}} \FloatTok{2.8386112}\SpecialCharTok{*}\NormalTok{LDatos[ , }\DecValTok{4}\NormalTok{] }\SpecialCharTok{{-}} \FloatTok{1.2576912}\SpecialCharTok{*}\NormalTok{LDatos[ , }\DecValTok{5}\NormalTok{] }\SpecialCharTok{+} \FloatTok{14.2887887}
+
+\CommentTok{\#}
+
+\FunctionTok{plot}\NormalTok{(U, }
+     \AttributeTok{main =} \StringTok{"Residuales de la Ecuación de Cointegración"}\NormalTok{,}
+     \AttributeTok{type =} \StringTok{"l"}\NormalTok{, }
+     \AttributeTok{col =} \StringTok{"darkred"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig84-1} 
+
+}
+
+\caption{Residuales estimados de la ecuación de cointegración}\label{fig:fig84}
+\end{figure}
+
+\hypertarget{modelos-adrl}{%
+\chapter{Modelos ADRL}\label{modelos-adrl}}
+
+\hypertarget{teoruxeda}{%
+\section{Teoría}\label{teoruxeda}}
+
+Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura \ref{fig:fig91} muestra un esquema o diagrama de cómo podríamos proceder para seleccionar el modelo correcto.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"Plots/TimeSeries\_Models.png"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.95\linewidth]{Plots/TimeSeries_Models} 
+
+}
+
+\caption{Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)}\label{fig:fig91}
+\end{figure}
+
+En este caso incorporaremos a los modelos autogregressive distributed lag models (ARDL, por sus siglas en inglés). En estos casos el procedimiento de Johansen no podría aplicarse directamennte cuando las variables incluidas son de un orden mixto o cuando simplemente todas no son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.
+
+Este tipo de modelos toma suficientes rezagos para capturar el mecanismo generador de datos. También es posible llegar a una especificación del mecanismo corrector de errores a partir de una trasformación lineal del ARDL.
+
+Consideremos la siguiente ecuación:
+\begin{equation}
+    Y_t = \alpha + \delta X_t + \gamma Z_t + U_t
+    \label{eq:EqARDL}
+\end{equation}
+
+Dada la ecuación \eqref{eq:EqARDL} podemos establecer su forma de mecanismo corrector de errores en forma ARDL dada por:
+\begin{eqnarray*}
+    \Delta Y_t & = & \alpha + \sum_{i = 1}^p \beta_i \Delta Y_{t-i} + \sum_{i = 1}^p \delta_i \Delta X_{t-i} + \sum_{i = 1}^p \gamma_i \Delta Z_{t-i} \\ 
+    &  & + \lambda_1 Y_{t-1} + \lambda_2 X_{t-1} + \lambda_3 Z_{t-1} + U_t
+\end{eqnarray*}
+
+Donde los coeficientes \(\beta_i\), \(\delta_i\), \(\gamma_i\) representan la dinámica de corto plazo y las \(\lambda\)'s la dinámica de largo plazo.
+
+La hipótesis nula (\(H_0\)) es que las \(\lambda_1 + \lambda_2 + \lambda_3 = 0\), es decir, que no existe relación de largo plazo.
+
+En la práctica estimamos una especificación con rezafos distribuidos:
+\begin{equation}
+    Y_t = \alpha + \sum_{i = 1}^p \beta_i Y_{t-i} + \sum_{i = 1}^p \delta_i X_{t-i} + \sum_{i = 1}^p \gamma_i Z_{t-i} + U_t
+\end{equation}
+
+Además de verificar si las series involucradas son estacionarias y decidir el número de reagos \(p\) mediante criterios de información.
+
+\hypertarget{ejemplo}{%
+\section{Ejemplo}\label{ejemplo}}
+
+\hypertarget{descripciuxf3n-del-problema}{%
+\subsection{DESCRIPCIÓN DEL PROBLEMA}\label{descripciuxf3n-del-problema}}
+
+Supongamos que queremos modelar el logaritmo de dinero (M2) como una función de LRY (logarithm of real income), IBO (bond rate) e IDE (bank deposit rate).
+
+\begin{itemize}
+\item
+  El problema es que la aplicación de una regresión de MCO en datos no estacionarios daría lugar a una regresión espúria.
+\item
+  Los parámetros estimados serían consistentes solo si las series estuvieran cointegradas.
+\end{itemize}
+
+\hypertarget{importamos-datos-desde-un-dataset-de-r}{%
+\subsection{Importamos Datos desde un dataset de R:}\label{importamos-datos-desde-un-dataset-de-r}}
+
+A data frame with 55 rows and 5 variables. Time period from 1974:Q1 until 1987:Q3.
+
+LRM: logarithm of real money, M2
+
+LRY: logarithm of real income
+
+LPY: logarithm of price deflator
+
+IBO: bond rate
+
+IDE: bank deposit rate
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(zoo) }
+\FunctionTok{library}\NormalTok{(xts) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ######################### Warning from 'xts' package ##########################
+## #                                                                             #
+## # The dplyr lag() function breaks how base R's lag() function is supposed to  #
+## # work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #
+## # source() into this session won't work correctly.                            #
+## #                                                                             #
+## # Use stats::lag() to make sure you're not using dplyr::lag(), or you can add #
+## # conflictRules('dplyr', exclude = 'lag') to your .Rprofile to stop           #
+## # dplyr from breaking base R's lag() function.                                #
+## #                                                                             #
+## # Code in packages is not affected. It's protected by R's namespace mechanism #
+## # Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #
+## #                                                                             #
+## ###############################################################################
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'xts'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     first, last
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ARDL)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## To cite the ARDL package in publications:
+## 
+## Use this reference to refer to the validity of the ARDL package.
+## 
+##   Natsiopoulos, Kleanthis, and Tzeremes, Nickolaos G. (2022). ARDL
+##   bounds test for cointegration: Replicating the Pesaran et al. (2001)
+##   results for the UK earnings equation using R. Journal of Applied
+##   Econometrics, 37(5), 1079-1090. https://doi.org/10.1002/jae.2919
+## 
+## Use this reference to cite this specific version of the ARDL package.
+## 
+##   Kleanthis Natsiopoulos and Nickolaos Tzeremes (2023). ARDL: ARDL, ECM
+##   and Bounds-Test for Cointegration. R package version 0.2.4.
+##   https://CRAN.R-project.org/package=ARDL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\FunctionTok{data}\NormalTok{(denmark)}
+
+\FunctionTok{names}\NormalTok{(denmark)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "LRM" "LRY" "LPY" "IBO" "IDE"
+\end{verbatim}
+
+\hypertarget{procedimiento}{%
+\subsection{Procedimiento:}\label{procedimiento}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calculamos un auto ADRL para determinar la combinación óptima de rezagos.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models }\OtherTok{\textless{}{-}} \FunctionTok{auto\_ardl}\NormalTok{(LRM }\SpecialCharTok{\textasciitilde{}}\NormalTok{ LRY }\SpecialCharTok{+}\NormalTok{ IBO }\SpecialCharTok{+}\NormalTok{ IDE, }\AttributeTok{data =}\NormalTok{ denmark, }\AttributeTok{max\_order =} \DecValTok{5}\NormalTok{)}
+
+\FunctionTok{names}\NormalTok{(models)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "best_model" "best_order" "top_orders"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\NormalTok{models}\SpecialCharTok{$}\NormalTok{top\_orders}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    LRM LRY IBO IDE       AIC
+## 1    3   1   3   2 -251.0259
+## 2    3   1   3   3 -250.1144
+## 3    2   2   0   0 -249.6266
+## 4    3   2   3   2 -249.1087
+## 5    3   2   3   3 -248.1858
+## 6    2   2   0   1 -247.7786
+## 7    2   1   0   0 -247.5643
+## 8    2   2   1   1 -246.6885
+## 9    3   3   3   3 -246.3061
+## 10   2   2   1   2 -246.2709
+## 11   2   1   1   1 -245.8736
+## 12   2   2   2   2 -245.7722
+## 13   1   1   0   0 -245.6620
+## 14   2   1   2   2 -245.1712
+## 15   3   1   2   2 -245.0996
+## 16   1   0   0   0 -244.4317
+## 17   1   1   0   1 -243.7702
+## 18   5   5   5   5 -243.3120
+## 19   4   1   3   2 -243.0728
+## 20   4   1   3   3 -242.4378
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\NormalTok{models}\SpecialCharTok{$}\NormalTok{best\_order}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## LRM LRY IBO IDE 
+##   3   1   3   2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\NormalTok{models}\SpecialCharTok{$}\NormalTok{best\_model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Coefficients:
+## (Intercept)    L(LRM, 1)    L(LRM, 2)    L(LRM, 3)          LRY    L(LRY, 1)  
+##      2.6202       0.3192       0.5326      -0.2687       0.6728      -0.2574  
+##         IBO    L(IBO, 1)    L(IBO, 2)    L(IBO, 3)          IDE    L(IDE, 1)  
+##     -1.0785      -0.1062       0.2877      -0.9947       0.1255      -0.3280  
+##   L(IDE, 2)  
+##      1.4079
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\NormalTok{BestMod }\OtherTok{\textless{}{-}}\NormalTok{ models}\SpecialCharTok{$}\NormalTok{best\_model}
+
+\FunctionTok{summary}\NormalTok{(BestMod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##             Estimate Std. Error t value   Pr(>|t|)    
+## (Intercept)   2.6202     0.5678   4.615 0.00004187 ***
+## L(LRM, 1)     0.3192     0.1367   2.336   0.024735 *  
+## L(LRM, 2)     0.5326     0.1324   4.024   0.000255 ***
+## L(LRM, 3)    -0.2687     0.1021  -2.631   0.012143 *  
+## LRY           0.6728     0.1312   5.129 0.00000832 ***
+## L(LRY, 1)    -0.2574     0.1472  -1.749   0.088146 .  
+## IBO          -1.0785     0.3217  -3.353   0.001790 ** 
+## L(IBO, 1)    -0.1062     0.5858  -0.181   0.857081    
+## L(IBO, 2)     0.2877     0.5691   0.505   0.616067    
+## L(IBO, 3)    -0.9947     0.3925  -2.534   0.015401 *  
+## IDE           0.1255     0.5545   0.226   0.822161    
+## L(IDE, 1)    -0.3280     0.7213  -0.455   0.651847    
+## L(IDE, 2)     1.4079     0.5520   2.550   0.014803 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.0191 on 39 degrees of freedom
+## Multiple R-squared:  0.988,  Adjusted R-squared:  0.9843 
+## F-statistic: 266.8 on 12 and 39 DF,  p-value: < 0.00000000000000022
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  UECM (Unrestricted Error Correction Model) of the underlying ARDL.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{UECM\_BestMod }\OtherTok{\textless{}{-}} \FunctionTok{uecm}\NormalTok{(BestMod)}
+
+\FunctionTok{summary}\NormalTok{(UECM\_BestMod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##              Estimate Std. Error t value   Pr(>|t|)    
+## (Intercept)   2.62019    0.56777   4.615 0.00004187 ***
+## L(LRM, 1)    -0.41685    0.09166  -4.548 0.00005154 ***
+## L(LRY, 1)     0.41538    0.11761   3.532    0.00108 ** 
+## L(IBO, 1)    -1.89172    0.39111  -4.837 0.00002093 ***
+## L(IDE, 1)     1.20534    0.44690   2.697    0.01028 *  
+## d(L(LRM, 1)) -0.26394    0.10192  -2.590    0.01343 *  
+## d(L(LRM, 2))  0.26867    0.10213   2.631    0.01214 *  
+## d(LRY)        0.67280    0.13116   5.129 0.00000832 ***
+## d(IBO)       -1.07852    0.32170  -3.353    0.00179 ** 
+## d(L(IBO, 1))  0.70701    0.46874   1.508    0.13953    
+## d(L(IBO, 2))  0.99468    0.39251   2.534    0.01540 *  
+## d(IDE)        0.12546    0.55445   0.226    0.82216    
+## d(L(IDE, 1)) -1.40786    0.55204  -2.550    0.01480 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.0191 on 39 degrees of freedom
+## Multiple R-squared:  0.7458, Adjusted R-squared:  0.6676 
+## F-statistic: 9.537 on 12 and 39 DF,  p-value: 0.00000003001
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  RECM (Restricted Error Correction Model) of the underlying ARDL
+  Obs: allowing the constant to join the short-run relationship (case 2), instead of the long-run (case 3)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RECM\_BestMod }\OtherTok{\textless{}{-}} \FunctionTok{recm}\NormalTok{(UECM\_BestMod, }\AttributeTok{case =} \DecValTok{2}\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(RECM\_BestMod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Time series regression with "zooreg" data:
+## Start = 1974 Q4, End = 1987 Q3
+## 
+## Call:
+## dynlm::dynlm(formula = full_formula, data = data, start = start, 
+##     end = end)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.029939 -0.008856 -0.002562  0.008190  0.072577 
+## 
+## Coefficients:
+##              Estimate Std. Error t value    Pr(>|t|)    
+## d(L(LRM, 1)) -0.26394    0.09008  -2.930    0.005405 ** 
+## d(L(LRM, 2))  0.26867    0.09127   2.944    0.005214 ** 
+## d(LRY)        0.67280    0.11591   5.805 0.000000703 ***
+## d(IBO)       -1.07852    0.30025  -3.592    0.000837 ***
+## d(L(IBO, 1))  0.70701    0.44359   1.594    0.118300    
+## d(L(IBO, 2))  0.99468    0.36491   2.726    0.009242 ** 
+## d(IDE)        0.12546    0.48290   0.260    0.796248    
+## d(L(IDE, 1)) -1.40786    0.48867  -2.881    0.006160 ** 
+## ect          -0.41685    0.07849  -5.311 0.000003633 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.01819 on 43 degrees of freedom
+##   (0 observations deleted due to missingness)
+## Multiple R-squared:  0.7613, Adjusted R-squared:  0.7113 
+## F-statistic: 15.24 on 9 and 43 DF,  p-value: 0.00000000009545
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  long-run levels relationship (cointegration)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bounds\_f\_test}\NormalTok{(BestMod, }\AttributeTok{case =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Bounds F-test (Wald) for no cointegration
+## 
+## data:  d(LRM) ~ L(LRM, 1) + L(LRY, 1) + L(IBO, 1) + L(IDE, 1) + d(L(LRM,     1)) + d(L(LRM, 2)) + d(LRY) + d(IBO) + d(L(IBO, 1)) + d(L(IBO,     2)) + d(IDE) + d(L(IDE, 1))
+## F = 5.1168, p-value = 0.004418
+## alternative hypothesis: Possible cointegration
+## null values:
+##    k    T 
+##    3 1000
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Long-run multipliers (with standard errors, t-statistics and p-values)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{multipliers}\NormalTok{(BestMod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Term   Estimate Std. Error   t value           Pr(>|t|)
+## 1 (Intercept)  6.2856579  0.7719160  8.142930 0.0000000006107445
+## 2         LRY  0.9964676  0.1239310  8.040503 0.0000000008358472
+## 3         IBO -4.5381160  0.5202961 -8.722180 0.0000000001058619
+## 4         IDE  2.8915201  0.9950853  2.905801 0.0060092393605960
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\NormalTok{Result }\OtherTok{\textless{}{-}} \FunctionTok{coint\_eq}\NormalTok{(BestMod, }\AttributeTok{case =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{make-the-plot}{%
+\subsection{Make the plot}\label{make-the-plot}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{cbind.zoo}\NormalTok{(}\AttributeTok{LRM =}\NormalTok{ denmark[,}\StringTok{"LRM"}\NormalTok{], Result)}
+
+\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{xts}\NormalTok{(Datos)}
+
+\FunctionTok{plot}\NormalTok{(Datos, }\AttributeTok{legend.loc =} \StringTok{"right"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.95\linewidth]{Notas-Series-Tiempo_files/figure-latex/fig92-1} 
+
+}
+
+\caption{Gráfica de la ecuación de cointegración}\label{fig:fig92}
+\end{figure}
 
   \bibliography{book.bib,packages.bib}
 

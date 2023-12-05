@@ -332,7 +332,7 @@ plot(cbind(LDatos, DLDatos),
 
 ```
 
-En el Cuadro (\ref{Result_UR}) mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie $LTC_t$, considerando $p = int \{ 4 (234/100)^{(1/4)} \} = 4$ para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS. 
+En los siguientes mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie $LTC_t$, considerando $p = int \{ 4 (234/100)^{(1/4)} \} = 4$ para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS. 
 
 ```{r warning=FALSE}
 
