@@ -4739,7 +4739,7 @@ Una de las grandes ventajas que aporta el análisis de los modelos VAR es el an�
 
 Donde \(\Psi_0 = I\) y cada una de las \(\Psi_i = - \mathbf{B}_i\), \(i = 1, 2, \ldots\). De esta forma se verifica el efecto que tiene en \(\mathbf{X}_t\) cada las innovaciones pasadas. Por lo que el análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas matrices en las que hemos descompuesto a \(\mathbf{B}(L)\).
 
-Retomando el modelo \(VAR(2)\) anteriormente estimado, en la Figura \ref{fig:fig64} reportamos las gráficas de Impulso-respuesta de la serie \(DLTC_t\) ante cambios en los residuales del resto de las series y de la propia serie.
+Retomando el modelo \(VAR(2)\) anteriormente estimado, en las siguientes figuras reportamos las gráficas de Impulso-respuesta de la serie \(DLTC_t\) ante cambios en los residuales del resto de las series y de la propia serie.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6639,63 +6639,8 @@ IDE: bank deposit rate
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(zoo) }
 \FunctionTok{library}\NormalTok{(xts) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## ######################### Warning from 'xts' package ##########################
-## #                                                                             #
-## # The dplyr lag() function breaks how base R's lag() function is supposed to  #
-## # work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #
-## # source() into this session won't work correctly.                            #
-## #                                                                             #
-## # Use stats::lag() to make sure you're not using dplyr::lag(), or you can add #
-## # conflictRules('dplyr', exclude = 'lag') to your .Rprofile to stop           #
-## # dplyr from breaking base R's lag() function.                                #
-## #                                                                             #
-## # Code in packages is not affected. It's protected by R's namespace mechanism #
-## # Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #
-## #                                                                             #
-## ###############################################################################
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'xts'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:dplyr':
-## 
-##     first, last
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ARDL)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## To cite the ARDL package in publications:
-## 
-## Use this reference to refer to the validity of the ARDL package.
-## 
-##   Natsiopoulos, Kleanthis, and Tzeremes, Nickolaos G. (2022). ARDL
-##   bounds test for cointegration: Replicating the Pesaran et al. (2001)
-##   results for the UK earnings equation using R. Journal of Applied
-##   Econometrics, 37(5), 1079-1090. https://doi.org/10.1002/jae.2919
-## 
-## Use this reference to cite this specific version of the ARDL package.
-## 
-##   Kleanthis Natsiopoulos and Nickolaos Tzeremes (2023). ARDL: ARDL, ECM
-##   and Bounds-Test for Cointegration. R package version 0.2.4.
-##   https://CRAN.R-project.org/package=ARDL
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\#}
 \FunctionTok{data}\NormalTok{(denmark)}
 

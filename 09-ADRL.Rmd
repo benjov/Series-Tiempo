@@ -61,7 +61,7 @@ IBO: bond rate
 
 IDE: bank deposit rate
 
-```{r warning=FALSE}
+```{r warning=FALSE, message=FALSE}
 
 library(zoo) 
 library(xts) 
