@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 10 Modelos Univariados y Multivariados de Volatilidad | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="10.1 Motivación Estos modelos de Heterocedásticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y modelos Heterocedásticidad Condicional Autoregresiva Generalizados (GARCH, por sus...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 10 Modelos Univariados y Multivariados de Volatilidad | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="10.1 Motivación Estos modelos de Heterocedásticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y modelos Heterocedásticidad Condicional Autoregresiva Generalizados (GARCH, por sus...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 10 Modelos Univariados y Multivariados de Volatilidad | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="10.1 Motivación Estos modelos de Heterocedásticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y modelos Heterocedásticidad Condicional Autoregresiva Generalizados (GARCH, por sus...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
+<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
+<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
+<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
+<li><a class="" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
+<li><a class="active" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
+<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-univariados-y-multivariados-de-volatilidad" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad<a class="anchor" aria-label="anchor" href="#modelos-univariados-y-multivariados-de-volatilidad"><i class="fas fa-link"></i></a>
+</h1>
+<div id="motivación-1" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Motivación<a class="anchor" aria-label="anchor" href="#motivaci%C3%B3n-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Estos modelos de Heterocedásticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y modelos Heterocedásticidad Condicional Autoregresiva Generalizados (GARCH, por sus siglas en inglés) tienen la característica de modelar situaciones como las que ilustra la Figutra <a href="modelos-univariados-y-multivariados-de-volatilidad.html#fig:fig102">10.2</a>. Es decir:</p>
+<ol style="list-style-type: decimal">
+<li><p>Existen zonas donde la variación de los datos es mayor y zonas donde la variación es más estable–a estas situaciones se les conoce como de variabilidad por clúster–, y</p></li>
+<li><p>los datos corresponden a innformación de alta frecuencia.</p></li>
+</ol>
+<p>Iniciemos por las bibliotecas necesarias:</p>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://R-Forge.R-project.org/projects/expm/">expm</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.quantmod.com/">quantmod</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">dynlm</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/fints/">FinTS</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/forecast/">forecast</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.unstarched.net">rugarch</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/tsbox/">tsbox</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">MTS</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.unstarched.net">rmgarch</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org">Rcpp</a></span><span class="op">)</span></span></code></pre></div>
+<p>Para el análisis de temas financieros existe una librería de mucha utilidad llamada <strong>quantmod</strong>. En primer lugar esta librería permite acceder a datos financieros de un modo muy simple, es posible decargar series financieras desde <em>yahoo</em>, la <em>FRED (Federal Reserve Economic Data)</em>, <em>google</em>, etc. Por otro lado también es una librería que permite realizar gráficos altamente estéticos con unas cuantas líneas de código. Ahora, usaremos datos de Yahoo Finance respecto de la cotización del bitcoin (ticker: “BTC-USD”).</p>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"getSymbols.warning4.0"</span><span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">BTC</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/getSymbols.html">getSymbols</a></span><span class="op">(</span><span class="st">"BTC-USD"</span>, src <span class="op">=</span> <span class="st">"yahoo"</span>, auto.assign <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">BTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartSeries.html">chartSeries</a></span><span class="op">(</span><span class="va">BTC</span>,TA<span class="op">=</span><span class="st">'addBBands();</span></span>
+<span><span class="st">                    addBBands(draw="p");</span></span>
+<span><span class="st">                    addVo();</span></span>
+<span><span class="st">                    addMACD()'</span>,<span class="co"># subset='2021',</span></span>
+<span>                theme<span class="op">=</span><span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/Data_ARCH-1.png" width="672"></div>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
+## 2014-09-17      465.864      468.174     452.422       457.334       21056800
+## 2014-09-18      456.860      456.860     413.104       424.440       34483200
+## 2014-09-19      424.103      427.835     384.532       394.796       37919700
+## 2014-09-20      394.673      423.296     389.883       408.904       36863600
+## 2014-09-21      408.085      412.426     393.181       398.821       26580100
+## 2014-09-22      399.100      406.916     397.130       402.152       24127600
+##            BTC-USD.Adjusted
+## 2014-09-17          457.334
+## 2014-09-18          424.440
+## 2014-09-19          394.796
+## 2014-09-20          408.904
+## 2014-09-21          398.821
+## 2014-09-22          402.152</code></pre>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
+## 2024-06-03     67753.90     70230.82    67589.84      68804.78    32401285324
+## 2024-06-04     68804.57     71047.41    68564.64      70567.77    33149696545
+## 2024-06-05     70568.35     71735.41    70390.71      71082.82    32810771409
+## 2024-06-06     71082.84     71625.73    70119.12      70757.16    25223152007
+## 2024-06-07     70759.19     71907.85    68507.26      69342.59    36188381096
+## 2024-06-08     69324.18     69533.32    69210.74      69305.77    14262185861
+##            BTC-USD.Adjusted
+## 2024-06-03         68804.78
+## 2024-06-04         70567.77
+## 2024-06-05         71082.82
+## 2024-06-06         70757.16
+## 2024-06-07         69342.59
+## 2024-06-08         69305.77</code></pre>
+<p>Para fines del ejercicio de esta clase, usaremos el valor de la acción ajustado. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas.</p>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">$</span><span class="va">`BTC-USD.Adjusted`</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig101"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig101-1.png" alt="Evolución del precio del Bitcoin" width="672"><p class="caption">
+Figure 10.1: Evolución del precio del Bitcoin
+</p>
+</div>
+<p>Una de las preguntas relevantes al observar la serie en diferencias, es si podríamos afirmar que esta serie cumple con el supuesto de homoscedasticidad.</p>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">logret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">$</span><span class="va">`BTC-USD.Adjusted`</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig102"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig102-1.png" alt="Evolución del rendimiento (diferenccias logarítmicas) del Bitcoin" width="672"><p class="caption">
+Figure 10.2: Evolución del rendimiento (diferenccias logarítmicas) del Bitcoin
+</p>
+</div>
+<div id="value-at-risk" class="section level3" number="10.1.1">
+<h3>
+<span class="header-section-number">10.1.1</span> Value at risk<a class="anchor" aria-label="anchor" href="#value-at-risk"><i class="fas fa-link"></i></a>
+</h3>
+<p>Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente es un cálculo que nos permite estimar el monto que una acción o portafolio podría perder dada una probabilidad <span class="math inline">\((1-\alpha)\)</span>.</p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span></span>
+<span><span class="va">VaR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span> <span class="va">logret</span>, <span class="va">alpha</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span> <span class="va">VaR</span>, <span class="fl">4</span> <span class="op">)</span><span class="op">*</span><span class="fl">100</span></span></code></pre></div>
+<pre><code>##   5% 
+## -5.9</code></pre>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">logret</span> , geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">'lightblue'</span> , bins <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">logret</span><span class="op">[</span><span class="va">logret</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">logret</span> , <span class="fl">0.05</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> , </span>
+<span>                  fill <span class="op">=</span> <span class="st">'red'</span> , bins <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Daily Returns'</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig103"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig103-1.png" alt="Histograma de rendimientos del Bitcoin" width="672"><p class="caption">
+Figure 10.3: Histograma de rendimientos del Bitcoin
+</p>
+</div>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">normal_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100000</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">VaR_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">normal_dist</span>, <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">ES_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">normal_dist</span><span class="op">[</span><span class="va">normal_dist</span><span class="op">&lt;</span><span class="va">VaR</span><span class="op">]</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">logret</span>, geom <span class="op">=</span><span class="st">'density'</span>, col <span class="op">=</span> <span class="st">'returns'</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">normal_dist</span>, col <span class="op">=</span> <span class="st">'normal'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig104"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig104-1.png" alt="Densidad de rendimientos del Bitcoin Vs. una distribución normal" width="672"><p class="caption">
+Figure 10.4: Densidad de rendimientos del Bitcoin Vs. una distribución normal
+</p>
+</div>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vector_ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##Kurtosis</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 14.32</code></pre>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##Sesgo</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -0.75</code></pre>
+</div>
+</div>
+<div id="prueba-de-normalidad" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Prueba de normalidad<a class="anchor" aria-label="anchor" href="#prueba-de-normalidad"><i class="fas fa-link"></i></a>
+</h2>
+<p><span class="math inline">\(H_o: K=S=0\)</span></p>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/jarque.test.html">jarque.test</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Jarque-Bera Normality Test
+## 
+## data:  vector_ret
+## JB = 19295, p-value &lt; 0.00000000000000022
+## alternative hypothesis: greater</code></pre>
+</div>
+<div id="modelos-arch-y-garch-univariados" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Modelos ARCH y GARCH Univariados<a class="anchor" aria-label="anchor" href="#modelos-arch-y-garch-univariados"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para plantear el modelo supongamos –por simplicidad– que hemos construido y estimado un modelo AR(1). Es decir, asumamos que el proceso subyacente para la media condicional está dada por:
+<span class="math display">\[\begin{equation}
+    X_t = a_0 + a_1 X_{t-1} + U_t
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(| a_1 |&lt; 1\)</span> para garantizar la convergencia del proceso en el largo plazo, en el cual:
+<span class="math display">\[\begin{eqnarray*}
+    \mathbb{E}[X_t] &amp; = &amp; \frac{a_0 }{1 - a_1} = \mu \\
+    Var[X_t] &amp; = &amp; \frac{\sigma^2}{1 - a_1^2}
+\end{eqnarray*}\]</span></p>
+<p>Ahora, supongamos que este tipo de modelos pueden ser extendidos y generalizados a un modelo ARMA(p, q), que incluya otras variables exogénas. Denotemos a como <span class="math inline">\(\mathbf{Z}_t\)</span> al conjunto que incluye los componentes AR, MA y variables exogénas que pueden explicar a <span class="math inline">\(X_t\)</span> de forma que el proceso estará dado por:
+<span class="math display">\[\begin{equation}
+    X_t = \mathbf{Z}_t \boldsymbol{\beta} + U_t
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(U_t\)</span> es un proceso estacionario que representa el error asociado a un proceso ARMA(p, q) y donde siguen diendo válidos los supuestos:
+<span class="math display">\[\begin{eqnarray*}
+    \mathbb{E}[U_t] &amp; = &amp; 0 \\
+    Var[U_t^2] &amp; = &amp; \sigma^2
+\end{eqnarray*}\]</span></p>
+<p>No obstante, en este caso podemos suponer que existe autocorrelación en el término de error al cuadrado que puede ser capturada por un porceso similar a uno de medias móviles (MA) dado por:
+<span class="math display">\[\begin{equation}
+    U_t^2 = \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2 + \nu_t
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\nu_t\)</span> es un ruido blanco y <span class="math inline">\(U_{t-i} = X_{t-i} - \mathbf{Z}_{t-i} \boldsymbol{\beta}\)</span>, $i = 1, 2 ,$. Si bien los procesos son estacionarios por los supuestos antes enunciados, la varianza condicional estará dada por:
+<span class="math display">\[\begin{eqnarray*}
+    \sigma^2_{t | t-1} &amp; = &amp; Var[ U_t | \Omega_{t-1} ] \\
+    &amp; = &amp; \mathbb{E}[ U^2_t | \Omega_{t-1} ]
+\end{eqnarray*}\]</span></p>
+<p>Donde <span class="math inline">\(\Omega_{t-1} = \{U_{t-1}, U_{t-2}, \ldots \}\)</span> es el conjunto de toda la información pasada de <span class="math inline">\(U_t\)</span> y observada hasta el momento <span class="math inline">\(t-1\)</span>, por lo que:
+<span class="math display">\[\begin{equation*}
+    U_t | \Omega_{t-1} \sim \mathbb{D}(0, \sigma^2_{t | t-1})
+\end{equation*}\]</span></p>
+<p>Así, de forma similar a un proceso MA(q) podemos decir que la varianza condicional tendrá efectos ARCH de orden <span class="math inline">\(q\)</span> (ARCH(q)) cuando:
+<span class="math display" id="eq:ARCHEffect">\[\begin{equation}
+    \sigma^2_{t | t-1} = \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2
+    \tag{10.1}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\mathbb{E}[\nu_t] = 0\)</span> y <span class="math inline">\(\gamma_0\)</span> y <span class="math inline">\(\gamma_i \geq 0\)</span>, para <span class="math inline">\(i = 1, 2, \ldots, q-1\)</span> y <span class="math inline">\(\gamma_q &gt; 0\)</span>. Estas condiciones son necesarias para garantizar que la varianza sea positiva. En general, la varianza condicional se expresa de la forma <span class="math inline">\(\sigma^2_{t | t-1}\)</span>, no obstante, para facilitar la notación, nos referiremos en cada caso a esta simplemente como <span class="math inline">\(\sigma^2_{t}\)</span>.</p>
+<p>Podemos generalizar está situación si asumimos a la varianza condicional como dependiente de lo valores de la varianza rezagados, es decir, como si fuera un proceso AR de orden <span class="math inline">\(p\)</span> para la varianza y juntandolo con la ecuación <a href="modelos-univariados-y-multivariados-de-volatilidad.html#eq:ARCHEffect">(10.1)</a>. Bollerslev (1986) y Taylor (1986) generalizaron el problema de heterocedásticidad condicional. El modelo se conoce como GARCH(p, q), el cual se especifica como:
+<span class="math display" id="eq:GARCHEffect">\[\begin{eqnarray}
+    \sigma^2_t &amp; = &amp; \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2 \\ \nonumber
+    &amp; &amp; + \beta_1 \sigma^2_{t-1} + \beta_2 \sigma^2_{t-2} + \ldots + \beta_p \sigma^2_{t-p}
+    \tag{10.2}
+\end{eqnarray}\]</span></p>
+<p>Donde las condiciones de no negatividad son que <span class="math inline">\(\gamma_0 &gt; 0\)</span>, <span class="math inline">\(\gamma_i \geq 0\)</span>, <span class="math inline">\(i = 1, 2, \ldots, q-1\)</span>, <span class="math inline">\(\beta_j \geq 0\)</span>, <span class="math inline">\(j = 1, 2, \ldots, p-1\)</span>, <span class="math inline">\(\gamma_q &gt; 0\)</span> y <span class="math inline">\(\beta_p &gt; 0\)</span>. Además, otra condición de convergencia es que:
+<span class="math display">\[\begin{equation*}
+    \gamma_1 + \ldots + \gamma_q + \beta_1 + \ldots + \beta_p &lt; 1
+\end{equation*}\]</span></p>
+<p>Usando el operador rezago <span class="math inline">\(L\)</span> en la ecuación <a href="modelos-univariados-y-multivariados-de-volatilidad.html#eq:GARCHEffect">(10.2)</a> podemos obtener:
+<span class="math display" id="eq:GARCHEffectL">\[\begin{equation}
+    \sigma^2_t = \gamma_0 + \alpha(L) U_t^2 + \beta(L) \sigma^2_t
+    \tag{10.3}
+\end{equation}\]</span></p>
+<p>De donde podemos establecer:
+<span class="math display">\[\begin{equation}
+    \sigma^2_t = \frac{\gamma_0}{1 - \beta(L)} + \frac{\alpha(L)}{1 - \beta(L)} U_t^2
+\end{equation}\]</span></p>
+<p>Por lo que la ecuación <a href="modelos-univariados-y-multivariados-de-volatilidad.html#eq:GARCHEffect">(10.2)</a> del GARCH(p, q) representa un ARCH(<span class="math inline">\(\infty\)</span>):
+<span class="math display">\[\begin{equation}
+    \sigma^2_t = \frac{a_0}{1 - b_1 - b_2 - \ldots - b_p} + \sum_{i = 1}^\infty U_{t-i}^2
+\end{equation}\]</span></p>
+<div id="ejemplo-arch1" class="section level3" number="10.3.1">
+<h3>
+<span class="header-section-number">10.3.1</span> Ejemplo ARCH(1)<a class="anchor" aria-label="anchor" href="#ejemplo-arch1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Hasta ahora las distribuciones utilizadas para medir el Valor en Riesgo de este activo, asumen que no existe correlación serial en los retornos diarios de este activo. Observemos un par de gráficas de la función de autocorrelación para corroborar este hecho.</p>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig105"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig105-1.png" alt="Función de autocorrelación parcial de lo rendimientos del Bitcoin" width="672"><p class="caption">
+Figure 10.5: Función de autocorrelación parcial de lo rendimientos del Bitcoin
+</p>
+</div>
+<p>La idea de clusterización de volatilidad, asume que periodos de alta volatilidad serán seguidos por una alta volatilidad y viceversa. Por esta razón la función de autocorrelación útil para saber si existen clústers de volatilidad es utilizando el valor absoluto, ya que lo que importa es saber si la serie está autocorrelacionada en la magnitud de los movimientos.</p>
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig106"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig106-1.png" alt="Evolución de los rendimientos del Bitcoin en valor absoluto" width="672"><p class="caption">
+Figure 10.6: Evolución de los rendimientos del Bitcoin en valor absoluto
+</p>
+</div>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig107"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig107-1.png" alt="Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto" width="672"><p class="caption">
+Figure 10.7: Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto
+</p>
+</div>
+<p>Otra manera de corroborar esta idea es volviendo IID nuestra serie de datos y observar que de este modo se pierde la autocorrelación serial, lo que refuerza la idea de que en esta serie existen clusters de volatilidad.</p>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">logret_random</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span>, size <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">logret_random</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig108"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig108-1.png" alt="Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto" width="672"><p class="caption">
+Figure 10.8: Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto
+</p>
+</div>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">logret_random</span>, type <span class="op">=</span> <span class="st">'l'</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig109"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig109-1.png" alt="Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto" width="672"><p class="caption">
+Figure 10.9: Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto
+</p>
+</div>
+<p>Primer enfoque para comprobar aceptar o rechazar la hopótesis de que necesitamos estimar un ARCH(q)</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">logret_mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynlm/man/dynlm.html">dynlm</a></span><span class="op">(</span><span class="va">logret</span><span class="op">~</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">logret_mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Time series regression with "ts" data:
+## Start = 1, End = 3552
+## 
+## Call:
+## dynlm(formula = logret ~ 1)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.46614 -0.01402 -0.00004  0.01558  0.22371 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) 0.0014135  0.0006202   2.279   0.0227 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.03696 on 3551 degrees of freedom</code></pre>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ehatsq</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">logret_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ARCH_m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynlm/man/dynlm.html">dynlm</a></span><span class="op">(</span><span class="va">ehatsq</span><span class="op">~</span><span class="fu">L</span><span class="op">(</span><span class="va">ehatsq</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">ARCH_m</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Time series regression with "ts" data:
+## Start = 2, End = 3552
+## 
+## Call:
+## dynlm(formula = ehatsq ~ L(ehatsq))
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.016888 -0.001189 -0.001058 -0.000332  0.216102 
+## 
+## Coefficients:
+##               Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept) 0.00118810 0.00008604  13.809 &lt; 0.0000000000000002 ***
+## L(ehatsq)   0.12923295 0.01664353   7.765   0.0000000000000106 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.004945 on 3549 degrees of freedom
+## Multiple R-squared:  0.0167, Adjusted R-squared:  0.01643 
+## F-statistic: 60.29 on 1 and 3549 DF,  p-value: 0.00000000000001063</code></pre>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">ARCH_m</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/ArchTest-1.png" width="672"></div>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">ARCH_m</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/ArchTest-2.png" width="672"></div>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/FinTS/man/ArchTest.html">ArchTest</a></span><span class="op">(</span><span class="va">logret</span>, lags <span class="op">=</span> <span class="fl">1</span>, demean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  ARCH LM-test; Null hypothesis: no ARCH effects
+## 
+## data:  logret
+## Chi-squared = 59.318, df = 1, p-value = 0.00000000000001342</code></pre>
+<p>Estimemos un ARCH(1), considerando la siguente especificación:</p>
+<p><span class="math inline">\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)</span></p>
+<p><span class="math inline">\(h_t = \omega+\alpha_ih_{t-i}+u_t\)</span></p>
+<p><span class="math inline">\(\varepsilon \sim N(0,1)\)</span></p>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.unstarched.net">rugarch</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/auto.arima.html">auto.arima</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Series: logret 
+## ARIMA(2,0,0) with non-zero mean 
+## 
+## Coefficients:
+##           ar1     ar2    mean
+##       -0.0215  0.0093  0.0014
+## s.e.   0.0168  0.0168  0.0006
+## 
+## sigma^2 = 0.001366:  log likelihood = 6675.29
+## AIC=-13342.59   AICc=-13342.58   BIC=-13317.89</code></pre>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#?ugarchspec</span></span>
+<span></span>
+<span><span class="va">model.spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec</a></span><span class="op">(</span> variance.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">'sGARCH'</span> , </span>
+<span>                                               garchOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        mean.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>armaOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        distribution.model <span class="op">=</span> <span class="st">"std"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#?ugarchfit</span></span>
+<span></span>
+<span><span class="va">arch.fit</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html">ugarchfit</a></span><span class="op">(</span>spec <span class="op">=</span> <span class="va">model.spec</span> , data <span class="op">=</span> <span class="va">logret</span>, </span>
+<span>                     solver <span class="op">=</span> <span class="st">'solnp'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">arch.fit</span><span class="op">@</span><span class="va">fit</span><span class="op">$</span><span class="va">matcoef</span></span></code></pre></div>
+<pre><code>##            Estimate   Std. Error    t value     Pr(&gt;|t|)
+## mu      0.001657804 0.0003634071  4.5618370 0.0000050708
+## ar1    -0.054492820 0.0166193734 -3.2788733 0.0010422242
+## ar2    -0.002412717 0.0135695190 -0.1778042 0.8588767813
+## omega   0.002223275 0.0006555542  3.3914440 0.0006952538
+## alpha1  0.903439192 0.3044799287  2.9671552 0.0030056923
+## shape   2.291331881 0.1091046492 21.0012305 0.0000000000</code></pre>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">boot.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchboot-methods.html">ugarchboot</a></span><span class="op">(</span><span class="va">arch.fit</span>,</span>
+<span>                         method <span class="op">=</span> <span class="st">"Partial"</span>,</span>
+<span>                         sampling <span class="op">=</span> <span class="st">"raw"</span>,  <span class="co">#bootstrap from fitted varepsilon</span></span>
+<span>                         n.ahead <span class="op">=</span> <span class="fl">1</span>,          <span class="co">#simulation horizon</span></span>
+<span>                         n.bootpred <span class="op">=</span> <span class="fl">100000</span>, <span class="co">#number of simulations </span></span>
+<span>                         solver <span class="op">=</span> <span class="st">"solnp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">boot.garch</span></span></code></pre></div>
+<pre><code>## 
+## *-----------------------------------*
+## *     GARCH Bootstrap Forecast      *
+## *-----------------------------------*
+## Model : sGARCH
+## n.ahead : 1
+## Bootstrap method:  partial
+## Date (T[0]): 3552-01-01
+## 
+## Series (summary):
+##          min     q.25     mean     q.75    max forecast[analytic]
+## t+1 -0.46547 -0.01071 0.001438 0.014643 0.2001            0.00183
+## .....................
+## 
+## Sigma (summary):
+##          min    q0.25     mean    q0.75      max forecast[analytic]
+## t+1 0.047262 0.047262 0.047262 0.047262 0.047262           0.047262
+## .....................</code></pre>
+</div>
+</div>
+<div id="ejemplo-garch01" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> Ejemplo GARCH(0,1)<a class="anchor" aria-label="anchor" href="#ejemplo-garch01"><i class="fas fa-link"></i></a>
+</h2>
+<p>Estimemos un GARCH(0,1) unsando la siguiente especificación:</p>
+<p><span class="math inline">\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)</span></p>
+<p><span class="math inline">\(h_t = \omega+\beta_i \sigma^2_{t-i}+u_t\)</span></p>
+<p><span class="math inline">\(\varepsilon \sim N(0,1)\)</span></p>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model.spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec</a></span><span class="op">(</span>variance.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">'sGARCH'</span> , </span>
+<span>                                              garchOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        mean.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>armaOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        distribution.model <span class="op">=</span> <span class="st">"std"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit.garch.n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html">ugarchfit</a></span><span class="op">(</span>spec <span class="op">=</span> <span class="va">model.spec</span>, data <span class="op">=</span> <span class="va">logret</span>, </span>
+<span>                        solver <span class="op">=</span> <span class="st">"solnp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit.garch.n</span><span class="op">@</span><span class="va">fit</span><span class="op">$</span><span class="va">matcoef</span></span></code></pre></div>
+<pre><code>##              Estimate       Std. Error       t value       Pr(&gt;|t|)
+## mu     0.001798970583 0.00038587558213     4.6620483 0.000003130778
+## ar1   -0.063613562868 0.01414330202209    -4.4977872 0.000006866437
+## ar2   -0.005885947766 0.01349635363446    -0.4361139 0.662754074026
+## omega  0.000003766748 0.00000006388575    58.9606948 0.000000000000
+## beta1  0.998250914699 0.00002785491650 35837.5123746 0.000000000000
+## shape  2.492673503467 0.02761073615459    90.2791396 0.000000000000</code></pre>
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">boot.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchboot-methods.html">ugarchboot</a></span><span class="op">(</span><span class="va">fit.garch.n</span>,</span>
+<span>                         method <span class="op">=</span> <span class="st">"Partial"</span>,</span>
+<span>                         sampling <span class="op">=</span> <span class="st">"raw"</span>,  <span class="co">#bootstrap from fitted varepsilon</span></span>
+<span>                         n.ahead <span class="op">=</span> <span class="fl">1</span>,          <span class="co">#simulation horizon</span></span>
+<span>                         n.bootpred <span class="op">=</span> <span class="fl">100000</span>, <span class="co">#number of simulations </span></span>
+<span>                         solver <span class="op">=</span> <span class="st">"solnp"</span><span class="op">)</span></span>
+<span><span class="va">boot.garch</span></span></code></pre></div>
+<pre><code>## 
+## *-----------------------------------*
+## *     GARCH Bootstrap Forecast      *
+## *-----------------------------------*
+## Model : sGARCH
+## n.ahead : 1
+## Bootstrap method:  partial
+## Date (T[0]): 3552-01-01
+## 
+## Series (summary):
+##          min      q.25   mean     q.75     max forecast[analytic]
+## t+1 -0.46699 -0.013008 0.0011 0.017366 0.24255           0.002077
+## .....................
+## 
+## Sigma (summary):
+##          min    q0.25     mean    q0.75      max forecast[analytic]
+## t+1 0.046389 0.046389 0.046389 0.046389 0.046389           0.046389
+## .....................</code></pre>
+<div id="selección-garchpq-óptimo" class="section level3" number="10.4.1">
+<h3>
+<span class="header-section-number">10.4.1</span> Selección GARCH(p,q) óptimo<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-garchpq-%C3%B3ptimo"><i class="fas fa-link"></i></a>
+</h3>
+<p>¿Cómo seleccionamos el órden adecuado para un GARCH(p,q)? Acá una respuesta.</p>
+<p><span class="math inline">\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)</span></p>
+<p><span class="math inline">\(h_t = \omega+\beta_ih_{t-i}+\alpha_i\varepsilon^2_{t-i}+u_t\)</span></p>
+<p><span class="math inline">\(\varepsilon \sim N(0,1)\)</span></p>
+<div id="criterios-de-información" class="section level4" number="10.4.1.1">
+<h4>
+<span class="header-section-number">10.4.1.1</span> Criterios de información<a class="anchor" aria-label="anchor" href="#criterios-de-informaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">infocriteria</a></span><span class="op">(</span><span class="va">fit.garch.n</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                       
+## Akaike       -4.058051
+## Bayes        -4.047620
+## Shibata      -4.058056
+## Hannan-Quinn -4.054331</code></pre>
+</div>
+<div id="selección-del-modelo-óptimo" class="section level4" number="10.4.1.2">
+<h4>
+<span class="header-section-number">10.4.1.2</span> Selección del modelo óptimo<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-del-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"Lag_Opt_GARCH.R"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Lag_Opt_GARCH</span><span class="op">(</span><span class="va">ehatsq</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##       q p       AIC Optimo
+##  [1,] 1 1 -10.88917      0
+##  [2,] 1 2 -10.88981      0
+##  [3,] 1 3 -10.88905      0
+##  [4,] 1 4 -10.89160      0
+##  [5,] 2 1 -10.88860      0
+##  [6,] 2 2 -10.88915      0
+##  [7,] 2 3 -10.89172      0
+##  [8,] 2 4 -10.89108      0
+##  [9,] 3 1 -10.88805      0
+## [10,] 3 2 -10.88874      0
+## [11,] 3 3 -10.89109      0
+## [12,] 3 4 -10.89039      0
+## [13,] 4 1 -10.89116      0
+## [14,] 4 2 -10.89216      0
+## [15,] 4 3 -10.89238      1
+## [16,] 4 4 -10.89104      0</code></pre>
+</div>
+<div id="estimación-de-modelo-óptimo" class="section level4" number="10.4.1.3">
+<h4>
+<span class="header-section-number">10.4.1.3</span> Estimación de modelo óptimo<a class="anchor" aria-label="anchor" href="#estimaci%C3%B3n-de-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model.spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec</a></span><span class="op">(</span>variance.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">'sGARCH'</span>, </span>
+<span>                                              garchOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        mean.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>armaOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        distribution.model <span class="op">=</span> <span class="st">"std"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">model.fit</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html">ugarchfit</a></span><span class="op">(</span>spec <span class="op">=</span> <span class="va">model.spec</span> , data <span class="op">=</span> <span class="va">logret</span>, </span>
+<span>                      solver <span class="op">=</span> <span class="st">'solnp'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model.fit</span><span class="op">@</span><span class="va">fit</span><span class="op">$</span><span class="va">matcoef</span></span></code></pre></div>
+<pre><code>##                Estimate     Std. Error         t value          Pr(&gt;|t|)
+## mu      0.0013647767998 0.000327550635  4.166613197425 0.000030915841045
+## ar1    -0.0533431285909 0.015474502741 -3.447162696237 0.000566507315561
+## ar2    -0.0015337829171 0.014251945668 -0.107619194795 0.914297770179209
+## omega   0.0000240076269 0.000005600024  4.287057849067 0.000018105515536
+## alpha1  0.1343244321922 0.022384738010  6.000714957447 0.000000001964506
+## alpha2  0.0000001131084 0.034625286002  0.000003266641 0.999997393597721
+## alpha3  0.0000000395280 0.028390927623  0.000001392276 0.999998889124606
+## alpha4  0.0244646890289 0.023816695882  1.027207516510 0.304322759497438
+## beta1   0.4225795592940 0.209966671336  2.012603031734 0.044156407778425
+## beta2   0.4176311658663 0.166128455780  2.513905061629 0.011940257201827
+## shape   3.1807937467541 0.129196858043 24.619745363271 0.000000000000000</code></pre>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">boot.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchboot-methods.html">ugarchboot</a></span><span class="op">(</span><span class="va">model.fit</span>,</span>
+<span>                         method <span class="op">=</span> <span class="st">"Partial"</span>,</span>
+<span>                         sampling <span class="op">=</span> <span class="st">"raw"</span>,  <span class="co">#bootstrap from fitted varepsilon</span></span>
+<span>                         n.ahead <span class="op">=</span> <span class="fl">1</span>,          <span class="co">#simulation horizon</span></span>
+<span>                         n.bootpred <span class="op">=</span> <span class="fl">100000</span>, <span class="co">#number of simulations </span></span>
+<span>                         solver <span class="op">=</span> <span class="st">"solnp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">boot.garch</span></span></code></pre></div>
+<pre><code>## 
+## *-----------------------------------*
+## *     GARCH Bootstrap Forecast      *
+## *-----------------------------------*
+## Model : sGARCH
+## n.ahead : 1
+## Bootstrap method:  partial
+## Date (T[0]): 3552-01-01
+## 
+## Series (summary):
+##          min      q.25     mean     q.75     max forecast[analytic]
+## t+1 -0.26075 -0.007495 0.001531 0.011159 0.20184           0.001499
+## .....................
+## 
+## Sigma (summary):
+##          min    q0.25     mean    q0.75      max forecast[analytic]
+## t+1 0.020854 0.020854 0.020854 0.020854 0.020854           0.020854
+## .....................</code></pre>
+</div>
+<div id="forecasting-with-garch11" class="section level4" number="10.4.1.4">
+<h4>
+<span class="header-section-number">10.4.1.4</span> Forecasting with GARCH(1,1)<a class="anchor" aria-label="anchor" href="#forecasting-with-garch11"><i class="fas fa-link"></i></a>
+</h4>
+<p>Para realizar pronósticos con la estimación de un GARCH, utilizando la librería <em>rugarch</em>, es necesario utilizar la función <strong>ugarchforecast()</strong>.</p>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model.spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec</a></span><span class="op">(</span>variance.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">'sGARCH'</span>, </span>
+<span>                                              garchOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        mean.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>armaOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                        distribution.model <span class="op">=</span> <span class="st">"std"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model.fit</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html">ugarchfit</a></span><span class="op">(</span>spec <span class="op">=</span> <span class="va">model.spec</span> , data <span class="op">=</span> <span class="va">logret</span>, </span>
+<span>                      solver <span class="op">=</span> <span class="st">'solnp'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">getspec</a></span><span class="op">(</span><span class="va">model.fit</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">setfixed</span><span class="op">(</span><span class="va">spec</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">model.fit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Esta función precisa como argumentos nuestra estimación del modelo GARCH, con una modificación en la manera en que se presentan los coeficientes, realizada en la última línea del código anterior y que llamamos <em>spec</em>. <em>n.ahead</em> es el número de periodos que vamos a pronosticar, <em>n.roll</em> señala el número de pronósticos móviles que utilizaremos, en caso de que haya más información para realizar el pronóstico. Finalmente damos como input nuestro set de datos y como producto obtendremos el pronostico de Sigma tanto como de la serie.</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">forecast</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchforecast-methods.html">ugarchforecast</a></span><span class="op">(</span><span class="va">spec</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, n.roll <span class="op">=</span> <span class="fl">0</span>, <span class="va">logret</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">sigma</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##      3552-01-01
+## T+1  0.02159870
+## T+2  0.02197838
+## T+3  0.02235124
+## T+4  0.02271762
+## T+5  0.02307782
+## T+6  0.02343214
+## T+7  0.02378083
+## T+8  0.02412414
+## T+9  0.02446230
+## T+10 0.02479551
+## T+11 0.02512398
+## T+12 0.02544789</code></pre>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##       3552-01-01
+## T+1  0.002318633
+## T+2  0.002021808
+## T+3  0.001821494
+## T+4  0.001992029
+## T+5  0.001839924
+## T+6  0.001977960
+## T+7  0.001847484
+## T+8  0.001965811
+## T+9  0.001853760
+## T+10 0.001955064
+## T+11 0.001858823
+## T+12 0.001945534</code></pre>
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">forecast</span></span></code></pre></div>
+<pre><code>## 
+## *------------------------------------*
+## *       GARCH Model Forecast         *
+## *------------------------------------*
+## Model: sGARCH
+## Horizon: 12
+## Roll Steps: 0
+## Out of Sample: 0
+## 
+## 0-roll forecast [T0=]:
+##        Series   Sigma
+## T+1  0.002319 0.02160
+## T+2  0.002022 0.02198
+## T+3  0.001821 0.02235
+## T+4  0.001992 0.02272
+## T+5  0.001840 0.02308
+## T+6  0.001978 0.02343
+## T+7  0.001847 0.02378
+## T+8  0.001966 0.02412
+## T+9  0.001854 0.02446
+## T+10 0.001955 0.02480
+## T+11 0.001859 0.02512
+## T+12 0.001946 0.02545</code></pre>
+</div>
+</div>
+</div>
+<div id="modelos-arch-y-garch-multivariados" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Modelos ARCH y GARCH Multivariados<a class="anchor" aria-label="anchor" href="#modelos-arch-y-garch-multivariados"><i class="fas fa-link"></i></a>
+</h2>
+<p>De forma similar a los modelo univariados, los modelos multivariados de heterocedásticidad condicional asumen una estructura de la media condicional. En este caso, descrita por un VAR(p) cuyo proceso estocástico <span class="math inline">\(\mathbf{X}\)</span> es estacionario de dimensión <span class="math inline">\(k\)</span>. De esta forma la expresión reducida del modelo o el proceso VAR(p) estará dado por:
+<span class="math display">\[\begin{equation}
+    \mathbf{X}_t = \mathbf{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
+\end{equation}\]</span></p>
+<p>Donde cada uno de las <span class="math inline">\(A_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, p\)</span>, son matrices cuadradas de dimensión <span class="math inline">\(k\)</span> y <span class="math inline">\(\mathbf{U}_t\)</span> representa un vector de dimensión <span class="math inline">\(k \times 1\)</span> con los residuales en el momento del tiempo <span class="math inline">\(t\)</span> que son un proceso pueramente aleatorio. También se incorpora un vector de términos constantes denominado como <span class="math inline">\(\mathbf{\delta}\)</span>, el cual es de dimensión <span class="math inline">\(k \times 1\)</span> –es este caso también es posible incorporar procesos determinas adicionales–.</p>
+<p>Así, suponemos que el término de error tendrá estructura de vector:
+<span class="math display">\[\begin{equation*}
+    \mathbf{U}_t =
+    \begin{bmatrix}
+    U_{1t} \\ U_{2t} \\ \vdots \\ U_{Kt}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>De forma que diremos que:
+<span class="math display">\[\begin{equation*}
+    \mathbf{U}_t | \Omega_{t-1} \sim (0, \Sigma_{t | t-1})
+\end{equation*}\]</span></p>
+<p>Dicho lo anterior, entonces, el mode ARCH(q) multivariado será descrito por:
+<span class="math display">\[\begin{equation}
+    Vech(\Sigma_{t | t-1}) = \boldsymbol{\gamma}_0 + \Gamma_1 Vech(\mathbf{U}_{t-1} \mathbf{U}_{t-1}') + \ldots + \Gamma_q Vech(\mathbf{U}_{t-q} \mathbf{U}_{t-q}')
+    (\#eq:M_ARCH)
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(Vech\)</span> es un operador que apila en un vector la parte superior de la matriz a la cual se le aplique, <span class="math inline">\(\boldsymbol{\gamma}_0\)</span> es un vector de cosntantes, <span class="math inline">\(\Gamma_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots\)</span> son matrices de coeficientes asociados a la estimación.</p>
+<p>Para ilustrar la ecuación @ref(eq:M_ARCH), tomemos un ejemplo de <span class="math inline">\(K = 2\)</span>, de esta forma tenemos que un M-ARCH(1) será:
+<span class="math display">\[\begin{equation*}
+    \Sigma_{t | t-1} =
+    \begin{bmatrix}
+    \sigma^2_{1, t | t-1} &amp; \sigma_{12, t | t-1} \\ \sigma_{21, t | t-1} &amp; \sigma^2_{2, t | t-1}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \sigma_{11, t} &amp; \sigma_{12, t} \\ \sigma_{21, t} &amp; \sigma_{22, t}
+    \end{bmatrix} =
+    \Sigma_{t}
+\end{equation*}\]</span></p>
+<p>Donde hemos simplificado la notación de la varianzas y la condición de que están en función de <span class="math inline">\(t-1\)</span>. Así,
+<span class="math display">\[\begin{equation*}
+    Vech(\Sigma_{t}) =
+    Vech \begin{bmatrix}
+    \sigma_{11, t} &amp; \sigma_{12, t} \\ \sigma_{21, t} &amp; \sigma_{22, t}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>De esta forma, podemos establecer el modelo M-ARCH(1) con <span class="math inline">\(K = 2\)</span> será de la forma:
+<span class="math display">\[\begin{equation*}
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \gamma_{10} \\ \gamma_{20} \\ \gamma_{30}
+    \end{bmatrix} +
+    \begin{bmatrix}
+    \gamma_{11} &amp; \gamma_{12} &amp; \gamma_{13} \\ \gamma_{21} &amp; \gamma_{22} &amp; \gamma_{23} \\ \gamma_{31} &amp; \gamma_{32} &amp; \gamma_{33}
+    \end{bmatrix}
+    \begin{bmatrix}
+    U^2_{1, t-1} \\ U_{1, t-1} U_{2, t-1} \\ U^2_{2, t-1}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>Como notarán este tipo de procedimientos implica la estimación de muchos paramétros. En este circunstacia, se suelen estimar modelos restringidos para reducir el número de coeficientes estimados. por ejemplo, podríamos querer estimar un caso como:
+<span class="math display">\[\begin{equation*}
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \gamma_{10} \\ \gamma_{20} \\ \gamma_{30}
+    \end{bmatrix} +
+    \begin{bmatrix}
+    \gamma_{11} &amp; 0 &amp; 0 \\ 0 &amp; \gamma_{22} &amp; 0 \\ 0 &amp; 0 &amp; \gamma_{33}
+    \end{bmatrix}
+    \begin{bmatrix}
+    U^2_{1, t-1} \\ U_{1, t-1} U_{2, t-1} \\ U^2_{2, t-1}
+    \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>Finalmente y de forma analóga al caso univariado, podemos plantear un modelo M-GARCH(p, q) como:
+<span class="math display">\[\begin{equation}
+    Vech(\Sigma_{t | t-1}) = \boldsymbol{\gamma}_0 + \sum_{j = 1}^q \Gamma_j Vech(\mathbf{U}_{t-j} \mathbf{U}_{t-j}') + \sum_{m = 1}^p \mathbf{G}_m Vech(\Sigma_{t-m | t-m-1})
+    \label{M_GARCH}
+\end{equation}\]</span></p>
+<p>Donde cada una de las <span class="math inline">\(\mathbf{G}_m\)</span> es una matriz de coeficientes. Para ilustrar este caso retomemos el ejemplo anterior pera ahora para un modelo M-GARCH(1, 1) con <span class="math inline">\(K = 2\)</span> de formaque tendríamos:
+<span class="math display">\[\begin{eqnarray*}
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix} &amp; = &amp;
+    \begin{bmatrix}
+    \gamma_{10} \\ \gamma_{20} \\ \gamma_{30}
+    \end{bmatrix} +
+    \begin{bmatrix}
+    \gamma_{11} &amp; \gamma_{12} &amp; \gamma_{13} \\ \gamma_{21} &amp; \gamma_{22} &amp; \gamma_{23} \\ \gamma_{31} &amp; \gamma_{32} &amp; \gamma_{33}
+    \end{bmatrix}
+    \begin{bmatrix}
+    U^2_{1, t-1} \\ U_{1, t-1} U_{2, t-1} \\ U^2_{2, t-1}
+    \end{bmatrix} \\
+    &amp; &amp; +
+    \begin{bmatrix}
+    g_{11} &amp; g_{12} &amp; g_{13} \\ g_{21} &amp; g_{22} &amp; g_{23} \\ g_{31} &amp; g_{32} &amp; g_{33}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \sigma_{11, t-1} \\ \sigma_{12, t-1} \\ \sigma_{22, t-1}
+    \end{bmatrix}
+\end{eqnarray*}\]</span></p>
+</div>
+<div id="pruebas-para-detectar-efectos-arch" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> Pruebas para detectar efectos ARCH<a class="anchor" aria-label="anchor" href="#pruebas-para-detectar-efectos-arch"><i class="fas fa-link"></i></a>
+</h2>
+<p>La prueba que mostraremos es conocida como una ARCH-LM, la cual está basada en una regresión de los residuales estimados de un modelo VAR(p) o cualquier otra estimación que deseemos probar, con el objeto de determinar si existen efectos ARCH –esta prueba se puede simplificar para el caso univariado–.</p>
+<p>Partamos de platear:
+<span class="math display" id="eq:ARCH-LM">\[\begin{eqnarray}
+    Vech(\hat{\mathbf{U}}_t \hat{\mathbf{U}}_t') &amp; = &amp; \mathbf{B}_0 + \mathbf{B}_1 Vech(\hat{\mathbf{U}}_{t-1} \hat{\mathbf{U}}_{t-1}') + \ldots \\ \nonumber
+    &amp; &amp; + \mathbf{B}_q Vech(\hat{\mathbf{U}}_{t-q} \hat{\mathbf{U}}_{t-q}') + \varepsilon_t
+    \tag{10.4}
+\end{eqnarray}\]</span></p>
+<p>Dada la estimación en la ecuación <a href="modelos-univariados-y-multivariados-de-volatilidad.html#eq:ARCH-LM">(10.4)</a>, plantemos la estructura de hipótesis dada por:
+<span class="math display">\[\begin{eqnarray*}
+    H_0 &amp; : &amp; \mathbf{B}_1 = \mathbf{B}_2 = \ldots = \mathbf{B}_q = 0 \\
+    H_a &amp; : &amp; No H_0    
+\end{eqnarray*}\]</span></p>
+<p>La estadística de prueba será determinada por:
+<span class="math display">\[\begin{equation}
+    LM_{M-ARCH} = \frac{1}{2} T K (K + 1) - Traza \left( \hat{\Sigma}_{ARCH} \hat{\Sigma}^{-1}_{0} \right) \sim \chi^2_{[q K^2 (K + 1)^2 / 4]}
+\end{equation}\]</span></p>
+<p>Donde la matriz <span class="math inline">\(\hat{\Sigma}_{ARCH}\)</span> es calcula de acuerdo con la ecuación <a href="modelos-univariados-y-multivariados-de-volatilidad.html#eq:ARCH-LM">(10.4)</a> y la matriz <span class="math inline">\(\hat{\Sigma}_{0}\)</span> sin considerar una estructura dada para los errores.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></div>
+<div class="next"><a href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#modelos-univariados-y-multivariados-de-volatilidad"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li>
+<a class="nav-link" href="#motivaci%C3%B3n-1"><span class="header-section-number">10.1</span> Motivación</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#value-at-risk"><span class="header-section-number">10.1.1</span> Value at risk</a></li></ul>
+</li>
+<li><a class="nav-link" href="#prueba-de-normalidad"><span class="header-section-number">10.2</span> Prueba de normalidad</a></li>
+<li>
+<a class="nav-link" href="#modelos-arch-y-garch-univariados"><span class="header-section-number">10.3</span> Modelos ARCH y GARCH Univariados</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ejemplo-arch1"><span class="header-section-number">10.3.1</span> Ejemplo ARCH(1)</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#ejemplo-garch01"><span class="header-section-number">10.4</span> Ejemplo GARCH(0,1)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#selecci%C3%B3n-garchpq-%C3%B3ptimo"><span class="header-section-number">10.4.1</span> Selección GARCH(p,q) óptimo</a></li></ul>
+</li>
+<li><a class="nav-link" href="#modelos-arch-y-garch-multivariados"><span class="header-section-number">10.5</span> Modelos ARCH y GARCH Multivariados</a></li>
+<li><a class="nav-link" href="#pruebas-para-detectar-efectos-arch"><span class="header-section-number">10.6</span> Pruebas para detectar efectos ARCH</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-06-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

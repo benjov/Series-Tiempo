@@ -141,7 +141,7 @@
 
 \title{Notas de Clase: Series de Tiempo}
 \author{Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres}
-\date{2023-12-04}
+\date{2024-06-09}
 
 \begin{document}
 \maketitle
@@ -6965,6 +6965,2846 @@ IDE: bank deposit rate
 
 \caption{Gráfica de la ecuación de cointegración}\label{fig:fig92}
 \end{figure}
+
+\hypertarget{modelos-univariados-y-multivariados-de-volatilidad}{%
+\chapter{Modelos Univariados y Multivariados de Volatilidad}\label{modelos-univariados-y-multivariados-de-volatilidad}}
+
+\hypertarget{motivaciuxf3n-1}{%
+\section{Motivación}\label{motivaciuxf3n-1}}
+
+Estos modelos de Heterocedásticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y modelos Heterocedásticidad Condicional Autoregresiva Generalizados (GARCH, por sus siglas en inglés) tienen la característica de modelar situaciones como las que ilustra la Figutra \ref{fig:fig102}. Es decir:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Existen zonas donde la variación de los datos es mayor y zonas donde la variación es más estable--a estas situaciones se les conoce como de variabilidad por clúster--, y
+\item
+  los datos corresponden a innformación de alta frecuencia.
+\end{enumerate}
+
+Iniciemos por las bibliotecas necesarias:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(expm)}
+\FunctionTok{library}\NormalTok{(Matrix)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(quantmod)}
+\FunctionTok{library}\NormalTok{(moments)}
+\FunctionTok{library}\NormalTok{(dynlm)}
+\FunctionTok{library}\NormalTok{(broom)}
+\FunctionTok{library}\NormalTok{(FinTS)}
+\FunctionTok{library}\NormalTok{(lubridate)}
+\FunctionTok{library}\NormalTok{(forecast)}
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(MASS)}
+\FunctionTok{library}\NormalTok{(rugarch)}
+\FunctionTok{library}\NormalTok{(tsbox)}
+\FunctionTok{library}\NormalTok{(MTS)}
+\FunctionTok{library}\NormalTok{(rmgarch)}
+\FunctionTok{library}\NormalTok{(Rcpp)}
+\end{Highlighting}
+\end{Shaded}
+
+Para el análisis de temas financieros existe una librería de mucha utilidad llamada \textbf{quantmod}. En primer lugar esta librería permite acceder a datos financieros de un modo muy simple, es posible decargar series financieras desde \emph{yahoo}, la \emph{FRED (Federal Reserve Economic Data)}, \emph{google}, etc. Por otro lado también es una librería que permite realizar gráficos altamente estéticos con unas cuantas líneas de código. Ahora, usaremos datos de Yahoo Finance respecto de la cotización del bitcoin (ticker: ``BTC-USD'').
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\StringTok{"getSymbols.warning4.0"}\OtherTok{=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{BTC }\OtherTok{\textless{}{-}}\FunctionTok{getSymbols}\NormalTok{(}\StringTok{"BTC{-}USD"}\NormalTok{, }\AttributeTok{src =} \StringTok{"yahoo"}\NormalTok{, }\AttributeTok{auto.assign =} \ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{BTC }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(BTC)}
+
+\FunctionTok{chartSeries}\NormalTok{(BTC,}\AttributeTok{TA=}\StringTok{\textquotesingle{}addBBands();}
+\StringTok{                    addBBands(draw="p");}
+\StringTok{                    addVo();}
+\StringTok{                    addMACD()\textquotesingle{}}\NormalTok{,}\CommentTok{\# subset=\textquotesingle{}2021\textquotesingle{},}
+                \AttributeTok{theme=}\StringTok{"white"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/Data_ARCH-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(BTC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
+## 2014-09-17      465.864      468.174     452.422       457.334       21056800
+## 2014-09-18      456.860      456.860     413.104       424.440       34483200
+## 2014-09-19      424.103      427.835     384.532       394.796       37919700
+## 2014-09-20      394.673      423.296     389.883       408.904       36863600
+## 2014-09-21      408.085      412.426     393.181       398.821       26580100
+## 2014-09-22      399.100      406.916     397.130       402.152       24127600
+##            BTC-USD.Adjusted
+## 2014-09-17          457.334
+## 2014-09-18          424.440
+## 2014-09-19          394.796
+## 2014-09-20          408.904
+## 2014-09-21          398.821
+## 2014-09-22          402.152
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(BTC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
+## 2024-06-03     67753.90     70230.82    67589.84      68804.78    32401285324
+## 2024-06-04     68804.57     71047.41    68564.64      70567.77    33149696545
+## 2024-06-05     70568.35     71735.41    70390.71      71082.82    32810771409
+## 2024-06-06     71082.84     71625.73    70119.12      70757.16    25223152007
+## 2024-06-07     70759.19     71907.85    68507.26      69342.59    36188381096
+## 2024-06-08     69324.18     69533.32    69210.74      69305.77    14262185861
+##            BTC-USD.Adjusted
+## 2024-06-03         68804.78
+## 2024-06-04         70567.77
+## 2024-06-05         71082.82
+## 2024-06-06         70757.16
+## 2024-06-07         69342.59
+## 2024-06-08         69305.77
+\end{verbatim}
+
+Para fines del ejercicio de esta clase, usaremos el valor de la acción ajustado. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(BTC}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{BTC{-}USD.Adjusted}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig101-1} 
+
+}
+
+\caption{Evolución del precio del Bitcoin}\label{fig:fig101}
+\end{figure}
+
+Una de las preguntas relevantes al observar la serie en diferencias, es si podríamos afirmar que esta serie cumple con el supuesto de homoscedasticidad.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logret }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(BTC}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{BTC{-}USD.Adjusted}\StringTok{\textasciigrave{}}\NormalTok{))[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{])}
+
+\FunctionTok{plot}\NormalTok{(logret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig102-1} 
+
+}
+
+\caption{Evolución del rendimiento (diferenccias logarítmicas) del Bitcoin}\label{fig:fig102}
+\end{figure}
+
+\hypertarget{value-at-risk}{%
+\subsection{Value at risk}\label{value-at-risk}}
+
+Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente es un cálculo que nos permite estimar el monto que una acción o portafolio podría perder dada una probabilidad \((1-\alpha)\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+
+\NormalTok{VaR }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{( logret, alpha )}
+
+\FunctionTok{round}\NormalTok{( VaR, }\DecValTok{4}\NormalTok{ )}\SpecialCharTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   5% 
+## -5.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qplot}\NormalTok{(logret , }\AttributeTok{geom =} \StringTok{\textquotesingle{}histogram\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{fill =} \StringTok{\textquotesingle{}lightblue\textquotesingle{}}\NormalTok{ , }\AttributeTok{bins =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{( }\FunctionTok{aes}\NormalTok{(logret[logret }\SpecialCharTok{\textless{}} \FunctionTok{quantile}\NormalTok{(logret , }\FloatTok{0.05}\NormalTok{)]) , }
+                  \AttributeTok{fill =} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{ , }\AttributeTok{bins =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}Daily Returns\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig103-1} 
+
+}
+
+\caption{Histograma de rendimientos del Bitcoin}\label{fig:fig103}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{normal\_dist }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100000}\NormalTok{, }\FunctionTok{mean}\NormalTok{(logret), }\FunctionTok{sd}\NormalTok{(logret))}
+\NormalTok{VaR\_n }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(normal\_dist, }\FloatTok{0.05}\NormalTok{)}
+\NormalTok{ES\_n }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(normal\_dist[normal\_dist}\SpecialCharTok{\textless{}}\NormalTok{VaR])}
+  
+\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\FunctionTok{aes}\NormalTok{(logret, }\AttributeTok{geom =}\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{, }\AttributeTok{col =} \StringTok{\textquotesingle{}returns\textquotesingle{}}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\FunctionTok{aes}\NormalTok{(normal\_dist, }\AttributeTok{col =} \StringTok{\textquotesingle{}normal\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig104-1} 
+
+}
+
+\caption{Densidad de rendimientos del Bitcoin Vs. una distribución normal}\label{fig:fig104}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vector\_ret }\OtherTok{\textless{}{-}} \FunctionTok{as.vector}\NormalTok{(logret)}
+
+\DocumentationTok{\#\#Kurtosis}
+\FunctionTok{round}\NormalTok{(}\FunctionTok{kurtosis}\NormalTok{(vector\_ret),}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 14.32
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Sesgo}
+\FunctionTok{round}\NormalTok{(}\FunctionTok{skewness}\NormalTok{(vector\_ret),}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.75
+\end{verbatim}
+
+\hypertarget{prueba-de-normalidad}{%
+\section{Prueba de normalidad}\label{prueba-de-normalidad}}
+
+\(H_o: K=S=0\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{jarque.test}\NormalTok{(vector\_ret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Jarque-Bera Normality Test
+## 
+## data:  vector_ret
+## JB = 19295, p-value < 0.00000000000000022
+## alternative hypothesis: greater
+\end{verbatim}
+
+\hypertarget{modelos-arch-y-garch-univariados}{%
+\section{Modelos ARCH y GARCH Univariados}\label{modelos-arch-y-garch-univariados}}
+
+Para plantear el modelo supongamos --por simplicidad-- que hemos construido y estimado un modelo AR(1). Es decir, asumamos que el proceso subyacente para la media condicional está dada por:
+\begin{equation}
+    X_t = a_0 + a_1 X_{t-1} + U_t
+\end{equation}
+
+Donde \(| a_1 |< 1\) para garantizar la convergencia del proceso en el largo plazo, en el cual:
+\begin{eqnarray*}
+    \mathbb{E}[X_t] & = & \frac{a_0 }{1 - a_1} = \mu \\
+    Var[X_t] & = & \frac{\sigma^2}{1 - a_1^2}
+\end{eqnarray*}
+
+Ahora, supongamos que este tipo de modelos pueden ser extendidos y generalizados a un modelo ARMA(p, q), que incluya otras variables exogénas. Denotemos a como \(\mathbf{Z}_t\) al conjunto que incluye los componentes AR, MA y variables exogénas que pueden explicar a \(X_t\) de forma que el proceso estará dado por:
+\begin{equation}
+    X_t = \mathbf{Z}_t \boldsymbol{\beta} + U_t
+\end{equation}
+
+Donde \(U_t\) es un proceso estacionario que representa el error asociado a un proceso ARMA(p, q) y donde siguen diendo válidos los supuestos:
+\begin{eqnarray*}
+    \mathbb{E}[U_t] & = & 0 \\
+    Var[U_t^2] & = & \sigma^2
+\end{eqnarray*}
+
+No obstante, en este caso podemos suponer que existe autocorrelación en el término de error al cuadrado que puede ser capturada por un porceso similar a uno de medias móviles (MA) dado por:
+\begin{equation}
+    U_t^2 = \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2 + \nu_t
+\end{equation}
+
+Donde \(\nu_t\) es un ruido blanco y \(U_{t-i} = X_{t-i} - \mathbf{Z}_{t-i} \boldsymbol{\beta}\), \$i = 1, 2 ,\ldots \$. Si bien los procesos son estacionarios por los supuestos antes enunciados, la varianza condicional estará dada por:
+\begin{eqnarray*}
+    \sigma^2_{t | t-1} & = & Var[ U_t | \Omega_{t-1} ] \\
+    & = & \mathbb{E}[ U^2_t | \Omega_{t-1} ]
+\end{eqnarray*}
+
+Donde \(\Omega_{t-1} = \{U_{t-1}, U_{t-2}, \ldots \}\) es el conjunto de toda la información pasada de \(U_t\) y observada hasta el momento \(t-1\), por lo que:
+\begin{equation*}
+    U_t | \Omega_{t-1} \sim \mathbb{D}(0, \sigma^2_{t | t-1})
+\end{equation*}
+
+Así, de forma similar a un proceso MA(q) podemos decir que la varianza condicional tendrá efectos ARCH de orden \(q\) (ARCH(q)) cuando:
+\begin{equation}
+    \sigma^2_{t | t-1} = \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2
+    \label{eq:ARCHEffect}
+\end{equation}
+
+Donde \(\mathbb{E}[\nu_t] = 0\) y \(\gamma_0\) y \(\gamma_i \geq 0\), para \(i = 1, 2, \ldots, q-1\) y \(\gamma_q > 0\). Estas condiciones son necesarias para garantizar que la varianza sea positiva. En general, la varianza condicional se expresa de la forma \(\sigma^2_{t | t-1}\), no obstante, para facilitar la notación, nos referiremos en cada caso a esta simplemente como \(\sigma^2_{t}\).
+
+Podemos generalizar está situación si asumimos a la varianza condicional como dependiente de lo valores de la varianza rezagados, es decir, como si fuera un proceso AR de orden \(p\) para la varianza y juntandolo con la ecuación \eqref{eq:ARCHEffect}. Bollerslev (1986) y Taylor (1986) generalizaron el problema de heterocedásticidad condicional. El modelo se conoce como GARCH(p, q), el cual se especifica como:
+\begin{eqnarray}
+    \sigma^2_t & = & \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2 \\ \nonumber 
+    & & + \beta_1 \sigma^2_{t-1} + \beta_2 \sigma^2_{t-2} + \ldots + \beta_p \sigma^2_{t-p}
+    \label{eq:GARCHEffect}
+\end{eqnarray}
+
+Donde las condiciones de no negatividad son que \(\gamma_0 > 0\), \(\gamma_i \geq 0\), \(i = 1, 2, \ldots, q-1\), \(\beta_j \geq 0\), \(j = 1, 2, \ldots, p-1\), \(\gamma_q > 0\) y \(\beta_p > 0\). Además, otra condición de convergencia es que:
+\begin{equation*}
+    \gamma_1 + \ldots + \gamma_q + \beta_1 + \ldots + \beta_p < 1
+\end{equation*}
+
+Usando el operador rezago \(L\) en la ecuación \eqref{eq:GARCHEffect} podemos obtener:
+\begin{equation}
+    \sigma^2_t = \gamma_0 + \alpha(L) U_t^2 + \beta(L) \sigma^2_t
+    \label{eq:GARCHEffectL}
+\end{equation}
+
+De donde podemos establecer:
+\begin{equation}
+    \sigma^2_t = \frac{\gamma_0}{1 - \beta(L)} + \frac{\alpha(L)}{1 - \beta(L)} U_t^2 
+\end{equation}
+
+Por lo que la ecuación \eqref{eq:GARCHEffect} del GARCH(p, q) representa un ARCH(\(\infty\)):
+\begin{equation}
+    \sigma^2_t = \frac{a_0}{1 - b_1 - b_2 - \ldots - b_p} + \sum_{i = 1}^\infty U_{t-i}^2 
+\end{equation}
+
+\hypertarget{ejemplo-arch1}{%
+\subsection{Ejemplo ARCH(1)}\label{ejemplo-arch1}}
+
+Hasta ahora las distribuciones utilizadas para medir el Valor en Riesgo de este activo, asumen que no existe correlación serial en los retornos diarios de este activo. Observemos un par de gráficas de la función de autocorrelación para corroborar este hecho.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(logret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig105-1} 
+
+}
+
+\caption{Función de autocorrelación parcial de lo rendimientos del Bitcoin}\label{fig:fig105}
+\end{figure}
+
+La idea de clusterización de volatilidad, asume que periodos de alta volatilidad serán seguidos por una alta volatilidad y viceversa. Por esta razón la función de autocorrelación útil para saber si existen clústers de volatilidad es utilizando el valor absoluto, ya que lo que importa es saber si la serie está autocorrelacionada en la magnitud de los movimientos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{abs}\NormalTok{(logret))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig106-1} 
+
+}
+
+\caption{Evolución de los rendimientos del Bitcoin en valor absoluto}\label{fig:fig106}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(}\FunctionTok{abs}\NormalTok{(logret))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig107-1} 
+
+}
+
+\caption{Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto}\label{fig:fig107}
+\end{figure}
+
+Otra manera de corroborar esta idea es volviendo IID nuestra serie de datos y observar que de este modo se pierde la autocorrelación serial, lo que refuerza la idea de que en esta serie existen clusters de volatilidad.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logret\_random }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{as.vector}\NormalTok{(logret), }\AttributeTok{size =}  \FunctionTok{length}\NormalTok{(logret), }\AttributeTok{replace =} \ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{acf}\NormalTok{(}\FunctionTok{abs}\NormalTok{(logret\_random))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig108-1} 
+
+}
+
+\caption{Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto}\label{fig:fig108}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(logret)}
+\FunctionTok{plot}\NormalTok{(logret\_random, }\AttributeTok{type =} \StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig109-1} 
+
+}
+
+\caption{Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto}\label{fig:fig109}
+\end{figure}
+
+Primer enfoque para comprobar aceptar o rechazar la hopótesis de que necesitamos estimar un ARCH(q)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logret\_mean }\OtherTok{=} \FunctionTok{dynlm}\NormalTok{(logret}\SpecialCharTok{\textasciitilde{}}\DecValTok{1}\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(logret\_mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Time series regression with "ts" data:
+## Start = 1, End = 3552
+## 
+## Call:
+## dynlm(formula = logret ~ 1)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.46614 -0.01402 -0.00004  0.01558  0.22371 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) 0.0014135  0.0006202   2.279   0.0227 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.03696 on 3551 degrees of freedom
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ehatsq }\OtherTok{=} \FunctionTok{ts}\NormalTok{(}\FunctionTok{resid}\NormalTok{(logret\_mean)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{ARCH\_m }\OtherTok{=} \FunctionTok{dynlm}\NormalTok{(ehatsq}\SpecialCharTok{\textasciitilde{}}\FunctionTok{L}\NormalTok{(ehatsq))}
+
+\FunctionTok{summary}\NormalTok{(ARCH\_m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Time series regression with "ts" data:
+## Start = 2, End = 3552
+## 
+## Call:
+## dynlm(formula = ehatsq ~ L(ehatsq))
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.016888 -0.001189 -0.001058 -0.000332  0.216102 
+## 
+## Coefficients:
+##               Estimate Std. Error t value             Pr(>|t|)    
+## (Intercept) 0.00118810 0.00008604  13.809 < 0.0000000000000002 ***
+## L(ehatsq)   0.12923295 0.01664353   7.765   0.0000000000000106 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.004945 on 3549 degrees of freedom
+## Multiple R-squared:  0.0167, Adjusted R-squared:  0.01643 
+## F-statistic: 60.29 on 1 and 3549 DF,  p-value: 0.00000000000001063
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(ARCH\_m}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/ArchTest-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(}\FunctionTok{abs}\NormalTok{(ARCH\_m}\SpecialCharTok{$}\NormalTok{residuals))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/ArchTest-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ArchTest}\NormalTok{(logret, }\AttributeTok{lags =} \DecValTok{1}\NormalTok{, }\AttributeTok{demean =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  ARCH LM-test; Null hypothesis: no ARCH effects
+## 
+## data:  logret
+## Chi-squared = 59.318, df = 1, p-value = 0.00000000000001342
+\end{verbatim}
+
+Estimemos un ARCH(1), considerando la siguente especificación:
+
+\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)
+
+\(h_t = \omega+\alpha_ih_{t-i}+u_t\)
+
+\(\varepsilon \sim N(0,1)\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rugarch)}
+
+\FunctionTok{auto.arima}\NormalTok{(logret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Series: logret 
+## ARIMA(2,0,0) with non-zero mean 
+## 
+## Coefficients:
+##           ar1     ar2    mean
+##       -0.0215  0.0093  0.0014
+## s.e.   0.0168  0.0168  0.0006
+## 
+## sigma^2 = 0.001366:  log likelihood = 6675.29
+## AIC=-13342.59   AICc=-13342.58   BIC=-13317.89
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#?ugarchspec}
+
+\NormalTok{model.spec }\OtherTok{=} \FunctionTok{ugarchspec}\NormalTok{( }\AttributeTok{variance.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{model =} \StringTok{\textquotesingle{}sGARCH\textquotesingle{}}\NormalTok{ , }
+                                               \AttributeTok{garchOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)), }
+                        \AttributeTok{mean.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{armaOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{)), }
+                        \AttributeTok{distribution.model =} \StringTok{"std"}\NormalTok{)}
+
+\CommentTok{\#?ugarchfit}
+
+\NormalTok{arch.fit }\OtherTok{=} \FunctionTok{ugarchfit}\NormalTok{(}\AttributeTok{spec =}\NormalTok{ model.spec , }\AttributeTok{data =}\NormalTok{ logret, }
+                     \AttributeTok{solver =} \StringTok{\textquotesingle{}solnp\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{arch.fit}\SpecialCharTok{@}\NormalTok{fit}\SpecialCharTok{$}\NormalTok{matcoef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Estimate   Std. Error    t value     Pr(>|t|)
+## mu      0.001657804 0.0003634071  4.5618370 0.0000050708
+## ar1    -0.054492820 0.0166193734 -3.2788733 0.0010422242
+## ar2    -0.002412717 0.0135695190 -0.1778042 0.8588767813
+## omega   0.002223275 0.0006555542  3.3914440 0.0006952538
+## alpha1  0.903439192 0.3044799287  2.9671552 0.0030056923
+## shape   2.291331881 0.1091046492 21.0012305 0.0000000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boot.garch }\OtherTok{\textless{}{-}} \FunctionTok{ugarchboot}\NormalTok{(arch.fit,}
+                         \AttributeTok{method =} \StringTok{"Partial"}\NormalTok{,}
+                         \AttributeTok{sampling =} \StringTok{"raw"}\NormalTok{,  }\CommentTok{\#bootstrap from fitted varepsilon}
+                         \AttributeTok{n.ahead =} \DecValTok{1}\NormalTok{,          }\CommentTok{\#simulation horizon}
+                         \AttributeTok{n.bootpred =} \DecValTok{100000}\NormalTok{, }\CommentTok{\#number of simulations }
+                         \AttributeTok{solver =} \StringTok{"solnp"}\NormalTok{)}
+
+\NormalTok{boot.garch}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## *-----------------------------------*
+## *     GARCH Bootstrap Forecast      *
+## *-----------------------------------*
+## Model : sGARCH
+## n.ahead : 1
+## Bootstrap method:  partial
+## Date (T[0]): 3552-01-01
+## 
+## Series (summary):
+##          min     q.25     mean     q.75    max forecast[analytic]
+## t+1 -0.46547 -0.01071 0.001438 0.014643 0.2001            0.00183
+## .....................
+## 
+## Sigma (summary):
+##          min    q0.25     mean    q0.75      max forecast[analytic]
+## t+1 0.047262 0.047262 0.047262 0.047262 0.047262           0.047262
+## .....................
+\end{verbatim}
+
+\hypertarget{ejemplo-garch01}{%
+\section{Ejemplo GARCH(0,1)}\label{ejemplo-garch01}}
+
+Estimemos un GARCH(0,1) unsando la siguiente especificación:
+
+\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)
+
+\(h_t = \omega+\beta_i \sigma^2_{t-i}+u_t\)
+
+\(\varepsilon \sim N(0,1)\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.spec }\OtherTok{=} \FunctionTok{ugarchspec}\NormalTok{(}\AttributeTok{variance.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{model =} \StringTok{\textquotesingle{}sGARCH\textquotesingle{}}\NormalTok{ , }
+                                              \AttributeTok{garchOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)), }
+                        \AttributeTok{mean.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{armaOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{)), }
+                        \AttributeTok{distribution.model =} \StringTok{"std"}\NormalTok{)}
+
+\NormalTok{fit.garch.n }\OtherTok{=} \FunctionTok{ugarchfit}\NormalTok{(}\AttributeTok{spec =}\NormalTok{ model.spec, }\AttributeTok{data =}\NormalTok{ logret, }
+                        \AttributeTok{solver =} \StringTok{"solnp"}\NormalTok{)}
+
+\NormalTok{fit.garch.n}\SpecialCharTok{@}\NormalTok{fit}\SpecialCharTok{$}\NormalTok{matcoef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Estimate       Std. Error       t value       Pr(>|t|)
+## mu     0.001798970583 0.00038587558213     4.6620483 0.000003130778
+## ar1   -0.063613562868 0.01414330202209    -4.4977872 0.000006866437
+## ar2   -0.005885947766 0.01349635363446    -0.4361139 0.662754074026
+## omega  0.000003766748 0.00000006388575    58.9606948 0.000000000000
+## beta1  0.998250914699 0.00002785491650 35837.5123746 0.000000000000
+## shape  2.492673503467 0.02761073615459    90.2791396 0.000000000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boot.garch }\OtherTok{\textless{}{-}} \FunctionTok{ugarchboot}\NormalTok{(fit.garch.n,}
+                         \AttributeTok{method =} \StringTok{"Partial"}\NormalTok{,}
+                         \AttributeTok{sampling =} \StringTok{"raw"}\NormalTok{,  }\CommentTok{\#bootstrap from fitted varepsilon}
+                         \AttributeTok{n.ahead =} \DecValTok{1}\NormalTok{,          }\CommentTok{\#simulation horizon}
+                         \AttributeTok{n.bootpred =} \DecValTok{100000}\NormalTok{, }\CommentTok{\#number of simulations }
+                         \AttributeTok{solver =} \StringTok{"solnp"}\NormalTok{)}
+\NormalTok{boot.garch}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## *-----------------------------------*
+## *     GARCH Bootstrap Forecast      *
+## *-----------------------------------*
+## Model : sGARCH
+## n.ahead : 1
+## Bootstrap method:  partial
+## Date (T[0]): 3552-01-01
+## 
+## Series (summary):
+##          min      q.25   mean     q.75     max forecast[analytic]
+## t+1 -0.46699 -0.013008 0.0011 0.017366 0.24255           0.002077
+## .....................
+## 
+## Sigma (summary):
+##          min    q0.25     mean    q0.75      max forecast[analytic]
+## t+1 0.046389 0.046389 0.046389 0.046389 0.046389           0.046389
+## .....................
+\end{verbatim}
+
+\hypertarget{selecciuxf3n-garchpq-uxf3ptimo}{%
+\subsection{Selección GARCH(p,q) óptimo}\label{selecciuxf3n-garchpq-uxf3ptimo}}
+
+¿Cómo seleccionamos el órden adecuado para un GARCH(p,q)? Acá una respuesta.
+
+\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)
+
+\(h_t = \omega+\beta_ih_{t-i}+\alpha_i\varepsilon^2_{t-i}+u_t\)
+
+\(\varepsilon \sim N(0,1)\)
+
+\hypertarget{criterios-de-informaciuxf3n}{%
+\subsubsection{Criterios de información}\label{criterios-de-informaciuxf3n}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{infocriteria}\NormalTok{(fit.garch.n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                       
+## Akaike       -4.058051
+## Bayes        -4.047620
+## Shibata      -4.058056
+## Hannan-Quinn -4.054331
+\end{verbatim}
+
+\hypertarget{selecciuxf3n-del-modelo-uxf3ptimo}{%
+\subsubsection{Selección del modelo óptimo}\label{selecciuxf3n-del-modelo-uxf3ptimo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{"Lag\_Opt\_GARCH.R"}\NormalTok{)}
+
+\FunctionTok{Lag\_Opt\_GARCH}\NormalTok{(ehatsq,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       q p       AIC Optimo
+##  [1,] 1 1 -10.88917      0
+##  [2,] 1 2 -10.88981      0
+##  [3,] 1 3 -10.88905      0
+##  [4,] 1 4 -10.89160      0
+##  [5,] 2 1 -10.88860      0
+##  [6,] 2 2 -10.88915      0
+##  [7,] 2 3 -10.89172      0
+##  [8,] 2 4 -10.89108      0
+##  [9,] 3 1 -10.88805      0
+## [10,] 3 2 -10.88874      0
+## [11,] 3 3 -10.89109      0
+## [12,] 3 4 -10.89039      0
+## [13,] 4 1 -10.89116      0
+## [14,] 4 2 -10.89216      0
+## [15,] 4 3 -10.89238      1
+## [16,] 4 4 -10.89104      0
+\end{verbatim}
+
+\hypertarget{estimaciuxf3n-de-modelo-uxf3ptimo}{%
+\subsubsection{Estimación de modelo óptimo}\label{estimaciuxf3n-de-modelo-uxf3ptimo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.spec }\OtherTok{=} \FunctionTok{ugarchspec}\NormalTok{(}\AttributeTok{variance.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{model =} \StringTok{\textquotesingle{}sGARCH\textquotesingle{}}\NormalTok{, }
+                                              \AttributeTok{garchOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{)), }
+                        \AttributeTok{mean.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{armaOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{0}\NormalTok{)), }
+                        \AttributeTok{distribution.model =} \StringTok{"std"}\NormalTok{)}
+
+
+\NormalTok{model.fit }\OtherTok{=} \FunctionTok{ugarchfit}\NormalTok{(}\AttributeTok{spec =}\NormalTok{ model.spec , }\AttributeTok{data =}\NormalTok{ logret, }
+                      \AttributeTok{solver =} \StringTok{\textquotesingle{}solnp\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{model.fit}\SpecialCharTok{@}\NormalTok{fit}\SpecialCharTok{$}\NormalTok{matcoef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                Estimate     Std. Error         t value          Pr(>|t|)
+## mu      0.0013647767998 0.000327550635  4.166613197425 0.000030915841045
+## ar1    -0.0533431285909 0.015474502741 -3.447162696237 0.000566507315561
+## ar2    -0.0015337829171 0.014251945668 -0.107619194795 0.914297770179209
+## omega   0.0000240076269 0.000005600024  4.287057849067 0.000018105515536
+## alpha1  0.1343244321922 0.022384738010  6.000714957447 0.000000001964506
+## alpha2  0.0000001131084 0.034625286002  0.000003266641 0.999997393597721
+## alpha3  0.0000000395280 0.028390927623  0.000001392276 0.999998889124606
+## alpha4  0.0244646890289 0.023816695882  1.027207516510 0.304322759497438
+## beta1   0.4225795592940 0.209966671336  2.012603031734 0.044156407778425
+## beta2   0.4176311658663 0.166128455780  2.513905061629 0.011940257201827
+## shape   3.1807937467541 0.129196858043 24.619745363271 0.000000000000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boot.garch }\OtherTok{\textless{}{-}} \FunctionTok{ugarchboot}\NormalTok{(model.fit,}
+                         \AttributeTok{method =} \StringTok{"Partial"}\NormalTok{,}
+                         \AttributeTok{sampling =} \StringTok{"raw"}\NormalTok{,  }\CommentTok{\#bootstrap from fitted varepsilon}
+                         \AttributeTok{n.ahead =} \DecValTok{1}\NormalTok{,          }\CommentTok{\#simulation horizon}
+                         \AttributeTok{n.bootpred =} \DecValTok{100000}\NormalTok{, }\CommentTok{\#number of simulations }
+                         \AttributeTok{solver =} \StringTok{"solnp"}\NormalTok{)}
+
+\NormalTok{boot.garch}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## *-----------------------------------*
+## *     GARCH Bootstrap Forecast      *
+## *-----------------------------------*
+## Model : sGARCH
+## n.ahead : 1
+## Bootstrap method:  partial
+## Date (T[0]): 3552-01-01
+## 
+## Series (summary):
+##          min      q.25     mean     q.75     max forecast[analytic]
+## t+1 -0.26075 -0.007495 0.001531 0.011159 0.20184           0.001499
+## .....................
+## 
+## Sigma (summary):
+##          min    q0.25     mean    q0.75      max forecast[analytic]
+## t+1 0.020854 0.020854 0.020854 0.020854 0.020854           0.020854
+## .....................
+\end{verbatim}
+
+\hypertarget{forecasting-with-garch11}{%
+\subsubsection{Forecasting with GARCH(1,1)}\label{forecasting-with-garch11}}
+
+Para realizar pronósticos con la estimación de un GARCH, utilizando la librería \emph{rugarch}, es necesario utilizar la función \textbf{ugarchforecast()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.spec }\OtherTok{=} \FunctionTok{ugarchspec}\NormalTok{(}\AttributeTok{variance.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{model =} \StringTok{\textquotesingle{}sGARCH\textquotesingle{}}\NormalTok{, }
+                                              \AttributeTok{garchOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)), }
+                        \AttributeTok{mean.model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{armaOrder =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{)), }
+                        \AttributeTok{distribution.model =} \StringTok{"std"}\NormalTok{)}
+
+\NormalTok{model.fit }\OtherTok{=} \FunctionTok{ugarchfit}\NormalTok{(}\AttributeTok{spec =}\NormalTok{ model.spec , }\AttributeTok{data =}\NormalTok{ logret, }
+                      \AttributeTok{solver =} \StringTok{\textquotesingle{}solnp\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{spec }\OtherTok{=} \FunctionTok{getspec}\NormalTok{(model.fit)}
+
+\FunctionTok{setfixed}\NormalTok{(spec) }\OtherTok{\textless{}{-}} \FunctionTok{as.list}\NormalTok{(}\FunctionTok{coef}\NormalTok{(model.fit))}
+\end{Highlighting}
+\end{Shaded}
+
+Esta función precisa como argumentos nuestra estimación del modelo GARCH, con una modificación en la manera en que se presentan los coeficientes, realizada en la última línea del código anterior y que llamamos \emph{spec}. \emph{n.ahead} es el número de periodos que vamos a pronosticar, \emph{n.roll} señala el número de pronósticos móviles que utilizaremos, en caso de que haya más información para realizar el pronóstico. Finalmente damos como input nuestro set de datos y como producto obtendremos el pronostico de Sigma tanto como de la serie.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forecast }\OtherTok{=} \FunctionTok{ugarchforecast}\NormalTok{(spec, }\AttributeTok{n.ahead =} \DecValTok{12}\NormalTok{, }\AttributeTok{n.roll =} \DecValTok{0}\NormalTok{, logret)}
+
+\FunctionTok{sigma}\NormalTok{(forecast)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      3552-01-01
+## T+1  0.02159870
+## T+2  0.02197838
+## T+3  0.02235124
+## T+4  0.02271762
+## T+5  0.02307782
+## T+6  0.02343214
+## T+7  0.02378083
+## T+8  0.02412414
+## T+9  0.02446230
+## T+10 0.02479551
+## T+11 0.02512398
+## T+12 0.02544789
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fitted}\NormalTok{(forecast)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       3552-01-01
+## T+1  0.002318633
+## T+2  0.002021808
+## T+3  0.001821494
+## T+4  0.001992029
+## T+5  0.001839924
+## T+6  0.001977960
+## T+7  0.001847484
+## T+8  0.001965811
+## T+9  0.001853760
+## T+10 0.001955064
+## T+11 0.001858823
+## T+12 0.001945534
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forecast}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## *------------------------------------*
+## *       GARCH Model Forecast         *
+## *------------------------------------*
+## Model: sGARCH
+## Horizon: 12
+## Roll Steps: 0
+## Out of Sample: 0
+## 
+## 0-roll forecast [T0=]:
+##        Series   Sigma
+## T+1  0.002319 0.02160
+## T+2  0.002022 0.02198
+## T+3  0.001821 0.02235
+## T+4  0.001992 0.02272
+## T+5  0.001840 0.02308
+## T+6  0.001978 0.02343
+## T+7  0.001847 0.02378
+## T+8  0.001966 0.02412
+## T+9  0.001854 0.02446
+## T+10 0.001955 0.02480
+## T+11 0.001859 0.02512
+## T+12 0.001946 0.02545
+\end{verbatim}
+
+\hypertarget{modelos-arch-y-garch-multivariados}{%
+\section{Modelos ARCH y GARCH Multivariados}\label{modelos-arch-y-garch-multivariados}}
+
+De forma similar a los modelo univariados, los modelos multivariados de heterocedásticidad condicional asumen una estructura de la media condicional. En este caso, descrita por un VAR(p) cuyo proceso estocástico \(\mathbf{X}\) es estacionario de dimensión \(k\). De esta forma la expresión reducida del modelo o el proceso VAR(p) estará dado por:
+\begin{equation}
+    \mathbf{X}_t = \mathbf{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
+\end{equation}
+
+Donde cada uno de las \(A_i\), \(i = 1, 2, \ldots, p\), son matrices cuadradas de dimensión \(k\) y \(\mathbf{U}_t\) representa un vector de dimensión \(k \times 1\) con los residuales en el momento del tiempo \(t\) que son un proceso pueramente aleatorio. También se incorpora un vector de términos constantes denominado como \(\mathbf{\delta}\), el cual es de dimensión \(k \times 1\) --es este caso también es posible incorporar procesos determinas adicionales--.
+
+Así, suponemos que el término de error tendrá estructura de vector:
+\begin{equation*}
+    \mathbf{U}_t = 
+    \begin{bmatrix}
+    U_{1t} \\ U_{2t} \\ \vdots \\ U_{Kt}
+    \end{bmatrix}
+\end{equation*}
+
+De forma que diremos que:
+\begin{equation*}
+    \mathbf{U}_t | \Omega_{t-1} \sim (0, \Sigma_{t | t-1})
+\end{equation*}
+
+Dicho lo anterior, entonces, el mode ARCH(q) multivariado será descrito por:
+\begin{equation}
+    Vech(\Sigma_{t | t-1}) = \boldsymbol{\gamma}_0 + \Gamma_1 Vech(\mathbf{U}_{t-1} \mathbf{U}_{t-1}') + \ldots + \Gamma_q Vech(\mathbf{U}_{t-q} \mathbf{U}_{t-q}')
+    (\#eq:M_ARCH)
+\end{equation}
+
+Donde \(Vech\) es un operador que apila en un vector la parte superior de la matriz a la cual se le aplique, \(\boldsymbol{\gamma}_0\) es un vector de cosntantes, \(\Gamma_i\), \(i = 1, 2, \ldots\) son matrices de coeficientes asociados a la estimación.
+
+Para ilustrar la ecuación @ref(eq:M\_ARCH), tomemos un ejemplo de \(K = 2\), de esta forma tenemos que un M-ARCH(1) será:
+\begin{equation*}
+    \Sigma_{t | t-1} = 
+    \begin{bmatrix}
+    \sigma^2_{1, t | t-1} & \sigma_{12, t | t-1} \\ \sigma_{21, t | t-1} & \sigma^2_{2, t | t-1}
+    \end{bmatrix} = 
+    \begin{bmatrix}
+    \sigma_{11, t} & \sigma_{12, t} \\ \sigma_{21, t} & \sigma_{22, t}
+    \end{bmatrix} =
+    \Sigma_{t}
+\end{equation*}
+
+Donde hemos simplificado la notación de la varianzas y la condición de que están en función de \(t-1\). Así,
+\begin{equation*}
+    Vech(\Sigma_{t}) = 
+    Vech \begin{bmatrix}
+    \sigma_{11, t} & \sigma_{12, t} \\ \sigma_{21, t} & \sigma_{22, t}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix}
+\end{equation*}
+
+De esta forma, podemos establecer el modelo M-ARCH(1) con \(K = 2\) será de la forma:
+\begin{equation*}
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \gamma_{10} \\ \gamma_{20} \\ \gamma_{30}
+    \end{bmatrix} +
+    \begin{bmatrix}
+    \gamma_{11} & \gamma_{12} & \gamma_{13} \\ \gamma_{21} & \gamma_{22} & \gamma_{23} \\ \gamma_{31} & \gamma_{32} & \gamma_{33}
+    \end{bmatrix} 
+    \begin{bmatrix}
+    U^2_{1, t-1} \\ U_{1, t-1} U_{2, t-1} \\ U^2_{2, t-1}
+    \end{bmatrix}
+\end{equation*}
+
+Como notarán este tipo de procedimientos implica la estimación de muchos paramétros. En este circunstacia, se suelen estimar modelos restringidos para reducir el número de coeficientes estimados. por ejemplo, podríamos querer estimar un caso como:
+\begin{equation*}
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \gamma_{10} \\ \gamma_{20} \\ \gamma_{30}
+    \end{bmatrix} +
+    \begin{bmatrix}
+    \gamma_{11} & 0 & 0 \\ 0 & \gamma_{22} & 0 \\ 0 & 0 & \gamma_{33}
+    \end{bmatrix} 
+    \begin{bmatrix}
+    U^2_{1, t-1} \\ U_{1, t-1} U_{2, t-1} \\ U^2_{2, t-1}
+    \end{bmatrix}
+\end{equation*}
+
+Finalmente y de forma analóga al caso univariado, podemos plantear un modelo M-GARCH(p, q) como:
+\begin{equation}
+    Vech(\Sigma_{t | t-1}) = \boldsymbol{\gamma}_0 + \sum_{j = 1}^q \Gamma_j Vech(\mathbf{U}_{t-j} \mathbf{U}_{t-j}') + \sum_{m = 1}^p \mathbf{G}_m Vech(\Sigma_{t-m | t-m-1})
+    \label{M_GARCH}
+\end{equation}
+
+Donde cada una de las \(\mathbf{G}_m\) es una matriz de coeficientes. Para ilustrar este caso retomemos el ejemplo anterior pera ahora para un modelo M-GARCH(1, 1) con \(K = 2\) de formaque tendríamos:
+\begin{eqnarray*}
+    \begin{bmatrix}
+    \sigma_{11, t} \\ \sigma_{12, t} \\ \sigma_{22, t}
+    \end{bmatrix} & = &
+    \begin{bmatrix}
+    \gamma_{10} \\ \gamma_{20} \\ \gamma_{30}
+    \end{bmatrix} +
+    \begin{bmatrix}
+    \gamma_{11} & \gamma_{12} & \gamma_{13} \\ \gamma_{21} & \gamma_{22} & \gamma_{23} \\ \gamma_{31} & \gamma_{32} & \gamma_{33}
+    \end{bmatrix} 
+    \begin{bmatrix}
+    U^2_{1, t-1} \\ U_{1, t-1} U_{2, t-1} \\ U^2_{2, t-1}
+    \end{bmatrix} \\
+    & & + 
+    \begin{bmatrix}
+    g_{11} & g_{12} & g_{13} \\ g_{21} & g_{22} & g_{23} \\ g_{31} & g_{32} & g_{33}
+    \end{bmatrix} 
+    \begin{bmatrix}
+    \sigma_{11, t-1} \\ \sigma_{12, t-1} \\ \sigma_{22, t-1}
+    \end{bmatrix}
+\end{eqnarray*}
+
+\hypertarget{pruebas-para-detectar-efectos-arch}{%
+\section{Pruebas para detectar efectos ARCH}\label{pruebas-para-detectar-efectos-arch}}
+
+La prueba que mostraremos es conocida como una ARCH-LM, la cual está basada en una regresión de los residuales estimados de un modelo VAR(p) o cualquier otra estimación que deseemos probar, con el objeto de determinar si existen efectos ARCH --esta prueba se puede simplificar para el caso univariado--.
+
+Partamos de platear:
+\begin{eqnarray}
+    Vech(\hat{\mathbf{U}}_t \hat{\mathbf{U}}_t') & = & \mathbf{B}_0 + \mathbf{B}_1 Vech(\hat{\mathbf{U}}_{t-1} \hat{\mathbf{U}}_{t-1}') + \ldots \\ \nonumber
+    & & + \mathbf{B}_q Vech(\hat{\mathbf{U}}_{t-q} \hat{\mathbf{U}}_{t-q}') + \varepsilon_t
+    \label{eq:ARCH-LM}
+\end{eqnarray}
+
+Dada la estimación en la ecuación \eqref{eq:ARCH-LM}, plantemos la estructura de hipótesis dada por:
+\begin{eqnarray*}
+    H_0 & : & \mathbf{B}_1 = \mathbf{B}_2 = \ldots = \mathbf{B}_q = 0 \\
+    H_a & : & No H_0    
+\end{eqnarray*}
+
+La estadística de prueba será determinada por:
+\begin{equation}
+    LM_{M-ARCH} = \frac{1}{2} T K (K + 1) - Traza \left( \hat{\Sigma}_{ARCH} \hat{\Sigma}^{-1}_{0} \right) \sim \chi^2_{[q K^2 (K + 1)^2 / 4]}
+\end{equation}
+
+Donde la matriz \(\hat{\Sigma}_{ARCH}\) es calcula de acuerdo con la ecuación \eqref{eq:ARCH-LM} y la matriz \(\hat{\Sigma}_{0}\) sin considerar una estructura dada para los errores.
+
+\hypertarget{modelos-de-datos-panel}{%
+\chapter{Modelos de Datos Panel}\label{modelos-de-datos-panel}}
+
+\hypertarget{motivaciuxf3n-2}{%
+\section{Motivación}\label{motivaciuxf3n-2}}
+
+Denotemos con \(Y_{it}\) el componente o individuo \(i\), \(i = 1, 2, \ldots, N\) en el tiempo \(t\), \(t = 1, 2, \ldots, T\). Típicamente las series de tiempo en forma de panel se caracterizan por ser de dimensión de individuos corta y de dimensión temporar larga.
+
+En general, escribiremos:
+\begin{equation}
+    Y_{it} = \alpha_i + \beta_i X_{it} + U_{it}
+\end{equation}
+
+Donde \(\alpha_i\) es un efecto fijo especificado como:
+\begin{equation}
+    \alpha_i = \beta_0 + \gamma_i Z_i
+\end{equation}
+
+\hypertarget{pruebas-de-rauxedces-unitarias-en-panel}{%
+\section{Pruebas de Raíces Unitarias en Panel}\label{pruebas-de-rauxedces-unitarias-en-panel}}
+
+Las pruebas de raíces unitarias para panel suelen ser usadas principalmente en casos macroeconómicos. De forma similar al caso de series univariadas, asumiremos una forma de AR(1) para una serie en panel:
+\begin{equation}
+    \Delta Y_{it} = \mu_i + \rho_i Y_{i t-1} + \sum_{i = 1}^{k_i} \varphi_{ij} \Delta Y_{i t-j} + \varepsilon_{it}
+    (\#eq:eq_AR_Panel)
+\end{equation}
+
+Donde \(i = 1, \ldots, N\), \(t = 1, \ldots, T\) y \(\varepsilon_{it}\) es una v.a. iid que cumple con:
+\begin{eqnarray*}
+    \mathbb{E}[\varepsilon_{it}] & = & 0 \\
+    \mathbb{E}[\varepsilon_{it}^2] & = & \sigma^2_i < \infty \\
+    \mathbb{E}[\varepsilon_{it}^4] & < & \infty 
+\end{eqnarray*}
+
+Al igual que en el caso univariado, en este tipo de pruebas buscamos identificar cuando las series son I(1) y cuando I(0). Pasra tal efecto, la prueba de raíz unitaria que utilizaremos está basada en una prueba Dickey-Fuller Aumentada en la cual la hipótesis nula (\(H_0\)) es que todas las series en el panel son no estacionarias, es decir, son I(1). Es decir,
+\begin{equation}
+    H_0 : \rho_i = 0
+\end{equation}
+
+Por su parte, en el caso de la hipótesis nula tenndremos dos:
+
+\begin{itemize}
+    \item $H_1^A :$ Todas las series son I(0) -- caso homogéneo, o
+    
+    \item $H_1^B :$ Al menos una de las series es I(0) -- caso heterogéneo
+\end{itemize}
+
+\hypertarget{ejemplo-pruebas-de-rauxedces-unitarias-en-panel}{%
+\section{Ejemplo: Pruebas de Raíces Unitarias en Panel}\label{ejemplo-pruebas-de-rauxedces-unitarias-en-panel}}
+
+Dependencies and Setup
+
+Download data from library PLM
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(}\StringTok{"EmplUK"}\NormalTok{, }\AttributeTok{package=}\StringTok{"plm"}\NormalTok{)}
+
+\FunctionTok{data}\NormalTok{(}\StringTok{"Produc"}\NormalTok{, }\AttributeTok{package=}\StringTok{"plm"}\NormalTok{)}
+
+\FunctionTok{data}\NormalTok{(}\StringTok{"Grunfeld"}\NormalTok{, }\AttributeTok{package=}\StringTok{"plm"}\NormalTok{)}
+
+\FunctionTok{data}\NormalTok{(}\StringTok{"Wages"}\NormalTok{, }\AttributeTok{package=}\StringTok{"plm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Describe data: Grunfeld data (Grunfeld 1958) comprising 20 annual observations on the three variables real gross investment (invest), real value of the firm (value), and real value of the capital stock (capital) for 10 large US firms for the years 1935--1954
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(Grunfeld)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "firm"    "year"    "inv"     "value"   "capital"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(Grunfeld)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   firm year   inv  value capital
+## 1    1 1935 317.6 3078.5     2.8
+## 2    1 1936 391.8 4661.7    52.6
+## 3    1 1937 410.6 5387.1   156.9
+## 4    1 1938 257.7 2792.2   209.2
+## 5    1 1939 330.8 4313.2   203.4
+## 6    1 1940 461.2 4643.9   207.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Invest }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{split}\NormalTok{( Grunfeld}\SpecialCharTok{$}\NormalTok{inv, Grunfeld}\SpecialCharTok{$}\NormalTok{firm )) }\CommentTok{\# individuals in columns}
+
+\FunctionTok{names}\NormalTok{(Invest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "X1"  "X2"  "X3"  "X4"  "X5"  "X6"  "X7"  "X8"  "X9"  "X10"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(Invest) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{( }\StringTok{"Firm\_1"}\NormalTok{, }\StringTok{"Firm\_2"}\NormalTok{, }\StringTok{"Firm\_3"}\NormalTok{, }\StringTok{"Firm\_4"}\NormalTok{, }
+                    \StringTok{"Firm\_5"}\NormalTok{, }\StringTok{"Firm\_6"}\NormalTok{, }\StringTok{"Firm\_7"}\NormalTok{, }\StringTok{"Firm\_8"}\NormalTok{, }
+                    \StringTok{"Firm\_9"}\NormalTok{, }\StringTok{"Firm\_10"}\NormalTok{ )}
+
+\FunctionTok{names}\NormalTok{(Invest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Firm_1"  "Firm_2"  "Firm_3"  "Firm_4"  "Firm_5"  "Firm_6"  "Firm_7" 
+##  [8] "Firm_8"  "Firm_9"  "Firm_10"
+\end{verbatim}
+
+Plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_1, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{1}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1500}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Tiempo"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Real gross investment"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_2, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_3, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{3}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_4, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{4}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_5, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{5}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_6, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{6}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_7, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{7}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_8, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{8}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_9, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{9}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(Invest}\SpecialCharTok{$}\NormalTok{Firm\_10, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \DecValTok{10}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\AttributeTok{legend=}\FunctionTok{c}\NormalTok{(}\StringTok{"Firm\_1"}\NormalTok{, }\StringTok{"Firm\_2"}\NormalTok{, }\StringTok{"Firm\_3"}\NormalTok{, }\StringTok{"Firm\_4"}\NormalTok{, }\StringTok{"Firm\_5"}\NormalTok{,}
+                           \StringTok{"Firm\_6"}\NormalTok{, }\StringTok{"Firm\_7"}\NormalTok{, }\StringTok{"Firm\_8"}\NormalTok{, }\StringTok{"Firm\_9"}\NormalTok{, }\StringTok{"Firm\_10"}\NormalTok{),}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig111-1} 
+
+}
+
+\caption{Evolución de la inversión por empresa}\label{fig:fig111}
+\end{figure}
+
+Unit Root Test: Test specifies the type of test to be performed among Levin et al.~(2002), Im et al.~(2003), Maddala and Wu (1999) and Hadri (2000)
+
+Consider Levin et al.~(2002)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(}\FunctionTok{log}\NormalTok{(Invest), }\AttributeTok{test =} \StringTok{"levinlin"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in selectT(l, theTs): the time series is short
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)
+## 
+## data:  log(Invest)
+## z = -0.63214, p-value = 0.2636
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+Same via:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ts\_LInvest }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Invest), }\AttributeTok{start =} \DecValTok{1935}\NormalTok{, }\AttributeTok{end =} \DecValTok{1954}\NormalTok{, }\AttributeTok{freq =} \DecValTok{1}\NormalTok{)}
+
+\NormalTok{ts\_DLInvest }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(}\FunctionTok{ts}\NormalTok{(}\FunctionTok{log}\NormalTok{(Invest), }\AttributeTok{start =} \DecValTok{1935}\NormalTok{, }\AttributeTok{end =} \DecValTok{1954}\NormalTok{, }\AttributeTok{freq =} \DecValTok{1}\NormalTok{), }
+                     \AttributeTok{lag =} \DecValTok{1}\NormalTok{, }\AttributeTok{differences =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_LInvest, }\AttributeTok{test =} \StringTok{"levinlin"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in selectT(l, theTs): the time series is short
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)
+## 
+## data:  ts_LInvest
+## z = -0.63214, p-value = 0.2636
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{purtest}\NormalTok{(ts\_LInvest, }\AttributeTok{test =} \StringTok{"levinlin"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in selectT(l, theTs): the time series is short
+\end{verbatim}
+
+\begin{verbatim}
+## Levin-Lin-Chu Unit-Root Test 
+## Exogenous variables: Individual Intercepts 
+## Automatic selection of lags using AIC: 0 - 3 lags (max: 4)
+## statistic: -0.632 
+## p-value: 0.264 
+## 
+##         lags obs          rho        trho     p.trho   sigma2ST    sigma2LT
+## Firm_1     0  19  0.006034802  0.05068864 0.96193110 0.03592530 0.014769876
+## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 0.05020448 0.014565004
+## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 0.03073205 0.019141095
+## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 0.06196079 0.018454390
+## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 0.04165516 0.006949122
+## Firm_6     2  17  0.062922587  0.72626225 0.99275186 0.02442139 0.009212851
+## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 0.03230724 0.007274365
+## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 0.06270208 0.026960667
+## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 0.05073398 0.013291332
+## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 0.07672404 0.062496477
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_DLInvest, }\AttributeTok{test =} \StringTok{"levinlin"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in selectT(l, theTs): the time series is short
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)
+## 
+## data:  ts_DLInvest
+## z = -8.5076, p-value < 0.00000000000000022
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{purtest}\NormalTok{(ts\_DLInvest, }\AttributeTok{test =} \StringTok{"levinlin"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in selectT(l, theTs): the time series is short
+\end{verbatim}
+
+\begin{verbatim}
+## Levin-Lin-Chu Unit-Root Test 
+## Exogenous variables: Individual Intercepts 
+## Automatic selection of lags using AIC: 0 - 3 lags (max: 4)
+## statistic: -8.508 
+## p-value: 0 
+## 
+##         lags obs        rho      trho            p.trho   sigma2ST    sigma2LT
+## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 0.03693616 0.007853674
+## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 0.02832436 0.031954702
+## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 0.03819653 0.022971185
+## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 0.04231849 0.030313940
+## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 0.02737020 0.015226407
+## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 0.02517911 0.008588652
+## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 0.03232079 0.012780800
+## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 0.03277746 0.034905699
+## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 0.05666016 0.019502840
+## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 0.08661396 0.030216984
+\end{verbatim}
+
+Consider Im-Pesaran-Shin Unit-Root Test (2003)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_LInvest, }\AttributeTok{test =} \StringTok{"ips"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)
+## 
+## data:  ts_LInvest
+## Wtbar = 0.6833, p-value = 0.7528
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{purtest}\NormalTok{(ts\_LInvest, }\AttributeTok{test =} \StringTok{"ips"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+                \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Im-Pesaran-Shin Unit-Root Test 
+## Exogenous variables: Individual Intercepts 
+## Automatic selection of lags using AIC: 0 - 3 lags (max: 4)
+## statistic (Wtbar): 0.683 
+## p-value: 0.753 
+## 
+##         lags obs          rho        trho     p.trho    mean    var
+## Firm_1     0  19  0.006034802  0.05068864 0.96193110 -1.5204 0.8654
+## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 -1.5108 0.9534
+## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 -1.3754 1.1522
+## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 -1.5204 0.8654
+## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 -1.5108 0.9534
+## Firm_6     2  17  0.062922587  0.72626225 0.99275186 -1.4034 1.0344
+## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 -1.4034 1.0344
+## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 -1.5108 0.9534
+## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 -1.5204 0.8654
+## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 -1.5108 0.9534
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_DLInvest, }\AttributeTok{test =} \StringTok{"ips"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)
+## 
+## data:  ts_DLInvest
+## Wtbar = -11.14, p-value < 0.00000000000000022
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{purtest}\NormalTok{(ts\_DLInvest, }\AttributeTok{test =} \StringTok{"ips"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"intercept"}\NormalTok{, }
+                \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Im-Pesaran-Shin Unit-Root Test 
+## Exogenous variables: Individual Intercepts 
+## Automatic selection of lags using AIC: 0 - 3 lags (max: 4)
+## statistic (Wtbar): -11.14 
+## p-value: 0 
+## 
+##         lags obs        rho      trho            p.trho    mean    var
+## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 -1.5188 0.8798
+## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 -1.3660 1.1810
+## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 -1.3952 1.0562
+## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 -1.5082 0.9726
+## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 -1.3952 1.0562
+## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 -1.5082 0.9726
+## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 -1.5082 0.9726
+## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 -1.3952 1.0562
+## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 -1.5188 0.8798
+## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 -1.5188 0.8798
+\end{verbatim}
+
+\hypertarget{ejemplo-modelo-dif-in-dif-para-el-inpc-de-anuxe1lsis-cluxednicos-update-nov-2022}{%
+\section{Ejemplo: Modelo Dif-in-Dif para el INPC de análsis clínicos (update nov-2022)}\label{ejemplo-modelo-dif-in-dif-para-el-inpc-de-anuxe1lsis-cluxednicos-update-nov-2022}}
+
+Dependencies and Setup
+
+Importamos Datos desde un archivo de Excel. Los datos están en formato panel incluyen:
+
+\begin{itemize}
+\item
+  INPC (Indice Nacional de Precios al Consumidor (2QJul2018 = 100)) para un tipo de servicio. Source: \url{https://www.inegi.org.mx/programas/inpc/2018/\#Tabulados}
+\item
+  Dummy variable to indicate the time when the treatment started
+\item
+  Dummy variable to identify the group exposed to the treatment
+\item
+  Pend: Create an interaction between time and treated and add trend variable
+\item
+  OTRAS variables de control
+\end{itemize}
+
+Partamos de la siguiente ecuación:
+\begin{equation}
+    y_{it} = \beta_1 + \beta_2 T_t + \beta_3 D_t + \theta T_t \times D_t + \boldsymbol{\gamma} \mathbf{X}_{it} + \varepsilon_{it}
+    (\#eq:eq_DiD)
+\end{equation}
+
+Donde \(y_{it}\) es la variable sobre la cual queremos evaluar el efecto de un tratamiento, \(\mathbf{X}_{it}\) es un conjunto de variables de control, que incluye a las variables de efectos fijos (temporales, de individuos o del tipo que se decida) y, en su caso, una tendencia, entre otras. Finalmente, las variables \(T_t\) y \(D_i\) son variables dicotómicas que identifican con el valor de 1 el momento a partir del cual se observa el tratamiento y con 0 en cualquier otro caso, y con 1 los individuos que fueron tratados y con 0 en cualquier otro caso, respectivamente.
+
+De esta forma, el producto \(T_t \times D_t\) sería una variable dicotómica que indicaría con un 1 a aquellos individuos que fueron tratados a partir del momento en que se implmenento el tratamiento y con 0 en cualquier otro caso. Bajo este escenario, \(\theta\) es un coeficiente que captura el efecto del tratamiento, condicional a que se ha controlado por una serie de factores.
+
+Otra forma de ver lo que se indica en la ecuación @ref(eq:eq\_DiD) es como la comparación de la diferencia en diferencia descrita por:
+\begin{eqnarray}
+    E & = & [ (\overline{y}_{exit} | treatment) - (\overline{y}_{baseline} | treatment) ] \nonumber \\  
+    &  & - [ (\overline{y}_{exit} | placebo) - (\overline{y}_{baseline} | placebo) ]
+    (\#eq:eq_DiD_E)
+\end{eqnarray}
+
+La expresión @ref(eq:eq\_DiD\_E) cuantifica el efecto que tiene el tratamiento como la diferencia de medias de dos grupos: un grupo tratado y otro no tratado. Dentro de los cuales se ha comparado las medias de respecto de una línea base. Podemos plantear esto desde esta otra perspectiva. Pensemos que solo tenemos dos periodos \(t = {1, 2}\), en el cual en 1 no ha ocurrido el tratamiento y en 2 ya ha ocurrido. Así, el cambio en la varaible de respuesta para los individuos tratados será (suponiendo que omitimos la matriz \(\mathbf{X}_{it}\) en la ecuación @ref(eq:eq\_DiD)):
+\begin{eqnarray}
+    \mathbb{E}[ y_{i2} | D_i = 1 ] - \mathbb{E}[ y_{i1} | D_i = 1 ] & = & ( \beta_1 + \beta_2 + \beta_3 + \theta ) - ( \beta_1 + \beta_3 + \theta ) \nonumber \\  
+    & = & \beta_2 + \theta 
+    (\#eq:eq_DiD_Treat)
+\end{eqnarray}
+
+Ahora, sobre los no tratados:
+\begin{eqnarray}
+    \mathbb{E}[ y_{i2} | D_i = 0 ] - \mathbb{E}[ y_{i1} | D_i = 0 ] & = & ( \beta_1 + \beta_2 ) - ( \beta_1 ) \nonumber \\  
+    & = & \beta_2 
+    (\#eq:eq_DiD_NoTreat)
+\end{eqnarray}
+
+Así, la diferencia en diferencia restulata de restar la ecuación @ref(eq:eq\_DiD\_NoTreat) a la ecuación @ref(eq:eq\_DiD\_Treat):
+\begin{eqnarray}
+    & & ( \mathbb{E}[ y_{i2} | D_i = 1 ] - \mathbb{E}[ y_{i1} | D_i = 1 ] ) - ( \mathbb{E}[ y_{i2} | D_i = 0 ] - \mathbb{E}[ y_{i1} | D_i = 0 ] ) \nonumber \\ 
+    & & = \theta 
+    (\#eq:eq_Aplicada)
+\end{eqnarray}
+
+En nuestro caso, utilizaremos como tratamiento la entrada al mercado de un laboratorio de análisis clínicos en una ciudad determinada.
+
+\begin{verbatim}
+## [1] 13420    17
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 6 x 17
+##   Fecha   Mes  Anio Ciudad INPC  Dummy_FIRMA Marca_01 Marca_02 Marca_03 Marca_04
+##   <chr> <dbl> <dbl> <chr>  <chr>       <dbl>    <dbl>    <dbl>    <dbl>    <dbl>
+## 1 Jul ~     7  2002 Área ~ 68.3~           0        0        0        0        0
+## 2 Ago ~     8  2002 Área ~ 68.3~           0        0        0        0        0
+## 3 Sep ~     9  2002 Área ~ 68.3~           0        0        0        0        0
+## 4 Oct ~    10  2002 Área ~ 68.3~           0        0        0        0        0
+## 5 Nov ~    11  2002 Área ~ 68.3~           0        0        0        0        0
+## 6 Dic ~    12  2002 Área ~ 68.3~           0        0        0        0        0
+## # i 7 more variables: Marca_05 <dbl>, Marca_06 <dbl>, Marca_07 <dbl>,
+## #   Marca_08 <dbl>, Marca_09 <dbl>, Marca_10 <dbl>, Marca_11 <dbl>
+\end{verbatim}
+
+Selección de ciudades:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\OtherTok{\textless{}{-}}\NormalTok{ Data[ }\FunctionTok{which}\NormalTok{( Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Atlacomulco, Edo. de Méx.\textquotesingle{}} \SpecialCharTok{\&} 
+\NormalTok{                     Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Cancún, Q.R.\textquotesingle{}} \SpecialCharTok{\&}
+\NormalTok{                     Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Coatzacoalcos, Ver.\textquotesingle{}} \SpecialCharTok{\&}
+\NormalTok{                     Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Esperanza, Son.\textquotesingle{}} \SpecialCharTok{\&}
+\NormalTok{                     Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Izúcar de Matamoros, Pue.\textquotesingle{}} \SpecialCharTok{\&}
+\NormalTok{                     Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Pachuca, Hgo.\textquotesingle{}} \SpecialCharTok{\&}
+\NormalTok{                     Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Tuxtla Gutiérrez, Chis.\textquotesingle{}} \SpecialCharTok{\&}
+\NormalTok{                     Data}\SpecialCharTok{$}\NormalTok{Ciudad }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Zacatecas, Zac.\textquotesingle{}}\NormalTok{ ), ]}
+\end{Highlighting}
+\end{Shaded}
+
+Tranformaciones:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Log de INPC}
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{LINPC }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{( }\FunctionTok{as.numeric}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{INPC) , }\AttributeTok{base =} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{))}
+
+\CommentTok{\# Volvemos factor a la fecha}
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Periodo }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Fecha, }\AttributeTok{order =} \ConstantTok{TRUE}\NormalTok{,}
+                       \AttributeTok{levels =} \FunctionTok{c}\NormalTok{( }\StringTok{"Jul 2002"}\NormalTok{, }\StringTok{"Ago 2002"}\NormalTok{, }\StringTok{"Sep 2002"}\NormalTok{, }
+                                   \StringTok{"Oct 2002"}\NormalTok{, }\StringTok{"Nov 2002"}\NormalTok{, }\StringTok{"Dic 2002"}\NormalTok{,}
+                                   \StringTok{"Ene 2003"}\NormalTok{, }\StringTok{"Feb 2003"}\NormalTok{, }\StringTok{"Mar 2003"}\NormalTok{, }
+                                   \StringTok{"Abr 2003"}\NormalTok{, }\StringTok{"May 2003"}\NormalTok{, }\StringTok{"Jun 2003"}\NormalTok{,}
+                                   \StringTok{"Jul 2003"}\NormalTok{, }\StringTok{"Ago 2003"}\NormalTok{, }\StringTok{"Sep 2003"}\NormalTok{, }
+                                   \StringTok{"Oct 2003"}\NormalTok{, }\StringTok{"Nov 2003"}\NormalTok{, }\StringTok{"Dic 2003"}\NormalTok{,}
+                                   \StringTok{"Ene 2004"}\NormalTok{, }\StringTok{"Feb 2004"}\NormalTok{, }\StringTok{"Mar 2004"}\NormalTok{, }
+                                   \StringTok{"Abr 2004"}\NormalTok{, }\StringTok{"May 2004"}\NormalTok{, }\StringTok{"Jun 2004"}\NormalTok{,}
+                                   \StringTok{"Jul 2004"}\NormalTok{, }\StringTok{"Ago 2004"}\NormalTok{, }\StringTok{"Sep 2004"}\NormalTok{, }
+                                   \StringTok{"Oct 2004"}\NormalTok{, }\StringTok{"Nov 2004"}\NormalTok{, }\StringTok{"Dic 2004"}\NormalTok{,}
+                                   \StringTok{"Ene 2005"}\NormalTok{, }\StringTok{"Feb 2005"}\NormalTok{, }\StringTok{"Mar 2005"}\NormalTok{, }
+                                   \StringTok{"Abr 2005"}\NormalTok{, }\StringTok{"May 2005"}\NormalTok{, }\StringTok{"Jun 2005"}\NormalTok{,}
+                                   \StringTok{"Jul 2005"}\NormalTok{, }\StringTok{"Ago 2005"}\NormalTok{, }\StringTok{"Sep 2005"}\NormalTok{, }
+                                   \StringTok{"Oct 2005"}\NormalTok{, }\StringTok{"Nov 2005"}\NormalTok{, }\StringTok{"Dic 2005"}\NormalTok{,}
+                                   \StringTok{"Ene 2006"}\NormalTok{, }\StringTok{"Feb 2006"}\NormalTok{, }\StringTok{"Mar 2006"}\NormalTok{, }
+                                   \StringTok{"Abr 2006"}\NormalTok{, }\StringTok{"May 2006"}\NormalTok{, }\StringTok{"Jun 2006"}\NormalTok{,}
+                                   \StringTok{"Jul 2006"}\NormalTok{, }\StringTok{"Ago 2006"}\NormalTok{, }\StringTok{"Sep 2006"}\NormalTok{, }
+                                   \StringTok{"Oct 2006"}\NormalTok{, }\StringTok{"Nov 2006"}\NormalTok{, }\StringTok{"Dic 2006"}\NormalTok{,}
+                                   \StringTok{"Ene 2007"}\NormalTok{, }\StringTok{"Feb 2007"}\NormalTok{, }\StringTok{"Mar 2007"}\NormalTok{, }
+                                   \StringTok{"Abr 2007"}\NormalTok{, }\StringTok{"May 2007"}\NormalTok{, }\StringTok{"Jun 2007"}\NormalTok{,}
+                                   \StringTok{"Jul 2007"}\NormalTok{, }\StringTok{"Ago 2007"}\NormalTok{, }\StringTok{"Sep 2007"}\NormalTok{, }
+                                   \StringTok{"Oct 2007"}\NormalTok{, }\StringTok{"Nov 2007"}\NormalTok{, }\StringTok{"Dic 2007"}\NormalTok{,}
+                                   \StringTok{"Ene 2008"}\NormalTok{, }\StringTok{"Feb 2008"}\NormalTok{, }\StringTok{"Mar 2008"}\NormalTok{, }
+                                   \StringTok{"Abr 2008"}\NormalTok{, }\StringTok{"May 2008"}\NormalTok{, }\StringTok{"Jun 2008"}\NormalTok{,}
+                                   \StringTok{"Jul 2008"}\NormalTok{, }\StringTok{"Ago 2008"}\NormalTok{, }\StringTok{"Sep 2008"}\NormalTok{, }
+                                   \StringTok{"Oct 2008"}\NormalTok{, }\StringTok{"Nov 2008"}\NormalTok{, }\StringTok{"Dic 2008"}\NormalTok{,}
+                                   \StringTok{"Ene 2009"}\NormalTok{, }\StringTok{"Feb 2009"}\NormalTok{, }\StringTok{"Mar 2009"}\NormalTok{, }
+                                   \StringTok{"Abr 2009"}\NormalTok{, }\StringTok{"May 2009"}\NormalTok{, }\StringTok{"Jun 2009"}\NormalTok{,}
+                                   \StringTok{"Jul 2009"}\NormalTok{, }\StringTok{"Ago 2009"}\NormalTok{, }\StringTok{"Sep 2009"}\NormalTok{, }
+                                   \StringTok{"Oct 2009"}\NormalTok{, }\StringTok{"Nov 2009"}\NormalTok{, }\StringTok{"Dic 2009"}\NormalTok{,}
+                                   \StringTok{"Ene 2010"}\NormalTok{, }\StringTok{"Feb 2010"}\NormalTok{, }\StringTok{"Mar 2010"}\NormalTok{, }
+                                   \StringTok{"Abr 2010"}\NormalTok{, }\StringTok{"May 2010"}\NormalTok{, }\StringTok{"Jun 2010"}\NormalTok{,}
+                                   \StringTok{"Jul 2010"}\NormalTok{, }\StringTok{"Ago 2010"}\NormalTok{, }\StringTok{"Sep 2010"}\NormalTok{, }
+                                   \StringTok{"Oct 2010"}\NormalTok{, }\StringTok{"Nov 2010"}\NormalTok{, }\StringTok{"Dic 2010"}\NormalTok{,}
+                                   \StringTok{"Ene 2011"}\NormalTok{, }\StringTok{"Feb 2011"}\NormalTok{, }\StringTok{"Mar 2011"}\NormalTok{, }
+                                   \StringTok{"Abr 2011"}\NormalTok{, }\StringTok{"May 2011"}\NormalTok{, }\StringTok{"Jun 2011"}\NormalTok{,}
+                                   \StringTok{"Jul 2011"}\NormalTok{, }\StringTok{"Ago 2011"}\NormalTok{, }\StringTok{"Sep 2011"}\NormalTok{, }
+                                   \StringTok{"Oct 2011"}\NormalTok{, }\StringTok{"Nov 2011"}\NormalTok{, }\StringTok{"Dic 2011"}\NormalTok{,}
+                                   \StringTok{"Ene 2012"}\NormalTok{, }\StringTok{"Feb 2012"}\NormalTok{, }\StringTok{"Mar 2012"}\NormalTok{, }
+                                   \StringTok{"Abr 2012"}\NormalTok{, }\StringTok{"May 2012"}\NormalTok{, }\StringTok{"Jun 2012"}\NormalTok{,}
+                                   \StringTok{"Jul 2012"}\NormalTok{, }\StringTok{"Ago 2012"}\NormalTok{, }\StringTok{"Sep 2012"}\NormalTok{, }
+                                   \StringTok{"Oct 2012"}\NormalTok{, }\StringTok{"Nov 2012"}\NormalTok{, }\StringTok{"Dic 2012"}\NormalTok{,}
+                                   \StringTok{"Ene 2013"}\NormalTok{, }\StringTok{"Feb 2013"}\NormalTok{, }\StringTok{"Mar 2013"}\NormalTok{, }
+                                   \StringTok{"Abr 2013"}\NormalTok{, }\StringTok{"May 2013"}\NormalTok{, }\StringTok{"Jun 2013"}\NormalTok{,}
+                                   \StringTok{"Jul 2013"}\NormalTok{, }\StringTok{"Ago 2013"}\NormalTok{, }\StringTok{"Sep 2013"}\NormalTok{, }
+                                   \StringTok{"Oct 2013"}\NormalTok{, }\StringTok{"Nov 2013"}\NormalTok{, }\StringTok{"Dic 2013"}\NormalTok{,}
+                                   \StringTok{"Ene 2014"}\NormalTok{, }\StringTok{"Feb 2014"}\NormalTok{, }\StringTok{"Mar 2014"}\NormalTok{, }
+                                   \StringTok{"Abr 2014"}\NormalTok{, }\StringTok{"May 2014"}\NormalTok{, }\StringTok{"Jun 2014"}\NormalTok{,}
+                                   \StringTok{"Jul 2014"}\NormalTok{, }\StringTok{"Ago 2014"}\NormalTok{, }\StringTok{"Sep 2014"}\NormalTok{, }
+                                   \StringTok{"Oct 2014"}\NormalTok{, }\StringTok{"Nov 2014"}\NormalTok{, }\StringTok{"Dic 2014"}\NormalTok{,}
+                                   \StringTok{"Ene 2015"}\NormalTok{, }\StringTok{"Feb 2015"}\NormalTok{, }\StringTok{"Mar 2015"}\NormalTok{, }
+                                   \StringTok{"Abr 2015"}\NormalTok{, }\StringTok{"May 2015"}\NormalTok{, }\StringTok{"Jun 2015"}\NormalTok{,}
+                                   \StringTok{"Jul 2015"}\NormalTok{, }\StringTok{"Ago 2015"}\NormalTok{, }\StringTok{"Sep 2015"}\NormalTok{, }
+                                   \StringTok{"Oct 2015"}\NormalTok{, }\StringTok{"Nov 2015"}\NormalTok{, }\StringTok{"Dic 2015"}\NormalTok{,}
+                                   \StringTok{"Ene 2016"}\NormalTok{, }\StringTok{"Feb 2016"}\NormalTok{, }\StringTok{"Mar 2016"}\NormalTok{, }
+                                   \StringTok{"Abr 2016"}\NormalTok{, }\StringTok{"May 2016"}\NormalTok{, }\StringTok{"Jun 2016"}\NormalTok{,}
+                                   \StringTok{"Jul 2016"}\NormalTok{, }\StringTok{"Ago 2016"}\NormalTok{, }\StringTok{"Sep 2016"}\NormalTok{, }
+                                   \StringTok{"Oct 2016"}\NormalTok{, }\StringTok{"Nov 2016"}\NormalTok{, }\StringTok{"Dic 2016"}\NormalTok{,}
+                                   \StringTok{"Ene 2017"}\NormalTok{, }\StringTok{"Feb 2017"}\NormalTok{, }\StringTok{"Mar 2017"}\NormalTok{, }
+                                   \StringTok{"Abr 2017"}\NormalTok{, }\StringTok{"May 2017"}\NormalTok{, }\StringTok{"Jun 2017"}\NormalTok{,}
+                                   \StringTok{"Jul 2017"}\NormalTok{, }\StringTok{"Ago 2017"}\NormalTok{, }\StringTok{"Sep 2017"}\NormalTok{, }
+                                   \StringTok{"Oct 2017"}\NormalTok{, }\StringTok{"Nov 2017"}\NormalTok{, }\StringTok{"Dic 2017"}\NormalTok{,}
+                                   \StringTok{"Ene 2018"}\NormalTok{, }\StringTok{"Feb 2018"}\NormalTok{, }\StringTok{"Mar 2018"}\NormalTok{, }
+                                   \StringTok{"Abr 2018"}\NormalTok{, }\StringTok{"May 2018"}\NormalTok{, }\StringTok{"Jun 2018"}\NormalTok{,}
+                                   \StringTok{"Jul 2018"}\NormalTok{, }\StringTok{"Ago 2018"}\NormalTok{, }\StringTok{"Sep 2018"}\NormalTok{, }
+                                   \StringTok{"Oct 2018"}\NormalTok{, }\StringTok{"Nov 2018"}\NormalTok{, }\StringTok{"Dic 2018"}\NormalTok{,}
+                                   \StringTok{"Ene 2019"}\NormalTok{, }\StringTok{"Feb 2019"}\NormalTok{, }\StringTok{"Mar 2019"}\NormalTok{, }
+                                   \StringTok{"Abr 2019"}\NormalTok{, }\StringTok{"May 2019"}\NormalTok{, }\StringTok{"Jun 2019"}\NormalTok{,}
+                                   \StringTok{"Jul 2019"}\NormalTok{, }\StringTok{"Ago 2019"}\NormalTok{, }\StringTok{"Sep 2019"}\NormalTok{, }
+                                   \StringTok{"Oct 2019"}\NormalTok{, }\StringTok{"Nov 2019"}\NormalTok{, }\StringTok{"Dic 2019"}\NormalTok{,}
+                                   \StringTok{"Ene 2020"}\NormalTok{, }\StringTok{"Feb 2020"}\NormalTok{, }\StringTok{"Mar 2020"}\NormalTok{, }
+                                   \StringTok{"Abr 2020"}\NormalTok{, }\StringTok{"May 2020"}\NormalTok{, }\StringTok{"Jun 2020"}\NormalTok{,}
+                                   \StringTok{"Jul 2020"}\NormalTok{, }\StringTok{"Ago 2020"}\NormalTok{, }\StringTok{"Sep 2020"}\NormalTok{, }
+                                   \StringTok{"Oct 2020"}\NormalTok{, }\StringTok{"Nov 2020"}\NormalTok{, }\StringTok{"Dic 2020"}\NormalTok{,}
+                                   \StringTok{"Ene 2021"}\NormalTok{, }\StringTok{"Feb 2021"}\NormalTok{, }\StringTok{"Mar 2021"}\NormalTok{, }
+                                   \StringTok{"Abr 2021"}\NormalTok{, }\StringTok{"May 2021"}\NormalTok{, }\StringTok{"Jun 2021"}\NormalTok{,}
+                                   \StringTok{"Jul 2021"}\NormalTok{, }\StringTok{"Ago 2021"}\NormalTok{, }\StringTok{"Sep 2021"}\NormalTok{, }
+                                   \StringTok{"Oct 2021"}\NormalTok{, }\StringTok{"Nov 2021"}\NormalTok{, }\StringTok{"Dic 2021"}\NormalTok{,}
+                                   \StringTok{"Ene 2022"}\NormalTok{, }\StringTok{"Feb 2022"}\NormalTok{, }\StringTok{"Mar 2022"}\NormalTok{, }
+                                   \StringTok{"Abr 2022"}\NormalTok{, }\StringTok{"May 2022"}\NormalTok{, }\StringTok{"Jun 2022"}\NormalTok{,}
+                                   \StringTok{"Jul 2022"}\NormalTok{, }\StringTok{"Ago 2022"}\NormalTok{, }\StringTok{"Sep 2022"}\NormalTok{, }\StringTok{"}
+\StringTok{                                   Oct 2022"}\NormalTok{, }\StringTok{"Nov 2022"}\NormalTok{, }\StringTok{"Dic 2022"}\NormalTok{ ))}
+\end{Highlighting}
+\end{Shaded}
+
+Plot
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Periodo, }\AttributeTok{y =}\NormalTok{ LINPC, }\AttributeTok{group =}\NormalTok{ Ciudad, }\AttributeTok{color =}\NormalTok{ Ciudad )) }\SpecialCharTok{+}
+        \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{8}\NormalTok{),}
+          \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{5}\NormalTok{ )) }\SpecialCharTok{+}
+        \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position=}\StringTok{"bottom"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{( }\AttributeTok{size =} \DecValTok{8}\NormalTok{, }\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+Hagamos una pruebas de Raíces Unitarias.
+
+Change to format wide:
+
+\begin{verbatim}
+## # A tibble: 6 x 48
+##   Fecha    `Acapulco, Gro.` `Aguascalientes, Ags.` Área Metropolitana de la Cd~1
+##   <chr>               <dbl>                  <dbl>                         <dbl>
+## 1 Abr 2003             4.39                   4.35                          4.26
+## 2 Abr 2004             4.39                   4.36                          4.31
+## 3 Abr 2005             4.44                   4.36                          4.36
+## 4 Abr 2006             4.47                   4.33                          4.40
+## 5 Abr 2007             4.54                   4.38                          4.42
+## 6 Abr 2008             4.60                   4.41                          4.44
+## # i abbreviated name: 1: `Área Metropolitana de la Cd. de México`
+## # i 44 more variables: `Campeche, Camp.` <dbl>, `Cd. Acuña, Coah.` <dbl>,
+## #   `Cd. Jiménez, Chih.` <dbl>, `Cd. Juárez, Chih.` <dbl>,
+## #   `Chetumal, Q.R.` <dbl>, `Chihuahua, Chih.` <dbl>, `Colima, Col.` <dbl>,
+## #   `Córdoba, Ver.` <dbl>, `Cortazar, Gto.` <dbl>, `Cuernavaca, Mor.` <dbl>,
+## #   `Culiacán, Sin.` <dbl>, `Durango, Dgo.` <dbl>, `Fresnillo, Zac.` <dbl>,
+## #   `Guadalajara, Jal.` <dbl>, `Hermosillo, Son.` <dbl>, ...
+\end{verbatim}
+
+Time Series:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ts\_LINPC }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{( LINPC[}\FunctionTok{c}\NormalTok{( }\DecValTok{2}\SpecialCharTok{:}\DecValTok{48}\NormalTok{ )], }
+               \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2002}\NormalTok{, }\DecValTok{7}\NormalTok{),}
+               \AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{ts\_DLINPC }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(}\FunctionTok{ts}\NormalTok{( LINPC[}\FunctionTok{c}\NormalTok{( }\DecValTok{2}\SpecialCharTok{:}\DecValTok{48}\NormalTok{ )], }
+                     \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2002}\NormalTok{, }\DecValTok{7}\NormalTok{),}
+                     \AttributeTok{freq =} \DecValTok{12}\NormalTok{), }
+                  \AttributeTok{lag =} \DecValTok{1}\NormalTok{, }
+                  \AttributeTok{differences =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Unit Root Test: Test specifies the type of test to be performed among Levin et al.~(2002), Im et al.~(2003), Maddala and Wu (1999) and Hadri (2000)
+
+Optimal lags:
+\begin{eqnarray*}
+  p & = & Int(4*(T/100)^{(1/4)}) \\
+   & = & Int(4*(244/100)^{(1/4)}) \\
+   & = & Int(4.99) \\
+   & = & 4
+\end{eqnarray*}
+
+Consider Levin et al.~(2002):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_LINPC, }\AttributeTok{test =} \StringTok{"levinlin"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"trend"}\NormalTok{, }\CommentTok{\# exo = c("none", "intercept", "trend"),}
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and
+##  Trend)
+## 
+## data:  ts_LINPC
+## z = -56.022, p-value < 2.2e-16
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_DLINPC, }\AttributeTok{test =} \StringTok{"levinlin"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"trend"}\NormalTok{, }\CommentTok{\# exo = c("none", "intercept", "trend"),}
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and
+##  Trend)
+## 
+## data:  ts_DLINPC
+## z = -107.84, p-value < 2.2e-16
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+Consider Choi (2001):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_LINPC, }\AttributeTok{test =} \StringTok{"logit"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"trend"}\NormalTok{, }\CommentTok{\# exo = c("none", "intercept", "trend"),}
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)
+## 
+## data:  ts_LINPC
+## L* = -85.506, df = 239, p-value < 2.2e-16
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_DLINPC, }\AttributeTok{test =} \StringTok{"logit"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"trend"}\NormalTok{, }\CommentTok{\# exo = c("none", "intercept", "trend"),}
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)
+## 
+## data:  ts_DLINPC
+## L* = -278.56, df = 239, p-value < 2.2e-16
+## alternative hypothesis: stationarity
+\end{verbatim}
+
+Consider Hadri (2000):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_LINPC, }\AttributeTok{test =} \StringTok{"hadri"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"trend"}\NormalTok{, }\CommentTok{\# exo = c("none", "intercept", "trend"),}
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.
+##  Consistent)
+## 
+## data:  ts_LINPC
+## z = -2.7, p-value = 0.9965
+## alternative hypothesis: at least one series has a unit root
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{purtest}\NormalTok{(ts\_DLINPC, }\AttributeTok{test =} \StringTok{"hadri"}\NormalTok{, }\AttributeTok{exo =} \StringTok{"trend"}\NormalTok{, }\CommentTok{\# exo = c("none", "intercept", "trend"),}
+        \AttributeTok{lags =} \StringTok{"AIC"}\NormalTok{, }\AttributeTok{pmax =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.
+##  Consistent)
+## 
+## data:  ts_DLINPC
+## z = -8.9351, p-value = 1
+## alternative hypothesis: at least one series has a unit root
+\end{verbatim}
+
+Estimación PANEL con TREND:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Modelo Final}
+\NormalTok{fixed }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{( LINPC }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Dummy\_FIRMA }\SpecialCharTok{+}\NormalTok{ Marca\_01 }\SpecialCharTok{+}\NormalTok{ Marca\_02 }\SpecialCharTok{+}\NormalTok{ Marca\_03 }\SpecialCharTok{+}\NormalTok{ Marca\_04 }\SpecialCharTok{+}\NormalTok{ Marca\_05 }\SpecialCharTok{+} 
+\NormalTok{              Marca\_06 }\SpecialCharTok{+}\NormalTok{ Marca\_07 }\SpecialCharTok{+}\NormalTok{ Marca\_08 }\SpecialCharTok{+}\NormalTok{ Marca\_09 }\SpecialCharTok{+}\NormalTok{ Marca\_10 }\SpecialCharTok{+}\NormalTok{ Marca\_11 }\SpecialCharTok{+} \FunctionTok{as.numeric}\NormalTok{(Periodo),}
+             \AttributeTok{data =}\NormalTok{ Data, }
+             \AttributeTok{index=}\FunctionTok{c}\NormalTok{(}\StringTok{"Ciudad"}\NormalTok{, }\StringTok{"Periodo"}\NormalTok{), }
+             \AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame
+##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(fixed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = LINPC ~ Dummy_FIRMA + Marca_01 + Marca_02 + Marca_03 + 
+##     Marca_04 + Marca_05 + Marca_06 + Marca_07 + Marca_08 + Marca_09 + 
+##     Marca_10 + Marca_11 + as.numeric(Periodo), data = Data, model = "within", 
+##     index = c("Ciudad", "Periodo"))
+## 
+## Balanced Panel: n = 47, T = 243, N = 11421
+## 
+## Residuals:
+##       Min.    1st Qu.     Median    3rd Qu.       Max. 
+## -0.4220510 -0.0416329  0.0026154  0.0471479  0.2275376 
+## 
+## Coefficients:
+##                        Estimate  Std. Error  t-value  Pr(>|t|)    
+## Dummy_FIRMA         -0.05972092  0.01892851  -3.1551 0.0016087 ** 
+## Marca_01             0.04545555  0.02069006   2.1970 0.0280423 *  
+## Marca_02             0.05452288  0.02372909   2.2977 0.0215956 *  
+## Marca_03            -0.02925504  0.02041744  -1.4328 0.1519296    
+## Marca_04            -0.07440826  0.02418665  -3.0764 0.0021000 ** 
+## Marca_05             0.02633713  0.01045219   2.5198 0.0117567 *  
+## Marca_06             0.12521494  0.01991655   6.2870 3.356e-10 ***
+## Marca_07            -0.09242328  0.02514895  -3.6750 0.0002389 ***
+## Marca_08             0.03362324  0.02086579   1.6114 0.1071193    
+## Marca_09             0.05630828  0.02121641   2.6540 0.0079655 ** 
+## Marca_10            -0.04866105  0.02638856  -1.8440 0.0652062 .  
+## Marca_11            -0.03582620  0.03031018  -1.1820 0.2372361    
+## as.numeric(Periodo)  0.00220384  0.00001018 216.4961 < 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    330.79
+## Residual Sum of Squares: 60.08
+## R-Squared:      0.81838
+## Adj. R-Squared: 0.81743
+## F-statistic: 3937.79 on 13 and 11361 DF, p-value: < 2.22e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Modelo Final}
+\NormalTok{fixed }\OtherTok{\textless{}{-}} \FunctionTok{plm}\NormalTok{( LINPC }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Dummy\_FIRMA }\SpecialCharTok{+} \FunctionTok{as.numeric}\NormalTok{(Periodo),}
+             \AttributeTok{data =}\NormalTok{ Data, }
+             \AttributeTok{index=}\FunctionTok{c}\NormalTok{(}\StringTok{"Ciudad"}\NormalTok{, }\StringTok{"Periodo"}\NormalTok{), }
+             \AttributeTok{model =} \StringTok{"within"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame
+##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(fixed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oneway (individual) effect Within Model
+## 
+## Call:
+## plm(formula = LINPC ~ Dummy_FIRMA + as.numeric(Periodo), data = Data, 
+##     model = "within", index = c("Ciudad", "Periodo"))
+## 
+## Balanced Panel: n = 47, T = 243, N = 11421
+## 
+## Residuals:
+##       Min.    1st Qu.     Median    3rd Qu.       Max. 
+## -0.4337032 -0.0421466  0.0026796  0.0480377  0.2504866 
+## 
+## Coefficients:
+##                        Estimate  Std. Error  t-value      Pr(>|t|)    
+## Dummy_FIRMA         -0.02239578  0.00417897  -5.3592 0.00000008525 ***
+## as.numeric(Periodo)  0.00220318  0.00001032 213.4825     < 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    330.79
+## Residual Sum of Squares: 61.94
+## R-Squared:      0.81275
+## Adj. R-Squared: 0.81196
+## F-statistic: 24680.5 on 2 and 11372 DF, p-value: < 2.22e-16
+\end{verbatim}
+
+\hypertarget{panel-var}{%
+\section{Panel VAR}\label{panel-var}}
+
+En esta sección extenderemos el caso del modelo VAR(p) a uno en forma panel. En este caso asumimos que las viables exogenas son los \(p\) rezagos de las \(k\) variables endogenas. Consideremos el siguiente caso de un modelo panel VAR con efectos fijos --ciertamente es posible hacer estimaciones con efectos aleatorios, no obstante requiere de supuestos adicionales que no contemplamos en estas notas --, el cual es la forma más común de estimación:
+\begin{equation}
+    \mathbf{Y}_{it} = \mu_i + \sum_{l = 1}^p \mathbf{A}_l \mathbf{Y}_{i t - l} + \mathbf{B} \mathbf{X}_{it} + \varepsilon_{it}
+   (\#eq:eq_PVAR)
+\end{equation}
+
+Donde \(\mathbf{Y}_{it}\) es un vector de variables endogenas estacionarias para la unidad de corte transversal \(i\) en el tiempo \(t\), \(\mathbf{X}_{it}\) es una matriz que contiene varaibles exógenas, y \(\varepsilon_{it}\) es un término de error que cumple con:
+\begin{eqnarray*}
+    \mathbb{E}[\varepsilon_{it}] & = & 0 \\
+    Var[\varepsilon_{it}] & = & \Sigma_\varepsilon
+\end{eqnarray*}
+
+Donde \(\Sigma_\varepsilon\) es una matriz definida positiva.
+
+Para el porceso de estimación la ecuación @ref(eq:eq\_PVAR) se modifica en su versión en diferencias para quedar como:
+\begin{equation}
+    \Delta \mathbf{Y}_{it} = \sum_{l = 1}^p \mathbf{A}_l \Delta \mathbf{Y}_{i t - l} + \mathbf{B} \Delta \mathbf{X}_{it} + \Delta \varepsilon_{it}
+    (\#eq:eq_Dinamic_PVAR)
+\end{equation}
+
+La ecuación @ref(eq:eq\_Dinamic\_PVAR) se estima por un GMM.
+
+\hypertarget{ejemplos-panel-varp}{%
+\section{Ejemplos: Panel VAR(p)}\label{ejemplos-panel-varp}}
+
+Dependencies and Setup
+
+\hypertarget{ejemplo-1}{%
+\subsection{Ejemplo 1}\label{ejemplo-1}}
+
+We used the dynamic panel literature by Arellano and Bond (1991), Blundell and Bond (1998) and Roodman (2009b).
+This data set describes employment, wages, capital and output of 140 firms in the United Kingdom from 1976 to 1984.
+We estimate: Employment is explained by past values of employment (``l'' lags), current and first lag of wages and output and current value of capital.
+
+\begin{verbatim}
+##  [1] "c1"       "ind"      "year"     "emp"      "wage"     "cap"     
+##  [7] "indoutpt" "n"        "w"        "k"        "ys"       "rec"     
+## [13] "yearm1"   "id"       "nL1"      "nL2"      "wL1"      "kL1"     
+## [19] "kL2"      "ysL1"     "ysL2"     "yr1976"   "yr1977"   "yr1978"  
+## [25] "yr1979"   "yr1980"   "yr1981"   "yr1982"   "yr1983"   "yr1984"
+\end{verbatim}
+
+\begin{verbatim}
+##    c1 ind year   emp    wage    cap indoutpt        n        w          k
+## 1 1-1   7 1977 5.041 13.1516 0.5894  95.7072 1.617604 2.576543 -0.5286502
+## 2 2-1   7 1978 5.600 12.3018 0.6318  97.3569 1.722767 2.509746 -0.4591824
+## 3 3-1   7 1979 5.015 12.8395 0.6771  99.6083 1.612433 2.552526 -0.3899363
+## 4 4-1   7 1980 4.715 13.8039 0.6171 100.5501 1.550749 2.624951 -0.4827242
+## 5 5-1   7 1981 4.093 14.2897 0.5076  99.5581 1.409278 2.659539 -0.6780615
+## 6 6-1   7 1982 3.166 14.8681 0.4229  98.6151 1.152469 2.699218 -0.8606195
+##         ys rec yearm1 id      nL1      nL2      wL1        kL1        kL2
+## 1 4.561294   1   1977  1       NA       NA       NA         NA         NA
+## 2 4.578383   2   1977  1 1.617604       NA 2.576543 -0.5286502         NA
+## 3 4.601245   3   1978  1 1.722767 1.617604 2.509746 -0.4591824 -0.5286502
+## 4 4.610656   4   1979  1 1.612433 1.722767 2.552526 -0.3899363 -0.4591824
+## 5 4.600741   5   1980  1 1.550749 1.612433 2.624951 -0.4827242 -0.3899363
+## 6 4.591224   6   1981  1 1.409278 1.550749 2.659539 -0.6780615 -0.4827242
+##       ysL1     ysL2 yr1976 yr1977 yr1978 yr1979 yr1980 yr1981 yr1982 yr1983
+## 1       NA       NA      0      1      0      0      0      0      0      0
+## 2 4.561294       NA      0      0      1      0      0      0      0      0
+## 3 4.578383 4.561294      0      0      0      1      0      0      0      0
+## 4 4.601245 4.578383      0      0      0      0      1      0      0      0
+## 5 4.610656 4.601245      0      0      0      0      0      1      0      0
+## 6 4.600741 4.610656      0      0      0      0      0      0      1      0
+##   yr1984
+## 1      0
+## 2      0
+## 3      0
+## 4      0
+## 5      0
+## 6      0
+\end{verbatim}
+
+Estimación
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#?pvargmm}
+
+\NormalTok{Arellano\_Bond\_1991\_table4b }\OtherTok{\textless{}{-}} \FunctionTok{pvargmm}\NormalTok{( }\AttributeTok{dependent\_vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"n"}\NormalTok{),}
+                                       \AttributeTok{lags =} \DecValTok{2}\NormalTok{, }
+                                       \AttributeTok{exog\_vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"w"}\NormalTok{, }\StringTok{"wL1"}\NormalTok{, }\StringTok{"k"}\NormalTok{, }\StringTok{"ys"}\NormalTok{, }\StringTok{"ysL1"}\NormalTok{, }\StringTok{"yr1979"}\NormalTok{, }\StringTok{"yr1980"}\NormalTok{, }\StringTok{"yr1981"}\NormalTok{, }\StringTok{"yr1982"}\NormalTok{,}
+                                                      \StringTok{"yr1983"}\NormalTok{, }\StringTok{"yr1984"}\NormalTok{),}
+                                       \AttributeTok{transformation =} \StringTok{"fd"}\NormalTok{, }\AttributeTok{data =}\NormalTok{ abdata,  }\AttributeTok{panel\_identifier =} \FunctionTok{c}\NormalTok{(}\StringTok{"id"}\NormalTok{, }\StringTok{"year"}\NormalTok{),}
+                                       \AttributeTok{steps =} \FunctionTok{c}\NormalTok{(}\StringTok{"twostep"}\NormalTok{),}
+                                       \AttributeTok{system\_instruments =} \ConstantTok{FALSE}\NormalTok{,}
+                                       \AttributeTok{max\_instr\_dependent\_vars =} \DecValTok{99}\NormalTok{,}
+                                       \AttributeTok{min\_instr\_dependent\_vars =}\NormalTok{ 2L,}
+                                       \AttributeTok{collapse =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Arellano\_Bond\_1991\_table4b)}
+\end{Highlighting}
+\end{Shaded}
+
+Dynamic Panel VAR estimation, two-step GMM
+
+Transformation: First-differencesGroup variable: idTime variable: yearNumber of observations = 611Number of groups = 140Obs per group: min = 4Obs per group: avg = 4.36428571428571Obs per group: max = 6Number of instruments = 38
+
+~
+
+n
+
+lag1\_n
+
+0.4742*
+
+~
+
+(0.1854)
+
+lag2\_n
+
+-0.0530
+
+~
+
+(0.0517)
+
+w
+
+-0.5132***
+
+~
+
+(0.1456)
+
+wL1
+
+0.2246
+
+~
+
+(0.1419)
+
+k
+
+0.2927***
+
+~
+
+(0.0626)
+
+ys
+
+0.6098***
+
+~
+
+(0.1563)
+
+ysL1
+
+-0.4464*
+
+~
+
+(0.2173)
+
+yr1979
+
+0.0105
+
+~
+
+(0.0099)
+
+yr1980
+
+0.0247
+
+~
+
+(0.0158)
+
+yr1981
+
+-0.0158
+
+~
+
+(0.0267)
+
+yr1982
+
+-0.0374
+
+~
+
+(0.0300)
+
+yr1983
+
+-0.0393
+
+~
+
+(0.0347)
+
+yr1984
+
+-0.0495
+
+~
+
+(0.0349)
+
+***p \textless{} 0.001; **p \textless{} 0.01; *p \textless{} 0.05
+
+Instruments for equation
+
+Standardw, wL1, k, ys, ysL1, yr1979, yr1980, yr1981, yr1982, yr1983, yr1984
+
+GMM-typeDependent vars: L(2,6))Collapse = FALSE
+
+Hansen test of overid. restrictions: chi2(25) = 30.11 Prob \textgreater{} chi2 = 0.22(Robust, but weakened by many instruments.)
+
+\hypertarget{ejemplo-2}{%
+\subsection{Ejemplo 2:}\label{ejemplo-2}}
+
+We used the panel data set consists of 265 Swedish municipalities and covers 9 years (1979-1987).
+These variables include total expenditures (expenditures), total own-source revenues (revenues) and intergovernmental grants received by the municipality (grants).
+Source: Dahlberg and Johansson (2000)
+
+Grants from the central to the local government are of three kinds: support to municipalities with small tax capacity, grants toward the running of certain local government activities and grants toward certain investments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(}\StringTok{"Dahlberg"}\NormalTok{)}
+
+\FunctionTok{names}\NormalTok{(Dahlberg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "id"           "year"         "expenditures" "revenues"     "grants"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(Dahlberg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    id year expenditures  revenues    grants
+## 1 114 1979    0.0229736 0.0181770 0.0054429
+## 2 114 1980    0.0266307 0.0209142 0.0057304
+## 3 114 1981    0.0273253 0.0210836 0.0056647
+## 4 114 1982    0.0288704 0.0234310 0.0058859
+## 5 114 1983    0.0226474 0.0179979 0.0055908
+## 6 114 1984    0.0215601 0.0179949 0.0047536
+\end{verbatim}
+
+Estimación:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ex1\_dahlberg\_data }\OtherTok{\textless{}{-}} \FunctionTok{pvargmm}\NormalTok{(}\AttributeTok{dependent\_vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"expenditures"}\NormalTok{, }\StringTok{"revenues"}\NormalTok{, }\StringTok{"grants"}\NormalTok{),}
+          \AttributeTok{lags =} \DecValTok{1}\NormalTok{,}
+          \AttributeTok{transformation =} \StringTok{"fod"}\NormalTok{,}
+          \AttributeTok{data =}\NormalTok{ Dahlberg,}
+          \AttributeTok{panel\_identifier=}\FunctionTok{c}\NormalTok{(}\StringTok{"id"}\NormalTok{, }\StringTok{"year"}\NormalTok{),}
+          \AttributeTok{steps =} \FunctionTok{c}\NormalTok{(}\StringTok{"twostep"}\NormalTok{),}
+          \AttributeTok{system\_instruments =} \ConstantTok{FALSE}\NormalTok{,}
+          \AttributeTok{max\_instr\_dependent\_vars =} \DecValTok{99}\NormalTok{,}
+          \AttributeTok{max\_instr\_predet\_vars =} \DecValTok{99}\NormalTok{,}
+          \AttributeTok{min\_instr\_dependent\_vars =}\NormalTok{ 2L,}
+          \AttributeTok{min\_instr\_predet\_vars =}\NormalTok{ 1L,}
+          \AttributeTok{collapse =} \ConstantTok{FALSE}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :
+## The matrix D_e is singular, therefore the general inverse is used
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(ex1\_dahlberg\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+Dynamic Panel VAR estimation, two-step GMM
+
+Transformation: Forward orthogonal deviationsGroup variable: idTime variable: yearNumber of observations = 1855Number of groups = 265Obs per group: min = 7Obs per group: avg = 7Obs per group: max = 7Number of instruments = 252
+
+~
+
+expenditures
+
+revenues
+
+grants
+
+lag1\_expenditures
+
+0.2846***
+
+0.2583**
+
+0.0167
+
+~
+
+(0.0664)
+
+(0.0795)
+
+(0.0172)
+
+lag1\_revenues
+
+-0.0470
+
+0.0588
+
+-0.0405**
+
+~
+
+(0.0637)
+
+(0.0726)
+
+(0.0151)
+
+lag1\_grants
+
+-1.6746***
+
+-2.2367***
+
+0.3204***
+
+~
+
+(0.2818)
+
+(0.2846)
+
+(0.0521)
+
+***p \textless{} 0.001; **p \textless{} 0.01; *p \textless{} 0.05
+
+Instruments for equation
+
+Standard
+
+GMM-typeDependent vars: L(2,7))Collapse = FALSE
+
+Hansen test of overid. restrictions: chi2(243) = 263.01 Prob \textgreater{} chi2 = 0.18(Robust, but weakened by many instruments.)
+
+Model selection procedure of Andrews and Lu (2001) to select the optimal lag length for our example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Andrews\_Lu\_MMSC}\NormalTok{(ex1\_dahlberg\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $MMSC_BIC
+## [1] -1610.877
+## 
+## $MMSC_AIC
+## [1] -234.9924
+## 
+## $MMSC_HQIC
+## [1] -792.3698
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ex2\_dahlberg\_data }\OtherTok{\textless{}{-}} \FunctionTok{pvargmm}\NormalTok{(}\AttributeTok{dependent\_vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"expenditures"}\NormalTok{, }\StringTok{"revenues"}\NormalTok{, }\StringTok{"grants"}\NormalTok{),}
+                             \AttributeTok{lags =} \DecValTok{2}\NormalTok{,}
+                             \AttributeTok{transformation =} \StringTok{"fod"}\NormalTok{,}
+                             \AttributeTok{data =}\NormalTok{ Dahlberg,}
+                             \AttributeTok{panel\_identifier=}\FunctionTok{c}\NormalTok{(}\StringTok{"id"}\NormalTok{, }\StringTok{"year"}\NormalTok{),}
+                             \AttributeTok{steps =} \FunctionTok{c}\NormalTok{(}\StringTok{"twostep"}\NormalTok{),}
+                             \AttributeTok{system\_instruments =} \ConstantTok{FALSE}\NormalTok{,}
+                             \AttributeTok{max\_instr\_dependent\_vars =} \DecValTok{99}\NormalTok{,}
+                             \AttributeTok{max\_instr\_predet\_vars =} \DecValTok{99}\NormalTok{,}
+                             \AttributeTok{min\_instr\_dependent\_vars =}\NormalTok{ 2L,}
+                             \AttributeTok{min\_instr\_predet\_vars =}\NormalTok{ 1L,}
+                             \AttributeTok{collapse =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :
+## The matrix D_e is singular, therefore the general inverse is used
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(ex2\_dahlberg\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+Dynamic Panel VAR estimation, two-step GMM
+
+Transformation: Forward orthogonal deviationsGroup variable: idTime variable: yearNumber of observations = 1590Number of groups = 265Obs per group: min = 6Obs per group: avg = 6Obs per group: max = 6Number of instruments = 243
+
+~
+
+expenditures
+
+revenues
+
+grants
+
+lag1\_expenditures
+
+0.2572**
+
+0.2486*
+
+0.0135
+
+~
+
+(0.0893)
+
+(0.1018)
+
+(0.0178)
+
+lag1\_revenues
+
+-0.1219
+
+-0.0634
+
+-0.0293
+
+~
+
+(0.0879)
+
+(0.0997)
+
+(0.0171)
+
+lag1\_grants
+
+-3.0718***
+
+-3.5849***
+
+0.1581*
+
+~
+
+(0.5941)
+
+(0.6168)
+
+(0.0636)
+
+lag2\_expenditures
+
+-0.0247
+
+0.0252
+
+0.0178
+
+~
+
+(0.0791)
+
+(0.0834)
+
+(0.0157)
+
+lag2\_revenues
+
+-0.2584**
+
+-0.2446**
+
+-0.0237
+
+~
+
+(0.0785)
+
+(0.0800)
+
+(0.0157)
+
+lag2\_grants
+
+-1.5265***
+
+-1.6687***
+
+0.0702
+
+~
+
+(0.1873)
+
+(0.2113)
+
+(0.0586)
+
+***p \textless{} 0.001; **p \textless{} 0.01; *p \textless{} 0.05
+
+Instruments for equation
+
+Standard
+
+GMM-typeDependent vars: L(2,6))Collapse = FALSE
+
+Hansen test of overid. restrictions: chi2(225) = 260.11 Prob \textgreater{} chi2 = 0.054(Robust, but weakened by many instruments.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Andrews\_Lu\_MMSC}\NormalTok{(ex2\_dahlberg\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $MMSC_BIC
+## [1] -1486.935
+## 
+## $MMSC_AIC
+## [1] -213.8917
+## 
+## $MMSC_HQIC
+## [1] -734.1071
+\end{verbatim}
+
+Sstability of the autoregressive process:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stab\_ex1\_dahlberg\_data }\OtherTok{\textless{}{-}} \FunctionTok{stability}\NormalTok{(ex1\_dahlberg\_data)}
+
+\FunctionTok{print}\NormalTok{(stab\_ex1\_dahlberg\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Eigenvalue stability condition:
+## 
+##              Eigenvalue    Modulus
+## 1 0.5370657+0.00000000i 0.53706574
+## 2 0.0633651+0.06442426i 0.09036383
+## 3 0.0633651-0.06442426i 0.09036383
+## 
+## All the eigenvalues lie inside the unit circle.
+## PVAR satisfies stability condition.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(stab\_ex1\_dahlberg\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-52-1.pdf}
+
+Generate impulse response functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex1\_dahlberg\_data\_oirf \textless{}{-}  oirf(ex1\_dahlberg\_data, n.ahead = 8)}
+\CommentTok{\# }
+\CommentTok{\# ex1\_dahlberg\_data\_girf \textless{}{-}  girf(ex1\_dahlberg\_data, n.ahead = 8, ma\_approx\_steps= 8)}
+\CommentTok{\# }
+\CommentTok{\# ex1\_dahlberg\_data\_bs \textless{}{-}  bootstrap\_irf(ex1\_dahlberg\_data, typeof\_irf = c("GIRF"),}
+\CommentTok{\#                                        n.ahead = 8,}
+\CommentTok{\#                                        nof\_Nstar\_draws = 500,}
+\CommentTok{\#                                        confidence.band = 0.95)}
+\CommentTok{\# }
+\CommentTok{\# plot(ex1\_dahlberg\_data\_girf, ex1\_dahlberg\_data\_bs)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{cointegraciuxf3n-1}{%
+\section{Cointegración}\label{cointegraciuxf3n-1}}
+
+{[}PENDIENTE{]}
+
+\hypertarget{otros-modelos-de-series-de-tiempo-no-lineales}{%
+\chapter{Otros Modelos de Series de Tiempo No lineales}\label{otros-modelos-de-series-de-tiempo-no-lineales}}
+
+\hypertarget{modelos-de-cambio-de-ruxe9gimen}{%
+\section{Modelos de cambio de régimen}\label{modelos-de-cambio-de-ruxe9gimen}}
+
+En años recientes, los modelos de serie de tiempo han sido incorporados en análisis de la existencia de diferentes estados que son generados por procesos estocásticos subyacentes. En esta sección del curso revisaremos algunos modelos de cambio de regimen. Restringimos nuestra revisión a modelos que asuman que la dinámica de las series puede ser descrito por modelos del tipo AR y dejamos fuera procesos del tipo MA.
+
+En general distinguimos que existen dos tipos de modelos:
+
+\begin{enumerate}
+    \item Modelos caracterizados por una variable observable, por lo que tenemos certeza de los régimanes en cada uno de los momentos.
+    
+    \item Modelos en los que el régimen no puede ser observado por una variable, pero si conocemos el proceso estocástico subyacente. 
+\end{enumerate}
+
+\hypertarget{reguxedmenes-determinados-por-informaciuxf3n-observable}{%
+\subsection{Regímenes determinados por información observable}\label{reguxedmenes-determinados-por-informaciuxf3n-observable}}
+
+En estos casos asumimos que el régimen ocurren en un momento \(t\) y puede ser determinado por una variable observable. Este modelo es conocido como el modelo autoregresivo con umbral (TAR, Threshold Autoregressive model). En este caso también diremos que cuando el régimen está determinado por la información de la misma serie será llamdao Self-Exciting TAR (SETAR).
+
+Veámos un ejemplo. Supongamos que existe un umbral, \(c\), para el régimen que esta determinado por \(q_t = y_{t-1}\) y que el estado de la naturaleza nos permite establecer dos estados o regímenes:
+\begin{equation}
+    y_t = 
+    \begin{cases}
+        \phi_{01} + \phi_{11} y_{t-1} + \varepsilon_t \text{ si } y_{t-1} \leq c \\
+        \phi_{02} + \phi_{12} y_{t-1} + \varepsilon_t \text{ si } y_{t-1} > c 
+    \end{cases}
+\end{equation}
+
+Donde asumiremos que \(\varepsilon_t\) es i.i.d y que cumple con:
+\begin{equation*}
+    \mathbb{E}[\varepsilon_t | \Omega_{t-1}] = 0
+\end{equation*}
+
+Donde \(\Omega_{t-1} = \{ y_{t-1}, y_{t-2}, \ldots \}\). Existe una variante de este modelo que suaviza la transición entre regímenes conocido como Smooth Transition AR (STAR) y puede ser especificado en su modalidad de dos regémenes como:
+\begin{equation}
+    y_t = (\phi_{01} + \phi_{11} y_{t-1}) (1 - G(y_{t-1}; \gamma, c)) + (\phi_{02} + \phi_{12} y_{t-1}) G(y_{t-1}; \gamma, c) + \varepsilon_t
+\end{equation}
+
+Donde \(G(y_{t-1}; \gamma, c)\) es una función de distribución de probabilidad que suviza la transición entre regímenes. La práctica común es suponer que está tiene una forma logística:
+\begin{equation}
+    G(y_{t-1}; \gamma, c) = \frac{1}{1 + e^{-\gamma (y_{t-1} - c)}}
+\end{equation}
+
+Es posible hacer estensiones de lo anterior a modelos de orden superior dando como resultado:
+\begin{equation}
+    y_t = 
+    \begin{cases}
+        \phi_{01} + \phi_{11} y_{t-1} + \phi_{21} y_{t-2} + \ldots + \phi_{p_1 1} y_{t-p_1} + \varepsilon_t \text{ si } y_{t-1} \leq c \\
+        \phi_{02} + \phi_{12} y_{t-1} + \phi_{22} y_{t-2} + \ldots + \phi_{p_2 2} y_{t-p_2} + \varepsilon_t \text{ si } y_{t-1} > c 
+    \end{cases}
+\end{equation}
+
+En el segundo caso:
+\begin{eqnarray*}
+    y_t & = & (\phi_{01} + \phi_{11} y_{t-1} + \phi_{21} y_{t-2} + \ldots + \phi_{p_1 1} y_{t-p_1}) (1 - G(y_{t-1}; \gamma, c)) \\
+    &  & + (\phi_{02} + \phi_{12} y_{t-1} + \phi_{22} y_{t-2} + \ldots + \phi_{p_2 2} y_{t-p_2}) G(y_{t-1}; \gamma, c) \\
+    &  & + \varepsilon_t
+\end{eqnarray*}
+
+De igual forma que en el caso de los modelos ARIMA y VAR, el número de rrezagos utilizados es determinado mediennte el uso de criterios de información como el de Akaike:
+\begin{equation}
+    AIC(p_1, p_2) = n_1 ln(\hat{\sigma}^2_1) + n_2 ln(\hat{\sigma}^2_2) + 2(p_1 + 1) + 2(p_2 + 1)
+\end{equation}
+
+Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan ciertas condiciones. En estas notas nos enfocaremos únicamente en el modelo SETAR el cual genera en un proceso estacionario cuando:
+
+\begin{enumerate}
+    \item $\phi_{11} < 1$, $\phi_{12} < 1$, $\phi_{11} \cdot \phi_{12} < 1$
+    
+    \item $\phi_{11} = 1$, $\phi_{12} < 1$, $\phi_{01} > 0$
+    
+    \item $\phi_{11} < 1$, $\phi_{12} = 1$, $\phi_{02} < 0$
+    
+    \item $\phi_{11} = 1$, $\phi_{12} = 1$, $\phi_{02} < 0 < \phi_{01}$
+    
+    \item $\phi_{11} \cdot \phi_{12} = 1$, $\phi_{11} < 0$, $\phi_{02} + \phi_{12} \cdot \phi_{01} > 0$
+\end{enumerate}
+
+Finalmente, en ocasiones podemos estar interesados en modelos donde los regímenes sean más de 2, es decir, digamos \(m\) umbrales bajo un modelo SETAR o STAR. Por ejemplo, en el caso de un modelo SETAR podemos verificar que \(m\) regímnes implican \(m + 1\) umbrales: \(c_0, c_1, \ldots, c_m\). En cuyo caso:
+\begin{equation*}
+    -\infty = c_0 < c_1 < \ldots < c_{m-1} < c_m = \infty
+\end{equation*}
+
+Así, tendríamos ecuaciones:
+\begin{equation}
+    y_t = \phi_{0j} + \phi_{ij} y_{t-1} + \varepsilon_t \text{ si } c_{j-1} < y_{t-1} < c_j
+\end{equation}
+
+Para \(j = 1, 2, \ldots, m\). De forma similar podemos recomponer el modelo STAR.
+
+\hypertarget{reguxedmenes-determinados-por-variables-no-observables}{%
+\subsection{Regímenes determinados por variables no observables}\label{reguxedmenes-determinados-por-variables-no-observables}}
+
+Este tipo de modelosmasume que el regímen ocurre en el momento \(t\) y que no puede ser observado, ya que este es determinado por un proceso no observable, el cual denotamos como \(s_t\). En el caso de dos regímenes, \(s_t\) puede ser asumido como que toma 2 valores: 1 y 2, por ejemplo. Supongamos que el proceso subyacente tiene una forma del tipo AR(1) dado por:
+\begin{equation}
+    y_t = 
+    \begin{cases}
+        \phi_{01} + \phi_{11} y_{t-1} + \varepsilon_t \text{ si } s_t = 1 \\
+        \phi_{02} + \phi_{12} y_{t-1} + \varepsilon_t \text{ si } s_t = 2
+    \end{cases}
+    \label{eq_swching_obs}
+\end{equation}
+
+O en un formato más corto de notación:
+\begin{equation}
+    y_t = \phi_{0 s_t} + \phi_{1 s_t} y_{t-1} + \varepsilon_t
+\end{equation}
+
+Para complementar el modelo, las propiedades del proceso \(s_t\) necesitan ser especificadas. El modelo más popular dentro de esta familia es el propuesto por James Hamilton en 1989 el cual es conocido como Markov Switching Model (MSM), en el cual el proceso \(s_t\) se asume como un proceso de Markov de primer orden. Esto implica que el regímen actula \(s_t\) sólo dependen del período \(s_{t-1}\).
+
+Así, el modelo es completado mediante la definición de las probabilidades de transición para moverse del un estado a otro:
+\begin{eqnarray*}
+    \mathbb{P}(s_t = 1 | s_{t-1} = 1) & = & p_{11} \\
+    \mathbb{P}(s_t = 2 | s_{t-1} = 1) & = & p_{12} \\
+    \mathbb{P}(s_t = 1 | s_{t-1} = 2) & = & p_{21} \\
+    \mathbb{P}(s_t = 2 | s_{t-1} = 2) & = & p_{22} 
+\end{eqnarray*}
+
+Así, \(p_{ij}\) es igual a la probabilidad de que la cadena de Markov pase del estado \(i\) en el momento \(t-1\) al estdo \(j\) en el tiempo \(t\). En todo caso asumiremos que \(p_{ij} > 0\) y que:
+\begin{eqnarray*}
+    p_{11} + p_{12} = 1 \\
+    p_{21} + p_{22} = 1 
+\end{eqnarray*}
+
+Otro tipo de probabilidades a analizar son las probabilidades incondicionales de \(\mathbb{P}(s_t = i)\), \(i = 1, 2\). Usando la teoría ergódica de la cadenas de Markov, estas probabilidades están dadas por:
+\begin{eqnarray*}
+    \mathbb{P}(s_t = 1) & = & \frac{1 - p_{22}}{2 - p_{11} - p_{22}} \\ 
+    \mathbb{P}(s_t = 2) & = & \frac{1 - p_{11}}{2 - p_{11} - p_{22}}
+\end{eqnarray*}
+
+Un caso más general es el de múltiples regímenes en el cual \(s_t\) puede tomar cualquier valor \(m > 2\), \(m \in \mathbb{N}\). Este modelo se puede escribir como:
+\begin{equation}
+    y_t = \phi_{0j} + \phi_{1j} y_{t-1} + \varepsilon_t \text{ si } s_t = j \text{, para } j = 1, 2, \ldots, m
+\end{equation}
+
+Donde las probabilidades de transición estarán dadas por:
+\begin{equation}
+    p_{ij} = \mathbb{P}(s_t = j | s_{t-1} = i) \text{ para } i , j = 1, 2, \ldots, m
+\end{equation}
+
+Donde la ecuación anterior satisface que \(p_{ij} > 0\), \(\forall i, j = = 1, 2, \ldots, m\) y que:
+\begin{equation*}
+    \sum_{j=1}^m p_{ij} = 1 \text{ para } i = 1, 2, \ldots, m
+\end{equation*}
+
+Finalmente, plantearemos el procedimiento empiríco seguido para la estimación de este tipo de modelos:
+
+\begin{enumerate}
+    \item Estimar un proceso AR(p)
+    
+    \item Probar una hipótesis nula de no linealidad de acurdo con alguno de los modelos SERAR, STAR o MSM
+    
+    \item Estimar lo parámetros
+    
+    \item Evluar los resultados del modelo
+    
+    \item Ajustar, en su caso, la estimación o modelo
+    
+    \item Pronósticar o realizar análisis impluso-respuesta
+\end{enumerate}
+
+\hypertarget{ejemplo-modelos-de-cambio-de-reguxedmen-tar}{%
+\section{Ejemplo: Modelos de Cambio de Regímen (TAR)}\label{ejemplo-modelos-de-cambio-de-reguxedmen-tar}}
+
+Dependencies and Setup:
+
+Data: Monthly rates of deaths due to flu in the United States for 11 years
+
+\begin{verbatim}
+##   X.8113721
+## 1 0.4458291
+## 2 0.3415985
+## 3 0.2774243
+## 4 0.2484958
+## 5 0.2525427
+## 6 0.2466902
+\end{verbatim}
+
+Convert time series
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flu }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(flu)}
+
+\NormalTok{D\_flu }\OtherTok{=} \FunctionTok{diff}\NormalTok{(flu, }\AttributeTok{lag =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Plotting
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(flu, }\AttributeTok{type =} \StringTok{"b"}\NormalTok{, }\AttributeTok{col =} \StringTok{"darkred"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Monthly rates of deaths due to flu in the United States"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-56-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(D\_flu, }\AttributeTok{type=}\StringTok{"b"}\NormalTok{, }\AttributeTok{col =} \StringTok{"darkred"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Diff Monthly rates of deaths due to flu in the United States"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-56-2.pdf}
+
+The tsDyn package in R has simplified this code into a handful of steps:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#?setar}
+
+\NormalTok{D\_flu\_tar4\_05 }\OtherTok{\textless{}{-}} \FunctionTok{setar}\NormalTok{(D\_flu, }\AttributeTok{m =} \DecValTok{4}\NormalTok{, }\AttributeTok{thDelay =} \DecValTok{0}\NormalTok{, }\AttributeTok{th =} \FloatTok{0.05}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: 
+## With the threshold you gave (0.05) there is a regime with less than trim=15% observations (86.51%, 13.49%, )
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Possible unit root in the high regime. Roots are: 0.6182 0.6244 0.6244
+## 0.6182
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(D\_flu\_tar4\_05) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Non linear autoregressive model
+## 
+## SETAR model ( 2 regimes)
+## Coefficients:
+## Low regime:
+##      const.L       phiL.1       phiL.2       phiL.3       phiL.4 
+##  0.004432028  0.501179574 -0.206693004  0.120140800 -0.122254140 
+## 
+## High regime:
+##    const.H     phiH.1     phiH.2     phiH.3     phiH.4 
+##  0.4079353 -0.7483325 -1.0323129 -2.0450407 -6.7117769 
+## 
+## Threshold:
+## -Variable: Z(t) = + (1) X(t)+ (0)X(t-1)+ (0)X(t-2)+ (0)X(t-3)
+## -Value: 0.05 (fixed)
+## Proportion of points in low regime: 86.51%    High regime: 13.49% 
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -0.1319314 -0.0217073  0.0015801  0.0196093  0.2674245 
+## 
+## Fit:
+## residuals variance = 0.002166,  AIC = -778, MAPE = 412.4%
+## 
+## Coefficient(s):
+## 
+##           Estimate  Std. Error  t value  Pr(>|t|)    
+## const.L  0.0044320   0.0051791   0.8558 0.3938357    
+## phiL.1   0.5011796   0.0833821   6.0106 2.043e-08 ***
+## phiL.2  -0.2066930   0.0608839  -3.3949 0.0009313 ***
+## phiL.3   0.1201408   0.0576505   2.0839 0.0392868 *  
+## phiL.4  -0.1222541   0.0522363  -2.3404 0.0209137 *  
+## const.H  0.4079353   0.0314121  12.9866 < 2.2e-16 ***
+## phiH.1  -0.7483325   0.1118329  -6.6915 7.455e-10 ***
+## phiH.2  -1.0323129   0.1420203  -7.2688 4.018e-11 ***
+## phiH.3  -2.0450407   0.7055163  -2.8986 0.0044573 ** 
+## phiH.4  -6.7117769   0.8367945  -8.0208 7.911e-13 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Threshold
+## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)
+## 
+## Value: 0.05 (fixed)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(D\_flu\_tar4\_05)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-1.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-2.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-3.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-4.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-5.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-6.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-7.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-8.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-9.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-58-10.pdf}
+
+If we do not provide a threshold to the th option, setar searches over a grid to choose a threshold \textasciitilde{} 0.038:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{D\_flu\_tar4 }\OtherTok{\textless{}{-}} \FunctionTok{setar}\NormalTok{(D\_flu, }\AttributeTok{m =} \DecValTok{4}\NormalTok{, }\AttributeTok{thDelay =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Possible unit root in the high regime. Roots are: 0.6316 0.7222 0.7222
+## 0.6316
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(D\_flu\_tar4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Non linear autoregressive model
+## 
+## SETAR model ( 2 regimes)
+## Coefficients:
+## Low regime:
+##        const.L         phiL.1         phiL.2         phiL.3         phiL.4 
+## -0.00006287604  0.44640751264 -0.23158878472  0.10701408961 -0.14406085874 
+## 
+## High regime:
+##    const.H     phiH.1     phiH.2     phiH.3     phiH.4 
+##  0.3486150 -0.5903335 -1.0318488 -2.4053812 -4.8052422 
+## 
+## Threshold:
+## -Variable: Z(t) = + (1) X(t)+ (0)X(t-1)+ (0)X(t-2)+ (0)X(t-3)
+## -Value: 0.03798
+## Proportion of points in low regime: 84.92%    High regime: 15.08% 
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.277686 -0.020554  0.005116  0.020762  0.119627 
+## 
+## Fit:
+## residuals variance = 0.002405,  AIC = -762, MAPE = 372.5%
+## 
+## Coefficient(s):
+## 
+##             Estimate   Std. Error  t value  Pr(>|t|)    
+## const.L -0.000062876  0.005572290  -0.0113 0.9910158    
+## phiL.1   0.446407513  0.089159422   5.0068 1.921e-06 ***
+## phiL.2  -0.231588785  0.064328877  -3.6001 0.0004636 ***
+## phiL.3   0.107014090  0.061034049   1.7534 0.0820953 .  
+## phiL.4  -0.144060859  0.055198346  -2.6099 0.0102109 *  
+## const.H  0.348615027  0.027460007  12.6954 < 2.2e-16 ***
+## phiH.1  -0.590333531  0.109881869  -5.3724 3.869e-07 ***
+## phiH.2  -1.031848767  0.149570541  -6.8987 2.641e-10 ***
+## phiH.3  -2.405381238  0.691344783  -3.4793 0.0007014 ***
+## phiH.4  -4.805242210  0.828241480  -5.8017 5.451e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Threshold
+## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)
+## 
+## Value: 0.03798
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(D\_flu\_tar4)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-1.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-2.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-3.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-4.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-5.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-6.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-7.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-8.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-9.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-59-10.pdf}
 
   \bibliography{book.bib,packages.bib}
 
