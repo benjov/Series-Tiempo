@@ -141,7 +141,7 @@
 
 \title{Notas de Clase: Series de Tiempo}
 \author{Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres}
-\date{2024-06-09}
+\date{2024-08-05}
 
 \begin{document}
 \maketitle
@@ -156,7 +156,7 @@
 
 \textbf{Notas de Clase}
 
-\textbf{Otoño 2023}
+\textbf{Otoño 2024}
 
 by Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres
 
@@ -7057,19 +7057,19 @@ Para el análisis de temas financieros existe una librería de mucha utilidad ll
 
 \begin{verbatim}
 ##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
-## 2024-06-03     67753.90     70230.82    67589.84      68804.78    32401285324
-## 2024-06-04     68804.57     71047.41    68564.64      70567.77    33149696545
-## 2024-06-05     70568.35     71735.41    70390.71      71082.82    32810771409
-## 2024-06-06     71082.84     71625.73    70119.12      70757.16    25223152007
-## 2024-06-07     70759.19     71907.85    68507.26      69342.59    36188381096
-## 2024-06-08     69324.18     69533.32    69210.74      69305.77    14262185861
+## 2024-07-31     66201.27     66810.21    64532.05      64619.25    31292785994
+## 2024-08-01     64625.84     65593.24    62248.94      65357.50    40975554494
+## 2024-08-02     65353.50     65523.22    61184.89      61415.07    43060875727
+## 2024-08-03     61414.81     62148.37    59836.53      60680.09    31753030589
+## 2024-08-04     60676.09     61062.99    57210.80      58116.98    31758917219
+## 2024-08-05     58143.10     58258.74    49513.63      54859.86   109217775616
 ##            BTC-USD.Adjusted
-## 2024-06-03         68804.78
-## 2024-06-04         70567.77
-## 2024-06-05         71082.82
-## 2024-06-06         70757.16
-## 2024-06-07         69342.59
-## 2024-06-08         69305.77
+## 2024-07-31         64619.25
+## 2024-08-01         65357.50
+## 2024-08-02         61415.07
+## 2024-08-03         60680.09
+## 2024-08-04         58116.98
+## 2024-08-05         54859.86
 \end{verbatim}
 
 Para fines del ejercicio de esta clase, usaremos el valor de la acción ajustado. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas.
@@ -7124,8 +7124,8 @@ Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente es un cálculo 
 \end{Shaded}
 
 \begin{verbatim}
-##   5% 
-## -5.9
+##    5% 
+## -5.89
 \end{verbatim}
 
 \begin{Shaded}
@@ -7178,7 +7178,7 @@ Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente es un cálculo 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 14.32
+## [1] 14.35
 \end{verbatim}
 
 \begin{Shaded}
@@ -7189,7 +7189,7 @@ Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente es un cálculo 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.75
+## [1] -0.74
 \end{verbatim}
 
 \hypertarget{prueba-de-normalidad}{%
@@ -7208,7 +7208,7 @@ Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente es un cálculo 
 ##  Jarque-Bera Normality Test
 ## 
 ## data:  vector_ret
-## JB = 19295, p-value < 0.00000000000000022
+## JB = 19694, p-value < 0.00000000000000022
 ## alternative hypothesis: greater
 \end{verbatim}
 
@@ -7390,22 +7390,22 @@ Primer enfoque para comprobar aceptar o rechazar la hopótesis de que necesitamo
 \begin{verbatim}
 ## 
 ## Time series regression with "ts" data:
-## Start = 1, End = 3552
+## Start = 1, End = 3610
 ## 
 ## Call:
 ## dynlm(formula = logret ~ 1)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.46614 -0.01402 -0.00004  0.01558  0.22371 
+## -0.46606 -0.01401 -0.00002  0.01553  0.22379 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(>|t|)  
-## (Intercept) 0.0014135  0.0006202   2.279   0.0227 *
+## (Intercept) 0.0013261  0.0006125   2.165   0.0304 *
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.03696 on 3551 degrees of freedom
+## Residual standard error: 0.0368 on 3609 degrees of freedom
 \end{verbatim}
 
 \begin{Shaded}
@@ -7421,25 +7421,25 @@ Primer enfoque para comprobar aceptar o rechazar la hopótesis de que necesitamo
 \begin{verbatim}
 ## 
 ## Time series regression with "ts" data:
-## Start = 2, End = 3552
+## Start = 2, End = 3610
 ## 
 ## Call:
 ## dynlm(formula = ehatsq ~ L(ehatsq))
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
-## -0.016888 -0.001189 -0.001058 -0.000332  0.216102 
+## -0.016920 -0.001178 -0.001046 -0.000331  0.216031 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value             Pr(>|t|)    
-## (Intercept) 0.00118810 0.00008604  13.809 < 0.0000000000000002 ***
-## L(ehatsq)   0.12923295 0.01664353   7.765   0.0000000000000106 ***
+## (Intercept) 0.00117732 0.00008466  13.906 < 0.0000000000000002 ***
+## L(ehatsq)   0.12956862 0.01650871   7.849  0.00000000000000551 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.004945 on 3549 degrees of freedom
-## Multiple R-squared:  0.0167, Adjusted R-squared:  0.01643 
-## F-statistic: 60.29 on 1 and 3549 DF,  p-value: 0.00000000000001063
+## Residual standard error: 0.004906 on 3607 degrees of freedom
+## Multiple R-squared:  0.01679,    Adjusted R-squared:  0.01652 
+## F-statistic:  61.6 on 1 and 3607 DF,  p-value: 0.000000000000005507
 \end{verbatim}
 
 \begin{Shaded}
@@ -7469,7 +7469,7 @@ Primer enfoque para comprobar aceptar o rechazar la hopótesis de que necesitamo
 ##  ARCH LM-test; Null hypothesis: no ARCH effects
 ## 
 ## data:  logret
-## Chi-squared = 59.318, df = 1, p-value = 0.00000000000001342
+## Chi-squared = 60.598, df = 1, p-value = 0.000000000000007
 \end{verbatim}
 
 Estimemos un ARCH(1), considerando la siguente especificación:
@@ -7494,11 +7494,11 @@ Estimemos un ARCH(1), considerando la siguente especificación:
 ## 
 ## Coefficients:
 ##           ar1     ar2    mean
-##       -0.0215  0.0093  0.0014
-## s.e.   0.0168  0.0168  0.0006
+##       -0.0200  0.0102  0.0013
+## s.e.   0.0167  0.0167  0.0006
 ## 
-## sigma^2 = 0.001366:  log likelihood = 6675.29
-## AIC=-13342.59   AICc=-13342.58   BIC=-13317.89
+## sigma^2 = 0.001354:  log likelihood = 6800.18
+## AIC=-13592.36   AICc=-13592.35   BIC=-13567.6
 \end{verbatim}
 
 \begin{Shaded}
@@ -7520,13 +7520,13 @@ Estimemos un ARCH(1), considerando la siguente especificación:
 \end{Shaded}
 
 \begin{verbatim}
-##            Estimate   Std. Error    t value     Pr(>|t|)
-## mu      0.001657804 0.0003634071  4.5618370 0.0000050708
-## ar1    -0.054492820 0.0166193734 -3.2788733 0.0010422242
-## ar2    -0.002412717 0.0135695190 -0.1778042 0.8588767813
-## omega   0.002223275 0.0006555542  3.3914440 0.0006952538
-## alpha1  0.903439192 0.3044799287  2.9671552 0.0030056923
-## shape   2.291331881 0.1091046492 21.0012305 0.0000000000
+##            Estimate   Std. Error    t value      Pr(>|t|)
+## mu      0.001580129 0.0003616549  4.3691631 0.00001247236
+## ar1    -0.052451953 0.0165097175 -3.1770351 0.00148789007
+## ar2    -0.002256016 0.0135268267 -0.1667809 0.86754247070
+## omega   0.002134233 0.0005980071  3.5689095 0.00035847021
+## alpha1  0.855492012 0.2763292111  3.0959159 0.00196205969
+## shape   2.307309385 0.1105924550 20.8631718 0.00000000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -7550,16 +7550,16 @@ Estimemos un ARCH(1), considerando la siguente especificación:
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3552-01-01
+## Date (T[0]): 3610-01-01
 ## 
 ## Series (summary):
-##          min     q.25     mean     q.75    max forecast[analytic]
-## t+1 -0.46547 -0.01071 0.001438 0.014643 0.2001            0.00183
+##          min      q.25   mean     q.75     max forecast[analytic]
+## t+1 -0.73559 -0.015194 0.0042 0.025205 0.31937           0.004789
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.047262 0.047262 0.047262 0.047262 0.047262           0.047262
+## t+1 0.073375 0.073375 0.073375 0.073375 0.073375           0.073375
 ## .....................
 \end{verbatim}
 
@@ -7590,12 +7590,12 @@ Estimemos un GARCH(0,1) unsando la siguiente especificación:
 
 \begin{verbatim}
 ##              Estimate       Std. Error       t value       Pr(>|t|)
-## mu     0.001798970583 0.00038587558213     4.6620483 0.000003130778
-## ar1   -0.063613562868 0.01414330202209    -4.4977872 0.000006866437
-## ar2   -0.005885947766 0.01349635363446    -0.4361139 0.662754074026
-## omega  0.000003766748 0.00000006388575    58.9606948 0.000000000000
-## beta1  0.998250914699 0.00002785491650 35837.5123746 0.000000000000
-## shape  2.492673503467 0.02761073615459    90.2791396 0.000000000000
+## mu     0.001722847899 0.00038364092506     4.4907824 0.000007096203
+## ar1   -0.061931773783 0.01405994577276    -4.4048373 0.000010586329
+## ar2   -0.006092611042 0.01345712874707    -0.4527423 0.650734336663
+## omega  0.000003740772 0.00000006342527    58.9792098 0.000000000000
+## beta1  0.998194753020 0.00002919458338 34191.0942841 0.000000000000
+## shape  2.515878146913 0.02904879954977    86.6086787 0.000000000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -7618,16 +7618,16 @@ Estimemos un GARCH(0,1) unsando la siguiente especificación:
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3552-01-01
+## Date (T[0]): 3610-01-01
 ## 
 ## Series (summary):
-##          min      q.25   mean     q.75     max forecast[analytic]
-## t+1 -0.46699 -0.013008 0.0011 0.017366 0.24255           0.002077
+##          min      q.25     mean     q.75     max forecast[analytic]
+## t+1 -0.46296 -0.009012 0.005109 0.020788 0.24529           0.005675
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.046389 0.046389 0.046389 0.046389 0.046389           0.046389
+## t+1 0.045509 0.045509 0.045509 0.045509 0.045509           0.045509
 ## .....................
 \end{verbatim}
 
@@ -7653,10 +7653,10 @@ Estimemos un GARCH(0,1) unsando la siguiente especificación:
 
 \begin{verbatim}
 ##                       
-## Akaike       -4.058051
-## Bayes        -4.047620
-## Shibata      -4.058056
-## Hannan-Quinn -4.054331
+## Akaike       -4.064928
+## Bayes        -4.054637
+## Shibata      -4.064933
+## Hannan-Quinn -4.061261
 \end{verbatim}
 
 \hypertarget{selecciuxf3n-del-modelo-uxf3ptimo}{%
@@ -7672,22 +7672,22 @@ Estimemos un GARCH(0,1) unsando la siguiente especificación:
 
 \begin{verbatim}
 ##       q p       AIC Optimo
-##  [1,] 1 1 -10.88917      0
-##  [2,] 1 2 -10.88981      0
-##  [3,] 1 3 -10.88905      0
-##  [4,] 1 4 -10.89160      0
-##  [5,] 2 1 -10.88860      0
-##  [6,] 2 2 -10.88915      0
-##  [7,] 2 3 -10.89172      0
-##  [8,] 2 4 -10.89108      0
-##  [9,] 3 1 -10.88805      0
-## [10,] 3 2 -10.88874      0
-## [11,] 3 3 -10.89109      0
-## [12,] 3 4 -10.89039      0
-## [13,] 4 1 -10.89116      0
-## [14,] 4 2 -10.89216      0
-## [15,] 4 3 -10.89238      1
-## [16,] 4 4 -10.89104      0
+##  [1,] 1 1 -10.90307      0
+##  [2,] 1 2 -10.90334      0
+##  [3,] 1 3 -10.90197      0
+##  [4,] 1 4 -10.90485      0
+##  [5,] 2 1 -10.90252      0
+##  [6,] 2 2 -10.90284      0
+##  [7,] 2 3 -10.90540      0
+##  [8,] 2 4 -10.90232      0
+##  [9,] 3 1 -10.90202      0
+## [10,] 3 2 -10.90238      0
+## [11,] 3 3 -10.90267      0
+## [12,] 3 4 -10.90375      0
+## [13,] 4 1 -10.90490      0
+## [14,] 4 2 -10.90580      0
+## [15,] 4 3 -10.90584      1
+## [16,] 4 4 -10.90277      0
 \end{verbatim}
 
 \hypertarget{estimaciuxf3n-de-modelo-uxf3ptimo}{%
@@ -7709,18 +7709,18 @@ Estimemos un GARCH(0,1) unsando la siguiente especificación:
 \end{Shaded}
 
 \begin{verbatim}
-##                Estimate     Std. Error         t value          Pr(>|t|)
-## mu      0.0013647767998 0.000327550635  4.166613197425 0.000030915841045
-## ar1    -0.0533431285909 0.015474502741 -3.447162696237 0.000566507315561
-## ar2    -0.0015337829171 0.014251945668 -0.107619194795 0.914297770179209
-## omega   0.0000240076269 0.000005600024  4.287057849067 0.000018105515536
-## alpha1  0.1343244321922 0.022384738010  6.000714957447 0.000000001964506
-## alpha2  0.0000001131084 0.034625286002  0.000003266641 0.999997393597721
-## alpha3  0.0000000395280 0.028390927623  0.000001392276 0.999998889124606
-## alpha4  0.0244646890289 0.023816695882  1.027207516510 0.304322759497438
-## beta1   0.4225795592940 0.209966671336  2.012603031734 0.044156407778425
-## beta2   0.4176311658663 0.166128455780  2.513905061629 0.011940257201827
-## shape   3.1807937467541 0.129196858043 24.619745363271 0.000000000000000
+##                 Estimate   Std. Error         t value          Pr(>|t|)
+## mu      0.00129580097026 0.0003270072  3.962606437647 0.000074135937718
+## ar1    -0.05115556795987 0.0153818016 -3.325720178443 0.000881904158519
+## ar2    -0.00064953670842 0.0142356691 -0.045627409837 0.963607222027861
+## omega   0.00002585276846 0.0000055321  4.673228886200 0.000002965010178
+## alpha1  0.13485914024742 0.0224348186  6.011153578790 0.000000001842078
+## alpha2  0.00000012431151 0.0348365224  0.000003568425 0.999997152808954
+## alpha3  0.00000004073991 0.0284587277  0.000001431544 0.999998857793410
+## alpha4  0.02623756152542 0.0236009471  1.111716467068 0.266260077345680
+## beta1   0.43491702429931 0.2109751879  2.061460537604 0.039259124551806
+## beta2   0.40298610716777 0.1665510448  2.419595191094 0.015537793389310
+## shape   3.18415126536705 0.1299759913 24.497995610740 0.000000000000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -7744,16 +7744,16 @@ Estimemos un GARCH(0,1) unsando la siguiente especificación:
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3552-01-01
+## Date (T[0]): 3610-01-01
 ## 
 ## Series (summary):
-##          min      q.25     mean     q.75     max forecast[analytic]
-## t+1 -0.26075 -0.007495 0.001531 0.011159 0.20184           0.001499
+##         min      q.25     mean     q.75     max forecast[analytic]
+## t+1 -0.4611 -0.011905 0.004282 0.021244 0.35815           0.004341
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.020854 0.020854 0.020854 0.020854 0.020854           0.020854
+## t+1 0.037355 0.037355 0.037355 0.037355 0.037355           0.037355
 ## .....................
 \end{verbatim}
 
@@ -7789,19 +7789,19 @@ Esta función precisa como argumentos nuestra estimación del modelo GARCH, con 
 \end{Shaded}
 
 \begin{verbatim}
-##      3552-01-01
-## T+1  0.02159870
-## T+2  0.02197838
-## T+3  0.02235124
-## T+4  0.02271762
-## T+5  0.02307782
-## T+6  0.02343214
-## T+7  0.02378083
-## T+8  0.02412414
-## T+9  0.02446230
-## T+10 0.02479551
-## T+11 0.02512398
-## T+12 0.02544789
+##      3610-01-01
+## T+1  0.03668175
+## T+2  0.03691060
+## T+3  0.03713781
+## T+4  0.03736342
+## T+5  0.03758745
+## T+6  0.03780993
+## T+7  0.03803089
+## T+8  0.03825035
+## T+9  0.03846835
+## T+10 0.03868490
+## T+11 0.03890003
+## T+12 0.03911376
 \end{verbatim}
 
 \begin{Shaded}
@@ -7811,19 +7811,19 @@ Esta función precisa como argumentos nuestra estimación del modelo GARCH, con 
 \end{Shaded}
 
 \begin{verbatim}
-##       3552-01-01
-## T+1  0.002318633
-## T+2  0.002021808
-## T+3  0.001821494
-## T+4  0.001992029
-## T+5  0.001839924
-## T+6  0.001977960
-## T+7  0.001847484
-## T+8  0.001965811
-## T+9  0.001853760
-## T+10 0.001955064
-## T+11 0.001858823
-## T+12 0.001945534
+##           3610-01-01
+## T+1   0.003580551295
+## T+2   0.001040177828
+## T+3  -0.000161577442
+## T+4   0.000350745394
+## T+5  -0.000003472915
+## T+6   0.000360129462
+## T+7   0.000053418985
+## T+8   0.000367503140
+## T+9   0.000107491323
+## T+10  0.000377728509
+## T+11  0.000157551015
+## T+12  0.000390312629
 \end{verbatim}
 
 \begin{Shaded}
@@ -7843,19 +7843,19 @@ Esta función precisa como argumentos nuestra estimación del modelo GARCH, con 
 ## Out of Sample: 0
 ## 
 ## 0-roll forecast [T0=]:
-##        Series   Sigma
-## T+1  0.002319 0.02160
-## T+2  0.002022 0.02198
-## T+3  0.001821 0.02235
-## T+4  0.001992 0.02272
-## T+5  0.001840 0.02308
-## T+6  0.001978 0.02343
-## T+7  0.001847 0.02378
-## T+8  0.001966 0.02412
-## T+9  0.001854 0.02446
-## T+10 0.001955 0.02480
-## T+11 0.001859 0.02512
-## T+12 0.001946 0.02545
+##            Series   Sigma
+## T+1   0.003580551 0.03668
+## T+2   0.001040178 0.03691
+## T+3  -0.000161577 0.03714
+## T+4   0.000350745 0.03736
+## T+5  -0.000003473 0.03759
+## T+6   0.000360129 0.03781
+## T+7   0.000053419 0.03803
+## T+8   0.000367503 0.03825
+## T+9   0.000107491 0.03847
+## T+10  0.000377729 0.03868
+## T+11  0.000157551 0.03890
+## T+12  0.000390313 0.03911
 \end{verbatim}
 
 \hypertarget{modelos-arch-y-garch-multivariados}{%

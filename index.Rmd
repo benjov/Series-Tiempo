@@ -26,7 +26,7 @@ library(readxl)
 
 **Notas de Clase**
 
-__Otoño 2023__
+__Otoño 2024__
 
 by Benjamín Oliva, Omar Alfaro Rivera & Emiliano Pérez Caullieres
 
