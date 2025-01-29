@@ -42,9 +42,9 @@ by Benjamín Oliva, Omar Alfaro Rivera & Emiliano Pérez Caullieres
 
 ## Contexto del documento {-}
 
-Estas son notas de clase de la materia de Análisis de Series de Tiempo en la Facultad de Economía de la Universidad Nacional Autónoma de México.
+Estas son notas de clase de la materia de Análisis de Series de Tiempo de la Facultad de Economía de la Universidad Nacional Autónoma de México.
 
-Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com.
+Este es un trabajo siempre en proceso de mejora. Para cualquier comentario o aclaración escribir a los correos benjov@ciencias.unam.mx o omarxalpha@gmail.com.
 
 La versión PDF de estas notas se encuentra en: https://github.com/benjov/Series-Tiempo/blob/main/docs/Notas-Series-Tiempo.pdf
 

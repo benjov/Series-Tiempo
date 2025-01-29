@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Modelos de Datos Panel | Notas de Clase: Series de Tiempo</title>
+<title>Chapter 10 Modelos de Datos Panel | Notas de Clase: Series de Tiempo</title>
 <meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
-<meta name="description" content="11.1 Motivación Denotemos con \(Y_{it}\) el componente o individuo \(i\), \(i = 1, 2, \ldots, N\) en el tiempo \(t\), \(t = 1, 2, \ldots, T\). Típicamente las series de tiempo en forma de panel se...">
+<meta name="description" content="10.1 Motivación Denotemos con \(Y_{it}\) el componente o individuo \(i\), \(i = 1, 2, \ldots, N\) en el tiempo \(t\), \(t = 1, 2, \ldots, T\). Típicamente las series de tiempo en forma de panel se...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Modelos de Datos Panel | Notas de Clase: Series de Tiempo">
+<meta property="og:title" content="Chapter 10 Modelos de Datos Panel | Notas de Clase: Series de Tiempo">
 <meta property="og:type" content="book">
-<meta property="og:description" content="11.1 Motivación Denotemos con \(Y_{it}\) el componente o individuo \(i\), \(i = 1, 2, \ldots, N\) en el tiempo \(t\), \(t = 1, 2, \ldots, T\). Típicamente las series de tiempo en forma de panel se...">
+<meta property="og:description" content="10.1 Motivación Denotemos con \(Y_{it}\) el componente o individuo \(i\), \(i = 1, 2, \ldots, N\) en el tiempo \(t\), \(t = 1, 2, \ldots, T\). Típicamente las series de tiempo en forma de panel se...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Modelos de Datos Panel | Notas de Clase: Series de Tiempo">
-<meta name="twitter:description" content="11.1 Motivación Denotemos con \(Y_{it}\) el componente o individuo \(i\), \(i = 1, 2, \ldots, N\) en el tiempo \(t\), \(t = 1, 2, \ldots, T\). Típicamente las series de tiempo en forma de panel se...">
+<meta name="twitter:title" content="Chapter 10 Modelos de Datos Panel | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="10.1 Motivación Denotemos con \(Y_{it}\) el componente o individuo \(i\), \(i = 1, 2, \ldots, N\) en el tiempo \(t\), \(t = 1, 2, \ldots, T\). Típicamente las series de tiempo en forma de panel se...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -44,17 +44,16 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
-<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
-<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
-<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
-<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
-<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
-<li><a class="" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="active" href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
-<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></li>
+<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">4</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">6</span> Procesos No Estacionarios</a></li>
+<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">7</span> Cointegración</a></li>
+<li><a class="" href="modelos-adrl.html"><span class="header-section-number">8</span> Modelos ADRL</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">9</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="active" href="modelos-de-datos-panel.html"><span class="header-section-number">10</span> Modelos de Datos Panel</a></li>
+<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">11</span> Otros Modelos de Series de Tiempo No lineales</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,13 +61,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-de-datos-panel" class="section level1" number="11">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-de-datos-panel" class="section level1" number="10">
 <h1>
-<span class="header-section-number">11</span> Modelos de Datos Panel<a class="anchor" aria-label="anchor" href="#modelos-de-datos-panel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10</span> Modelos de Datos Panel<a class="anchor" aria-label="anchor" href="#modelos-de-datos-panel"><i class="fas fa-link"></i></a>
 </h1>
-<div id="motivación-2" class="section level2" number="11.1">
+<div id="motivación-2" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">11.1</span> Motivación<a class="anchor" aria-label="anchor" href="#motivaci%C3%B3n-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Motivación<a class="anchor" aria-label="anchor" href="#motivaci%C3%B3n-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Denotemos con <span class="math inline">\(Y_{it}\)</span> el componente o individuo <span class="math inline">\(i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, N\)</span> en el tiempo <span class="math inline">\(t\)</span>, <span class="math inline">\(t = 1, 2, \ldots, T\)</span>. Típicamente las series de tiempo en forma de panel se caracterizan por ser de dimensión de individuos corta y de dimensión temporar larga.</p>
 <p>En general, escribiremos:
@@ -80,9 +79,9 @@
     \alpha_i = \beta_0 + \gamma_i Z_i
 \end{equation}\]</span></p>
 </div>
-<div id="pruebas-de-raíces-unitarias-en-panel" class="section level2" number="11.2">
+<div id="pruebas-de-raíces-unitarias-en-panel" class="section level2" number="10.2">
 <h2>
-<span class="header-section-number">11.2</span> Pruebas de Raíces Unitarias en Panel<a class="anchor" aria-label="anchor" href="#pruebas-de-ra%C3%ADces-unitarias-en-panel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Pruebas de Raíces Unitarias en Panel<a class="anchor" aria-label="anchor" href="#pruebas-de-ra%C3%ADces-unitarias-en-panel"><i class="fas fa-link"></i></a>
 </h2>
 <p>Las pruebas de raíces unitarias para panel suelen ser usadas principalmente en casos macroeconómicos. De forma similar al caso de series univariadas, asumiremos una forma de AR(1) para una serie en panel:
 <span class="math display">\[\begin{equation}
@@ -101,9 +100,9 @@
 \end{equation}\]</span></p>
 Por su parte, en el caso de la hipótesis nula tenndremos dos:
 </div>
-<div id="ejemplo-pruebas-de-raíces-unitarias-en-panel" class="section level2" number="11.3">
+<div id="ejemplo-pruebas-de-raíces-unitarias-en-panel" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">11.3</span> Ejemplo: Pruebas de Raíces Unitarias en Panel<a class="anchor" aria-label="anchor" href="#ejemplo-pruebas-de-ra%C3%ADces-unitarias-en-panel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Ejemplo: Pruebas de Raíces Unitarias en Panel<a class="anchor" aria-label="anchor" href="#ejemplo-pruebas-de-ra%C3%ADces-unitarias-en-panel"><i class="fas fa-link"></i></a>
 </h2>
 <p>Dependencies and Setup</p>
 <p>Download data from library PLM</p>
@@ -160,7 +159,7 @@ Por su parte, en el caso de la hipótesis nula tenndremos dos:
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig111"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig111-1.png" alt="Evolución de la inversión por empresa" width="672"><p class="caption">
-Figure 11.1: Evolución de la inversión por empresa
+Figure 10.1: Evolución de la inversión por empresa
 </p>
 </div>
 <p>Unit Root Test: Test specifies the type of test to be performed among Levin et al. (2002), Im et al. (2003), Maddala and Wu (1999) and Hadri (2000)</p>
@@ -303,9 +302,9 @@ Figure 11.1: Evolución de la inversión por empresa
 ## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 -1.5188 0.8798
 ## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 -1.5188 0.8798</code></pre>
 </div>
-<div id="ejemplo-modelo-dif-in-dif-para-el-inpc-de-análsis-clínicos-update-nov-2022" class="section level2" number="11.4">
+<div id="ejemplo-modelo-dif-in-dif-para-el-inpc-de-análsis-clínicos-update-nov-2022" class="section level2" number="10.4">
 <h2>
-<span class="header-section-number">11.4</span> Ejemplo: Modelo Dif-in-Dif para el INPC de análsis clínicos (update nov-2022)<a class="anchor" aria-label="anchor" href="#ejemplo-modelo-dif-in-dif-para-el-inpc-de-an%C3%A1lsis-cl%C3%ADnicos-update-nov-2022"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4</span> Ejemplo: Modelo Dif-in-Dif para el INPC de análsis clínicos (update nov-2022)<a class="anchor" aria-label="anchor" href="#ejemplo-modelo-dif-in-dif-para-el-inpc-de-an%C3%A1lsis-cl%C3%ADnicos-update-nov-2022"><i class="fas fa-link"></i></a>
 </h2>
 <p>Dependencies and Setup</p>
 <p>Importamos Datos desde un archivo de Excel. Los datos están en formato panel incluyen:</p>
@@ -651,9 +650,9 @@ Figure 11.1: Evolución de la inversión por empresa
 ## Adj. R-Squared: 0.81196
 ## F-statistic: 24680.5 on 2 and 11372 DF, p-value: &lt; 2.22e-16</code></pre>
 </div>
-<div id="panel-var" class="section level2" number="11.5">
+<div id="panel-var" class="section level2" number="10.5">
 <h2>
-<span class="header-section-number">11.5</span> Panel VAR<a class="anchor" aria-label="anchor" href="#panel-var"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5</span> Panel VAR<a class="anchor" aria-label="anchor" href="#panel-var"><i class="fas fa-link"></i></a>
 </h2>
 <p>En esta sección extenderemos el caso del modelo VAR(p) a uno en forma panel. En este caso asumimos que las viables exogenas son los <span class="math inline">\(p\)</span> rezagos de las <span class="math inline">\(k\)</span> variables endogenas. Consideremos el siguiente caso de un modelo panel VAR con efectos fijos –ciertamente es posible hacer estimaciones con efectos aleatorios, no obstante requiere de supuestos adicionales que no contemplamos en estas notas –, el cual es la forma más común de estimación:
 <span class="math display">\[\begin{equation}
@@ -673,14 +672,14 @@ Figure 11.1: Evolución de la inversión por empresa
 \end{equation}\]</span></p>
 <p>La ecuación @ref(eq:eq_Dinamic_PVAR) se estima por un GMM.</p>
 </div>
-<div id="ejemplos-panel-varp" class="section level2" number="11.6">
+<div id="ejemplos-panel-varp" class="section level2" number="10.6">
 <h2>
-<span class="header-section-number">11.6</span> Ejemplos: Panel VAR(p)<a class="anchor" aria-label="anchor" href="#ejemplos-panel-varp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.6</span> Ejemplos: Panel VAR(p)<a class="anchor" aria-label="anchor" href="#ejemplos-panel-varp"><i class="fas fa-link"></i></a>
 </h2>
 <p>Dependencies and Setup</p>
-<div id="ejemplo-1" class="section level3" number="11.6.1">
+<div id="ejemplo-1" class="section level3" number="10.6.1">
 <h3>
-<span class="header-section-number">11.6.1</span> Ejemplo 1<a class="anchor" aria-label="anchor" href="#ejemplo-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.6.1</span> Ejemplo 1<a class="anchor" aria-label="anchor" href="#ejemplo-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>We used the dynamic panel literature by Arellano and Bond (1991), Blundell and Bond (1998) and Roodman (2009b).
 This data set describes employment, wages, capital and output of 140 firms in the United Kingdom from 1976 to 1984.
@@ -976,9 +975,9 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <p>
 <b>Hansen test of overid. restrictions:</b> <em>chi2(25) = 30.11 Prob &gt; chi2 = 0.22<br>(Robust, but weakened by many instruments.)</em><br></p>
 </div>
-<div id="ejemplo-2" class="section level3" number="11.6.2">
+<div id="ejemplo-2" class="section level3" number="10.6.2">
 <h3>
-<span class="header-section-number">11.6.2</span> Ejemplo 2:<a class="anchor" aria-label="anchor" href="#ejemplo-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.6.2</span> Ejemplo 2:<a class="anchor" aria-label="anchor" href="#ejemplo-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>We used the panel data set consists of 265 Swedish municipalities and covers 9 years (1979-1987).
 These variables include total expenditures (expenditures), total own-source revenues (revenues) and intergovernmental grants received by the municipality (grants).
@@ -1416,33 +1415,33 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <span><span class="co"># plot(ex1_dahlberg_data_girf, ex1_dahlberg_data_bs)</span></span></code></pre></div>
 </div>
 </div>
-<div id="cointegración-1" class="section level2" number="11.7">
+<div id="cointegración-1" class="section level2" number="10.7">
 <h2>
-<span class="header-section-number">11.7</span> Cointegración<a class="anchor" aria-label="anchor" href="#cointegraci%C3%B3n-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.7</span> Cointegración<a class="anchor" aria-label="anchor" href="#cointegraci%C3%B3n-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>[PENDIENTE]</p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></div>
-<div class="next"><a href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></div>
+<div class="prev"><a href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">9</span> Modelos Univariados y Multivariados de Volatilidad</a></div>
+<div class="next"><a href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">11</span> Otros Modelos de Series de Tiempo No lineales</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#modelos-de-datos-panel"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
-<li><a class="nav-link" href="#motivaci%C3%B3n-2"><span class="header-section-number">11.1</span> Motivación</a></li>
-<li><a class="nav-link" href="#pruebas-de-ra%C3%ADces-unitarias-en-panel"><span class="header-section-number">11.2</span> Pruebas de Raíces Unitarias en Panel</a></li>
-<li><a class="nav-link" href="#ejemplo-pruebas-de-ra%C3%ADces-unitarias-en-panel"><span class="header-section-number">11.3</span> Ejemplo: Pruebas de Raíces Unitarias en Panel</a></li>
-<li><a class="nav-link" href="#ejemplo-modelo-dif-in-dif-para-el-inpc-de-an%C3%A1lsis-cl%C3%ADnicos-update-nov-2022"><span class="header-section-number">11.4</span> Ejemplo: Modelo Dif-in-Dif para el INPC de análsis clínicos (update nov-2022)</a></li>
-<li><a class="nav-link" href="#panel-var"><span class="header-section-number">11.5</span> Panel VAR</a></li>
+<li><a class="nav-link" href="#modelos-de-datos-panel"><span class="header-section-number">10</span> Modelos de Datos Panel</a></li>
+<li><a class="nav-link" href="#motivaci%C3%B3n-2"><span class="header-section-number">10.1</span> Motivación</a></li>
+<li><a class="nav-link" href="#pruebas-de-ra%C3%ADces-unitarias-en-panel"><span class="header-section-number">10.2</span> Pruebas de Raíces Unitarias en Panel</a></li>
+<li><a class="nav-link" href="#ejemplo-pruebas-de-ra%C3%ADces-unitarias-en-panel"><span class="header-section-number">10.3</span> Ejemplo: Pruebas de Raíces Unitarias en Panel</a></li>
+<li><a class="nav-link" href="#ejemplo-modelo-dif-in-dif-para-el-inpc-de-an%C3%A1lsis-cl%C3%ADnicos-update-nov-2022"><span class="header-section-number">10.4</span> Ejemplo: Modelo Dif-in-Dif para el INPC de análsis clínicos (update nov-2022)</a></li>
+<li><a class="nav-link" href="#panel-var"><span class="header-section-number">10.5</span> Panel VAR</a></li>
 <li>
-<a class="nav-link" href="#ejemplos-panel-varp"><span class="header-section-number">11.6</span> Ejemplos: Panel VAR(p)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#ejemplo-1"><span class="header-section-number">11.6.1</span> Ejemplo 1</a></li>
-<li><a class="nav-link" href="#ejemplo-2"><span class="header-section-number">11.6.2</span> Ejemplo 2:</a></li>
+<a class="nav-link" href="#ejemplos-panel-varp"><span class="header-section-number">10.6</span> Ejemplos: Panel VAR(p)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ejemplo-1"><span class="header-section-number">10.6.1</span> Ejemplo 1</a></li>
+<li><a class="nav-link" href="#ejemplo-2"><span class="header-section-number">10.6.2</span> Ejemplo 2:</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#cointegraci%C3%B3n-1"><span class="header-section-number">11.7</span> Cointegración</a></li>
+<li><a class="nav-link" href="#cointegraci%C3%B3n-1"><span class="header-section-number">10.7</span> Cointegración</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1459,7 +1458,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-08-05.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-12-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

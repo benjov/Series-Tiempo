@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 7 Procesos No Estacionarios | Notas de Clase: Series de Tiempo</title>
+<title>Chapter 6 Procesos No Estacionarios | Notas de Clase: Series de Tiempo</title>
 <meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
-<meta name="description" content="7.1 Definición y formas de No Estacionariedad Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la...">
+<meta name="description" content="6.1 Definición y formas de No Estacionariedad Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 7 Procesos No Estacionarios | Notas de Clase: Series de Tiempo">
+<meta property="og:title" content="Chapter 6 Procesos No Estacionarios | Notas de Clase: Series de Tiempo">
 <meta property="og:type" content="book">
-<meta property="og:description" content="7.1 Definición y formas de No Estacionariedad Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la...">
+<meta property="og:description" content="6.1 Definición y formas de No Estacionariedad Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 Procesos No Estacionarios | Notas de Clase: Series de Tiempo">
-<meta name="twitter:description" content="7.1 Definición y formas de No Estacionariedad Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la...">
+<meta name="twitter:title" content="Chapter 6 Procesos No Estacionarios | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="6.1 Definición y formas de No Estacionariedad Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -44,17 +44,16 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
-<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
-<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
-<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
-<li><a class="active" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
-<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
-<li><a class="" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
-<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></li>
+<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">4</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="active" href="procesos-no-estacionarios.html"><span class="header-section-number">6</span> Procesos No Estacionarios</a></li>
+<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">7</span> Cointegración</a></li>
+<li><a class="" href="modelos-adrl.html"><span class="header-section-number">8</span> Modelos ADRL</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">9</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">10</span> Modelos de Datos Panel</a></li>
+<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">11</span> Otros Modelos de Series de Tiempo No lineales</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,13 +61,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="procesos-no-estacionarios" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="procesos-no-estacionarios" class="section level1" number="6">
 <h1>
-<span class="header-section-number">7</span> Procesos No Estacionarios<a class="anchor" aria-label="anchor" href="#procesos-no-estacionarios"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6</span> Procesos No Estacionarios<a class="anchor" aria-label="anchor" href="#procesos-no-estacionarios"><i class="fas fa-link"></i></a>
 </h1>
-<div id="definición-y-formas-de-no-estacionariedad" class="section level2" number="7.1">
+<div id="definición-y-formas-de-no-estacionariedad" class="section level2" number="6.1">
 <h2>
-<span class="header-section-number">7.1</span> Definición y formas de No Estacionariedad<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-formas-de-no-estacionariedad"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.1</span> Definición y formas de No Estacionariedad<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-formas-de-no-estacionariedad"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hasta ahora hemos planteado una serie de técnicas de regresión que aplican sólo a procesos o series estacionarias. En esta sección relajaremos la definición de estacionariedad y plantearemos pruebas para determinar cuando una serie es estacionaria bajo tres diferentes especificiones:</p>
 <ol style="list-style-type: decimal">
@@ -80,40 +79,40 @@
 <p>Bajo este enfoque, el proceso está lejos de cumplir con la defición de estacionariedad que hemos establecido en capítulos previos, pero relajaremos el supuesto y reconoceremos que una serie puede ser estacionaria en varianza bajo una tendencia determinística. Así, diremos que la serie será descrita por una ecuación dada por:
 <span class="math display" id="eq:YTrend">\[\begin{equation}
     Y_t = \sum^m_{j = 0} \delta_j t^j + X_t
-    \tag{7.1}
+    \tag{6.1}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(X_t\)</span> es un proceso <span class="math inline">\(ARMA(p, q)\)</span> con media cero, que se puede ver como:
 <span class="math display">\[\begin{equation}
     \alpha(L) X_t = \beta(L) U_t
 \end{equation}\]</span></p>
-<p>Entonces, los momentos y variaza de la ecuación <a href="procesos-no-estacionarios.html#eq:YTrend">(7.1)</a> estaran dados por:
+<p>Entonces, los momentos y variaza de la ecuación <a href="procesos-no-estacionarios.html#eq:YTrend">(6.1)</a> estaran dados por:
 <span class="math display" id="eq:ETrend">\[\begin{equation}
     \mathbb{E}[Y_t] = \sum^m_{j = 0} \delta_j t^j = \mu_t
-    \tag{7.2}
+    \tag{6.2}
 \end{equation}\]</span></p>
-<p>Dada la ecuación <a href="procesos-no-estacionarios.html#eq:ETrend">(7.2)</a> podemos plantear la siguiente ecuación de covarainzas:
+<p>Dada la ecuación <a href="procesos-no-estacionarios.html#eq:ETrend">(6.2)</a> podemos plantear la siguiente ecuación de covarainzas:
 <span class="math display" id="eq:CovTrend">\[\begin{eqnarray}
     \mathbb{E}[(Y_t - \mu_t) \cdot (Y_{t+\tau} - \mu_{t+\tau})] &amp; = &amp; \mathbb{E}[X_t \cdot X_{t+\tau}] \nonumber \\
     &amp; = &amp; \gamma_X(\tau)
-    \tag{7.3}
+    \tag{6.3}
 \end{eqnarray}\]</span></p>
-<p>Utilizando el resultado de la ecuación <a href="procesos-no-estacionarios.html#eq:CovTrend">(7.3)</a> podemos establecer que:
+<p>Utilizando el resultado de la ecuación <a href="procesos-no-estacionarios.html#eq:CovTrend">(6.3)</a> podemos establecer que:
 <span class="math display" id="eq:VarTrend">\[\begin{equation}
     \mathbb{E}[(Y_t - \mu_t)^2] = \mathbb{E}[X_t^2] = \sigma_X^2
-    \tag{7.4}
+    \tag{6.4}
 \end{equation}\]</span></p>
-<p>Así, las ecuaciones <a href="procesos-no-estacionarios.html#eq:ETrend">(7.2)</a> y <a href="procesos-no-estacionarios.html#eq:VarTrend">(7.4)</a> significan que el proceso descrito por la ecuación <a href="procesos-no-estacionarios.html#eq:YTrend">(7.1)</a> es estacionario pero en varianza. De esta forma a partir de este momento diremos que una serie será estacionaria al rededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones <a href="procesos-no-estacionarios.html#eq:YTrend">(7.1)</a>, <a href="procesos-no-estacionarios.html#eq:ETrend">(7.2)</a> y <a href="procesos-no-estacionarios.html#eq:VarTrend">(7.4)</a>.</p>
+<p>Así, las ecuaciones <a href="procesos-no-estacionarios.html#eq:ETrend">(6.2)</a> y <a href="procesos-no-estacionarios.html#eq:VarTrend">(6.4)</a> significan que el proceso descrito por la ecuación <a href="procesos-no-estacionarios.html#eq:YTrend">(6.1)</a> es estacionario pero en varianza. De esta forma a partir de este momento diremos que una serie será estacionaria al rededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones <a href="procesos-no-estacionarios.html#eq:YTrend">(6.1)</a>, <a href="procesos-no-estacionarios.html#eq:ETrend">(6.2)</a> y <a href="procesos-no-estacionarios.html#eq:VarTrend">(6.4)</a>.</p>
 <p>Dicho lo anterior estudiaremos el concepto de raíz unitaria de un proceso estocástico o de una serie de tiempo. Partamos de platear que un proceso AR(1) tiene raíz unitaria cuando el cual el coeficiente <span class="math inline">\(a_1 = 1\)</span>, es decir:
 <span class="math display" id="eq:UR1">\[\begin{equation}
     Y_t = Y_{t-1} + U_t
-    \tag{7.5}
+    \tag{6.5}
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(U_t\)</span> es un proceso pueramente aleatorio con media cero, varianza constante y autocovarianza cero (0), al cual nos referiremos simplemente como ruido blanco. Supongamos ahora que incluímos un término constante en la ecuación <a href="procesos-no-estacionarios.html#eq:UR1">(7.5)</a>, de forma que tenemos:
+<p>Donde <span class="math inline">\(U_t\)</span> es un proceso pueramente aleatorio con media cero, varianza constante y autocovarianza cero (0), al cual nos referiremos simplemente como ruido blanco. Supongamos ahora que incluímos un término constante en la ecuación <a href="procesos-no-estacionarios.html#eq:UR1">(6.5)</a>, de forma que tenemos:
 <span class="math display" id="eq:UR2">\[\begin{equation}
     Y_t = \delta + Y_{t-1} + U_t
-    \tag{7.6}
+    \tag{6.6}
 \end{equation}\]</span></p>
-<p>Tomando a la ecuación <a href="procesos-no-estacionarios.html#eq:UR2">(7.6)</a> y suponiendo que existe un valor inicial <span class="math inline">\(Y_0\)</span> de la serie podemos plantear la sguiente secuencia de expresiones:
+<p>Tomando a la ecuación <a href="procesos-no-estacionarios.html#eq:UR2">(6.6)</a> y suponiendo que existe un valor inicial <span class="math inline">\(Y_0\)</span> de la serie podemos plantear la sguiente secuencia de expresiones:
 <span class="math display">\[\begin{eqnarray*}
     Y_1 &amp; = &amp; \delta + Y_0 + U_1 \\
     Y_2 &amp; = &amp; \delta + Y_1 + U_2 \\
@@ -123,32 +122,32 @@
 <p>Si repitieramos la sustitución sucesiva anterior hasta el momento <span class="math inline">\(t\)</span> encontrariamos que la ecuación de la solución general que describe a un <span class="math inline">\(AR(1)\)</span> con término constante que tiene raíz unitaria es de la forma:
 <span class="math display" id="eq:UR3">\[\begin{equation}
     Y_t = t \delta + Y_0 + \sum_{i=1}^t U_i
-    \tag{7.7}
+    \tag{6.7}
 \end{equation}\]</span></p>
-<p>La ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(7.7)</a> es equivalente a la ecuación <a href="procesos-no-estacionarios.html#eq:YTrend">(7.1)</a>. A la ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(7.7)</a> también se le conoce como proceso con Drift o con término constante, indistintamente, ya que el componente de Drift suele asociarse a la posibilidad de incorporar el efecto de los residuales pasados, lo cual es posible simplemente agregando una constante.s</p>
-<p>Si revisamos el comportamiento de sus momentos y varianza de la ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(7.7)</a> encontramos que:
+<p>La ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(6.7)</a> es equivalente a la ecuación <a href="procesos-no-estacionarios.html#eq:YTrend">(6.1)</a>. A la ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(6.7)</a> también se le conoce como proceso con Drift o con término constante, indistintamente, ya que el componente de Drift suele asociarse a la posibilidad de incorporar el efecto de los residuales pasados, lo cual es posible simplemente agregando una constante.s</p>
+<p>Si revisamos el comportamiento de sus momentos y varianza de la ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(6.7)</a> encontramos que:
 <span class="math display">\[\begin{eqnarray*}
     \mathbb{E}[Y_t] &amp; = &amp; Y_0 + \delta t = \mu_t \\
     Var[Y_t] &amp; = &amp; t \sigma^2 = \gamma(0, t) \\
     Cov(Y_t, Y_{t+\tau}) &amp; = &amp; (t - \tau) \sigma^2 = \gamma(t, \tau)
 \end{eqnarray*}\]</span></p>
-<p>De esta forma, la ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(7.7)</a> no describe un proceso estacionario, sólo podría ser estacionario si <span class="math inline">\(t = 1\)</span>, en cualquier otro caso sería no estacionario en varianza. Ahora hagamos un resumen y acordemos notación que se utilizará en esta sección. Supongamos un proceso o serie de tiempo que es decrito por la siguiente ecuación:
+<p>De esta forma, la ecuación <a href="procesos-no-estacionarios.html#eq:UR3">(6.7)</a> no describe un proceso estacionario, sólo podría ser estacionario si <span class="math inline">\(t = 1\)</span>, en cualquier otro caso sería no estacionario en varianza. Ahora hagamos un resumen y acordemos notación que se utilizará en esta sección. Supongamos un proceso o serie de tiempo que es decrito por la siguiente ecuación:
 <span class="math display" id="eq:UR4">\[\begin{equation}
     Y_t = \delta + Y_{t-1} + X_t
-    \tag{7.8}
+    \tag{6.8}
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(X_t\)</span> es un <span class="math inline">\(ARMA(p, q)\)</span> con media cero. Si definimos a <span class="math inline">\(\Delta Y_t = Y_t - Y_{t-1}\)</span>, entonces la ecuación <a href="procesos-no-estacionarios.html#eq:UR4">(7.8)</a> la podemos escribir como:
+<p>Donde <span class="math inline">\(X_t\)</span> es un <span class="math inline">\(ARMA(p, q)\)</span> con media cero. Si definimos a <span class="math inline">\(\Delta Y_t = Y_t - Y_{t-1}\)</span>, entonces la ecuación <a href="procesos-no-estacionarios.html#eq:UR4">(6.8)</a> la podemos escribir como:
 <span class="math display" id="eq:UR5">\[\begin{equation}
     \Delta Y_t = \delta + X_t
-    \tag{7.9}
+    \tag{6.9}
 \end{equation}\]</span></p>
-<p>A la ecuación <a href="procesos-no-estacionarios.html#eq:UR5">(7.9)</a> la denominaremos como un proceso estacionario en diferencias o simplemente como un proceso integrado. Así utilizaremos la siguiente definición.</p>
+<p>A la ecuación <a href="procesos-no-estacionarios.html#eq:UR5">(6.9)</a> la denominaremos como un proceso estacionario en diferencias o simplemente como un proceso integrado. Así utilizaremos la siguiente definición.</p>
 <p>Sea un proceso estocástico <span class="math inline">\(Y\)</span>, decimos que este es integrado de orden <span class="math inline">\(d\)</span>, <span class="math inline">\(I(d)\)</span>, si este puede transformarse a uno estacionacionario, que sea invertible, mediante la diferenciación del mismo <span class="math inline">\(d\)</span>-veces, es decir:
 <span class="math display" id="eq:UR6">\[\begin{equation}
     (1 - L)^d Y_t = \delta + X_t
-    \tag{7.10}
+    \tag{6.10}
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(X_t\)</span> es un proceso <span class="math inline">\(ARMA(p, q)\)</span>. De lo cual se infiere que en la ecuación <a href="procesos-no-estacionarios.html#eq:UR6">(7.10)</a> <span class="math inline">\(Y_t\)</span> será una <span class="math inline">\(ARIMA(p, d, q)\)</span>, el cual contiene <span class="math inline">\(d\)</span> raíces unitarias. A estos procesos también se les conoce como procesos con tendencia estocástica.</p>
+<p>Donde <span class="math inline">\(X_t\)</span> es un proceso <span class="math inline">\(ARMA(p, q)\)</span>. De lo cual se infiere que en la ecuación <a href="procesos-no-estacionarios.html#eq:UR6">(6.10)</a> <span class="math inline">\(Y_t\)</span> será una <span class="math inline">\(ARIMA(p, d, q)\)</span>, el cual contiene <span class="math inline">\(d\)</span> raíces unitarias. A estos procesos también se les conoce como procesos con tendencia estocástica.</p>
 <p>Dada la discusión annterior, a continuación platearemos un resumen de cuales son los dos casos a los cuales nos referiremos como procesos que no son estacionarios en media, pero que si lo son en varianza. Estos casos son:
 <span class="math display">\[\begin{eqnarray}
     Y_t &amp; = &amp; Y_0 + \delta t + U_t \\
@@ -156,9 +155,9 @@
 \end{eqnarray}\]</span></p>
 <p>Ambos casos no son estacionarios en media, pero si lo son en varianza. De ambos podemos decir que los choques o innovaciones del término de error tienen un efecto transitorio en el primero, pero permanentes en el segundo.</p>
 </div>
-<div id="pruebas-de-raíces-unitarias" class="section level2" number="7.2">
+<div id="pruebas-de-raíces-unitarias" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">7.2</span> Pruebas de Raíces Unitarias<a class="anchor" aria-label="anchor" href="#pruebas-de-ra%C3%ADces-unitarias"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Pruebas de Raíces Unitarias<a class="anchor" aria-label="anchor" href="#pruebas-de-ra%C3%ADces-unitarias"><i class="fas fa-link"></i></a>
 </h2>
 <p>En esta sección plantearemos una serie de pruebas estadísticas para determinar cuando una serie puede ser estacionaria bajo tres posibles casos:</p>
 <ol style="list-style-type: decimal">
@@ -167,19 +166,19 @@
 <li><p>Estacionariedad al rededor del cero.</p></li>
 </ol>
 </div>
-<div id="dickey---fuller-df" class="section level2" number="7.3">
+<div id="dickey---fuller-df" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">7.3</span> Dickey - Fuller (DF)<a class="anchor" aria-label="anchor" href="#dickey---fuller-df"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Dickey - Fuller (DF)<a class="anchor" aria-label="anchor" href="#dickey---fuller-df"><i class="fas fa-link"></i></a>
 </h2>
 <p>Partamos de una forma del proceso <span class="math inline">\(Y_t\)</span> dada por:
 <span class="math display" id="eq:URDFG">\[\begin{equation}
     Y_t = \sum_{j = 0}^m \delta_j t^j + X_t
-    \tag{7.11}
+    \tag{6.11}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(X_t\)</span> es un <span class="math inline">\(ARMA(p, q)\)</span> con media cero. Esta prueba asume que <span class="math inline">\(m = 1\)</span>, por lo que utilizaremos un modelo del tipo:
 <span class="math display" id="eq:URDF">\[\begin{equation}
     Y_t = \alpha + \delta t + \rho Y_{t-1} + U_t
-    \tag{7.12}
+    \tag{6.12}
 \end{equation}\]</span></p>
 <p>Si, el <span class="math inline">\(AR(1)\)</span> planteado tiene raíz unitaria, es decir, <span class="math inline">\(\rho = 1\)</span>, entonces tendríamos:
 <span class="math display">\[\begin{eqnarray*}
@@ -187,7 +186,7 @@
     \Delta Y_t &amp; = &amp; \alpha + \delta t + U_t
 \end{eqnarray*}\]</span></p>
 <p>De esta forma, para determinar si una serie tiene raíz unitaria basta con probar la hipótesis nula de que <span class="math inline">\(H_0 : \rho = 1\)</span>, junto con las diferentes combinaciones que impliquen restricciones respecto a <span class="math inline">\(\delta\)</span> y <span class="math inline">\(\alpha\)</span>.</p>
-<p>En resumen, la prueba DF consiste en asumir un modelo general dado por la ecuación <a href="procesos-no-estacionarios.html#eq:URDF">(7.12)</a> y probar tres especificaciones distintas que serían válidas bajo <span class="math inline">\(H_0 : \rho = 1\)</span>:</p>
+<p>En resumen, la prueba DF consiste en asumir un modelo general dado por la ecuación <a href="procesos-no-estacionarios.html#eq:URDF">(6.12)</a> y probar tres especificaciones distintas que serían válidas bajo <span class="math inline">\(H_0 : \rho = 1\)</span>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Modelo A: con intercepto y tendencia:
 <span class="math display">\[\begin{equation*}
@@ -205,16 +204,16 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
   \end{equation*}\]</span>
 Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</span> contra <span class="math inline">\(H_a : \beta &lt; 0\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.</p></li>
 </ol>
-<div id="dickey---fuller-aumentada-adf" class="section level3" number="7.3.1">
+<div id="dickey---fuller-aumentada-adf" class="section level3" number="6.3.1">
 <h3>
-<span class="header-section-number">7.3.1</span> Dickey - Fuller Aumentada (ADF)<a class="anchor" aria-label="anchor" href="#dickey---fuller-aumentada-adf"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3.1</span> Dickey - Fuller Aumentada (ADF)<a class="anchor" aria-label="anchor" href="#dickey---fuller-aumentada-adf"><i class="fas fa-link"></i></a>
 </h3>
-<p>A diferencia de un modelo AR(1) para el caso de una prueba DF como en la ecuación <a href="procesos-no-estacionarios.html#eq:URDF">(7.12)</a>, en una prueba ADF se asume que el proceso es un AR(p) de la forma (por simplicidad hemos omitido el término constante y el término de tendencia determinística):
+<p>A diferencia de un modelo AR(1) para el caso de una prueba DF como en la ecuación <a href="procesos-no-estacionarios.html#eq:URDF">(6.12)</a>, en una prueba ADF se asume que el proceso es un AR(p) de la forma (por simplicidad hemos omitido el término constante y el término de tendencia determinística):
 <span class="math display" id="eq:URADF">\[\begin{equation}
     Y_t = a_1 Y_{t-1} + a_2 Y_{t-2} + \ldots + a_p Y_{t-p} + U_t
-    \tag{7.13}
+    \tag{6.13}
 \end{equation}\]</span></p>
-<p>Haciendo una sustitución de términos similar a las que hemos planteado en otras secciones podemos reexpresar la ecuación <a href="procesos-no-estacionarios.html#eq:URADF">(7.13)</a> en su versión en diferencias siguiendo el proceso:
+<p>Haciendo una sustitución de términos similar a las que hemos planteado en otras secciones podemos reexpresar la ecuación <a href="procesos-no-estacionarios.html#eq:URADF">(6.13)</a> en su versión en diferencias siguiendo el proceso:
 <span class="math display">\[\begin{equation}
     Y_t = \rho Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + + \theta_{p-1} \Delta Y_{t-p+1} + U_t
 \end{equation}\]</span></p>
@@ -227,7 +226,7 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 <span class="math display">\[\begin{equation}
     \Delta Y_{t-1} = \alpha + \beta t + (\rho - 1) Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_k \Delta Y_{t-k} + U_t
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(U_t\)</span> es un proceso puramente aleatorio y <span class="math inline">\(k\)</span> es elegido de tal manera que los residuales sean un proceso puramente aleatorio. En resumen, la prueba DF consiste en asumir un modelo general dado por la ecuación <a href="procesos-no-estacionarios.html#eq:URADF">(7.13)</a>, que incluya constante y tendencia, y probar tres especificaciones distintas que serían válidas bajo <span class="math inline">\(H_0 : \rho = 1\)</span>:</p>
+<p>Donde <span class="math inline">\(U_t\)</span> es un proceso puramente aleatorio y <span class="math inline">\(k\)</span> es elegido de tal manera que los residuales sean un proceso puramente aleatorio. En resumen, la prueba DF consiste en asumir un modelo general dado por la ecuación <a href="procesos-no-estacionarios.html#eq:URADF">(6.13)</a>, que incluya constante y tendencia, y probar tres especificaciones distintas que serían válidas bajo <span class="math inline">\(H_0 : \rho = 1\)</span>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Modelo A: con intercepto y tendencia:
 <span class="math display">\[\begin{equation*}
@@ -246,17 +245,17 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</span> contra <span class="math inline">\(H_a : \beta &lt; 0\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.</p></li>
 </ol>
 </div>
-<div id="phillips---perron-pp" class="section level3" number="7.3.2">
+<div id="phillips---perron-pp" class="section level3" number="6.3.2">
 <h3>
-<span class="header-section-number">7.3.2</span> Phillips - Perron (PP)<a class="anchor" aria-label="anchor" href="#phillips---perron-pp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3.2</span> Phillips - Perron (PP)<a class="anchor" aria-label="anchor" href="#phillips---perron-pp"><i class="fas fa-link"></i></a>
 </h3>
 <p>Una tercera prueba es la de PP, la cual también está basada en una AR(1) dado por la ecuación:
 <span class="math display" id="eq:URPP">\[\begin{equation}
     Y_t = d \eta + \rho Y_{t-1} + U_t
-    \tag{7.14}
+    \tag{6.14}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(d\)</span> incluye a cualquiera de los componentes determinísticos como constante y tendencia. Al igual que los casos pasados, la hipótesis a probar era <span class="math inline">\(H_0 : \rho = 1\)</span> contra la alternativa <span class="math inline">\(H_a : | \rho | &lt; 1\)</span>, y asumimos una estructura MA(q) es el término de error de la forma <span class="math inline">\(U_t = \psi(L) \varepsilon_t = \psi_0 \varepsilon_t + \psi_1 \varepsilon_{t-1} + \ldots + \psi_p \varepsilon_{t-p}\)</span>, con <span class="math inline">\(\varepsilon_t\)</span> es un ruido blanco con media cero y varianza <span class="math inline">\(\sigma^2\)</span>. En este modelo se elige el valor <span class="math inline">\(p\)</span> que hace que el componente sea un MA(p). Las tablas estadísticas de PP para esta prueba pueden utilizar una estadística <span class="math inline">\(Z_\tau\)</span> o <span class="math inline">\(Z_\rho\)</span>, las cuales se pueden emplear indistintamente.</p>
-<p>En resumen, la prueba PP consiste en asumir un modelo general dado por la ecuación <a href="procesos-no-estacionarios.html#eq:URPP">(7.14)</a> y probar dos especificaciones distintas que serían válidas bajo <span class="math inline">\(H_0 : \rho = 1\)</span>, ambas considerando un compenente Drift:</p>
+<p>En resumen, la prueba PP consiste en asumir un modelo general dado por la ecuación <a href="procesos-no-estacionarios.html#eq:URPP">(6.14)</a> y probar dos especificaciones distintas que serían válidas bajo <span class="math inline">\(H_0 : \rho = 1\)</span>, ambas considerando un compenente Drift:</p>
 <ol style="list-style-type: decimal">
 <li><p>Modelo A: con intercepto y tendencia:
 <span class="math display">\[\begin{equation*}
@@ -270,9 +269,9 @@ Y_t = \alpha + \rho Y_{t-1} + U_t
 Buscamos probar si <span class="math inline">\(H_0 : \rho = 1\)</span> contra <span class="math inline">\(H_a : | \rho | &lt; 1\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo, es probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario al rededor de una constante.</p></li>
 </ol>
 </div>
-<div id="kwiatkowsky---phillips---schmidt---shin-kpss" class="section level3" number="7.3.3">
+<div id="kwiatkowsky---phillips---schmidt---shin-kpss" class="section level3" number="6.3.3">
 <h3>
-<span class="header-section-number">7.3.3</span> Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)<a class="anchor" aria-label="anchor" href="#kwiatkowsky---phillips---schmidt---shin-kpss"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3.3</span> Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)<a class="anchor" aria-label="anchor" href="#kwiatkowsky---phillips---schmidt---shin-kpss"><i class="fas fa-link"></i></a>
 </h3>
 <p>La prueba KPSS considera que el proceso es estacionario bajo la hipótesis nula, lo cual hace una diferencia respecto de las anteriores pruebas. El modelo considerado es:
 <span class="math display">\[\begin{equation}
@@ -285,9 +284,9 @@ Buscamos probar si <span class="math inline">\(H_0 : \rho = 1\)</span> contra <s
 <li><p>0.463, para un modelo con constante</p></li>
 </ol>
 </div>
-<div id="ejemplo-con-aplicación-de-todas-las-pruebas-de-raíces-unitarias" class="section level3" number="7.3.4">
+<div id="ejemplo-con-aplicación-de-todas-las-pruebas-de-raíces-unitarias" class="section level3" number="6.3.4">
 <h3>
-<span class="header-section-number">7.3.4</span> Ejemplo con aplicación de todas las pruebas de raíces unitarias<a class="anchor" aria-label="anchor" href="#ejemplo-con-aplicaci%C3%B3n-de-todas-las-pruebas-de-ra%C3%ADces-unitarias"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3.4</span> Ejemplo con aplicación de todas las pruebas de raíces unitarias<a class="anchor" aria-label="anchor" href="#ejemplo-con-aplicaci%C3%B3n-de-todas-las-pruebas-de-ra%C3%ADces-unitarias"><i class="fas fa-link"></i></a>
 </h3>
 <p>A continuación, mostraremos como ejemplo la aplicación de las pruebas de raíces unitarias a la serie de Tipo de Cambio en forma logaritmica y de diferencias logaritmicas. Asumamos que determinamos el valor de los rezagos de la prueba con el criterio de <span class="math inline">\(p = int\{ 4 (T/100)^{1/4} \}\)</span>. En la práctica, existen otras formas de determinar el valor de <span class="math inline">\(p\)</span>, como el criterio de AIC, pero es decisión del investigador cual usar.</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
@@ -329,7 +328,7 @@ Buscamos probar si <span class="math inline">\(H_0 : \rho = 1\)</span> contra <s
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig71"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig71-1.png" alt="Series en Logaritmos" width="672"><p class="caption">
-Figure 7.1: Series en Logaritmos
+Figure 6.1: Series en Logaritmos
 </p>
 </div>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
@@ -341,7 +340,7 @@ Figure 7.1: Series en Logaritmos
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig72"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig72-1.png" alt="Series en Diferencias Logaritmicas" width="672"><p class="caption">
-Figure 7.2: Series en Diferencias Logaritmicas
+Figure 6.2: Series en Diferencias Logaritmicas
 </p>
 </div>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
@@ -353,7 +352,7 @@ Figure 7.2: Series en Diferencias Logaritmicas
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig73"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig73-1.png" alt="Series en Diferencias Anuales Logaritmicas" width="672"><p class="caption">
-Figure 7.3: Series en Diferencias Anuales Logaritmicas
+Figure 6.3: Series en Diferencias Anuales Logaritmicas
 </p>
 </div>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
@@ -365,7 +364,7 @@ Figure 7.3: Series en Diferencias Anuales Logaritmicas
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig74"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig74-1.png" alt="Comparacion de Series en Diferencias Anuales" width="672"><p class="caption">
-Figure 7.4: Comparacion de Series en Diferencias Anuales
+Figure 6.4: Comparacion de Series en Diferencias Anuales
 </p>
 </div>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
@@ -377,7 +376,7 @@ Figure 7.4: Comparacion de Series en Diferencias Anuales
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig75"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig75-1.png" alt="Comparacion de Series en Diferencias" width="672"><p class="caption">
-Figure 7.5: Comparacion de Series en Diferencias
+Figure 6.5: Comparacion de Series en Diferencias
 </p>
 </div>
 <p>En los siguientes mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie <span class="math inline">\(LTC_t\)</span>, considerando <span class="math inline">\(p = int \{ 4 (234/100)^{(1/4)} \} = 4\)</span> para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS.</p>
@@ -1064,20 +1063,20 @@ Figure 7.5: Comparacion de Series en Diferencias
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></div>
-<div class="next"><a href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></div>
+<div class="prev"><a href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></div>
+<div class="next"><a href="cointegraci%C3%B3n.html"><span class="header-section-number">7</span> Cointegración</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#procesos-no-estacionarios"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
-<li><a class="nav-link" href="#definici%C3%B3n-y-formas-de-no-estacionariedad"><span class="header-section-number">7.1</span> Definición y formas de No Estacionariedad</a></li>
-<li><a class="nav-link" href="#pruebas-de-ra%C3%ADces-unitarias"><span class="header-section-number">7.2</span> Pruebas de Raíces Unitarias</a></li>
+<li><a class="nav-link" href="#procesos-no-estacionarios"><span class="header-section-number">6</span> Procesos No Estacionarios</a></li>
+<li><a class="nav-link" href="#definici%C3%B3n-y-formas-de-no-estacionariedad"><span class="header-section-number">6.1</span> Definición y formas de No Estacionariedad</a></li>
+<li><a class="nav-link" href="#pruebas-de-ra%C3%ADces-unitarias"><span class="header-section-number">6.2</span> Pruebas de Raíces Unitarias</a></li>
 <li>
-<a class="nav-link" href="#dickey---fuller-df"><span class="header-section-number">7.3</span> Dickey - Fuller (DF)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#dickey---fuller-aumentada-adf"><span class="header-section-number">7.3.1</span> Dickey - Fuller Aumentada (ADF)</a></li>
-<li><a class="nav-link" href="#phillips---perron-pp"><span class="header-section-number">7.3.2</span> Phillips - Perron (PP)</a></li>
-<li><a class="nav-link" href="#kwiatkowsky---phillips---schmidt---shin-kpss"><span class="header-section-number">7.3.3</span> Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)</a></li>
-<li><a class="nav-link" href="#ejemplo-con-aplicaci%C3%B3n-de-todas-las-pruebas-de-ra%C3%ADces-unitarias"><span class="header-section-number">7.3.4</span> Ejemplo con aplicación de todas las pruebas de raíces unitarias</a></li>
+<a class="nav-link" href="#dickey---fuller-df"><span class="header-section-number">6.3</span> Dickey - Fuller (DF)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dickey---fuller-aumentada-adf"><span class="header-section-number">6.3.1</span> Dickey - Fuller Aumentada (ADF)</a></li>
+<li><a class="nav-link" href="#phillips---perron-pp"><span class="header-section-number">6.3.2</span> Phillips - Perron (PP)</a></li>
+<li><a class="nav-link" href="#kwiatkowsky---phillips---schmidt---shin-kpss"><span class="header-section-number">6.3.3</span> Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)</a></li>
+<li><a class="nav-link" href="#ejemplo-con-aplicaci%C3%B3n-de-todas-las-pruebas-de-ra%C3%ADces-unitarias"><span class="header-section-number">6.3.4</span> Ejemplo con aplicación de todas las pruebas de raíces unitarias</a></li>
 </ul>
 </li>
 </ul>
@@ -1096,7 +1095,7 @@ Figure 7.5: Comparacion de Series en Diferencias
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-08-05.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-12-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

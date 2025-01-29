@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 5 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo</title>
+<title>Chapter 4 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo</title>
 <meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
-<meta name="description" content="5.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
+<meta name="description" content="4.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 5 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo">
+<meta property="og:title" content="Chapter 4 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo">
 <meta property="og:type" content="book">
-<meta property="og:description" content="5.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
+<meta property="og:description" content="4.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo">
-<meta name="twitter:description" content="5.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
+<meta name="twitter:title" content="Chapter 4 Desestacionalización y filtrado de Series | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="4.1 Motivación Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -44,17 +44,16 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
-<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
-<li><a class="active" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
-<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
-<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
-<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
-<li><a class="" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
-<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></li>
+<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="active" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">4</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">6</span> Procesos No Estacionarios</a></li>
+<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">7</span> Cointegración</a></li>
+<li><a class="" href="modelos-adrl.html"><span class="header-section-number">8</span> Modelos ADRL</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">9</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">10</span> Modelos de Datos Panel</a></li>
+<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">11</span> Otros Modelos de Series de Tiempo No lineales</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,13 +61,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="desestacionalización-y-filtrado-de-series" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="desestacionalización-y-filtrado-de-series" class="section level1" number="4">
 <h1>
-<span class="header-section-number">5</span> Desestacionalización y filtrado de Series<a class="anchor" aria-label="anchor" href="#desestacionalizaci%C3%B3n-y-filtrado-de-series"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Desestacionalización y filtrado de Series<a class="anchor" aria-label="anchor" href="#desestacionalizaci%C3%B3n-y-filtrado-de-series"><i class="fas fa-link"></i></a>
 </h1>
-<div id="motivación" class="section level2" number="5.1">
+<div id="motivación" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">5.1</span> Motivación<a class="anchor" aria-label="anchor" href="#motivaci%C3%B3n"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> Motivación<a class="anchor" aria-label="anchor" href="#motivaci%C3%B3n"><i class="fas fa-link"></i></a>
 </h2>
 <p>Existen múltiples enfoques para la desestacionalización de series. Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como un conjunto de dummies. No obstante, en el caso partícular que discutiremos en este curso, estará basado en un modelo ARIMA de la serie. Este enfoque está basado en el modelo X11 de la oficina del censo de Estados Unidos (Census Bureau) el cual es conocido como el modelo X13-ARIMA-SEATS. El modelo X13-ARIMA-SEATS es, como su nombre lo indica, la combinación de un modelo ARIMA con componentes estacionales (por la traducción literal de la palabra: seasonal).</p>
 <p>Un modelo ARIMA estacional emplea la serie en diferencias y como regresores los valores rezagados de las diferencia de la serie tantas veces como procesos estacionales <span class="math inline">\(s\)</span> existan en ésta, con el objeto de remover los efectos aditivos de la estacionalidad. Sólo para entender qué significa este mecanismo, recordemos que cuando se utiliza la primera direncia de la serie respecto del periodo inmediato anterior se remueve la tendencia. Por su parte, cuando se incluye la diferencia respecto del mes <span class="math inline">\(s\)</span> se está en el caso en que se modela la serie como una media móvil en términos del rezago <span class="math inline">\(s\)</span>.</p>
@@ -79,20 +78,20 @@
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\Theta_P(.)\)</span>, <span class="math inline">\(\theta_p(.)\)</span>, <span class="math inline">\(\Psi_Q(.)\)</span> y <span class="math inline">\(\psi_q(.)\)</span> son polinomios de <span class="math inline">\(L\)</span> de orden <span class="math inline">\(P\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(Q\)</span> y <span class="math inline">\(q\)</span> respectivamente. En general, la representación es de una serie no estacionaria, aunque si <span class="math inline">\(D = d = 0\)</span> y las raíces del polinomio carácteristico (de los polinomios del lado izquierdo de la ecuación @ref(eq:ARIMA_seas) todas son más grandes que 1 en valor absoluto, el proceso modelado será estacionario.</p>
 <p>Si bien es cierto que existen otras formas de modelar la desestacionalización, como la modelación en diferencias con dummies para identificar ciertos patrones regulares, en los algorimtos disponibles como el X11 o X13-ARIMA-SEATS se emplea la formulación de la ecuación @ref(eq:ARIMA_seas). A continuación implementaremos la desestacionalización de una serie.</p>
-<p>Como ejemplo utilizaremos la serie del Índice Nacional de Precios al Consumidor (INPC). Podemos ver que la serie original del INPC y su ajuste estacional bajo una metodología X13-ARIMA-SEATS son como se muestra en la Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig51">5.1</a>.</p>
+<p>Como ejemplo utilizaremos la serie del Índice Nacional de Precios al Consumidor (INPC). Podemos ver que la serie original del INPC y su ajuste estacional bajo una metodología X13-ARIMA-SEATS son como se muestra en la Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig51">4.1</a>.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_INPC_Adj.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig51"></span>
 <img src="Plots/G_INPC_Adj.png" alt="Índice Nacional de Precios al Consumidor ($INPC_t$) y su serie desestacionalizada utilizando un proceso X13-ARIMA-SEATS" width="95%"><p class="caption">
-Figure 5.1: Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) y su serie desestacionalizada utilizando un proceso X13-ARIMA-SEATS
+Figure 4.1: Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) y su serie desestacionalizada utilizando un proceso X13-ARIMA-SEATS
 </p>
 </div>
 El mismo procesamiento puede ser seguido para todas las series que busquemos analizar. En particular, en adelante, además del INPC que incluimos en la lista, utilzaremos las siguientes series, así como su versión desestacionalizada:
 </div>
-<div id="filtro-hodrick-prescott" class="section level2" number="5.2">
+<div id="filtro-hodrick-prescott" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">5.2</span> Filtro Hodrick-Prescott<a class="anchor" aria-label="anchor" href="#filtro-hodrick-prescott"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Filtro Hodrick-Prescott<a class="anchor" aria-label="anchor" href="#filtro-hodrick-prescott"><i class="fas fa-link"></i></a>
 </h2>
 <p>Como último tema de los procesos univariados y que no necesariamente aplican a series estacionarias, a continuación desarrollaremos el procedimiento conocido como filtro de Hodrick y Prescott (1997). El trabajo de estos autores era determinar una técnica de regresión que permitiera utilizar series agregadas o macroeconómicas para separarlas en dos componentes: uno de ciclo de negocios y otro de tendencia. En su trabajo orignal Hodrick y Prescott (1997) utilizaron datos trimestrales de alguna series como el Gross Domestic Product (GNP, por sus siglas enn Inglés), los agregados montearios M1, empleo, etc., de los Estados Unidos que fueron observados posteriormente a la Segunda Guerra Mundial.</p>
 <p>El marco conceptual de Hodrick y Prescott (1997) parte de suponer una serie <span class="math inline">\(X_t\)</span> que se puede descomponer en la suma de componente de crecimiento tendencial, <span class="math inline">\(g_t\)</span>, y su componente de ciclio de negocios, <span class="math inline">\(c_t\)</span>, de esta forma para <span class="math inline">\(t = 1, 2, \ldots, T\)</span> tenemos que:
@@ -107,13 +106,13 @@ El mismo procesamiento puede ser seguido para todas las series que busquemos ana
 \end{equation}\]</span></p>
 Donde <span class="math inline">\(\Delta g_t = g_t - g_{t-1}\)</span> y <span class="math inline">\(\Delta g_{t-1} = g_{t-1} - g_{t-2}\)</span>; <span class="math inline">\(c_t = X_t - g_t\)</span>, y el parámetro <span class="math inline">\(\lambda\)</span> es un número positivo que penaliza la variabilidad en el crecimiento de las series. De acuerdo con el trabajo de Hodrick y Prescott (1997) la constante <span class="math inline">\(\lambda\)</span> debe tomar valores especificos de acuerdo con la periodicidad de la series. Así, <span class="math inline">\(\lambda\)</span> será:
 <p>En resumen, podemos decir que el filtro de Hodrick y Prescott (1997) es un algoritmo que mimiza las distancias o variaciones de la trayectoria de largo plazo. De esta forma, determina una trayectoria estable de largo plazo, por lo que las desviaciones respecto de esta trayectoria serán componentes de ciclos de negocio o cambios transitorios (tanto positivos como negativos).</p>
-<p>A contiuación, ilustraremos el filtro de Hodrick y Prescott (1997) para dos series desestacionalizadas: <span class="math inline">\(INPC_t\)</span> y <span class="math inline">\(TC_t\)</span>. Las Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig52">5.2</a> y Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig53">5.3</a> muestran los resultados de la implementación del filtro.</p>
+<p>A contiuación, ilustraremos el filtro de Hodrick y Prescott (1997) para dos series desestacionalizadas: <span class="math inline">\(INPC_t\)</span> y <span class="math inline">\(TC_t\)</span>. Las Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig52">4.2</a> y Figura <a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html#fig:fig53">4.3</a> muestran los resultados de la implementación del filtro.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_INPC_HP.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig52"></span>
 <img src="Plots/G_INPC_HP.png" alt="Descomposición del Índice Nacional de Precios al Consumidor ($INPC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)" width="95%"><p class="caption">
-Figure 5.2: Descomposición del Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)
+Figure 4.2: Descomposición del Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)
 </p>
 </div>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
@@ -121,12 +120,12 @@ Figure 5.2: Descomposición del Índice Nacional de Precios al Consumidor (<span
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig53"></span>
 <img src="Plots/G_TC_HP.png" alt="Descomposición del Tipo de Cambio FIX ($TC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)" width="95%"><p class="caption">
-Figure 5.3: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(TC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)
+Figure 4.3: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(TC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott (1997)
 </p>
 </div>
-<div id="filtro-hodrick-prescott-planteado-por-st-amant-van-norden" class="section level3" number="5.2.1">
+<div id="filtro-hodrick-prescott-planteado-por-st-amant-van-norden" class="section level3" number="4.2.1">
 <h3>
-<span class="header-section-number">5.2.1</span> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden<a class="anchor" aria-label="anchor" href="#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2.1</span> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden<a class="anchor" aria-label="anchor" href="#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><i class="fas fa-link"></i></a>
 </h3>
 <p>Método tradicional de HP consiste en minimizar la serie <span class="math inline">\(\{ \tau_t \}_{t=-1}^T\)</span>:</p>
 <p><span class="math display">\[\sum_{t=1}^T (y_t - \tau_t)^2 + \lambda \sum_{t=1}^{T} [(\tau_{t} - \tau_{t-1}) - (\tau_{t-1} - \tau_{t-2})]^2\]</span></p>
@@ -193,15 +192,15 @@ Figure 5.3: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></div>
-<div class="next"><a href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></div>
+<div class="prev"><a href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></div>
+<div class="next"><a href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#desestacionalizaci%C3%B3n-y-filtrado-de-series"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
-<li><a class="nav-link" href="#motivaci%C3%B3n"><span class="header-section-number">5.1</span> Motivación</a></li>
+<li><a class="nav-link" href="#desestacionalizaci%C3%B3n-y-filtrado-de-series"><span class="header-section-number">4</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="nav-link" href="#motivaci%C3%B3n"><span class="header-section-number">4.1</span> Motivación</a></li>
 <li>
-<a class="nav-link" href="#filtro-hodrick-prescott"><span class="header-section-number">5.2</span> Filtro Hodrick-Prescott</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><span class="header-section-number">5.2.1</span> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden</a></li></ul>
+<a class="nav-link" href="#filtro-hodrick-prescott"><span class="header-section-number">4.2</span> Filtro Hodrick-Prescott</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><span class="header-section-number">4.2.1</span> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden</a></li></ul>
 </li>
 </ul>
 
@@ -219,7 +218,7 @@ Figure 5.3: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-08-05.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-12-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

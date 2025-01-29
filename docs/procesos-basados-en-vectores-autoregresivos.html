@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo</title>
+<title>Chapter 5 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo</title>
 <meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
 <meta name="description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo">
+<meta property="og:title" content="Chapter 5 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo">
 <meta property="og:type" content="book">
 <meta property="og:description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo">
+<meta name="twitter:title" content="Chapter 5 Procesos Basados en Vectores Autoregresivos | Notas de Clase: Series de Tiempo">
 <meta name="twitter:description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -44,17 +44,16 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
-<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
-<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
-<li><a class="active" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
-<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
-<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
-<li><a class="" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
-<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></li>
+<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">4</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="active" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">6</span> Procesos No Estacionarios</a></li>
+<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">7</span> Cointegración</a></li>
+<li><a class="" href="modelos-adrl.html"><span class="header-section-number">8</span> Modelos ADRL</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">9</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">10</span> Modelos de Datos Panel</a></li>
+<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">11</span> Otros Modelos de Series de Tiempo No lineales</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,14 +61,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="procesos-basados-en-vectores-autoregresivos" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="procesos-basados-en-vectores-autoregresivos" class="section level1" number="5">
 <h1>
-<span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos<a class="anchor" aria-label="anchor" href="#procesos-basados-en-vectores-autoregresivos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos<a class="anchor" aria-label="anchor" href="#procesos-basados-en-vectores-autoregresivos"><i class="fas fa-link"></i></a>
 </h1>
 <p>En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más series. Como primer aproximación desarrollaremos el concepto de Causalidad de Granger. Mediante esta metodología discutiremos cuando dos series se causan estadísticamente. Posteriormente, introduciremos una técnica más sofisticada conocida como la metodología de Vectores Autoregresivos (VAR), la cual es una generalización de los procesos Autoregresivos (AR) que analizamos al principio del curso.</p>
-<div id="causalidad-de-granger" class="section level2" number="6.1">
+<div id="causalidad-de-granger" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">6.1</span> Causalidad de Granger<a class="anchor" aria-label="anchor" href="#causalidad-de-granger"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Causalidad de Granger<a class="anchor" aria-label="anchor" href="#causalidad-de-granger"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hasta ahora hemos supuesto que una serie puede ser explicada únicamente con la información contenida en ella misma. No obstante, en adelante trataremos de analizar el caso en el que buscamos determinar relaciones entre variables y cómo el comportamiento de una serie influye en las demás. Algunas relaciones más importantes son las llamadas causalidad. En este caso analizaremos el procedimiento de Granger (1969), conocido como causalidad de Granger. En adelante asumiremos que las series involucradas son debílmente estacionarias.</p>
 <p>Sean <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> dos series debílmente estacionarias. Definamos a <span class="math inline">\(I_t\)</span> un conjunto de toda la información disponible hasta el momento <span class="math inline">\(t\)</span>. Asimismo, digamos que <span class="math inline">\(\overline{X}_t\)</span> y <span class="math inline">\(\overline{Y}_t\)</span> son los conjuntos de toda la información disponible (actual y pasada) de <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, respectivamente. Es decir:
@@ -97,7 +96,7 @@ La definición anterior aplica de igual forma si se reemplaza a <span class="mat
     \begin{bmatrix}
     V_t \\ U_t
     \end{bmatrix}
-    \tag{6.1}
+    \tag{5.1}
 \end{equation}\]</span></p>
 <p>O en su versión <span class="math inline">\(MA(q)\)</span> con variables exógenas:
 <span class="math display">\[\begin{equation}
@@ -117,7 +116,7 @@ La definición anterior aplica de igual forma si se reemplaza a <span class="mat
     V_t \\ U_t
     \end{bmatrix}
 \end{equation}\]</span></p>
-<p>Para determinar el test de causalidad utilizaremos una especificación similar a la de la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:GrangerEq">(6.1)</a>. Para probar si <span class="math inline">\(X\)</span> causa a <span class="math inline">\(Y\)</span> consideraremos la siguiente regresión:
+<p>Para determinar el test de causalidad utilizaremos una especificación similar a la de la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:GrangerEq">(5.1)</a>. Para probar si <span class="math inline">\(X\)</span> causa a <span class="math inline">\(Y\)</span> consideraremos la siguiente regresión:
 <span class="math display">\[\begin{equation}
     Y_t = \alpha_0 + \sum^{k_1}_{k = 1} a^k_{11} Y_{t-k} + \sum^{k_2}_{k = k_0} a^k_{12} X_{t-k} + U_{1,t}
 \end{equation}\]</span></p>
@@ -126,7 +125,7 @@ La definición anterior aplica de igual forma si se reemplaza a <span class="mat
 <span class="math display">\[\begin{equation}
     H_0: a^1_{12} = a^2_{12} = \ldots = a^{k2}_{12} = 0
 \end{equation}\]</span></p>
-<p>Ahora veámos un ejemplo. Consideremos como variables analizadas al Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>), al Tipo de Cambio (<span class="math inline">\(TDC_t\)</span>) y al rendimiento anual de los Cetes a 28 días (<span class="math inline">\(CETE28_t\)</span>), todas desestacionalizadas para el periodo de enero de 2000 a julio de 2019. Dado que la metodología de Granger supone que las series son estacionarias, utilizaremos las diferencias logaritmicas de cada una de las tres series (es decir, utilizaremos una transformación del tipo <span class="math inline">\(ln(X_t) - ln(X_{t-1})\)</span>). La Figura <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig61">6.1</a> muestra las series en su transformación de diferencias logarítmicas.</p>
+<p>Ahora veámos un ejemplo. Consideremos como variables analizadas al Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>), al Tipo de Cambio (<span class="math inline">\(TDC_t\)</span>) y al rendimiento anual de los Cetes a 28 días (<span class="math inline">\(CETE28_t\)</span>), todas desestacionalizadas para el periodo de enero de 2000 a julio de 2019. Dado que la metodología de Granger supone que las series son estacionarias, utilizaremos las diferencias logaritmicas de cada una de las tres series (es decir, utilizaremos una transformación del tipo <span class="math inline">\(ln(X_t) - ln(X_{t-1})\)</span>). La Figura <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig61">5.1</a> muestra las series en su transformación de diferencias logarítmicas.</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -186,17 +185,17 @@ La definición anterior aplica de igual forma si se reemplaza a <span class="mat
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig61"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig61-1.png" alt="Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$." width="672"><p class="caption">
-Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
+Figure 5.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
 </p>
 </div>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
-<p>Por simplicidad, en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:Granger">6.1</a> se muestra el resultado de aplicar el test de Granger a diferentes especificaciones, con rezagos 4, 8, 12 y 16, sólo para la serie de Tipo de Cambio en diferencias logarítmicas. En cada una de las pruebas se compara el modelo considerado como regresor a la variable que es candidata de causar, respecto del modelo si considerar a dicha variable.</p>
+<p>Por simplicidad, en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:Granger">5.1</a> se muestra el resultado de aplicar el test de Granger a diferentes especificaciones, con rezagos 4, 8, 12 y 16, sólo para la serie de Tipo de Cambio en diferencias logarítmicas. En cada una de las pruebas se compara el modelo considerado como regresor a la variable que es candidata de causar, respecto del modelo si considerar a dicha variable.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:Granger">Table 6.1: </span> Prueba de si <span class="math inline">\(DLINPC_t\)</span> Granger causa a <span class="math inline">\(DLTC_t\)</span>.</caption>
+<span id="tab:Granger">Table 5.1: </span> Prueba de si <span class="math inline">\(DLINPC_t\)</span> Granger causa a <span class="math inline">\(DLTC_t\)</span>.</caption>
 <thead><tr class="header">
 <th align="center">Rezagos</th>
 <th align="center">Estadiística F</th>
@@ -248,11 +247,11 @@ Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresi
 </tr>
 </tbody>
 </table></div>
-<p>De acuerdo con el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:Granger">6.1</a>, podemos concluir que existe información estadísticamente significativa para concluir que la inflación causa a la tasa de depreciación cambiaria, ambas medidas como las diferencias logaritmicas. El resto de los resultados para las otras combinaciones de causalidad se encuentran en el R Markdown llamado Clase 13 ubicado en el repositorio de GitHub.</p>
+<p>De acuerdo con el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:Granger">5.1</a>, podemos concluir que existe información estadísticamente significativa para concluir que la inflación causa a la tasa de depreciación cambiaria, ambas medidas como las diferencias logaritmicas. El resto de los resultados para las otras combinaciones de causalidad se encuentran en el R Markdown llamado Clase 13 ubicado en el repositorio de GitHub.</p>
 </div>
-<div id="definición-y-representación-del-sistema-o-modelo-varp" class="section level2" number="6.2">
+<div id="definición-y-representación-del-sistema-o-modelo-varp" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">6.2</span> Definición y representación del Sistema o Modelo VAR(p)<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-varp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Definición y representación del Sistema o Modelo VAR(p)<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-varp"><i class="fas fa-link"></i></a>
 </h2>
 <p>En esta sección ampliaremos la discusión planteada en el apartado anterior. En el sentido de que en la sección pasada nuestra discusión se limito al análisis de causalidad entre dos variables a la vez, que si bien es posible extenderlo a más variables es un procedimiento limitado a casos particulares por las siguientes razones.</p>
 <p>El procediento de causalidad de Granger supone que es posible identificar un sistema de ecuaciones que debe conformarse una vez que se ha identificado el sentido de la causalidad. Así, el proceso anterior necesita del conocimiento previo de las relaciones que existen entre las varibles.</p>
@@ -262,10 +261,10 @@ Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresi
 <p>Ahora bien, iniciaremos con el establecimiento de la representación del proceso. Digamos que tenemos un proceso estocástico <span class="math inline">\(\mathbf{X}\)</span> estacionario de dimensión <span class="math inline">\(k\)</span>. De esta forma la expresión reducida del modelo o el proceso <span class="math inline">\(VAR(p)\)</span> estará dado por:
 <span class="math display" id="eq:VARp">\[\begin{equation}
     \mathbf{X}_t = \mathbf{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
-    \tag{6.2}
+    \tag{5.2}
 \end{equation}\]</span></p>
 <p>Donde cada uno de las <span class="math inline">\(A_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, p\)</span>, son matrices cuadradas de dimensión <span class="math inline">\(k\)</span> y <span class="math inline">\(\mathbf{U}_t\)</span> representa un vector de dimensión <span class="math inline">\(k \times 1\)</span> con los residuales en el momento del tiempo <span class="math inline">\(t\)</span> que son un proceso pueramente aleatorio. También se incorpora un vector de términos constantes denominado como <span class="math inline">\(\mathbf{\delta}\)</span>, el cual es de dimensión <span class="math inline">\(k \times 1\)</span>.</p>
-<p>Así, la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> supone la siguiente estructura de vectores:
+<p>Así, la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(5.2)</a> supone la siguiente estructura de vectores:
 <span class="math display">\[\begin{equation*}
     \mathbf{X}_t =
     \begin{bmatrix}
@@ -285,20 +284,20 @@ Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresi
     \delta_{1} \\ \delta_{2} \\ \vdots \\ \delta_{k}
     \end{bmatrix}
 \end{equation*}\]</span></p>
-<p>También, la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> supone que cada matriz <span class="math inline">\(A_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, p\)</span>, esta definida de la siguiente forma:
+<p>También, la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(5.2)</a> supone que cada matriz <span class="math inline">\(A_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, p\)</span>, esta definida de la siguiente forma:
 <span class="math display">\[\begin{equation*}
     \mathbf{A}_i =
     \begin{bmatrix}
     a^{(i)}_{11} &amp; a^{(i)}_{12} &amp; \ldots &amp; a^{(i)}_{1k} \\ a^{(i)}_{21} &amp; a^{(i)}_{22} &amp; \ldots &amp; a^{(i)}_{2k} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a^{(i)}_{k1} &amp; a^{(i)}_{k2} &amp; \ldots &amp; a^{(i)}_{kk}
     \end{bmatrix}
 \end{equation*}\]</span></p>
-<p>Retomando la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> y considerando que podemos ocupar el operador rezago <span class="math inline">\(L^j\)</span> de forma analóga al caso del modelo <span class="math inline">\(AR(p)\)</span>, pero aplicado a un vector, tenemos las siguientes ecuaciones:
+<p>Retomando la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(5.2)</a> y considerando que podemos ocupar el operador rezago <span class="math inline">\(L^j\)</span> de forma analóga al caso del modelo <span class="math inline">\(AR(p)\)</span>, pero aplicado a un vector, tenemos las siguientes ecuaciones:
 <span class="math display" id="eq:VARCorto">\[\begin{eqnarray}
     \mathbf{X}_t - A_1 \mathbf{X}_{t-1} - A_2 \mathbf{X}_{t-2} - \ldots - A_p \mathbf{X}_{t-p} &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
     \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t-p} &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
     (I_k - A_1 L - A_2 L^2 - \ldots - A_p L^p) \mathbf{X}_t &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t} \nonumber \\
     \mathbf{A}(L) \mathbf{X}_t &amp; = &amp; \mathbf{\delta} + \mathbf{U}_{t}
-    \tag{6.3}
+    \tag{5.3}
 \end{eqnarray}\]</span></p>
 <p>Adicionalmente, requeriremos que dado que <span class="math inline">\(\mathbf{U}_t\)</span> es un proceso pueramente aleatorio, este debe cumplir con las siguientes condiciones:</p>
 <ol style="list-style-type: decimal">
@@ -332,7 +331,7 @@ Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresi
    \rho_{k1} &amp; \rho_{k2} &amp; \ldots &amp; \sigma^2_k
    \end{bmatrix} \nonumber \\
    &amp; = &amp; \mathbf{\Sigma}_{UU}
-   \tag{6.4}
+   \tag{5.4}
   \end{eqnarray}\]</span></p></li>
 <li><p>La matriz de varianzas y covarianzas no comtemporáneas es nula. Es decir, que para todo <span class="math inline">\(t \neq s\)</span>:
 <span class="math display" id="eq:RhoVAR">\[\begin{eqnarray}
@@ -354,27 +353,27 @@ Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresi
     U^{(t)}_{k} U^{(s)}_{1} &amp; U^{(t)}_{k} U^{(s)}_{2} &amp; \ldots &amp; U^{(t)}_{k} U^{(s)}_{k}
     \end{bmatrix} \nonumber \\
     &amp; = &amp; \mathbf{0}
-    \tag{6.5}
+    \tag{5.5}
 \end{eqnarray}\]</span></p></li>
 </ol>
-<p>Las ecuaciones <a href="procesos-basados-en-vectores-autoregresivos.html#eq:SigmaVAR">(6.4)</a> y <a href="procesos-basados-en-vectores-autoregresivos.html#eq:RhoVAR">(6.5)</a> significan que los residuales <span class="math inline">\(\mathbf{U}_t\)</span> pueden estar correlacionados entre ellos solo en el caso de que la información sea contemporánea, pero no tienen información en común entre residuales de otros periodos.</p>
-<p>Al igual que en el caso del modelo o especificación <span class="math inline">\(AR(p)\)</span> en la especificación del modelo <span class="math inline">\(VAR(p)\)</span> existen condiciones de estabilidad. Dichas condiciones están dadas por lo siguiente, definamos el siguiente polinomio que resulta de tomar la matriz <span class="math inline">\(\mathbf{A}(L)\)</span> en la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARCorto">(6.3)</a>:
+<p>Las ecuaciones <a href="procesos-basados-en-vectores-autoregresivos.html#eq:SigmaVAR">(5.4)</a> y <a href="procesos-basados-en-vectores-autoregresivos.html#eq:RhoVAR">(5.5)</a> significan que los residuales <span class="math inline">\(\mathbf{U}_t\)</span> pueden estar correlacionados entre ellos solo en el caso de que la información sea contemporánea, pero no tienen información en común entre residuales de otros periodos.</p>
+<p>Al igual que en el caso del modelo o especificación <span class="math inline">\(AR(p)\)</span> en la especificación del modelo <span class="math inline">\(VAR(p)\)</span> existen condiciones de estabilidad. Dichas condiciones están dadas por lo siguiente, definamos el siguiente polinomio que resulta de tomar la matriz <span class="math inline">\(\mathbf{A}(L)\)</span> en la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARCorto">(5.3)</a>:
 <span class="math display">\[\begin{equation}
     Det[I_t - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
 \end{equation}\]</span></p>
 <p>Donde las raíces del polinomio cumplen que <span class="math inline">\(|z| \leq 1\)</span>, es decir, se ubican dentro del circulo unitario.</p>
-<p>La ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARCorto">(6.3)</a> puede ser rexpresada en una forma similar al un proceso de MA. Al respecto, de forma similar a la siguiente ecuación podemos construir un modelo <span class="math inline">\(VARMA(p,q)\)</span>, el cual no estudiamos es este curso.</p>
+<p>La ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARCorto">(5.3)</a> puede ser rexpresada en una forma similar al un proceso de MA. Al respecto, de forma similar a la siguiente ecuación podemos construir un modelo <span class="math inline">\(VARMA(p,q)\)</span>, el cual no estudiamos es este curso.</p>
 <p>Reromando el primer planteamiento, podemos escribir:
 <span class="math display" id="eq:VARMAq">\[\begin{eqnarray}
     \mathbf{X}_t &amp; = &amp; \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
     &amp; = &amp; \mu + \beta(L) \mathbf{U}_t
-    \tag{6.6}
+    \tag{5.6}
 \end{eqnarray}\]</span></p>
 <p>Por el lado de las matrices que representan la autocovarianza, estás resultan de resolver lo siguiente:
 <span class="math display">\[\begin{equation}
     \Gamma_X(\tau) = E[(\mathbf{X}_t - \mu)(\mathbf{X}_{t-\tau} - \mu)']
 \end{equation}\]</span></p>
-<p>Ahora, sin pérdida de generalidad digamos que la especificación VAR(p) en la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(6.2)</a> no tiene constante, por lo que <span class="math inline">\(\delta = 0\)</span>, lo que implica que <span class="math inline">\(\mu = 0\)</span>. De esta forma las matrices de autocovarianza resultan de:
+<p>Ahora, sin pérdida de generalidad digamos que la especificación VAR(p) en la ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARp">(5.2)</a> no tiene constante, por lo que <span class="math inline">\(\delta = 0\)</span>, lo que implica que <span class="math inline">\(\mu = 0\)</span>. De esta forma las matrices de autocovarianza resultan de:
 <span class="math display">\[\begin{eqnarray*}
     \Gamma_X(\tau) &amp; = &amp; E[(\mathbf{X}_t)(\mathbf{X}_{t-\tau})'] \\
     &amp; = &amp; A_1 E[(\mathbf{X}_{t-1})(\mathbf{X}_{t-\tau})'] + A_2 E[(\mathbf{X}_{t-2})(\mathbf{X}_{t-\tau})'] \\
@@ -410,7 +409,7 @@ Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresi
             \end{bmatrix}
             \right]
         \end{equation*}\]</span></p>
-<p>Ahora veámos un ejemplo de estimación de <span class="math inline">\(VAR(p)\)</span>. Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción Industrial de los Estados Unidos, todas desestacionalizadas y para el período de enero de 2000 a julio de 2019. Dado que el supuesto estacionariedad sigue presente en nuestro análisis, emplearemos cada una de las series en su versión de diferencias logaritmicas. Las Figuras <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig62">6.2</a> y <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig63">6.3</a> muestra las series referidas.</p>
+<p>Ahora veámos un ejemplo de estimación de <span class="math inline">\(VAR(p)\)</span>. Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción Industrial de los Estados Unidos, todas desestacionalizadas y para el período de enero de 2000 a julio de 2019. Dado que el supuesto estacionariedad sigue presente en nuestro análisis, emplearemos cada una de las series en su versión de diferencias logaritmicas. Las Figuras <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig62">5.2</a> y <a href="procesos-basados-en-vectores-autoregresivos.html#fig:fig63">5.3</a> muestra las series referidas.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -463,7 +462,7 @@ Figure 6.1: Series en diferencias logarítmicas dadas por las siguientes expresi
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig62"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig62-1.png" alt="Series en diferencias logarítmicas (Forma 1)" width="672"><p class="caption">
-Figure 6.2: Series en diferencias logarítmicas (Forma 1)
+Figure 5.2: Series en diferencias logarítmicas (Forma 1)
 </p>
 </div>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
@@ -473,14 +472,14 @@ Figure 6.2: Series en diferencias logarítmicas (Forma 1)
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig63"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig63-1.png" alt="Series en diferencias logarítmicas (Forma 2)" width="672"><p class="caption">
-Figure 6.3: Series en diferencias logarítmicas (Forma 2)
+Figure 5.3: Series en diferencias logarítmicas (Forma 2)
 </p>
 </div>
 <p>Dicho lo anterior, a continuación mostraremos la tabla que resume el valor de los distintos criterios de información una especificación de un <span class="math inline">\(VAR(p)\)</span> con constante. Notése que es posible especificar un <span class="math inline">\(VAR(p)\)</span> con tendencia, caso que no aplica hasta este momento, ya que nuestro análisis de estacionariedad es claro respecto a la media constante (más adelante relajaremos este supuesto), lo cual elimina la poisiblidad de incluir una tendencia.</p>
-<p>En el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:SelectVAR">6.2</a> reportamos los resultados de aplicar una prueba de criterios de información para diferentes valores de reagos. Del cual se concluye que el número óptimo de residuales es 2 (según el crietrio AIC y el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es una buena práctica utilizarlo como referente principal.</p>
+<p>En el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:SelectVAR">5.2</a> reportamos los resultados de aplicar una prueba de criterios de información para diferentes valores de reagos. Del cual se concluye que el número óptimo de residuales es 2 (según el crietrio AIC y el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es una buena práctica utilizarlo como referente principal.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:SelectVAR">Table 6.2: </span> Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
+<span id="tab:SelectVAR">Table 5.2: </span> Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
 <thead><tr class="header">
 <th align="center">Rezagos</th>
 <th align="center">AIC</th>
@@ -519,10 +518,10 @@ Figure 6.3: Series en diferencias logarítmicas (Forma 2)
 </tr>
 </tbody>
 </table></div>
-<p>De esta forma, justificamos la estimación de un <span class="math inline">\(VAR(2)\)</span>. Los resultados del mismo se repotartan en los siguientes cuadros, en los que se reporta el resultado de una de las ecuaciones. Los resultados restantes se encuentran en el Scrip Clase 14 que se encuentra en repositorio de GitHub. Primero mostraremos los resutlados de las raíces del polinomio caracteristico en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:RootsVAR">6.3</a>, seguido de un cuadro para la ecuación del IGAE en el Cuadro @ref(tab:IGAE_VAR) (por simplicidad se omiten las otras cuatro ecuaciones del VAR(2)), y del Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:SigmaVARp">6.5</a> con la matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR.</p>
+<p>De esta forma, justificamos la estimación de un <span class="math inline">\(VAR(2)\)</span>. Los resultados del mismo se repotartan en los siguientes cuadros, en los que se reporta el resultado de una de las ecuaciones. Los resultados restantes se encuentran en el Scrip Clase 14 que se encuentra en repositorio de GitHub. Primero mostraremos los resutlados de las raíces del polinomio caracteristico en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:RootsVAR">5.3</a>, seguido de un cuadro para la ecuación del IGAE en el Cuadro @ref(tab:IGAE_VAR) (por simplicidad se omiten las otras cuatro ecuaciones del VAR(2)), y del Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:SigmaVARp">5.5</a> con la matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:RootsVAR">Table 6.3: </span> Raíces del polinomio característico de un VAR(2).</caption>
+<span id="tab:RootsVAR">Table 5.3: </span> Raíces del polinomio característico de un VAR(2).</caption>
 <thead><tr class="header">
 <th align="center">Rezagos</th>
 <th align="center">AIC</th>
@@ -549,7 +548,7 @@ Figure 6.3: Series en diferencias logarítmicas (Forma 2)
 </table></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:IGAEVAR">Table 6.4: </span> Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
+<span id="tab:IGAEVAR">Table 5.4: </span> Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
 <thead><tr class="header">
 <th align="center">Variable</th>
 <th align="center">Coeficiente</th>
@@ -660,7 +659,7 @@ Figure 6.3: Series en diferencias logarítmicas (Forma 2)
 </table></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:SigmaVARp">Table 6.5: </span> Matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR(2).</caption>
+<span id="tab:SigmaVARp">Table 5.5: </span> Matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR(2).</caption>
 <tbody>
 <tr class="odd">
 <td align="center"></td>
@@ -712,10 +711,10 @@ Figure 6.3: Series en diferencias logarítmicas (Forma 2)
 </tr>
 </tbody>
 </table></div>
-<p>Finalmente, en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:DiagnosVAR">6.6</a> reportamos las pruebas de diagnóstico del VAR(2). Incluímos las pruebas de normalidad, autocorrelación parcial y de heterocedásticidad.</p>
+<p>Finalmente, en el Cuadro <a href="procesos-basados-en-vectores-autoregresivos.html#tab:DiagnosVAR">5.6</a> reportamos las pruebas de diagnóstico del VAR(2). Incluímos las pruebas de normalidad, autocorrelación parcial y de heterocedásticidad.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:DiagnosVAR">Table 6.6: </span> Pruebas de diagnóstico sobre los residuales del VAR(2).</caption>
+<span id="tab:DiagnosVAR">Table 5.6: </span> Pruebas de diagnóstico sobre los residuales del VAR(2).</caption>
 <colgroup>
 <col width="25%">
 <col width="25%">
@@ -1023,11 +1022,11 @@ Figure 6.3: Series en diferencias logarítmicas (Forma 2)
 ## data:  Residuals of VAR object VAR_p
 ## Chi-squared = 2122.4, df = 1350, p-value &lt; 0.00000000000000022</code></pre>
 </div>
-<div id="análisis-de-impulso-respuesta" class="section level2" number="6.3">
+<div id="análisis-de-impulso-respuesta" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">6.3</span> Análisis de Impulso-Respuesta<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-de-impulso-respuesta"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Análisis de Impulso-Respuesta<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-de-impulso-respuesta"><i class="fas fa-link"></i></a>
 </h2>
-<p>Una de las grandes ventajas que aporta el análisis de los modelos VAR es el análisis de Impulso-Respuesta. Dicho análisis busca cuantificar el efecto que tiene en <span class="math inline">\(\mathbf{X}_t\)</span> una innovación o cambio en los residuales de cualquiera de las variables en un momento definido. Partamos dela ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARMAq">(6.6)</a> de forma que tenemos:
+<p>Una de las grandes ventajas que aporta el análisis de los modelos VAR es el análisis de Impulso-Respuesta. Dicho análisis busca cuantificar el efecto que tiene en <span class="math inline">\(\mathbf{X}_t\)</span> una innovación o cambio en los residuales de cualquiera de las variables en un momento definido. Partamos dela ecuación <a href="procesos-basados-en-vectores-autoregresivos.html#eq:VARMAq">(5.6)</a> de forma que tenemos:
 <span class="math display">\[\begin{eqnarray}
     \mathbf{X}_t &amp; = &amp; \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
     &amp; = &amp; \mu + \mathbf{B}(L) \mathbf{U}_t \nonumber \\
@@ -1295,31 +1294,31 @@ Figure 6.3: Series en diferencias logarítmicas (Forma 2)
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-1"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-1.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 6.4: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figure 5.4: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-2"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-2.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 6.5: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figure 5.5: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-3"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-3.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 6.6: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figure 5.6: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-4"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-4.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 6.7: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figure 5.7: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-5"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-5.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 6.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figure 5.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <p>Los resultados muestran que la respuesta de <span class="math inline">\(DLTC_t\)</span> ante impulsos en los términos de error fue estadísticamente significativo sólo para alguunos de los casos y en periodos cortos de tiempo. El resto de los resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase 15 que se ubica en el repositorio de GitHub.</p>
@@ -1327,15 +1326,15 @@ Figure 6.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></div>
-<div class="next"><a href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></div>
+<div class="prev"><a href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">4</span> Desestacionalización y filtrado de Series</a></div>
+<div class="next"><a href="procesos-no-estacionarios.html"><span class="header-section-number">6</span> Procesos No Estacionarios</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#procesos-basados-en-vectores-autoregresivos"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
-<li><a class="nav-link" href="#causalidad-de-granger"><span class="header-section-number">6.1</span> Causalidad de Granger</a></li>
-<li><a class="nav-link" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-varp"><span class="header-section-number">6.2</span> Definición y representación del Sistema o Modelo VAR(p)</a></li>
-<li><a class="nav-link" href="#an%C3%A1lisis-de-impulso-respuesta"><span class="header-section-number">6.3</span> Análisis de Impulso-Respuesta</a></li>
+<li><a class="nav-link" href="#procesos-basados-en-vectores-autoregresivos"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="nav-link" href="#causalidad-de-granger"><span class="header-section-number">5.1</span> Causalidad de Granger</a></li>
+<li><a class="nav-link" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-varp"><span class="header-section-number">5.2</span> Definición y representación del Sistema o Modelo VAR(p)</a></li>
+<li><a class="nav-link" href="#an%C3%A1lisis-de-impulso-respuesta"><span class="header-section-number">5.3</span> Análisis de Impulso-Respuesta</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1352,7 +1351,7 @@ Figure 6.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-08-05.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-12-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

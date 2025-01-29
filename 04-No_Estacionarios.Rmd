@@ -1,0 +1,480 @@
+# Procesos No Estacionarios Univariados
+
+## Definición y formas de No Estacionariedad
+
+Hasta ahora hemos planteado una serie de técnicas de regresión (AR, MA, ARMA, ARIMA, ARIMAX, etc.) que aplican sólo a procesos o series estacionarias. Sin embargo, no hemos proporcionado una prueba estadística para determinar si una serie es estacionaria. Ese es uno de los objetivos de esta sección. 
+
+Adicionalmente, en esta sección relajaremos la definición de estacionariedad y plantearemos pruebas para determinar cuándo una serie es estacionaria bajo tres diferentes especificaciones: 
+
+1. Estacionariedad alrededor de una tendencia determinística; 
+
+2. Estacionariedad alrededor de una media, y 
+
+3. Estacionariedad alrededor del cero.
+
+A continuación, discutiremos cómo es posible que una serie sea estacionaria al rededor de una tendencia determinística. Diremos que una tendencia es determinística si ésta puede ser aproximada o modelada por un polinomio en función de $t$, la cual incluye posibles transformaciones logarítmicas.
+
+Bajo este enfoque, el proceso está lejos de cumplir con la definición de estacionariedad que hemos establecido en capítulos previos, pero relajaremos el supuesto y reconoceremos que una serie puede ser estacionaria en varianza bajo una tendencia determinística. Así, diremos que la serie será descrita por una ecuación dada por:
+\begin{equation}
+    Y_t = \sum^m_{j = 0} \delta_j t^j + X_t
+    (\#eq:YTrend)
+\end{equation}
+
+Donde $X_t$ es un proceso $ARMA(p, q)$ con media cero, que se puede ver como:
+\begin{equation}
+    \alpha(L) X_t = \beta(L) U_t
+\end{equation}
+
+Entonces, los momentos y variaza de la ecuación \@ref(eq:YTrend) estarán dados por:
+\begin{equation}
+    \mathbb{E}[Y_t] = \sum^m_{j = 0} \delta_j t^j = \mu_t
+    (\#eq:ETrend)
+\end{equation}
+
+Dada la ecuación \@ref(eq:ETrend) podemos plantear la siguiente ecuación de covarianzas:
+\begin{eqnarray}
+    \mathbb{E}[(Y_t - \mu_t) \cdot (Y_{t+\tau} - \mu_{t+\tau})] & = & \mathbb{E}[X_t \cdot X_{t+\tau}] \nonumber \\
+    & = & \gamma_X(\tau)
+    (\#eq:CovTrend)
+\end{eqnarray}
+
+Utilizando el resultado de la ecuación \@ref(eq:CovTrend) podemos establecer que:
+\begin{equation}
+    \mathbb{E}[(Y_t - \mu_t)^2] = \mathbb{E}[X_t^2] = \sigma_X^2
+    (\#eq:VarTrend)
+\end{equation}
+
+Así, las ecuaciones \@ref(eq:ETrend) y \@ref(eq:VarTrend) significan que el proceso descrito por la ecuación \@ref(eq:YTrend) es estacionario pero en varianza. De esta forma, a partir de este momento diremos que una serie será estacionaria al rededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones  \@ref(eq:YTrend), \@ref(eq:ETrend) y \@ref(eq:VarTrend).
+
+Dicho lo anterior, estudiaremos el concepto de raíz unitaria de un proceso estocástico o de una serie de tiempo. Partamos de plantear que un proceso AR(1) tiene raíz unitaria cuando el coeficiente $a_1 = 1$, es decir:
+\begin{equation}
+    Y_t = Y_{t-1} + U_t
+    (\#eq:UR1)
+\end{equation}
+
+Donde $U_t$ es un proceso puramente aleatorio con media cero, varianza constante y autocovarianza cero (0), al cual nos referiremos simplemente como ruido blanco. Supongamos ahora que incluimos un término constante en la ecuación \@ref(eq:UR1), de forma que tenemos:
+\begin{equation}
+    Y_t = \delta + Y_{t-1} + U_t
+    (\#eq:UR2)
+\end{equation}
+
+Tomando a la ecuación \@ref(eq:UR2) y suponiendo que existe un valor inicial $Y_0$ de la serie, podemos plantear la siguiente secuencia de expresiones:
+\begin{eqnarray*}
+    Y_1 & = & \delta + Y_0 + U_1 \\
+    Y_2 & = & \delta + Y_1 + U_2 \\
+    & = & \delta + (\delta + Y_0 + U_1) + U_2 \\
+    & = & 2 \times \delta + Y_0 + U_1 + U_2
+\end{eqnarray*}
+
+Si repitieramos la sustitución sucesiva anterior hasta el momento $t$ encontrariamos que la ecuación de la solución general que describe a un $AR(1)$ con término constante que tiene raíz unitaria es de la forma:
+\begin{equation}
+    Y_t = t \delta + Y_0 + \sum_{i=1}^t U_i
+    (\#eq:UR3)
+\end{equation}
+
+La ecuación \@ref(eq:UR3) es equivalente a la ecuación \@ref(eq:YTrend). A la ecuación \@ref(eq:UR3) también se le conoce como proceso con Drift o con término constante, indistintamente, ya que el componente de Drift suele asociarse a la posibilidad de incorporar el efecto de los residuales pasados, lo cual es posible simplemente agregando una constante.s
+
+Si revisamos el comportamiento de sus momentos y varianza de la ecuación \@ref(eq:UR3) encontramos que:
+\begin{eqnarray*}
+    \mathbb{E}[Y_t] & = & Y_0 + \delta t = \mu_t \\
+    Var[Y_t] & = & t \sigma^2 = \gamma(0, t) \\
+    Cov(Y_t, Y_{t+\tau}) & = & (t - \tau) \sigma^2 = \gamma(t, \tau)
+\end{eqnarray*}
+
+De esta forma, la ecuación \@ref(eq:UR3) no describe un proceso estacionario, sólo podría ser estacionario si $t = 1$, en cualquier otro caso sería no estacionario en varianza. Ahora hagamos un resumen y acordemos notación que se utilizará en esta sección. Supongamos un proceso o serie de tiempo que es descrito por la siguiente ecuación:
+\begin{equation}
+    Y_t = \delta + Y_{t-1} + X_t
+    (\#eq:UR4)
+\end{equation}
+
+Donde $X_t$ es un $ARMA(p, q)$ con media cero. Si definimos a $\Delta Y_t = Y_t - Y_{t-1}$, entonces la ecuación \@ref(eq:UR4) la podemos escribir como:
+\begin{equation}
+    \Delta Y_t = \delta + X_t
+    (\#eq:UR5)
+\end{equation}
+
+A la ecuación \@ref(eq:UR5) la denominaremos como un proceso estacionario en diferencias o simplemente como un proceso integrado. Así, utilizaremos la siguiente definición.
+
+Sea un proceso estocástico $Y$, decimos que es un \textbf{proceso integrado de orden} $d$, $I(d)$, si este puede transformarse a uno estacionario, que sea invertible, mediante la diferenciación del mismo $d$-veces, es decir:
+\begin{equation}
+    (1 - L)^d Y_t = \delta + X_t
+    (\#eq:UR6)
+\end{equation}
+
+Donde $X_t$ es un proceso $ARMA(p, q)$. De lo cual se infiere que en la ecuación \@ref(eq:UR6) $Y_t$ será una $ARIMA(p, d, q)$, el cual contiene $d$ raíces unitarias. A estos procesos también se les conoce como procesos con tendencia estocástica.
+
+Dada la discusión anterior, a continuación, plantearemos un resumen de cuáles son los dos casos a los cuales nos referiremos como procesos que no son estacionarios en media, pero que sí lo son en varianza. Estos casos son:
+\begin{eqnarray}
+    Y_t & = & Y_0 + \delta t + U_t \\
+    Y_t & = & Y_0 + \delta + \sum_{i = 1}^t U_t
+\end{eqnarray}
+
+Ambos casos no son estacionarios en media, pero sí lo son en varianza. De ambos podemos decir que los choques o innovaciones del término de error tienen un efecto transitorio en el primero, pero permanentes en el segundo.
+
+## Pruebas de Raíces Unitarias
+
+En esta sección plantearemos una serie de pruebas estadísticas para determinar cuándo una serie puede ser estacionaria bajo tres posibles casos: 
+
+1. Estacionariedad alrededor de una tendencia determinística; 
+
+2. Estacionariedad alrededor de una media, y 
+
+3. Estacionariedad alrededor del cero.
+
+A continuación, mostraremos como ejemplo la aplicación de las pruebas de raíces unitarias a la serie de Tipo de Cambio en forma logarítmica y de diferencias logarítmicas. Asumamos que determinamos el valor de los rezagos de la prueba con el criterio de $p = int\{ 4 (T/100)^{1/4} \}$. En la práctica, existen otras formas de determinar el valor de $p$, como el criterio de AIC, pero es decisión del investigador cuál usar.
+
+```{r warning=FALSE, message=FALSE}
+
+library(ggplot2)
+library(dplyr)
+library(stats)
+library(MASS)
+library(strucchange)
+library(zoo)
+library(sandwich)
+library(urca)
+library(lmtest)
+library(vars)
+
+#
+load("BD/Datos_Ad.RData")
+
+#
+## Conversion a series de tiempo:
+Datos <- ts(Datos_Ad[7: 11], 
+            start = c(2000, 1), 
+            freq = 12)
+
+LDatos <- log(Datos)
+
+DLDatos <- diff(log(Datos, base = exp(1)), 
+                lag = 1, 
+                differences = 1)
+
+DaLDatos <- diff(log(Datos, base = exp(1)), 
+                 lag = 12, 
+                 differences = 1)
+
+```
+
+Como primer paso, exploraremos las series en niveles (bajo una transformación logarítmica), como en la Figura \@ref(fig:fig71), y en diferencias logarítmicas, como en la Figura \@ref(fig:fig72). De dicha exploración, podemos concluir que las series parecen estacionarias en diferencias, pero no en niveles.
+
+```{r fig71, warning=FALSE, fig.cap="Series en Logaritmos", fig.align='center'}
+
+plot(LDatos, 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     main = "Series en Logaritmos", 
+     xlab = "Tiempo")
+
+```
+
+```{r fig72, warning=FALSE, fig.cap="Series en Diferencias Logaritmicas", fig.align='center'}
+
+plot(DLDatos, 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     main = "Series en Diferencias Logaritmicas", 
+     xlab = "Tiempo")
+
+```
+
+```{r fig73, warning=FALSE, fig.cap="Series en Diferencias Anuales Logaritmicas", fig.align='center'}
+
+plot(DaLDatos, 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     main = "Series en Diferencias Anuales Logaritmicas", 
+     xlab = "Tiempo")
+
+```
+
+```{r fig74, warning=FALSE, fig.cap="Comparacion de Series en Diferencias Anuales", fig.align='center'}
+
+plot(cbind(DLDatos, DaLDatos), 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     main = "Comparacion de Series en Diferencias", 
+     xlab = "Tiempo")
+
+```
+
+```{r fig75, warning=FALSE, fig.cap="Comparacion de Series en Diferencias", fig.align='center'}
+
+plot(cbind(LDatos, DLDatos), 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     main = "Comparacion de Series en Diferencias", 
+     xlab = "Tiempo")
+
+```
+
+### Dickey - Fuller (DF)
+
+Partamos de una forma del proceso $Y_t$ dada por:
+\begin{equation}
+    Y_t = \sum_{j = 0}^m \delta_j t^j + X_t
+    (\#eq:URDFG)
+\end{equation}
+
+Donde $X_t$ es un $ARMA(p, q)$ con media cero. Esta prueba asume que $m = 1$, por lo que utilizaremos un modelo del tipo:
+\begin{equation}
+    Y_t = \alpha + \delta t + \rho Y_{t-1} + U_t
+    (\#eq:URDF)
+\end{equation}
+
+Si, el $AR(1)$ planteado tiene raíz unitaria, es decir, $\rho = 1$, entonces tendríamos:
+\begin{eqnarray*}
+    Y_t & = & \alpha + \delta t + Y_{t-1} + U_t \\
+    \Delta Y_t & = & \alpha + \delta t + U_t
+\end{eqnarray*}
+
+De esta forma, para determinar si una serie tiene raíz unitaria basta con probar la hipótesis nula de que $H_0 : \rho = 1$, junto con las diferentes combinaciones que impliquen restricciones respecto a $\delta$ y $\alpha$.
+
+En resumen, la prueba DF consiste en asumir un modelo general dado por la ecuación \@ref(eq:URDF) y probar tres especificaciones distintas que serían válidas bajo $H_0 : \rho = 1$:
+
+1. Modelo A: con intercepto y tendencia:
+  \begin{equation*}
+    \Delta Y_t = \alpha + \delta t + \beta Y_{t-1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una tendencia determinística.
+    
+2. Modelo B: con intercepto:
+  \begin{equation*}
+    \Delta Y_t = \alpha + \beta Y_{t-1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una constante.
+    
+3. Modelo C: sin intercepto y tendencia:
+  \begin{equation*}
+    \Delta Y_t = \beta Y_{t-1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.
+
+\textbf{Ejemplo}. En los siguientes mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie $LTC_t$, considerando $p = int \{ 4 (234/100)^{(1/4)} \} = 4$ para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS. La convención es implementar las pruebas de raíces unitarias iniciando con el modelo más general hasta llegar al más restringido. Es decir, iniciar con el Modelo A, pasar al Modelo B y cerrar con el Modelo C.
+
+Iniciaremos implementando una prueba de DF simple (o una ADF sin rezagos). En este caso obtenemos los resultados mostrados en la siguiente Tabla. En esta se reportan los resultados de la prueba para cada uno de los 3 modelos (A, B y C) y los valores críticos (CV, por sus siglas en inglés) de la prueba para los niveles 1\%, 5\% y 10\%--estos valores son los reportados por MacKinnon (1996) para una prueba con distribución de 1 cola (izquierda). La convención es utilizar el nivel del 5\% de significancia.
+
+Los resultados deben leerse de la siguiente forma. La siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es comparar el estadístico con el valor crítico. Así, rechazaremos la hipótesis nula en los casos en que el estadístico $t$ se ubique por encima del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+
+Table: (\#tab:DF-summary) Resumen de resultados de la prueba Dickey-Fuller (DF).
+
+| **Model**   | **Estadístico** | **1% CV** | **5% CV** | **10% CV** |
+|:------------|:----------------|:---------:|:---------:|:----------:|
+| **LTC_t**   |                 |           |           |            |
+| Modelo A    | \(t=-2.0752\)   | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
+| Modelo B    | \(t=-1.1724\)   | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
+| Modelo C    | \(t=1.1815\)    | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
+| **\(\Delta LTC_t\)** |       |           |           |            |
+| Modelo A    | \(t=-12.6805\)  | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
+| Modelo B    | \(t=-12.6899\)  | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
+| Modelo C    | \(t=-12.6515\)  | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
+
+```{r warning=FALSE}
+
+## Dickey-Fuller:
+
+### NIVELES: Tipo de cambio
+
+summary(ur.df(LDatos[, 2], type = "trend", lags = 0))
+
+summary(ur.df(LDatos[, 2], type = "drift", lags = 0))
+
+summary(ur.df(LDatos[, 2], type = "none", lags = 0))
+
+### DIFERENCIAS: Tipo de cambio
+
+summary(ur.df(DLDatos[, 2], type = "trend", lags = 0))
+
+summary(ur.df(DLDatos[, 2], type = "drift", lags = 0))
+
+summary(ur.df(DLDatos[, 2], type = "none", lags = 0))
+```
+
+### Dickey - Fuller Aumentada (ADF)
+
+A diferencia de un modelo AR(1) para el caso de una prueba DF como en la ecuación \@ref(eq:URDF), en una prueba ADF se asume que el proceso es un AR(p) de la forma (por simplicidad, hemos omitido el término constante y el término de tendencia determinística):
+\begin{equation}
+    Y_t = a_1 Y_{t-1} + a_2 Y_{t-2} + \ldots + a_p Y_{t-p} + U_t
+    (\#eq:URADF)
+\end{equation}
+
+Haciendo una sustitución de términos similar a las que hemos planteado en otras secciones, podemos reexpresar la ecuación \@ref(eq:URADF) en su versión en diferencias siguiendo el proceso:
+\begin{equation}
+    Y_t = \rho Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + + \theta_{p-1} \Delta Y_{t-p+1} + U_t 
+\end{equation}
+
+Donde $\rho = \theta_0 = \sum_{j = 1}^p a_j$, $\theta_i = - \sum_{j = i + 1}^p a_j$, $i = 1, 2, \ldots, p-1$. Así, si el proceso AR(p) tiene raíz unitaria, entonces, veremos que:
+\begin{eqnarray*}
+    1 - a_1 - a_2 - \ldots - a_p & = & 0 \\
+    \rho & = & 1
+\end{eqnarray*}
+
+De donde podemos establecer que el modelo general de una prueba ADF será:
+\begin{equation}
+    \Delta Y_{t-1} = \alpha + \beta t + (\rho - 1) Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_k \Delta Y_{t-k} + U_t
+\end{equation}
+
+Donde $U_t$ es un proceso puramente aleatorio y $k$ es elegido de tal manera que los residuales sean un proceso puramente aleatorio. En resumen, la prueba ADF consiste en asumir un modelo general dado por la ecuación \@ref(eq:URADF), que incluya constante y tendencia, y probar tres especificaciones distintas que serían válidas bajo $H_0 : \rho = 1$:
+
+1. Modelo A: con intercepto y tendencia:
+  \begin{equation*}
+   \Delta Y_t = \alpha + \delta t + \beta Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_{p-1} \Delta Y_{t-p+1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una tendencia determinística.
+    
+2. Modelo B: con intercepto:
+  \begin{equation*}
+    \Delta Y_t = \alpha + \beta Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_{p-1} \Delta Y_{t-p+1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una constante.
+    
+3. Modelo C: sin intercepto y tendencia:
+  \begin{equation*}
+    \Delta Y_t = \beta Y_{t-1} + \theta_1 \Delta Y_{t-1} + \theta_2 \Delta Y_{t-2} + \ldots + \theta_{p-1} \Delta Y_{t-p+1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.
+
+\textbf{Ejemplo}. La siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$ de una prueba ADF. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es, al igual que en el caso anterior, comparar el estadístico con el valor crítico. Así, rechazaremos la hipótesis nula en los casos en que el estadístico $t$ se ubique por encima del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+
+Table: (\#tab:DF-summary) Resumen de resultados de la prueba Augmented Dickey-Fuller (ADF) con 5 rezagos (resultado de $p = int \{ 4 (282/100)^{(1/4)} \} = 5$).
+
+| **Model**   | **Estadístico** | **1% CV** | **5% CV** | **10% CV** |
+|:------------|:----------------|:---------:|:---------:|:----------:|
+| **LTC_t**   |                |           |           |            |
+| Modelo A    | \(t=-2.4972\)  | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
+| Modelo B    | \(t=-1.1265\)  | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
+| Modelo C    | \(t=1.0273\)   | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
+| **\(\Delta LTC_t\)** |       |           |           |            |
+| Modelo A    | \(t=-7.4125\)  | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
+| Modelo B    | \(t=-7.4034\)  | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
+| Modelo C    | \(t=-7.2639\)  | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
+
+```{r warning=FALSE}
+## Augmented Dickey - Fuller
+
+### NIVELES: Tipo de cambio
+
+summary(ur.df(LDatos[, 2], type = "trend", lags = 5))
+
+summary(ur.df(LDatos[, 2], type = "drift", lags = 5))
+
+summary(ur.df(LDatos[, 2], type = "none", lags = 5))
+
+### DIFERENCIAS: Tipo de cambio
+
+summary(ur.df(DLDatos[, 2], type = "trend", lags = 5))
+
+summary(ur.df(DLDatos[, 2], type = "drift", lags = 5))
+
+summary(ur.df(DLDatos[, 2], type = "none", lags = 5))
+
+```
+
+### Phillips - Perron (PP)
+
+Una tercera prueba es la de PP, la cual también está basada en un AR(1) descrito por la ecuación:
+\begin{equation}
+    Y_t = d \eta + \rho Y_{t-1} + U_t
+    (\#eq:URPP)
+\end{equation}
+
+Donde $d$ incluye a cualquiera de los componentes determinísticos como constante y tendencia. 
+
+Al igual que los casos pasados, la hipótesis a probar es $H_0 : \rho = 1$ contra la alternativa $H_a : | \rho | < 1$, y asumimos una estructura de MA(q) que es un término de error de la forma:
+\begin{equation}
+    U_t = \psi(L) \varepsilon_t = \psi_0 \varepsilon_t + \psi_1 \varepsilon_{t-1} + \ldots + \psi_p \varepsilon_{t-p}    
+\end{equation}
+
+Con $\varepsilon_t$ que es un ruido blanco con media cero y varianza $\sigma^2$. En este modelo se elige el valor $p$ que hace que el componente sea un MA(p). Las tablas estadísticas de PP para esta prueba pueden utilizar una estadística $Z_\tau$ o $Z_\rho$, las cuales se pueden emplear indistintamente.
+
+En resumen, la prueba PP consiste en asumir un modelo general dado por la ecuación \@ref(eq:URPP) y probar dos especificaciones distintas que serían válidas bajo $H_0 : \rho = 1$, ambas considerando un componente Drift:
+
+1. Modelo A: con intercepto y tendencia:
+  \begin{equation*}
+    Y_t = \alpha + \delta t + \rho Y_{t-1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \rho = 1$ contra $H_a : | \rho | < 1$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una tendencia determinística.
+    
+2. Modelo B: con intercepto:
+  \begin{equation*}
+    Y_t = \alpha + \rho Y_{t-1} + U_t
+  \end{equation*}
+Buscamos probar si $H_0 : \rho = 1$ contra $H_a : | \rho | < 1$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una constante.
+
+\textbf{Ejemplo}. La siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$ de una prueba PP. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es, al igual que en los casos anteriores, comparar el estadístico con el valor crítico ($Z_\alpha$ o $Z_\tau$). Así, rechazaremos la hipótesis nula en los casos en que el estadístico $Z_\alpha$ o $Z_\tau$ se ubique por encima del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+
+Table: (\#tab:PP-summary) Resumen de resultados de la prueba Phillips-Perron (PP) con 5 rezagos (resultado de $p = int \{ 4 (282/100)^{(1/4)} \} = 5$).
+
+| **Model**     | **Estadístico**    | **1% CV**     | **5% CV**     | **10% CV**     |
+|:--------------|:-------------------|:-------------:|:-------------:|:--------------:|
+| **LTC_t**     |                   |               |               |                |
+| Modelo A      | \(Z_\tau = -2.5039\)  | \(-3.994127\) | \(-3.427199\) | \(-3.136601\)  |
+| Modelo B      | \(Z_\tau = -1.2297\)  | \(-3.455219\) | \(-2.87195\)  | \(-2.572274\)  |
+| **\(\Delta LTC_t\)** |            |               |               |                |
+| Modelo A      | \(Z_\tau = -12.3906\) | \(-3.994127\) | \(-3.427199\) | \(-3.136601\)  |
+| Modelo B      | \(Z_\tau = -12.4037\) | \(-3.455219\) | \(-2.87195\)  | \(-2.572274\)  |
+
+```{r warning=FALSE}
+## PP: Phillips - Perron Test
+
+### NIVELES: Tipo de cambio
+
+summary(ur.pp(LDatos[, 2], type = "Z-tau", model = "trend", use.lag = 5))
+
+summary(ur.pp(LDatos[, 2], type = "Z-tau", model = "constant", use.lag = 5))
+
+### DIFERENCIAS: Tipo de cambio
+
+summary(ur.pp(DLDatos[, 2], type = "Z-tau", model = "trend", use.lag = 5))
+
+summary(ur.pp(DLDatos[, 2], type = "Z-tau", model = "constant", use.lag = 5))
+
+```
+
+### Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)
+
+La prueba KPSS considera que el proceso es estacionario bajo la hipótesis nula, lo cual hace una diferencia respecto de las anteriores pruebas. El modelo considerado es:
+\begin{equation}
+    Y_t = \delta t + \xi_t + U_t
+\end{equation}
+
+Donde $U_t$ es un proceso estacionario y $\xi_t$ es un ruido blanco descrito por la forma: $\xi_t = \xi_{t-1} + \varepsilon_t$, donde $\varepsilon_t$ es un proceso normalmente distribuido con media cero y varianza $\sigma^2_\varepsilon$.
+
+Así, bajo la hipótesis nula $H_0 : \sigma^2_\varepsilon = 0$, $\xi$ se vuelve una constante y el proceso puede tener una tendencia estacionaria. Dado el planteamiento de la prueba, los valores críticos al 95\% son: 
+
+1. \textbf{Modelo A}: 0.146, para un modelo con tendencia (estadístico $\tau$).
+
+2. \textbf{Modelo B}: 0.463, para un modelo con constante (estadístico $\mu$).
+
+\textbf{Ejemplo}. Finalmente, la siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$ de una prueba KPSS. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es, al igual que en los casos anteriores, comparar el estadístico con el valor crítico ($\mu$ y $\tau$). No obstante, en este caso buscaremos aceptar la hipótesis nula en los casos en que los estadísticos $\mu$ y $\tau$ se ubique por debajo del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+
+Table: (\#tab:KPSS-summary) Resumen de resultados de la prueba Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)).
+
+| **Model**     | **Estadístico** | **1% CV** | **5% CV** | **10% CV** |
+|:--------------|:----------------|:---------:|:---------:|:----------:|
+| **LTC_t**     |                |           |           |           |
+| Modelo A      | \(\tau = 0.3433\) | 0.216    | 0.146    | 0.119     |
+| Modelo B      | \(\mu = 4.429\)   | 0.739    | 0.463    | 0.347     |
+| **\(\Delta LTC_t\)** |          |           |          |           |
+| Modelo A      | \(\tau = 0.0701\) | 0.216    | 0.146    | 0.119     |
+| Modelo B      | \(\mu = 0.0801\)  | 0.739    | 0.463    | 0.347     |
+
+
+```{r warning=FALSE}
+## KPSS: 
+
+### NIVELES: Tipo de cambio
+
+summary(ur.kpss(LDatos[, 2], type = "tau"))
+
+summary(ur.kpss(LDatos[, 2], type = "mu"))
+
+### DIFERENCIAS: Tipo de cambio
+
+summary(ur.kpss(DLDatos[, 2], type = "tau"))
+
+summary(ur.kpss(DLDatos[, 2], type = "mu"))
+
+```
+

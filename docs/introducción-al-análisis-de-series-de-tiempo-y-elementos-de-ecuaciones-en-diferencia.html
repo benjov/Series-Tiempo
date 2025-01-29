@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="2.1 La naturaleza de los datos de Series de Tiempo El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="2.1 La naturaleza de los datos de Series de Tiempo El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="2.1 La naturaleza de los datos de Series de Tiempo El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="active" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="procesos-no-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
+<li><a class="" href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraci%C3%B3n-y-modelos-ardl.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, y Modelos ARDL</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia<a class="anchor" aria-label="anchor" href="#introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia"><i class="fas fa-link"></i></a>
+</h1>
+<div id="la-naturaleza-de-los-datos-de-series-de-tiempo" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> La naturaleza de los datos de Series de Tiempo<a class="anchor" aria-label="anchor" href="#la-naturaleza-de-los-datos-de-series-de-tiempo"><i class="fas fa-link"></i></a>
+</h2>
+<p>El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está expuesto a información recopilada de los mercados financieros, indicadores de empleo, índices o indicadores del nivel de producción, índices de precios, etc. En otros campos de las ciencias sociales se emplea el análisis de series de tiempo para analizar la evolución de la población, los nacimientos, o el número de personas con matrículas escolares. Finalmente, en las ciencias exactas se pueden encontrar casos como los de un epidemiólogo que puede estar interesado en el número de casos de influenza observados en algún periodo de tiempo dado y si a estos se les puede asociar con algún tipo de estacionalidad o si se trata del inicio de un fenómeno atípico.</p>
+<p>La primera aproximación que se suele tener a las series de tiempo es mediante el examen de datos puestos en una gráfica, en la cual uno de los ejes es el tiempo y el otro es el valor tomado por la variable. No obstante, en este tipo de exámenes existen dos enfoques. Por un lado, existe el enfoque de la importancia del tiempo, el cual consiste en reconocer cómo lo que sucede hoy es afectado por lo que pasó ayer o, en general, en períodos pasados, o cómo lo que pasa hoy afectará los eventos futuros. Por otro lado, existe el enfoque del análisis frecuentista o de frecuencia, mediante el cual se busca reconocer la importancia que tiene para los investigadores los ciclos –por ejemplo, ciclos estacionales, momentos de crisis económicas, etc.–</p>
+</div>
+<div id="ejemplos-y-aplicaciones-de-las-series-de-tiempo" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Ejemplos y aplicaciones de las Series de Tiempo<a class="anchor" aria-label="anchor" href="#ejemplos-y-aplicaciones-de-las-series-de-tiempo"><i class="fas fa-link"></i></a>
+</h2>
+<p>Un primer ejemplo que puede ilustrar la presencia de los dos tipos de
+enfoques antes mencionados es la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig1">2.1</a>. En esta figura se muestra la evolución del Indicador Global de la Actividad Económica (IGAE) en su versión global o del total de la economía y en su versión únicamente para las actividades primarias entre enero de 2002 y mayo de 2023.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Base_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"BD/Base_1_TimeSeries.xlsx"</span><span class="op">)</span></span>
+<span><span class="va">IGAE_2013</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Base_1</span><span class="op">$</span><span class="va">IGAE_2013</span>, start <span class="op">=</span> <span class="fl">2002</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">IGAE_PRIM_2013</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Base_1</span><span class="op">$</span><span class="va">IGAE_PRIM_2013</span>, start <span class="op">=</span> <span class="fl">2002</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> </span>
+<span><span class="va">ICC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Base_1</span><span class="op">$</span><span class="va">ICC</span>, start <span class="op">=</span> <span class="fl">2002</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">ICC_LAG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Base_1</span><span class="op">$</span><span class="va">ICC_LAG</span>, start <span class="op">=</span> <span class="fl">2002</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">IPC_BMV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Base_1</span><span class="op">$</span><span class="va">IPC_BMV</span>, start <span class="op">=</span> <span class="fl">2002</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">TDC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Base_1</span><span class="op">$</span><span class="va">TDC</span>, start <span class="op">=</span> <span class="fl">2002</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">IGAE_2013</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, ylab <span class="op">=</span> <span class="st">"Indice"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">60</span>,<span class="fl">160</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> </span>
+<span><span class="co"># Indicador Global de la Actividad Económica, Act. Prim., base 2008</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">IGAE_PRIM_2013</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"blue"</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">"Indice"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">60</span>,<span class="fl">160</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Leyenda</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"IGAE"</span>,<span class="st">"IGAE Act. Prim."</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.8</span>, </span>
+<span>       lty <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig1"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig1-1.png" alt="Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023" width="672"><p class="caption">
+Figure 2.1: Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2023
+</p>
+</div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<p>Como se puede observar, el IGAE del total de la economía muestra, principalmente, que el enfoque del tiempo es más relevante. Es decir, que existe cierta persistencia en el indicador, lo que significa que la economía crece en razón del crecimiento reportado en períodos pasados. No obstante, lo que no podemos reconocer es que los eventos futuros tienen un efecto en el desempeño de la economía hoy día. Así, no es común observar cambios abruptos del indicador, salvo por la crisis global de 2008 y la reciente crisis causada por la COVID-19.</p>
+<p>Por el contrario, el IGAE de las actividades primarias muestra una presencia significativa de la importancia de la frecuencia. No pasa desapercibido que existen muchos ciclos en la evolución del indicador. Algo que suena común en las actividades primarias, cuya producción depende de eventos que son cíclicos y que están asociados con el clima u otros factores determinantes de la oferta de productos agrícolas. Otro factor que puede influir en el indicador son elementos de demanda, más que los de oferta. Por ejemplo, el consumo de alimentos típicos de algunas temporadas del año.</p>
+<p>Como segundo ejemplo, en la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig2">2.2</a> se ilustra la evolución reciente del índice de Confianza del Consumidor (ICC) en dos de sus versiones: i) el Índice global y ii) el Índice de confianza de los consumidores cuando estos consideran la situación actual en la economía en relación el año anterior.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ICC</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, ylab <span class="op">=</span> <span class="st">"Indice"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">29</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Comando que indica a R que sin borrar la grafica anterior, </span></span>
+<span><span class="co"># grafique la siguiente.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> </span>
+<span><span class="co"># Indice ??Como considera usted la situacion economica del pais </span></span>
+<span><span class="co"># hoy en dia comparada con la de hace 12 meses?, base enero 2003</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ICC_LAG</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"blue"</span>, ylab <span class="op">=</span> <span class="st">"Indice"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">29</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Leyenda</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ICC"</span>,<span class="st">"ICC lag"</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.8</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1</span>, </span>
+<span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig2"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023" width="672"><p class="caption">
+Figure 2.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2023
+</p>
+</div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<p>Destacamos que el ICC mide las expectativas de los consumidores en razón de la información pasada y de la esperada, según dichos consumidores. Así, es probable que las dos series de tiempo exhiban un gran peso para los eventos pasados, pero a la vez, un componente –probablemente menor– del componente de frecuencia. Esto último en razón de que los consumidores suelen considerar en sus expectativas de consumo los períodos cíclicos de la economía: temporadas navideñas, pagos de colegiaturas, etc. Este segundo ejemplo también ilustra que la confianza del consumidor no necesariamente está directamente correlacionada con el desempeño de la economía.</p>
+<p>Como tercer ejemplo se muestra la evolución de dos series. La Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig3">2.3</a> ilustra el comportamiento reciente de dos indicadores que son referencia para los inversionistas. Por un lado, se ubica el índice de Precios y Cotizaciones de la BMV (IPC), el cual refleja el valor de las acciones de empresas que cotizan en la BMV y el volumen de acciones comercializadas, en conjunto. En el mundo de las finanzas se ha interpretado que el IPC refleja el rendimiento del capital promedio invertido en las empresas que cotizan en la BMV.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Indice de Precios y Cotizaciones de la Bolsa Mexicana de Valores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">IPC_BMV</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, ylab <span class="op">=</span> <span class="st">"Indice"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, main <span class="op">=</span> <span class="st">"Indice de Precios y \nCotizaciones BMV"</span><span class="op">)</span></span>
+<span><span class="co"># Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">TDC</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"blue"</span>, ylab <span class="op">=</span> <span class="st">"Pesos X Dolar"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, main <span class="op">=</span> <span class="st">"Tipo de Cambio"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig3"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023" width="672"><p class="caption">
+Figure 2.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2023
+</p>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Por otro lado, en la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig3">2.3</a> se presenta la evolución del Tipo de Cambio (TDC) –indicador financiero que se suele utilizar como medio de reserva de valor–. Esto, en razón de que el TDC es conocido como un instrumento que en momentos de crisis toma valores contracíclicos de la economía mexicana. No obstante, ambos indicadores no son comparables. Para hacerlos comparables en la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig4">2.4</a> se presentan en versión índice con una base en el primer mes de la muestra.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">IPC_BMV_I</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="va">IPC_BMV</span><span class="op">/</span><span class="va">IPC_BMV</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">TDC_I</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="va">TDC</span><span class="op">/</span><span class="va">TDC</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co"># Indice del indice de Precios y Cotizaciones de la Bolsa Mexicana </span></span>
+<span><span class="co"># de Valores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">IPC_BMV_I</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, ylab <span class="op">=</span> <span class="st">"Indice"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">740</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Comando que indica a R que sin borrar la grafica anterior, </span></span>
+<span><span class="co"># grafique la siguiente.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="co"># Indice del Tipo de Cambio para Solventar Obligaciones en </span></span>
+<span><span class="co"># Moneda Extranjera</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">TDC_I</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"blue"</span>, ylab <span class="op">=</span> <span class="st">"Indice"</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">740</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Leyenda</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Indice del IPC"</span>,<span class="st">"Indice del TDC"</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.8</span>, </span>
+<span>       lty <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig4"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig4-1.png" alt="Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos, enero de 2002 = 100), pesos por dólar, Ene.2002-May.2023 " width="672"><p class="caption">
+Figure 2.4: Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos, enero de 2002 = 100), pesos por dólar, Ene.2002-May.2023
+</p>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<p>En la perspectiva de la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig4">2.4</a> se puede apreciar que el TDC no es tan rentable, ya que una inversión en la BMV mediante el IPC, en el largo plazo, muestra más rendimientos. Asimismo, la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig4">2.4</a> ilustra que en ambas series se observa un dominio de la condición de tiempo y no uno de la frecuencia. Es decir, tanto el IPC como el TDC no responden a condiciones como ciclos o temporadas que sí son observables en actividades económicas como las
+primarias.</p>
+<p>Finalmente, la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig5">2.5</a> ilustra una característica que también resulta de gran interés en el análisis de series de tiempo: los datos de alta frecuencia y de comportamiento no regular. En la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig5">2.5</a> se muestran las diferencias logarítmicas de las series de IGAE de la actividad total, el IPC y el TDC.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Indicador Global de la Actividad Econ?mica, base 2008</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">IGAE_2013</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>     col <span class="op">=</span> <span class="st">"darkred"</span>, ylab <span class="op">=</span> <span class="st">"Var. %"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Indicador Global de la Actividad Economica"</span><span class="op">)</span> </span>
+<span><span class="co"># Indice de Precios y Cotizaciones de la Bolsa Mexicana de Valores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">IPC_BMV</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>     col <span class="op">=</span> <span class="st">"darkgreen"</span>, ylab <span class="op">=</span> <span class="st">"Var. %"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Indice de Precios y Cotizaciones BMV"</span><span class="op">)</span></span>
+<span><span class="co"># Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">TDC</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>     col <span class="op">=</span> <span class="st">"darkblue"</span>, ylab <span class="op">=</span> <span class="st">"Pesos X Dolar"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Tipo de Cambio"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig5"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023" width="672"><p class="caption">
+Figure 2.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023
+</p>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Dichas diferencias se pueden interpretar como una tasa de crecimiento de las series por las siguientes razones. Consideremos una serie de tiempo dada por <span class="math inline">\(y_t\)</span>, cuya versión logarítmica es <span class="math inline">\(ln(y_t\)</span>). De esta forma, la diferencia logarítmica está dada por la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:difflog">(2.1)</a>:</p>
+<p><span class="math display" id="eq:difflog">\[\begin{equation}
+   \Delta ln(y_t) = ln(y_t) - ln(y_{t-1}) = ln \left( \frac{y_t}{y_{t-1}} \right)
+   \tag{2.1}
+\end{equation}\]</span></p>
+<p>Ahora bien, si retomamos la definición de tasa de crecimiento (<span class="math inline">\(TC\)</span>) de una serie de tiempo <span class="math inline">\(y_t\)</span> entre el periodo <span class="math inline">\(t\)</span> y <span class="math inline">\(t-1\)</span> podemos obtener que:</p>
+<p><span class="math display" id="eq:TC">\[\begin{equation}
+    TC = \frac{y_t - y_{t-1}}{y_{t-1}} = \frac{y_t}{y_{t-1}} - 1
+    \tag{2.2}
+\end{equation}\]</span></p>
+<p>De esta forma, si tomamos el logaritmo de la expresión de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:TC">(2.2)</a> obtenemos la siguiente aproximación:</p>
+<p><span class="math display" id="eq:TCDiffLog">\[\begin{equation}
+    \frac{y_t}{y_{t-1}} -1  \approx ln \left( \frac{y_t}{y_{t-1}} \right) = ln(y_t) - ln(y_{t-1})
+    \tag{2.3}
+\end{equation}\]</span></p>
+<p>La ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:TCDiffLog">(2.3)</a> es cierta cuando los valores de <span class="math inline">\(y_t\)</span> y <span class="math inline">\(y_{t-1}\)</span> son muy parecidos, es decir, cuando las variaciones no son tan abruptas. Otra forma de interpretar la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:TCDiffLog">(2.3)</a> es que para tasas de crecimiento pequeñas, se puede utilizar como una buena aproximación a la diferencia logarítmica mostrada en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:difflog">(2.1)</a>.</p>
+<p>En la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig5">2.5</a> se reportan las diferencias logarítmicas del IGAE, IPC y TDC, todos, como una media de distintos tipos de rendimientos. Es decir, podemos decir que un capitalista promedio (suponiendo que solo puede invertir en la actividad económica, en la bolsa o en el dólar), puede observar que le es más redituable en función de sus preferencias.</p>
+<p>Notése que la dinámica de las variaciones de cada una de las series es significativamente diferente. Destaca que el TDC es una de las variables que, en general, no muestra grandes cambios a lo largo del tiempo. No obstante, se han observado cambios radicales, cuando menos en el año 2008 y durante la pandemia de COVID-19. Esta situación también se ha observado para el IPC. En cambio, el IGAE muestra un comportamiento más estable o estacionario –concepto que abordaremos más adelante–.</p>
+</div>
+<div id="ecuaciones-en-diferencia-para-procesos-deterministas" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Ecuaciones en Diferencia para procesos deterministas<a class="anchor" aria-label="anchor" href="#ecuaciones-en-diferencia-para-procesos-deterministas"><i class="fas fa-link"></i></a>
+</h2>
+<p>En las secciones previas se hizo una introducción al concepto de series de tiempo. En esta sección se pretende desarrollar la construcción de los procesos generadores de datos de las series de tiempo. En un sentido más formal, se expondrá que las series de tiempo se pueden considerar como una secuencia de variables aleatorias.</p>
+<p>Para tales efectos, se desarrollará una introducción al concepto de ecuaciones en diferencia. Así, las preguntas que se pretende responder son:</p>
+<ol style="list-style-type: decimal">
+<li><p>¿Cuál es la solución de la ecuación en diferencia que se estudia?</p></li>
+<li><p>¿Cuáles son las condiciones para que un proceso estocástico, representado mediante una ecuación en diferencia, llegue a alcanzar un punto de equilibrio en el largo plazo?</p></li>
+</ol>
+<p>El término de <em>ecuación en diferencia</em> sirve para denominar un proceso similar o equivalente dentro de las ecuaciones diferenciales, dentro del cual se consideran a un conjunto de variables que están en función del tiempo. Así, si consideramos al tiempo como una variable continua, es decir, consideramos una variable <span class="math inline">\(Z(t)\)</span>, podemos expresar las siguientes expresiones para la ecuación diferencial:
+<span class="math display" id="eq:eqDiff">\[\begin{equation}
+    \frac{dZ(t)}{dt}; \frac{d^2Z(t)}{dt^2}; \ldots; \frac{d^kZ(t)}{dt^k}
+        \tag{2.4}
+\end{equation}\]</span></p>
+<p>Por otro lado, suponiendo el caso del tiempo en forma discreta, es decir, con <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>, entonces el comportamiento de la serie de variables dadas por <span class="math inline">\(Z_t\)</span>, la cual se puede expresar como:
+<span class="math display" id="eq:Diff1">\[\begin{equation}
+    \Delta Z_t; \Delta^2 Z_t; \ldots; \Delta^k Z_t
+    \tag{2.5}
+\end{equation}\]</span></p>
+<p>Observemos que una forma técnicamente más correcta es escribir las expresiones anteriores como:
+<span class="math display" id="eq:Diff2">\[\begin{equation}
+    \frac{\Delta Z_t}{\Delta t}; \frac{\Delta^2 Z_t}{\Delta t^2}; \ldots; \frac{\Delta^k Z_t}{\Delta t^k}
+    \tag{2.6}
+\end{equation}\]</span></p>
+<p>No obstante, no pasa desapercibido que <span class="math inline">\(\Delta t = 1\)</span>, por lo que resultan equivalentes ambos conjuntos de expresiones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Diff1">(2.5)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Diff2">(2.6)</a>.</p>
+<div id="ecuaciones-en-diferencia-lineales-de-primer-orden" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> Ecuaciones en Diferencia Lineales de Primer Orden<a class="anchor" aria-label="anchor" href="#ecuaciones-en-diferencia-lineales-de-primer-orden"><i class="fas fa-link"></i></a>
+</h3>
+<p>El primer caso que se suele estudiar en relación a Ecuaciones en Diferencia es el de las Ecuaciones en Diferencia Lineales de Primer Orden. Al respecto, al igual que en el caso continuo, las variaciones de la variable <span class="math inline">\(Z_t\)</span> se pueden expresar como se ilustra en el siguiente ejemplo. Consideremos la siguiente ecuación:
+<span class="math display" id="eq:EDPO">\[\begin{equation}
+    Z_t = a_0 + a_1 Z_{t-1}
+    \tag{2.7}
+\end{equation}\]</span></p>
+<p>Donde, <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>, y <span class="math inline">\(a_0\)</span> y <span class="math inline">\(a_1 \neq 0\)</span> son números reales constantes. De <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDPO">(2.7)</a> podemos despejar la variable <span class="math inline">\(Z_{t-1}\)</span> y obtener una forma de ecuación en diferencia:
+<span class="math display" id="eq:EDPO2">\[\begin{equation}
+    Z_t - a_1 Z_{t-1} = a_0
+    \tag{2.8}
+\end{equation}\]</span></p>
+<p>Ahora denotemos a <span class="math inline">\(L Z_t = Z_{t-1}\)</span>, es decir, mediante el operador <span class="math inline">\(L\)</span> se puede rezagar una variable dada. En general, podemos decir que el operador tiene dos propiedades, la primera es que es lineal –en el sentido de que abre sumas y saca escalares– como se muestra en la siguiente expresión para el caso de un (1) rezago:
+<span class="math display" id="eq:E1Lag">\[\begin{equation}
+    L(\alpha Z_{t} + \beta) = \alpha Z_{t-1} + \beta
+    \tag{2.9}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(\alpha, \beta \in \mathbb{R}\)</span> y <span class="math inline">\(\alpha, \beta \neq 0\)</span>. Otro resultado implícito en esta primera propiedad es que el operador rezago aplicado a cualquier escalar dará como resultado el escalar, puesto que este es una constante sin importar el momento <span class="math inline">\(t\)</span> en el cual se encuentre la variable <span class="math inline">\(Z\)</span>.</p>
+<p>La segunda propiedad del operador es que se puede aplicar de forma consecutiva a una misma variable. Es decir, <span class="math inline">\(L ( Z_{t-1}) = L L Z_{t} = L^2 Z_{t}\)</span>, por lo que en general tendremos: <span class="math inline">\(L^p Z_t = Z_{t-p}\)</span> (con <span class="math inline">\(p \in \mathbb{Z}\)</span>). Así, en el caso de <span class="math inline">\(p\)</span> rezagos la propiedad de linealidad del operador rezago será:
+<span class="math display" id="eq:LinProp">\[\begin{equation}
+    L^p (\alpha Z_{t} + \beta) = \alpha Z_{t-p} + \beta
+   \tag{2.10}
+\end{equation}\]</span></p>
+<p>Dicho lo anterior, podemos escribir la solución general de <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDPO2">(2.8)</a> como:
+<span class="math display" id="eq:PROC01">\[\begin{eqnarray}
+    Z_t - a_1 L Z_t &amp; = &amp; a_0 \nonumber \\
+    (1 - a_1 L)Z_t &amp; = &amp; a_0 \nonumber \\
+    Z_t &amp; = &amp; a_0 \frac{1}{1 - a_1 L} + s a^t_1 \nonumber \\
+    Z_t &amp; = &amp; a_0 \frac{1}{1 - a_1} + s a^t_1
+    \tag{2.11}
+\end{eqnarray}\]</span></p>
+<p>Donde <span class="math inline">\(a_1 \neq 1\)</span> y <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Notése que la aplicación del operador rezago <span class="math inline">\(L\)</span> a la constante <span class="math inline">\(a_1\)</span> dará como resultado el valor de la misma constante, ya que ésta no depende del momento <span class="math inline">\(t\)</span> en el cual observemos a la variable <span class="math inline">\(Z_t\)</span>. En la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:PROC01">(2.11)</a> se adiciona un término <span class="math inline">\(s a^t_1\)</span> que permite ubicar la trayectoria inicial de la solución de la ecuación. El componente no significa un cambio respecto de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDPO2">(2.8)</a> original, ya que si buscáramos reconstruir esta ecuación tendríamos:
+<span class="math display">\[\begin{eqnarray}
+    (1 - a_1 L) s a^t_1 &amp; = &amp; s a^t_1 - a_1 s L a^{t}_1 \nonumber \\
+    &amp; = &amp; s a^t_1 - a_1 s a^{t - 1}_1 \nonumber \\
+    &amp; = &amp; s a^t_1 - s a^t_1 \nonumber \\
+    &amp; = &amp; 0 \nonumber
+\end{eqnarray}\]</span></p>
+<p>La ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:PROC01">(2.11)</a> se suele interpretar como la solución de largo plazo. Ahora demostraremos por qué es cierta la ecuación y discutiremos algunas condiciones que se deben observar en esta solución para que sea una solución convergente. No obstante, primero discutiremos un método indirecto e incompleto para demostrar el resultado. Dicho método es conocido como el método iterativo. Plantearemos las siguientes ecuaciones particulares donde suponemos la existencia del valor inicial <span class="math inline">\(Z_0\)</span> del proceso:
+<span class="math display">\[\begin{equation*}
+    Z_1 = a_0 + a_1 Z_0
+\end{equation*}\]</span></p>
+<p><span class="math display">\[\begin{eqnarray*}
+Z_2 &amp; = &amp; a_0 + a_1 Z_1 \\
+    &amp; = &amp; a_0 + a_1 (a_0 + a_1 Z_0) \\
+    &amp; = &amp; a_0 +  a_0 a_1 + a^2_1 Z_0 \\
+    &amp; = &amp; a_0 (1 + a_1) + a^2_1 Z_0
+\end{eqnarray*}\]</span></p>
+<p><span class="math display">\[\begin{eqnarray*}
+Z_3 &amp; = &amp; a_0 + a_1 Z_2 \\
+    &amp; = &amp; a_0 + a_1 (a_0 +  a_0 a_1 + a^2_1 Z_0) \\
+    &amp; = &amp; a_0 +  a_0 a_1 + a_0 a^2_1 + a^3_1 Z_0 \\
+    &amp; = &amp; a_0 (1 + a_1 + a^2_1) + a^3_1 Z_0
+\end{eqnarray*}\]</span></p>
+<p>De lo anterior se puede inferir que el método iterativo convergerá hacia una expresión como la siguiente en el momento <span class="math inline">\(t\)</span>:
+<span class="math display" id="eq:SUM">\[\begin{eqnarray}
+Z_t &amp; = &amp; a_0 + a_1 Z_{t-1} \nonumber \\
+    &amp; = &amp; a_0 (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) + a^t_1 Z_0 \nonumber \\
+    &amp; = &amp; a_0 \sum^{t-1}_{i = 0}{a^i_1} + a^t_1 Z_0
+    \tag{2.12}
+\end{eqnarray}\]</span></p>
+<p>Donde, es necesario que en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SUM">(2.12)</a> se cumpla que <span class="math inline">\(\lvert{a_1}\lvert &lt; 1\)</span> para que la suma sea convergente –más adelante detallaremos esta afirmación–. A este tipo de ecuaciones se les puede denominar como lineales. Esto en razón de que ningún término de la variable <span class="math inline">\(Z\)</span> aparece elevado a ninguna potencia distinta a 1. También, son de primer orden, ya que el rezago de la variable <span class="math inline">\(Z\)</span> es sólo de un período.</p>
+<p>En adelante trabajaremos con ecuaciones en las que la variable <span class="math inline">\(Z\)</span> se encuentra rezagada en cualquiera de los siguientes casos:
+<span class="math display" id="eq:SUM0">\[\begin{equation}
+    Z_t, Z_{t-1}, Z_{t-2}, Z_{t-3}, \ldots, Z_{t-p}, \ldots
+    \tag{2.13}
+\end{equation}\]</span></p>
+<p>Por lo que diremos que en adelante el curso versará sobre ecuaciones en diferencia lineales y de cualquier orden <span class="math inline">\(p \in \mathbb{N}\)</span>.</p>
+<p>Retomando la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SUM">(2.12)</a> y considerando la parte de la suma de los términos de <span class="math inline">\(a^i_1\)</span>, de tal forma que buscaremos dar una expresión más comprensible a dicho término. Definamos la siguiente expresión como:
+<span class="math display" id="eq:St1">\[\begin{equation}
+    S_{t-1} = \sum^{t-1}_{i = 0}{a^i_1}
+    \tag{2.14}
+\end{equation}\]</span></p>
+<p>Por lo tanto, <span class="math inline">\(S_t\)</span> estaría dado por la siguiente expresión:
+<span class="math display" id="eq:St">\[\begin{eqnarray}
+S_{t} &amp; = &amp; a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
+      &amp; = &amp; a_1 (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) \nonumber \\
+      &amp; = &amp; a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1 \nonumber \\
+      &amp; = &amp; a_1 S_{t-1}
+      \tag{2.15}
+\end{eqnarray}\]</span></p>
+<p>Tomando los dos resultados de las ecuaciones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:St1">(2.14)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:St">(2.15)</a> anteriores, podemos expresar que si a <span class="math inline">\(S_{t-1}\)</span> le restamos <span class="math inline">\(S_t\)</span>, y desarrollando ambos lados de la ecuación anterior podemos obtener:
+<span class="math display">\[\begin{eqnarray}
+    S_{t-1} - a_1 S_{t-1} &amp; = &amp; S_{t-1} - S_{t} \nonumber \\
+    (1 - a_1) S_{t-1} &amp; = &amp; (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) - (a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1) \nonumber \\
+    (1 - a_1) S_{t-1} &amp; = &amp; 1 - a^{t}_1 \nonumber
+\end{eqnarray}\]</span></p>
+<p>Así, podemos concluir que:
+<span class="math display" id="eq:SUM2">\[\begin{equation}
+    S_{t-1} = \frac{1 - a^{t}_1}{1 - a_1}
+    \tag{2.16}
+\end{equation}\]</span></p>
+<p>Conjuntando este último resultado de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SUM2">(2.16)</a> con la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SUM">(2.12)</a> tenemos la siguiente solución por el método de iteración:
+<span class="math display" id="eq:SOLITER">\[\begin{equation}
+    Z_t = a_0 \left( \frac{1 - a^{t}_1}{1 - a_1} \right) + a^t_1 Z_0
+    \tag{2.17}
+\end{equation}\]</span></p>
+<p>De esta forma la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.17)</a> es una solución para la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SUM">(2.12)</a>, que es una ecuación de un proceso de una Ecuación en Diferencia planteado en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDPO">(2.7)</a>. Esta solución aún no es general, en el sentido de que sea válida para cualquier tipo de proceso: convergente o divergente. Dicha convergencia o divergencia estará determinada por el parámetro <span class="math inline">\(a_1\)</span>. No debe pasar desapercibido que cuando <span class="math inline">\(t \rightarrow \infty\)</span> o cuando la muestra es muy grande (lo que es equivalente), podemos decir que la solución solo puede converger a la siguiente expresión cuando se considera que <span class="math inline">\(|a_1| &lt; 1\)</span>:
+<span class="math display" id="eq:trayec">\[\begin{equation}
+    Z_t = a_0 \left( \frac{1}{1 - a_1} \right)
+    \tag{2.18}
+\end{equation}\]</span></p>
+<p>Retomemos ahora el caso general descrito en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:PROC01">(2.11)</a> y determinemos una solución general en la cual <span class="math inline">\(a_1 \neq 1\)</span> y <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Para ello, observemos que el siguiente componente en la ecuación mencionada se puede interpretar como la suma infinita de términos descritos como:
+<span class="math display" id="eq:SUMINF">\[\begin{eqnarray}
+    \frac{1}{1 - a_1} &amp; = &amp; 1 + a_1 + a_1^2 + \ldots + a_1^t + \ldots \nonumber \\
+    &amp; = &amp; \sum_{i = 0}^{\infty} a_1^{i}
+    \tag{2.19}
+\end{eqnarray}\]</span></p>
+<p>Donde claramente es necesario que <span class="math inline">\(|a_1| &lt; 1\)</span>. Por lo tanto, sólo faltaría determinar el valor de la constante <span class="math inline">\(s\)</span> en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:PROC01">(2.11)</a> de la siguiente forma, supongamos que observamos el proceso en el momento inicial, por lo que es posible determinar el valor de la constante conociendo el valor inicial del proceso como sigue:
+<span class="math display" id="eq:Z0">\[\begin{equation}
+    Z_0 = a_0 \frac{1}{1 - a_1} + s
+\tag{2.20}
+\end{equation}\]</span></p>
+<p>De la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Z0">(2.20)</a> tenemos que:
+<span class="math display" id="eq:eqs">\[\begin{equation}
+    s = Z_0 - a_0 \frac{1}{1 - a_1}
+\tag{2.21}
+\end{equation}\]</span></p>
+<p>Así, juntando la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:PROC01">(2.11)</a> y la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:eqs">(2.21)</a> tenemos la expresión:
+<span class="math display" id="eq:SOLGEN">\[\begin{equation}
+    Z_t = a_0 \frac{1 - a^t_1}{1 - a_1} + a^t_1 Z_0
+\tag{2.22}
+\end{equation}\]</span></p>
+<p>No debe pasar desapercibido que esta solución es la misma que la mostrada en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.17)</a>, por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLITER">(2.17)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN">(2.22)</a>. Ambas convergen a la expresión como la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:trayec">(2.18)</a>, con la misma condición de convergencia <span class="math inline">\(|a_1| &lt; 1\)</span>. Para ilustrar estas ecuaciones, veamos algunos ejemplos al respecto.</p>
+<p>. Consideremos que tenemos un proceso <span class="math inline">\(Z_t\)</span> que es descrito por una ecuación en diferencia lineal de primer orden dada por:
+<span class="math display" id="eq:ex1">\[\begin{equation}
+    Z_t = 2 + 0.9 Z_{t-1}
+\tag{2.23}
+\end{equation}\]</span></p>
+<p>Siguiendo la expresión mostrada en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN">(2.22)</a>, obtenemos la expresión:
+<span class="math display" id="eq:ex2">\[\begin{equation}
+    Z_t = 2 \left( \frac{1 - 0.9^{t}}{1 - 0.9} \right) + 0.9^t Z_0
+\tag{2.24}
+\end{equation}\]</span></p>
+<p>Donde asumiremos que el valor inicial es <span class="math inline">\(Z_0 = 10\)</span> y que la expresión debe converger al valor de 20, cuando <span class="math inline">\(t\)</span> es muy grande o tiende a infinito.</p>
+<p>. De forma similar, tomemos otro ejemplo en el cual asumimos la siguiente expresión:
+<span class="math display" id="eq:ex3">\[\begin{equation}
+    Z_t = 2 - 0.5 Z_{t-1}
+\tag{2.25}
+\end{equation}\]</span></p>
+<p>Siguiendo la expresión mostrada en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN">(2.22)</a>, obtenemos:
+<span class="math display" id="eq:ex4">\[\begin{equation}
+    Z_t = 2 \left( \frac{1 - (-0.5)^{t}}{1 + 0.5} \right) + (-0.5)^t Z_0
+\tag{2.26}
+\end{equation}\]</span></p>
+<p>Donde asumiremos que el valor inicial es <span class="math inline">\(Z_0 = 10\)</span> y que la ecuación converge al valor de <span class="math inline">\(1.3333333 \ldots\)</span>, cuando <span class="math inline">\(t\)</span> es muy grande o tiende a infinito. Ahora simulemos el comportamiento de ambos procesos y estableceremos los resultados del Cuadro <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#tab:table1">2.1</a>. Notemos que el segundo proceso converge de una forma más rápida que el primero. El Cuadro <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#tab:table1">2.1</a> se ilustra en las siguientes dos Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig21">2.6</a> y Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig22">2.7</a>.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Tiempo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">Zt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">Zt2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">Zt</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="va">Zt2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="fl">10</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">101</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">Zt</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fl">2</span><span class="op">+</span><span class="fl">0.9</span><span class="op">*</span><span class="va">Zt</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">Zt2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span><span class="va">Zt2</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">lista</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">16</span>, <span class="fl">97</span><span class="op">:</span><span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">Tiempo1</span> <span class="op">=</span> <span class="va">Tiempo</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span><span class="va">Zt1</span><span class="op">=</span><span class="va">Zt</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span><span class="va">Zt21</span><span class="op">=</span><span class="va">Zt2</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">tabla1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Tiempo1</span>, <span class="va">Zt1</span>, <span class="va">Zt21</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tabla1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tiempo"</span>, <span class="st">"$Z_t =2+0.9Z_{t-1}$"</span>, </span>
+<span>                      <span class="st">"$Z_t = 2-0.5Z_{t-1}$"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tabla1</span>, </span>
+<span>      caption <span class="op">=</span> <span class="st">"Dos ejemplos de Ecuaciones Lineales de Primer Orden"</span>, </span>
+<span>      format <span class="op">=</span> <span class="st">"pandoc"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>font_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:table1">Table 2.1: </span>Dos ejemplos de Ecuaciones Lineales de Primer Orden</caption>
+<thead><tr class="header">
+<th align="right">Tiempo</th>
+<th align="right"><span class="math inline">\(Z_t =2+0.9Z_{t-1}\)</span></th>
+<th align="right"><span class="math inline">\(Z_t = 2-0.5Z_{t-1}\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">10.00000</td>
+<td align="right">10.000000</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">11.00000</td>
+<td align="right">-3.000000</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">11.90000</td>
+<td align="right">3.500000</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">12.71000</td>
+<td align="right">0.250000</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">13.43900</td>
+<td align="right">1.875000</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">14.09510</td>
+<td align="right">1.062500</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">14.68559</td>
+<td align="right">1.468750</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">15.21703</td>
+<td align="right">1.265625</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">15.69533</td>
+<td align="right">1.367188</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">16.12580</td>
+<td align="right">1.316406</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">16.51322</td>
+<td align="right">1.341797</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">16.86189</td>
+<td align="right">1.329102</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">17.17570</td>
+<td align="right">1.335449</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">17.45813</td>
+<td align="right">1.332275</td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="right">17.71232</td>
+<td align="right">1.333862</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">17.94109</td>
+<td align="right">1.333069</td>
+</tr>
+<tr class="odd">
+<td align="right">96</td>
+<td align="right">19.99960</td>
+<td align="right">1.333333</td>
+</tr>
+<tr class="even">
+<td align="right">97</td>
+<td align="right">19.99964</td>
+<td align="right">1.333333</td>
+</tr>
+<tr class="odd">
+<td align="right">98</td>
+<td align="right">19.99967</td>
+<td align="right">1.333333</td>
+</tr>
+<tr class="even">
+<td align="right">99</td>
+<td align="right">19.99970</td>
+<td align="right">1.333333</td>
+</tr>
+<tr class="odd">
+<td align="right">100</td>
+<td align="right">19.99973</td>
+<td align="right">1.333333</td>
+</tr>
+</tbody>
+</table></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tabla</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="va">Tiempo</span>, <span class="va">Zt</span>, <span class="va">Zt2</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span> data <span class="op">=</span> <span class="va">tabla</span> , <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Tiempo</span>, y <span class="op">=</span> <span class="va">Zt</span><span class="op">)</span> <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"blue4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col<span class="op">=</span> <span class="st">"blue4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Z</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig21"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig21-1.png" alt="Evolución del proceso dado por $Z_t =2+0.9Z_{t-1}$" width="672"><p class="caption">
+Figure 2.6: Evolución del proceso dado por <span class="math inline">\(Z_t =2+0.9Z_{t-1}\)</span>
+</p>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tabla</span> , <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Tiempo</span>, y<span class="op">=</span><span class="va">Zt2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col<span class="op">=</span> <span class="st">"red4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Z</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig22"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig22-1.png" alt="Evolución del proceso dado por $Z_t =2-0.5Z_{t-1}$" width="672"><p class="caption">
+Figure 2.7: Evolución del proceso dado por <span class="math inline">\(Z_t =2-0.5Z_{t-1}\)</span>
+</p>
+</div>
+</div>
+<div id="ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior<a class="anchor" aria-label="anchor" href="#ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior"><i class="fas fa-link"></i></a>
+</h3>
+<p>Como un segundo caso a estudiar se ubica el caso de las Ecuaciones en Diferencia Lineales de Segundo Orden y, en su caso, de orden superior. Primero, sea una ecuación como la siguiente, la cual es lineal y de segundo orden, ya que tiene asociado un término de <span class="math inline">\(Z_t\)</span> rezagado dos períodos:
+<span class="math display" id="eq:EDSO">\[\begin{equation}
+    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2}
+    \tag{2.27}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span> y <span class="math inline">\(a_1, a_2 \neq 0\)</span>. Reordenando la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDSO">(2.27)</a> podemos escribir:
+<span class="math display" id="eq:EDSOSOL">\[\begin{eqnarray}
+    Z_t - a_1 Z_{t-1} - a_2 Z_{t-2} &amp; = &amp; a_0 \nonumber \\
+    Z_t - a_1 L Z_{t} - a_2 L^2 Z_{t} &amp; = &amp; a_0 \nonumber \\
+    (1 - a_1 L - a_2 L^2)Z_t &amp; = &amp; a_0
+    \tag{2.28}
+\end{eqnarray}\]</span></p>
+<p>Así, la solución general propuesta para la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDSOSOL">(2.28)</a> es la siguiente, la cual es una forma análoga a una Ecuación Lineal en Diferencia de Primer Orden:
+<span class="math display" id="eq:SOLGEN2">\[\begin{equation}
+    Z_t = \frac{a_0}{1 - a_1 - a_2} + s_1 g^t_1 + s_2 g^t_2
+    \tag{2.29}
+\end{equation}\]</span></p>
+<p>En donde <span class="math inline">\(s_1\)</span> y <span class="math inline">\(s_2\)</span> son constantes que se determinan mediante dos condiciones iniciales –por lo que para resolver este tipo de ecuaciones requerimos conocer dos condiciones iniciales–. Los valores de <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span> están relacionados con los coeficientes <span class="math inline">\(a_1\)</span> y <span class="math inline">\(a_2\)</span>, de esta forma:
+<span class="math display" id="eq:a1">\[\begin{equation}
+  a_1  =  g_1 + g_2
+  \tag{2.30}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:a2">\[\begin{equation}
+    a_2  =  - g_1 g_2
+    \tag{2.31}
+\end{equation}\]</span></p>
+<p>Lo anterior surge del siguiente procedimiento y recordando que siempre es posible descomponer una ecuación cuadrática en expresiones como las siguientes:
+<span class="math display" id="eq:eqcaracteristica">\[\begin{eqnarray}
+    (1 - a_1 L - a_2 L^2) &amp; = &amp; (1 - g_1 L)(1 - g_2 L) \nonumber \\
+    &amp; = &amp; 1 - g_1 L - g_2 L + g_1 g_2 L^2 \nonumber \\
+    &amp; = &amp; 1 - (g_1 + g_2) L + g_1 g_2 L^2
+    \tag{2.32}
+\end{eqnarray}\]</span></p>
+<p>Donde se observa la equivalencia mostrada en las ecuaciones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:a1">(2.30)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:a2">(2.31)</a>. Así, considerando la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN2">(2.29)</a> tenemos que:
+<span class="math display" id="eq:eqcaracteristica1">\[\begin{eqnarray}
+    (1 - a_1 L - a_2 L^2) Z_t &amp; = &amp; (1 - g_1 L)(1 - g_2 L) Z_t \nonumber \\
+    &amp; = &amp; a_0 + (1 - g_1 L)(1 - g_2 L) s_1 g^t_1 \nonumber \\
+    &amp;  &amp; + (1 - g_1 L)(1 - g_2 L) s_2 g^t_2
+    \tag{2.33}
+\end{eqnarray}\]</span></p>
+<p>Por lo tanto, buscamos que, para que el proceso sea equivalente y podamos interpretar que la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN2">(2.29)</a> sea una solución general, deberá pasar lo siguiente:
+<span class="math display" id="eq:eqcaracteristica2">\[\begin{equation}
+    (1 - g_1 L) (1 - g_2 L) s_1 g^t_1 + (1 - g_1 L) (1 - g_2 L) s_2 g^t_2 = 0
+    \tag{2.34}
+\end{equation}\]</span></p>
+<p>O, escrito de otra forma:
+<span class="math display" id="eq:eqcaracteristica3">\[\begin{equation}
+    (1 - g_1 L) s_1 g^t_1 = (1 - g_2 L) s_2 g^t_2 = 0
+    \tag{2.35}
+\end{equation}\]</span></p>
+<p>Ahora determinemos cuáles son los valores <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span> dados los valores <span class="math inline">\(a_1\)</span> y <span class="math inline">\(a_2\)</span> que nos permitan determinar si el proceso será convergente. Para ello debemos resolver la siguiente ecuación que se deriva de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:eqcaracteristica">(2.32)</a>:
+<span class="math display" id="eq:eqcaracteristica4">\[\begin{equation}
+    1 - a_1 x - a_2 x^2 = (1 - g_1 x)(1 - g_2 x) = 0
+    \tag{2.36}
+\end{equation}\]</span></p>
+<p>Donde, claramente existen dos raíces: <span class="math inline">\(x_1 = g^{-1}_1\)</span> y <span class="math inline">\(x_2 = g^{-1}_2\)</span>. Así, la solución estará dada por las raíces de la ecuación característica:
+<span class="math display" id="eq:POL2">\[\begin{eqnarray}
+    1 - a_1 x - a_2 x^2 = 0 \nonumber \\
+    a_2 x^2 + a_1 x - 1 = 0
+    \tag{2.37}
+\end{eqnarray}\]</span></p>
+<p>Cuya solución es:
+<span class="math display" id="eq:eqcaracteristica5">\[\begin{equation}
+    x = \frac{- a_1 \pm \sqrt{a^2_1 + 4 a_2}}{2 a_2}
+    \tag{2.38}
+\end{equation}\]</span></p>
+<p>Es importante distinguir tres diferentes casos en relación con las raíces que surgen como solución de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:POL2">(2.37)</a>, estos son:</p>
+<p><strong>Caso I</strong>. Si <span class="math inline">\(a^2_1 + 4 a_2 &gt; 0\)</span>, la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:POL2">(2.37)</a> proporcionará dos valores de raíces reales y distintos, eso es <span class="math inline">\(x_1 = g^{-1}_1 \neq x_2 = g^{-1}_2\)</span>. Si por ahora suponemos que <span class="math inline">\(|{g_1} &lt; 1|\)</span> y que <span class="math inline">\(|{g_2} &lt; 1|\)</span>, entonces tendremos que:
+<span class="math display" id="eq:eqcaracteristica6">\[\begin{eqnarray}
+    (1 - g_1 L)^{-1} (1 - g_2 L)^{-1} a_0 &amp; =&amp;  \left( \sum^{\infty}_{j = 0}{g^j_1 L^j} \right) \left( \sum^{\infty}_{j = 0}{g^j_2 L^j} \right) a_0 \nonumber \\
+    &amp; = &amp; \left( \sum^{\infty}_{j = 0}{g^j_1} \right) \left( \sum^{\infty}_{j = 0}{g^j_2} \right) a_0 \nonumber \\
+    &amp; = &amp; \frac{a_0}{(1 - g_1)(1 - g_2)} \nonumber \\
+    &amp; = &amp; \frac{a_0}{1 - a_1 - a_2}
+    \tag{2.39}
+\end{eqnarray}\]</span></p>
+<p>Esto último es el punto de equilibrio de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN2">(2.29)</a>; considerando que <span class="math inline">\(|{g_1} &lt; 1|\)</span> y que <span class="math inline">\(|{g_2} &lt; 1|\)</span> –notemos que los demás casos son divergentes, ya que la suma anterior no convergería–. De esta forma, la solución de la ecuación estará dada por:
+<span class="math display" id="eq:Conver">\[\begin{equation}
+    \lim_{t \to \infty} Z_t = \frac{a_0}{1 - a_1 - a_2}
+    \tag{2.40}
+\end{equation}\]</span></p>
+<p><strong>Caso II</strong>. Si <span class="math inline">\(a_1^2 + 4a_2 &lt; 0\)</span> en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:POL2">(2.37)</a>, entonces las raíces serán números complejos conjugados, es decir:
+<span class="math display" id="eq:Conver1">\[\begin{equation}
+g_i^{-1}=a \pm ib
+\tag{2.41}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:Conver2">\[\begin{eqnarray}
+    g_i  =  u \pm iv
+    \tag{2.42}
+\end{eqnarray}\]</span></p>
+<p>Dichas raíces las podemos escribir en coordenadas polares como:
+<span class="math display" id="eq:Conver3">\[\begin{eqnarray}
+    g_1^{-1} = r e^{i \theta} = r (cos(\theta) + i sen(\theta))
+    \tag{2.43}
+\end{eqnarray}\]</span>
+<span class="math display" id="eq:Conver4">\[\begin{eqnarray}
+    g_2^{-1}  =  r e^{-i \theta} = r (cos(\theta) - i sen(\theta))
+    \tag{2.44}
+\end{eqnarray}\]</span>
+Donde: <span class="math inline">\(r = \sqrt{u^2 + v^2}\)</span>, a esta expresión también se le conoce como módulo Alternativamente, podemos escribir que <span class="math inline">\(r = \sqrt{g_1 g_2}\)</span>. La única condición es que <span class="math inline">\(r &lt; 1\)</span> para que el proceso descrito en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:SOLGEN2">(2.29)</a> sea convergente.</p>
+<p>Al igual que en el <strong>Caso I</strong>, el punto de equilibrio de la ecuación se debería ubicar alrededor de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Conver">(2.40)</a>, siempre que <span class="math inline">\(r &lt; 1\)</span>, por lo que el factor que determina la convergencia es el módulo, ya que si el módulo es mayor a 1, el proceso será divergente, pero si es menor a 1 convergerá a <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Conver">(2.40)</a>. Para ilustrar, el caso contrario es divergente puesto que representa trayectorias senoidales (oscilatorias) que sólo pueden converger si a medida que pasa el tiempo las ondas son menos amplias.</p>
+<p>Analicemos la solución:
+<span class="math display">\[\begin{equation*}
+    Z_t = \frac{a_0}{1 - a_1 - a_2} + s_1 g_1^t + s_2 g_2^t
+\end{equation*}\]</span></p>
+<p>Donde <span class="math inline">\(s_1\)</span> y <span class="math inline">\(s_2\)</span> las determinamos usando las condiciones iniciales al solucionar:
+<span class="math display">\[\begin{eqnarray*}
+    Z_0 &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 g_1^t + s_2 g_2^t \\
+    Z_1 &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 g_1^t + s_2 g_2^t
+\end{eqnarray*}\]</span></p>
+<p>Donde, una vez encontradas las <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span>, las incognitas son <span class="math inline">\(s_1\)</span> y <span class="math inline">\(s_2\)</span>. Para determinar <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span> realizamos el siguiente procedimiento. Partimos de la ecuación:
+<span class="math display">\[\begin{equation*}
+    1 - a_1 x - a_2 x^2 = 0
+\end{equation*}\]</span></p>
+<p>Al factorizar notamos que:
+<span class="math display">\[\begin{equation*}
+    (1 - g_1 x)(1 - g_2 x) = 0
+\end{equation*}\]</span></p>
+<p>De lo anterior debe quedar claro que:
+<span class="math display">\[\begin{eqnarray*}
+    x_1 &amp; = &amp; g_1^{-1} \\
+    x_2 &amp; = &amp; g_2^{-1}
+\end{eqnarray*}\]</span></p>
+<p>Donde <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span> se determinan:
+<span class="math display">\[\begin{equation*}
+    x = \frac{-a_1 \pm \sqrt{a_1^2 + 4a_2}}{2 a_2}
+\end{equation*}\]</span></p>
+<p>Asumiendo que obtienen números complejos:
+<span class="math display">\[\begin{eqnarray*}
+    x_1 &amp; = &amp; g_1^{-1} = u + iv  \\
+    x_2 &amp; = &amp; g_2^{-1} = u - iv
+\end{eqnarray*}\]</span></p>
+<p>Las cuales se pueden reescribir en coordenadas polares:
+<span class="math display">\[\begin{eqnarray*}
+    g_1^{-1} &amp; = &amp; s e^{i \theta} = s [cos(\theta) + i sen(\theta)] \\
+    g_2^{-1} &amp; = &amp; s e^{-i \theta} = s [cos(\theta) - i sen(\theta)] \\
+    s &amp; = &amp; \sqrt{u^2 + v^2} = \sqrt{g_1^{-1} \cdot g_2^{-1}} \\
+    cos(\theta) &amp; = &amp; \frac{u}{s} \\
+    sen(\theta) &amp; = &amp; \frac{v}{s}
+\end{eqnarray*}\]</span></p>
+<p>Recuerde que: <span class="math inline">\(r = s^{-1} = \sqrt{g_1 \cdot g_2}\)</span>, de esta forma:
+<span class="math display">\[\begin{eqnarray*}
+    g_1 &amp; = &amp; r[cos(\theta) - isen(\theta)] \\
+    g_2 &amp; = &amp; r[cos(\theta) + isen(\theta)]
+\end{eqnarray*}\]</span></p>
+<p>Retomemos nuestra solución original:
+<span class="math display">\[\begin{eqnarray*}
+    Z_t &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 g_1^t + s_2 g_2^t \\
+    &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 r^t[cos(\theta) - isen(\theta)]^t + s_2 r^t[cos(\theta) + isen(\theta)]^t \\
+    &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 r^t\left(e^{-i \theta}\right)^t + s_2 r^t\left(e^{i \theta}\right)^t \\
+    &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 r^t\left(e^{-i t \theta}\right) + s_2 r^t\left(e^{i t \theta}\right) \\
+    &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 r^t[cos(\theta t) - isen(\theta t)] + s_2 r^t[cos(\theta t) + isen(\theta t)] \\
+    &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 r^t[(s_1 + s_2)cos(\theta t) - i(s_2 - s_1)sen(\theta t)] \\
+    &amp; = &amp; \frac{a_0}{1 - a_1 - a_2} + s_1 r^t[A cos(\theta t) - B sen(\theta t)]
+\end{eqnarray*}\]</span></p>
+<p>Donde <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> son constantes arbitrarias y la convergencia está definida por <span class="math inline">\(r\)</span>, si <span class="math inline">\(r&gt;1\)</span> el proceso diverge, y converge si <span class="math inline">\(r&lt;1\)</span>. Finalmente:
+<span class="math display">\[\begin{eqnarray*}
+    \theta &amp; = &amp; cos^{-1}cos(\theta) \\
+    \theta &amp; = &amp; sen^{-1}sen(\theta)
+\end{eqnarray*}\]</span></p>
+<p><strong>Caso III</strong>. Ahora revisemos el caso en el que <span class="math inline">\(a_1^2 + 4a_2 = 0\)</span>, de esta forma las raíces serán idénticas:
+<span class="math display" id="eq:Conver6">\[\begin{equation}
+    g = g_1^{-1} = g_2^{-1} = \frac{-a_1}{2 a_2}
+    \tag{2.45}
+\end{equation}\]</span></p>
+<p>Así, el punto de equilibrio será dado por la solución descrita como:
+<span class="math display" id="eq:Conver7">\[\begin{eqnarray}
+    (1 - g L)^2 Z_t &amp; = &amp; a_0 \nonumber \\
+    Z_t &amp; = &amp; \frac{a_0}{(1 - g L)^2} + s_1 g^t + s_2 t g^t \nonumber \\
+    &amp; = &amp; a_0 \sum_{i = 0}^{\infty} (1 + i) g^j + s_1 g^t + s_2 t g^t
+    \tag{2.46}
+\end{eqnarray}\]</span></p>
+<p>Donde la expresión anterior es resultado de considerar el siguiente procedimiento. Sea:
+<span class="math display">\[\begin{eqnarray}
+    f(g) &amp; = &amp; \frac{1}{(1 - g)} = \sum_{j = 0}^{\infty} g^j \nonumber
+\end{eqnarray}\]</span></p>
+<p>Por lo que si hacemos la primer derivada del la expresión anterior tenemos que:
+<span class="math display">\[\begin{eqnarray}
+    f'(g) &amp; = &amp; \frac{1}{(1 - g)^2} \nonumber \\
+    &amp; = &amp; \sum_{j = 0}^{\infty} j g^{j-1} \nonumber \\
+    &amp; = &amp; 0 + g^0 + 2 g^1 + 3 g^2 + \ldots \nonumber \\
+    &amp; = &amp; \sum_{j = 0}^{\infty} (1 + j) g^j \nonumber
+\end{eqnarray}\]</span></p>
+<p>Ahora veámos un ejemplo de una Ecuación Lineal en Diferencia de Segundo Orden. Supongamos la ecuación y el desarrollo siguientes:
+<span class="math display">\[\begin{eqnarray}
+    Z_t &amp; = &amp; 3 + 0.9 Z_{t-1} - 0.2 Z_{t-2} \nonumber \\
+    (1 - 0.9 L + 0.2 L^2) Z_t &amp; = &amp; 3 \nonumber
+\end{eqnarray}\]</span></p>
+<p>La solución dada por una ecuación similar a la expresión <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:POL2">(2.37)</a>, obtendríamos la solución dada por las ecuaciones equivalentes a:
+<span class="math display">\[\begin{eqnarray}
+    1 - 0.9 x + 0.2 x^2 = 0 \nonumber \\
+    - 0.2 x^2 + 0.9 x - 1 = 0 \nonumber
+\end{eqnarray}\]</span></p>
+<p>De donde las raíces del polinomio característico <span class="math inline">\(x_1 = g_1^{-1}\)</span> y <span class="math inline">\(x_2 = g_2^{-1}\)</span> se obtienen de la expresión dada por:
+<span class="math display">\[\begin{eqnarray}
+    x &amp; = &amp;\frac{-0.9 \pm \sqrt{0.81 + (4)(-0.2)}}{(2)(-0.2)} \nonumber \\
+    &amp; = &amp; \frac{0.9 \pm 0.1}{0.4} \nonumber
+\end{eqnarray}\]</span></p>
+<p>Dado que el componente <span class="math inline">\(a^2_1 + 4 a_2\)</span> es positivo, obtendremos dos raíces reales. Las raíces estarán dadas por <span class="math inline">\(x_1 = 2.5\)</span> y <span class="math inline">\(x_2 = 2.0\)</span>, de lo cual podemos determinar que <span class="math inline">\(g_1 = 0.4\)</span> y <span class="math inline">\(g_2 = 0.5\)</span>. De esta forma tenemos que <span class="math inline">\(|g_1| &lt; 1\)</span> y <span class="math inline">\(|g_2| &lt; 1\)</span>, así la ecuación converge a la expresión dada por las siguientes expresiones:
+<span class="math display">\[\begin{eqnarray}
+    Z_t &amp; = &amp; \frac{3}{1 - 0.9 L + 0.2 L^2} + s_1 (0.4)^t + s_2 (0.5)^t \nonumber \\
+    &amp; = &amp; \frac{3}{1 - 0.9 + 0.2} + s_1 (0.4)^t + s_2 (0.5)^t \nonumber \\
+    &amp; = &amp; \frac{3}{(1 - 0.4)(1 - 0.5)} + s_1 (0.4)^t + s_2 (0.5)^t \nonumber
+\end{eqnarray}\]</span></p>
+<p>Al final, la ecuación que describe la solución general será:
+<span class="math display" id="eq:Conver9">\[\begin{equation}
+    z_t = 10 + s_1 (0.4)^t + s_2 (0.5)^t
+    \tag{2.47}
+\end{equation}\]</span></p>
+<p>Para determinar los valores de <span class="math inline">\(s_1\)</span> y <span class="math inline">\(s_2\)</span> necesitamos obtener dos valores iniciales de la ecuación. Para lo cual iniciaremos con <span class="math inline">\(t = 0\)</span> y, luego, obtenemos el valor de <span class="math inline">\(t = 1\)</span>, y consideremos el valor de <span class="math inline">\(Z_0 = 0\)</span> y <span class="math inline">\(Z_1 = 50\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+    Z_0 &amp; = &amp; 10 + s_1(0.4)^0  + s_2(0.5)^0 \\
+    0 &amp; = &amp; 10 + s_1 + s_2 \\
+    Z_1 &amp; = &amp; 10 + s_1(0.4)^1  + s_2(0.5)^1 \\
+    50 &amp; = &amp; 10 + 0.4 s_1 + 0.5 s_2
+\end{eqnarray*}\]</span></p>
+<p>Por lo que la solución es: <span class="math inline">\(s_1 = -450\)</span> y <span class="math inline">\(s_2 = 440\)</span>, de donde podemos expresar la ecuación como:
+<span class="math display" id="eq:Ejem01">\[\begin{equation}
+    Z_t = 10 - 450(0.4)^t + 440(0.5)^t
+\tag{2.48}
+\end{equation}\]</span></p>
+<p>La ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Ejem01">(2.48)</a> anterior convergerá al valor de 10 cuando <span class="math inline">\(t \rightarrow \infty\)</span>. Para ilustrar la trayectoria de esta ecuación tomemos un cuadro similar al de los ejemplos anteriores. En el Cuadro <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#tab:table2">2.2</a> y la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig23">2.8</a> mostramos los resultados de la trayectoria para 100 períodos.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Zt</span> <span class="op">=</span> <span class="fl">10</span><span class="op">-</span><span class="fl">450</span><span class="op">*</span><span class="op">(</span><span class="fl">0.4</span><span class="op">^</span><span class="va">t</span><span class="op">)</span><span class="op">+</span><span class="fl">440</span><span class="op">*</span><span class="op">(</span><span class="fl">0.5</span><span class="op">^</span><span class="va">t</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tabla_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="va">t</span>, <span class="va">Zt</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">lista</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">16</span>, <span class="fl">97</span><span class="op">:</span><span class="fl">101</span><span class="op">)</span></span>
+<span><span class="va">t1</span> <span class="op">=</span> <span class="va">t</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span><span class="va">Zt1</span><span class="op">=</span><span class="va">Zt</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
+<span></span>
+<span></span>
+<span><span class="va">tabla1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Tiempo1</span>, <span class="va">Zt1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tabla1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tiempo"</span>, <span class="st">"$Z_t =10-450(0.4)^t+440(0.5)^t$"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tabla1</span>, </span>
+<span>      caption <span class="op">=</span> <span class="st">"Un ejemplo de Ecuación de Segundo Orden"</span>, </span>
+<span>      format <span class="op">=</span> <span class="st">"pandoc"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>font_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:table2">Table 2.2: </span>Un ejemplo de Ecuación de Segundo Orden</caption>
+<thead><tr class="header">
+<th align="right">Tiempo</th>
+<th align="right"><span class="math inline">\(Z_t =10-450(0.4)^t+440(0.5)^t\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.00000</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">50.00000</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">48.00000</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">36.20000</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">25.98000</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">19.14200</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">15.03180</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">12.70022</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">11.42384</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">10.74141</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">10.38250</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">10.19597</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">10.09987</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">10.05069</td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="right">10.02565</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">10.01294</td>
+</tr>
+<tr class="odd">
+<td align="right">96</td>
+<td align="right">10.00000</td>
+</tr>
+<tr class="even">
+<td align="right">97</td>
+<td align="right">10.00000</td>
+</tr>
+<tr class="odd">
+<td align="right">98</td>
+<td align="right">10.00000</td>
+</tr>
+<tr class="even">
+<td align="right">99</td>
+<td align="right">10.00000</td>
+</tr>
+<tr class="odd">
+<td align="right">100</td>
+<td align="right">10.00000</td>
+</tr>
+</tbody>
+</table></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tabla_2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">t</span>, y<span class="op">=</span><span class="va">Zt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"green4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>col<span class="op">=</span> <span class="st">"green4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Z</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig23"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig23-1.png" alt="Evolución del proceso dado por $Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}$" width="672"><p class="caption">
+Figure 2.8: Evolución del proceso dado por <span class="math inline">\(Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}\)</span>
+</p>
+</div>
+<p>Finalmente, discutiremos la solución para las Ecuaciones Lineales en Diferencia de Orden <span class="math inline">\(p\)</span>, donde <span class="math inline">\(p \geq 2\)</span>. En general, una ecuación de este tipo se puede escribir como:
+<span class="math display" id="eq:EDOP">\[\begin{equation}
+    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2} + \ldots + a_p Z_{t-p}
+    \tag{2.49}
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span> y <span class="math inline">\(a_p \neq 0\)</span>. La ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOP">(2.49)</a> se puede escribir como:
+<span class="math display" id="eq:EDOP2">\[\begin{eqnarray}
+    Z_t - a_1 Z_{t-1} - a_2 Z_{t-2} - \ldots - a_p Z_{t-p} &amp; = &amp; a_0 \nonumber \\
+    Z_t - a_1 L Z_t - a_2 L^2 Z_t - \ldots - a_p L^p Z_t &amp; = &amp; a_0 \nonumber \\
+    (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p) Z_t &amp; = &amp; a_0
+    \tag{2.50}
+\end{eqnarray}\]</span></p>
+<p>Por el Teorema Fundamental del Álgebra es posible escribir la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOP2">(2.50)</a> como:
+<span class="math display" id="eq:EDOP3">\[\begin{eqnarray}
+    (1 - g_1 L)(1 - g_1 L) \ldots (1 - g_p L) Z_t &amp; = &amp; a_0
+    \tag{2.51}
+\end{eqnarray}\]</span></p>
+<p>Utilizando la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOP2">(2.50)</a> y la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOP3">(2.51)</a> tenemos que la solución general de una ecuación como la descrita en <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOP">(2.49)</a> se puede escribir como:
+<span class="math display" id="eq:EDOPGEN">\[\begin{equation}
+    Z_t  =  \frac{a_0}{1 - a_1 - a_2 - \ldots - a_p} + s_1 g^t_1 + s_2 g^t_2 + \ldots + s_p g^t_p \\
+    \tag{2.52}
+\end{equation}\]</span><br><span class="math display" id="eq:EDOPGEN2">\[\begin{eqnarray}
+    Z_t &amp; = &amp; \frac{a_0}{(1 - g_1)(1 - g_1) \ldots (1 - g_p)} + s_1 g^t_1 + s_2 g^t_2 + \ldots + s_p g^t_p
+    \tag{2.53}
+\end{eqnarray}\]</span></p>
+<p>Donde <span class="math inline">\(s_1\)</span>, <span class="math inline">\(s_2\)</span>, …, <span class="math inline">\(s_p\)</span> son constantes que se determinan utilizando <span class="math inline">\(p\)</span> valores partículares de <span class="math inline">\(Z_t\)</span>, y la solución general descrita en las ecuaciones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOPGEN">(2.52)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOPGEN2">(2.53)</a> implica encontrar <span class="math inline">\(p\)</span> raíces: <span class="math inline">\(x_1 = g^{-1}_1\)</span>, <span class="math inline">\(x_2 = g^{-1}_2\)</span>, …, <span class="math inline">\(x_p = g^{-1}_p\)</span> de los siguientes polinomios equivalentes:
+<span class="math display" id="eq:POLGEN1">\[\begin{eqnarray}
+    (1 - g_1)(1 - g_1) \ldots (1 - g_p) = 0
+    \tag{2.54}
+\end{eqnarray}\]</span></p>
+<p><span class="math display" id="eq:POLGEN2">\[\begin{eqnarray}
+    1 - a_1 x - a_2 x^2 - \ldots - a_p x^p = 0
+    \tag{2.55}
+\end{eqnarray}\]</span></p>
+<p><span class="math display" id="eq:POLGEN3">\[\begin{eqnarray}
+    a_p x^p + \ldots + a_2 x^2 + a_1 x - 1 = 0
+    \tag{2.56}
+\end{eqnarray}\]</span></p>
+<p>Antes de plantear la solución general, analicemos una solución particular cuando un conjunto de las <span class="math inline">\(p\)</span> raíces, digamos un total de <span class="math inline">\(m\)</span>, son iguales, es decir, cuando sucede que <span class="math inline">\(g_1 = g_2 = \ldots = g_m = g\)</span> (con <span class="math inline">\(1 &lt; m \leq p\)</span>). En este caso la solución general en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOPGEN2">(2.53)</a> se escribe como:
+<span class="math display" id="eq:EDOPGEN3">\[\begin{eqnarray}
+    Z_t &amp; = &amp; \frac{a_0}{(1 - g)^m(1 - g_{m+1}) \ldots (1 - g_p)} \nonumber \\
+    &amp; &amp; + s_1 g^t + s_2 t g^t + \ldots + s_m t^{m-1} g^t + s_{m+1} g^t_{m+1} + \ldots + s_{p} g^t_{p}
+    \tag{2.57}
+\end{eqnarray}\]</span></p>
+<p>Definamos:
+<span class="math display" id="eq:EDOPGEN4">\[\begin{equation}
+    f(g) = \frac{1}{1 - g} = \sum_{j = 0}^{\infty} g^j
+    \tag{2.58}
+\end{equation}\]</span></p>
+<p>Si retomamos el método descrito párrafos arriba tenemos las siguientes expresiones. Cuando <span class="math inline">\(m = 2\)</span>:
+<span class="math display">\[\begin{equation}
+    f'(g) = \frac{1}{(1 - g)^2} = \sum_{j = 0}^{\infty} j g^{j-1} = \sum_{j = 0}^{\infty} (1 + j) g^j \nonumber
+\end{equation}\]</span></p>
+<p>En el otro extremo, cuando <span class="math inline">\(m = p\)</span>:
+<span class="math display" id="eq:EDOPGEN5">\[\begin{equation}
+    f^{(p-1)}(g) = \frac{p-1}{(1 - g)^p} = \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j
+    \tag{2.59}
+\end{equation}\]</span></p>
+<p>Así, en el extremo cuando <span class="math inline">\(m = p\)</span> la solución general podría estar dada por:
+<span class="math display" id="eq:EDOPGEN6">\[\begin{eqnarray}
+    Z_t &amp; = &amp; a_0 \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j \nonumber \\
+    &amp; &amp; + g^t \sum_{i = 0}^p s_i t^{i-1}
+    \tag{2.60}
+\end{eqnarray}\]</span></p>
+<p>Donde <span class="math inline">\(|{g} &lt; 1|\)</span>, <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Para finalizar esta sección, plantearemos la expresión del polinomio característico que nos permitirá hacer el análisis de convergencia de los procesos. Partamos de que la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:POLGEN3">(2.56)</a> se puede escribir como:
+<span class="math display" id="eq:POLGEN55">\[\begin{equation}
+    (x^{-1})^p - a_1 (x^{-1})^{p-1} - a_2 (x^{-1})^{p-1} - \ldots - a_p = 0
+    \tag{2.61}
+\end{equation}\]</span></p>
+<p>La ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:POLGEN55">(2.61)</a> permite interpretar las raíces del polinomio característico de forma directa ya que <span class="math inline">\(x^{-1}_1 = g_1\)</span>, <span class="math inline">\(x^{-1}_2 = g_2\)</span>, …, <span class="math inline">\(x^{-1}_p = g_p\)</span>. Así, siempre que <span class="math inline">\(p \geq 1\)</span> en la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:EDOP">(2.49)</a>, diremos que el proceso descrito en esa ecuación dará como resultado un proceso convergente si se cumplen las dos condiciones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND1">(2.62)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND2">(2.63)</a>:
+<span class="math display" id="eq:COND1">\[\begin{equation}
+    |a_p| &lt; 1  
+    \tag{2.62}
+\end{equation}\]</span>
+<span class="math display" id="eq:COND2">\[\begin{equation}
+    a_1 + a_2 + \ldots + a_p &lt; 1
+    \tag{2.63}
+\end{equation}\]</span></p>
+<p>Alternativamente, cuando las raíces son reales, lo anterior es equivalente a la expresión <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND3">(2.64)</a>:
+<span class="math display" id="eq:COND3">\[\begin{eqnarray}
+    |g_i| &lt; 1
+    \tag{2.64}
+\end{eqnarray}\]</span></p>
+<p>Para <span class="math inline">\(\forall i = 1, 2, \ldots, p\)</span>. Cuando las raíces son imaginarias, las dos condiciones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND1">(2.62)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND2">(2.63)</a> son equivalentes a la expresión <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND4">(2.65)</a>:
+<span class="math display" id="eq:COND4">\[\begin{eqnarray}
+    \sqrt{g_i g_j} = \sqrt{u^2 + v^2} &lt; 1
+    \tag{2.65}
+\end{eqnarray}\]</span></p>
+<p>Para <span class="math inline">\(\forall i \neq j\)</span> y <span class="math inline">\(i, j = 1, 2, \ldots, p\)</span>. Cuando <span class="math inline">\(g_1 = g_2 = \ldots = g_p = g\)</span>, la condición de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND3">(2.64)</a> se resume a que <span class="math inline">\(|g| &lt; 1\)</span>. En resumen, las condiciones descritas en las ecuaciones <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND3">(2.64)</a> y <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:COND4">(2.65)</a> se puden ilustrar mediante un circulo unitario como el de la Figura <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#fig:fig24">2.9</a> en que sí las raíces se ubican dentro de éste, podemos decir que el proceso es convergente en el largo plazo.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Crear datos para el círculo</span></span>
+<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">*</span><span class="va">pi</span>, length.out<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span></span>
+<span><span class="va">circle_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Dibujar el círculo</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">circle_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a></span><span class="op">(</span>fill<span class="op">=</span><span class="cn">NA</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span>ratio<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:fig24"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig24-1.png" alt="Circulo unitario en el que se cumple que $|g_i|&lt;1$ y $(g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1$" width="384"><p class="caption">
+Figure 2.9: Circulo unitario en el que se cumple que <span class="math inline">\(|g_i|&lt;1\)</span> y <span class="math inline">\((g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1\)</span>
+</p>
+</div>
+</div>
+</div>
+<div id="operador-de-rezago-l" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Operador de rezago L<a class="anchor" aria-label="anchor" href="#operador-de-rezago-l"><i class="fas fa-link"></i></a>
+</h2>
+<p>Denotemos, como se ha mencionado con anterioridad, con <span class="math inline">\(L\)</span> al operador de rezago, el cual nos permitirá construir una relación entre diferencias y medias móviles como se verá más adelante en los procesos univariados <span class="math inline">\(AR(p)\)</span>, <span class="math inline">\(MA(q)\)</span> y, en general, <span class="math inline">\(ARIMA(p, d, q)\)</span>. Sean <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> o <span class="math inline">\(Z\)</span> variables con las que denotaremos a una serie de tiempo (note que hasta el momento no hemos definido qué es una serie de tiempo, no obstante, no es necesario definirla para hacer uso del operador).</p>
+<p>En esta sección resumiremos algunas propiedades usadas en el capítulo y en capítulos más adelante. Así, si a dicha serie le aplicamos el operador rezago antes definido, el resultado deberá ser que cada uno de los valores de la serie es retardado o regresado un período. Es decir:</p>
+<p><span class="math display" id="eq:Lag1">\[\begin{equation}
+    L Z_t = Z_{t-1}
+    \tag{2.66}
+\end{equation}\]</span></p>
+<p>De esta forma, si aplicamos el operador rezago <span class="math inline">\(L\)</span> a la nueva serie de tiempo dada por <span class="math inline">\(Z_{t-1}\)</span> podemos obtener <span class="math inline">\(Z_{t-2}\)</span>. Haciendo uso de la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Lag1">(2.66)</a> podemos obtener:
+<span class="math display" id="eq:Lag2">\[\begin{equation}
+    L Z_{t-1} = L(L Z_t) = L^2 Z_t = Z_{t-2}
+    \tag{2.67}
+\end{equation}\]</span></p>
+<p>Mediante una generalización podemos obtener:
+<span class="math display" id="eq:Lag3">\[\begin{equation}
+    L^k Z_t = Z_{t-k}
+    \tag{2.68}
+\end{equation}\]</span></p>
+<p>Para <span class="math inline">\(k = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Así, para <span class="math inline">\(k = 0\)</span> obtenemos la identidad dado que <span class="math inline">\(L^0 Z_t = Z_t\)</span>, de tal forma que siempre asumiremos que <span class="math inline">\(L^0 = 1\)</span>. En otro caso, cuando <span class="math inline">\(k &gt; 0\)</span> a la serie de tiempo a la cual se le aplique el operador rezago <span class="math inline">\(L\)</span> se le deberá aplicar un rezago de <span class="math inline">\(k\)</span> periodos a cada uno de los elementos de la serie. Por el contrario, cuando <span class="math inline">\(k &lt; 0\)</span> el operador rezago significa que se deberá adelantar <span class="math inline">\(|k|\)</span> veces a cada elemento de la serie. Por ejemplo, <span class="math inline">\(L^{-3} Z_t = Z_{t+3}\)</span>.</p>
+<p>Las reglas descritas en lo subsecuente se mantienen indistintamente cuando aplican para el caso de rezagar como para cuando se adelanta una serie. Como primera propiedad tomemos a la siguiente propiedad:
+<span class="math display" id="eq:Lag4">\[\begin{equation}
+    L^{m} Z_{t-n} = L^{m} (L^{n} Z_{t}) = L^{m + n} Z_{t} = Z_{t-(n + m)}
+    \tag{2.69}
+\end{equation}\]</span></p>
+<p>De lo anterior, podemos inferir el siguiente resultado:
+<span class="math display" id="eq:Lag5">\[\begin{equation}
+    \Delta Z_{t} = Z_{t} - Z_{t-1} = (1 - L) Z_{t}
+    \tag{2.70}
+\end{equation}\]</span></p>
+<p>En el caso de la diferencia de órden cuatro o cuarta diferencia se puede expresar como:
+<span class="math display" id="eq:Diff4">\[\begin{equation}
+    \Delta_{4} Z_{t} = Z_{t} - Z_{t-4} = (1 - L^4) Z_{t}
+\tag{2.71}
+\end{equation}\]</span></p>
+<p>Al respecto, vale la pena aclarar que en ocasiones se hará uso de una notación alternativa dada por: <span class="math inline">\(\Delta^k\)</span> o <span class="math inline">\(\Delta_k\)</span>, donde <span class="math inline">\(k = 1, 2, 3, \ldots\)</span>, indistintamente, ya que en ambos casos se referirá a una diferencia de orden <span class="math inline">\(k\)</span>. Esta notación resulta de gran utilidad cuando se quiere comparar períodos equivalentes como, por ejemplo, el mismo trimestre pero de un año anterior. De forma similar, para el caso de logaritmos podemos escribir la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Diff4">(2.71)</a> como:
+<span class="math display" id="eq:Diff5">\[\begin{equation}
+    \Delta^{4} ln(Z_{t}) = \Delta_{4} ln(Z_{t}) = ln(Z_{t}) - ln(Z_{t-4}) = (1 - L^4) ln(Z_{t})
+    \tag{2.72}
+\end{equation}\]</span></p>
+<p>Para el caso de una serie de tiempo que se le ha transformado mediante medias móviles, digamos de <span class="math inline">\(4\)</span> periodos, podemos escribirla como:
+<span class="math display" id="eq:Diff6">\[\begin{equation}
+    Zs_{t} = \frac{1}{4}(Z_{t} + Z_{t-1} + Z_{t-2} + Z_{t-3}) = \frac{1}{4}(1 + L + L^2 + L^3)Z_{t}
+    \tag{2.73}
+\end{equation}\]</span></p>
+<p>Una generalización del anterior caso puede ser escrita como un polinomio de orden <span class="math inline">\(p\)</span> con el operador rezago <span class="math inline">\(L\)</span> dado como:
+<span class="math display" id="eq:Ecp1">\[\begin{eqnarray}
+    \alpha(L) Z_{t} &amp; = &amp; (1 - \alpha_1 L - \alpha_2 L^2 - \ldots - \alpha_p L^p) Z_{t} \nonumber \\
+    &amp; = &amp; Z_{t} - \alpha_1 Z_{t-1} - \alpha_2 Z_{t-2} - \ldots - \alpha_p Z_{t-p}
+\tag{2.74}
+\end{eqnarray}\]</span></p>
+<p>Donde <span class="math inline">\(\alpha_i\)</span> puede ser reemplazada por cualquier constante <span class="math inline">\(a_i\)</span>, con <span class="math inline">\(i = 1, 2, 3, \ldots\)</span>, para escribir ecuaciones como las anteriores. Adicionalmente, podemos decir que la ecuación <a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#eq:Ecp1">(2.74)</a> es una generalización del caso de medias móviles, el cual admite una ponderación distinta para cada uno de los elementos rezagados.</p>
+<p>Existe la posibilidad de operar más de un polinomio a la vez. Para múltiples polinomios (digamos, los polinomios <span class="math inline">\(\alpha(L)\)</span> y <span class="math inline">\(\beta(L)\)</span>) podemos escribir el siguiente resultado:
+<span class="math display" id="eq:Diff7">\[\begin{equation}
+    \alpha(L) \beta(L) = \beta(L) \alpha(L)
+    \tag{2.75}
+\end{equation}\]</span></p>
+<p>Tales polinomios del operador rezago también son llamados <em>filtros lineales</em>. A manera de ejemplo, tomemos el siguiente caso de diferencias para una serie de <span class="math inline">\(Z_t\)</span>:
+<span class="math display" id="eq:Diff8">\[\begin{equation}
+    \Delta Z_{t} = (1 - L) Z_{t} = Z_{t} - Z_{t-1}
+    \tag{2.76}
+\end{equation}\]</span></p>
+<p>y un proceso de medias móviles para la misma serie de <span class="math inline">\(Z_t\)</span>:
+<span class="math display" id="eq:Diff9">\[\begin{equation}
+    Zs_{t} = \frac{1}{4}(1 + L^1 + L^2 + L^3) Z_{t} = \frac{1}{4}(Z_{t} + Z_{t-1} + Z_{t-2} + Z_{t-3})
+    \tag{2.77}
+\end{equation}\]</span></p>
+<p>De tal forma que el producto de ambos procesos se puede escribir como:
+<span class="math display" id="eq:Diff10">\[\begin{equation}
+(1 - L) \times \frac{1}{4}(1 + L^1 + L^2 + L^3) Z_{t} = \frac{1}{4}(1 - L^4) Z_{t}
+\tag{2.78}
+\end{equation}\]</span></p>
+<p>Es decir, que el producto de dos polinomios, uno de diferencias y otro más de medias móviles, resulta en uno de diferencias pero de mayor grado, en este caso de grado 4.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></div>
+<div class="next"><a href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="nav-link" href="#la-naturaleza-de-los-datos-de-series-de-tiempo"><span class="header-section-number">2.1</span> La naturaleza de los datos de Series de Tiempo</a></li>
+<li><a class="nav-link" href="#ejemplos-y-aplicaciones-de-las-series-de-tiempo"><span class="header-section-number">2.2</span> Ejemplos y aplicaciones de las Series de Tiempo</a></li>
+<li>
+<a class="nav-link" href="#ecuaciones-en-diferencia-para-procesos-deterministas"><span class="header-section-number">2.3</span> Ecuaciones en Diferencia para procesos deterministas</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ecuaciones-en-diferencia-lineales-de-primer-orden"><span class="header-section-number">2.3.1</span> Ecuaciones en Diferencia Lineales de Primer Orden</a></li>
+<li><a class="nav-link" href="#ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior"><span class="header-section-number">2.3.2</span> Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#operador-de-rezago-l"><span class="header-section-number">2.4</span> Operador de rezago L</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2025-01-28.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

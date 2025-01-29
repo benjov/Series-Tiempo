@@ -1,0 +1,1190 @@
+# Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, y Modelos ARDL
+
+En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más series. Como primera aproximación desarrollaremos el concepto de Causalidad de Granger. Mediante esta metodología discutiremos cuándo dos series se causan estadísticamente. Posteriormente, introduciremos una técnica más sofisticada conocida como la metodología de Vectores Autoregresivos (VAR), la cual es una generalización de los procesos Autoregresivos (AR) que analizamos al principio del curso. Finalmente, introduciremos la técnica de cointegración y de rezagos distribuidos (ARDL) para los casos en que las series que analicemos sean procesos no estacionarios.
+
+A partir de este punto, asumiremos que las series empleadas son estacionarias en sus primeras diferencias y solo nos preocuparemos por su estacionariedad en los casos particulares de Cointegración y los modelos ARDL.
+
+## Causalidad de Granger
+
+Hasta ahora hemos supuesto que una serie puede ser explicada únicamente con la información contenida en ella misma. No obstante, en adelante trataremos de analizar el caso en el que buscamos determinar relaciones entre variables y cómo el comportamiento de una serie influye en las demás. Algunas relaciones más importantes son las llamadas: causalidad. En este caso analizaremos el procedimiento de Granger (1969), conocido como causalidad de Granger. En adelante asumiremos que las series involucradas son débilmente estacionarias.
+
+Sean $X$ y $Y$ dos series débilmente estacionarias. Definamos a $I_t$ un conjunto de toda la información disponible hasta el momento $t$. Asimismo, digamos que $\overline{X}_t$ y $\overline{Y}_t$ son los conjuntos de toda la información disponible (actual y pasada) de $X$ y $Y$, respectivamente. Es decir:
+\begin{eqnarray*}
+    \overline{X}_t & := & \{ X_t, X_{t-1}, X_{t-2}, \ldots \} \\
+    \overline{Y}_t & := & \{ Y_t, Y_{t-1}, Y_{t-2}, \ldots \} \\
+    I_t & := & \overline{X}_t + \overline{Y}_t
+\end{eqnarray*}
+
+Adicionalmente, definamos $\sigma^2(*)$ como la varianza del término de error estimado de una regresión dada. Dicho lo anterior, digamos que:
+\begin{enumerate}
+  \item Existe Causalidad de Granger o $X$ causa a $Y$ si y solo si, una regresión lineal da como resultado que: 
+    \begin{equation}
+        \sigma^2 (Y_{t+1} | I_t) < \sigma^2 (Y_{t+1} | I_t - X_t)    
+    \end{equation}
+
+Es decir, que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de toda la información aplicada a un pronóstico de $Y_{t+1}$ es MENOR que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de la información de $Y$ aplicada a un pronóstico de $Y_{t+1}$.
+
+  \item Existe Causalidad de Granger Instantanéa o $X$ causa de forma instantanéa a $Y$ si y solo si, una regresión lineal da como resultado:
+    \begin{equation}
+        \sigma^2 (Y_{t+1} | \{ I_t, X_{t+1} \}) < \sigma^2 (Y_{t+1} | I_t)
+    \end{equation}
+\end{enumerate}
+
+La definición anterior aplica de igual forma si se reemplaza a $X$ por $Y$ y a $Y$ por $X$, respectivamente. De acuerdo a la definición anterior, existen 5 diferentes posibilidades de relaciones causales entre las dos series:
+\begin{enumerate}
+    \item $X$ y $Y$ son independientes: $(X, Y)$;
+
+    \item Existe solo causalidad instantanéa: $(X - Y)$;
+
+    \item $X$ causa a $Y$: $(X \longrightarrow Y)$;
+
+    \item $Y$ causa a $X$: $(X \longleftarrow Y)$, y
+
+    \item Ambas series se causan: $(X \longleftrightarrow Y)$.
+\end{enumerate}
+
+Por lo anterior, representaremos mediante un $AR(p)$ con variables exógenas lo siguiente:
+\begin{equation}
+    A(L) 
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{11}(L) & a_{12}(L) \\ a_{21}(L) & a_{22}(L)
+    \end{bmatrix}
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+    (\#eq:GrangerEq)
+\end{equation}
+
+O en su versión $MA(q)$  con variables exógenas:
+\begin{equation}
+    \begin{bmatrix}
+    Y_t \\ X_t
+    \end{bmatrix}
+    =
+    B(L)
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    b_{11}(L) & b_{12}(L) \\ b_{21}(L) & b_{22}(L)
+    \end{bmatrix}
+    \begin{bmatrix}
+    V_t \\ U_t
+    \end{bmatrix}
+\end{equation}
+
+Para determinar el test de causalidad utilizaremos una especificación similar a la de la ecuación \@ref(eq:GrangerEq). Para probar si $X$ causa a $Y$, consideraremos la siguiente regresión:
+\begin{equation}
+    Y_t = \alpha_0 + \sum^{k_1}_{k = 1} a^k_{11} Y_{t-k} + \sum^{k_2}_{k = k_0} a^k_{12} X_{t-k} + U_{1,t}
+\end{equation}
+
+Donde $k_0 = 1$ y, en general, se asume que $k_1 = k_2$. Asimismo, el valor de estas constantes se puede determinar con el criterio de Akaike (o cualquier otro criterio de información). No obstante, algunos autores sugieren que una buena práctica es considerar valores de $k_1$ y $k_2$ que recorran al 4, 8, 12 y 16.
+
+Dicho lo anterior, el test de causalidad de Granger se establece con una prueba F, en la cual se prueba la siguiente hipótesis nula:
+\begin{equation}
+    H_0: a^1_{12} = a^2_{12} = \ldots = a^{k2}_{12} = 0
+\end{equation}
+
+\textbf{Ejemplo}. Consideremos como variables analizadas al Índice Nacional de Precios al Consumidor ($INPC_t$), al Tipo de Cambio ($TDC_t$) y al rendimiento anual de los Cetes a 28 días ($CETE28_t$), todas desestacionalizadas para el periodo de enero de 2000 a julio de 2019. Dado que la metodología de Granger supone que las series son estacionarias, utilizaremos las diferencias logarítmicas de cada una de las tres series (es decir, utilizaremos una transformación del tipo $ln(X_t) - ln(X_{t-1})$). La Figura \@ref(fig:fig61) muestra las series en su transformación de diferencias logarítmicas.
+
+```{r fig.align='center', message=FALSE, warning=FALSE}
+
+library(ggplot2)
+library(dplyr)
+library(stats)
+library(MASS)
+library(strucchange)
+library(zoo)
+library(sandwich)
+library(urca)
+library(lmtest)
+library(vars)
+
+#
+load("BD/Datos_Ad.RData")
+
+#
+INPC <- ts(Datos_Ad$INPC_Ad, 
+           start = c(2000, 1), 
+           freq = 12)
+
+DLINPC <- diff(log( ts(Datos_Ad$INPC_Ad, start = c(2000, 1), freq = 12) ))
+
+TC <- ts(Datos_Ad$TC_Ad, 
+         start = c(2000, 1), 
+         freq = 12)
+
+DLTC <- diff(log( ts(Datos_Ad$TC_Ad, start = c(2000, 1), freq = 12) ))
+
+CETE28 <- ts(Datos_Ad$CETE28_Ad, 
+             start = c(2000, 1), 
+             freq = 12)
+
+DLCETE28 <- diff(log( ts(Datos_Ad$CETE28_Ad, start = c(2000, 1), freq = 12) ))
+```
+
+```{r fig61, fig.cap = "Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$.", fig.align='center', message=FALSE, warning=FALSE}
+#
+#png("Plots/DLGranger.png", width = 800, height = 1200)
+
+par(mfrow=c(3, 1))
+
+plot(DLINPC, xlab = "Tiempo", 
+     main = "Diferencias Logarítmicas del INPC",
+     col = "darkgreen")
+
+plot(DLTC, xlab = "Tiempo", 
+     main = "Diferencias Logarítmicas del Tipo de Cambio",
+     col = "darkblue")
+
+plot(DLCETE28, xlab = "Tiempo", 
+     main = "Diferencias Logarítmicas de los Cetes a 28 dias",
+     col = "darkred")
+
+par(mfrow=c(1, 1))
+
+#dev.off()
+
+```
+
+Por simplicidad, en el Cuadro \@ref(tab:Granger) se muestra el resultado de aplicar el test de Granger a diferentes especificaciones, con rezagos 4, 8, 12 y 16, sólo para la serie de Tipo de Cambio en diferencias logarítmicas. En cada una de las pruebas se compara el modelo considerado como regresor a la variable que es candidata de causar, respecto del modelo sin considerar a dicha variable.
+
+Table: (\#tab:Granger) Prueba de si $DLINPC_t$ Granger causa a $DLTC_t$.
+
+| Rezagos | Estadiística F | Probabilidad ($>$F) | Significancia |
+|:---:|:---:|:---:|:---:|
+| 4 | 3.2621 | 0.01265 | * |
+| 8 | 1.9079 | 0.06030 |  |
+| 12 | 2.2577 | 0.01067 | * |
+| 16 | 1.6735 | 0.05495 | * |
+| Notas: | *** | signif. | al 0.1\% |
+|  |  ** | signif. | al 1\% |
+|  | * |  signif. | al 5\% |
+
+De acuerdo con el Cuadro \@ref(tab:Granger), podemos concluir que existe información estadísticamente significativa para concluir que la inflación causa a la tasa de depreciación cambiaria, ambas medidas como las diferencias logaritmicas. El resto de los resultados para las otras combinaciones de causalidad se encuentran en el R Markdown llamado Clase 13 ubicado en el repositorio de GitHub.
+
+## Definición y representación del Sistema o Modelo de Vectores Autorregresicos (VAR(p))
+
+En esta sección ampliaremos la discusión planteada en el apartado anterior. En el sentido de que en la sección pasada nuestra discusión se limitó al análisis de causalidad entre dos variables a la vez, que si bien es posible extenderlo a más variables, es un procedimiento limitado a casos particulares por las siguientes razones.
+
+El procedimiento de causalidad de Granger supone que es posible identificar un sistema de ecuaciones que debe conformarse una vez que se ha identificado el sentido de la causalidad. Así, el proceso anterior necesita del conocimiento previo de las relaciones que existen entre las variables. 
+
+Adicionalmente, no resuelve el problema más general que está relacionado con cómo identificar la causalidad cuando se tienen múltiples variables con múltiples sentidos de causalidad. En esta sección analizaremos una mejor aproximación al problema de cómo identificar la causalidad múltiple. Por lo tanto, como mecanismo para solucionar el problema planteado, analizaremos el caso de un Sistema o Modelo de Vectores Autoregresivos conocido como VAR.
+
+El primer supuesto del que partiremos es que existe algún grado de endogeneidad entre las variables consideradas en el análisis. Adicionalmente, el segundo supuesto que estableceremos es que requerimos que las variables que tengamos consideradas sean estacionarias.
+
+Por lo anterior, diremos que un modelo de Vectores Autoregresivos (VAR) es un procedimiento que sigue fundado en el supuesto de que las variables consideradas son estacionarias. Así, hasta este momento del curso hemos pasado de modelos univariados a modelos multivariados, pero no hemos podido dejar de asumir que las series son estacionarias. 
+
+En lo subsecuente asumiremos que las series empleadas son estacionarias y sólo lo demostraremos cuando, en su caso, sea necesario. Esto no significa que el lector deba asumir estacionariedad. Por el contrario, siempre debe probar que las series son estacionarias antes de iniciar la implementación de cualquier técnica de series de tiempo.
+
+Ahora bien, iniciaremos con el establecimiento de la representación del proceso. Digamos que tenemos un proceso estocástico $\mathbf{X}_t$ estacionario vectorial de dimensión $k$:
+\begin{equation*}
+    \mathbf{X}_t = 
+    \begin{bmatrix}
+    X_{1t} \\ X_{2t} \\ \vdots \\ X_{kt}
+    \end{bmatrix}
+\end{equation*}
+
+Para cualquier $i = 1, 2, \ldots, p$:
+\begin{equation*}
+    \mathbf{X}_{t-i} = 
+    \begin{bmatrix}
+    X_{1t-i} \\ X_{2t-i} \\ \vdots \\ X_{kt-i}
+    \end{bmatrix}
+\end{equation*}
+
+Donde cada $X_{kt}$ en $\mathbf{X}_t$ es una serie de tiempo por sí misma. De esta forma, la expresión reducida del modelo o el proceso $VAR(p)$ estará dado por:
+\begin{equation}
+    \mathbf{X}_t = \boldsymbol{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
+    (\#eq:VARp)
+\end{equation}
+
+Donde cada uno de las $A_i$, $i = 1, 2, \ldots, p$, son matrices cuadradas de dimensión $k$ y $\mathbf{U}_t$ representa un vector de dimensión $k \times 1$ con los residuales en el momento del tiempo $t$ que son, por individual, un proceso puramente aleatorio. También se incorpora un vector de términos constantes denominado como $\mathbf{\delta}$, el cual es de dimensión $k \times 1$.
+
+Así, la ecuación \@ref(eq:VARp) supone la siguiente estructura del vector $\boldsymbol{\delta}$:
+\begin{equation*}
+    \boldsymbol{\delta} = 
+    \begin{bmatrix}
+    \delta_{1} \\ \delta_{2} \\ \vdots \\ \delta_{k}
+    \end{bmatrix}
+\end{equation*}
+
+También, la ecuación \@ref(eq:VARp) supone que cada matriz $A_i$, $i = 1, 2, \ldots, p$ está definida de la siguiente forma:
+\begin{equation*}
+    \mathbf{A}_i = 
+    \begin{bmatrix}
+    a^{(i)}_{11} & a^{(i)}_{12} & \ldots & a^{(i)}_{1k} \\ a^{(i)}_{21} & a^{(i)}_{22} & \ldots & a^{(i)}_{2k} \\ \vdots & \vdots & \ddots & \vdots \\ a^{(i)}_{k1} & a^{(i)}_{k2} & \ldots & a^{(i)}_{kk}
+    \end{bmatrix}
+\end{equation*}
+
+Donde $i = 1, 2, \ldots, p$.
+
+Retomando la ecuación \@ref(eq:VARp) y considerando que podemos ocupar el operador rezago $L^j$ de forma análoga al caso del modelo $AR(p)$, pero aplicado a un vector, tenemos las siguientes ecuaciones:
+\begin{eqnarray}
+    \mathbf{X}_t - A_1 \mathbf{X}_{t-1} - A_2 \mathbf{X}_{t-2} - \ldots - A_p \mathbf{X}_{t-p} & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t-p} & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
+    (I_k - \mathbf{A_1} L - \mathbf{A_2} L^2 - \ldots - \mathbf{A_p} L^p) \mathbf{X}_t & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{A}(L) \mathbf{X}_t & = & \boldsymbol{\delta} + \mathbf{U}_{t}
+    (\#eq:VARCorto)
+\end{eqnarray}
+
+Adicionalmente, requeriremos que dado que $\mathbf{U}_t$ es un proceso puramente aleatorio, este debe cumplir con las siguientes condiciones:
+
+1. El valor esperado del término de error es cero:
+  \begin{equation}
+      \mathbb{E}[\mathbf{U}_t] = 0
+  \end{equation}
+
+2. Existe una matriz de varianzas y covarianzas entre los términos de error contemporáneos dada por:
+  \begin{eqnarray}
+      \mathbb{E}[\mathbf{U}_t \mathbf{U}_t'] 
+      & = &
+      \mathbb{E} \left[
+      \begin{bmatrix}
+      U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+      \end{bmatrix}
+      \begin{bmatrix}
+      U^{(t)}_{1} & U^{(t)}_{2} & \ldots & U^{(t)}_{k}
+      \end{bmatrix}
+      \right] \nonumber \\
+      & = & \mathbb{E}
+      \begin{bmatrix}
+      U^{(t)}_{1} U^{(t)}_{1} & U^{(t)}_{1} U^{(t)}_{2} & \ldots & U^{(t)}_{1} U^{(t)}_{k} \\
+      U^{(t)}_{2} U^{(t)}_{1} & U^{(t)}_{2} U^{(t)}_{2} & \ldots & U^{(t)}_{2} U^{(t)}_{k} \\
+      \vdots & \vdots & \ldots & \vdots \\
+      U^{(t)}_{k} U^{(t)}_{1} & U^{(t)}_{k} U^{(t)}_{2} & \ldots & U^{(t)}_{k} U^{(t)}_{k}
+      \end{bmatrix} \nonumber \\
+      & = & \begin{bmatrix}
+      \sigma^2_1 & \rho_{12} & \ldots & \rho_{1k} \\
+      \rho_{21} & \sigma^2_2 & \ldots & \rho_{2k} \\
+      \vdots & \vdots & \ldots & \vdots \\
+      \rho_{k1} & \rho_{k2} & \ldots & \sigma^2_k
+      \end{bmatrix} \nonumber \\
+      & = & \mathbf{\Sigma}_{UU}
+      (\#eq:SigmaVAR)
+  \end{eqnarray} 
+
+3. La matriz de varianzas y covarianzas no contemporáneas es nula. Es decir, que para todo $t \neq s$:
+   \begin{eqnarray}
+       \mathbb{E} [\mathbf{U}_t \mathbf{U}_s'] 
+       & = &
+       \mathbb{E} \left[
+       \begin{bmatrix}
+       U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+       \end{bmatrix}
+       \begin{bmatrix}
+       U^{(s)}_{1} & U^{(s)}_{2} & \ldots & U^{(s)}_{k}
+       \end{bmatrix}
+       \right] \nonumber \\
+       & =  & \mathbb{E}
+       \begin{bmatrix}
+       U^{(t)}_{1} U^{(s)}_{1} & U^{(t)}_{1} U^{(s)}_{2} & \ldots & U^{(t)}_{1} U^{(s)}_{k} \\
+       U^{(t)}_{2} U^{(s)}_{1} & U^{(t)}_{2} U^{(s)}_{2} & \ldots & U^{(t)}_{2} U^{(s)}_{k} \\
+       \vdots & \vdots & \ldots & \vdots \\
+       U^{(t)}_{k} U^{(s)}_{1} & U^{(t)}_{k} U^{(s)}_{2} & \ldots & U^{(t)}_{k} U^{(s)}_{k}
+       \end{bmatrix} \nonumber \\
+       & = & \mathbf{0}
+       (\#eq:RhoVAR)
+   \end{eqnarray}
+
+Las ecuaciones \@ref(eq:SigmaVAR) y \@ref(eq:RhoVAR) significan que los residuales $\mathbf{U}_t$ pueden estar correlacionados entre ellos solo en el caso de que la información sea contemporánea, pero no tienen información en común entre residuales de otros periodos.
+
+Al igual que en el caso del modelo o especificación $AR(p)$ en la especificación del modelo $VAR(p)$ existen condiciones de estabilidad. Dichas condiciones están dadas por lo siguiente, definamos el siguiente polinomio que resulta de tomar la matriz $\mathbf{A}(L)$ en la ecuación \@ref(eq:VARCorto):
+\begin{equation}
+    Det[I_t - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
+\end{equation}
+
+Donde las raíces del polinomio cumplen que $|z| \leq 1$, es decir, se ubican dentro del circulo unitario.
+
+La ecuación \@ref(eq:VARCorto) puede ser rexpresada en una forma similar al un proceso de MA. Al respecto, de forma similar a la siguiente ecuación podemos construir un modelo $VARMA(p,q)$, el cual no estudiamos es este curso. 
+
+Reromando el primer planteamiento, podemos escribir:
+\begin{eqnarray}
+    \mathbf{X}_t & = & \mathbf{A}^{-1}(L) \boldsymbol{\delta} + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
+    & = & \boldsymbol{\mu} + \boldsymbol{\beta}(L) \mathbf{U}_t
+    (\#eq:VARMAq)
+\end{eqnarray}
+
+Donde $\boldsymbol{\mu}$ es un vector de $k \times 1$ constantes y $\boldsymbol{\beta}(L)$ es una matriz que depende de $L$.
+
+Por el lado de las matrices que representan la autocovarianza, estás resultan de resolver lo siguiente:
+\begin{equation}
+    \Gamma_X(\tau) = E[(\mathbf{X}_t - \mu)(\mathbf{X}_{t-\tau} - \mu)'] 
+\end{equation}
+
+Ahora, sin pérdida de generalidad digamos que la especificación VAR(p) en la ecuación \@ref(eq:VARp) no tiene constante, por lo que $\boldsymbol{\delta} = \mathbf{0}$, lo que implica que $\boldsymbol{\mu} = \mathbf{0}$. De esta forma las matrices de autocovarianza resultan de:
+\begin{eqnarray*}
+    \Gamma_{\mathbf{X}}(\tau) & = & E[(\mathbf{X}_t)(\mathbf{X}_{t-\tau})'] \\
+    & = & \mathbf{A_1} E[(\mathbf{X}_{t-1})(\mathbf{X}_{t-\tau})'] + \mathbf{A_2} E[(\mathbf{X}_{t-2})(\mathbf{X}_{t-\tau})'] \\
+    &   & + \ldots + \mathbf{A_p} E[(\mathbf{X}_{t-p})(\mathbf{X}_{t-\tau})'] + E[(\mathbf{U}_t(\mathbf{X}_{t-\tau})']
+\end{eqnarray*}
+
+Finalmente, al igual que en el caso $AR(p)$, requerimos de una métrica que nos permita determinar el número de rezagos óptimo $p$ en el $VAR(p)$. Así, establecemos criterios de información similares a los del $AR(p)$ dados por:
+
+1.Final Prediction Error (FPE):
+        \begin{equation}
+        FPE(p) = \left[ \frac{T + kp + 1}{T - kp - 1} \right]^k |\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)|
+        \end{equation}
+    
+2. Akaike Criterion (AIC):
+        \begin{equation}
+        AIC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2}{T}
+        \end{equation}
+    
+3. Hannan - Quinn Criterion (HQ):
+        \begin{equation}
+        HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(2))}{T}
+        \end{equation}
+    
+4. Schwartz Criterion (SC):
+        \begin{equation}
+        SC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{ln(T)}{T}
+        \end{equation}
+        
+Donde la matriz de varianzas y covarianzas contemporáneas estará dada por:
+    \begin{equation*}
+            \mathbf{\Sigma}_{\hat{U}\hat{U}}(p) = \mathbb{E} \left[
+            \begin{bmatrix}
+            U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
+            \end{bmatrix}
+            \begin{bmatrix}
+            U^{(t)}_{1} & U^{(t)}_{2} & \ldots & U^{(t)}_{k}
+            \end{bmatrix}
+            \right]
+    \end{equation*}
+
+\textbf{Ejemplo}. Ahora veámos un ejemplo de estimación de $VAR(p)$. Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción Industrial de los Estados Unidos, todas desestacionalizadas y para el período de enero de 2000 a julio de 2019. Dado que el supuesto estacionariedad sigue presente en nuestro análisis, emplearemos cada una de las series en su versión de diferencias logaritmicas. Las Figuras \@ref(fig:fig62) y \@ref(fig:fig63) muestra las series referidas.
+
+```{r warning=FALSE, message=FALSE}
+
+library(ggplot2)
+library(dplyr)
+library(stats)
+library(MASS)
+library(strucchange)
+library(zoo)
+library(sandwich)
+library(urca)
+library(lmtest)
+library(vars)
+
+#
+load("BD/Datos_Ad.RData")
+
+#
+DLINPC <- diff(log( ts(Datos_Ad$INPC_Ad, start = c(2000, 1), freq = 12) ))
+
+DLTC <- diff(log( ts(Datos_Ad$TC_Ad, start = c(2000, 1), freq = 12) ))
+
+DLCETE28 <- diff(log( ts(Datos_Ad$CETE28_Ad, start = c(2000, 1), freq = 12) ))
+
+DLIGAE <- diff(log( ts(Datos_Ad$IGAE_Ad, start = c(2000, 1), freq = 12) ))
+
+DLIPI <- diff(log( ts(Datos_Ad$IPI_Ad, start = c(2000, 1), freq = 12) ))
+
+Datos <- data.frame(cbind(DLINPC, DLTC, DLCETE28, DLIGAE, DLIPI))
+
+Datos <- ts(Datos, 
+            start = c(2000, 2), freq = 12)
+
+```
+
+```{r fig62, warning=FALSE, message=FALSE, fig.cap="Series en diferencias logarítmicas (Forma 1)", fig.align='center'}
+
+plot(Datos, plot.type = "s", 
+     col = c("darkgreen", "darkblue", "darkred", "black", "purple"), 
+     main = "Series en Diferencias logaritmicas", 
+     xlab = "Tiempo", ylab = "Variacion")
+
+legend("bottomright", c("INPC", "TC", "CETES28", "IGAE", "IPI"),
+       cex = 0.6, lty = 1:1, 
+       col = c("darkgreen", "darkblue", "darkred", "black", "purple"))
+
+```
+
+```{r fig63, warning=FALSE, message=FALSE,fig.cap="Series en diferencias logarítmicas (Forma 2)", fig.align='center'}
+
+plot(Datos, plot.type = "m", 
+     col = "darkgreen", 
+     main = "Series en Diferencias logaritmicas", xlab = "Tiempo")
+
+```
+
+Dicho lo anterior, a continuación mostraremos la tabla que resume el valor de los distintos criterios de información para una especificación de un $VAR(p)$ con constante. Notése que es posible especificar un $VAR(p)$ con tendencia, siempre que exista evidencia de que algunas de las series sean estacionarias alrededor de una tendencia. Caso que no aplica hasta este momento, ya que nuestro análisis de estacionariedad es claro respecto a la media constante (más adelante aportaremos la evidencia de esto), lo cual elimina la posibilidad de incluir una tendencia.
+
+En el Cuadro \@ref(tab:NumSelectVAR) reportamos el número de rezagos propuesto a partir de cada criterio de información y en el Cuadro \@ref(tab:SelectVAR) reportamos los resultados de aplicar una prueba de criterios de información para diferentes valores de rezagos. Del cual se concluye que el número óptimo de rezagos es 2 (según el criterio AIC y el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es una buena práctica utilizarlo como referente principal.
+
+Table: (\#tab:NumSelectVAR) Número de rezagos determinados por cada uno de los criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series $DLINPC_t$, $DLTC_t$, $DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$.
+
+| **AIC** | **HQ** | **SC** | **FPE** |
+|:-------:|:------:|:------:|:-------:|
+| 2       | 1      | 1      | 2       |
+
+Table: (\#tab:SelectVAR) Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series $DLINPC_t$, $DLTC_t$, $DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$.
+
+| Rezagos | AIC | HQ | SC | FPE |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | -4.636412e+01 | -4.617847e+01 | -4.590430e+01 | 7.317262e-21 |
+| 2 | -4.639541e+01 | -4.605506e+01 | -4.555241e+01 | 7.094216e-21 |
+| 3 | -4.635305e+01 | -4.585799e+01 | -4.512686e+01 | 7.407479e-21 |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+
+```{r selVAR, warning=FALSE, message=FALSE}
+
+VARselect(Datos, lag.max = 12, type = "const")
+
+```
+
+De esta forma, justificamos la estimación de un $VAR(2)$. Los resultados del mismo se reportan en los siguientes cuadros, en los que se muestra el resultado de una de las ecuaciones. Los resultados restantes se encuentran en el código de R mostrado más abajo. Primero mostraremos los resultados de las raíces del polinomio característico en el Cuadro \@ref(tab:RootsVAR), seguido de un cuadro para la ecuación del IGAE en el Cuadro \@ref(tab:IGAEVAR) (por simplicidad se omiten las otras cuatro ecuaciones del VAR(2)), y del Cuadro \@ref(tab:SigmaVARp) con la matriz $\mathbf{\Sigma}_{\hat{U}\hat{U}}$ estimada del VAR.
+
+Table: (\#tab:RootsVAR) Raíces del polinomio característico de un VAR(2).
+
+|  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|
+| 0.7452 | 0.4403 | 0.4403 | 0.3503 | 0.3503 |
+| 0.3342 | 0.3342 | 0.3339 | 0.3339 | 0.06951 |
+
+Table: (\#tab:IGAEVAR) Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series $DLINPC_t$, $DLTC_t$, $DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$.
+
+| Variable | Coeficiente | Error Est. | Estad. t | Prob.($>$ t) |
+|:---:|:---:|:---:|:---:|:---:|
+| $DLINPC_{t-1}$ | -0.2584978 | 0.1658396 | -1.559 | 0.120493 |
+| $DLTC_{t-1}$ | 0.0022016 | 0.0152876 | 0.144 | 0.885620 |
+| $DLCETE28_{t-1}$ | 0.0009547 | 0.0049115 | 0.194 | 0.846054 |
+| $DLIGAE_{t-1}$ | -0.2351453 | 0.0699797 | -3.360 | 0.000917 *** |
+| $DLIPI_{t-1}$ | 0.2442406 | 0.0600502 | 4.067 | 6.62e-05 *** |
+| $DLINPC_{t-2}$ | -0.0775039 | 0.1694809 | -0.457 | 0.647904 |
+| $DLTC_{t-2}$ | -0.0413316 | 0.0144650 | -2.857 | 0.004680 ** |
+| $DLCETE28_{t-2}$ | 0.0005341 | 0.0048058 | 0.111 | 0.911612 |
+| $DLIGAE_{t-2}$ | -0.0646890 | 0.0693711 | -0.933 | 0.352092 | 
+| $DLIPI_{t-2}$ | 0.1796286 | 0.0620861 | 2.893 | 0.004195 ** |
+| $\delta_4$ | 0.0030377 | 0.0008077 | 3.761 | 0.000217 *** |
+|  | Notas: | *** | signif. | al 0.1\% |
+|  |  |  ** | signif. | al 1\% |
+|  |  | * |  signif. | al 5\% |
+
+Table: (\#tab:SigmaVARp) Matriz $\mathbf{\Sigma}_{\hat{U}\hat{U}}$ estimada del VAR(2).
+
+|  |  |  |  |  |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|  | $DLINPC_t$ | $DLTC_t$ | $DLCE28_t$ | $DLIGAE_t$ | $DLIGAE_t$ | 
+| $DLINPC_t$ | 3.95e-06 | 3.19e-06 | -1.83e-06 | -5.29-07 | 1.34e-06 |
+| $DLTC_t$ | 3.19e-06 | 5.04e-04 | 4.27e-04 | 9.81e-06 | 1.61e-05 |
+| $DLCE28_t$ | -1.83e-06 | 4.27e-04 | 4.63e-03 | 1.26e-05 | 2.76e-05 |
+| $DLIGAE_t$ | -5.29e-07 | 9.81e-06 | 1.26e-05 | 2.43e-05 | 8.75e-06 |
+| $DLIGAE_t$ | 1.34e-06 | 1.61e-05 | 2.76e-05 | 8.75e-06 | 3.13e-05 |
+
+```{r EstimacionVAR, warning=FALSE, message=FALSE}
+VAR_p <- VAR(Datos, p = 2, type = "const")
+
+summary(VAR_p)
+```
+
+Finalmente, en el Cuadro \@ref(tab:DiagnosVAR) reportamos las pruebas de diagnóstico del VAR(2). Incluimos las pruebas de correlación serial (o autocorrelación), normalidad y de heterocedasticidad. De acuerdo con esa información, la correlación serial muestra que existe relación de la matriz de covarianzas no contemporánea considerando pocos rezagos, pero se elimina conforme los rezagos se incrementan. En cuanto a normalidad, se observa que los residuales no lo son, por lo que se requeriría mejorar la especificación del VAR. Finalmente, se observa que los residuales no son homocedásticos.
+
+Table: (\#tab:DiagnosVAR) Pruebas de diagnóstico sobre los residuales del VAR(2).
+
+| Estadística (rezagos) | Coeficiente | p-value | Conclusión |
+|:---:|:---:|:---:|:---:|
+| Correlación Serial ($\chi^2 (2)$) | 59.436 | 0.1696 | Existe autocorrelación serial |
+| Correlación Serial ($\chi^2 (4)$) | 127.17 | 0.03461 | No existe autocorrelación serial |
+| Correlación Serial ($\chi^2 (6)$) | 183.14 | 0.03393 | No existe autocorrelación serial |
+| Normalidad - JB ($\chi^2$) | 2335 | 0.0000 | Los residuales no son normales |
+| ARCH ($\chi^2 (2)$) | 691.58 | 0.0000 | Los residuales no son homocedásticos |
+
+
+```{r warning=FALSE, message=FALSE}
+
+### Diagnostic tests
+
+#### Normalidad:
+
+normality.test(VAR_p)
+
+#### Autocorrelacion Serial:
+
+#### LAGS = 2:
+
+serial.test(VAR_p, lags.bg = 2, type = "BG")
+
+#### LAGS = 4:
+
+serial.test(VAR_p, lags.bg = 4, type = "BG")
+
+#### LAGS = 6:
+
+serial.test(VAR_p, lags.bg = 6, type = "BG")
+
+#### Homocedasticidad:
+
+arch.test(VAR_p, lags.multi = 6)
+
+```
+
+## Análisis de Impulso-Respuesta
+
+Una de las grandes ventajas que aporta el análisis de los modelos VAR es el análisis de Impulso-Respuesta. Dicho análisis busca cuantificar el efecto que tiene en $\mathbf{X}_t$ una innovación o cambio en los residuales de cualquiera de las variables en un momento definido. Partamos de la ecuación \@ref(eq:VARMAq) de forma que tenemos:
+\begin{eqnarray}
+    \mathbf{X}_t & = & \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
+    & = & \mu + \mathbf{B}(L) \mathbf{U}_t \nonumber \\
+    & = & \mu + \Psi_0 \mathbf{U}_t + \Psi_1 \mathbf{U}_{t-1} + \Psi_2 \mathbf{U}_{t-2} + \Psi_3 \mathbf{U}_{t-3} + \ldots
+\end{eqnarray}
+
+Donde $\Psi_0 = I$ y cada una de las $\Psi_i = - \mathbf{B}_i$, $i = 1, 2, \ldots$. De esta forma se verifica el efecto que tiene en $\mathbf{X}_t$ cada una de las innovaciones pasadas. Por lo que el análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas matrices en las que hemos descompuesto a $\mathbf{B}(L)$.
+
+\textbf{Ejemplo}. Retomando el modelo $VAR(2)$ anteriormente estimado, en las siguientes figuras reportamos las gráficas de Impulso-Respuesta de la serie $DLTC_t$ ante cambios en los residuales del resto de las series y de la propia serie.
+
+```{r warning=FALSE, message=FALSE, fig.align='center'}
+
+IR_DLINPC <- irf(VAR_p, n.ahead = 12, boot = TRUE, 
+                 ci = 0.95, response = "DLINPC")
+
+IR_DLINPC
+
+#plot(IR_DLINPC)
+
+```
+
+```{r fig64, warning=FALSE, message=FALSE,fig.cap="Impulso - Respuesta en $DLTC_t$", fig.align='center'}
+
+IR_DLTC <- irf(VAR_p, n.ahead = 12, boot = TRUE, 
+               ci = 0.95, response = "DLTC")
+
+plot(IR_DLTC)
+
+```
+
+Los resultados muestran que la respuesta de $DLTC_t$ ante impulsos en los términos de error fue estadísticamente significativo sólo para alguunos de los casos y en periodos cortos de tiempo. El resto de los resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase 15 que se ubica en el repositorio de GitHub.
+
+## VAR Estructural
+
+El enfoque VAR de Sims (1980) tiene la propiedad deseable de que todas las variables se tratan simétricamente, de modo que todas las variables son endógenas en conjunto y el econometrista no depende de ninguna restricción de identificación. Consideremos un sistema VAR de primer orden del tipo representado en la ecuación \@ref(eq:VARp):
+\begin{equation}
+    \mathbf{X}_t = \mathbf{\delta} + A_1 \mathbf{X}_{t-1} + \mathbf{U}_{t}
+    (\#eq:VAR_p2)
+\end{equation}
+
+Sin embargo, dada la naturaleza un tanto ad hoc de la descomposición de Choleski, la belleza del enfoque parece disminuida cuando se construyen funciones de respuesta al impulso y descomposiciones de varianza del error de pronóstico. Además, el enfoque VAR ha sido criticado por estar desprovisto de cualquier contenido económico. El único papel del economista es sugerir las variables apropiadas para incluir en el VAR. A partir de ese punto, el procedimiento es casi mecánico. Sin embargo, es posible utilizar una teoría económica para imponer restricciones a las variables de modo que los resultados no sean ad hoc.
+
+A menos que el modelo estructural subyacente pueda identificarse a partir del modelo VAR de forma reducida, las innovaciones en una descomposición de Choleski no tienen una interpretación económica directa. Sin embargo, en lugar de utilizar una descomposición de Choleski, es posible imponer restricciones a los errores para identificar completamente los shocks estructurales de una manera que sea consistente con un modelo económico subyacente. Consideremos un VAR(2) en el que $\mathbf{X}_t$ contiene a dos series $Y_t$ y $Z_t$:
+\begin{eqnarray}
+    Y_t & = & a_{10} + a_{11} Y_{t - 1} + a_{12} Z_{t-1} + U_{1t} \nonumber \\
+    Z_t & = & a_{20} + a_{21} Y_{t - 1} + a_{22} Z_{t-1} + U_{2t} 
+    (\#eq:VAR2)
+\end{eqnarray}
+
+Para nuestros propósitos, el punto importante a destacar es que los dos términos de error $U_{1t}$ y $U_{2t}$ son en realidad compuestos de los shocks subyacentes $\varepsilon_{Yt}$ y $\varepsilon_{Zt}$. Así, 
+\begin{equation*}
+    \mathbf{U}_t = 
+    \begin{bmatrix}
+    U_{1t} \\ U_{2t}
+    \end{bmatrix} = 
+    \begin{bmatrix}
+    b_{11} & b_{12} \\ b_{21} & b_{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+    \varepsilon_{Yt} \\ \varepsilon_{Zt}
+    \end{bmatrix}
+\end{equation*}
+
+Aunque estos shocks compuestos son los errores de pronóstico de un valor adelante en $Y_t$ y $Z_t$, no tienen una interpretación estructural. Por lo tanto, existe una diferencia importante entre usar VAR para pronósticos y análisis económico. En nuestra representación \@ref(eq:VAR2) $U_{1t}$ y $U_{2t}$ son errores de pronóstico. Si solo nos interesa el pronóstico, los componentes de los errores de pronóstico no son importantes. 
+
+Dado el modelo económico, $\varepsilon_{Yt}$ y $\varepsilon_{Zt}$ son los cambios autónomos en $Y_t$ y $Z_t$ en el período $t$, respectivamente. Si queremos obtener las funciones de impulso - respuesta o las descomposiciones de varianza, es necesario usar los shocks estructurales (es decir, $\varepsilon_{Yt}$ y $\varepsilon_{Zt}$), no los errores de pronóstico. 
+
+El objetivo de un VAR estructural es usar la teoría económica (en lugar de la descomposición de Choleski) para recuperar las innovaciones estructurales a partir de los residuos $U_{1t}$ y $U_{2t}$.
+
+Una forma de sustituir el VAR estructural es ordenar las series en el VAR de las más correlacionadas a las menos correlacionadas. Si el coeficiente de correlación entre $U_{1t}$ y $U_{2t}$ es bajo, es poco probable que el ordenamiento sea importante. Sin embargo, en un VAR con varias variables, es improbable que todas las correlaciones sean pequeñas. Después de todo, al seleccionar las variables que se incluirán en un modelo, es probable que se elijan variables que muestren fuertes comovimientos. Cuando los residuos de un VAR están correlacionados, no es práctico probar todos los ordenamientos alternativos. Con un modelo de cuatro variables, hay 24 (es decir, $4!$) ordenamientos posibles. 
+
+Sims (1986) y Bernanke (1986) propusieron modelar las innovaciones utilizando el análisis económico. La idea básica es estimar las relaciones entre los shocks estructurales utilizando un modelo económico. Para entender el procedimiento, es útil examinar la relación entre los errores de pronóstico y las innovaciones estructurales en un VAR de $n$ variables.
+
+Dado que la relación es invariante a la longitud de los rezagos, podemos escribir el VAR(1) como:
+\begin{eqnarray*}
+    \mathbf{X}_t & = & \boldsymbol{\delta} + \mathbf{A_1} \mathbf{X}_{t-1} + \mathbf{U}_{t} \\
+    & = & \mathbf{B}^{-1} \mathbf{\Gamma}_{0} + \mathbf{B}^{-1} \mathbf{\Gamma}_{1} \mathbf{X}_{t-1} + \mathbf{B}^{-1} \mathbf{\varepsilon}_{t} \\
+    \mathbf{B} \mathbf{X}_t & = & \mathbf{\Gamma}_{0} + \mathbf{\Gamma}_{1} \mathbf{X}_{t-1} + \mathbf{\varepsilon}_{t}
+\end{eqnarray*}
+
+Donde $\mathbf{B}$ es una matriz que establece la estructura entre las variables. Sin embargo, la selección de los distintos $bij \in \mathbf{B}$ no puede ser completamente arbitraria. 
+
+La cuestión es restringir el sistema de modo que:
+\begin{enumerate}
+    \item Recupere los distintos $\{ \varepsilon_{it} \}$, y 
+    
+    \item Preserve la estructura del error supuesta en relación con la independencia de los distintos shocks $\{ \varepsilon_{it} \}$.
+\end{enumerate} 
+
+Para resolver este problema de identificación, simplemente cuente las ecuaciones y las incógnitas. Usando MCO, podemos obtener la matriz de varianza/covarianza $\mathbf{\Sigma}$:
+\begin{equation*}
+    \mathbf{\Sigma} = 
+    \begin{bmatrix}
+    \sigma_1^2 & \sigma_{12} & \cdots & \sigma_{1n} \\ 
+    \sigma_{21} & \sigma_2^2 & \cdots & \sigma_{2n} \\ 
+    \vdots & \vdots & \cdots & \vdots \\ 
+    \sigma_{n1} & \sigma_{n2} & \cdots & \sigma_n^2 \\ 
+    \end{bmatrix}
+\end{equation*}
+
+Donde cada elemento de $\mathbf{\Sigma}$ se estima como la suma:
+\begin{equation*}
+    \sigma_{ij} = \frac{\sum_{i = 1}^{T} U_{it} U_{jt} }{T}
+\end{equation*}
+
+Como $\mathbf{\Sigma}$ es simétrica, contiene sólo $(n + 1)n/2$ elementos distintos. Hay $n$ elementos a lo largo de la diagonal principal, $(n - 1)$ a lo largo del primer elemento fuera de la diagonal, $(n - 2)$ a lo largo del siguiente elemento fuera de la diagonal, así sucesivamente, y un elemento de esquina para un total de $(n2 + n)/2$ elementos libres.
+
+Dado que los elementos diagonales de $\mathbf{B}$ son todos la unidad, $\mathbf{B}$ contiene $n^2 - n$ valores desconocidos. Además, existen los $n$ valores desconocidos $Var(\varepsilon_{it})$ para un total de $n^2$ valores desconocidos en el modelo estructural [es decir, los $n^2 - n$ valores de $\mathbf{B}$ más los $n$ valores $Var(\varepsilon_{it})$]. 
+
+Ahora la respuesta al problema de identificación es simple; para identificar las $n^2$ incógnitas a partir de los elementos independientes conocidos $(n^2 + n)/2$ de $\mathbf{\Sigma}$, es necesario imponer restricciones adicionales $n^2 - [(n^2 + n)/2] = (n^2 + n)/2$ al sistema. 
+
+Este resultado se generaliza a un modelo con $p$ rezagos: Para identificar el modelo estructural a partir de un VAR estimado, es necesario imponer restricciones $(n^2 - n)/2$ al modelo estructural.
+
+Para aquellos que desean un poco más de formalidad, escriba la matriz de varianzas / covarianzas de los residuos de regresión como:
+\begin{equation*}
+    \mathbb{E}[\hat{\mathbf{U}}_{t} \hat{\mathbf{U}}_{t}'] = \mathbf{\Sigma} =
+    \begin{bmatrix}
+    \sigma_1^2 & \sigma_{12} & \cdots & \sigma_{1n} \\ 
+    \sigma_{21} & \sigma_2^2 & \cdots & \sigma_{2n} \\ 
+    \vdots & \vdots & \cdots & \vdots \\ 
+    \sigma_{n1} & \sigma_{n2} & \cdots & \sigma_n^2 \\ 
+    \end{bmatrix}
+\end{equation*}
+
+Dado que: $\mathbf{U}_t = \mathbf{B}^{-1} \mathbf{\varepsilon}_t$, de esta forma:
+\begin{equation*}
+    \mathbb{E}[\hat{\mathbf{U}}_{t} \hat{\mathbf{U}}_{t}'] = \mathbb{E}[(\mathbf{B}^{-1} \mathbf{\varepsilon}_t)(\mathbf{B}^{-1} \mathbf{\varepsilon}_t)'] = \mathbb{E}[\mathbf{B}^{-1} \mathbf{\varepsilon}_t \mathbf{\varepsilon}_t' (\mathbf{B}^{-1})'] = \mathbf{B}^{-1} \mathbb{E}[\mathbf{\varepsilon}_t \mathbf{\varepsilon}_t'] (\mathbf{B}^{-1})'
+\end{equation*}
+
+Donde $\mathbb{E}[\mathbf{\varepsilon}_t \mathbf{\varepsilon}_t']$ es varianza estructural de las innovaciones y $\mathbf{B}^{-1}$ es la matriz que permite darle estructura a la varianza estructural. De esta forma:
+\begin{equation*}
+    \mathbf{\Sigma_{\varepsilon}} = \mathbb{E}[\mathbf{\varepsilon}_t \mathbf{\varepsilon}_t']
+\end{equation*}
+
+\textbf{Ejemplo}. Retomemos el conjunto de variables del ejemplo de una VAR(p) antes discutido, pero solo consideremos las variables domésticas y en orden de las más endógenas a las menos endógenas ($\Delta LINPC$, $\Delta LIGAE$, $\Delta 
+ LCETE28$, $\Delta  LTC$)--dejando fuera al IPI de Estados Unidos--. En este caso requerimos establecer las restricciones $\frac{K^2 - K}{2}$. Pensemos en una matriz:
+\begin{equation*}
+    \begin{pmatrix}
+    \text{NA} & \text{NA} & \text{NA} & \text{NA}\\
+    0         & \text{NA} & \text{NA} & \text{NA}\\
+    0         & 0         & \text{NA} & \text{NA}\\
+    0         & 0         & 0         & \text{NA}
+    \end{pmatrix}
+\end{equation*}
+
+Y en una matriz que capture los efectos individuales:
+\begin{equation*}
+    \begin{pmatrix}
+    \text{NA} & 0 & 0 & 0 \\
+    0         & \text{NA} & 0 & 0 \\
+    0         & 0         & \text{NA} & 0 \\
+    0         & 0         & 0         & \text{NA}
+    \end{pmatrix}
+\end{equation*}
+
+Donde estaríamos imponiendo la restricción de que las variables solo se relacionan en los casos que son distintos de cero (0). Dado lo anterior, obtendríamos el siguiente resultado de la matriz de covarianza restringida:
+\begin{equation*}
+    \begin{pmatrix}
+    1 & -0.03652 & -0.000252 & -0.001698 \\
+    0         & 1.00000 & -0.024109 & 0.077889 \\
+    0         & 0         & 1.000000 & -0.503508 \\
+    0         & 0         & 0         & 1
+    \end{pmatrix}
+\end{equation*}
+
+Y de la matiz de efectos individuales:
+\begin{equation*}
+    \begin{pmatrix}
+    0.002113 & 0 & 0 & 0 \\
+    0         & 0.01369 & 0 & 0 \\
+    0         & 0         & 0.0634 & 0 \\
+    0         & 0         & 0         & 0.02585
+    \end{pmatrix}
+\end{equation*}
+
+ 
+```{r SVAR, warning=FALSE, message=FALSE}
+#
+
+Datos <- data.frame(cbind(DLINPC, DLIGAE, DLCETE28, DLTC))
+
+Datos <- ts(Datos, 
+            start = c(2000, 2), freq = 12)
+
+VARselect(Datos, lag.max = 12, type = "const")
+
+VAR_p <- VAR(Datos, p = 2, type = "const")
+
+summary(VAR_p)
+
+```
+
+```{r warning=FALSE, message=FALSE}
+### Create Restrictions Matrix:
+
+a.mat <- diag(4)
+
+diag(a.mat) <- NA
+
+a.mat[1, 2] <- NA
+a.mat[1, 3] <- NA
+a.mat[1, 4] <- NA
+a.mat[2, 3] <- NA
+a.mat[2, 4] <- NA
+a.mat[3, 4] <- NA
+
+a.mat
+
+#### individual shocks
+
+b.mat <- diag(4)
+
+diag(b.mat) <- NA
+
+b.mat
+
+```
+
+```{r warning=FALSE, message=FALSE}
+### SVAR Estimation
+#?SVAR
+
+SVAR_p <- SVAR(VAR_p, Amat = a.mat, Bmat = b.mat, max.iter = 10000, hessian = TRUE)
+
+SVAR_p
+
+```
+
+Como resultado, obtenemos las siguientes Impulse-Response, que tienen la característica de que representan un VAR con la estructura definida en las matrices anteriores.
+
+```{r fig65, warning=FALSE, message=FALSE,fig.cap="Impulso - Respuesta en $DLINPC_t$", fig.align='center'}
+
+#
+
+IR_DLINPC <- irf(SVAR_p, n.ahead = 12, boot = TRUE, 
+                 ci = 0.95, response = "DLINPC")
+
+plot(IR_DLINPC)
+
+```
+
+
+## Otras opciones del análisis impulso-respuesta
+
+```{r }
+
+IR_DLINPC_2 <- irf(SVAR_p, n.ahead = 12, boot = TRUE, 
+                   ci = 0.95, response = "DLINPC",
+                   ortho = TRUE, cumulative = FALSE)
+
+plot(IR_DLINPC_2)
+
+```
+
+## Cointegración
+
+Hasta ahora en el curso hemos usado el supuesto de que las series son estacionarias para el conjunto de técnicas $ARMA(p,q)$ y $VAR(p)$. No obstante, dado que relajamos el supuesto de estacionariedad (incluyendo la estacionariedad en varianza) y que establecimos una serie de pruebas para determinar cuándo una serie es estadísticamente estacionaria, ahora podemos plantear una técnica llamada Cointegración. Para esta técnica consideraremos sólo series que son $I(1)$ y reconoceremos que se originó con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen (1988).
+
+### Definición y propiedades del proceso de cointegración
+
+Cointegración puede ser caracterizada o definida en palabras sencillas como que dos o más variables tienen una relación común estable en el largo plazo. Es decir, estas no suelen tomar caminos o trayectorias diferentes, excepto por períodos de tiempo transitorios y eventuales. A continuación, utilizaremos la definición de Engle y Granger (1984) de cointegración.
+
+Sea $\mathbf{Y}$ un vector de k-series de tiempo, decimos que los elementos en $\mathbf{Y}$ están cointegrados en un orden (d, c), es decir, $\mathbf{Y} \sim CI(d, c)$, si todos los elementos de $\mathbf{Y}$ son series integradas de orden d, I(d), y si existe al menos una combinación lineal no trivial $\mathbf{Z}$ de esas variables que es de orden I(d - c), donde $d \geq c > 0$, si y sólo si:
+\begin{equation}
+    \boldsymbol{\beta}_i' \mathbf{Y}_t = \mathbf{Y}_{it} \sim I(d-c)
+\end{equation}
+
+Donde $i = 1, 2, \ldots, r$ y $r < k$.
+
+A los diferentes vectores $\boldsymbol{\beta}_i$ se les denomina como vectores de cointegración. El rango de la matriz de vectores de cointegración $r$ es el número de vectores de cointegración linealmente independientes. En general diremos que los vectores de la matriz de cointegración $\boldsymbol{\beta}$ tendrán la forma de:
+\begin{equation}
+    \boldsymbol{\beta}' \mathbf{Y}_t = \mathbf{Z}_t
+\end{equation}
+
+Antes de continuar hagamos algunas observaciones. Si todas las variables de $\mathbf{Y}$ son I(1) y $0 \leq r < k$, diremos que las series no cointegran si $r = 0$. Si esto pasa, entonces, como demostraremos más adelante, la mejor opción será estimar un modelo VAR(p) en diferencias. Adicionalmente, asumiremos que $c = d = 1$, por lo que la relación de cointegración, en su caso, generará combinaciones lineales $\mathbf{Z}$ estacionarias.
+
+### Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos
+
+Sean $Y_1, Y_2, \ldots, Y_k$ son series que forman $\mathbf{Y}$ y que todas son I(1), entonces los siguientes casos son posibles:
+
+1. Si $r = 1$ entonces se trata de un caso de cointegración de Granger.
+
+2. Si $r \geq 1$ entonces se trata de un caso de cointegración múltiple de Johansen.
+
+Por lo anterior, en este curso analizaremos el caso de Cointegración de Johansen. Ahora plantearemos la forma de estimar el proceso de cointegración. El primer paso para ello es determinar un modelo VAR(p) con las k-series no estacionarias (series en niveles)--en este punto se vuelve fundamental caracterizar las series a través de pruebas de raíces unitarias--. Elegimos el valor de $p$ mediante el uso de los criterios de información. De esta forma tendremos una especificación similar a:
+\begin{equation}
+    \mathbf{Y}_t = \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
+    (\#eq:VARCI)
+\end{equation}
+
+Donde $\mathbf{U}_t$ es un término de error k-dimensional puramente aleatorio; $\mathbf{D}_t$ contiene los componentes determinísticos de constante y tendencia, y $\mathbf{A}_i$, $i = 1, 2, \ldots, p$, son matrices de $k \times k$ coeficientes. Notemos que el VAR(p) involucrado en este caso, a diferencia del VAR anteriormente estudiado, puede incluir un término de tendencia. Esto en razón de que hemos relajado el concepto de estacionariedad.
+
+Si reescribimos la ecuación \@ref(eq:VARCI) en su forma de Vector Corrector de Errores (VEC, por sus siglas en inglés) tenemos:
+\begin{eqnarray}
+    \mathbf{Y}_t - \mathbf{Y}_{t-1} & = & \Delta \mathbf{Y}_t \nonumber \\
+    & = & \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t - \mathbf{Y}_{t-1} + \mathbf{U}_t \nonumber \\
+    & = & (\mathbf{A}_1 - \mathbf{I}) \mathbf{Y}_{t-1} + \mathbf{A}_2 \mathbf{Y}_{t-2} + \ldots + \mathbf{A}_p \mathbf{Y}_{t-p} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
+    & = & \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
+    & = & - \left( \mathbf{I} - \sum_{j=1}^{p} \mathbf{A}_j \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
+    \Delta \mathbf{Y}_t & = & - \Pi \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
+    (\#eq:VARVEC)
+\end{eqnarray}
+
+Donde $\mathbf{A}_j^* = - \sum_{i=j+1}^p \mathbf{A}_i$, $i = 1, 2, \ldots, p-1$, y la matriz $\Pi$ representa todas las relaciones de largo plazo entre las variables, por lo que la matriz es de rango completo $k \times k$. Por lo tanto, tenemos que dicha matriz en la ecuación \@ref(eq:VARVEC) se puede factorizar como:
+\begin{equation}
+    \Pi_{(k \times k)} = \Gamma_{(k \times r)} \boldsymbol{\beta}_{(r \times k)}'
+    (\#eq:Pi_Matrix)
+\end{equation}
+
+Donde $\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}$ son $r$ combinaciones linealmente independientes que son estacionarias.
+
+Dada la ecuación \@ref(eq:VARVEC) podemos establecer la aproximación de Johansen (1988) que se realiza mediante una estimación por Máxima Verosimilitud de la ecuación:
+\begin{equation}
+    \Delta \mathbf{Y}_t + \Gamma \boldsymbol{\beta}' \mathbf{Y}_{t-1} = \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
+\end{equation}
+
+Donde una vez estimado el sistema:
+\begin{equation}
+    \boldsymbol{\beta} = [v_1, v_2, \ldots, v_r]
+\end{equation}
+
+Cada $v_i$, $i = 1, 2, \ldots, r$ es un vector propio que está asociado con los $r$ valores propios positivos, mismos que están asociados con la prueba de hipótesis de cointegración. Dicha hipótesis está basada en dos estadísticas con las que se determina el rango $r$ de $\Pi$:
+
+1. Prueba de Traza:
+    $H_0 :$ Existen al menos $r$ valores propios positivos o Existen al menos $r$ relaciones de largo plazo estacionarias.
+    
+2. Prueba del valor propio máximo o $\lambda_{max}$:
+    $H_0 :$ Existen $r$ valores propios positivos o Existen $r$ relaciones de largo plazo estacionarias.
+
+\textbf{Ejemplo}. Para ejemplificar el procedimiento de cointegración utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, IGAE e Índice de Producción Industrial de Estados Unidos. Quizá el marco teórico de la relación entre las variables no sea del todo correcto, pero dejando de lado ese problema, estimaremos si las 5 series cointegran.
+
+Por principio, probaremos que todas las series son I(1), lo cual es cierto (ver Scrip para mayores detalles). En las Figuras \@ref(fig:fig81), \@ref(fig:fig82) y \@ref(fig:fig83) se muestran las series en niveles y en diferencias, con lo cual ilustramos como es viable que las series sean I(1).
+
+```{r warning=FALSE, message=FALSE}
+
+library(ggplot2)
+library(dplyr)
+library(stats)
+library(MASS)
+library(strucchange)
+library(zoo)
+library(sandwich)
+library(urca)
+library(lmtest)
+library(vars)
+
+#
+load("BD/Datos_Ad.RData")
+
+#
+## Conversion a series de tiempo:
+Datos <- ts(Datos_Ad[7: 11], 
+            start = c(2000, 1), 
+            freq = 12)
+
+LDatos <- log(Datos)
+
+DLDatos <- diff(log(Datos, base = exp(1)), 
+                lag = 1, 
+                differences = 1)
+
+```
+
+```{r fig81, warning=FALSE, fig.cap="Series en niveles (logaritmos) para la prueba de Cointegración", fig.align='center'}
+
+plot(LDatos, 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     #main = "Series en Logaritmos", 
+     xlab = "Tiempo")
+
+```
+
+```{r fig82, warning=FALSE, fig.cap="Series en Diferencias Logarítmicas para la prueba de Cointegración", fig.align='center'}
+
+plot(DLDatos, 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     #main = "Series en Diferencias Logaritmicas", 
+     xlab = "Tiempo")
+
+```
+
+```{r fig83, warning=FALSE, fig.cap="Comparacion de Series en Diferencias para la prueba de Cointegración", fig.align='center'}
+
+plot(cbind(LDatos, DLDatos), 
+     plot.type = "m", nc = 2,
+     col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
+     #main = "Comparacion de Series en Diferencias", 
+     xlab = "Tiempo")
+
+```
+
+Posteriormente, determinamos cuál es el orden adecuado de un VAR(p) en niveles. En el Cuadro \@ref(tab:SelectVARVEC) mostramos los resultados de los criterios de información para determinar el número de rezagos óptimos, el cual resultó en $p = 3$ para los criterios AIC y FPE, $p = 2$ para el criterio HQ y $p = 1$ para el criterio SC. Por lo tanto, decidiremos utilizar un VAR(3) con tendencia y constante. Note que es posible elegir otros modelos de VAR que incluyan: solo tendencia, solo constante o ninguno de estos elementos.
+
+Table: (\#tab:SelectVARVEC) Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante y tendencia de las series $LINPC_t$, $LTC_t$, $LCETE28_t$, $LIGAE_t$ y $LIPI_t$.
+
+| Rezagos | AIC | HQ | SC | FPE |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | -4.606707e+01 | -4.585260e+01 | -4.553568e+01 | 9.848467e-21 |
+| 2 | -4.643287e+01 | -4.606521e+01 | -4.552191e+01 | 6.834064e-21 |
+| 3 | -4.647783e+01 | -4.595697e+01 | -4.518730e+01 | 6.539757e-21 |
+| 4 | -4.645834e+01 | -4.578428e+01 | -4.478824e+01 | 6.679778e-21 |
+| \vdots | \vdots | \vdots | \vdots | \vdots |
+
+
+```{r warning=FALSE, message=FALSE}
+## VAR(p) Seleccion:
+
+VARselect(LDatos, lag.max = 10, type = "both")
+
+VARselect(LDatos, lag.max = 10, type = "trend")
+
+VARselect(LDatos, lag.max = 10, type = "const")
+
+VARselect(LDatos, lag.max = 10, type = "none")
+
+```
+
+El mismo número de rezagos los utilizaremos para probar la Cointegración, ya sea por una estadística de la Traza o por una del máximo valor propio. Dado que los resultados se sostienen, sólo mostraremos uno de los casos en que las series cointegran y únicamente para el caso de la prueba de la traza (el otro caso está disponible en el código de R disponible abajo). En el Cuadro \@ref(tab:TrazaTest) reportamos los resultados del Test de Cointegración para un modelo con 3 rezagos.
+
+Cuadro: (\#tab:TrazaTest) Prueba de la traza para cointegración considerando un VAR(p) con término constante y tendencia de las series $LINPC_t$, $LTC_t$, $LCETE28_t$, $LIGAE_t$ y $LIPI_t$.
+
+| r $\leq$ | Estadística | 10\% | 5\% | 1\% |
+|:---:|:---:|:---:|:---:|:---:|
+| 4 | 4.79 | 10.49 | 12.25 | 16.26 |
+| 3 | 13.97 | 22.76 | 25.32 | 30.45 |
+| 2 | 27.45 | 39.06 | 42.44 | 48.45 |
+| 1 | 48.14 | 59.14 | 62.99 | 70.05 |
+| 0 | 118.98 | 83.20 | 87.31 | 96.58 |
+
+Los resultados del Cuadro \@ref(tab:TrazaTest) indican que aceptamos la hipótesis nula para el caso de $r \leq 1$ al $5\%$, por lo que podemos concluir que existe evidencia estadística para probar que existe al menos 1 vector de cointegración. Por lo que dicho vector normalizado a la primera entrada es:
+\begin{equation}
+    \boldsymbol{\beta} = \left[ 
+    \begin{matrix}
+    1.00000000 \\
+    0.2100057 \\
+    0.4812626 \\
+    -2.8386112 \\
+    -1.2576912 \\
+    14.2887887 \\
+    \end{matrix} \right]
+\end{equation}
+
+Donde el vector esta normalizado para la serie $LINPC_t$, por lo que concluímos que la relación de largo plazo que encontramos cointegra estará dada por:
+\begin{eqnarray*}
+    LINPC_t & = & -0.2100057 LTC_t - 0.4812626 LCETE28_t \\
+    &  & + 2.8386112 LIGAE_t + 1.2576912 LIPI_t \\
+    &  & - 14.2887887
+\end{eqnarray*}
+
+
+```{r warning=FALSE, message=FALSE}
+## VAR Estimacion:
+
+VAR_1 <- VAR(LDatos, p = 3, type = "both")
+
+#summary(VAR_1)
+
+#plot(VAR_1, names = "INPC_Ad")
+#plot(VAR_1, names = "TC_Ad")
+#plot(VAR_1, names = "CETE28_Ad")
+#plot(VAR_1, names = "IGAE_Ad")
+#plot(VAR_1, names = "IPI_Ad")
+
+# Cointegration Test:
+#ca.jo = function (x, type = c("eigen", "trace"), ecdet = c("none", "const", 
+#"trend"), K = 2, spec = c("longrun", "transitory"), season = NULL, 
+#dumvar = NULL) 
+
+#summary(ca.jo(LDatos, type = "trace", ecdet = "trend", K = 3, spec = "longrun"))
+
+#summary(ca.jo(LDatos, type = "trace", ecdet = "const", K = 3, spec = "longrun"))
+
+#summary(ca.jo(LDatos, type = "trace", ecdet = "none", K = 3, spec = "longrun"))
+
+CA_1 <- ca.jo(LDatos, type = "trace", ecdet = "const", K = 3, spec = "longrun")
+
+summary(CA_1)
+
+```
+
+Considerando lo anterior, podemos determinar $\hat{U}_t$ para esta ecuación de cointegración. En la Figura \@ref(fig:fig84) mostramos los residuales estimados. Derivado de la inspección visual, parecería que estos no son estacionarios, condición que debería ser cierta. De esta forma, una prueba deseable es aplicar todas las pruebas de raíces unitarias a esta serie para mostrar que es I(0). En el Scrip llamado Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre esta serie y se encuentra que es posible que no sea estacionaria.
+
+```{r fig84, fig.cap = "Residuales estimados de la ecuación de cointegración", fig.align='center'}
+
+TT <- ts(c(1:282), 
+         start = c(2000, 1), 
+         freq = 12)
+
+U <- LDatos[ , 1] + 0.2100057 *LDatos[ , 2] + 0.4812626*LDatos[ , 3] - 2.8386112*LDatos[ , 4] - 1.2576912*LDatos[ , 5] + 14.2887887
+
+#
+
+plot(U, 
+     main = "Residuales de la Ecuación de Cointegración",
+     type = "l", 
+     col = "darkred")
+
+```
+
+## Modelos ADRL
+
+### Teoría
+
+Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura \@ref(fig:fig91) muestra un esquema o diagrama de cómo podríamos proceder para seleccionar el modelo correcto.
+
+```{r fig91, out.width='95%', fig.cap = "Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)", fig.align='center'}
+
+knitr::include_graphics("Plots/TimeSeries_Models.png") 
+
+```
+
+En este caso incorporaremos a los modelos autogregressive distributed lag models (ARDL, por sus siglas en inglés). En estos casos el procedimiento de Johansen no podría aplicarse directamennte cuando las variables incluidas son de un orden mixto o cuando simplemente todas no son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.
+
+Este tipo de modelos toma suficientes rezagos para capturar el mecanismo generador de datos. También es posible llegar a una especificación del mecanismo corrector de errores a partir de una trasformación lineal del ARDL. 
+
+Consideremos la siguiente ecuación:
+\begin{equation}
+    Y_t = \alpha + \delta X_t + \gamma Z_t + U_t
+    (\#eq:EqARDL)
+\end{equation}
+
+Dada la ecuación \@ref(eq:EqARDL) podemos establecer su forma de mecanismo corrector de errores en forma ARDL dada por:
+\begin{eqnarray*}
+    \Delta Y_t & = & \alpha + \sum_{i = 1}^p \beta_i \Delta Y_{t-i} + \sum_{i = 1}^p \delta_i \Delta X_{t-i} + \sum_{i = 1}^p \gamma_i \Delta Z_{t-i} \\ 
+    &  & + \lambda_1 Y_{t-1} + \lambda_2 X_{t-1} + \lambda_3 Z_{t-1} + U_t
+\end{eqnarray*}
+
+Donde los coeficientes $\beta_i$, $\delta_i$, $\gamma_i$ representan la dinámica de corto plazo y las $\lambda$'s la dinámica de largo plazo.
+
+La hipótesis nula ($H_0$) es que las $\lambda_1 + \lambda_2 + \lambda_3 = 0$, es decir, que no existe relación de largo plazo.
+
+En la práctica estimamos una especificación con rezafos distribuidos:
+\begin{equation}
+    Y_t = \alpha + \sum_{i = 1}^p \beta_i Y_{t-i} + \sum_{i = 1}^p \delta_i X_{t-i} + \sum_{i = 1}^p \gamma_i Z_{t-i} + U_t
+\end{equation}
+
+Además de verificar si las series involucradas son estacionarias y decidir el número de reagos $p$ mediante criterios de información.
+
+### Ejemplo
+
+#### DESCRIPCIÓN DEL PROBLEMA
+
+Supongamos que queremos modelar el logaritmo de dinero (M2) como una función de LRY (logarithm of real income), IBO (bond rate) e IDE (bank deposit rate). 
+
+* El problema es que la aplicación de una regresión de MCO en datos no estacionarios daría lugar a una regresión espúria. 
+
+* Los parámetros estimados serían consistentes solo si las series estuvieran cointegradas.
+ 
+#### Importamos Datos desde un dataset de R:
+
+Utilizaremos un dataset integrado en la biblioteca ARDL de R. Se trata de un dataframe con 55 renglones y 5 variables en el período de 1974:Q1 a 1987:Q3 de las siguientes variables:
+
+LRM: logarithm of real money, M2
+
+LRY: logarithm of real income
+
+LPY: logarithm of price deflator
+
+IBO: bond rate
+
+IDE: bank deposit rate
+
+```{r warning=FALSE, message=FALSE}
+
+library(zoo) 
+library(xts) 
+library(ARDL)
+
+#
+data(denmark)
+
+names(denmark)
+
+```
+
+#### Procedimiento:
+
+1. Calculamos un auto ADRL para determinar la combinación óptima de rezagos.
+
+```{r warning=FALSE}
+
+models <- auto_ardl(LRM ~ LRY + IBO + IDE, data = denmark, max_order = 5)
+
+names(models)
+
+#
+models$top_orders
+
+#
+models$best_order
+
+#
+models$best_model
+
+#
+BestMod <- models$best_model
+
+summary(BestMod)
+
+```
+
+2. UECM (Unrestricted Error Correction Model) of the underlying ARDL.
+```{r warning=FALSE}
+
+UECM_BestMod <- uecm(BestMod)
+
+summary(UECM_BestMod)
+
+```
+
+3. RECM (Restricted Error Correction Model) of the underlying ARDL
+Obs: allowing the constant to join the short-run relationship (case 2), instead of the long-run (case 3)
+
+```{r warning=FALSE}
+
+RECM_BestMod <- recm(UECM_BestMod, case = 2)
+
+summary(RECM_BestMod)
+
+```
+
+4. long-run levels relationship (cointegration) 
+
+```{r warning=FALSE}
+
+bounds_f_test(BestMod, case = 2)
+
+```
+
+5. Long-run multipliers (with standard errors, t-statistics and p-values)
+
+```{r warning=FALSE}
+
+multipliers(BestMod)
+
+#
+Result <- coint_eq(BestMod, case = 2)
+
+```
+
+#### Make the plot
+
+```{r fig92, out.width='95%', fig.cap = "Gráfica de la ecuación de cointegración", fig.align='center'}
+
+Datos <- cbind.zoo(LRM = denmark[,"LRM"], Result)
+
+Datos <- xts(Datos)
+
+plot(Datos, legend.loc = "right")
+
+```
+
+

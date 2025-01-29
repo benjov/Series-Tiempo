@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 Modelos ADRL | Notas de Clase: Series de Tiempo</title>
+<title>Chapter 8 Modelos ADRL | Notas de Clase: Series de Tiempo</title>
 <meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
-<meta name="description" content="9.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 9.1 muestra un esquema o diagrama de cómo podríamos...">
+<meta name="description" content="8.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 8.1 muestra un esquema o diagrama de cómo podríamos...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 9 Modelos ADRL | Notas de Clase: Series de Tiempo">
+<meta property="og:title" content="Chapter 8 Modelos ADRL | Notas de Clase: Series de Tiempo">
 <meta property="og:type" content="book">
-<meta property="og:description" content="9.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 9.1 muestra un esquema o diagrama de cómo podríamos...">
+<meta property="og:description" content="8.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 8.1 muestra un esquema o diagrama de cómo podríamos...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 Modelos ADRL | Notas de Clase: Series de Tiempo">
-<meta name="twitter:description" content="9.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 9.1 muestra un esquema o diagrama de cómo podríamos...">
+<meta name="twitter:title" content="Chapter 8 Modelos ADRL | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="8.1 Teoría Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura 8.1 muestra un esquema o diagrama de cómo podríamos...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -44,17 +44,16 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
-<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
-<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
-<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
-<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
-<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
-<li><a class="active" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
-<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></li>
+<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">4</span> Desestacionalización y filtrado de Series</a></li>
+<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">5</span> Procesos Basados en Vectores Autoregresivos</a></li>
+<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">6</span> Procesos No Estacionarios</a></li>
+<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">7</span> Cointegración</a></li>
+<li><a class="active" href="modelos-adrl.html"><span class="header-section-number">8</span> Modelos ADRL</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">9</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">10</span> Modelos de Datos Panel</a></li>
+<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">11</span> Otros Modelos de Series de Tiempo No lineales</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,21 +61,21 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-adrl" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-adrl" class="section level1" number="8">
 <h1>
-<span class="header-section-number">9</span> Modelos ADRL<a class="anchor" aria-label="anchor" href="#modelos-adrl"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Modelos ADRL<a class="anchor" aria-label="anchor" href="#modelos-adrl"><i class="fas fa-link"></i></a>
 </h1>
-<div id="teoría" class="section level2" number="9.1">
+<div id="teoría" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">9.1</span> Teoría<a class="anchor" aria-label="anchor" href="#teor%C3%ADa"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Teoría<a class="anchor" aria-label="anchor" href="#teor%C3%ADa"><i class="fas fa-link"></i></a>
 </h2>
-<p>Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura <a href="modelos-adrl.html#fig:fig91">9.1</a> muestra un esquema o diagrama de cómo podríamos proceder para seleccionar el modelo correcto.</p>
+<p>Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura <a href="modelos-adrl.html#fig:fig91">8.1</a> muestra un esquema o diagrama de cómo podríamos proceder para seleccionar el modelo correcto.</p>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/TimeSeries_Models.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig91"></span>
 <img src="Plots/TimeSeries_Models.png" alt="Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)" width="95%"><p class="caption">
-Figure 9.1: Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)
+Figure 8.1: Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)
 </p>
 </div>
 <p>En este caso incorporaremos a los modelos autogregressive distributed lag models (ARDL, por sus siglas en inglés). En estos casos el procedimiento de Johansen no podría aplicarse directamennte cuando las variables incluidas son de un orden mixto o cuando simplemente todas no son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.</p>
@@ -84,9 +83,9 @@ Figure 9.1: Method selection for time series data. OLS: Ordinary least squares; 
 <p>Consideremos la siguiente ecuación:
 <span class="math display" id="eq:EqARDL">\[\begin{equation}
     Y_t = \alpha + \delta X_t + \gamma Z_t + U_t
-    \tag{9.1}
+    \tag{8.1}
 \end{equation}\]</span></p>
-<p>Dada la ecuación <a href="modelos-adrl.html#eq:EqARDL">(9.1)</a> podemos establecer su forma de mecanismo corrector de errores en forma ARDL dada por:
+<p>Dada la ecuación <a href="modelos-adrl.html#eq:EqARDL">(8.1)</a> podemos establecer su forma de mecanismo corrector de errores en forma ARDL dada por:
 <span class="math display">\[\begin{eqnarray*}
     \Delta Y_t &amp; = &amp; \alpha + \sum_{i = 1}^p \beta_i \Delta Y_{t-i} + \sum_{i = 1}^p \delta_i \Delta X_{t-i} + \sum_{i = 1}^p \gamma_i \Delta Z_{t-i} \\
     &amp;  &amp; + \lambda_1 Y_{t-1} + \lambda_2 X_{t-1} + \lambda_3 Z_{t-1} + U_t
@@ -99,13 +98,13 @@ Figure 9.1: Method selection for time series data. OLS: Ordinary least squares; 
 \end{equation}\]</span></p>
 <p>Además de verificar si las series involucradas son estacionarias y decidir el número de reagos <span class="math inline">\(p\)</span> mediante criterios de información.</p>
 </div>
-<div id="ejemplo" class="section level2" number="9.2">
+<div id="ejemplo" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">9.2</span> Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo"><i class="fas fa-link"></i></a>
 </h2>
-<div id="descripción-del-problema" class="section level3" number="9.2.1">
+<div id="descripción-del-problema" class="section level3" number="8.2.1">
 <h3>
-<span class="header-section-number">9.2.1</span> DESCRIPCIÓN DEL PROBLEMA<a class="anchor" aria-label="anchor" href="#descripci%C3%B3n-del-problema"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.1</span> DESCRIPCIÓN DEL PROBLEMA<a class="anchor" aria-label="anchor" href="#descripci%C3%B3n-del-problema"><i class="fas fa-link"></i></a>
 </h3>
 <p>Supongamos que queremos modelar el logaritmo de dinero (M2) como una función de LRY (logarithm of real income), IBO (bond rate) e IDE (bank deposit rate).</p>
 <ul>
@@ -113,9 +112,9 @@ Figure 9.1: Method selection for time series data. OLS: Ordinary least squares; 
 <li><p>Los parámetros estimados serían consistentes solo si las series estuvieran cointegradas.</p></li>
 </ul>
 </div>
-<div id="importamos-datos-desde-un-dataset-de-r" class="section level3" number="9.2.2">
+<div id="importamos-datos-desde-un-dataset-de-r" class="section level3" number="8.2.2">
 <h3>
-<span class="header-section-number">9.2.2</span> Importamos Datos desde un dataset de R:<a class="anchor" aria-label="anchor" href="#importamos-datos-desde-un-dataset-de-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.2</span> Importamos Datos desde un dataset de R:<a class="anchor" aria-label="anchor" href="#importamos-datos-desde-un-dataset-de-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>A data frame with 55 rows and 5 variables. Time period from 1974:Q1 until 1987:Q3.</p>
 <p>LRM: logarithm of real money, M2</p>
@@ -134,9 +133,9 @@ Figure 9.1: Method selection for time series data. OLS: Ordinary least squares; 
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">denmark</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "LRM" "LRY" "LPY" "IBO" "IDE"</code></pre>
 </div>
-<div id="procedimiento" class="section level3" number="9.2.3">
+<div id="procedimiento" class="section level3" number="8.2.3">
 <h3>
-<span class="header-section-number">9.2.3</span> Procedimiento:<a class="anchor" aria-label="anchor" href="#procedimiento"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.3</span> Procedimiento:<a class="anchor" aria-label="anchor" href="#procedimiento"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>Calculamos un auto ADRL para determinar la combinación óptima de rezagos.</li>
@@ -337,9 +336,9 @@ Obs: allowing the constant to join the short-run relationship (case 2), instead 
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">Result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/coint_eq.html">coint_eq</a></span><span class="op">(</span><span class="va">BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="make-the-plot" class="section level3" number="9.2.4">
+<div id="make-the-plot" class="section level3" number="8.2.4">
 <h3>
-<span class="header-section-number">9.2.4</span> Make the plot<a class="anchor" aria-label="anchor" href="#make-the-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.4</span> Make the plot<a class="anchor" aria-label="anchor" href="#make-the-plot"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/zoo/man/merge.zoo.html">cbind.zoo</a></span><span class="op">(</span>LRM <span class="op">=</span> <span class="va">denmark</span><span class="op">[</span>,<span class="st">"LRM"</span><span class="op">]</span>, <span class="va">Result</span><span class="op">)</span></span>
@@ -350,7 +349,7 @@ Obs: allowing the constant to join the short-run relationship (case 2), instead 
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig92"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig92-1.png" alt="Gráfica de la ecuación de cointegración" width="95%"><p class="caption">
-Figure 9.2: Gráfica de la ecuación de cointegración
+Figure 8.2: Gráfica de la ecuación de cointegración
 </p>
 </div>
 
@@ -358,19 +357,19 @@ Figure 9.2: Gráfica de la ecuación de cointegración
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></div>
-<div class="next"><a href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></div>
+<div class="prev"><a href="cointegraci%C3%B3n.html"><span class="header-section-number">7</span> Cointegración</a></div>
+<div class="next"><a href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">9</span> Modelos Univariados y Multivariados de Volatilidad</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#modelos-adrl"><span class="header-section-number">9</span> Modelos ADRL</a></li>
-<li><a class="nav-link" href="#teor%C3%ADa"><span class="header-section-number">9.1</span> Teoría</a></li>
+<li><a class="nav-link" href="#modelos-adrl"><span class="header-section-number">8</span> Modelos ADRL</a></li>
+<li><a class="nav-link" href="#teor%C3%ADa"><span class="header-section-number">8.1</span> Teoría</a></li>
 <li>
-<a class="nav-link" href="#ejemplo"><span class="header-section-number">9.2</span> Ejemplo</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#descripci%C3%B3n-del-problema"><span class="header-section-number">9.2.1</span> DESCRIPCIÓN DEL PROBLEMA</a></li>
-<li><a class="nav-link" href="#importamos-datos-desde-un-dataset-de-r"><span class="header-section-number">9.2.2</span> Importamos Datos desde un dataset de R:</a></li>
-<li><a class="nav-link" href="#procedimiento"><span class="header-section-number">9.2.3</span> Procedimiento:</a></li>
-<li><a class="nav-link" href="#make-the-plot"><span class="header-section-number">9.2.4</span> Make the plot</a></li>
+<a class="nav-link" href="#ejemplo"><span class="header-section-number">8.2</span> Ejemplo</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#descripci%C3%B3n-del-problema"><span class="header-section-number">8.2.1</span> DESCRIPCIÓN DEL PROBLEMA</a></li>
+<li><a class="nav-link" href="#importamos-datos-desde-un-dataset-de-r"><span class="header-section-number">8.2.2</span> Importamos Datos desde un dataset de R:</a></li>
+<li><a class="nav-link" href="#procedimiento"><span class="header-section-number">8.2.3</span> Procedimiento:</a></li>
+<li><a class="nav-link" href="#make-the-plot"><span class="header-section-number">8.2.4</span> Make the plot</a></li>
 </ul>
 </li>
 </ul>
@@ -389,7 +388,7 @@ Figure 9.2: Gráfica de la ecuación de cointegración
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-08-05.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-12-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

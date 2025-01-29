@@ -1,75 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
-<meta name="description" content="3.1 Definición de ergodicidad y estacionariedad A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo">
-<meta property="og:type" content="book">
-<meta property="og:description" content="3.1 Definición de ergodicidad y estacionariedad A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo">
-<meta name="twitter:description" content="3.1 Definición de ergodicidad y estacionariedad A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo</title>
+  <meta name="description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
+  <meta name="github-repo" content="https://github.com/benjov/Series-Tiempo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Modelos de Series de Tiempo Estacionarias | Notas de Clase: Series de Tiempo" />
+  
+  <meta name="twitter:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
+  
+
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres" />
+
+
+<meta name="date" content="2024-12-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"/>
+<link rel="next" href="procesos-estacionarios-univariados.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
-<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="active" href="modelos-de-series-de-tiempo-estacionarias.html"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
-<li><a class="" href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></li>
-<li><a class="" href="desestacionalizaci%C3%B3n-y-filtrado-de-series.html"><span class="header-section-number">5</span> Desestacionalización y filtrado de Series</a></li>
-<li><a class="" href="procesos-basados-en-vectores-autoregresivos.html"><span class="header-section-number">6</span> Procesos Basados en Vectores Autoregresivos</a></li>
-<li><a class="" href="procesos-no-estacionarios.html"><span class="header-section-number">7</span> Procesos No Estacionarios</a></li>
-<li><a class="" href="cointegraci%C3%B3n.html"><span class="header-section-number">8</span> Cointegración</a></li>
-<li><a class="" href="modelos-adrl.html"><span class="header-section-number">9</span> Modelos ADRL</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">10</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="" href="modelos-de-datos-panel.html"><span class="header-section-number">11</span> Modelos de Datos Panel</a></li>
-<li><a class="" href="otros-modelos-de-series-de-tiempo-no-lineales.html"><span class="header-section-number">12</span> Otros Modelos de Series de Tiempo No lineales</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Análisis de Series de Tiempo</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contexto-del-documento"><i class="fa fa-check"></i>Contexto del documento</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><i class="fa fa-check"></i><b>2</b> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#la-naturaleza-de-los-datos-de-series-de-tiempo"><i class="fa fa-check"></i><b>2.1</b> La naturaleza de los datos de Series de Tiempo</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ejemplos-y-aplicaciones-de-las-series-de-tiempo"><i class="fa fa-check"></i><b>2.2</b> Ejemplos y aplicaciones de las Series de Tiempo</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-para-procesos-deterministas"><i class="fa fa-check"></i><b>2.3</b> Ecuaciones en Diferencia para procesos deterministas</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-lineales-de-primer-orden"><i class="fa fa-check"></i><b>2.3.1</b> Ecuaciones en Diferencia Lineales de Primer Orden</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior"><i class="fa fa-check"></i><b>2.3.2</b> Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#operador-de-rezago-l"><i class="fa fa-check"></i><b>2.4</b> Operador de rezago L</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modelos-de-series-de-tiempo-estacionarias.html"><a href="modelos-de-series-de-tiempo-estacionarias.html"><i class="fa fa-check"></i><b>3</b> Modelos de Series de Tiempo Estacionarias</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modelos-de-series-de-tiempo-estacionarias.html"><a href="modelos-de-series-de-tiempo-estacionarias.html#definición-de-ergodicidad-y-estacionariedad"><i class="fa fa-check"></i><b>3.1</b> Definición de ergodicidad y estacionariedad</a></li>
+<li class="chapter" data-level="3.2" data-path="modelos-de-series-de-tiempo-estacionarias.html"><a href="modelos-de-series-de-tiempo-estacionarias.html#función-de-autocorrelación"><i class="fa fa-check"></i><b>3.2</b> Función de autocorrelación</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html"><i class="fa fa-check"></i><b>4</b> Procesos estacionarios univariados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#procesos-autoregresivos-ar"><i class="fa fa-check"></i><b>4.1</b> Procesos Autoregresivos (AR)</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#ar1"><i class="fa fa-check"></i><b>4.1.1</b> AR(1)</a></li>
+<li class="chapter" data-level="4.1.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#ar2"><i class="fa fa-check"></i><b>4.1.2</b> AR(2)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#arp"><i class="fa fa-check"></i><b>4.1.3</b> AR(p)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#procesos-de-medias-móviles-ma"><i class="fa fa-check"></i><b>4.2</b> Procesos de Medias Móviles (MA)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#ma1"><i class="fa fa-check"></i><b>4.2.1</b> MA(1)</a></li>
+<li class="chapter" data-level="4.2.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#maq"><i class="fa fa-check"></i><b>4.2.2</b> MA(q)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#procesos-armap-q-y-arimap-d-q"><i class="fa fa-check"></i><b>4.3</b> Procesos ARMA(p, q) y ARIMA(p, d, q)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#arma1-1"><i class="fa fa-check"></i><b>4.3.1</b> ARMA(1, 1)</a></li>
+<li class="chapter" data-level="4.3.2" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#armap-q"><i class="fa fa-check"></i><b>4.3.2</b> ARMA(p, q)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#función-de-autocorrelación-parcial"><i class="fa fa-check"></i><b>4.4</b> Función de Autocorrelación Parcial</a></li>
+<li class="chapter" data-level="4.5" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#selección-de-las-constantes-p-q-d-en-un-arp-un-maq-un-armap-q-o-un-arimap-d-q"><i class="fa fa-check"></i><b>4.5</b> Selección de las constantes p, q, d en un AR(p), un MA(q), un ARMA(p, q) o un ARIMA(p, d, q)</a></li>
+<li class="chapter" data-level="4.6" data-path="procesos-estacionarios-univariados.html"><a href="procesos-estacionarios-univariados.html#pronósticos"><i class="fa fa-check"></i><b>4.6</b> Pronósticos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html"><i class="fa fa-check"></i><b>5</b> Desestacionalización y filtrado de Series</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html#motivación"><i class="fa fa-check"></i><b>5.1</b> Motivación</a></li>
+<li class="chapter" data-level="5.2" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>5.2</b> Filtro Hodrick-Prescott</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="desestacionalización-y-filtrado-de-series.html"><a href="desestacionalización-y-filtrado-de-series.html#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><i class="fa fa-check"></i><b>5.2.1</b> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html"><i class="fa fa-check"></i><b>6</b> Procesos Basados en Vectores Autoregresivos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html#causalidad-de-granger"><i class="fa fa-check"></i><b>6.1</b> Causalidad de Granger</a></li>
+<li class="chapter" data-level="6.2" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html#definición-y-representación-del-sistema-o-modelo-varp"><i class="fa fa-check"></i><b>6.2</b> Definición y representación del Sistema o Modelo VAR(p)</a></li>
+<li class="chapter" data-level="6.3" data-path="procesos-basados-en-vectores-autoregresivos.html"><a href="procesos-basados-en-vectores-autoregresivos.html#análisis-de-impulso-respuesta"><i class="fa fa-check"></i><b>6.3</b> Análisis de Impulso-Respuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html"><i class="fa fa-check"></i><b>7</b> Procesos No Estacionarios</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#definición-y-formas-de-no-estacionariedad"><i class="fa fa-check"></i><b>7.1</b> Definición y formas de No Estacionariedad</a></li>
+<li class="chapter" data-level="7.2" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#pruebas-de-raíces-unitarias"><i class="fa fa-check"></i><b>7.2</b> Pruebas de Raíces Unitarias</a></li>
+<li class="chapter" data-level="7.3" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#dickey---fuller-df"><i class="fa fa-check"></i><b>7.3</b> Dickey - Fuller (DF)</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#dickey---fuller-aumentada-adf"><i class="fa fa-check"></i><b>7.3.1</b> Dickey - Fuller Aumentada (ADF)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#phillips---perron-pp"><i class="fa fa-check"></i><b>7.3.2</b> Phillips - Perron (PP)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#kwiatkowsky---phillips---schmidt---shin-kpss"><i class="fa fa-check"></i><b>7.3.3</b> Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)</a></li>
+<li class="chapter" data-level="7.3.4" data-path="procesos-no-estacionarios.html"><a href="procesos-no-estacionarios.html#ejemplo-con-aplicación-de-todas-las-pruebas-de-raíces-unitarias"><i class="fa fa-check"></i><b>7.3.4</b> Ejemplo con aplicación de todas las pruebas de raíces unitarias</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="cointegración.html"><a href="cointegración.html"><i class="fa fa-check"></i><b>8</b> Cointegración</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="cointegración.html"><a href="cointegración.html#definición-y-propiedades-del-proceso-de-cointegración"><i class="fa fa-check"></i><b>8.1</b> Definición y propiedades del proceso de cointegración</a></li>
+<li class="chapter" data-level="8.2" data-path="cointegración.html"><a href="cointegración.html#cointegración-para-modelos-de-más-de-una-ecuación-o-para-modelos-basados-en-vectores-autoregresivos"><i class="fa fa-check"></i><b>8.2</b> Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos</a></li>
+<li class="chapter" data-level="8.3" data-path="cointegración.html"><a href="cointegración.html#ejemplo-de-cointegración"><i class="fa fa-check"></i><b>8.3</b> Ejemplo de cointegración</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modelos-adrl.html"><a href="modelos-adrl.html"><i class="fa fa-check"></i><b>9</b> Modelos ADRL</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="modelos-adrl.html"><a href="modelos-adrl.html#teoría"><i class="fa fa-check"></i><b>9.1</b> Teoría</a></li>
+<li class="chapter" data-level="9.2" data-path="modelos-adrl.html"><a href="modelos-adrl.html#ejemplo"><i class="fa fa-check"></i><b>9.2</b> Ejemplo</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="modelos-adrl.html"><a href="modelos-adrl.html#descripción-del-problema"><i class="fa fa-check"></i><b>9.2.1</b> DESCRIPCIÓN DEL PROBLEMA</a></li>
+<li class="chapter" data-level="9.2.2" data-path="modelos-adrl.html"><a href="modelos-adrl.html#importamos-datos-desde-un-dataset-de-r"><i class="fa fa-check"></i><b>9.2.2</b> Importamos Datos desde un dataset de R:</a></li>
+<li class="chapter" data-level="9.2.3" data-path="modelos-adrl.html"><a href="modelos-adrl.html#procedimiento"><i class="fa fa-check"></i><b>9.2.3</b> Procedimiento:</a></li>
+<li class="chapter" data-level="9.2.4" data-path="modelos-adrl.html"><a href="modelos-adrl.html#make-the-plot"><i class="fa fa-check"></i><b>9.2.4</b> Make the plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html"><i class="fa fa-check"></i><b>10</b> Modelos Univariados y Multivariados de Volatilidad</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#motivación-1"><i class="fa fa-check"></i><b>10.1</b> Motivación</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#value-at-risk"><i class="fa fa-check"></i><b>10.1.1</b> Value at risk</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>10.2</b> Prueba de normalidad</a></li>
+<li class="chapter" data-level="10.3" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#modelos-arch-y-garch-univariados"><i class="fa fa-check"></i><b>10.3</b> Modelos ARCH y GARCH Univariados</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#ejemplo-arch1"><i class="fa fa-check"></i><b>10.3.1</b> Ejemplo ARCH(1)</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#ejemplo-garch01"><i class="fa fa-check"></i><b>10.4</b> Ejemplo GARCH(0,1)</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#selección-garchpq-óptimo"><i class="fa fa-check"></i><b>10.4.1</b> Selección GARCH(p,q) óptimo</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#modelos-arch-y-garch-multivariados"><i class="fa fa-check"></i><b>10.5</b> Modelos ARCH y GARCH Multivariados</a></li>
+<li class="chapter" data-level="10.6" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#pruebas-para-detectar-efectos-arch"><i class="fa fa-check"></i><b>10.6</b> Pruebas para detectar efectos ARCH</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html"><i class="fa fa-check"></i><b>11</b> Modelos de Datos Panel</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#motivación-2"><i class="fa fa-check"></i><b>11.1</b> Motivación</a></li>
+<li class="chapter" data-level="11.2" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#pruebas-de-raíces-unitarias-en-panel"><i class="fa fa-check"></i><b>11.2</b> Pruebas de Raíces Unitarias en Panel</a></li>
+<li class="chapter" data-level="11.3" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#ejemplo-pruebas-de-raíces-unitarias-en-panel"><i class="fa fa-check"></i><b>11.3</b> Ejemplo: Pruebas de Raíces Unitarias en Panel</a></li>
+<li class="chapter" data-level="11.4" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#ejemplo-modelo-dif-in-dif-para-el-inpc-de-análsis-clínicos-update-nov-2022"><i class="fa fa-check"></i><b>11.4</b> Ejemplo: Modelo Dif-in-Dif para el INPC de análsis clínicos (update nov-2022)</a></li>
+<li class="chapter" data-level="11.5" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#panel-var"><i class="fa fa-check"></i><b>11.5</b> Panel VAR</a></li>
+<li class="chapter" data-level="11.6" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#ejemplos-panel-varp"><i class="fa fa-check"></i><b>11.6</b> Ejemplos: Panel VAR(p)</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#ejemplo-1"><i class="fa fa-check"></i><b>11.6.1</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="11.6.2" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#ejemplo-2"><i class="fa fa-check"></i><b>11.6.2</b> Ejemplo 2:</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="modelos-de-datos-panel.html"><a href="modelos-de-datos-panel.html#cointegración-1"><i class="fa fa-check"></i><b>11.7</b> Cointegración</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="otros-modelos-de-series-de-tiempo-no-lineales.html"><a href="otros-modelos-de-series-de-tiempo-no-lineales.html"><i class="fa fa-check"></i><b>12</b> Otros Modelos de Series de Tiempo No lineales</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="otros-modelos-de-series-de-tiempo-no-lineales.html"><a href="otros-modelos-de-series-de-tiempo-no-lineales.html#modelos-de-cambio-de-régimen"><i class="fa fa-check"></i><b>12.1</b> Modelos de cambio de régimen</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="otros-modelos-de-series-de-tiempo-no-lineales.html"><a href="otros-modelos-de-series-de-tiempo-no-lineales.html#regímenes-determinados-por-información-observable"><i class="fa fa-check"></i><b>12.1.1</b> Regímenes determinados por información observable</a></li>
+<li class="chapter" data-level="12.1.2" data-path="otros-modelos-de-series-de-tiempo-no-lineales.html"><a href="otros-modelos-de-series-de-tiempo-no-lineales.html#regímenes-determinados-por-variables-no-observables"><i class="fa fa-check"></i><b>12.1.2</b> Regímenes determinados por variables no observables</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="otros-modelos-de-series-de-tiempo-no-lineales.html"><a href="otros-modelos-de-series-de-tiempo-no-lineales.html#ejemplo-modelos-de-cambio-de-regímen-tar"><i class="fa fa-check"></i><b>12.2</b> Ejemplo: Modelos de Cambio de Regímen (TAR)</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-de-series-de-tiempo-estacionarias" class="section level1" number="3">
-<h1>
-<span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias<a class="anchor" aria-label="anchor" href="#modelos-de-series-de-tiempo-estacionarias"><i class="fas fa-link"></i></a>
-</h1>
-<div id="definición-de-ergodicidad-y-estacionariedad" class="section level2" number="3.1">
-<h2>
-<span class="header-section-number">3.1</span> Definición de ergodicidad y estacionariedad<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-de-ergodicidad-y-estacionariedad"><i class="fas fa-link"></i></a>
-</h2>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas de Clase: Series de Tiempo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modelos-de-series-de-tiempo-estacionarias" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Modelos de Series de Tiempo Estacionarias<a href="modelos-de-series-de-tiempo-estacionarias.html#modelos-de-series-de-tiempo-estacionarias" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="definición-de-ergodicidad-y-estacionariedad" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Definición de ergodicidad y estacionariedad<a href="modelos-de-series-de-tiempo-estacionarias.html#definición-de-ergodicidad-y-estacionariedad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A partir de esta sección introduciremos mayor formalidad matemática al análisis de las series de tiempo. Por ello cambiaremos un poco la notación y ocuparemos a <span class="math inline">\(X_t\)</span> en lugar de <span class="math inline">\(Z_t\)</span> como objeto de nuestro análisis. Con <span class="math inline">\(X_t\)</span> denotaremos a una serie de tiempo, ya que con <span class="math inline">\(Z_t\)</span> denotareemos a una variable, sin que ella fuera necesariamente una serie de tiempo en los términos que a continuación discutimos. Asimismo, iniciaremos por establecer una serie de definiciones.</p>
 <p>De esta forma, definiremos a una <em>serie de tiempo</em> como un vector de variables aleatorias de dimensión <span class="math inline">\(T\)</span>, dado como:
 <span class="math display" id="eq:Serie0">\[\begin{equation}
@@ -240,51 +461,48 @@
     &amp; = &amp; 1 + 1 + 1 + 1 \\
     &amp; = &amp; min(t,s)
 \end{eqnarray*}\]</span></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
-<span><span class="co"># Utilizaremos una función guardada en un archivo a parte</span></span>
-<span><span class="co"># Llamamos a la función:</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"Caminata.R"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Definimos argumentos de la función</span></span>
-<span><span class="va">Opciones</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#</span></span>
-<span><span class="va">Soporte</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
-<span></span>
-<span><span class="co"># Vamos a réplicar el proceso con estos parámetros</span></span>
-<span><span class="va">Rango</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
-<span><span class="co">#</span></span>
-<span><span class="va">Caminos</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span></span>
-<span><span class="co">#</span></span>
-<span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">Caminos</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">TT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.matrix.html">data.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu">Caminata</span><span class="op">(</span><span class="va">Opciones</span>, <span class="va">Soporte</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="co">#</span></span>
-<span>  <span class="va">G_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.matrix.html">data.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu">Caminata</span><span class="op">(</span><span class="va">Opciones</span>, <span class="va">Soporte</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="co">#</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">TT</span>, <span class="va">G_t</span>, col <span class="op">=</span> <span class="st">"blue"</span>, type <span class="op">=</span> <span class="st">"l"</span>, ylab <span class="op">=</span> <span class="st">"Ganancias"</span>, </span>
-<span>       xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">Rango</span>,<span class="va">Rango</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="co">#</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>  <span class="co">#</span></span>
-<span>  <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">i</span> <span class="op">+</span><span class="fl">1</span></span>
-<span><span class="op">}</span></span>
-<span><span class="co">#</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:fig31"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig31-1.png" alt="Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1" width="672"><p class="caption">
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb17-2"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-2" tabindex="-1"></a><span class="co"># Utilizaremos una función guardada en un archivo a parte</span></span>
+<span id="cb17-3"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-3" tabindex="-1"></a><span class="co"># Llamamos a la función:</span></span>
+<span id="cb17-4"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-4" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;Caminata.R&quot;</span>)</span>
+<span id="cb17-5"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-5" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-6" tabindex="-1"></a><span class="co"># Definimos argumentos de la función</span></span>
+<span id="cb17-7"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-7" tabindex="-1"></a>Opciones <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb17-8"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-8" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb17-9"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-9" tabindex="-1"></a>Soporte <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb17-10"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-10" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-11" tabindex="-1"></a><span class="co"># Vamos a réplicar el proceso con estos parámetros</span></span>
+<span id="cb17-12"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-12" tabindex="-1"></a>Rango <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb17-13"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-13" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb17-14"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-14" tabindex="-1"></a>Caminos <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb17-15"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-15" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-16" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb17-17"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-17" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-18" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>Caminos){</span>
+<span id="cb17-19"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-19" tabindex="-1"></a>  TT <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">Caminata</span>(Opciones, Soporte)[<span class="dv">1</span>]))</span>
+<span id="cb17-20"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-20" tabindex="-1"></a>  <span class="co">#</span></span>
+<span id="cb17-21"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-21" tabindex="-1"></a>  G_t <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">Caminata</span>(Opciones, Soporte)[<span class="dv">2</span>]))</span>
+<span id="cb17-22"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-22" tabindex="-1"></a>  <span class="co">#</span></span>
+<span id="cb17-23"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-23" tabindex="-1"></a>  <span class="fu">plot</span>(TT, G_t, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Ganancias&quot;</span>, </span>
+<span id="cb17-24"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-24" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Tiempo&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>Rango,Rango))</span>
+<span id="cb17-25"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-25" tabindex="-1"></a>  <span class="co">#</span></span>
+<span id="cb17-26"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-26" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">new =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-27"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-27" tabindex="-1"></a>  <span class="co">#</span></span>
+<span id="cb17-28"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-28" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb17-29"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-29" tabindex="-1"></a>}</span>
+<span id="cb17-30"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-30" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb17-31"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb17-31" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig31"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig31-1.png" alt="Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1" width="672" />
+<p class="caption">
 Figure 3.1: Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1
 </p>
 </div>
 <p>Así, el proceso estocástico dado por la caminata alaeatoria sin un término de ajuste es estacionario en media, pero no en varianza o en covarianza, y consecuentemente, en general no estacionario, condición que contraria al caso del proceso simple descrito en <span class="math inline">\(U_t\)</span>.</p>
 <p>Es facil ver que muchas de las posibilidades de realización de este proceso estocástico (series de tiempo) pueden tomar cualquiera de las rutas consideradas en el Figura <a href="modelos-de-series-de-tiempo-estacionarias.html#fig:fig31">3.1</a>.</p>
 </div>
-<div id="función-de-autocorrelación" class="section level2" number="3.2">
-<h2>
-<span class="header-section-number">3.2</span> Función de autocorrelación<a class="anchor" aria-label="anchor" href="#funci%C3%B3n-de-autocorrelaci%C3%B3n"><i class="fas fa-link"></i></a>
-</h2>
+<div id="función-de-autocorrelación" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Función de autocorrelación<a href="modelos-de-series-de-tiempo-estacionarias.html#función-de-autocorrelación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para ampliar la discusión, es posible calcular la fuerza o intensidad de la dependencia de las variables aleatorias dentro de un proceso estocástico, ello mediante el uso de las autocovarianzas. Cuando las covarianzas son normalizadas respecto de la varianza, el resultado es un término que es independiente de las unidad de medida aplicada, y se conoce como la <em>función de autocorrelación</em>.</p>
 <p>Para procesos estacionarios, dicha función de autocorrelación esta dada por:
 <span class="math display" id="eq:em5">\[\begin{equation}
@@ -293,22 +511,19 @@ Figure 3.1: Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\tau = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Dicha función tiene las siguientes propiedades:</p>
 <ol style="list-style-type: decimal">
-<li>
-<span class="math inline">\(\rho(0) = 1\)</span>. Es fácil demostrar que la función <span class="math inline">\(\rho(0)\)</span> es:</li>
+<li><span class="math inline">\(\rho(0) = 1\)</span>. Es fácil demostrar que la función <span class="math inline">\(\rho(0)\)</span> es:</li>
 </ol>
 <p><span class="math display">\[\begin{equation}
     \rho(0) = \frac{\mathbb{E}[(X_t - \mu)(X_{t + 0} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \frac{\mathbb{E}[(X_t - \mu)^2]}{\mathbb{E}[(X_t - \mu)^2]} = 1
 \end{equation}\]</span></p>
 <ol start="2" style="list-style-type: decimal">
-<li>
-<span class="math inline">\(\rho(\tau) = \rho(-\tau)\)</span>. Partiendo de la definción de <span class="math inline">\(\rho(\tau)\)</span> podemos ver que la distancia que existe entre <span class="math inline">\(t\)</span> y <span class="math inline">\(t + \tau\)</span> es <span class="math inline">\(\tau\)</span>, de esta forma la autocorrelación de la variable <span class="math inline">\(X\)</span> entre los periodos antes señalados debería ser la misma para el caso en que <span class="math inline">\(\rho(-\tau)\)</span>. Partamos de la ecuación para ver más claramente:</li>
+<li><span class="math inline">\(\rho(\tau) = \rho(-\tau)\)</span>. Partiendo de la definción de <span class="math inline">\(\rho(\tau)\)</span> podemos ver que la distancia que existe entre <span class="math inline">\(t\)</span> y <span class="math inline">\(t + \tau\)</span> es <span class="math inline">\(\tau\)</span>, de esta forma la autocorrelación de la variable <span class="math inline">\(X\)</span> entre los periodos antes señalados debería ser la misma para el caso en que <span class="math inline">\(\rho(-\tau)\)</span>. Partamos de la ecuación para ver más claramente:</li>
 </ol>
 <p><span class="math display">\[\begin{equation}
     \rho(\tau) = \frac{\mathbb{E}[(X_t - \mu)(X_{t + \tau} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \frac{\mathbb{E}[(X_t - \mu)(X_{t - \tau} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \rho(-\tau)
 \end{equation}\]</span></p>
 <ol start="3" style="list-style-type: decimal">
-<li>
-<span class="math inline">\(\lvert\rho(\tau)\lvert \leq 1\)</span>, para todo <span class="math inline">\(\tau\)</span>.</li>
+<li><span class="math inline">\(\lvert\rho(\tau)\lvert \leq 1\)</span>, para todo <span class="math inline">\(\tau\)</span>.</li>
 </ol>
 <p>Derivado de las propiedades 1 y 2 antes descritas se puede concluir que sólo es necesario conocer la función de autocorrelación para el caso de <span class="math inline">\(\tau = 1, 2, 3, \ldots\)</span>, ya que de estos casos podemos derivar los valores de la función de autocorrelación complementarios de <span class="math inline">\(\tau = \ldots, -3, -2, -1\)</span>.</p>
 <p>Partiendo de los supuestos de ergodicidad en relación a la media, varianza y covarianzas de un proceso estacionario, podemos estimar dichos paramétros con las siguientes formulaciones o propuestas de estimadores puntuales:
@@ -390,51 +605,50 @@ Figure 3.1: Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es
     \tag{3.26}
 \end{equation}\]</span></p>
 <p>La cual tiene una distribución <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(2\)</span> grados de libertad y donde <span class="math inline">\(T\)</span> es el tamaño de la muestra. La hipótesis de que las observaciones están distribuidas de forma normal se rechaza si los valores de la estadística de prueba es más grande que los correspondientes valores criticos en tablas.</p>
-<p>Veamos un ejemplo para ilustrar el uso de la función de autocorrelación. Tomemos como variable al número de pasajeros transportados por el sistema de transporte del metro de la CDMX.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Los datos y algoritmo está disponible en el repositorio de GitHub y corresponde a la Clase 3.&lt;/p&gt;"><sup>1</sup></a> Los datos empleados fueron tomados del INEGI y son una serie de tiempo en el periodo que va de enero de 2000 a junio de 2019, es decir, 234 observaciones. Como se puede apreciar en la Figura <a href="modelos-de-series-de-tiempo-estacionarias.html#fig:fig32">3.2</a>, el número de pasajeros por mes ha oscilado significativamente a lo largo de tiempo. Incluso podemos observar un cambio estructural de la serie entre 2011 y 2012. Asimismo, podemos ubicar una caida atípica que ocurrió en septiembre de 2017.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"BD/Base_Transporte.xlsx"</span>, </span>
-<span>                    sheet <span class="op">=</span> <span class="st">"Datos"</span>, col_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Datos</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Periodo</span>, y <span class="op">=</span> <span class="va">Pax_Metro</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co">#geom_point(size = 1.0, color = "darkblue") + </span></span>
-<span>  <span class="co">#theme_bw() + </span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Tiempo"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Millones de pasajeros"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.subtitle <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.caption <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Pasajeros Transportados en el Metro de la CDMX"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"(Ene-2000 a Jul-2021)"</span>,</span>
-<span>    caption <span class="op">=</span> <span class="st">"Fuente: Elaboración propia con información del INEGI, \nhttps://www.inegi.org.mx/app/indicadores/?tm=0&amp;t=1090"</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:fig32"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig32-1.png" alt="Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023" width="672"><p class="caption">
+<p>Veamos un ejemplo para ilustrar el uso de la función de autocorrelación. Tomemos como variable al número de pasajeros transportados por el sistema de transporte del metro de la CDMX.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Los datos empleados fueron tomados del INEGI y son una serie de tiempo en el periodo que va de enero de 2000 a junio de 2019, es decir, 234 observaciones. Como se puede apreciar en la Figura <a href="modelos-de-series-de-tiempo-estacionarias.html#fig:fig32">3.2</a>, el número de pasajeros por mes ha oscilado significativamente a lo largo de tiempo. Incluso podemos observar un cambio estructural de la serie entre 2011 y 2012. Asimismo, podemos ubicar una caida atípica que ocurrió en septiembre de 2017.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-2"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-3"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-3" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb18-4"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-5" tabindex="-1"></a>Datos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;BD/Base_Transporte.xlsx&quot;</span>, </span>
+<span id="cb18-6"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-6" tabindex="-1"></a>                    <span class="at">sheet =</span> <span class="st">&quot;Datos&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-7"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-7" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Datos, <span class="fu">aes</span>(<span class="at">x =</span> Periodo, <span class="at">y =</span> Pax_Metro)) <span class="sc">+</span> </span>
+<span id="cb18-9"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-10" tabindex="-1"></a>  <span class="co">#geom_point(size = 1.0, color = &quot;darkblue&quot;) + </span></span>
+<span id="cb18-11"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-11" tabindex="-1"></a>  <span class="co">#theme_bw() + </span></span>
+<span id="cb18-12"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tiempo&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb18-13"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Millones de pasajeros&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb18-14"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-14" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">hjust =</span> <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb18-15"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">hjust =</span> <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb18-16"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">hjust =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb18-17"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb18-18"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-18" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-19"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-19" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Pasajeros Transportados en el Metro de la CDMX&quot;</span>,</span>
+<span id="cb18-20"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-20" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;(Ene-2000 a Jul-2021)&quot;</span>,</span>
+<span id="cb18-21"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-21" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Fuente: Elaboración propia con información del INEGI, </span><span class="sc">\n</span><span class="st">https://www.inegi.org.mx/app/indicadores/?tm=0&amp;t=1090&quot;</span></span>
+<span id="cb18-22"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb18-22" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig32"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig32-1.png" alt="Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023" width="672" />
+<p class="caption">
 Figure 3.2: Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023
 </p>
 </div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"Pax_Metro.png"</span>, width <span class="op">=</span> <span class="fl">20</span>, height <span class="op">=</span> <span class="fl">15</span>, units <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb19-1" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb19-2"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb19-2" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;Pax_Metro.png&quot;</span>, <span class="at">width =</span> <span class="dv">20</span>, <span class="at">height =</span> <span class="dv">15</span>, <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>)</span></code></pre></div>
 <p>A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro <a href="modelos-de-series-de-tiempo-estacionarias.html#tab:foo">3.1</a>. En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura <a href="modelos-de-series-de-tiempo-estacionarias.html#fig:fig33">3.3</a> se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza dentro de las cuales no se puede rechazar la hipotésis nula de que <span class="math inline">\(H_0: \hat{\rho}(p) = 0\)</span>, para todo <span class="math inline">\(\tau = 1, 2, \ldots, T-1\)</span>.</p>
-<div class="inline-table"><table class="table table-sm">
-<caption>
-<span id="tab:foo">Table 3.1: </span> Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2019</caption>
+<table>
+<caption><span id="tab:foo">Table 3.1: </span> Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2019</caption>
 <colgroup>
-<col width="50%">
-<col width="50%">
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th align="center">Estadística</th>
 <th align="center">Valor</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td align="center"><span class="math inline">\(\hat{\mu} = \frac{1}{T} \sum^T_{t=1} X_t\)</span></td>
@@ -477,60 +691,92 @@ Figure 3.2: Evolución del número de pasajeros en el Metro de la CDMX, enero 20
 <td align="center">290.9279</td>
 </tr>
 </tbody>
-</table></div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Pax_Metro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">$</span><span class="va">Pax_Metro</span>, </span>
-<span>                start <span class="op">=</span> <span class="fl">2000</span>, </span>
-<span>                freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">Pax_Metro</span>, </span>
-<span>    lag.max <span class="op">=</span> <span class="fl">150</span>, </span>
-<span>    xlab <span class="op">=</span> <span class="st">'Resagos k en meses'</span>, </span>
-<span>    main <span class="op">=</span> <span class="st">"Funcion de Autocorrelación del número de pasajeros del metro"</span><span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:fig33"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig33-1.png" alt="Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023" width="672"><p class="caption">
+</table>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-1" tabindex="-1"></a>Pax_Metro <span class="ot">&lt;-</span> <span class="fu">ts</span>(Datos<span class="sc">$</span>Pax_Metro, </span>
+<span id="cb20-2"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-2" tabindex="-1"></a>                <span class="at">start =</span> <span class="dv">2000</span>, </span>
+<span id="cb20-3"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-3" tabindex="-1"></a>                <span class="at">freq =</span> <span class="dv">12</span>)</span>
+<span id="cb20-4"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-5" tabindex="-1"></a><span class="fu">acf</span>(Pax_Metro, </span>
+<span id="cb20-6"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-6" tabindex="-1"></a>    <span class="at">lag.max =</span> <span class="dv">150</span>, </span>
+<span id="cb20-7"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-7" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">&#39;Resagos k en meses&#39;</span>, </span>
+<span id="cb20-8"><a href="modelos-de-series-de-tiempo-estacionarias.html#cb20-8" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;Funcion de Autocorrelación del número de pasajeros del metro&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig33"></span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig33-1.png" alt="Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023" width="672" />
+<p class="caption">
 Figure 3.3: Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023
 </p>
 </div>
 
 </div>
 </div>
-
-  <div class="chapter-nav">
-<div class="prev"><a href="elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Elementos de Ecuaciones en Diferencia</a></div>
-<div class="next"><a href="procesos-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos estacionarios univariados</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#modelos-de-series-de-tiempo-estacionarias"><span class="header-section-number">3</span> Modelos de Series de Tiempo Estacionarias</a></li>
-<li><a class="nav-link" href="#definici%C3%B3n-de-ergodicidad-y-estacionariedad"><span class="header-section-number">3.1</span> Definición de ergodicidad y estacionariedad</a></li>
-<li><a class="nav-link" href="#funci%C3%B3n-de-autocorrelaci%C3%B3n"><span class="header-section-number">3.2</span> Función de autocorrelación</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Los datos y algoritmo está disponible en el repositorio de GitHub y corresponde a la Clase 3.<a href="modelos-de-series-de-tiempo-estacionarias.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
-    </nav>
-</div>
+            </section>
 
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2024-08-05.</p>
+          </div>
+        </div>
+      </div>
+<a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="procesos-estacionarios-univariados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-Modelos_STE.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Notas-Series-Tiempo.pdf", "Notas-Series-Tiempo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -542,22 +788,7 @@ Figure 3.3: Función de Autocorrelación: 150 rezagos del número de pasajeros e
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>

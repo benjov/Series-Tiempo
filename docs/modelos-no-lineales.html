@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Modelos No Lineales | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="8.1 Modelos de cambio de régimen En años recientes, los modelos de serie de tiempo han sido incorporados en análisis de la existencia de diferentes estados que son generados por procesos...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Modelos No Lineales | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="8.1 Modelos de cambio de régimen En años recientes, los modelos de serie de tiempo han sido incorporados en análisis de la existencia de diferentes estados que son generados por procesos...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Modelos No Lineales | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="8.1 Modelos de cambio de régimen En años recientes, los modelos de serie de tiempo han sido incorporados en análisis de la existencia de diferentes estados que son generados por procesos...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="procesos-no-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
+<li><a class="" href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraci%C3%B3n-y-modelos-ardl.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, y Modelos ARDL</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel-y-panel-var.html"><span class="header-section-number">7</span> Modelos de Datos Panel y Panel VAR</a></li>
+<li><a class="active" href="modelos-no-lineales.html"><span class="header-section-number">8</span> Modelos No Lineales</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-no-lineales" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Modelos No Lineales<a class="anchor" aria-label="anchor" href="#modelos-no-lineales"><i class="fas fa-link"></i></a>
+</h1>
+<div id="modelos-de-cambio-de-régimen" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Modelos de cambio de régimen<a class="anchor" aria-label="anchor" href="#modelos-de-cambio-de-r%C3%A9gimen"><i class="fas fa-link"></i></a>
+</h2>
+<p>En años recientes, los modelos de serie de tiempo han sido incorporados en análisis de la existencia de diferentes estados que son generados por procesos estocásticos subyacentes. En esta sección del curso revisaremos algunos modelos de cambio de regimen. Restringimos nuestra revisión a modelos que asuman que la dinámica de las series puede ser descrito por modelos del tipo AR y dejamos fuera procesos del tipo MA.</p>
+En general distinguimos que existen dos tipos de modelos:
+<div id="regímenes-determinados-por-información-observable" class="section level3" number="8.1.1">
+<h3>
+<span class="header-section-number">8.1.1</span> Regímenes determinados por información observable<a class="anchor" aria-label="anchor" href="#reg%C3%ADmenes-determinados-por-informaci%C3%B3n-observable"><i class="fas fa-link"></i></a>
+</h3>
+<p>En estos casos asumimos que el régimen ocurren en un momento <span class="math inline">\(t\)</span> y puede ser determinado por una variable observable. Este modelo es conocido como el modelo autoregresivo con umbral (TAR, Threshold Autoregressive model). En este caso también diremos que cuando el régimen está determinado por la información de la misma serie será llamdao Self-Exciting TAR (SETAR).</p>
+<p>Veámos un ejemplo. Supongamos que existe un umbral, <span class="math inline">\(c\)</span>, para el régimen que esta determinado por <span class="math inline">\(q_t = y_{t-1}\)</span> y que el estado de la naturaleza nos permite establecer dos estados o regímenes:
+<span class="math display">\[\begin{equation}
+    y_t =
+    \begin{cases}
+        \phi_{01} + \phi_{11} y_{t-1} + \varepsilon_t \text{ si } y_{t-1} \leq c \\
+        \phi_{02} + \phi_{12} y_{t-1} + \varepsilon_t \text{ si } y_{t-1} &gt; c
+    \end{cases}
+\end{equation}\]</span></p>
+<p>Donde asumiremos que <span class="math inline">\(\varepsilon_t\)</span> es i.i.d y que cumple con:
+<span class="math display">\[\begin{equation*}
+    \mathbb{E}[\varepsilon_t | \Omega_{t-1}] = 0
+\end{equation*}\]</span></p>
+<p>Donde <span class="math inline">\(\Omega_{t-1} = \{ y_{t-1}, y_{t-2}, \ldots \}\)</span>. Existe una variante de este modelo que suaviza la transición entre regímenes conocido como Smooth Transition AR (STAR) y puede ser especificado en su modalidad de dos regémenes como:
+<span class="math display">\[\begin{equation}
+    y_t = (\phi_{01} + \phi_{11} y_{t-1}) (1 - G(y_{t-1}; \gamma, c)) + (\phi_{02} + \phi_{12} y_{t-1}) G(y_{t-1}; \gamma, c) + \varepsilon_t
+\end{equation}\]</span></p>
+<p>Donde <span class="math inline">\(G(y_{t-1}; \gamma, c)\)</span> es una función de distribución de probabilidad que suviza la transición entre regímenes. La práctica común es suponer que está tiene una forma logística:
+<span class="math display">\[\begin{equation}
+    G(y_{t-1}; \gamma, c) = \frac{1}{1 + e^{-\gamma (y_{t-1} - c)}}
+\end{equation}\]</span></p>
+<p>Es posible hacer estensiones de lo anterior a modelos de orden superior dando como resultado:
+<span class="math display">\[\begin{equation}
+    y_t =
+    \begin{cases}
+        \phi_{01} + \phi_{11} y_{t-1} + \phi_{21} y_{t-2} + \ldots + \phi_{p_1 1} y_{t-p_1} + \varepsilon_t \text{ si } y_{t-1} \leq c \\
+        \phi_{02} + \phi_{12} y_{t-1} + \phi_{22} y_{t-2} + \ldots + \phi_{p_2 2} y_{t-p_2} + \varepsilon_t \text{ si } y_{t-1} &gt; c
+    \end{cases}
+\end{equation}\]</span></p>
+<p>En el segundo caso:
+<span class="math display">\[\begin{eqnarray*}
+    y_t &amp; = &amp; (\phi_{01} + \phi_{11} y_{t-1} + \phi_{21} y_{t-2} + \ldots + \phi_{p_1 1} y_{t-p_1}) (1 - G(y_{t-1}; \gamma, c)) \\
+    &amp;  &amp; + (\phi_{02} + \phi_{12} y_{t-1} + \phi_{22} y_{t-2} + \ldots + \phi_{p_2 2} y_{t-p_2}) G(y_{t-1}; \gamma, c) \\
+    &amp;  &amp; + \varepsilon_t
+\end{eqnarray*}\]</span></p>
+<p>De igual forma que en el caso de los modelos ARIMA y VAR, el número de rrezagos utilizados es determinado mediennte el uso de criterios de información como el de Akaike:
+<span class="math display">\[\begin{equation}
+    AIC(p_1, p_2) = n_1 ln(\hat{\sigma}^2_1) + n_2 ln(\hat{\sigma}^2_2) + 2(p_1 + 1) + 2(p_2 + 1)
+\end{equation}\]</span></p>
+Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan ciertas condiciones. En estas notas nos enfocaremos únicamente en el modelo SETAR el cual genera en un proceso estacionario cuando:
+<p>Finalmente, en ocasiones podemos estar interesados en modelos donde los regímenes sean más de 2, es decir, digamos <span class="math inline">\(m\)</span> umbrales bajo un modelo SETAR o STAR. Por ejemplo, en el caso de un modelo SETAR podemos verificar que <span class="math inline">\(m\)</span> regímnes implican <span class="math inline">\(m + 1\)</span> umbrales: <span class="math inline">\(c_0, c_1, \ldots, c_m\)</span>. En cuyo caso:
+<span class="math display">\[\begin{equation*}
+    -\infty = c_0 &lt; c_1 &lt; \ldots &lt; c_{m-1} &lt; c_m = \infty
+\end{equation*}\]</span></p>
+<p>Así, tendríamos ecuaciones:
+<span class="math display">\[\begin{equation}
+    y_t = \phi_{0j} + \phi_{ij} y_{t-1} + \varepsilon_t \text{ si } c_{j-1} &lt; y_{t-1} &lt; c_j
+\end{equation}\]</span></p>
+<p>Para <span class="math inline">\(j = 1, 2, \ldots, m\)</span>. De forma similar podemos recomponer el modelo STAR.</p>
+</div>
+<div id="regímenes-determinados-por-variables-no-observables" class="section level3" number="8.1.2">
+<h3>
+<span class="header-section-number">8.1.2</span> Regímenes determinados por variables no observables<a class="anchor" aria-label="anchor" href="#reg%C3%ADmenes-determinados-por-variables-no-observables"><i class="fas fa-link"></i></a>
+</h3>
+<p>Este tipo de modelosmasume que el regímen ocurre en el momento <span class="math inline">\(t\)</span> y que no puede ser observado, ya que este es determinado por un proceso no observable, el cual denotamos como <span class="math inline">\(s_t\)</span>. En el caso de dos regímenes, <span class="math inline">\(s_t\)</span> puede ser asumido como que toma 2 valores: 1 y 2, por ejemplo. Supongamos que el proceso subyacente tiene una forma del tipo AR(1) dado por:
+<span class="math display">\[\begin{equation}
+    y_t =
+    \begin{cases}
+        \phi_{01} + \phi_{11} y_{t-1} + \varepsilon_t \text{ si } s_t = 1 \\
+        \phi_{02} + \phi_{12} y_{t-1} + \varepsilon_t \text{ si } s_t = 2
+    \end{cases}
+    \label{eq_swching_obs}
+\end{equation}\]</span></p>
+<p>O en un formato más corto de notación:
+<span class="math display">\[\begin{equation}
+    y_t = \phi_{0 s_t} + \phi_{1 s_t} y_{t-1} + \varepsilon_t
+\end{equation}\]</span></p>
+<p>Para complementar el modelo, las propiedades del proceso <span class="math inline">\(s_t\)</span> necesitan ser especificadas. El modelo más popular dentro de esta familia es el propuesto por James Hamilton en 1989 el cual es conocido como Markov Switching Model (MSM), en el cual el proceso <span class="math inline">\(s_t\)</span> se asume como un proceso de Markov de primer orden. Esto implica que el regímen actula <span class="math inline">\(s_t\)</span> sólo dependen del período <span class="math inline">\(s_{t-1}\)</span>.</p>
+<p>Así, el modelo es completado mediante la definición de las probabilidades de transición para moverse del un estado a otro:
+<span class="math display">\[\begin{eqnarray*}
+    \mathbb{P}(s_t = 1 | s_{t-1} = 1) &amp; = &amp; p_{11} \\
+    \mathbb{P}(s_t = 2 | s_{t-1} = 1) &amp; = &amp; p_{12} \\
+    \mathbb{P}(s_t = 1 | s_{t-1} = 2) &amp; = &amp; p_{21} \\
+    \mathbb{P}(s_t = 2 | s_{t-1} = 2) &amp; = &amp; p_{22}
+\end{eqnarray*}\]</span></p>
+<p>Así, <span class="math inline">\(p_{ij}\)</span> es igual a la probabilidad de que la cadena de Markov pase del estado <span class="math inline">\(i\)</span> en el momento <span class="math inline">\(t-1\)</span> al estdo <span class="math inline">\(j\)</span> en el tiempo <span class="math inline">\(t\)</span>. En todo caso asumiremos que <span class="math inline">\(p_{ij} &gt; 0\)</span> y que:
+<span class="math display">\[\begin{eqnarray*}
+    p_{11} + p_{12} = 1 \\
+    p_{21} + p_{22} = 1
+\end{eqnarray*}\]</span></p>
+<p>Otro tipo de probabilidades a analizar son las probabilidades incondicionales de <span class="math inline">\(\mathbb{P}(s_t = i)\)</span>, <span class="math inline">\(i = 1, 2\)</span>. Usando la teoría ergódica de la cadenas de Markov, estas probabilidades están dadas por:
+<span class="math display">\[\begin{eqnarray*}
+    \mathbb{P}(s_t = 1) &amp; = &amp; \frac{1 - p_{22}}{2 - p_{11} - p_{22}} \\
+    \mathbb{P}(s_t = 2) &amp; = &amp; \frac{1 - p_{11}}{2 - p_{11} - p_{22}}
+\end{eqnarray*}\]</span></p>
+<p>Un caso más general es el de múltiples regímenes en el cual <span class="math inline">\(s_t\)</span> puede tomar cualquier valor <span class="math inline">\(m &gt; 2\)</span>, <span class="math inline">\(m \in \mathbb{N}\)</span>. Este modelo se puede escribir como:
+<span class="math display">\[\begin{equation}
+    y_t = \phi_{0j} + \phi_{1j} y_{t-1} + \varepsilon_t \text{ si } s_t = j \text{, para } j = 1, 2, \ldots, m
+\end{equation}\]</span></p>
+<p>Donde las probabilidades de transición estarán dadas por:
+<span class="math display">\[\begin{equation}
+    p_{ij} = \mathbb{P}(s_t = j | s_{t-1} = i) \text{ para } i , j = 1, 2, \ldots, m
+\end{equation}\]</span></p>
+<p>Donde la ecuación anterior satisface que <span class="math inline">\(p_{ij} &gt; 0\)</span>, <span class="math inline">\(\forall i, j = = 1, 2, \ldots, m\)</span> y que:
+<span class="math display">\[\begin{equation*}
+    \sum_{j=1}^m p_{ij} = 1 \text{ para } i = 1, 2, \ldots, m
+\end{equation*}\]</span></p>
+Finalmente, plantearemos el procedimiento empiríco seguido para la estimación de este tipo de modelos:
+</div>
+</div>
+<div id="ejemplo-modelos-de-cambio-de-regímen-tar" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Ejemplo: Modelos de Cambio de Regímen (TAR)<a class="anchor" aria-label="anchor" href="#ejemplo-modelos-de-cambio-de-reg%C3%ADmen-tar"><i class="fas fa-link"></i></a>
+</h2>
+<p>Dependencies and Setup:</p>
+<p>Data: Monthly rates of deaths due to flu in the United States for 11 years</p>
+<pre><code>##   X.8113721
+## 1 0.4458291
+## 2 0.3415985
+## 3 0.2774243
+## 4 0.2484958
+## 5 0.2525427
+## 6 0.2466902</code></pre>
+<p>Convert time series</p>
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">flu</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">D_flu</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">flu</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<p>Plotting</p>
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">flu</span>, type <span class="op">=</span> <span class="st">"b"</span>, col <span class="op">=</span> <span class="st">"darkred"</span>, ylab <span class="op">=</span> <span class="st">""</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Monthly rates of deaths due to flu in the United States"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-64-1.png" width="672"></div>
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">D_flu</span>, type<span class="op">=</span><span class="st">"b"</span>, col <span class="op">=</span> <span class="st">"darkred"</span>, ylab <span class="op">=</span> <span class="st">""</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Diff Monthly rates of deaths due to flu in the United States"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-64-2.png" width="672"></div>
+<p>The tsDyn package in R has simplified this code into a handful of steps:</p>
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#?setar</span></span>
+<span></span>
+<span><span class="va">D_flu_tar4_05</span> <span class="op">&lt;-</span> <span class="fu">setar</span><span class="op">(</span><span class="va">D_flu</span>, m <span class="op">=</span> <span class="fl">4</span>, thDelay <span class="op">=</span> <span class="fl">0</span>, th <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>## Warning: 
+## With the threshold you gave (0.05) there is a regime with less than trim=15% observations (86.51%, 13.49%, )</code></pre>
+<pre><code>## Warning: Possible unit root in the high regime. Roots are: 0.6182 0.6244 0.6244
+## 0.6182</code></pre>
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">D_flu_tar4_05</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>## 
+## Non linear autoregressive model
+## 
+## SETAR model ( 2 regimes)
+## Coefficients:
+## Low regime:
+##      const.L       phiL.1       phiL.2       phiL.3       phiL.4 
+##  0.004432028  0.501179574 -0.206693004  0.120140800 -0.122254140 
+## 
+## High regime:
+##    const.H     phiH.1     phiH.2     phiH.3     phiH.4 
+##  0.4079353 -0.7483325 -1.0323129 -2.0450407 -6.7117769 
+## 
+## Threshold:
+## -Variable: Z(t) = + (1) X(t)+ (0)X(t-1)+ (0)X(t-2)+ (0)X(t-3)
+## -Value: 0.05 (fixed)
+## Proportion of points in low regime: 86.51%    High regime: 13.49% 
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -0.1319314 -0.0217073  0.0015801  0.0196093  0.2674245 
+## 
+## Fit:
+## residuals variance = 0.002166,  AIC = -778, MAPE = 412.4%
+## 
+## Coefficient(s):
+## 
+##           Estimate  Std. Error  t value  Pr(&gt;|t|)    
+## const.L  0.0044320   0.0051791   0.8558 0.3938357    
+## phiL.1   0.5011796   0.0833821   6.0106 2.043e-08 ***
+## phiL.2  -0.2066930   0.0608839  -3.3949 0.0009313 ***
+## phiL.3   0.1201408   0.0576505   2.0839 0.0392868 *  
+## phiL.4  -0.1222541   0.0522363  -2.3404 0.0209137 *  
+## const.H  0.4079353   0.0314121  12.9866 &lt; 2.2e-16 ***
+## phiH.1  -0.7483325   0.1118329  -6.6915 7.455e-10 ***
+## phiH.2  -1.0323129   0.1420203  -7.2688 4.018e-11 ***
+## phiH.3  -2.0450407   0.7055163  -2.8986 0.0044573 ** 
+## phiH.4  -6.7117769   0.8367945  -8.0208 7.911e-13 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Threshold
+## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)
+## 
+## Value: 0.05 (fixed)</code></pre>
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">D_flu_tar4_05</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-1.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-2.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-3.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-4.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-5.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-6.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-7.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-8.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-9.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-66-10.png" width="672"></p>
+<p>If we do not provide a threshold to the th option, setar searches over a grid to choose a threshold ~ 0.038:</p>
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">D_flu_tar4</span> <span class="op">&lt;-</span> <span class="fu">setar</span><span class="op">(</span><span class="va">D_flu</span>, m <span class="op">=</span> <span class="fl">4</span>, thDelay <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: Possible unit root in the high regime. Roots are: 0.6316 0.7222 0.7222
+## 0.6316</code></pre>
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">D_flu_tar4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Non linear autoregressive model
+## 
+## SETAR model ( 2 regimes)
+## Coefficients:
+## Low regime:
+##        const.L         phiL.1         phiL.2         phiL.3         phiL.4 
+## -0.00006287604  0.44640751264 -0.23158878472  0.10701408961 -0.14406085874 
+## 
+## High regime:
+##    const.H     phiH.1     phiH.2     phiH.3     phiH.4 
+##  0.3486150 -0.5903335 -1.0318488 -2.4053812 -4.8052422 
+## 
+## Threshold:
+## -Variable: Z(t) = + (1) X(t)+ (0)X(t-1)+ (0)X(t-2)+ (0)X(t-3)
+## -Value: 0.03798
+## Proportion of points in low regime: 84.92%    High regime: 15.08% 
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.277686 -0.020554  0.005116  0.020762  0.119627 
+## 
+## Fit:
+## residuals variance = 0.002405,  AIC = -762, MAPE = 372.5%
+## 
+## Coefficient(s):
+## 
+##             Estimate   Std. Error  t value  Pr(&gt;|t|)    
+## const.L -0.000062876  0.005572290  -0.0113 0.9910158    
+## phiL.1   0.446407513  0.089159422   5.0068 1.921e-06 ***
+## phiL.2  -0.231588785  0.064328877  -3.6001 0.0004636 ***
+## phiL.3   0.107014090  0.061034049   1.7534 0.0820953 .  
+## phiL.4  -0.144060859  0.055198346  -2.6099 0.0102109 *  
+## const.H  0.348615027  0.027460007  12.6954 &lt; 2.2e-16 ***
+## phiH.1  -0.590333531  0.109881869  -5.3724 3.869e-07 ***
+## phiH.2  -1.031848767  0.149570541  -6.8987 2.641e-10 ***
+## phiH.3  -2.405381238  0.691344783  -3.4793 0.0007014 ***
+## phiH.4  -4.805242210  0.828241480  -5.8017 5.451e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Threshold
+## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)
+## 
+## Value: 0.03798</code></pre>
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">D_flu_tar4</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-1.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-2.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-3.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-4.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-5.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-6.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-7.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-8.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-9.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-67-10.png" width="672"></p>
+
+</div>
+</div>
+
+
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="modelos-de-datos-panel-y-panel-var.html"><span class="header-section-number">7</span> Modelos de Datos Panel y Panel VAR</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#modelos-no-lineales"><span class="header-section-number">8</span> Modelos No Lineales</a></li>
+<li>
+<a class="nav-link" href="#modelos-de-cambio-de-r%C3%A9gimen"><span class="header-section-number">8.1</span> Modelos de cambio de régimen</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#reg%C3%ADmenes-determinados-por-informaci%C3%B3n-observable"><span class="header-section-number">8.1.1</span> Regímenes determinados por información observable</a></li>
+<li><a class="nav-link" href="#reg%C3%ADmenes-determinados-por-variables-no-observables"><span class="header-section-number">8.1.2</span> Regímenes determinados por variables no observables</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#ejemplo-modelos-de-cambio-de-reg%C3%ADmen-tar"><span class="header-section-number">8.2</span> Ejemplo: Modelos de Cambio de Regímen (TAR)</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2025-01-28.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
