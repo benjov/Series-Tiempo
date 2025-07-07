@@ -337,3 +337,11 @@ modelos-de-cambio-de-régimen
 regímenes-determinados-por-información-observable
 regímenes-determinados-por-variables-no-observables
 ejemplo-modelos-de-cambio-de-regímen-tar
+identificación-de-los-choques-estructurales-en-los-modelos-var
+var-recursivo
+var-recursivo---identificación-recursiva-mediante-descomposición-de-cholesky
+var-recursivo---identificación-recursiva
+var-estructural---1
+var-estructural---2
+var-estructural---restricción-de-largo-plazo
+var-estructural---imposición-de-restricciones-de-signo
