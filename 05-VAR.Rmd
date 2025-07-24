@@ -5,7 +5,7 @@ editor_options:
 output: pdf_document
 ---
 
-# Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, y Modelos ARDL
+# Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado
 
 En este capítulo removeremos el supuesto de que el análisis es
 univariado, ya que introduciremos la posibilidad de que los procesos
@@ -1563,3 +1563,588 @@ Datos <- xts(Datos)
 plot(Datos, legend.loc = "right")
 
 ```
+
+## Filtro Kalman
+
+En secciones pasadas, entendimos la naturaleza del filtrado univariado como, por ejemplo, el *Filtro Hodrick-Prescott*. Este ha sido utilizado ampliamente en la literatura macroeconométrica, sobre todo para la estimación del Producto Potencial y, de este modo, la Brecha del Producto. Sin embargo, este método presenta dos limitaciones importantes: 1) es univariado, es decir, únicamente se explica por sí mismo y, 2) el llamado "problema de colas", que sí bien entendimos que se puede solucionar aplicando la metodología de "colas pesadas", la estimación del $\lambda$ es un tanto ambigua.
+
+De este modo, el **Filtro Kalman** puede ser una alternativa viable y metodológicamente robusta, sobre todo si queremos trabajar con variables no observables como el *Producto Potencial* o, incluso, la *Tasa de interés neutral*, variable clave en la decisión de Política Monetaria de los Bancos Centrales.
+
+En este sentido, el **Filtro Kalman** nació a partir del artículo seminal de Rudolf E. Kálmán (1960) *A New Approach to Linear Filtering and Prediction Problems*. La idea principal de Kálmán era describir los procesos estocásticos con un modelo de "estado" y resolver, de alguna manera, el problema de estimación con un ciclo *predicción-corrección* ejecutado en tiempo real. Así, el **Filtro Kalman** es un algoritmo de estimación recursivo a partir de mediciones ruidosas. De este modo, también podemos entender al **Filtro Kalman** como una especie de filtro multivariado. Sus aplicaciones no se han limitado únicamente a la Economía, pues ha sido utilizado para trabajos de la *NASA* como el pronóstico de la posición y velocidad del *Apollo 11* en 1969.
+
+### Modelos Estado-Espacio y Teoría Económica
+
+Para hacer uso del **Filtro Kalman**, necesitamos de un modelo estructural que vincule a nuestras variables (observables y no observables), representado en la *Forma Estado-Espacio*. En general, casi todos los modelos de series de tiempo pueden ser representados como *Modelos Estado-Espacio*. El modelo estructural puede basarse en la teoría económica como, por ejemplo, un modelo DSGE. Para efectos prácticos, tomaremos como ejemplo el *Modelo de Proyección Trimestral (QPM)* del IMF (2020). No nos enfocaremos en el por qué y cómo del *Modelo QPM*, pues el objetivo principal es entender el **Filtro Kalman** y su aplicación.
+
+#### Modelo de Proyección Trimestral (QPM) del IMF (2020)
+
+Supongamos una economía pequeña y abierta, en donde:
+
+- **Demanda Agregada (Curva IS)**
+\begin{equation}
+\hat{y}_t = b_1 \hat{y}_{t-1} - b_2 mci_t + b_3 \hat{y}_t^* + \varepsilon_t^y
+\end{equation}
+\begin{equation}
+mci_t = b_4 \hat{r}_t + (1-b_4)(-\hat{z}_t)
+\end{equation}
+
+  donde: 
+  
+  - $\hat{y}_t =$ Brecha del Producto Doméstico,
+  
+  - $\hat{y}_{t-1} =$  Brecha del Producto Doméstico rezagada,
+  
+  - $mci_t =$ Índice de Condiciones Monetarias Real,
+  
+  - $\hat{y}_t^* =$ Brecha del Producto Foráneo,
+  
+  - $\varepsilon_t^y =$ Choque de Demanda,
+  
+  - $\hat{r}_t =$ Brecha de la tasa de interés real y
+  
+  - $\hat{z}_t =$ Brecha del tipo de cambio real.
+
+
+- **Inflación (Curva de Phillips)**
+\begin{equation}
+\pi_t = a_1 \pi_{t-1} + (1-a_1) E\{\pi_{t+1}\} + a_2 rmc_t + \varepsilon_t^\pi
+\end{equation}
+\begin{equation}
+rmc_t = a_3 \hat{y}_t + (1-a_3) \hat{z}_t
+\end{equation}
+
+  donde: 
+
+  - $\pi_t =$ Inflación,
+
+  - $\pi_{t-1} =$ Inflación rezagada,
+
+  - $E\{\pi_{t+1}\} =$ Expectativa de inflación,
+
+  - $rmc_t =$ Costo Marginal Real,
+
+  - $\epsilon_t^\pi =$ Choque de Oferta (cost-push shock),
+
+  - $\hat{y}_t =$ Brecha del Producto Doméstica y
+
+  - $\hat{z}_t =$ Brecha del tipo de cambio real.
+
+
+- **Paridad Descubierta de Tasas de Interés (UIP)**
+\begin{equation}
+S_t = (1 - e_1) \mathbb{E}_t \{ S_{t+1} \} + e_1 \left[ S_{t-1} + \frac{2(\pi_t - \pi_t^{*} + \Delta \bar{z}_t)}{4} + \frac{i_t^{*} - i_t + prem_t}{4} \right] + \varepsilon_s
+\end{equation}
+
+  donde:
+
+  - $\mathbb{E}_t \{ S_{t+1}\} =$ Expectativas sobre el tipo de cambio nominal futuro,
+
+  - $S_{t-1} =$ Tipo de cambio nominal rezagado,
+
+  - $\pi_t =$ Inflación,
+
+  - $\pi_t^* =$ Inflación foránea,
+
+  - $\Delta \bar{z}_t =$ Depreciación del tipo de cambio tendencial,
+
+  - $i_t^* =$ Tasa de interés real foránea,
+
+  - $i_t =$ Tasa de interés real doméstica,
+  
+  - $prem_t =$ Premio Riesgo-País y
+  
+  - $\varepsilon_t =$ Choque del Tipo de cambio.
+  
+  
+- **Función de Reacción de Política Monetaria (Regla de Taylor)**
+\begin{equation}
+i_t = g_1 i_{t-1} + (1 - g_1) \left\{ i_t^n + g_2 \left( \mathbb{E}_t [\pi_{t+N}^4] - \pi_{t+N}^T \right) + g_3 \hat{y}_t \right\} + \varepsilon_t
+\end{equation}
+
+  donde:
+
+  - $i_t =$ Tasa de interés (o política),
+
+  - $i_{t-1} =$ Tasa de interés rezagada,
+
+  - $i_t^n =$ Tasa de interés natural o neutral,
+
+  - $\mathbb{E}_t [\pi_{t+N}^4] =$ Inflación esperada (YoY) en el periodo $_{t+N}$,
+
+  - $\pi_{t+N}^T =$ Meta de inflación,
+
+  - $\hat{y}_t =$ Brecha del Producto Doméstica y
+
+  - $\varepsilon_t =$ Choque de política monetaria no sistémico.
+
+- **Bloque externo**
+
+En este caso, todas las variables siguen procesos autorregresivos simples
+
+\begin{array}{ll}
+\textbf{Brecha del Producto Foránea} & \textbf{Tasa natural (tendencia) de intéres real foránea} \\
+\hat{y}^*_t = \rho_y \hat{y}^*_{t-1} + \varepsilon^{\hat{y}^*}_t 
+& \tilde{r}^*_t = \rho_{\tilde{r}} \tilde{r}^*_{t-1} + (1 - \rho_{\tilde{r}}) \tilde{r}^{*SS} + \varepsilon^{\tilde{r}^*}_t \\[1.5ex]
+
+\textbf{Tasa de interés nominal foránea} & \textbf{Brecha de la Tasa de interés real foránea} \\
+i^*_t = \rho_i i^*_{t-1} + (1 - \rho_i)(r^*_t + \pi^*_t) + \varepsilon^{i^*}_t 
+& \hat{r}^*_t = r^*_t - \tilde{r}^*_t \\[1.5ex]
+
+\textbf{Tasa de interés real foránea} & \textbf{Inflación foránea} \\
+r^*_t = i^*_t - \pi^*_t 
+& \pi^*_t = \rho_\pi \pi^*_{t-1} + (1 - \rho_\pi)\pi^{*SS} + \varepsilon^{\pi^*}_t
+\end{array}
+
+#### Modelos Estado-Espacio
+
+La idea general detrás de los *Modelos Estado-Espacio* es que una (múltiples) variable observable $Y_1,...Y_T$ depende de un posible estado no observable $X_t$ que sigue un proceso estocástico. La relación entre $Y_t$ y $X_t$ es descrita por la **Ecuación de Observación**
+
+\begin{equation}
+Y_t = C X_T + v_t
+(\#eq:Obs)
+\end{equation}
+
+donde $C$ es una matriz de parámetros conocidos y $v_t$ es un vector de errores observados (si los hay), los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza $R$, es decir, $v_t \sim iid(0, R)$. De este modo, la ecuación \@ref(eq:Obs) describe la relación estática entre las variables observables y no observables.
+
+La ecuación que describe la dinámica de las variables de estado, también conocida como **Ecuación de Transición**, es definida como
+
+\begin{equation}
+X_t = A X_{t-1} + \varepsilon_t,
+(\#eq:Tra)
+\end{equation}
+
+en donde $A$ es una matriz de parámetros conocidos, $\varepsilon_t$ es un vector de errores, los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza $Q$, es decir, $\varepsilon_t \sim iid(0,Q)$. Adicionalmente, se asume que $v_t$ y $\varepsilon_t$ son independientes entre sí, es decir, $Cov(v_t,\varepsilon_t) = 0$.
+
+En la *Figura 5.15* se puede observar un ejemplo de la relación de las variables en los *Modelos Estado-Espacio* en el *QPM* básico del IMF (2020).
+
+```{r, echo = FALSE, out.width='60%', fig.cap = "State-space models. Recuperado de IMF (2020).", fig.align='center'}
+
+knitr::include_graphics("Plots/StateSpace.png") 
+
+```
+
+Afortunadamente, nuestro *Modelo QPM* está construido de tal manera que tenemos **ecuaciones de transición** y **observación** que vinculan las variables observables con las no observables:
+
+```
+% ======================================
+% Basic Quarterly Projection Model (QPM)
+% ======================================
+
+!transition_variables
+'Real GDP (100*log)'                                               L_GDP
+'Trend in Real GDP (100*log)'                                      L_GDP_BAR
+'Output Gap (in %)'                                                L_GDP_GAP
+'Quarterly Growth in Real GDP(in % pa)'                            DLA_GDP
+'Real GDP Growth YoY (in % pa)'                                    D4L_GDP
+'Real GDP Trend Growth QoQ annualized (in % pa)'                   DLA_GDP_BAR
+
+'Real Monetary Condition Index (in % pa)'                          MCI
+
+'CPI (level, 100*log)'                                             L_CPI
+'CPI Inflation QoQ annualized (in % pa)'                           DLA_CPI
+'Expected CPI Inflation QoQ annualized (in % pa)'                  E_DLA_CPI
+'CPI Inflation YoY (in % pa)'                                      D4L_CPI
+'Inflation Target (in % pa)'                                       D4L_CPI_TAR
+
+'Real Marginal Cost  (in %)'                                       RMC
+
+'Nominal Exchange Rate (LCY/FCY, 100*log)'                         L_S
+'Nominal Exch. Rate Depreciation QoQ annualized (in % pa)'         DLA_S
+'Nominal Exch. Rate Depreciation YoY (in % pa)'                    D4L_S
+'Country Risk Premium (in % pa)'                                   PREM
+
+'Nominal Policy Interest Rate (in % pa)'                           RS
+'Real Interest Rate (in % pa)'                                     RR
+'Trend Real Interest Rate (in % pa)'                               RR_BAR
+'Real Interest Rate Gap (in %)'                                    RR_GAP
+'Nominal Policy Neutral Interest Rate (in % pa)'                   RSNEUTRAL
+
+'Real Exchange Rate (level, 100*log)'                              L_Z
+'Trend Real Exchange Rate (level, 100*log)'                        L_Z_BAR
+'Real Exchange Rate Gap (in %)'                                    L_Z_GAP
+'Real Exchange Rate Depreciation QoQ annualized (in % pa)'         DLA_Z
+'Trend Real Exchange Rate Depreciation QoQ annualized(in % pa)'    DLA_Z_BAR
+
+'Foreign Output Gap (in %)'                                        L_GDP_RW_GAP
+'Foreign Nominal Interest Rate (in % pa)'                          RS_RW
+'Foreign Real Interest Rate (in % pa)'                             RR_RW 
+'Foreign Real Interest Rate Trend (in % pa)'                       RR_RW_BAR
+'Foreign Real Interest Rate Gap (in %)'                            RR_RW_GAP
+'Foreign CPI (level, 100*log)'                                     L_CPI_RW
+'Foreign Inflation QoQ annualized (in % pa)'                       DLA_CPI_RW
+
+% ------------------------------------------------------------------------------- %
+!transition_shocks
+'Shock: Output gap (demand)'                                       SHK_L_GDP_GAP
+'Shock: CPI inflation (cost-push)'                                 SHK_DLA_CPI 
+'Shock: Exchange rate (UIP)'                                       SHK_L_S 
+'Shock: Interest rate (monetary policy)'                           SHK_RS 
+'Shock: Inflation target'                                          SHK_D4L_CPI_TAR
+
+'Shock: Real interest rate'                                        SHK_RR_BAR 
+'Shock: Real exchange rate depreciation'                           SHK_DLA_Z_BAR 
+'Shock: Potential GDP growth'                                      SHK_DLA_GDP_BAR
+
+'Shock: Foreign output gap'                                        SHK_L_GDP_RW_GAP 
+'Shock: Foreign nominal interest rate'                             SHK_RS_RW 
+'Shock: Foreign inflation'                                         SHK_DLA_CPI_RW 
+'Shock: Foreign real interest rate'                                SHK_RR_RW_BAR
+
+% ------------------------------------------------------------------------------- %
+!parameters
+b1 b2 b3 b4
+a1 a2 a3
+e1
+g1 g2 g3
+
+rho_D4L_CPI_TAR
+rho_DLA_Z_BAR 
+rho_RR_BAR
+rho_DLA_GDP_BAR
+ 
+rho_L_GDP_RW_GAP
+rho_RS_RW 
+rho_DLA_CPI_RW
+rho_RR_RW_BAR
+
+ss_D4L_CPI_TAR
+ss_DLA_Z_BAR
+ss_RR_BAR 
+ss_DLA_GDP_BAR
+
+ss_DLA_CPI_RW 
+ss_RR_RW_BAR
+
+%% ------------------------------------------------------------------------------- %
+!transition_equations
+%% === Aggregate demand (the IS curve) ===
+L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP + SHK_L_GDP_GAP;
+
+%-- Real monetary conditions index
+MCI = b4*RR_GAP + (1-b4)*(- L_Z_GAP);
+
+%% === Inflation (the Phillips curve) ===
+DLA_CPI =  a1*DLA_CPI{-1} + (1-a1)*DLA_CPI{+1} + a2*RMC + SHK_DLA_CPI;
+
+%-- Real marginal cost
+RMC = a3*L_GDP_GAP + (1-a3)*L_Z_GAP;
+
+%- expected inflation
+E_DLA_CPI = DLA_CPI{+1};
+
+%% === Monetary policy reaction function (a forward-looking Taylor-type Rule) ===
+RS = g1*RS{-1} + (1-g1)*(RSNEUTRAL + g2*(D4L_CPI{+4} - D4L_CPI_TAR{+4}) + g3*L_GDP_GAP) + SHK_RS;
+
+%- Neutral nominal policy interest rate
+RSNEUTRAL = RR_BAR + D4L_CPI{+1};
+
+%% === Modified Uncovered Interest Rate Parity (UIP) condition ===
+L_S = (1-e1)*L_S{+1} + e1*(L_S{-1} + 2/4*(D4L_CPI_TAR - ss_DLA_CPI_RW + DLA_Z_BAR)) + (- RS + RS_RW + PREM)/4 + SHK_L_S;
+
+%% === Definitions ===
+
+%- Fisher equation (RIR)
+RR = RS - D4L_CPI{+1};
+
+%- Real exchange rate (RER)
+L_Z = L_S + L_CPI_RW - L_CPI;
+
+%- Long-term version of UIP (consistency of trends)
+DLA_Z_BAR{+1} = RR_BAR - RR_RW_BAR - PREM;
+
+%% === Identities ===
+DLA_GDP_BAR = 4*(L_GDP_BAR - L_GDP_BAR{-1});
+DLA_Z_BAR   = 4*(L_Z_BAR - L_Z_BAR{-1});
+DLA_Z       = 4*(L_Z - L_Z{-1});
+DLA_GDP     = 4*(L_GDP - L_GDP{-1});
+DLA_CPI     = 4*(L_CPI - L_CPI{-1});
+DLA_S       = 4*(L_S - L_S{-1});
+
+D4L_GDP     = L_GDP - L_GDP{-4};
+D4L_CPI     = L_CPI - L_CPI{-4};
+D4L_S       = L_S - L_S{-4};
+
+%% === Gaps ===
+RR_GAP    = RR - RR_BAR;
+L_Z_GAP   = L_Z - L_Z_BAR;
+L_GDP_GAP = L_GDP - L_GDP_BAR;
+
+%% === Trends ===
+D4L_CPI_TAR = rho_D4L_CPI_TAR*D4L_CPI_TAR{-1} + (1-rho_D4L_CPI_TAR)*ss_D4L_CPI_TAR + SHK_D4L_CPI_TAR;
+DLA_Z_BAR   = rho_DLA_Z_BAR*DLA_Z_BAR{-1} + (1-rho_DLA_Z_BAR)*ss_DLA_Z_BAR + SHK_DLA_Z_BAR;
+RR_BAR      = rho_RR_BAR*RR_BAR{-1} + (1-rho_RR_BAR)*ss_RR_BAR + SHK_RR_BAR;
+DLA_GDP_BAR = rho_DLA_GDP_BAR*DLA_GDP_BAR{-1} + (1-rho_DLA_GDP_BAR)*ss_DLA_GDP_BAR + SHK_DLA_GDP_BAR;
+
+%% === Foreign Sector Equations ===
+L_GDP_RW_GAP = rho_L_GDP_RW_GAP*L_GDP_RW_GAP{-1} + SHK_L_GDP_RW_GAP;
+DLA_CPI_RW   = rho_DLA_CPI_RW*DLA_CPI_RW{-1} + (1-rho_DLA_CPI_RW)*ss_DLA_CPI_RW + SHK_DLA_CPI_RW;
+RS_RW        = rho_RS_RW*RS_RW{-1} + (1-rho_RS_RW)*(RR_RW_BAR + DLA_CPI_RW) + SHK_RS_RW;
+RR_RW_BAR    = rho_RR_RW_BAR*RR_RW_BAR{-1} + (1-rho_RR_RW_BAR)*ss_RR_RW_BAR + SHK_RR_RW_BAR;
+RR_RW        = RS_RW - DLA_CPI_RW;
+RR_RW_GAP    = RR_RW - RR_RW_BAR;
+
+DLA_CPI_RW   = 4*(L_CPI_RW - L_CPI_RW{-1});
+
+%% ------------------------------------------------------------------------------- %
+!measurement_variables
+OBS_L_GDP
+OBS_L_CPI
+OBS_RS
+OBS_L_S
+OBS_D4L_CPI_TAR
+
+OBS_L_GDP_RW_GAP
+OBS_DLA_CPI_RW 
+OBS_RS_RW
+
+!measurement_equations
+OBS_L_GDP = L_GDP;
+OBS_L_CPI = L_CPI;
+OBS_RS    = RS;
+OBS_L_S   = L_S;
+OBS_D4L_CPI_TAR = D4L_CPI_TAR;
+
+OBS_L_GDP_RW_GAP = L_GDP_RW_GAP;
+OBS_DLA_CPI_RW   = DLA_CPI_RW;
+OBS_RS_RW        = RS_RW;
+
+%% ------------------------------------------------------------------------------- %
+Legend
+_GAP        cyclical deviation from a trend
+_BAR        trend (equilibrium)
+ss_         steady-state value  
+DLA_        q-o-q change
+D4L_        y-o-y change  
+_RW         foreign variable
+SHK_        equation residual
+
+```
+
+Sin embargo, la **Ecuación de Transición** de los estados presentes dependen de los estados pasados, mientras que el *Modelo QPM* es prospectivo, es decir, las variables dependen de sus expectativas así que la ecuación toma la forma de 
+
+\begin{equation}
+F \mathbb{E}_t[X_{t+1}] + G X_t + H X_{t-1} + M \eta_t = 0 
+(\#eq:Pros)
+\end{equation}
+
+donde $F$, $G$, $H$, $M$ son matrices de parámetros estructurales conocidos, $\mathbb{E}_t$ es el operador de expectativas y $\eta_t$ es un vector de choques estructurales. Para pasar de este modelo a la *Forma Estado-Espacio*, tenemos que resolver para *Expectativas Racionales*. Para esto, proponemos una *hipótesis de solución*
+
+\begin{equation}
+X_t = A X_{t-1} + P \eta_t
+\quad \text{con} \quad
+\varepsilon_t \equiv P \eta_t 
+(\#eq:Hip)
+\end{equation}
+
+Ahora, suponemos que $\eta_t$ sigue un proceso autorregresivo, es decir, tiene su propia dinámica:
+
+\begin{equation}
+\eta_{t+1} = S \eta_t + \gamma_{t+1} 
+\quad \text{donde} \quad 
+\gamma_{t+1} \sim iid(0,W)
+\end{equation}
+
+Así, sabemos que
+
+\begin{equation}
+\mathbb{E}_t[X_{t+1}] = A X_t + P \mathbb{E}_t[\eta_{t+1}] = A (A X_{t-1} + P \eta_t) + P S \eta_t
+\end{equation}
+
+De este modo, si sustituimos la ecuación \@ref(eq:Hip) en la \@ref(eq:Pros), tenemos que las matrices deben de satisfacer la identidad
+
+\begin{equation}
+F [A (A X_{t-1} + P \eta_t) + P (S \eta_t)] + G [A X_{t-1} + P \eta_t] + H X_{t-1} + M \eta_t = 0
+(\#eq:Iden)
+\end{equation}
+
+para todos los valores $X_{t-1}$ y $\eta_t$, de tal modo que $A$ y $P$ son las soluciones de ecuaciones
+
+\begin{equation}
+F A^2 + G A + H = 0, 
+\quad \quad
+F A P + F P S + G P + M = 0
+(\#eq:Sol)
+\end{equation}
+
+De esta forma, obtenemos nuestro modelo en la *Forma Estado-Espacio*.
+
+### Recursión del Filtro Kalman
+
+Ya que tenemos nuestro modelo en la *Forma Estado-Espacio* como se muestra en las ecuaciones \@ref(eq:Obs) y \@ref(eq:Tra), podemos hacer uso del **Filtro Kalman**.
+
+Para comenzar, definamos $Y_{t/t-1}$ y $X_{t/t-1}$ como los valores predichos de $Y_t$ y $X_t$, respectivamente, condicionado a la información del periodo $_{t-1}$. Además, definamos $X_{t/t}$ como la estimación de $X_t$ condicionada a la información del periodo $_t$.
+
+Como se mencionó en un inicio, el **Filtro Kalman** utiliza un algoritmo recursivo para cada periodo $1,2,...,T$. Cada recursión está compuesta de dos pasos. Supongamos que tenemos los datos observados y las estimaciones del estado para el periodo $_{t-1}$, es decir, conocemos $Y_{t-1}$ y $X_{t-1/t-1}$. De este modo, para el periodo $_t$:
+
+- **Paso 1.** Predicción del estado y observación de las variables en el periodo $_t$ dada la información de $_{t-1}$. Como no tenemos nueva información, el promedio de la predicción se basa en el *Modelo Estado-Espacio* \@ref(eq:Obs) - \@ref(eq:Tra):
+
+\begin{equation}
+X_{t/t-1} = A X_{t-1/t-1}
+(\#eq:Xt)
+\end{equation}
+
+\begin{equation}
+Y_{t/t-1} = C X_{t/t-1}
+(\#eq:Yt)
+\end{equation}
+
+- **Paso 2.** Actualización de la estimación del estado dada la información en el periodo $_t$. Una vez que conocemos la nueva información del periodo $_t$, existirá una discrepancia entre la información actual ($Y_t$) y la predicción del modelo ($Y_{t/t-1}$). El **Filtro Kalman** utiliza dicha discrepancia para actualizar la estimación de los estados no observables utilizando la matriz $K_t$, que se llama **Ganancia de Kalman**:
+
+\begin{equation}
+X_{t/t} = X_{t/t-1} + K_t (Y_t - Y_{t/t-1})
+(\#eq:Xt1)
+\end{equation}
+
+### Ganancia de Kalman
+
+Supongamos que los errores siguen una distribución normal, es decir, $v_t \sim N(0,R), \varepsilon_t \sim N(0,Q)$.
+
+Para la primera estimación (Paso 1) de la *Recursión de Kalman*, $P_{t/t-1}$ denota la varianza del error de predicción de las variables de estado ($X_t$) dada la información del periodo $_{t-1}$, o sea, $P_{t/t-1} = Var_{t-1}[(X_t - X_{t/t-1})]$. De manera similar, $F_{t/t-1}$ es la varianza del error de predicción de las variables observables ($Y_t$) dada la información del periodo $_{t-1}$, o bien, $F_{t/t-1} = Var_{t-1}[(Y_t - Y_{t/t-1})]$.
+
+Para la actualización (Paso 2) de la *Recursión de Kalman*, $P_{t/t}$ denota la varianza del error de las variables de estado ($X_t$) dada la información del periodo $_t$, es decir, $P_{t/t} = Var_t[(X_t - X_{t/t})]$. 
+
+Así, la distribución multivariada del vector $(Y_t,X_t)$ toma la forma
+
+\begin{equation}
+\begin{pmatrix}
+Y_t \\ X_t
+\end{pmatrix}
+\Bigg|
+Y_t,...,Y_{t-1} \sim N
+\Bigg(\begin{pmatrix}
+Y_{t/t-1} \\ X_{t/t-1}
+\end{pmatrix},
+\begin{pmatrix}
+F_{t/t-1} & C P_{t/t-1} \\
+P_{t/t-1} C' & P_{t/t-1}
+\end{pmatrix}\Bigg).
+(\#eq:Mat)
+\end{equation}
+
+De \@ref(eq:Mat), la distribución condicional de $X_t$ dado $Y_t$ toma la forma de
+
+\begin{equation}
+X_t \mid Y_t, Y_1, ... , Y_{t-1} \sim N
+\begin{aligned}
+( & X_{t|t-1} + P_{t|t-1} C' F_{t|t-1} {}^{-1} [Y_t - Y_{t|t-1}], \\ 
+& P_{t|t-1} - P_{t|t-1} C' F_{t|t-1} {}^{-1} C P_{t|t-1} )
+\end{aligned}
+(\#eq:Xt2)
+\end{equation}
+
+Y de la ecuación \@ref(eq:Xt2) obtenemos directamente que 
+
+\begin{equation}
+X_{t|t} = X_{t|t-1} + P_{t|t-1} C' F_{t|t-1} {}^{-1} \left[ Y_t - Y_{t|t-1} \right] = X_{t|t-1} + K_t \left[ Y_t - Y_{t|t-1} \right],
+(\#eq:Xt3)
+\end{equation}
+
+\begin{equation}
+P_{t|t} = P_{t|t-1} - P_{t|t-1} C' F_{t|t-1} {}^{-1} C P_{t|t-1} = (I - K_t C) P_{t|t-1},
+(\#eq:Pt)
+\end{equation}
+
+en donde la **Ganancia de Kalman** es 
+
+\begin{equation}
+K_t = P_{t/t-1} C' F_{t/t-1} {}^{-1}.
+(\#eq:Kt)
+\end{equation}
+
+Notese que $F_{t/t-1}$ sigue:
+
+\begin{equation}
+F_{t|t-1} = Var_{t-1} \left[( Y_t - Y_{t|t-1} \right)] = Var_{t-1} \left[( C X_t + v_t - C X_{t|t-1} \right)] = C P_{t|t-1} C' + R
+\end{equation}
+
+Por el contrario, $P_{t/t-1}$ sigue:
+
+\begin{align}
+P_{t|t-1} &= Var_{t-1} \left[( X_t - X_{t|t-1} \right)] 
+\\ &= Var_{t-1} \left[( A X_{t-1} + \varepsilon_t - A X_{t-1|t-1} \right)] 
+\\ &= A P_{t-1|t-1} A' + Q 
+\\ &= A (I - K_{t-1} C) P_{t-1|t-2} A' + Q
+\end{align}
+
+Y si sustituimos $F_{t/t-1}$ y $P_{t/t-1}$ en las ecuaciones \@ref(eq:Xt3) - \@ref(eq:Kt), obtenemos las siguientes ecuaciones para el algoritmo del **Filtro Kalman**
+
+\begin{equation}
+K_t = P_{t/t-1} C' (C P_{t/t-1} C' + R)^{-1}
+(\#eq:Kt1)
+\end{equation}
+
+\begin{equation}
+X_{t/t} = X_{t/t-1} + K_t [Y_t - Y_{t/t-1}]
+(\#eq:Xt4)
+\end{equation}
+
+\begin{equation}
+P_{t+1|t} = A (I - K_t C) P_{t/t-1} A' + Q
+(\#eq:Pt1)
+\end{equation}
+
+De este modo, la **Ganancia de Kalman** en \@ref(eq:Kt1) depende de manera positiva de la varianza del error de predicción del estado ($P_{t/t-1}$) y de manera negativa de la varianza de la ecuación de observación $R$. Esto es bastante intuitivo:
+
+- Si existen grandes errores en las predicciones del estado $X_{t/t-1}$ en el Paso 1 de la *Recursión de Kalman*, es decir, $P_{t/t-1}$ es grande, se le da más peso a la nueva información observada $Y_t$, lo cual significa que la **Ganancia de Kalman** es grande. En particular, esto es cierto para las ecuaciones de transición que no se cumplen de manera estricta, es decir, $Q$ es grande;
+
+- Si la información es ruidosa, o sea, $R$ es grande, se le da menos peso a la información nueva por lo que $K_t$ es pequeño.
+
+### Algoritmo del Filtro Kalman y del Suavizador de Kalman
+
+Ya que encontramos las expresiones más relevantes, podemos combinar todas para entender cómo funciona el **Filtro Kalman**.
+
+Sabemos que el filtro es recursivo. De este modo, para poder correrlo necesitamos *condiciones iniciales* para todos los estados al principio de la muestra ($X_{0|0}$), al igual que para la varianza del error de predicción del estado ($P_{0|0}$). Para muestras pequeñas, las *condiciones iniciales* pueden afectar significativamente los resultados del filtro. Si no tenemos información previa, una opción es asumir que las *condiciones iniciales* de los estados y de la varianza del error de predicción no están lejos de sus valores en estado estacionario. En particular, para modelos estacionarios, se puede establecer que las *condiciones iniciales* son iguales a los valores en estado estacionario.
+
+Ahora, ya que hemos asignado las *condiciones iniciales*, el **Filtro Kalman** corre el algortimo recursivo para cada periodo de tiempo $1,2,...,T$. Cada recursión está compuesta de dos pasos:
+
+- **Paso 1.** Predicción utilizando el *Modelo Estado-Espacio*:
+
+\begin{equation}
+X_{t/t-1} = A X_{t-1/t-1},
+(\#eq:P1)
+\end{equation}
+
+\begin{equation}
+Y_{t/t-1} = C X_{t/t-1}.
+(\#eq:P2)
+\end{equation}
+
+- **Paso 2.** Actualización utilzando la información:
+
+\begin{equation}
+K_t = P_{t/t-1} C' (C P_{t/t-1} C' + R)^{-1},
+(\#eq:A1)
+\end{equation}
+
+\begin{equation}
+X_{t/t} = X_{t/t-1} + K_t [Y_t - Y_{t/t-1}],
+(\#eq:A2)
+\end{equation}
+
+\begin{equation}
+P_{t+1/t} = A (I - K_t C) P_{t/t-1} A' + Q.
+(\#eq:A3)
+\end{equation}
+
+El **Filtro Kalman** nos proporciona el estimador lineal óptimo de mínimos cuadrados del estado, dada la información hasta el periodo $_t$. Si los errores están distribuidos normalmente, es óptimo entre todos los estimadores de $X_t$ condicionados a la información disponible hasta ese periodo.
+
+Para cada periodo $_t$, el **Filtro Kalman** utiliza únicamente la información disponible hasta ese periodo para estimar $X_t$. Dichas estimaciones se encuentran en $X_{t/t-1}$ (del Paso 1) y en $X_{t/t}$ (del Paso 2). Sin embargo, para estimar $X_t$, comúnmente es deseable utilizar toda la información disponible, hasta el último periodo $T$. Es decir, podría ser deseable obtener estimaciones $X_{t/T}$, que se conocen como **estimaciones suavizadas** de los estados. Precisamente eso es lo que hace el **Suavizador de Kalman (Kalman smoother)**.
+
+Para correr el **Suavizador de Kalman**, necesitamos primero correr el **Filtro Kalman** y obtener todas las estimaciones de los estados: $X_{1/1}, X_{2/2},...,X_{T/T}$.
+
+Después, el algortimo del **Suavizador de Kalman** funciona recursivamente hacia atrás, desde $T-1, T-2,...,1$. Para cada periodo $_{t+1}$, observamos la diferencia entre las estimaciones suavizadas y las estimaciones filtradas de los estados: $X_{t+1/T}-X_{t+1/t}$. El **Suavizador de Kalman** utiliza la diferencia para actualizar las estimaciones filtradas de los estados en el periodo $_t$, con el fin de obtener las estimaciones suavizadas:
+
+\begin{equation}
+X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
+(\#eq:Sua)
+\end{equation}
+
+En la *Figura 5.16*, podemos observar los resultados del código de Matlab. Otra de las virtudes del **Filtro Kalman** es que podemos hacer una especie de descomposición de la varianza para, así, observar de donde vinieron los choques:
+
+```{r, echo = FALSE, out.width='80%', fig.cap = "Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF (2020).", fig.align='center'}
+
+knitr::include_graphics("Plots/Filtration.png") 
+
+```
+
+***Nota: Para este ejemplo, se ocupa el QPM básico presentado por IMF (2020) en su curso "Monetary Policy Analysis and Forecasting" que se puede tomar en la plataforma edX. Asimismo, el código de Matlab fue realizado por el IMF.***
