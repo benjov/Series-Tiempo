@@ -122,19 +122,19 @@
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
-## 2025-01-22     106136.4     106294.3    103360.3      103653.1    53878181052
-## 2025-01-23     103657.7     106820.3    101257.8      103960.2   104104515428
-## 2025-01-24     103965.7     107098.5    102772.1      104819.5    52388229265
-## 2025-01-25     104824.0     105243.8    104120.4      104714.6    23888996502
-## 2025-01-26     104713.2     105438.6    102507.7      102682.5    22543395879
-## 2025-01-28     102097.5     103466.5    100265.7      101070.7    47309680640
+## 2025-08-14     123339.4     124457.1    117254.9      118359.6   104055627395
+## 2025-08-15     118365.8     119332.3    116864.6      117398.4    68665353159
+## 2025-08-16     117398.4     117996.1    117272.0      117491.4    48036922378
+## 2025-08-17     117492.8     118595.8    117279.5      117453.1    45852169525
+## 2025-08-18     117453.9     117614.2    114723.7      116252.3    72787808090
+## 2025-08-19     116270.0     116709.3    112811.8      112811.8    68530503680
 ##            BTC-USD.Adjusted
-## 2025-01-22         103653.1
-## 2025-01-23         103960.2
-## 2025-01-24         104819.5
-## 2025-01-25         104714.6
-## 2025-01-26         102682.5
-## 2025-01-28         101070.7</code></pre>
+## 2025-08-14         118359.6
+## 2025-08-15         117398.4
+## 2025-08-16         117491.4
+## 2025-08-17         117453.1
+## 2025-08-18         116252.3
+## 2025-08-19         112811.8</code></pre>
 <p>Para fines del ejercicio de esta clase, usaremos el valor de la acción ajustado. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas.</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">$</span><span class="va">`BTC-USD.Adjusted`</span><span class="op">)</span></span></code></pre></div>
@@ -167,7 +167,7 @@ Figure 6.2: Evolución del rendimiento (diferenccias logarítmicas) del Bitcoin
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span> <span class="va">VaR</span>, <span class="fl">4</span> <span class="op">)</span><span class="op">*</span><span class="fl">100</span></span></code></pre></div>
 <pre><code>##    5% 
-## -5.75</code></pre>
+## -5.57</code></pre>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">logret</span> , geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">'lightblue'</span> , bins <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span></span>
@@ -200,7 +200,7 @@ Figure 6.4: Densidad de rendimientos del Bitcoin Vs. una distribución normal
 <span></span>
 <span><span class="co">##Kurtosis</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 14.4</code></pre>
+<pre><code>## [1] 14.6</code></pre>
 <div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##Sesgo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
@@ -218,7 +218,7 @@ Figure 6.4: Densidad de rendimientos del Bitcoin Vs. una distribución normal
 ##  Jarque-Bera Normality Test
 ## 
 ## data:  vector_ret
-## JB = 20834, p-value &lt; 0.00000000000000022
+## JB = 22716, p-value &lt; 0.00000000000000022
 ## alternative hypothesis: greater</code></pre>
 </div>
 <div id="modelos-arch-y-garch-univariados" class="section level2" number="6.3">
@@ -343,22 +343,22 @@ Figure 6.9: Función de autocorrelación parcial de los rendimientos del Bitcoin
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">logret_mean</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Time series regression with "ts" data:
-## Start = 1, End = 3785
+## Start = 1, End = 3989
 ## 
 ## Call:
 ## dynlm(formula = logret ~ 1)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.46616 -0.01409 -0.00011  0.01542  0.22369 
+## -0.46611 -0.01387 -0.00011  0.01485  0.22374 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)  
-## (Intercept) 0.0014262  0.0005913   2.412   0.0159 *
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) 0.001381   0.000567   2.435   0.0149 *
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.03638 on 3784 degrees of freedom</code></pre>
+## Residual standard error: 0.03581 on 3988 degrees of freedom</code></pre>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ehatsq</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">logret_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span></span>
@@ -367,25 +367,25 @@ Figure 6.9: Función de autocorrelación parcial de los rendimientos del Bitcoin
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">ARCH_m</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Time series regression with "ts" data:
-## Start = 2, End = 3785
+## Start = 2, End = 3989
 ## 
 ## Call:
 ## dynlm(formula = ehatsq ~ L(ehatsq))
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
-## -0.016924 -0.001151 -0.001019 -0.000314  0.216151 
+## -0.017235 -0.001113 -0.000986 -0.000307  0.216147 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value             Pr(&gt;|t|)    
-## (Intercept) 0.00115055 0.00008097  14.210 &lt; 0.0000000000000002 ***
-## L(ehatsq)   0.12955356 0.01612192   8.036  0.00000000000000123 ***
+##               Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept) 0.00111267 0.00007693  14.464 &lt;0.0000000000000002 ***
+## L(ehatsq)   0.13123178 0.01570035   8.359 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.004805 on 3782 degrees of freedom
-## Multiple R-squared:  0.01679,    Adjusted R-squared:  0.01653 
-## F-statistic: 64.58 on 1 and 3782 DF,  p-value: 0.000000000000001231</code></pre>
+## Residual standard error: 0.004689 on 3986 degrees of freedom
+## Multiple R-squared:  0.01723,    Adjusted R-squared:  0.01698 
+## F-statistic: 69.86 on 1 and 3986 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">ARCH_m</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/ArchTest-1.png" width="672"></div>
@@ -398,7 +398,7 @@ Figure 6.9: Función de autocorrelación parcial de los rendimientos del Bitcoin
 ##  ARCH LM-test; Null hypothesis: no ARCH effects
 ## 
 ## data:  logret
-## Chi-squared = 63.525, df = 1, p-value = 0.000000000000001584</code></pre>
+## Chi-squared = 68.696, df = 1, p-value &lt; 0.00000000000000022</code></pre>
 <p>La prueba puede repetirse para diferentes especificaciones de ARCH, sin embargo, para efectos ilustrativos usaremos un ARCH(1). Estimemos un ARCH(1), considerando la siguente especificación:</p>
 <p><span class="math display">\[\begin{eqnarray*}
     Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
@@ -492,11 +492,11 @@ Figure 6.9: Función de autocorrelación parcial de los rendimientos del Bitcoin
 ## 
 ## Coefficients:
 ##           ar1     ar2    mean
-##       -0.0200  0.0110  0.0014
-## s.e.   0.0163  0.0163  0.0006
+##       -0.0227  0.0106  0.0014
+## s.e.   0.0158  0.0158  0.0006
 ## 
-## sigma^2 = 0.001324:  log likelihood = 7173.27
-## AIC=-14338.54   AICc=-14338.53   BIC=-14313.59</code></pre>
+## sigma^2 = 0.001282:  log likelihood = 7623.09
+## AIC=-15238.18   AICc=-15238.17   BIC=-15213.01</code></pre>
 <div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#?ugarchspec</span></span>
 <span></span>
@@ -511,13 +511,13 @@ Figure 6.9: Función de autocorrelación parcial de los rendimientos del Bitcoin
 <span>                     solver <span class="op">=</span> <span class="st">'solnp'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">arch.fit</span><span class="op">@</span><span class="va">fit</span><span class="op">$</span><span class="va">matcoef</span></span></code></pre></div>
-<pre><code>##            Estimate   Std. Error     t value      Pr(&gt;|t|)
-## mu      0.001634199 0.0003554176  4.59796875 0.00000426630
-## ar1    -0.051571141 0.0160278553 -3.21759461 0.00129270384
-## ar2    -0.001173354 0.0132063519 -0.08884774 0.92920291820
-## omega   0.001956746 0.0004877426  4.01184036 0.00006024724
-## alpha1  0.730831252 0.2153966887  3.39295491 0.00069143019
-## shape   2.347546285 0.1143766754 20.52469420 0.00000000000</code></pre>
+<pre><code>##            Estimate   Std. Error    t value       Pr(&gt;|t|)
+## mu      0.001532859 0.0003377202  4.5388422 0.000005656395
+## ar1    -0.053141145 0.0156833536 -3.3883789 0.000703070619
+## ar2    -0.003613264 0.0128710634 -0.2807277 0.778919236704
+## omega   0.001893921 0.0004644606  4.0776784 0.000045487632
+## alpha1  0.766134525 0.2205304690  3.4740529 0.000512659866
+## shape   2.341467717 0.1100251224 21.2812098 0.000000000000</code></pre>
 <div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">boot.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchboot-methods.html">ugarchboot</a></span><span class="op">(</span><span class="va">arch.fit</span>,</span>
 <span>                         method <span class="op">=</span> <span class="st">"Partial"</span>,</span>
@@ -534,16 +534,16 @@ Figure 6.9: Función de autocorrelación parcial de los rendimientos del Bitcoin
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3785-01-01
+## Date (T[0]): 3989-01-01
 ## 
 ## Series (summary):
 ##          min      q.25     mean     q.75     max forecast[analytic]
-## t+1 -0.49272 -0.011029 0.002131 0.016278 0.21349           0.002559
+## t+1 -0.55212 -0.011663 0.002887 0.018289 0.23963           0.003253
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.046993 0.046993 0.046993 0.046993 0.046993           0.046993
+## t+1 0.051853 0.051853 0.051853 0.051853 0.051853           0.051853
 ## .....................</code></pre>
 </div>
 </div>
@@ -631,12 +631,12 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 <span></span>
 <span><span class="va">fit.garch.n</span><span class="op">@</span><span class="va">fit</span><span class="op">$</span><span class="va">matcoef</span></span></code></pre></div>
 <pre><code>##              Estimate       Std. Error       t value       Pr(&gt;|t|)
-## mu     0.001732549251 0.00037335216769     4.6405228 0.000003475288
-## ar1   -0.060564251420 0.01366669410752    -4.4315217 0.000009357040
-## ar2   -0.003165659273 0.01312052794226    -0.2412753 0.809341755744
-## omega  0.000004030097 0.00000006466761    62.3201687 0.000000000000
-## beta1  0.998010983096 0.00003420421161 29178.0145209 0.000000000000
-## shape  2.514422127328 0.02778984749145    90.4798822 0.000000000000</code></pre>
+## mu     0.001640529284 0.00035501451081     4.6210204 0.000003818573
+## ar1   -0.062295689074 0.01329870081284    -4.6843440 0.000002808580
+## ar2   -0.003860340713 0.01279194989561    -0.3017789 0.762820608167
+## omega  0.000004335678 0.00000006739704    64.3303867 0.000000000000
+## beta1  0.997759011830 0.00004111080070 24269.9970508 0.000000000000
+## shape  2.512717794144 0.02648819898283    94.8617834 0.000000000000</code></pre>
 <div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">boot.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchboot-methods.html">ugarchboot</a></span><span class="op">(</span><span class="va">fit.garch.n</span>,</span>
 <span>                         method <span class="op">=</span> <span class="st">"Partial"</span>,</span>
@@ -652,16 +652,16 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3785-01-01
+## Date (T[0]): 3989-01-01
 ## 
 ## Series (summary):
-##          min      q.25     mean     q.75    max forecast[analytic]
-## t+1 -0.46517 -0.012305 0.002125 0.017968 0.2412           0.002863
+##          min      q.25     mean     q.75     max forecast[analytic]
+## t+1 -0.46369 -0.010886 0.003073 0.018241 0.24131            0.00366
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.045009 0.045009 0.045009 0.045009 0.045009           0.045009
+## t+1 0.043984 0.043984 0.043984 0.043984 0.043984           0.043984
 ## .....................</code></pre>
 <div id="selección-garchpq-óptimo" class="section level3" number="6.4.1">
 <h3>
@@ -704,10 +704,10 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 <div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">infocriteria</a></span><span class="op">(</span><span class="va">fit.garch.n</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                       
-## Akaike       -4.084107
-## Bayes        -4.074217
-## Shibata      -4.084112
-## Hannan-Quinn -4.080591</code></pre>
+## Akaike       -4.119423
+## Bayes        -4.109960
+## Shibata      -4.119427
+## Hannan-Quinn -4.116068</code></pre>
 </div>
 <div id="selección-del-modelo-óptimo" class="section level4" number="6.4.1.2">
 <h4>
@@ -827,22 +827,22 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 <span></span>
 <span><span class="fu">Lag_Opt_GARCH</span><span class="op">(</span><span class="va">ehatsq</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##       q p       AIC Optimo
-##  [1,] 1 1 -10.93717      0
-##  [2,] 1 2 -10.93691      0
-##  [3,] 1 3 -10.93883      0
-##  [4,] 1 4 -10.93810      0
-##  [5,] 2 1 -10.93664      0
-##  [6,] 2 2 -10.93672      0
-##  [7,] 2 3 -10.93641      0
-##  [8,] 2 4 -10.93591      0
-##  [9,] 3 1 -10.93617      0
-## [10,] 3 2 -10.93594      0
-## [11,] 3 3 -10.93849      0
-## [12,] 3 4 -10.93729      0
-## [13,] 4 1 -10.93924      0
-## [14,] 4 2 -10.94022      1
-## [15,] 4 3 -10.93976      0
-## [16,] 4 4 -10.93942      0</code></pre>
+##  [1,] 1 1 -11.01720      0
+##  [2,] 1 2 -11.01770      0
+##  [3,] 1 3 -11.01713      0
+##  [4,] 1 4 -11.01797      0
+##  [5,] 2 1 -11.01669      0
+##  [6,] 2 2 -11.01691      0
+##  [7,] 2 3 -11.01667      0
+##  [8,] 2 4 -11.01892      0
+##  [9,] 3 1 -11.01619      0
+## [10,] 3 2 -11.01632      0
+## [11,] 3 3 -11.01593      0
+## [12,] 3 4 -11.01841      0
+## [13,] 4 1 -11.01821      0
+## [14,] 4 2 -11.01929      0
+## [15,] 4 3 -11.01985      1
+## [16,] 4 4 -11.01783      0</code></pre>
 </div>
 <div id="estimación-de-modelo-óptimo" class="section level4" number="6.4.1.3">
 <h4>
@@ -957,18 +957,18 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 <span>                      solver <span class="op">=</span> <span class="st">'solnp'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model.fit</span><span class="op">@</span><span class="va">fit</span><span class="op">$</span><span class="va">matcoef</span></span></code></pre></div>
-<pre><code>##                Estimate     Std. Error        t value          Pr(&gt;|t|)
-## mu      0.0013463448938 0.000323450602  4.16244361401 0.000031485990629
-## ar1    -0.0488340334201 0.014958604103 -3.26461166323 0.001096142473348
-## ar2     0.0007806639661 0.013852428181  0.05635574903 0.955058408055019
-## omega   0.0000275911232 0.000005169389  5.33740503074 0.000000094286259
-## alpha1  0.1291123913696 0.021657036600  5.96168320494 0.000000002496528
-## alpha2  0.0000001167147 0.036821188483  0.00000316977 0.999997470889172
-## alpha3  0.0000000357534 0.026602826782  0.00000134397 0.999998927667146
-## alpha4  0.0334049097266 0.022389819504  1.49196869230 0.135707352966684
-## beta1   0.4258402873418 0.226518488970  1.87993611152 0.060116785623216
-## beta2   0.4106422585493 0.182128432146  2.25468507970 0.024153102839025
-## shape   3.1840994007682 0.130709861275 24.36005493171 0.000000000000000</code></pre>
+<pre><code>##                 Estimate     Std. Error         t value           Pr(&gt;|t|)
+## mu      0.00127367124495 0.000310531004  4.101591233367 0.0000410318663298
+## ar1    -0.04992939910616 0.014589526918 -3.422276773488 0.0006209906565398
+## ar2    -0.00118605691463 0.013570620620 -0.087398870534 0.9303544671280766
+## omega   0.00002742663768 0.000004534288  6.048719631653 0.0000000014600148
+## alpha1  0.13033650621041 0.021289267169  6.122169691329 0.0000000009230963
+## alpha2  0.00000008131683 0.040370968586  0.000002014240 0.9999983928688645
+## alpha3  0.00000002738912 0.024954002312  0.000001097584 0.9999991242544615
+## alpha4  0.02903733674991 0.022972108136  1.264025773236 0.2062207764207016
+## beta1   0.43367902817778 0.236321582920  1.835122390513 0.0664875570511090
+## beta2   0.40594701728917 0.194427233636  2.087912324310 0.0368057442492031
+## shape   3.17561175344950 0.130949205829 24.250714109682 0.0000000000000000</code></pre>
 <div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">boot.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchboot-methods.html">ugarchboot</a></span><span class="op">(</span><span class="va">model.fit</span>,</span>
 <span>                         method <span class="op">=</span> <span class="st">"Partial"</span>,</span>
@@ -985,16 +985,16 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3785-01-01
+## Date (T[0]): 3989-01-01
 ## 
 ## Series (summary):
-##          min      q.25     mean     q.75     max forecast[analytic]
-## t+1 -0.30584 -0.008737 0.002116 0.013685 0.23587           0.002168
+##          min      q.25     mean     q.75    max forecast[analytic]
+## t+1 -0.28372 -0.006936 0.002972 0.013502 0.2175           0.002851
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.025129 0.025129 0.025129 0.025129 0.025129           0.025129
+## t+1 0.023181 0.023181 0.023181 0.023181 0.023181           0.023181
 ## .....................</code></pre>
 </div>
 <div id="forecasting-with-garch11" class="section level4" number="6.4.1.4">
@@ -1019,34 +1019,34 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 <code class="sourceCode R"><span><span class="va">forecast</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchforecast-methods.html">ugarchforecast</a></span><span class="op">(</span><span class="va">spec</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, n.roll <span class="op">=</span> <span class="fl">0</span>, <span class="va">logret</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">sigma</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##      3785-01-01
-## T+1  0.02537095
-## T+2  0.02571801
-## T+3  0.02606010
-## T+4  0.02639743
-## T+5  0.02673017
-## T+6  0.02705849
-## T+7  0.02738256
-## T+8  0.02770251
-## T+9  0.02801850
-## T+10 0.02833065
-## T+11 0.02863909
-## T+12 0.02894394</code></pre>
+<pre><code>##      3989-01-01
+## T+1  0.02249421
+## T+2  0.02287969
+## T+3  0.02325841
+## T+4  0.02363070
+## T+5  0.02399684
+## T+6  0.02435712
+## T+7  0.02471180
+## T+8  0.02506112
+## T+9  0.02540528
+## T+10 0.02574451
+## T+11 0.02607900
+## T+12 0.02640892</code></pre>
 <div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##       3785-01-01
-## T+1  0.003014905
-## T+2  0.002208362
-## T+3  0.001815263
-## T+4  0.002000821
-## T+5  0.001847454
-## T+6  0.001985169
-## T+7  0.001851648
-## T+8  0.001969917
-## T+9  0.001854931
-## T+10 0.001956140
-## T+11 0.001857074
-## T+12 0.001943646</code></pre>
+<pre><code>##       3989-01-01
+## T+1  0.002808082
+## T+2  0.001162015
+## T+3  0.001263699
+## T+4  0.001534758
+## T+5  0.001187587
+## T+6  0.001031094
+## T+7  0.001401712
+## T+8  0.001460814
+## T+9  0.001092147
+## T+10 0.001125498
+## T+11 0.001469772
+## T+12 0.001353992</code></pre>
 <div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecast</span></span></code></pre></div>
 <pre><code>## 
@@ -1060,18 +1060,18 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 ## 
 ## 0-roll forecast [T0=]:
 ##        Series   Sigma
-## T+1  0.003015 0.02537
-## T+2  0.002208 0.02572
-## T+3  0.001815 0.02606
-## T+4  0.002001 0.02640
-## T+5  0.001847 0.02673
-## T+6  0.001985 0.02706
-## T+7  0.001852 0.02738
-## T+8  0.001970 0.02770
-## T+9  0.001855 0.02802
-## T+10 0.001956 0.02833
-## T+11 0.001857 0.02864
-## T+12 0.001944 0.02894</code></pre>
+## T+1  0.002808 0.02249
+## T+2  0.001162 0.02288
+## T+3  0.001264 0.02326
+## T+4  0.001535 0.02363
+## T+5  0.001188 0.02400
+## T+6  0.001031 0.02436
+## T+7  0.001402 0.02471
+## T+8  0.001461 0.02506
+## T+9  0.001092 0.02541
+## T+10 0.001125 0.02574
+## T+11 0.001470 0.02608
+## T+12 0.001354 0.02641</code></pre>
 </div>
 </div>
 </div>
@@ -1239,7 +1239,7 @@ Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2025-01-28.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2025-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

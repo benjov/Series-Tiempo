@@ -28,7 +28,7 @@ library(readxl)
 
 __Otoño 2024__
 
-by Benjamín Oliva, Omar Alfaro Rivera & Emiliano Pérez Caullieres
+by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruiz
 
 
 ```{r eval=FALSE, include=FALSE}
