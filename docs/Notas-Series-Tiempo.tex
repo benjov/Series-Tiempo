@@ -141,7 +141,7 @@
 
 \title{Notas de Clase: Series de Tiempo}
 \author{Benjamín Oliva, Omar Alfaro Rivera \& Emiliano Pérez Caullieres}
-\date{2025-08-19}
+\date{2025-08-21}
 
 \begin{document}
 \maketitle
@@ -5394,26 +5394,50 @@ Modelo B & \(\mu = 0.0801\) & 0.739 & 0.463 & 0.347 \\
 ## critical values 0.347 0.463  0.574 0.739
 \end{verbatim}
 
-\hypertarget{causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraciuxf3n-y-modelos-ardl}{%
-\chapter{Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, y Modelos ARDL}\label{causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraciuxf3n-y-modelos-ardl}}
+\hypertarget{causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraciuxf3n-modelos-ardl-y-filtro-multivariado}{%
+\chapter{Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado}\label{causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraciuxf3n-modelos-ardl-y-filtro-multivariado}}
 
-En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más series. Como primera aproximación desarrollaremos el concepto de Causalidad de Granger. Mediante esta metodología discutiremos cuándo dos series se causan estadísticamente. Posteriormente, introduciremos una técnica más sofisticada conocida como la metodología de Vectores Autoregresivos (VAR), la cual es una generalización de los procesos Autoregresivos (AR) que analizamos al principio del curso. Finalmente, introduciremos la técnica de cointegración y de rezagos distribuidos (ARDL) para los casos en que las series que analicemos sean procesos no estacionarios.
+En este capítulo removeremos el supuesto de que el análisis es
+univariado, ya que introduciremos la posibilidad de que los procesos
+generadores de datos compartan información entre dos o más series. Como
+primera aproximación desarrollaremos el concepto de Causalidad de
+Granger. Mediante esta metodología discutiremos cuándo dos series se
+causan estadísticamente. Posteriormente, introduciremos una técnica más
+sofisticada conocida como la metodología de Vectores Autoregresivos
+(VAR), la cual es una generalización de los procesos Autoregresivos (AR)
+que analizamos al principio del curso. Finalmente, introduciremos la
+técnica de cointegración y de rezagos distribuidos (ARDL) para los casos
+en que las series que analicemos sean procesos no estacionarios.
 
-A partir de este punto, asumiremos que las series empleadas son estacionarias en sus primeras diferencias y solo nos preocuparemos por su estacionariedad en los casos particulares de Cointegración y los modelos ARDL.
+A partir de este punto, asumiremos que las series empleadas son
+estacionarias en sus primeras diferencias y solo nos preocuparemos por
+su estacionariedad en los casos particulares de Cointegración y los
+modelos ARDL.
 
 \hypertarget{causalidad-de-granger}{%
 \section{Causalidad de Granger}\label{causalidad-de-granger}}
 
-Hasta ahora hemos supuesto que una serie puede ser explicada únicamente con la información contenida en ella misma. No obstante, en adelante trataremos de analizar el caso en el que buscamos determinar relaciones entre variables y cómo el comportamiento de una serie influye en las demás. Algunas relaciones más importantes son las llamadas: causalidad. En este caso analizaremos el procedimiento de Granger (1969), conocido como causalidad de Granger. En adelante asumiremos que las series involucradas son débilmente estacionarias.
+Hasta ahora hemos supuesto que una serie puede ser explicada únicamente
+con la información contenida en ella misma. No obstante, en adelante
+trataremos de analizar el caso en el que buscamos determinar relaciones
+entre variables y cómo el comportamiento de una serie influye en las
+demás. Algunas relaciones más importantes son las llamadas: causalidad.
+En este caso analizaremos el procedimiento de Granger (1969), conocido
+como causalidad de Granger. En adelante asumiremos que las series
+involucradas son débilmente estacionarias.
 
-Sean \(X\) y \(Y\) dos series débilmente estacionarias. Definamos a \(I_t\) un conjunto de toda la información disponible hasta el momento \(t\). Asimismo, digamos que \(\overline{X}_t\) y \(\overline{Y}_t\) son los conjuntos de toda la información disponible (actual y pasada) de \(X\) y \(Y\), respectivamente. Es decir:
-\begin{eqnarray*}
+Sean \(X\) y \(Y\) dos series débilmente estacionarias. Definamos a \(I_t\) un
+conjunto de toda la información disponible hasta el momento \(t\).
+Asimismo, digamos que \(\overline{X}_t\) y \(\overline{Y}_t\) son los
+conjuntos de toda la información disponible (actual y pasada) de \(X\) y
+\(Y\), respectivamente. Es decir: \begin{eqnarray*}
     \overline{X}_t & := & \{ X_t, X_{t-1}, X_{t-2}, \ldots \} \\
     \overline{Y}_t & := & \{ Y_t, Y_{t-1}, Y_{t-2}, \ldots \} \\
     I_t & := & \overline{X}_t + \overline{Y}_t
 \end{eqnarray*}
 
-Adicionalmente, definamos \(\sigma^2(*)\) como la varianza del término de error estimado de una regresión dada. Dicho lo anterior, digamos que:
+Adicionalmente, definamos \(\sigma^2(*)\) como la varianza del término de
+error estimado de una regresión dada. Dicho lo anterior, digamos que:
 
 \begin{enumerate}
   \item Existe Causalidad de Granger o $X$ causa a $Y$ si y solo si, una regresión lineal da como resultado que: 
@@ -5429,7 +5453,10 @@ Es decir, que la variabilidad del término de error de una regresión lineal de 
     \end{equation}
 \end{enumerate}
 
-La definición anterior aplica de igual forma si se reemplaza a \(X\) por \(Y\) y a \(Y\) por \(X\), respectivamente. De acuerdo a la definición anterior, existen 5 diferentes posibilidades de relaciones causales entre las dos series:
+La definición anterior aplica de igual forma si se reemplaza a \(X\) por
+\(Y\) y a \(Y\) por \(X\), respectivamente. De acuerdo a la definición
+anterior, existen 5 diferentes posibilidades de relaciones causales
+entre las dos series:
 
 \begin{enumerate}
     \item $X$ y $Y$ son independientes: $(X, Y)$;
@@ -5443,7 +5470,8 @@ La definición anterior aplica de igual forma si se reemplaza a \(X\) por \(Y\) 
     \item Ambas series se causan: $(X \longleftrightarrow Y)$.
 \end{enumerate}
 
-Por lo anterior, representaremos mediante un \(AR(p)\) con variables exógenas lo siguiente:
+Por lo anterior, representaremos mediante un \(AR(p)\) con variables
+exógenas lo siguiente:
 \begin{equation}
     A(L) 
     \begin{bmatrix}
@@ -5463,8 +5491,7 @@ Por lo anterior, representaremos mediante un \(AR(p)\) con variables exógenas l
     \label{eq:GrangerEq}
 \end{equation}
 
-O en su versión \(MA(q)\) con variables exógenas:
-\begin{equation}
+O en su versión \(MA(q)\) con variables exógenas: \begin{equation}
     \begin{bmatrix}
     Y_t \\ X_t
     \end{bmatrix}
@@ -5482,19 +5509,33 @@ O en su versión \(MA(q)\) con variables exógenas:
     \end{bmatrix}
 \end{equation}
 
-Para determinar el test de causalidad utilizaremos una especificación similar a la de la ecuación \eqref{eq:GrangerEq}. Para probar si \(X\) causa a \(Y\), consideraremos la siguiente regresión:
-\begin{equation}
+Para determinar el test de causalidad utilizaremos una especificación
+similar a la de la ecuación \eqref{eq:GrangerEq}. Para probar si \(X\)
+causa a \(Y\), consideraremos la siguiente regresión: \begin{equation}
     Y_t = \alpha_0 + \sum^{k_1}_{k = 1} a^k_{11} Y_{t-k} + \sum^{k_2}_{k = k_0} a^k_{12} X_{t-k} + U_{1,t}
 \end{equation}
 
-Donde \(k_0 = 1\) y, en general, se asume que \(k_1 = k_2\). Asimismo, el valor de estas constantes se puede determinar con el criterio de Akaike (o cualquier otro criterio de información). No obstante, algunos autores sugieren que una buena práctica es considerar valores de \(k_1\) y \(k_2\) que recorran al 4, 8, 12 y 16.
+Donde \(k_0 = 1\) y, en general, se asume que \(k_1 = k_2\). Asimismo, el
+valor de estas constantes se puede determinar con el criterio de Akaike
+(o cualquier otro criterio de información). No obstante, algunos autores
+sugieren que una buena práctica es considerar valores de \(k_1\) y \(k_2\)
+que recorran al 4, 8, 12 y 16.
 
-Dicho lo anterior, el test de causalidad de Granger se establece con una prueba F, en la cual se prueba la siguiente hipótesis nula:
+Dicho lo anterior, el test de causalidad de Granger se establece con una
+prueba F, en la cual se prueba la siguiente hipótesis nula:
 \begin{equation}
     H_0: a^1_{12} = a^2_{12} = \ldots = a^{k2}_{12} = 0
 \end{equation}
 
-\textbf{Ejemplo}. Consideremos como variables analizadas al Índice Nacional de Precios al Consumidor (\(INPC_t\)), al Tipo de Cambio (\(TDC_t\)) y al rendimiento anual de los Cetes a 28 días (\(CETE28_t\)), todas desestacionalizadas para el periodo de enero de 2000 a julio de 2019. Dado que la metodología de Granger supone que las series son estacionarias, utilizaremos las diferencias logarítmicas de cada una de las tres series (es decir, utilizaremos una transformación del tipo \(ln(X_t) - ln(X_{t-1})\)). La Figura \ref{fig:fig61} muestra las series en su transformación de diferencias logarítmicas.
+\textbf{Ejemplo}. Consideremos como variables analizadas al Índice
+Nacional de Precios al Consumidor (\(INPC_t\)), al Tipo de Cambio
+(\(TDC_t\)) y al rendimiento anual de los Cetes a 28 días (\(CETE28_t\)),
+todas desestacionalizadas para el periodo de enero de 2000 a julio de
+2019. Dado que la metodología de Granger supone que las series son
+estacionarias, utilizaremos las diferencias logarítmicas de cada una de
+las tres series (es decir, utilizaremos una transformación del tipo
+\(ln(X_t) - ln(X_{t-1})\)). La Figura \ref{fig:fig61} muestra las series
+en su transformación de diferencias logarítmicas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5571,7 +5612,12 @@ Dicho lo anterior, el test de causalidad de Granger se establece con una prueba 
 \end{Highlighting}
 \end{Shaded}
 
-Por simplicidad, en el Cuadro \ref{tab:Granger} se muestra el resultado de aplicar el test de Granger a diferentes especificaciones, con rezagos 4, 8, 12 y 16, sólo para la serie de Tipo de Cambio en diferencias logarítmicas. En cada una de las pruebas se compara el modelo considerado como regresor a la variable que es candidata de causar, respecto del modelo sin considerar a dicha variable.
+Por simplicidad, en el Cuadro \ref{tab:Granger} se muestra el resultado
+de aplicar el test de Granger a diferentes especificaciones, con rezagos
+4, 8, 12 y 16, sólo para la serie de Tipo de Cambio en diferencias
+logarítmicas. En cada una de las pruebas se compara el modelo
+considerado como regresor a la variable que es candidata de causar,
+respecto del modelo sin considerar a dicha variable.
 
 \begin{longtable}[]{@{}cccc@{}}
 \caption{\label{tab:Granger} Prueba de si \(DLINPC_t\) Granger causa a \(DLTC_t\).}\tabularnewline
@@ -5594,56 +5640,94 @@ Notas: & *** & signif. & al 0.1\% \\
 & * & signif. & al 5\% \\
 \end{longtable}
 
-De acuerdo con el Cuadro \ref{tab:Granger}, podemos concluir que existe información estadísticamente significativa para concluir que la inflación causa a la tasa de depreciación cambiaria, ambas medidas como las diferencias logaritmicas. El resto de los resultados para las otras combinaciones de causalidad se encuentran en el R Markdown llamado Clase 13 ubicado en el repositorio de GitHub.
+De acuerdo con el Cuadro \ref{tab:Granger}, podemos concluir que existe
+información estadísticamente significativa para concluir que la
+inflación causa a la tasa de depreciación cambiaria, ambas medidas como
+las diferencias logaritmicas. El resto de los resultados para las otras
+combinaciones de causalidad se encuentran en el R Markdown llamado Clase
+13 ubicado en el repositorio de GitHub.
 
 \hypertarget{definiciuxf3n-y-representaciuxf3n-del-sistema-o-modelo-de-vectores-autorregresicos-varp}{%
 \section{Definición y representación del Sistema o Modelo de Vectores Autorregresicos (VAR(p))}\label{definiciuxf3n-y-representaciuxf3n-del-sistema-o-modelo-de-vectores-autorregresicos-varp}}
 
-En esta sección ampliaremos la discusión planteada en el apartado anterior. En el sentido de que en la sección pasada nuestra discusión se limitó al análisis de causalidad entre dos variables a la vez, que si bien es posible extenderlo a más variables, es un procedimiento limitado a casos particulares por las siguientes razones.
+En esta sección ampliaremos la discusión planteada en el apartado
+anterior. En el sentido de que en la sección pasada nuestra discusión se
+limitó al análisis de causalidad entre dos variables a la vez, que si
+bien es posible extenderlo a más variables, es un procedimiento limitado
+a casos particulares por las siguientes razones.
 
-El procedimiento de causalidad de Granger supone que es posible identificar un sistema de ecuaciones que debe conformarse una vez que se ha identificado el sentido de la causalidad. Así, el proceso anterior necesita del conocimiento previo de las relaciones que existen entre las variables.
+El procedimiento de causalidad de Granger supone que es posible
+identificar un sistema de ecuaciones que debe conformarse una vez que se
+ha identificado el sentido de la causalidad. Así, el proceso anterior
+necesita del conocimiento previo de las relaciones que existen entre las
+variables.
 
-Adicionalmente, no resuelve el problema más general que está relacionado con cómo identificar la causalidad cuando se tienen múltiples variables con múltiples sentidos de causalidad. En esta sección analizaremos una mejor aproximación al problema de cómo identificar la causalidad múltiple. Por lo tanto, como mecanismo para solucionar el problema planteado, analizaremos el caso de un Sistema o Modelo de Vectores Autoregresivos conocido como VAR.
+Adicionalmente, no resuelve el problema más general que está relacionado
+con cómo identificar la causalidad cuando se tienen múltiples variables
+con múltiples sentidos de causalidad. En esta sección analizaremos una
+mejor aproximación al problema de cómo identificar la causalidad
+múltiple. Por lo tanto, como mecanismo para solucionar el problema
+planteado, analizaremos el caso de un Sistema o Modelo de Vectores
+Autoregresivos conocido como VAR.
 
-El primer supuesto del que partiremos es que existe algún grado de endogeneidad entre las variables consideradas en el análisis. Adicionalmente, el segundo supuesto que estableceremos es que requerimos que las variables que tengamos consideradas sean estacionarias.
+El primer supuesto del que partiremos es que existe algún grado de
+endogeneidad entre las variables consideradas en el análisis.
+Adicionalmente, el segundo supuesto que estableceremos es que requerimos
+que las variables que tengamos consideradas sean estacionarias.
 
-Por lo anterior, diremos que un modelo de Vectores Autoregresivos (VAR) es un procedimiento que sigue fundado en el supuesto de que las variables consideradas son estacionarias. Así, hasta este momento del curso hemos pasado de modelos univariados a modelos multivariados, pero no hemos podido dejar de asumir que las series son estacionarias.
+Por lo anterior, diremos que un modelo de Vectores Autoregresivos (VAR)
+es un procedimiento que sigue fundado en el supuesto de que las
+variables consideradas son estacionarias. Así, hasta este momento del
+curso hemos pasado de modelos univariados a modelos multivariados, pero
+no hemos podido dejar de asumir que las series son estacionarias.
 
-En lo subsecuente asumiremos que las series empleadas son estacionarias y sólo lo demostraremos cuando, en su caso, sea necesario. Esto no significa que el lector deba asumir estacionariedad. Por el contrario, siempre debe probar que las series son estacionarias antes de iniciar la implementación de cualquier técnica de series de tiempo.
+En lo subsecuente asumiremos que las series empleadas son estacionarias
+y sólo lo demostraremos cuando, en su caso, sea necesario. Esto no
+significa que el lector deba asumir estacionariedad. Por el contrario,
+siempre debe probar que las series son estacionarias antes de iniciar la
+implementación de cualquier técnica de series de tiempo.
 
-Ahora bien, iniciaremos con el establecimiento de la representación del proceso. Digamos que tenemos un proceso estocástico \(\mathbf{X}_t\) estacionario vectorial de dimensión \(k\):
-\begin{equation*}
+Ahora bien, iniciaremos con el establecimiento de la representación del
+proceso. Digamos que tenemos un proceso estocástico \(\mathbf{X}_t\)
+estacionario vectorial de dimensión \(k\): \begin{equation*}
     \mathbf{X}_t = 
     \begin{bmatrix}
     X_{1t} \\ X_{2t} \\ \vdots \\ X_{kt}
     \end{bmatrix}
 \end{equation*}
 
-Para cualquier \(i = 1, 2, \ldots, p\):
-\begin{equation*}
+Para cualquier \(i = 1, 2, \ldots, p\): \begin{equation*}
     \mathbf{X}_{t-i} = 
     \begin{bmatrix}
     X_{1t-i} \\ X_{2t-i} \\ \vdots \\ X_{kt-i}
     \end{bmatrix}
 \end{equation*}
 
-Donde cada \(X_{kt}\) en \(\mathbf{X}_t\) es una serie de tiempo por sí misma. De esta forma, la expresión reducida del modelo o el proceso \(VAR(p)\) estará dado por:
+Donde cada \(X_{kt}\) en \(\mathbf{X}_t\) es una serie de tiempo por sí
+misma. De esta forma, la expresión reducida del modelo o el proceso
+\(VAR(p)\) estará dado por:
 \begin{equation}
     \mathbf{X}_t = \boldsymbol{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
     \label{eq:VARp}
 \end{equation}
 
-Donde cada uno de las \(A_i\), \(i = 1, 2, \ldots, p\), son matrices cuadradas de dimensión \(k\) y \(\mathbf{U}_t\) representa un vector de dimensión \(k \times 1\) con los residuales en el momento del tiempo \(t\) que son, por individual, un proceso puramente aleatorio. También se incorpora un vector de términos constantes denominado como \(\mathbf{\delta}\), el cual es de dimensión \(k \times 1\).
+Donde cada uno de las \(A_i\), \(i = 1, 2, \ldots, p\), son matrices
+cuadradas de dimensión \(k\) y \(\mathbf{U}_t\) representa un vector de
+dimensión \(k \times 1\) con los residuales en el momento del tiempo \(t\)
+que son, por individual, un proceso puramente aleatorio. También se
+incorpora un vector de términos constantes denominado como
+\(\mathbf{\delta}\), el cual es de dimensión \(k \times 1\).
 
-Así, la ecuación \eqref{eq:VARp} supone la siguiente estructura del vector \(\boldsymbol{\delta}\):
-\begin{equation*}
+Así, la ecuación \eqref{eq:VARp} supone la siguiente estructura del
+vector \(\boldsymbol{\delta}\): \begin{equation*}
     \boldsymbol{\delta} = 
     \begin{bmatrix}
     \delta_{1} \\ \delta_{2} \\ \vdots \\ \delta_{k}
     \end{bmatrix}
 \end{equation*}
 
-También, la ecuación \eqref{eq:VARp} supone que cada matriz \(A_i\), \(i = 1, 2, \ldots, p\) está definida de la siguiente forma:
+También, la ecuación \eqref{eq:VARp} supone que cada matriz \(A_i\),
+\(i = 1, 2, \ldots, p\) está definida de la siguiente forma:
 \begin{equation*}
     \mathbf{A}_i = 
     \begin{bmatrix}
@@ -5653,7 +5737,9 @@ También, la ecuación \eqref{eq:VARp} supone que cada matriz \(A_i\), \(i = 1, 
 
 Donde \(i = 1, 2, \ldots, p\).
 
-Retomando la ecuación \eqref{eq:VARp} y considerando que podemos ocupar el operador rezago \(L^j\) de forma análoga al caso del modelo \(AR(p)\), pero aplicado a un vector, tenemos las siguientes ecuaciones:
+Retomando la ecuación \eqref{eq:VARp} y considerando que podemos ocupar
+el operador rezago \(L^j\) de forma análoga al caso del modelo \(AR(p)\),
+pero aplicado a un vector, tenemos las siguientes ecuaciones:
 \begin{eqnarray}
     \mathbf{X}_t - A_1 \mathbf{X}_{t-1} - A_2 \mathbf{X}_{t-2} - \ldots - A_p \mathbf{X}_{t-p} & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
     \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t-p} & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
@@ -5662,17 +5748,18 @@ Retomando la ecuación \eqref{eq:VARp} y considerando que podemos ocupar el oper
     \label{eq:VARCorto}
 \end{eqnarray}
 
-Adicionalmente, requeriremos que dado que \(\mathbf{U}_t\) es un proceso puramente aleatorio, este debe cumplir con las siguientes condiciones:
+Adicionalmente, requeriremos que dado que \(\mathbf{U}_t\) es un proceso
+puramente aleatorio, este debe cumplir con las siguientes condiciones:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  El valor esperado del término de error es cero:
-  \begin{equation}
+  El valor esperado del término de error es cero: \begin{equation}
      \mathbb{E}[\mathbf{U}_t] = 0
     \end{equation}
 \item
-  Existe una matriz de varianzas y covarianzas entre los términos de error contemporáneos dada por:
+  Existe una matriz de varianzas y covarianzas entre los términos de
+  error contemporáneos dada por:
   \begin{eqnarray}
      \mathbb{E}[\mathbf{U}_t \mathbf{U}_t'] 
      & = &
@@ -5701,7 +5788,8 @@ Adicionalmente, requeriremos que dado que \(\mathbf{U}_t\) es un proceso puramen
      \label{eq:SigmaVAR}
     \end{eqnarray}
 \item
-  La matriz de varianzas y covarianzas no contemporáneas es nula. Es decir, que para todo \(t \neq s\):
+  La matriz de varianzas y covarianzas no contemporáneas es nula. Es
+  decir, que para todo \(t \neq s\):
   \begin{eqnarray}
       \mathbb{E} [\mathbf{U}_t \mathbf{U}_s'] 
       & = &
@@ -5725,16 +5813,26 @@ Adicionalmente, requeriremos que dado que \(\mathbf{U}_t\) es un proceso puramen
   \end{eqnarray}
 \end{enumerate}
 
-Las ecuaciones \eqref{eq:SigmaVAR} y \eqref{eq:RhoVAR} significan que los residuales \(\mathbf{U}_t\) pueden estar correlacionados entre ellos solo en el caso de que la información sea contemporánea, pero no tienen información en común entre residuales de otros periodos.
+Las ecuaciones \eqref{eq:SigmaVAR} y \eqref{eq:RhoVAR} significan que los
+residuales \(\mathbf{U}_t\) pueden estar correlacionados entre ellos solo
+en el caso de que la información sea contemporánea, pero no tienen
+información en común entre residuales de otros periodos.
 
-Al igual que en el caso del modelo o especificación \(AR(p)\) en la especificación del modelo \(VAR(p)\) existen condiciones de estabilidad. Dichas condiciones están dadas por lo siguiente, definamos el siguiente polinomio que resulta de tomar la matriz \(\mathbf{A}(L)\) en la ecuación \eqref{eq:VARCorto}:
-\begin{equation}
+Al igual que en el caso del modelo o especificación \(AR(p)\) en la
+especificación del modelo \(VAR(p)\) existen condiciones de estabilidad.
+Dichas condiciones están dadas por lo siguiente, definamos el siguiente
+polinomio que resulta de tomar la matriz \(\mathbf{A}(L)\) en la ecuación
+\eqref{eq:VARCorto}: \begin{equation}
     Det[I_t - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
 \end{equation}
 
-Donde las raíces del polinomio cumplen que \(|z| \leq 1\), es decir, se ubican dentro del circulo unitario.
+Donde las raíces del polinomio cumplen que \(|z| \leq 1\), es decir, se
+ubican dentro del circulo unitario.
 
-La ecuación \eqref{eq:VARCorto} puede ser rexpresada en una forma similar al un proceso de MA. Al respecto, de forma similar a la siguiente ecuación podemos construir un modelo \(VARMA(p,q)\), el cual no estudiamos es este curso.
+La ecuación \eqref{eq:VARCorto} puede ser rexpresada en una forma similar
+al un proceso de MA. Al respecto, de forma similar a la siguiente
+ecuación podemos construir un modelo \(VARMA(p,q)\), el cual no estudiamos
+es este curso.
 
 Reromando el primer planteamiento, podemos escribir:
 \begin{eqnarray}
@@ -5743,24 +5841,30 @@ Reromando el primer planteamiento, podemos escribir:
     \label{eq:VARMAq}
 \end{eqnarray}
 
-Donde \(\boldsymbol{\mu}\) es un vector de \(k \times 1\) constantes y \(\boldsymbol{\beta}(L)\) es una matriz que depende de \(L\).
+Donde \(\boldsymbol{\mu}\) es un vector de \(k \times 1\) constantes y
+\(\boldsymbol{\beta}(L)\) es una matriz que depende de \(L\).
 
-Por el lado de las matrices que representan la autocovarianza, estás resultan de resolver lo siguiente:
-\begin{equation}
+Por el lado de las matrices que representan la autocovarianza, estás
+resultan de resolver lo siguiente: \begin{equation}
     \Gamma_X(\tau) = E[(\mathbf{X}_t - \mu)(\mathbf{X}_{t-\tau} - \mu)'] 
 \end{equation}
 
-Ahora, sin pérdida de generalidad digamos que la especificación VAR(p) en la ecuación \eqref{eq:VARp} no tiene constante, por lo que \(\boldsymbol{\delta} = \mathbf{0}\), lo que implica que \(\boldsymbol{\mu} = \mathbf{0}\). De esta forma las matrices de autocovarianza resultan de:
-\begin{eqnarray*}
+Ahora, sin pérdida de generalidad digamos que la especificación VAR(p)
+en la ecuación \eqref{eq:VARp} no tiene constante, por lo que
+\(\boldsymbol{\delta} = \mathbf{0}\), lo que implica que
+\(\boldsymbol{\mu} = \mathbf{0}\). De esta forma las matrices de
+autocovarianza resultan de: \begin{eqnarray*}
     \Gamma_{\mathbf{X}}(\tau) & = & E[(\mathbf{X}_t)(\mathbf{X}_{t-\tau})'] \\
     & = & \mathbf{A_1} E[(\mathbf{X}_{t-1})(\mathbf{X}_{t-\tau})'] + \mathbf{A_2} E[(\mathbf{X}_{t-2})(\mathbf{X}_{t-\tau})'] \\
     &   & + \ldots + \mathbf{A_p} E[(\mathbf{X}_{t-p})(\mathbf{X}_{t-\tau})'] + E[(\mathbf{U}_t(\mathbf{X}_{t-\tau})']
 \end{eqnarray*}
 
-Finalmente, al igual que en el caso \(AR(p)\), requerimos de una métrica que nos permita determinar el número de rezagos óptimo \(p\) en el \(VAR(p)\). Así, establecemos criterios de información similares a los del \(AR(p)\) dados por:
+Finalmente, al igual que en el caso \(AR(p)\), requerimos de una métrica
+que nos permita determinar el número de rezagos óptimo \(p\) en el
+\(VAR(p)\). Así, establecemos criterios de información similares a los del
+\(AR(p)\) dados por:
 
-1.Final Prediction Error (FPE):
-\begin{equation}
+1.Final Prediction Error (FPE): \begin{equation}
         FPE(p) = \left[ \frac{T + kp + 1}{T - kp - 1} \right]^k |\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)|
         \end{equation}
 
@@ -5768,24 +5872,21 @@ Finalmente, al igual que en el caso \(AR(p)\), requerimos de una métrica que no
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{1}
 \item
-  Akaike Criterion (AIC):
-  \begin{equation}
+  Akaike Criterion (AIC): \begin{equation}
        AIC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2}{T}
        \end{equation}
 \item
-  Hannan - Quinn Criterion (HQ):
-  \begin{equation}
+  Hannan - Quinn Criterion (HQ): \begin{equation}
        HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(2))}{T}
        \end{equation}
 \item
-  Schwartz Criterion (SC):
-  \begin{equation}
+  Schwartz Criterion (SC): \begin{equation}
        SC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{ln(T)}{T}
        \end{equation}
 \end{enumerate}
 
-Donde la matriz de varianzas y covarianzas contemporáneas estará dada por:
-\begin{equation*}
+Donde la matriz de varianzas y covarianzas contemporáneas estará dada
+por: \begin{equation*}
             \mathbf{\Sigma}_{\hat{U}\hat{U}}(p) = \mathbb{E} \left[
             \begin{bmatrix}
             U^{(t)}_{1} \\ U^{(t)}_{2} \\ \vdots \\ U^{(t)}_{k}
@@ -5796,7 +5897,14 @@ Donde la matriz de varianzas y covarianzas contemporáneas estará dada por:
             \right]
     \end{equation*}
 
-\textbf{Ejemplo}. Ahora veámos un ejemplo de estimación de \(VAR(p)\). Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción Industrial de los Estados Unidos, todas desestacionalizadas y para el período de enero de 2000 a julio de 2019. Dado que el supuesto estacionariedad sigue presente en nuestro análisis, emplearemos cada una de las series en su versión de diferencias logaritmicas. Las Figuras \ref{fig:fig62} y \ref{fig:fig63} muestra las series referidas.
+\textbf{Ejemplo}. Ahora veámos un ejemplo de estimación de \(VAR(p)\).
+Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio,
+rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción
+Industrial de los Estados Unidos, todas desestacionalizadas y para el
+período de enero de 2000 a julio de 2019. Dado que el supuesto
+estacionariedad sigue presente en nuestro análisis, emplearemos cada una
+de las series en su versión de diferencias logaritmicas. Las Figuras
+\ref{fig:fig62} y \ref{fig:fig63} muestra las series referidas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5871,12 +5979,30 @@ Donde la matriz de varianzas y covarianzas contemporáneas estará dada por:
 \caption{Series en diferencias logarítmicas (Forma 2)}\label{fig:fig63}
 \end{figure}
 
-Dicho lo anterior, a continuación mostraremos la tabla que resume el valor de los distintos criterios de información para una especificación de un \(VAR(p)\) con constante. Notése que es posible especificar un \(VAR(p)\) con tendencia, siempre que exista evidencia de que algunas de las series sean estacionarias alrededor de una tendencia. Caso que no aplica hasta este momento, ya que nuestro análisis de estacionariedad es claro respecto a la media constante (más adelante aportaremos la evidencia de esto), lo cual elimina la posibilidad de incluir una tendencia.
+Dicho lo anterior, a continuación mostraremos la tabla que resume el
+valor de los distintos criterios de información para una especificación
+de un \(VAR(p)\) con constante. Notése que es posible especificar un
+\(VAR(p)\) con tendencia, siempre que exista evidencia de que algunas de
+las series sean estacionarias alrededor de una tendencia. Caso que no
+aplica hasta este momento, ya que nuestro análisis de estacionariedad es
+claro respecto a la media constante (más adelante aportaremos la
+evidencia de esto), lo cual elimina la posibilidad de incluir una
+tendencia.
 
-En el Cuadro \ref{tab:NumSelectVAR} reportamos el número de rezagos propuesto a partir de cada criterio de información y en el Cuadro \ref{tab:SelectVAR} reportamos los resultados de aplicar una prueba de criterios de información para diferentes valores de rezagos. Del cual se concluye que el número óptimo de rezagos es 2 (según el criterio AIC y el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es una buena práctica utilizarlo como referente principal.
+En el Cuadro \ref{tab:NumSelectVAR} reportamos el número de rezagos
+propuesto a partir de cada criterio de información y en el Cuadro
+\ref{tab:SelectVAR} reportamos los resultados de aplicar una prueba de
+criterios de información para diferentes valores de rezagos. Del cual se
+concluye que el número óptimo de rezagos es 2 (según el criterio AIC y
+el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que
+el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es
+una buena práctica utilizarlo como referente principal.
 
 \begin{longtable}[]{@{}cccc@{}}
-\caption{\label{tab:NumSelectVAR} Número de rezagos determinados por cada uno de los criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series \(DLINPC_t\), \(DLTC_t\), \(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
+\caption{\label{tab:NumSelectVAR} Número de rezagos determinados por cada uno de los
+criterios de información para diferentes especificaciones de modelos
+VAR(p) con término constante de la series \(DLINPC_t\), \(DLTC_t\),
+\(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
 \toprule\noalign{}
 \textbf{AIC} & \textbf{HQ} & \textbf{SC} & \textbf{FPE} \\
 \midrule\noalign{}
@@ -5890,14 +6016,41 @@ En el Cuadro \ref{tab:NumSelectVAR} reportamos el número de rezagos propuesto a
 2 & 1 & 1 & 2 \\
 \end{longtable}
 
-\begin{longtable}[]{@{}ccccc@{}}
-\caption{\label{tab:SelectVAR} Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series \(DLINPC_t\), \(DLTC_t\), \(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1449}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2174}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2174}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2174}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2029}}@{}}
+\caption{\label{tab:SelectVAR} Criterios de información para diferentes
+especificaciones de modelos VAR(p) con término constante de la series
+\(DLINPC_t\), \(DLTC_t\), \(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
 \toprule\noalign{}
-Rezagos & AIC & HQ & SC & FPE \\
+\begin{minipage}[b]{\linewidth}\centering
+Rezagos
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+HQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+SC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+FPE
+\end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-Rezagos & AIC & HQ & SC & FPE \\
+\begin{minipage}[b]{\linewidth}\centering
+Rezagos
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+HQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+SC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+FPE
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -5952,7 +6105,15 @@ Rezagos & AIC & HQ & SC & FPE \\
 ## FPE(n)   0.0000000000000000001936459   0.0000000000000000002093856
 \end{verbatim}
 
-De esta forma, justificamos la estimación de un \(VAR(2)\). Los resultados del mismo se reportan en los siguientes cuadros, en los que se muestra el resultado de una de las ecuaciones. Los resultados restantes se encuentran en el código de R mostrado más abajo. Primero mostraremos los resultados de las raíces del polinomio característico en el Cuadro \ref{tab:RootsVAR}, seguido de un cuadro para la ecuación del IGAE en el Cuadro \ref{tab:IGAEVAR} (por simplicidad se omiten las otras cuatro ecuaciones del VAR(2)), y del Cuadro \ref{tab:SigmaVARp} con la matriz \(\mathbf{\Sigma}_{\hat{U}\hat{U}}\) estimada del VAR.
+De esta forma, justificamos la estimación de un \(VAR(2)\). Los resultados
+del mismo se reportan en los siguientes cuadros, en los que se muestra
+el resultado de una de las ecuaciones. Los resultados restantes se
+encuentran en el código de R mostrado más abajo. Primero mostraremos los
+resultados de las raíces del polinomio característico en el Cuadro
+\ref{tab:RootsVAR}, seguido de un cuadro para la ecuación del IGAE en
+el Cuadro \ref{tab:IGAEVAR} (por simplicidad se omiten las otras cuatro
+ecuaciones del VAR(2)), y del Cuadro \ref{tab:SigmaVARp} con la matriz
+\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\) estimada del VAR.
 
 \begin{longtable}[]{@{}ccccc@{}}
 \caption{\label{tab:RootsVAR} Raíces del polinomio característico de un VAR(2).}\tabularnewline
@@ -5965,14 +6126,41 @@ De esta forma, justificamos la estimación de un \(VAR(2)\). Los resultados del 
 0.3342 & 0.3342 & 0.3339 & 0.3339 & 0.06951 \\
 \end{longtable}
 
-\begin{longtable}[]{@{}ccccc@{}}
-\caption{\label{tab:IGAEVAR} Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante de la series \(DLINPC_t\), \(DLTC_t\), \(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2571}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1857}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1714}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2429}}@{}}
+\caption{\label{tab:IGAEVAR} Criterios de información para diferentes
+especificaciones de modelos VAR(p) con término constante de la series
+\(DLINPC_t\), \(DLTC_t\), \(DLCETE28_t\), \(DLIGAE_t\) y \(DLIPI_t\).}\tabularnewline
 \toprule\noalign{}
-Variable & Coeficiente & Error Est. & Estad. t & Prob.(\(>\) t) \\
+\begin{minipage}[b]{\linewidth}\centering
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Coeficiente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Error Est.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Estad. t
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Prob.(\(>\) t)
+\end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-Variable & Coeficiente & Error Est. & Estad. t & Prob.(\(>\) t) \\
+\begin{minipage}[b]{\linewidth}\centering
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Coeficiente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Error Est.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Estad. t
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Prob.(\(>\) t)
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -5993,8 +6181,15 @@ Variable & Coeficiente & Error Est. & Estad. t & Prob.(\(>\) t) \\
 & & * & signif. & al 5\% \\
 \end{longtable}
 
-\begin{longtable}[]{@{}cccccc@{}}
-\caption{\label{tab:SigmaVARp} Matriz \(\mathbf{\Sigma}_{\hat{U}\hat{U}}\) estimada del VAR(2).}\tabularnewline
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1714}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1714}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1429}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1714}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1714}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1714}}@{}}
+\caption{\label{tab:SigmaVARp} Matriz \(\mathbf{\Sigma}_{\hat{U}\hat{U}}\) estimada
+del VAR(2).}\tabularnewline
 \toprule\noalign{}
 \endfirsthead
 \endhead
@@ -6173,14 +6368,23 @@ Variable & Coeficiente & Error Est. & Estad. t & Prob.(\(>\) t) \\
 ## DLIPI     0.285629 -0.109656  0.11792  0.76147  1.0000
 \end{verbatim}
 
-Finalmente, en el Cuadro \ref{tab:DiagnosVAR} reportamos las pruebas de diagnóstico del VAR(2). Incluimos las pruebas de correlación serial (o autocorrelación), normalidad y de heterocedasticidad. De acuerdo con esa información, la correlación serial muestra que existe relación de la matriz de covarianzas no contemporánea considerando pocos rezagos, pero se elimina conforme los rezagos se incrementan. En cuanto a normalidad, se observa que los residuales no lo son, por lo que se requeriría mejorar la especificación del VAR. Finalmente, se observa que los residuales no son homocedásticos.
+Finalmente, en el Cuadro \ref{tab:DiagnosVAR} reportamos las pruebas de
+diagnóstico del VAR(2). Incluimos las pruebas de correlación serial (o
+autocorrelación), normalidad y de heterocedasticidad. De acuerdo con esa
+información, la correlación serial muestra que existe relación de la
+matriz de covarianzas no contemporánea considerando pocos rezagos, pero
+se elimina conforme los rezagos se incrementan. En cuanto a normalidad,
+se observa que los residuales no lo son, por lo que se requeriría
+mejorar la especificación del VAR. Finalmente, se observa que los
+residuales no son homocedásticos.
 
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
-\caption{\label{tab:DiagnosVAR} Pruebas de diagnóstico sobre los residuales del VAR(2).}\tabularnewline
+\caption{\label{tab:DiagnosVAR} Pruebas de diagnóstico sobre los residuales del
+VAR(2).}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Estadística (rezagos)
@@ -6318,16 +6522,27 @@ ARCH (\(\chi^2 (2)\)) & 691.58 & 0.0000 & Los residuales no son homocedásticos 
 \hypertarget{anuxe1lisis-de-impulso-respuesta}{%
 \section{Análisis de Impulso-Respuesta}\label{anuxe1lisis-de-impulso-respuesta}}
 
-Una de las grandes ventajas que aporta el análisis de los modelos VAR es el análisis de Impulso-Respuesta. Dicho análisis busca cuantificar el efecto que tiene en \(\mathbf{X}_t\) una innovación o cambio en los residuales de cualquiera de las variables en un momento definido. Partamos de la ecuación \eqref{eq:VARMAq} de forma que tenemos:
+Una de las grandes ventajas que aporta el análisis de los modelos VAR es
+el análisis de Impulso-Respuesta. Dicho análisis busca cuantificar el
+efecto que tiene en \(\mathbf{X}_t\) una innovación o cambio en los
+residuales de cualquiera de las variables en un momento definido.
+Partamos de la ecuación \eqref{eq:VARMAq} de forma que tenemos:
 \begin{eqnarray}
     \mathbf{X}_t & = & \mathbf{A}^{-1}(L) \delta + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
     & = & \mu + \mathbf{B}(L) \mathbf{U}_t \nonumber \\
     & = & \mu + \Psi_0 \mathbf{U}_t + \Psi_1 \mathbf{U}_{t-1} + \Psi_2 \mathbf{U}_{t-2} + \Psi_3 \mathbf{U}_{t-3} + \ldots
 \end{eqnarray}
 
-Donde \(\Psi_0 = I\) y cada una de las \(\Psi_i = - \mathbf{B}_i\), \(i = 1, 2, \ldots\). De esta forma se verifica el efecto que tiene en \(\mathbf{X}_t\) cada una de las innovaciones pasadas. Por lo que el análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas matrices en las que hemos descompuesto a \(\mathbf{B}(L)\).
+Donde \(\Psi_0 = I\) y cada una de las \(\Psi_i = - \mathbf{B}_i\),
+\(i = 1, 2, \ldots\). De esta forma se verifica el efecto que tiene en
+\(\mathbf{X}_t\) cada una de las innovaciones pasadas. Por lo que el
+análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas
+matrices en las que hemos descompuesto a \(\mathbf{B}(L)\).
 
-\textbf{Ejemplo}. Retomando el modelo \(VAR(2)\) anteriormente estimado, en las siguientes figuras reportamos las gráficas de Impulso-Respuesta de la serie \(DLTC_t\) ante cambios en los residuales del resto de las series y de la propia serie.
+\textbf{Ejemplo}. Retomando el modelo \(VAR(2)\) anteriormente estimado,
+en las siguientes figuras reportamos las gráficas de Impulso-Respuesta
+de la serie \(DLTC_t\) ante cambios en los residuales del resto de las
+series y de la propia serie.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6642,825 +6857,466 @@ Donde \(\Psi_0 = I\) y cada una de las \(\Psi_i = - \mathbf{B}_i\), \(i = 1, 2, 
 \caption{Impulso - Respuesta en $DLTC_t$}\label{fig:fig64-5}
 \end{figure}
 
-Los resultados muestran que la respuesta de \(DLTC_t\) ante impulsos en los términos de error fue estadísticamente significativo sólo para alguunos de los casos y en periodos cortos de tiempo. El resto de los resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase 15 que se ubica en el repositorio de GitHub.
+Los resultados muestran que la respuesta de \(DLTC_t\) ante impulsos en
+los términos de error fue estadísticamente significativo sólo para
+alguunos de los casos y en periodos cortos de tiempo. El resto de los
+resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase
+15 que se ubica en el repositorio de GitHub.
 
-\hypertarget{var-estructural}{%
-\section{VAR Estructural}\label{var-estructural}}
+\hypertarget{identificaciuxf3n-de-los-choques-estructurales-en-los-modelos-var}{%
+\section{Identificación de los Choques Estructurales en los Modelos VAR}\label{identificaciuxf3n-de-los-choques-estructurales-en-los-modelos-var}}
 
-El enfoque VAR de Sims (1980) tiene la propiedad deseable de que todas las variables se tratan simétricamente, de modo que todas las variables son endógenas en conjunto y el econometrista no depende de ninguna restricción de identificación. Consideremos un sistema VAR de primer orden del tipo representado en la ecuación \eqref{eq:VARp}:
+En su trabajo seminal \emph{``Macroeconomics and Reality''}, Sims (1980)
+cuestionó los modelos macroeconométricos utilizados en ese momento.
+Antes de la aparición de los modelos de referencia modernos, como los
+Vectores Autorregresivos (VAR) y los modelos estocásticos dinámicos de
+equilibrio general (DSGE), se estimaban modelos de ecuaciones
+simultáneas derivados de la escuela keynesiana, especificados con \(n\) cantidad de ecuaciones. Por lo tanto, para entender el surgimiento de los modelos
+VAR en la macroeconometría, es necesario partir del contexto en el que
+se escribió el trabajo seminal de Sims.
+
+A finales de los años 70 e inicios de los 80, comenzó una crisis en
+torno a los modelos estructurales tradicionales. Los modelos
+macroeconómicos de gran escala --como los de la Cowles Commission--
+utilizaban restricciones teóricas para identificar relaciones
+estructurales que, en muchos casos, eran impuestas de manera arbitraria.
+Estos modelos estaban altamente parametrizados y basados en supuestos
+teóricos fuertes --como las expectativas adaptativas--, lo que los hacía
+sensibles a errores específicos. De esta situación surge en parte la
+\emph{Crítica de Lucas}, en la cual Robert Lucas (1976) mostró que este tipo
+de modelos fallaba al capturar cambios en el comportamiento cuando las
+políticas cambiaban, debido a que no trataban adecuadamente las
+expectativas racionales.
+
+Ante este panorama, Sims propuso los modelos VAR, lo que eventualmente
+le valió el Premio Nobel de Economía. El objetivo de estos modelos era
+ofrecer una alternativa más flexible y empíricamente realista, sin
+imponer supuestos estructurales fuertes a priori. De esta manera, los
+VAR permiten modelar un conjunto de variables macroeconómicas como
+funciones de sus propios rezagos, sin imponer una estructura teórica
+rígida. Además, todos los choques y relaciones se tratan inicialmente de
+forma simétrica y empírica. Así, los modelos VAR en su forma reducida
+son modelos completamente ateóricos.
+
+Sin embargo, aunque los modelos VAR permiten capturar la dinámica
+conjunta entre variables sin imponer restricciones teóricas fuertes a
+priori, tienen una limitación que no es menor: los choques estimados a
+partir de la forma reducida -forma que hemos trabajado hasta
+ahora- están correlacionados entre sí. Es decir, los errores \(u_t\)
+de la forma reducida reflejan combinaciones lineales de múltiples
+choques estructurales y esto nos impide identificar la interacción contemporánea de las variables. Los choques \(u_t\) no se pueden interpretar directamente porque no son ortogonales. En este sentido, para encontrar choques estructurales, debemos encontrar choques \(w_t\) que sí sean ortogonales y tengan una interpretación económica.
+
+Comencemos con la forma estructural del VAR para comprender sus parámetros:
 \begin{equation}
-    \mathbf{X}_t = \mathbf{\delta} + A_1 \mathbf{X}_{t-1} + \mathbf{U}_{t}
-    (\#eq:VAR_p2)
+B_0 Y_t = B_1 Y_{t-1} + ... B_p Y_{t-p} + w_t
 \end{equation}
 
-Sin embargo, dada la naturaleza un tanto ad hoc de la descomposición de Choleski, la belleza del enfoque parece disminuida cuando se construyen funciones de respuesta al impulso y descomposiciones de varianza del error de pronóstico. Además, el enfoque VAR ha sido criticado por estar desprovisto de cualquier contenido económico. El único papel del economista es sugerir las variables apropiadas para incluir en el VAR. A partir de ese punto, el procedimiento es casi mecánico. Sin embargo, es posible utilizar una teoría económica para imponer restricciones a las variables de modo que los resultados no sean ad hoc.
+donde \(w_t\) es un término de error con media cero y no correlacionado en el tiempo, también conocido como innovación estructural o shock estructural. Además, se asume que el término de error es incondicionalmente homocedástico a menos de que se indique lo contrario. La matriz \(B_0\) es no singular y establece la interacción contemporánea entre las variables del modelo. De este modo, el modelo puede escribirse de manera compacta como:
+\begin{equation}
+B(L) y_t = w_t
+\end{equation}
 
-A menos que el modelo estructural subyacente pueda identificarse a partir del modelo VAR de forma reducida, las innovaciones en una descomposición de Choleski no tienen una interpretación económica directa. Sin embargo, en lugar de utilizar una descomposición de Choleski, es posible imponer restricciones a los errores para identificar completamente los shocks estructurales de una manera que sea consistente con un modelo económico subyacente. Consideremos un VAR(2) en el que \(\mathbf{X}_t\) contiene a dos series \(Y_t\) y \(Z_t\):
-\begin{eqnarray}
-    Y_t & = & a_{10} + a_{11} Y_{t - 1} + a_{12} Z_{t-1} + U_{1t} \nonumber \\
-    Z_t & = & a_{20} + a_{21} Y_{t - 1} + a_{22} Z_{t-1} + U_{2t} 
-    \label{eq:VAR2}
-\end{eqnarray}
+donde \(B(L) \equiv B_0 - B_1 L - B_2 L^2 - ...B_p L^p\) es el polinomio autorregresivo en rezagos. La matriz de covarianza del término de error estructural es normalizada tal que:
+\begin{equation}
+\mathbb{E}(w_t w_t') \equiv \Sigma_w = I_K.
+\end{equation}
 
-Para nuestros propósitos, el punto importante a destacar es que los dos términos de error \(U_{1t}\) y \(U_{2t}\) son en realidad compuestos de los shocks subyacentes \(\varepsilon_{Yt}\) y \(\varepsilon_{Zt}\). Así,
-\begin{equation*}
-    \mathbf{U}_t = 
-    \begin{bmatrix}
-    U_{1t} \\ U_{2t}
-    \end{bmatrix} = 
-    \begin{bmatrix}
-    b_{11} & b_{12} \\ b_{21} & b_{22}
-    \end{bmatrix}
-    \begin{bmatrix}
-    \varepsilon_{Yt} \\ \varepsilon_{Zt}
-    \end{bmatrix}
-\end{equation*}
+Con esto, sabemos que existen tantos shocks estructurales como variables en el modelo. Asimismo, los shocks estructurales, por definición, son mutuamente no correlacionados lo que implica que \(\Sigma_w\) es diagonal. Por último, también sabemos que si normalizamos la varianza de todos los shocks estructurales a uno, no implica una pérdida de generalidad siempre y cuando los elementos diagonales \(B_0\) permanezcan sin restricciones.
 
-Aunque estos shocks compuestos son los errores de pronóstico de un valor adelante en \(Y_t\) y \(Z_t\), no tienen una interpretación estructural. Por lo tanto, existe una diferencia importante entre usar VAR para pronósticos y análisis económico. En nuestra representación \eqref{eq:VAR2} \(U_{1t}\) y \(U_{2t}\) son errores de pronóstico. Si solo nos interesa el pronóstico, los componentes de los errores de pronóstico no son importantes.
+Sin embargo, para que el modelo \(B_0 Y_t = B_1 Y_{t-1} + ... B_p Y_{t-p} + w_t\) sea considerado como un VAR estructural no es suficiente con que los elementos de \(w_t\) no se encuentren correlacionados, si no que los choques también deben ser económicamente interpretables. Para esto, derivamos la forma reducida de este modelo VAR estructural de tal modo que \(y_t\) es una función de los rezagos de \(y_t\) únicamente. Si multiplicamos ambos lados de la representación estructural del VAR por \(B_0^{-1}\)
+\begin{equation}
+B_0^{-1} B_0 y_t = B_0^{-1} B_1 y_{t-1} + ... + B_0^{-1} B_p y_{t-p} + B_0^{-1} w_t
+\end{equation}
 
-Dado el modelo económico, \(\varepsilon_{Yt}\) y \(\varepsilon_{Zt}\) son los cambios autónomos en \(Y_t\) y \(Z_t\) en el período \(t\), respectivamente. Si queremos obtener las funciones de impulso - respuesta o las descomposiciones de varianza, es necesario usar los shocks estructurales (es decir, \(\varepsilon_{Yt}\) y \(\varepsilon_{Zt}\)), no los errores de pronóstico.
+de tal modo que puede ser representado como
+\begin{equation}
+y_t = A_1 y_{t-1} + ... + A_p y_{t-p} + u_t 
+\end{equation}
 
-El objetivo de un VAR estructural es usar la teoría económica (en lugar de la descomposición de Choleski) para recuperar las innovaciones estructurales a partir de los residuos \(U_{1t}\) y \(U_{2t}\).
+donde \(A_i = B_0^{-1} B_i\), \(i = 1,...,p\), y \(u_t = B_0^{-1} w_t\). Asi, las innovaciones en forma reducida de \(u_t\) son un promedio ponderado de los shocks estructurales \(w_t\). De manera compacta, el modelo puede ser expresado como:
+\begin{equation}
+A(L) y_t = u_t 
+\end{equation}
 
-Una forma de sustituir el VAR estructural es ordenar las series en el VAR de las más correlacionadas a las menos correlacionadas. Si el coeficiente de correlación entre \(U_{1t}\) y \(U_{2t}\) es bajo, es poco probable que el ordenamiento sea importante. Sin embargo, en un VAR con varias variables, es improbable que todas las correlaciones sean pequeñas. Después de todo, al seleccionar las variables que se incluirán en un modelo, es probable que se elijan variables que muestren fuertes comovimientos. Cuando los residuos de un VAR están correlacionados, no es práctico probar todos los ordenamientos alternativos. Con un modelo de cuatro variables, hay 24 (es decir, \(4!\)) ordenamientos posibles.
+donde \(A(L) = I_K - A_1L - A_2 L^2 - ... A_p L^p\) es el polinomio autorregresivo en rezagos. Los métodos de estimación estándar permiten obtener estimaciones de los parámetros de la forma reducida \(A_i\), para \(i=1,...p\), de las innovaciones reducidas \(u_t\) y de su matriz de covarianza \(\mathbb{E}(u_t u_t') \equiv \Sigma_u\).
 
-Sims (1986) y Bernanke (1986) propusieron modelar las innovaciones utilizando el análisis económico. La idea básica es estimar las relaciones entre los shocks estructurales utilizando un modelo económico. Para entender el procedimiento, es útil examinar la relación entre los errores de pronóstico y las innovaciones estructurales en un VAR de \(n\) variables.
+Sin embargo, el debate que se ha generado desde entonces es, una vez estimada la forma reducida, de qué manera se puede recuperar la representación estructural del modelo VAR. Es decir, queremos recuperar la matriz \(B_0\) -o bien, su inversa- que contiene las relaciones estructurales contemporáneas de las variables, recordando que \(u_t = B_0^{-1}w_t\).
 
-Dado que la relación es invariante a la longitud de los rezagos, podemos escribir el VAR(1) como:
-\begin{eqnarray*}
-    \mathbf{X}_t & = & \boldsymbol{\delta} + \mathbf{A_1} \mathbf{X}_{t-1} + \mathbf{U}_{t} \\
-    & = & \mathbf{B}^{-1} \mathbf{\Gamma}_{0} + \mathbf{B}^{-1} \mathbf{\Gamma}_{1} \mathbf{X}_{t-1} + \mathbf{B}^{-1} \mathbf{\varepsilon}_{t} \\
-    \mathbf{B} \mathbf{X}_t & = & \mathbf{\Gamma}_{0} + \mathbf{\Gamma}_{1} \mathbf{X}_{t-1} + \mathbf{\varepsilon}_{t}
-\end{eqnarray*}
+El método para recuperar dicha matriz ha generado gran debate en el análisis macroeconométrico, dando pie incluso a tesis doctorales al respecto. Con esto en mente, ahora veremos algunos de los métodos clásicos para recuperar las relaciones estructurales de las variables. Nos concentraremos en los siguientes:
 
-Donde \(\mathbf{B}\) es una matriz que establece la estructura entre las variables. Sin embargo, la selección de los distintos \(bij \in \mathbf{B}\) no puede ser completamente arbitraria.
+\emph{1. Identificación Recursiva}
 
-La cuestión es restringir el sistema de modo que:
+\emph{2. Restricción de largo plazo}
+
+\emph{3. Imposición de restricciones de signo}
+
+\textbf{\emph{Nota: RStudio es un poco limitado en cuanto a los métodos de identificación de las innovaciones estructurales relacionados con la teoría económica. En realidad, en los trabajos actuales de macroeconometría suele ocuparse, mayoritariamente, el método de Identificación Recursiva. Sin embargo, para ver los métodos de Restricción de largo plazo e Imposición de restricciones de signo, ver el Script de MatLab de estos.}}
+
+\hypertarget{var-recursivo---identificaciuxf3n-recursiva}{%
+\subsection{VAR Recursivo - Identificación Recursiva}\label{var-recursivo---identificaciuxf3n-recursiva}}
+
+Una de las formas más populares para recuperar las innovaciones estructurales es mediante la \emph{identificación recursiva}, un caso particular de las restricciones de corto plazo que se implementa utilizando la \textbf{descomposición de Cholesky}.
+
+La idea detrás de este método es simple e intuitivo: queremos recuperar las innovaciones estructurales \(w_t\) a partir de las innovaciones de forma reducida \(u_t\). Para lograr esto, buscamos \emph{ortogonalizar} los errores de forma reducida, lo que en este contexto significa transformarlos en un conjunto de choques no correlacionados contemporáneamente. Es decir, deseamos que \(\mathbb{E}[w_t w_t'] = I\).
+
+Para lograr esto, definimos una matriz \(P\) de tamaño \(K \times K\), triangular inferior y con diagonal principal positiva, de tal modo que:
+
+\begin{equation}
+\Sigma_u = \mathbb{E}[u_t u_t'] = P P'
+\end{equation}
+
+La matriz \(P\) es conocida como la \textbf{descomposción de Cholesky inferior de \(\Sigma_u\)}. Por ejemplo, en un VAR con tres variables, \(P\) tendría la forma:
+
+\[
+P = 
+\begin{bmatrix}
+p_{11} & 0      & 0 \\
+p_{21} & p_{22} & 0 \\
+p_{31} & p_{32} & p_{33}
+\end{bmatrix}
+\]
+
+Ahora, si recordamos que en el modelo estructural los errores están relacionados por \(u_t = B_0^{-1}w_t\) y que
+
+\begin{equation}
+\Sigma_u = B_0^{-1} \mathbb{E}[w_t w_t'] B_0^{-1'} = B_0^{-1} B_0^{-1'}
+\end{equation}
+
+entonces una solución válida al problema de identificación estructural es asumir que \(B_0^{-1} = P\). Dado que \(P\) es triangular inferior, contiene exactamente \(\frac{K(K-1)}{2}\) ceros impuestos, lo que cumple la condición de orden para identificar todos los elementos libres de la matriz \(B_0^{-1}\). Por simetría. si \(B_0^{-1}\) es triangular inferior, entonces \(B_0\) también lo es -aunque triangular superior-.
+
+Sin embargo, es importante destacar que esta ortogonalización de los errores solo es válida si la estructura recursiva impuesta por la matriz \(P\) se puede justificar con fundamentos económicos. El método impone que la primera variable del sistema responde solo a su propio shock contemporáneo, la segunda puede responder al shock de la primera, la tercera a los dos primeros, y así sucesivamente. Por eso se dice que el modelo estructural resultante es recursivo: se impone una estructura jerárquica de causalidad contemporánea, en lugar de inferirla directamente de los datos.
+
+En este sentido, la \textbf{descomposición de Cholesky} no descubre las relaciones estructurales sino que las impone. Por lo tanto, el orden de las variables en el VAR \textbf{si importa}, ya que determina la interpretación de los shocks estructurales. Por esta razón, se recomienda justificar el orden mediante teoría económica. Por ejemplo, en aplicaciones del Banco de México, el orden se suele establecer de acuerdo con la hipótesis de una economía pequeña y abierta, ordenando las variables de la más exógena a la más endógena.
+
+Veamos un ejemplo rápido de la \emph{identificación recursiva} mediante la \textbf{descomposición de Cholesky}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("svars")}
+\CommentTok{\# install.packages("ggplot2")}
+\CommentTok{\# install.packages("ggfortify")}
+\FunctionTok{library}\NormalTok{(svars)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(ggfortify)}
+
+\NormalTok{var.reducido }\OtherTok{\textless{}{-}}\NormalTok{ vars}\SpecialCharTok{::}\FunctionTok{VAR}\NormalTok{(USA, }\AttributeTok{lag.max =} \DecValTok{10}\NormalTok{, }\AttributeTok{ic =} \StringTok{"AIC"}\NormalTok{)}
+\NormalTok{var.estructural }\OtherTok{\textless{}{-}} \FunctionTok{id.chol}\NormalTok{(var.reducido)}
+\FunctionTok{summary}\NormalTok{(var.estructural)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Identification Results
+## ---------------------- 
+## 
+## Method: Cholesky
+## Sample size: 169
+## 
+## Estimated B Matrix (unique decomposition of the covariance matrix): 
+##           [,1]      [,2]      [,3]
+## x   0.68338360 0.0000000 0.0000000
+## pi -0.03642697 1.0726563 0.0000000
+## i   0.22450359 0.1818031 0.7672318
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# x  = Porcentaje de desviación logarítmica del PIB real con respecto a la }
+\CommentTok{\#      estimación del producto potencial}
+\CommentTok{\# pi = Crecimiento anualizado trimestre a trimestre del deflactor del PIB}
+\CommentTok{\# i  = Tasa de interés de los fondos federales}
+
+\NormalTok{cores }\OtherTok{\textless{}{-}}\NormalTok{ parallel}\SpecialCharTok{::}\FunctionTok{detectCores}\NormalTok{() }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{boot.svar }\OtherTok{\textless{}{-}} \FunctionTok{wild.boot}\NormalTok{(var.estructural, }\AttributeTok{n.ahead =} \DecValTok{24}\NormalTok{, }\AttributeTok{nboot =} \DecValTok{1000}\NormalTok{, }\AttributeTok{nc =}\NormalTok{ cores)}
+
+\FunctionTok{plot}\NormalTok{(boot.svar)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-13-1} \end{center}
+
+\hypertarget{var-estructural---restricciuxf3n-de-largo-plazo}{%
+\subsection{VAR Estructural - Restricción de largo plazo}\label{var-estructural---restricciuxf3n-de-largo-plazo}}
+
+Otra manera de identificar las innovaciones estructurales de un modelo VAR, es mediante el método propuesto por Blanchard y Quah (1989) en \emph{``The Dynamic Effects of Aggregate Demand and Supply Disturbances''}.
+
+La intuición de este método es simple: Blanchard y Quah querían medir el efecto de choques de oferta agregada \(w_t^{AS}\) y demanda agregada \(w_t^{AD}\) sobre el Producto y el Desempleo, imponiendo restricciones en la respuesta acumulada, es decir, en el efecto acumulado permanente (horizonte \(h \rightarrow \infty\)). La lógica económica detrás de este método es, básicamente, que el choque de demanda agregada no tiene efectos de largo plazo sobre el nivel del PIB real.
+
+Ahora bien, sean:
+
+\begin{itemize}
+\tightlist
+\item
+  \(ur_t\): tasa de desempleo en EE.UU.
+\item
+  \(gdp_t\): logaritmo del PIB real de EE.UU.
+\end{itemize}
+
+Y definimos el vector \(z_t\)
+
+\begin{equation}
+z_t = \begin{bmatrix} \Delta gdp_t \\ ur_t \end{bmatrix} \sim I(0)
+\end{equation}
+
+Aunque \(gdp_t \sim I(1)\), su primera diferencia es estacionaria (\(I(0)\)), lo cual justifica que \(z_t \sim I(0)\). Por otro lado, podemos suponer que este vector es generado por un VAR reducido:
+
+\begin{equation}
+A(L) z_t = u_t
+\end{equation}
+
+donde \(A(L)=I_2-A_1L-...A_pL^p\), y \(u_t \sim (0, \Sigma_u)\) es ruido blanco. Si lo representamos como su forma estructural, tenemos que:
+
+\begin{equation}
+B(L) z_t = w_t
+\end{equation}
+
+donde \(B(L) = B_0-B_1L-...B_pL^p = B_0A(L)\), y si recordamos a qué es igual \(w_t\), tenemos que:
+
+\begin{equation}
+w_t = B_0 u_t \rightarrow u_t = B_0^{-1} w_t \rightarrow \Sigma_u = B_0^{-1} (B_0^{-1})'
+\end{equation}
+
+Ahora, pasemos a la representación MA estructural para entender dónde se impone la restricción. Desde el modelo MA, tenemos que:
+
+\begin{equation}
+z_t = B(L)^{-1} w_t = \Theta (L) w_t 
+\end{equation}
+
+Esto implica que, dado que \(z_t \sim I(0)\), el efecto de un choque estructural sobre \(z_t\) se desvanece con el tiempo y, por tanto, tanto \(\Delta gdp_t\) como \(ur_t\) eventualmente vuelven a su nivel original tras un choque. Sin embargo, el nivel del PIB real -y no su crecimiento- no necesariamente vuelve a su nivel inicial, por lo que la suma acumulada de las respuestas al choque nos da su efecto permanente. Ahora, pasemos a la matriz de efectos acumulados de largo plazo, definida como:
+
+\begin{equation}
+\Theta (1) = \sum_{i=0}^{\infty} \Theta_i = B(1)^{-1}
+\end{equation}
+
+Dado que queremos que el PIB real vuelva a su tendencia tras un choque de demanda -recordemos que no tiene efectos de largo plazo- implica imponer un cero en la posición \(\theta_{12}\) de la matriz \(\Theta(1)\):
+
+\begin{equation}
+\Theta (1) = \begin{bmatrix}
+                    \theta_{11} (1) & 0               \\
+                    \theta_{21} (1) & \theta_{22} (1)
+             \end{bmatrix}
+\end{equation}
+
+el hecho de que \(\theta_{12}(1) = 0\) implica que el choque de demanda no afecta permanentemente al PIB real y, por otro lado, que \(\theta_{11}(1)\) permanezca libre, implica que los choques de oferta sí pueden tener efectos de largo plazo.
+
+Para la identificación, recordemos que:
+
+\begin{equation}
+\Theta (1) = B(1)^{-1} = A(1)^{-1} B_0^{-1} \rightarrow B_0^{-1} = A(1) \Theta(1)
+\end{equation}
+
+De este modo, una vez que conocemos \(A(1)\) y \(\Theta(1)\) podemos recuperar \(B_0^{-1}\), recordando que la restricción en \(\Theta(1)\) es equivalente a imponer una restricción sobre \(B_0\).
+
+Para estimar \(\Theta(1)\), sabemos que:
+
+\begin{equation}
+\Sigma_u = B_0^{-1} (B_0^{-1})' = \Theta(1) \Theta(1)'
+\end{equation}
+
+y, entonces, si usamos \(A(1)\):
+
+\begin{equation}
+A(1)^{-1} \Sigma_u A(1)^{-1'} = \Theta(1) \Theta(1)'
+\end{equation}
+
+lo cual implica que podemos calcular el lado izquierdo usando solo parámetros estimados del VAR reducido y luego identificar \(\Theta(1)\) imponiendo que tenga forma triangular inferior, y aplicar la \textbf{descomposición de Cholesky} para tener finalmente que:
+
+\begin{equation}
+B_0^{-1} = A(1) \Theta (1)
+\end{equation}
+
+\hypertarget{var-estructural---imposiciuxf3n-de-restricciones-de-signo}{%
+\subsection{VAR Estructural - Imposición de restricciones de signo}\label{var-estructural---imposiciuxf3n-de-restricciones-de-signo}}
+
+Una alternativa a la identificación de las innovaciones estructurales además de la \emph{Identificación recursiva} es la \textbf{Imposición de restricciones de signo}. Sigue un poco la misma lógica: queremos imponer restricciones de signo en vez de proponer una matriz triangular inferior en la matriz \(B_0^{-1}\). Este método ofrece una alternativa menos restrictiva que imponer ceros exactos. Para explicar este método, tomemos el siguiente modelo ejemplo.
+
+Consideremos un modelo bivariado de un mercado de bienes con:
+
+\begin{itemize}
+\tightlist
+\item
+  Un choque de demanda \(w_t^{demanda}\)
+\item
+  Un choque de oferta \(w_t^{oferta}\)
+\end{itemize}
+
+en donde nuestras variables observables son:
+
+\begin{itemize}
+\tightlist
+\item
+  Precio \(p_t\)
+\item
+  Cantidad \(q_t\)
+\end{itemize}
+
+Y los errores en forma reducida están dados por:
+
+\begin{equation}
+u_t = \begin{bmatrix} u_t^q \\ u_t^p \end{bmatrix} = B_0^{-1} w_t 
+      \quad \text{donde} \quad 
+w_t = \begin{bmatrix} w_t^{oferta} \\ w_t^{demanda} \end{bmatrix}
+\end{equation}
+
+Es sencillo: la interpretación económica es que los efectos de los choques \(u_t\) dependen de la pendiente de las curvas de demanda y oferta.
+
+En un método tradicional -restricción de exclusión-, se asume que la oferta es vertical en el corto plazo, lo cual implica que los choques de demanda no afectan la cantidad contemporáneamente:
+
+\begin{equation}
+\begin{bmatrix} u_t^q \\ u_t^p \end{bmatrix} = 
+\begin{bmatrix} \ast & 0 \\
+                \ast & \ast 
+                \end{bmatrix}
+\begin{bmatrix} w_t^{oferta} \\ w_t^{demanda} \end{bmatrix}
+\end{equation}
+
+En donde los asteriscos representan \emph{coeficientes libres} y el cero es una \emph{restricción de exclusión}.
+
+En cambio, si tomamos la teoría económica básica en el enfoque alternativo de \textbf{Imposición de restricción de signo} esperaríamos que, ante un choque de oferta positivo -la curva de oferta se desplaza a la derecha-, la cantidad aumente y el precio caiga, mientras que, ante un choque de demanda positiva -la curva de demanda se desplaza a la derecha-, la cantidad aumenta y el precio aumenta. De este modo, tenemos que:
+
+\begin{equation}
+  \begin{bmatrix} u_t^q \\ u_t^p \end{bmatrix} = 
+    \underbrace{
+  \begin{bmatrix} + & + \\ - & + \end{bmatrix}
+    }_{B_0^{-1}}
+  \begin{bmatrix} w_t^{\text{oferta}} \\ w_t^{\text{demanda}} \end{bmatrix}
+\end{equation}
+
+Donde \(+\) indica signo positivo estricto y \(-\) negativo estricto.
+
+La diferencia clave con el método de \emph{Identificación recursiva mediante la descomposición de Cholesky} es que, en estos últimos modelos, los parámetros están puntualmente identificados mientras que con \textbf{restricciones de signo} los parámetros no se identifican exactamente, sino que quedan dentro de un conjunto compatible con las restricciones. De este modo, no hay una única solución, pues hay muchas matrices \(B_0^{-1}\) que cumplen con los signos impuestos. También, se pueden imponer \textbf{restricciones de signo} de la siguiente forma:
+
+\begin{equation}
+  \begin{bmatrix} + & + \\ 0 & + \end{bmatrix}
+      \quad \text{o} \quad 
+  \begin{bmatrix} + & + \\ - & 0 \end{bmatrix}
+\end{equation}
+
+Estas formas también pueden ser admisibles pero algunas podrían llegar a ser problemáticas si llevan a choques no identificables entre sí.
+
+Se dice que los modelos identificados por signos son más generales que los recursivos pero no son modelos ``anidados'', o sea, uno no puede validar o rechazar el otro con datos. Así, las \textbf{restricciones de signo} permiten más flexibilidad, pero imponen otras limitaciones como perder identificación puntual.
+
+Ahora, de manera más puntual, para imponer las \textbf{restricciones de signo estáticas} consideremos un modelo VAR en su forma estructural:
+
+\begin{equation}
+B_0 y_t = B_1 y_{t-1} + ... + B_p y_{t-p} + w_t
+\end{equation}
+
+y normalizamos la matriz de varianzas-covarianzas del término de error estructural \(w_t\) tal que:
+
+\begin{equation}
+\mathbb{E}(w_t w_t') \equiv \Sigma_w = I_K.
+\end{equation}
+
+Ahora, sea \(u_t = P \eta_t\), donde \(u_t\) es la innovación del VAR en forma reducida y \(P\) es la descomposición de Cholesky de \(\Sigma_u\). Por construcción, los choques \(\eta_t\) son mutuamente no correlacionados y tienen varianza unitaria. Por supuesto, no hay razón para que estos choques correspondan a choques estructurales económicamente interpretables, como los choques de oferta y demanda en el modelo bivariado mencionado anteriormente. Sin embargo, podemos buscar soluciones candidatas \(w_t^*\) para los choques estructurales desconocidos \(w_t\) construyendo un gran número de combinaciones de los choques \(\eta_t\) de la forma:
+
+\begin{equation}
+w_t^* = Q' \eta_t, 
+\end{equation}
+
+donde \(Q'\) es una matriz ortogonal cuadrada tal que \(Q'Q = QQ' = I_K\) y \(u_t = PQ \eta_t = PQw_t^*\). Por lo tanto, cada solución candidata \(w_t^*\) consiste en choques no correlacionados con varianza unitaria. Que una de estas soluciones candidatas \(w_t^*\) sea una solución admisible para el choque estructural desconocido \(w_t\), dado el vector de parámetros en forma reducida, depende de si la matriz de impacto estructural implicado \(PQ\) satisface las restricciones de signo mantenidas sobre \(B_0^{-1}\). De este modo, solo conservamos las soluciones que satisfagan las restricciones de signo y se descartan las demás. El hecho de repetir este procedimiento nos permite caracterizar el conjunto de todos los modelos estructurales que son consistentes con las restricciones de signo mantenidas y los parámetros en forma reducida. Conocer \(PQ\) permite construir todos los coeficientes estructurales de respuesta al impulso que se derivan de las estimaciones de los parámetros en forma reducida.
+
+Los dos enfoques comunes para construir las matrices ortogonales \(Q\) están basados en:
 
 \begin{enumerate}
-    \item Recupere los distintos $\{ \varepsilon_{it} \}$, y 
-    
-    \item Preserve la estructura del error supuesta en relación con la independencia de los distintos shocks $\{ \varepsilon_{it} \}$.
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Matrices de rotación de Givens.
+\item
+  Transformación de Householder.
 \end{enumerate}
 
-Para resolver este problema de identificación, simplemente cuente las ecuaciones y las incógnitas. Usando MCO, podemos obtener la matriz de varianza/covarianza \(\mathbf{\Sigma}\):
-\begin{equation*}
-    \mathbf{\Sigma} = 
-    \begin{bmatrix}
-    \sigma_1^2 & \sigma_{12} & \cdots & \sigma_{1n} \\ 
-    \sigma_{21} & \sigma_2^2 & \cdots & \sigma_{2n} \\ 
-    \vdots & \vdots & \cdots & \vdots \\ 
-    \sigma_{n1} & \sigma_{n2} & \cdots & \sigma_n^2 \\ 
-    \end{bmatrix}
-\end{equation*}
-
-Donde cada elemento de \(\mathbf{\Sigma}\) se estima como la suma:
-\begin{equation*}
-    \sigma_{ij} = \frac{\sum_{i = 1}^{T} U_{it} U_{jt} }{T}
-\end{equation*}
-
-Como \(\mathbf{\Sigma}\) es simétrica, contiene sólo \((n + 1)n/2\) elementos distintos. Hay \(n\) elementos a lo largo de la diagonal principal, \((n - 1)\) a lo largo del primer elemento fuera de la diagonal, \((n - 2)\) a lo largo del siguiente elemento fuera de la diagonal, así sucesivamente, y un elemento de esquina para un total de \((n2 + n)/2\) elementos libres.
-
-Dado que los elementos diagonales de \(\mathbf{B}\) son todos la unidad, \(\mathbf{B}\) contiene \(n^2 - n\) valores desconocidos. Además, existen los \(n\) valores desconocidos \(Var(\varepsilon_{it})\) para un total de \(n^2\) valores desconocidos en el modelo estructural {[}es decir, los \(n^2 - n\) valores de \(\mathbf{B}\) más los \(n\) valores \(Var(\varepsilon_{it})\){]}.
-
-Ahora la respuesta al problema de identificación es simple; para identificar las \(n^2\) incógnitas a partir de los elementos independientes conocidos \((n^2 + n)/2\) de \(\mathbf{\Sigma}\), es necesario imponer restricciones adicionales \(n^2 - [(n^2 + n)/2] = (n^2 + n)/2\) al sistema.
-
-Este resultado se generaliza a un modelo con \(p\) rezagos: Para identificar el modelo estructural a partir de un VAR estimado, es necesario imponer restricciones \((n^2 - n)/2\) al modelo estructural.
-
-Para aquellos que desean un poco más de formalidad, escriba la matriz de varianzas / covarianzas de los residuos de regresión como:
-\begin{equation*}
-    \mathbb{E}[\hat{\mathbf{U}}_{t} \hat{\mathbf{U}}_{t}'] = \mathbf{\Sigma} =
-    \begin{bmatrix}
-    \sigma_1^2 & \sigma_{12} & \cdots & \sigma_{1n} \\ 
-    \sigma_{21} & \sigma_2^2 & \cdots & \sigma_{2n} \\ 
-    \vdots & \vdots & \cdots & \vdots \\ 
-    \sigma_{n1} & \sigma_{n2} & \cdots & \sigma_n^2 \\ 
-    \end{bmatrix}
-\end{equation*}
-
-Dado que: \(\mathbf{U}_t = \mathbf{B}^{-1} \mathbf{\varepsilon}_t\), de esta forma:
-\begin{equation*}
-    \mathbb{E}[\hat{\mathbf{U}}_{t} \hat{\mathbf{U}}_{t}'] = \mathbb{E}[(\mathbf{B}^{-1} \mathbf{\varepsilon}_t)(\mathbf{B}^{-1} \mathbf{\varepsilon}_t)'] = \mathbb{E}[\mathbf{B}^{-1} \mathbf{\varepsilon}_t \mathbf{\varepsilon}_t' (\mathbf{B}^{-1})'] = \mathbf{B}^{-1} \mathbb{E}[\mathbf{\varepsilon}_t \mathbf{\varepsilon}_t'] (\mathbf{B}^{-1})'
-\end{equation*}
-
-Donde \(\mathbb{E}[\mathbf{\varepsilon}_t \mathbf{\varepsilon}_t']\) es varianza estructural de las innovaciones y \(\mathbf{B}^{-1}\) es la matriz que permite darle estructura a la varianza estructural. De esta forma:
-\begin{equation*}
-    \mathbf{\Sigma_{\varepsilon}} = \mathbb{E}[\mathbf{\varepsilon}_t \mathbf{\varepsilon}_t']
-\end{equation*}
-
-\textbf{Ejemplo}. Retomemos el conjunto de variables del ejemplo de una VAR(p) antes discutido, pero solo consideremos las variables domésticas y en orden de las más endógenas a las menos endógenas (\(\Delta LINPC\), \(\Delta LIGAE\), \(\Delta  LCETE28\), \(\Delta LTC\))--dejando fuera al IPI de Estados Unidos--. En este caso requerimos establecer las restricciones \(\frac{K^2 - K}{2}\). Pensemos en una matriz:
-\begin{equation*}
-    \begin{pmatrix}
-    \text{NA} & \text{NA} & \text{NA} & \text{NA}\\
-    0         & \text{NA} & \text{NA} & \text{NA}\\
-    0         & 0         & \text{NA} & \text{NA}\\
-    0         & 0         & 0         & \text{NA}
-    \end{pmatrix}
-\end{equation*}
-
-Y en una matriz que capture los efectos individuales:
-\begin{equation*}
-    \begin{pmatrix}
-    \text{NA} & 0 & 0 & 0 \\
-    0         & \text{NA} & 0 & 0 \\
-    0         & 0         & \text{NA} & 0 \\
-    0         & 0         & 0         & \text{NA}
-    \end{pmatrix}
-\end{equation*}
-
-Donde estaríamos imponiendo la restricción de que las variables solo se relacionan en los casos que son distintos de cero (0). Dado lo anterior, obtendríamos el siguiente resultado de la matriz de covarianza restringida:
-\begin{equation*}
-    \begin{pmatrix}
-    1 & -0.03652 & -0.000252 & -0.001698 \\
-    0         & 1.00000 & -0.024109 & 0.077889 \\
-    0         & 0         & 1.000000 & -0.503508 \\
-    0         & 0         & 0         & 1
-    \end{pmatrix}
-\end{equation*}
-
-Y de la matiz de efectos individuales:
-\begin{equation*}
-    \begin{pmatrix}
-    0.002113 & 0 & 0 & 0 \\
-    0         & 0.01369 & 0 & 0 \\
-    0         & 0         & 0.0634 & 0 \\
-    0         & 0         & 0         & 0.02585
-    \end{pmatrix}
-\end{equation*}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#}
-
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(DLINPC, DLIGAE, DLCETE28, DLTC))}
-
-\NormalTok{Datos }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(Datos, }
-            \AttributeTok{start =} \FunctionTok{c}\NormalTok{(}\DecValTok{2000}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{freq =} \DecValTok{12}\NormalTok{)}
-
-\FunctionTok{VARselect}\NormalTok{(Datos, }\AttributeTok{lag.max =} \DecValTok{12}\NormalTok{, }\AttributeTok{type =} \StringTok{"const"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $selection
-## AIC(n)  HQ(n)  SC(n) FPE(n) 
-##      2      2      1      2 
-## 
-## $criteria
-##                                1                         2
-## AIC(n) -33.521409602805981364781 -33.616338087137677348437
-## HQ(n)  -33.414075512840469173170 -33.423136725199746877024
-## SC(n)  -33.254144816218484947967 -33.135261471280180956001
-## FPE(n)   0.000000000000002765949   0.000000000000002515668
-##                                3                         4
-## AIC(n) -33.565395809217491773779 -33.541826085160096226900
-## HQ(n)  -33.286327175307150127992 -33.176890179277343406739
-## SC(n)  -32.870507364089995405720 -32.633125810762606988646
-## FPE(n)   0.000000000000002647675   0.000000000000002711834
-##                                5                         6
-## AIC(n) -33.477447219141787115859 -33.417817003960756494507
-## HQ(n)  -33.026644041286616015896 -32.881146554133181325597
-## SC(n)  -32.354935115474297901983 -32.081493071023274410436
-## FPE(n)   0.000000000000002893893   0.000000000000003074404
-##                               7                         8
-## AIC(n) -33.44082242666117110730 -33.416926070357718003834
-## HQ(n)  -32.81828470486117765859 -32.708521076585313380747
-## SC(n)  -31.89068666445368549489 -31.652978478880235968518
-## FPE(n)   0.00000000000000300813   0.000000000000003085823
-##                                9                        10
-## AIC(n) -33.373717109782838008414 -33.317048231898660048955
-## HQ(n)  -32.579444844038022210952 -32.436908694181433077119
-## SC(n)  -31.395957689035355997476 -31.125476981881185167822
-## FPE(n)   0.000000000000003228696   0.000000000000003425694
-##                               11                        12
-## AIC(n) -33.252581037301176536403 -33.212431345326635323545
-## HQ(n)  -32.286574227611531284765 -32.160557263664578897533
-## SC(n)  -30.847197958013701679647 -30.593236436769156938453
-## FPE(n)   0.000000000000003665237   0.000000000000003829719
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{VAR\_p }\OtherTok{\textless{}{-}} \FunctionTok{VAR}\NormalTok{(Datos, }\AttributeTok{p =} \DecValTok{2}\NormalTok{, }\AttributeTok{type =} \StringTok{"const"}\NormalTok{)}
-
-\FunctionTok{summary}\NormalTok{(VAR\_p)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## VAR Estimation Results:
-## ========================= 
-## Endogenous variables: DLINPC, DLIGAE, DLCETE28, DLTC 
-## Deterministic variables: const 
-## Sample size: 279 
-## Log Likelihood: 3139.909 
-## Roots of the characteristic polynomial:
-## 0.5346 0.5346 0.4467 0.4467 0.4372 0.4372 0.2395 0.2395
-## Call:
-## VAR(y = Datos, p = 2, type = "const")
-## 
-## 
-## Estimation results for equation DLINPC: 
-## ======================================= 
-## DLINPC = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const 
-## 
-##               Estimate Std. Error t value           Pr(>|t|)    
-## DLINPC.l1    0.3936901  0.0621471   6.335 0.0000000009896467 ***
-## DLIGAE.l1   -0.0178878  0.0092660  -1.930             0.0546 .  
-## DLCETE28.l1  0.0011197  0.0020507   0.546             0.5855    
-## DLTC.l1     -0.0043366  0.0052130  -0.832             0.4062    
-## DLINPC.l2   -0.0162582  0.0621158  -0.262             0.7937    
-## DLIGAE.l2   -0.0022728  0.0088328  -0.257             0.7971    
-## DLCETE28.l2  0.0018184  0.0020464   0.889             0.3750    
-## DLTC.l2      0.0092343  0.0054652   1.690             0.0922 .  
-## const        0.0023387  0.0002932   7.976 0.0000000000000432 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## 
-## Residual standard error: 0.002172 on 270 degrees of freedom
-## Multiple R-Squared: 0.175,   Adjusted R-squared: 0.1505 
-## F-statistic: 7.157 on 8 and 270 DF,  p-value: 0.0000000135 
-## 
-## 
-## Estimation results for equation DLIGAE: 
-## ======================================= 
-## DLIGAE = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const 
-## 
-##              Estimate Std. Error t value       Pr(>|t|)    
-## DLINPC.l1    0.944639   0.397173   2.378        0.01808 *  
-## DLIGAE.l1    0.249038   0.059217   4.205 0.000035471815 ***
-## DLCETE28.l1  0.008873   0.013106   0.677        0.49900    
-## DLTC.l1     -0.221922   0.033315  -6.661 0.000000000152 ***
-## DLINPC.l2   -1.037719   0.396972  -2.614        0.00945 ** 
-## DLIGAE.l2   -0.234709   0.056449  -4.158 0.000043182412 ***
-## DLCETE28.l2 -0.012941   0.013078  -0.990        0.32328    
-## DLTC.l2      0.062581   0.034927   1.792        0.07429 .  
-## const        0.001917   0.001874   1.023        0.30737    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## 
-## Residual standard error: 0.01388 on 270 degrees of freedom
-## Multiple R-Squared: 0.291,   Adjusted R-squared:  0.27 
-## F-statistic: 13.85 on 8 and 270 DF,  p-value: < 0.00000000000000022 
-## 
-## 
-## Estimation results for equation DLCETE28: 
-## ========================================= 
-## DLCETE28 = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const 
-## 
-##              Estimate Std. Error t value Pr(>|t|)  
-## DLINPC.l1    4.480766   1.851857   2.420   0.0162 *
-## DLIGAE.l1    0.209477   0.276107   0.759   0.4487  
-## DLCETE28.l1  0.136087   0.061108   2.227   0.0268 *
-## DLTC.l1      0.052508   0.155336   0.338   0.7356  
-## DLINPC.l2   -2.845520   1.850923  -1.537   0.1254  
-## DLIGAE.l2    0.388994   0.263200   1.478   0.1406  
-## DLCETE28.l2  0.068584   0.060978   1.125   0.2617  
-## DLTC.l2      0.096184   0.162852   0.591   0.5553  
-## const       -0.007588   0.008738  -0.868   0.3860  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## 
-## Residual standard error: 0.06473 on 270 degrees of freedom
-## Multiple R-Squared: 0.06608, Adjusted R-squared: 0.03841 
-## F-statistic: 2.388 on 8 and 270 DF,  p-value: 0.01678 
-## 
-## 
-## Estimation results for equation DLTC: 
-## ===================================== 
-## DLTC = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const 
-## 
-##              Estimate Std. Error t value    Pr(>|t|)    
-## DLINPC.l1   -1.610981   0.739621  -2.178     0.03026 *  
-## DLIGAE.l1    0.062128   0.110275   0.563     0.57364    
-## DLCETE28.l1 -0.045981   0.024406  -1.884     0.06064 .  
-## DLTC.l1      0.332109   0.062040   5.353 0.000000185 ***
-## DLINPC.l2    0.404104   0.739248   0.547     0.58508    
-## DLIGAE.l2   -0.020673   0.105121  -0.197     0.84424    
-## DLCETE28.l2  0.028537   0.024354   1.172     0.24233    
-## DLTC.l2     -0.171879   0.065042  -2.643     0.00871 ** 
-## const        0.006309   0.003490   1.808     0.07173 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## 
-## Residual standard error: 0.02585 on 270 degrees of freedom
-## Multiple R-Squared: 0.1261,  Adjusted R-squared: 0.1002 
-## F-statistic: 4.871 on 8 and 270 DF,  p-value: 0.00001254 
-## 
-## 
-## 
-## Covariance matrix of residuals:
-##                 DLINPC       DLIGAE    DLCETE28          DLTC
-## DLINPC    0.0000047185  0.000006982 0.000004359 -0.0000003849
-## DLIGAE    0.0000069818  0.000192716 0.000074798 -0.0000439413
-## DLCETE28  0.0000043588  0.000074798 0.004189604  0.0003364986
-## DLTC     -0.0000003849 -0.000043941 0.000336499  0.0006683077
-## 
-## Correlation matrix of residuals:
-##             DLINPC   DLIGAE DLCETE28      DLTC
-## DLINPC    1.000000  0.23153  0.03100 -0.006853
-## DLIGAE    0.231529  1.00000  0.08324 -0.122441
-## DLCETE28  0.031002  0.08324  1.00000  0.201098
-## DLTC     -0.006853 -0.12244  0.20110  1.000000
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#\# Create Restrictions Matrix:}
-
-\NormalTok{a.mat }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\DecValTok{4}\NormalTok{)}
-
-\FunctionTok{diag}\NormalTok{(a.mat) }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-
-\NormalTok{a.mat[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-\NormalTok{a.mat[}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-\NormalTok{a.mat[}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-\NormalTok{a.mat[}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-\NormalTok{a.mat[}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-\NormalTok{a.mat[}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-
-\NormalTok{a.mat}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3] [,4]
-## [1,]   NA   NA   NA   NA
-## [2,]    0   NA   NA   NA
-## [3,]    0    0   NA   NA
-## [4,]    0    0    0   NA
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#\#\# individual shocks}
-
-\NormalTok{b.mat }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\DecValTok{4}\NormalTok{)}
-
-\FunctionTok{diag}\NormalTok{(b.mat) }\OtherTok{\textless{}{-}} \ConstantTok{NA}
-
-\NormalTok{b.mat}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3] [,4]
-## [1,]   NA    0    0    0
-## [2,]    0   NA    0    0
-## [3,]    0    0   NA    0
-## [4,]    0    0    0   NA
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#\# SVAR Estimation}
-\CommentTok{\#?SVAR}
-
-\NormalTok{SVAR\_p }\OtherTok{\textless{}{-}} \FunctionTok{SVAR}\NormalTok{(VAR\_p, }\AttributeTok{Amat =}\NormalTok{ a.mat, }\AttributeTok{Bmat =}\NormalTok{ b.mat, }\AttributeTok{max.iter =} \DecValTok{10000}\NormalTok{, }\AttributeTok{hessian =} \ConstantTok{TRUE}\NormalTok{)}
-
-\NormalTok{SVAR\_p}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## SVAR Estimation Results:
-## ======================== 
-## 
-## 
-## Estimated A matrix:
-##          DLINPC   DLIGAE  DLCETE28      DLTC
-## DLINPC        1 -0.03652 -0.000252 -0.001698
-## DLIGAE        0  1.00000 -0.024109  0.077889
-## DLCETE28      0  0.00000  1.000000 -0.503508
-## DLTC          0  0.00000  0.000000  1.000000
-## 
-## Estimated B matrix:
-##            DLINPC  DLIGAE DLCETE28    DLTC
-## DLINPC   0.002113 0.00000   0.0000 0.00000
-## DLIGAE   0.000000 0.01369   0.0000 0.00000
-## DLCETE28 0.000000 0.00000   0.0634 0.00000
-## DLTC     0.000000 0.00000   0.0000 0.02585
-\end{verbatim}
-
-Como resultado, obtenemos las siguientes Impulse-Response, que tienen la característica de que representan un VAR con la estructura definida en las matrices anteriores.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#}
-
-\NormalTok{IR\_DLINPC }\OtherTok{\textless{}{-}} \FunctionTok{irf}\NormalTok{(SVAR\_p, }\AttributeTok{n.ahead =} \DecValTok{12}\NormalTok{, }\AttributeTok{boot =} \ConstantTok{TRUE}\NormalTok{, }
-                 \AttributeTok{ci =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{response =} \StringTok{"DLINPC"}\NormalTok{)}
-
-\FunctionTok{plot}\NormalTok{(IR\_DLINPC)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig65-1} 
-
-}
-
-\caption{Impulso - Respuesta en $DLINPC_t$}\label{fig:fig65-1}
-\end{figure}
-\begin{figure}
-
-{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig65-2} 
-
-}
-
-\caption{Impulso - Respuesta en $DLINPC_t$}\label{fig:fig65-2}
-\end{figure}
-\begin{figure}
-
-{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig65-3} 
-
-}
-
-\caption{Impulso - Respuesta en $DLINPC_t$}\label{fig:fig65-3}
-\end{figure}
-\begin{figure}
-
-{\centering \includegraphics{Notas-Series-Tiempo_files/figure-latex/fig65-4} 
-
-}
-
-\caption{Impulso - Respuesta en $DLINPC_t$}\label{fig:fig65-4}
-\end{figure}
-
-\hypertarget{otras-opciones-del-anuxe1lisis-impulso-respuesta}{%
-\section{Otras opciones del análisis impulso-respuesta}\label{otras-opciones-del-anuxe1lisis-impulso-respuesta}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{IR\_DLINPC\_2 }\OtherTok{\textless{}{-}} \FunctionTok{irf}\NormalTok{(SVAR\_p, }\AttributeTok{n.ahead =} \DecValTok{12}\NormalTok{, }\AttributeTok{boot =} \ConstantTok{TRUE}\NormalTok{, }
-                   \AttributeTok{ci =} \FloatTok{0.95}\NormalTok{, }\AttributeTok{response =} \StringTok{"DLINPC"}\NormalTok{,}
-                   \AttributeTok{ortho =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{cumulative =} \ConstantTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-
-## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :
-## The AB-model is just identified. No test possible.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(IR\_DLINPC\_2)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-1.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-2.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-3.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-4.pdf}
+La paquetería del código de MatLab, VAR Toolbox, ocupa el enfoque de \textbf{Matrices de rotación de Givens}.
 
 \hypertarget{cointegraciuxf3n}{%
 \section{Cointegración}\label{cointegraciuxf3n}}
 
-Hasta ahora en el curso hemos usado el supuesto de que las series son estacionarias para el conjunto de técnicas \(ARMA(p,q)\) y \(VAR(p)\). No obstante, dado que relajamos el supuesto de estacionariedad (incluyendo la estacionariedad en varianza) y que establecimos una serie de pruebas para determinar cuándo una serie es estadísticamente estacionaria, ahora podemos plantear una técnica llamada Cointegración. Para esta técnica consideraremos sólo series que son \(I(1)\) y reconoceremos que se originó con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen (1988).
+Hasta ahora en el curso hemos usado el supuesto de que las series son
+estacionarias para el conjunto de técnicas \(ARMA(p,q)\) y \(VAR(p)\). No
+obstante, dado que relajamos el supuesto de estacionariedad (incluyendo
+la estacionariedad en varianza) y que establecimos una serie de pruebas
+para determinar cuándo una serie es estadísticamente estacionaria, ahora
+podemos plantear una técnica llamada Cointegración. Para esta técnica
+consideraremos sólo series que son \(I(1)\) y reconoceremos que se originó
+con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen
+(1988).
 
 \hypertarget{definiciuxf3n-y-propiedades-del-proceso-de-cointegraciuxf3n}{%
 \subsection{Definición y propiedades del proceso de cointegración}\label{definiciuxf3n-y-propiedades-del-proceso-de-cointegraciuxf3n}}
 
-Cointegración puede ser caracterizada o definida en palabras sencillas como que dos o más variables tienen una relación común estable en el largo plazo. Es decir, estas no suelen tomar caminos o trayectorias diferentes, excepto por períodos de tiempo transitorios y eventuales. A continuación, utilizaremos la definición de Engle y Granger (1984) de cointegración.
+Cointegración puede ser caracterizada o definida en palabras sencillas
+como que dos o más variables tienen una relación común estable en el
+largo plazo. Es decir, estas no suelen tomar caminos o trayectorias
+diferentes, excepto por períodos de tiempo transitorios y eventuales. A
+continuación, utilizaremos la definición de Engle y Granger (1984) de
+cointegración.
 
-Sea \(\mathbf{Y}\) un vector de k-series de tiempo, decimos que los elementos en \(\mathbf{Y}\) están cointegrados en un orden (d, c), es decir, \(\mathbf{Y} \sim CI(d, c)\), si todos los elementos de \(\mathbf{Y}\) son series integradas de orden d, I(d), y si existe al menos una combinación lineal no trivial \(\mathbf{Z}\) de esas variables que es de orden I(d - c), donde \(d \geq c > 0\), si y sólo si:
+Sea \(\mathbf{Y}\) un vector de k-series de tiempo, decimos que los
+elementos en \(\mathbf{Y}\) están cointegrados en un orden (d, c), es
+decir, \(\mathbf{Y} \sim CI(d, c)\), si todos los elementos de
+\(\mathbf{Y}\) son series integradas de orden d, I(d), y si existe al
+menos una combinación lineal no trivial \(\mathbf{Z}\) de esas variables
+que es de orden I(d - c), donde \(d \geq c > 0\), si y sólo si:
 \begin{equation}
     \boldsymbol{\beta}_i' \mathbf{Y}_t = \mathbf{Y}_{it} \sim I(d-c)
 \end{equation}
 
 Donde \(i = 1, 2, \ldots, r\) y \(r < k\).
 
-A los diferentes vectores \(\boldsymbol{\beta}_i\) se les denomina como vectores de cointegración. El rango de la matriz de vectores de cointegración \(r\) es el número de vectores de cointegración linealmente independientes. En general diremos que los vectores de la matriz de cointegración \(\boldsymbol{\beta}\) tendrán la forma de:
-\begin{equation}
+A los diferentes vectores \(\boldsymbol{\beta}_i\) se les denomina como
+vectores de cointegración. El rango de la matriz de vectores de
+cointegración \(r\) es el número de vectores de cointegración linealmente
+independientes. En general diremos que los vectores de la matriz de
+cointegración \(\boldsymbol{\beta}\) tendrán la forma de: \begin{equation}
     \boldsymbol{\beta}' \mathbf{Y}_t = \mathbf{Z}_t
 \end{equation}
 
-Antes de continuar hagamos algunas observaciones. Si todas las variables de \(\mathbf{Y}\) son I(1) y \(0 \leq r < k\), diremos que las series no cointegran si \(r = 0\). Si esto pasa, entonces, como demostraremos más adelante, la mejor opción será estimar un modelo VAR(p) en diferencias. Adicionalmente, asumiremos que \(c = d = 1\), por lo que la relación de cointegración, en su caso, generará combinaciones lineales \(\mathbf{Z}\) estacionarias.
+Antes de continuar hagamos algunas observaciones. Si todas las variables
+de \(\mathbf{Y}\) son I(1) y \(0 \leq r < k\), diremos que las series no
+cointegran si \(r = 0\). Si esto pasa, entonces, como demostraremos más
+adelante, la mejor opción será estimar un modelo VAR(p) en diferencias.
+Adicionalmente, asumiremos que \(c = d = 1\), por lo que la relación de
+cointegración, en su caso, generará combinaciones lineales \(\mathbf{Z}\)
+estacionarias.
 
 \hypertarget{cointegraciuxf3n-para-modelos-de-muxe1s-de-una-ecuaciuxf3n-o-para-modelos-basados-en-vectores-autoregresivos}{%
 \subsection{Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos}\label{cointegraciuxf3n-para-modelos-de-muxe1s-de-una-ecuaciuxf3n-o-para-modelos-basados-en-vectores-autoregresivos}}
 
-Sean \(Y_1, Y_2, \ldots, Y_k\) son series que forman \(\mathbf{Y}\) y que todas son I(1), entonces los siguientes casos son posibles:
+Sean \(Y_1, Y_2, \ldots, Y_k\) son series que forman \(\mathbf{Y}\) y que
+todas son I(1), entonces los siguientes casos son posibles:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   Si \(r = 1\) entonces se trata de un caso de cointegración de Granger.
 \item
-  Si \(r \geq 1\) entonces se trata de un caso de cointegración múltiple de Johansen.
+  Si \(r \geq 1\) entonces se trata de un caso de cointegración múltiple
+  de Johansen.
 \end{enumerate}
 
-Por lo anterior, en este curso analizaremos el caso de Cointegración de Johansen. Ahora plantearemos la forma de estimar el proceso de cointegración. El primer paso para ello es determinar un modelo VAR(p) con las k-series no estacionarias (series en niveles)--en este punto se vuelve fundamental caracterizar las series a través de pruebas de raíces unitarias--. Elegimos el valor de \(p\) mediante el uso de los criterios de información. De esta forma tendremos una especificación similar a:
+Por lo anterior, en este curso analizaremos el caso de Cointegración de
+Johansen. Ahora plantearemos la forma de estimar el proceso de
+cointegración. El primer paso para ello es determinar un modelo VAR(p)
+con las k-series no estacionarias (series en niveles)--en este punto se
+vuelve fundamental caracterizar las series a través de pruebas de raíces
+unitarias--. Elegimos el valor de \(p\) mediante el uso de los criterios
+de información. De esta forma tendremos una especificación similar a:
 \begin{equation}
     \mathbf{Y}_t = \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
     \label{eq:VARCI}
 \end{equation}
 
-Donde \(\mathbf{U}_t\) es un término de error k-dimensional puramente aleatorio; \(\mathbf{D}_t\) contiene los componentes determinísticos de constante y tendencia, y \(\mathbf{A}_i\), \(i = 1, 2, \ldots, p\), son matrices de \(k \times k\) coeficientes. Notemos que el VAR(p) involucrado en este caso, a diferencia del VAR anteriormente estudiado, puede incluir un término de tendencia. Esto en razón de que hemos relajado el concepto de estacionariedad.
+Donde \(\mathbf{U}_t\) es un término de error k-dimensional puramente
+aleatorio; \(\mathbf{D}_t\) contiene los componentes determinísticos de
+constante y tendencia, y \(\mathbf{A}_i\), \(i = 1, 2, \ldots, p\), son
+matrices de \(k \times k\) coeficientes. Notemos que el VAR(p) involucrado
+en este caso, a diferencia del VAR anteriormente estudiado, puede
+incluir un término de tendencia. Esto en razón de que hemos relajado el
+concepto de estacionariedad.
 
-Si reescribimos la ecuación \eqref{eq:VARCI} en su forma de Vector Corrector de Errores (VEC, por sus siglas en inglés) tenemos:
+Si reescribimos la ecuación \eqref{eq:VARCI} en su forma de Vector
+Corrector de Errores (VEC, por sus siglas en inglés) tenemos:
 \begin{eqnarray}
     \mathbf{Y}_t - \mathbf{Y}_{t-1} & = & \Delta \mathbf{Y}_t \nonumber \\
     & = & \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t - \mathbf{Y}_{t-1} + \mathbf{U}_t \nonumber \\
@@ -7471,39 +7327,58 @@ Si reescribimos la ecuación \eqref{eq:VARCI} en su forma de Vector Corrector de
     \label{eq:VARVEC}
 \end{eqnarray}
 
-Donde \(\mathbf{A}_j^* = - \sum_{i=j+1}^p \mathbf{A}_i\), \(i = 1, 2, \ldots, p-1\), y la matriz \(\Pi\) representa todas las relaciones de largo plazo entre las variables, por lo que la matriz es de rango completo \(k \times k\). Por lo tanto, tenemos que dicha matriz en la ecuación \eqref{eq:VARVEC} se puede factorizar como:
+Donde \(\mathbf{A}_j^* = - \sum_{i=j+1}^p \mathbf{A}_i\),
+\(i = 1, 2, \ldots, p-1\), y la matriz \(\Pi\) representa todas las
+relaciones de largo plazo entre las variables, por lo que la matriz es
+de rango completo \(k \times k\). Por lo tanto, tenemos que dicha matriz
+en la ecuación \eqref{eq:VARVEC} se puede factorizar como:
 \begin{equation}
     \Pi_{(k \times k)} = \Gamma_{(k \times r)} \boldsymbol{\beta}_{(r \times k)}'
     (\#eq:Pi_Matrix)
 \end{equation}
 
-Donde \(\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}\) son \(r\) combinaciones linealmente independientes que son estacionarias.
+Donde \(\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}\) son \(r\)
+combinaciones linealmente independientes que son estacionarias.
 
-Dada la ecuación \eqref{eq:VARVEC} podemos establecer la aproximación de Johansen (1988) que se realiza mediante una estimación por Máxima Verosimilitud de la ecuación:
-\begin{equation}
+Dada la ecuación \eqref{eq:VARVEC} podemos establecer la aproximación de
+Johansen (1988) que se realiza mediante una estimación por Máxima
+Verosimilitud de la ecuación: \begin{equation}
     \Delta \mathbf{Y}_t + \Gamma \boldsymbol{\beta}' \mathbf{Y}_{t-1} = \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
 \end{equation}
 
-Donde una vez estimado el sistema:
-\begin{equation}
+Donde una vez estimado el sistema: \begin{equation}
     \boldsymbol{\beta} = [v_1, v_2, \ldots, v_r]
 \end{equation}
 
-Cada \(v_i\), \(i = 1, 2, \ldots, r\) es un vector propio que está asociado con los \(r\) valores propios positivos, mismos que están asociados con la prueba de hipótesis de cointegración. Dicha hipótesis está basada en dos estadísticas con las que se determina el rango \(r\) de \(\Pi\):
+Cada \(v_i\), \(i = 1, 2, \ldots, r\) es un vector propio que está asociado
+con los \(r\) valores propios positivos, mismos que están asociados con la
+prueba de hipótesis de cointegración. Dicha hipótesis está basada en dos
+estadísticas con las que se determina el rango \(r\) de \(\Pi\):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Prueba de Traza:
-  \(H_0 :\) Existen al menos \(r\) valores propios positivos o Existen al menos \(r\) relaciones de largo plazo estacionarias.
+  Prueba de Traza: \(H_0 :\) Existen al menos \(r\) valores propios
+  positivos o Existen al menos \(r\) relaciones de largo plazo
+  estacionarias.
 \item
-  Prueba del valor propio máximo o \(\lambda_{max}\):
-  \(H_0 :\) Existen \(r\) valores propios positivos o Existen \(r\) relaciones de largo plazo estacionarias.
+  Prueba del valor propio máximo o \(\lambda_{max}\): \(H_0 :\) Existen
+  \(r\) valores propios positivos o Existen \(r\) relaciones de largo
+  plazo estacionarias.
 \end{enumerate}
 
-\textbf{Ejemplo}. Para ejemplificar el procedimiento de cointegración utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los Cetes a 28 días, IGAE e Índice de Producción Industrial de Estados Unidos. Quizá el marco teórico de la relación entre las variables no sea del todo correcto, pero dejando de lado ese problema, estimaremos si las 5 series cointegran.
+\textbf{Ejemplo}. Para ejemplificar el procedimiento de cointegración
+utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los
+Cetes a 28 días, IGAE e Índice de Producción Industrial de Estados
+Unidos. Quizá el marco teórico de la relación entre las variables no sea
+del todo correcto, pero dejando de lado ese problema, estimaremos si las
+5 series cointegran.
 
-Por principio, probaremos que todas las series son I(1), lo cual es cierto (ver Scrip para mayores detalles). En las Figuras \ref{fig:fig81}, \ref{fig:fig82} y \ref{fig:fig83} se muestran las series en niveles y en diferencias, con lo cual ilustramos como es viable que las series sean I(1).
+Por principio, probaremos que todas las series son I(1), lo cual es
+cierto (ver Scrip para mayores detalles). En las Figuras
+\ref{fig:fig81}, \ref{fig:fig82} y \ref{fig:fig83} se muestran las
+series en niveles y en diferencias, con lo cual ilustramos como es
+viable que las series sean I(1).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7592,16 +7467,50 @@ Por principio, probaremos que todas las series son I(1), lo cual es cierto (ver 
 \caption{Comparacion de Series en Diferencias para la prueba de Cointegración}\label{fig:fig83}
 \end{figure}
 
-Posteriormente, determinamos cuál es el orden adecuado de un VAR(p) en niveles. En el Cuadro \ref{tab:SelectVARVEC} mostramos los resultados de los criterios de información para determinar el número de rezagos óptimos, el cual resultó en \(p = 3\) para los criterios AIC y FPE, \(p = 2\) para el criterio HQ y \(p = 1\) para el criterio SC. Por lo tanto, decidiremos utilizar un VAR(3) con tendencia y constante. Note que es posible elegir otros modelos de VAR que incluyan: solo tendencia, solo constante o ninguno de estos elementos.
+Posteriormente, determinamos cuál es el orden adecuado de un VAR(p) en
+niveles. En el Cuadro \ref{tab:SelectVARVEC} mostramos los resultados
+de los criterios de información para determinar el número de rezagos
+óptimos, el cual resultó en \(p = 3\) para los criterios AIC y FPE,
+\(p = 2\) para el criterio HQ y \(p = 1\) para el criterio SC. Por lo tanto,
+decidiremos utilizar un VAR(3) con tendencia y constante. Note que es
+posible elegir otros modelos de VAR que incluyan: solo tendencia, solo
+constante o ninguno de estos elementos.
 
-\begin{longtable}[]{@{}ccccc@{}}
-\caption{\label{tab:SelectVARVEC} Criterios de información para diferentes especificaciones de modelos VAR(p) con término constante y tendencia de las series \(LINPC_t\), \(LTC_t\), \(LCETE28_t\), \(LIGAE_t\) y \(LIPI_t\).}\tabularnewline
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1324}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2206}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2206}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2206}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2059}}@{}}
+\caption{\label{tab:SelectVARVEC} Criterios de información para diferentes
+especificaciones de modelos VAR(p) con término constante y tendencia de
+las series \(LINPC_t\), \(LTC_t\), \(LCETE28_t\), \(LIGAE_t\) y \(LIPI_t\).}\tabularnewline
 \toprule\noalign{}
-Rezagos & AIC & HQ & SC & FPE \\
+\begin{minipage}[b]{\linewidth}\centering
+Rezagos
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+HQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+SC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+FPE
+\end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-Rezagos & AIC & HQ & SC & FPE \\
+\begin{minipage}[b]{\linewidth}\centering
+Rezagos
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+HQ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+SC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+FPE
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -7771,9 +7680,18 @@ Rezagos & AIC & HQ & SC & FPE \\
 ## FPE(n)   0.0000000000000000001594144   0.0000000000000000001650919
 \end{verbatim}
 
-El mismo número de rezagos los utilizaremos para probar la Cointegración, ya sea por una estadística de la Traza o por una del máximo valor propio. Dado que los resultados se sostienen, sólo mostraremos uno de los casos en que las series cointegran y únicamente para el caso de la prueba de la traza (el otro caso está disponible en el código de R disponible abajo). En el Cuadro \ref{tab:TrazaTest} reportamos los resultados del Test de Cointegración para un modelo con 3 rezagos.
+El mismo número de rezagos los utilizaremos para probar la
+Cointegración, ya sea por una estadística de la Traza o por una del
+máximo valor propio. Dado que los resultados se sostienen, sólo
+mostraremos uno de los casos en que las series cointegran y únicamente
+para el caso de la prueba de la traza (el otro caso está disponible en
+el código de R disponible abajo). En el Cuadro \ref{tab:TrazaTest}
+reportamos los resultados del Test de Cointegración para un modelo con 3
+rezagos.
 
-Cuadro: \label{tab:TrazaTest} Prueba de la traza para cointegración considerando un VAR(p) con término constante y tendencia de las series \(LINPC_t\), \(LTC_t\), \(LCETE28_t\), \(LIGAE_t\) y \(LIPI_t\).
+Cuadro: \label{tab:TrazaTest} Prueba de la traza para cointegración
+considerando un VAR(p) con término constante y tendencia de las series
+\(LINPC_t\), \(LTC_t\), \(LCETE28_t\), \(LIGAE_t\) y \(LIPI_t\).
 
 \begin{longtable}[]{@{}ccccc@{}}
 \toprule\noalign{}
@@ -7789,8 +7707,11 @@ r \(\leq\) & Estadística & 10\% & 5\% & 1\% \\
 0 & 118.98 & 83.20 & 87.31 & 96.58 \\
 \end{longtable}
 
-Los resultados del Cuadro \ref{tab:TrazaTest} indican que aceptamos la hipótesis nula para el caso de \(r \leq 1\) al \(5\%\), por lo que podemos concluir que existe evidencia estadística para probar que existe al menos 1 vector de cointegración. Por lo que dicho vector normalizado a la primera entrada es:
-\begin{equation}
+Los resultados del Cuadro \ref{tab:TrazaTest} indican que aceptamos la
+hipótesis nula para el caso de \(r \leq 1\) al \(5\%\), por lo que podemos
+concluir que existe evidencia estadística para probar que existe al
+menos 1 vector de cointegración. Por lo que dicho vector normalizado a
+la primera entrada es: \begin{equation}
     \boldsymbol{\beta} = \left[ 
     \begin{matrix}
     1.00000000 \\
@@ -7802,8 +7723,9 @@ Los resultados del Cuadro \ref{tab:TrazaTest} indican que aceptamos la hipótesi
     \end{matrix} \right]
 \end{equation}
 
-Donde el vector esta normalizado para la serie \(LINPC_t\), por lo que concluímos que la relación de largo plazo que encontramos cointegra estará dada por:
-\begin{eqnarray*}
+Donde el vector esta normalizado para la serie \(LINPC_t\), por lo que
+concluímos que la relación de largo plazo que encontramos cointegra
+estará dada por: \begin{eqnarray*}
     LINPC_t & = & -0.2100057 LTC_t - 0.4812626 LCETE28_t \\
     &  & + 2.8386112 LIGAE_t + 1.2576912 LIPI_t \\
     &  & - 14.2887887
@@ -7896,7 +7818,14 @@ Donde el vector esta normalizado para la serie \(LINPC_t\), por lo que concluím
 ## IPI_Ad.d    -0.0046051140  0.000000000000027991698
 \end{verbatim}
 
-Considerando lo anterior, podemos determinar \(\hat{U}_t\) para esta ecuación de cointegración. En la Figura \ref{fig:fig84} mostramos los residuales estimados. Derivado de la inspección visual, parecería que estos no son estacionarios, condición que debería ser cierta. De esta forma, una prueba deseable es aplicar todas las pruebas de raíces unitarias a esta serie para mostrar que es I(0). En el Scrip llamado Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre esta serie y se encuentra que es posible que no sea estacionaria.
+Considerando lo anterior, podemos determinar \(\hat{U}_t\) para esta
+ecuación de cointegración. En la Figura \ref{fig:fig84} mostramos los
+residuales estimados. Derivado de la inspección visual, parecería que
+estos no son estacionarios, condición que debería ser cierta. De esta
+forma, una prueba deseable es aplicar todas las pruebas de raíces
+unitarias a esta serie para mostrar que es I(0). En el Scrip llamado
+Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre
+esta serie y se encuentra que es posible que no sea estacionaria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7930,7 +7859,10 @@ Considerando lo anterior, podemos determinar \(\hat{U}_t\) para esta ecuación d
 \hypertarget{teoruxeda}{%
 \subsection{Teoría}\label{teoruxeda}}
 
-Una vez que hemos analizado diversas técnicas de series de tiempo, el problema consiste en seleccionar el modelo correcto. La Figura \ref{fig:fig91} muestra un esquema o diagrama de cómo podríamos proceder para seleccionar el modelo correcto.
+Una vez que hemos analizado diversas técnicas de series de tiempo, el
+problema consiste en seleccionar el modelo correcto. La Figura
+\ref{fig:fig91} muestra un esquema o diagrama de cómo podríamos
+proceder para seleccionar el modelo correcto.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7947,9 +7879,16 @@ Una vez que hemos analizado diversas técnicas de series de tiempo, el problema 
 \caption{Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)}\label{fig:fig91}
 \end{figure}
 
-En este caso incorporaremos a los modelos autogregressive distributed lag models (ARDL, por sus siglas en inglés). En estos casos el procedimiento de Johansen no podría aplicarse directamennte cuando las variables incluidas son de un orden mixto o cuando simplemente todas no son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.
+En este caso incorporaremos a los modelos autogregressive distributed
+lag models (ARDL, por sus siglas en inglés). En estos casos el
+procedimiento de Johansen no podría aplicarse directamennte cuando las
+variables incluidas son de un orden mixto o cuando simplemente todas no
+son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.
 
-Este tipo de modelos toma suficientes rezagos para capturar el mecanismo generador de datos. También es posible llegar a una especificación del mecanismo corrector de errores a partir de una trasformación lineal del ARDL.
+Este tipo de modelos toma suficientes rezagos para capturar el mecanismo
+generador de datos. También es posible llegar a una especificación del
+mecanismo corrector de errores a partir de una trasformación lineal del
+ARDL.
 
 Consideremos la siguiente ecuación:
 \begin{equation}
@@ -7957,22 +7896,26 @@ Consideremos la siguiente ecuación:
     \label{eq:EqARDL}
 \end{equation}
 
-Dada la ecuación \eqref{eq:EqARDL} podemos establecer su forma de mecanismo corrector de errores en forma ARDL dada por:
-\begin{eqnarray*}
+Dada la ecuación \eqref{eq:EqARDL} podemos establecer su forma de
+mecanismo corrector de errores en forma ARDL dada por: \begin{eqnarray*}
     \Delta Y_t & = & \alpha + \sum_{i = 1}^p \beta_i \Delta Y_{t-i} + \sum_{i = 1}^p \delta_i \Delta X_{t-i} + \sum_{i = 1}^p \gamma_i \Delta Z_{t-i} \\ 
     &  & + \lambda_1 Y_{t-1} + \lambda_2 X_{t-1} + \lambda_3 Z_{t-1} + U_t
 \end{eqnarray*}
 
-Donde los coeficientes \(\beta_i\), \(\delta_i\), \(\gamma_i\) representan la dinámica de corto plazo y las \(\lambda\)'s la dinámica de largo plazo.
+Donde los coeficientes \(\beta_i\), \(\delta_i\), \(\gamma_i\) representan la
+dinámica de corto plazo y las \(\lambda\)'s la dinámica de largo plazo.
 
-La hipótesis nula (\(H_0\)) es que las \(\lambda_1 + \lambda_2 + \lambda_3 = 0\), es decir, que no existe relación de largo plazo.
+La hipótesis nula (\(H_0\)) es que las
+\(\lambda_1 + \lambda_2 + \lambda_3 = 0\), es decir, que no existe
+relación de largo plazo.
 
 En la práctica estimamos una especificación con rezafos distribuidos:
 \begin{equation}
     Y_t = \alpha + \sum_{i = 1}^p \beta_i Y_{t-i} + \sum_{i = 1}^p \delta_i X_{t-i} + \sum_{i = 1}^p \gamma_i Z_{t-i} + U_t
 \end{equation}
 
-Además de verificar si las series involucradas son estacionarias y decidir el número de reagos \(p\) mediante criterios de información.
+Además de verificar si las series involucradas son estacionarias y
+decidir el número de reagos \(p\) mediante criterios de información.
 
 \hypertarget{ejemplo}{%
 \subsection{Ejemplo}\label{ejemplo}}
@@ -7980,19 +7923,25 @@ Además de verificar si las series involucradas son estacionarias y decidir el n
 \hypertarget{descripciuxf3n-del-problema}{%
 \subsubsection{DESCRIPCIÓN DEL PROBLEMA}\label{descripciuxf3n-del-problema}}
 
-Supongamos que queremos modelar el logaritmo de dinero (M2) como una función de LRY (logarithm of real income), IBO (bond rate) e IDE (bank deposit rate).
+Supongamos que queremos modelar el logaritmo de dinero (M2) como una
+función de LRY (logarithm of real income), IBO (bond rate) e IDE (bank
+deposit rate).
 
 \begin{itemize}
 \item
-  El problema es que la aplicación de una regresión de MCO en datos no estacionarios daría lugar a una regresión espúria.
+  El problema es que la aplicación de una regresión de MCO en datos no
+  estacionarios daría lugar a una regresión espúria.
 \item
-  Los parámetros estimados serían consistentes solo si las series estuvieran cointegradas.
+  Los parámetros estimados serían consistentes solo si las series
+  estuvieran cointegradas.
 \end{itemize}
 
 \hypertarget{importamos-datos-desde-un-dataset-de-r}{%
 \subsubsection{Importamos Datos desde un dataset de R:}\label{importamos-datos-desde-un-dataset-de-r}}
 
-Utilizaremos un dataset integrado en la biblioteca ARDL de R. Se trata de un dataframe con 55 renglones y 5 variables en el período de 1974:Q1 a 1987:Q3 de las siguientes variables:
+Utilizaremos un dataset integrado en la biblioteca ARDL de R. Se trata
+de un dataframe con 55 renglones y 5 variables en el período de 1974:Q1
+a 1987:Q3 de las siguientes variables:
 
 LRM: logarithm of real money, M2
 
@@ -8028,7 +7977,8 @@ IDE: bank deposit rate
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Calculamos un auto ADRL para determinar la combinación óptima de rezagos.
+  Calculamos un auto ADRL para determinar la combinación óptima de
+  rezagos.
 \end{enumerate}
 
 \begin{Shaded}
@@ -8213,8 +8163,9 @@ IDE: bank deposit rate
 \setcounter{enumi}{2}
 \tightlist
 \item
-  RECM (Restricted Error Correction Model) of the underlying ARDL
-  Obs: allowing the constant to join the short-run relationship (case 2), instead of the long-run (case 3)
+  RECM (Restricted Error Correction Model) of the underlying ARDL Obs:
+  allowing the constant to join the short-run relationship (case 2),
+  instead of the long-run (case 3)
 \end{enumerate}
 
 \begin{Shaded}
@@ -8289,7 +8240,8 @@ IDE: bank deposit rate
 \setcounter{enumi}{4}
 \tightlist
 \item
-  Long-run multipliers (with standard errors, t-statistics and p-values)
+  Long-run multipliers (with standard errors, t-statistics and
+  p-values)
 \end{enumerate}
 
 \begin{Shaded}
@@ -8334,6 +8286,634 @@ IDE: bank deposit rate
 
 \caption{Gráfica de la ecuación de cointegración}\label{fig:fig92}
 \end{figure}
+
+\hypertarget{filtro-kalman}{%
+\section{Filtro Kalman}\label{filtro-kalman}}
+
+En secciones pasadas, entendimos la naturaleza del filtrado univariado como, por ejemplo, el \emph{Filtro Hodrick-Prescott}. Este ha sido utilizado ampliamente en la literatura macroeconométrica, sobre todo para la estimación del Producto Potencial y, de este modo, la Brecha del Producto. Sin embargo, este método presenta dos limitaciones importantes: 1) es univariado, es decir, únicamente se explica por sí mismo y, 2) el llamado ``problema de colas'', que sí bien entendimos que se puede solucionar aplicando la metodología de ``colas pesadas'', la estimación del \(\lambda\) es un tanto ambigua.
+
+De este modo, el \textbf{Filtro Kalman} puede ser una alternativa viable y metodológicamente robusta, sobre todo si queremos trabajar con variables no observables como el \emph{Producto Potencial} o, incluso, la \emph{Tasa de interés neutral}, variable clave en la decisión de Política Monetaria de los Bancos Centrales.
+
+En este sentido, el \textbf{Filtro Kalman} nació a partir del artículo seminal de Rudolf E. Kálmán (1960) \emph{A New Approach to Linear Filtering and Prediction Problems}. La idea principal de Kálmán era describir los procesos estocásticos con un modelo de ``estado'' y resolver, de alguna manera, el problema de estimación con un ciclo \emph{predicción-corrección} ejecutado en tiempo real. Así, el \textbf{Filtro Kalman} es un algoritmo de estimación recursivo a partir de mediciones ruidosas. De este modo, también podemos entender al \textbf{Filtro Kalman} como una especie de filtro multivariado. Sus aplicaciones no se han limitado únicamente a la Economía, pues ha sido utilizado para trabajos de la \emph{NASA} como el pronóstico de la posición y velocidad del \emph{Apollo 11} en 1969.
+
+\hypertarget{modelos-estado-espacio-y-teoruxeda-econuxf3mica}{%
+\subsection{Modelos Estado-Espacio y Teoría Económica}\label{modelos-estado-espacio-y-teoruxeda-econuxf3mica}}
+
+Para hacer uso del \textbf{Filtro Kalman}, necesitamos de un modelo estructural que vincule a nuestras variables (observables y no observables), representado en la \emph{Forma Estado-Espacio}. En general, casi todos los modelos de series de tiempo pueden ser representados como \emph{Modelos Estado-Espacio}. El modelo estructural puede basarse en la teoría económica como, por ejemplo, un modelo DSGE. Para efectos prácticos, tomaremos como ejemplo el \emph{Modelo de Proyección Trimestral (QPM)} del IMF (2020). No nos enfocaremos en el por qué y cómo del \emph{Modelo QPM}, pues el objetivo principal es entender el \textbf{Filtro Kalman} y su aplicación.
+
+\hypertarget{modelo-de-proyecciuxf3n-trimestral-qpm-del-imf-2020}{%
+\subsubsection{Modelo de Proyección Trimestral (QPM) del IMF (2020)}\label{modelo-de-proyecciuxf3n-trimestral-qpm-del-imf-2020}}
+
+Supongamos una economía pequeña y abierta, en donde:
+
+\begin{itemize}
+\item
+  \textbf{Demanda Agregada (Curva IS)}
+  \begin{equation}
+  \hat{y}_t = b_1 \hat{y}_{t-1} - b_2 mci_t + b_3 \hat{y}_t^* + \varepsilon_t^y
+  \end{equation}
+  \begin{equation}
+  mci_t = b_4 \hat{r}_t + (1-b_4)(-\hat{z}_t)
+  \end{equation}
+
+  donde:
+
+  \begin{itemize}
+  \item
+    \(\hat{y}_t =\) Brecha del Producto Doméstico,
+  \item
+    \(\hat{y}_{t-1} =\) Brecha del Producto Doméstico rezagada,
+  \item
+    \(mci_t =\) Índice de Condiciones Monetarias Real,
+  \item
+    \(\hat{y}_t^* =\) Brecha del Producto Foráneo,
+  \item
+    \(\varepsilon_t^y =\) Choque de Demanda,
+  \item
+    \(\hat{r}_t =\) Brecha de la tasa de interés real y
+  \item
+    \(\hat{z}_t =\) Brecha del tipo de cambio real.
+  \end{itemize}
+\item
+  \textbf{Inflación (Curva de Phillips)}
+  \begin{equation}
+  \pi_t = a_1 \pi_{t-1} + (1-a_1) E\{\pi_{t+1}\} + a_2 rmc_t + \varepsilon_t^\pi
+  \end{equation}
+  \begin{equation}
+  rmc_t = a_3 \hat{y}_t + (1-a_3) \hat{z}_t
+  \end{equation}
+
+  donde:
+
+  \begin{itemize}
+  \item
+    \(\pi_t =\) Inflación,
+  \item
+    \(\pi_{t-1} =\) Inflación rezagada,
+  \item
+    \(E\{\pi_{t+1}\} =\) Expectativa de inflación,
+  \item
+    \(rmc_t =\) Costo Marginal Real,
+  \item
+    \(\epsilon_t^\pi =\) Choque de Oferta (cost-push shock),
+  \item
+    \(\hat{y}_t =\) Brecha del Producto Doméstica y
+  \item
+    \(\hat{z}_t =\) Brecha del tipo de cambio real.
+  \end{itemize}
+\item
+  \textbf{Paridad Descubierta de Tasas de Interés (UIP)}
+  \begin{equation}
+  S_t = (1 - e_1) \mathbb{E}_t \{ S_{t+1} \} + e_1 \left[ S_{t-1} + \frac{2(\pi_t - \pi_t^{*} + \Delta \bar{z}_t)}{4} + \frac{i_t^{*} - i_t + prem_t}{4} \right] + \varepsilon_s
+  \end{equation}
+
+  donde:
+
+  \begin{itemize}
+  \item
+    \(\mathbb{E}_t \{ S_{t+1}\} =\) Expectativas sobre el tipo de cambio nominal futuro,
+  \item
+    \(S_{t-1} =\) Tipo de cambio nominal rezagado,
+  \item
+    \(\pi_t =\) Inflación,
+  \item
+    \(\pi_t^* =\) Inflación foránea,
+  \item
+    \(\Delta \bar{z}_t =\) Depreciación del tipo de cambio tendencial,
+  \item
+    \(i_t^* =\) Tasa de interés real foránea,
+  \item
+    \(i_t =\) Tasa de interés real doméstica,
+  \item
+    \(prem_t =\) Premio Riesgo-País y
+  \item
+    \(\varepsilon_t =\) Choque del Tipo de cambio.
+  \end{itemize}
+\item
+  \textbf{Función de Reacción de Política Monetaria (Regla de Taylor)}
+  \begin{equation}
+  i_t = g_1 i_{t-1} + (1 - g_1) \left\{ i_t^n + g_2 \left( \mathbb{E}_t [\pi_{t+N}^4] - \pi_{t+N}^T \right) + g_3 \hat{y}_t \right\} + \varepsilon_t
+  \end{equation}
+
+  donde:
+
+  \begin{itemize}
+  \item
+    \(i_t =\) Tasa de interés (o política),
+  \item
+    \(i_{t-1} =\) Tasa de interés rezagada,
+  \item
+    \(i_t^n =\) Tasa de interés natural o neutral,
+  \item
+    \(\mathbb{E}_t [\pi_{t+N}^4] =\) Inflación esperada (YoY) en el periodo \(_{t+N}\),
+  \item
+    \(\pi_{t+N}^T =\) Meta de inflación,
+  \item
+    \(\hat{y}_t =\) Brecha del Producto Doméstica y
+  \item
+    \(\varepsilon_t =\) Choque de política monetaria no sistémico.
+  \end{itemize}
+\item
+  \textbf{Bloque externo}
+\end{itemize}
+
+En este caso, todas las variables siguen procesos autorregresivos simples
+
+\[
+\begin{array}{ll}
+\text{\textbf{Brecha del producto foráneo}} & \text{\textbf{Tasa natural (tendencia) de interés real foránea}} \\
+\hat{y}^{*}_{t} = \rho_{y}\,\hat{y}^{*}_{t-1} + \varepsilon^{\hat{y}^{*}}_{t} 
+& \tilde{r}^{*}_{t} = \rho_{\tilde r}\,\tilde{r}^{*}_{t-1} + (1 - \rho_{\tilde r})\,\tilde{r}^{*\,\mathrm{SS}} + \varepsilon^{\tilde{r}^{*}}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés nominal foránea}} & \text{\textbf{Brecha de la tasa de interés real foránea}} \\
+i^{*}_{t} = \rho_{i}\,i^{*}_{t-1} + (1 - \rho_{i})(r^{*}_{t} + \pi^{*}_{t}) + \varepsilon^{i^{*}}_{t} 
+& \hat{r}^{*}_{t} = r^{*}_{t} - \tilde{r}^{*}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés real foránea}} & \text{\textbf{Inflación foránea}} \\
+r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t} 
+& \pi^{*}_{t} = \rho_{\pi}\,\pi^{*}_{t-1} + (1 - \rho_{\pi})\,\pi^{*\,\mathrm{SS}} + \varepsilon^{\pi^{*}}_{t}
+\end{array}
+\]
+
+\hypertarget{modelos-estado-espacio}{%
+\subsubsection{Modelos Estado-Espacio}\label{modelos-estado-espacio}}
+
+La idea general detrás de los \emph{Modelos Estado-Espacio} es que una (múltiples) variable observable \(Y_1,...Y_T\) depende de un posible estado no observable \(X_t\) que sigue un proceso estocástico. La relación entre \(Y_t\) y \(X_t\) es descrita por la \textbf{Ecuación de Observación}
+
+\begin{equation}
+Y_t = C X_T + v_t
+\label{eq:Obs}
+\end{equation}
+
+donde \(C\) es una matriz de parámetros conocidos y \(v_t\) es un vector de errores observados (si los hay), los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza \(R\), es decir, \(v_t \sim iid(0, R)\). De este modo, la ecuación \eqref{eq:Obs} describe la relación estática entre las variables observables y no observables.
+
+La ecuación que describe la dinámica de las variables de estado, también conocida como \textbf{Ecuación de Transición}, es definida como
+
+\begin{equation}
+X_t = A X_{t-1} + \varepsilon_t,
+\label{eq:Tra}
+\end{equation}
+
+en donde \(A\) es una matriz de parámetros conocidos, \(\varepsilon_t\) es un vector de errores, los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza \(Q\), es decir, \(\varepsilon_t \sim iid(0,Q)\). Adicionalmente, se asume que \(v_t\) y \(\varepsilon_t\) son independientes entre sí, es decir, \(Cov(v_t,\varepsilon_t) = 0\).
+
+En la \emph{Figura 5.15} se puede observar un ejemplo de la relación de las variables en los \emph{Modelos Estado-Espacio} en el \emph{QPM} básico del IMF (2020).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{Plots/StateSpace} 
+
+}
+
+\caption{State-space models. Recuperado de IMF (2020).}\label{fig:unnamed-chunk-23}
+\end{figure}
+
+Afortunadamente, nuestro \emph{Modelo QPM} está construido de tal manera que tenemos \textbf{ecuaciones de transición} y \textbf{observación} que vinculan las variables observables con las no observables:
+
+\begin{verbatim}
+% ======================================
+% Basic Quarterly Projection Model (QPM)
+% ======================================
+
+!transition_variables
+'Real GDP (100*log)'                                               L_GDP
+'Trend in Real GDP (100*log)'                                      L_GDP_BAR
+'Output Gap (in %)'                                                L_GDP_GAP
+'Quarterly Growth in Real GDP(in % pa)'                            DLA_GDP
+'Real GDP Growth YoY (in % pa)'                                    D4L_GDP
+'Real GDP Trend Growth QoQ annualized (in % pa)'                   DLA_GDP_BAR
+
+'Real Monetary Condition Index (in % pa)'                          MCI
+
+'CPI (level, 100*log)'                                             L_CPI
+'CPI Inflation QoQ annualized (in % pa)'                           DLA_CPI
+'Expected CPI Inflation QoQ annualized (in % pa)'                  E_DLA_CPI
+'CPI Inflation YoY (in % pa)'                                      D4L_CPI
+'Inflation Target (in % pa)'                                       D4L_CPI_TAR
+
+'Real Marginal Cost  (in %)'                                       RMC
+
+'Nominal Exchange Rate (LCY/FCY, 100*log)'                         L_S
+'Nominal Exch. Rate Depreciation QoQ annualized (in % pa)'         DLA_S
+'Nominal Exch. Rate Depreciation YoY (in % pa)'                    D4L_S
+'Country Risk Premium (in % pa)'                                   PREM
+
+'Nominal Policy Interest Rate (in % pa)'                           RS
+'Real Interest Rate (in % pa)'                                     RR
+'Trend Real Interest Rate (in % pa)'                               RR_BAR
+'Real Interest Rate Gap (in %)'                                    RR_GAP
+'Nominal Policy Neutral Interest Rate (in % pa)'                   RSNEUTRAL
+
+'Real Exchange Rate (level, 100*log)'                              L_Z
+'Trend Real Exchange Rate (level, 100*log)'                        L_Z_BAR
+'Real Exchange Rate Gap (in %)'                                    L_Z_GAP
+'Real Exchange Rate Depreciation QoQ annualized (in % pa)'         DLA_Z
+'Trend Real Exchange Rate Depreciation QoQ annualized(in % pa)'    DLA_Z_BAR
+
+'Foreign Output Gap (in %)'                                        L_GDP_RW_GAP
+'Foreign Nominal Interest Rate (in % pa)'                          RS_RW
+'Foreign Real Interest Rate (in % pa)'                             RR_RW 
+'Foreign Real Interest Rate Trend (in % pa)'                       RR_RW_BAR
+'Foreign Real Interest Rate Gap (in %)'                            RR_RW_GAP
+'Foreign CPI (level, 100*log)'                                     L_CPI_RW
+'Foreign Inflation QoQ annualized (in % pa)'                       DLA_CPI_RW
+
+% ------------------------------------------------------------------------------- %
+!transition_shocks
+'Shock: Output gap (demand)'                                       SHK_L_GDP_GAP
+'Shock: CPI inflation (cost-push)'                                 SHK_DLA_CPI 
+'Shock: Exchange rate (UIP)'                                       SHK_L_S 
+'Shock: Interest rate (monetary policy)'                           SHK_RS 
+'Shock: Inflation target'                                          SHK_D4L_CPI_TAR
+
+'Shock: Real interest rate'                                        SHK_RR_BAR 
+'Shock: Real exchange rate depreciation'                           SHK_DLA_Z_BAR 
+'Shock: Potential GDP growth'                                      SHK_DLA_GDP_BAR
+
+'Shock: Foreign output gap'                                        SHK_L_GDP_RW_GAP 
+'Shock: Foreign nominal interest rate'                             SHK_RS_RW 
+'Shock: Foreign inflation'                                         SHK_DLA_CPI_RW 
+'Shock: Foreign real interest rate'                                SHK_RR_RW_BAR
+
+% ------------------------------------------------------------------------------- %
+!parameters
+b1 b2 b3 b4
+a1 a2 a3
+e1
+g1 g2 g3
+
+rho_D4L_CPI_TAR
+rho_DLA_Z_BAR 
+rho_RR_BAR
+rho_DLA_GDP_BAR
+ 
+rho_L_GDP_RW_GAP
+rho_RS_RW 
+rho_DLA_CPI_RW
+rho_RR_RW_BAR
+
+ss_D4L_CPI_TAR
+ss_DLA_Z_BAR
+ss_RR_BAR 
+ss_DLA_GDP_BAR
+
+ss_DLA_CPI_RW 
+ss_RR_RW_BAR
+
+%% ------------------------------------------------------------------------------- %
+!transition_equations
+%% === Aggregate demand (the IS curve) ===
+L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP + SHK_L_GDP_GAP;
+
+%-- Real monetary conditions index
+MCI = b4*RR_GAP + (1-b4)*(- L_Z_GAP);
+
+%% === Inflation (the Phillips curve) ===
+DLA_CPI =  a1*DLA_CPI{-1} + (1-a1)*DLA_CPI{+1} + a2*RMC + SHK_DLA_CPI;
+
+%-- Real marginal cost
+RMC = a3*L_GDP_GAP + (1-a3)*L_Z_GAP;
+
+%- expected inflation
+E_DLA_CPI = DLA_CPI{+1};
+
+%% === Monetary policy reaction function (a forward-looking Taylor-type Rule) ===
+RS = g1*RS{-1} + (1-g1)*(RSNEUTRAL + g2*(D4L_CPI{+4} - D4L_CPI_TAR{+4}) + g3*L_GDP_GAP) + SHK_RS;
+
+%- Neutral nominal policy interest rate
+RSNEUTRAL = RR_BAR + D4L_CPI{+1};
+
+%% === Modified Uncovered Interest Rate Parity (UIP) condition ===
+L_S = (1-e1)*L_S{+1} + e1*(L_S{-1} + 2/4*(D4L_CPI_TAR - ss_DLA_CPI_RW + DLA_Z_BAR)) + (- RS + RS_RW + PREM)/4 + SHK_L_S;
+
+%% === Definitions ===
+
+%- Fisher equation (RIR)
+RR = RS - D4L_CPI{+1};
+
+%- Real exchange rate (RER)
+L_Z = L_S + L_CPI_RW - L_CPI;
+
+%- Long-term version of UIP (consistency of trends)
+DLA_Z_BAR{+1} = RR_BAR - RR_RW_BAR - PREM;
+
+%% === Identities ===
+DLA_GDP_BAR = 4*(L_GDP_BAR - L_GDP_BAR{-1});
+DLA_Z_BAR   = 4*(L_Z_BAR - L_Z_BAR{-1});
+DLA_Z       = 4*(L_Z - L_Z{-1});
+DLA_GDP     = 4*(L_GDP - L_GDP{-1});
+DLA_CPI     = 4*(L_CPI - L_CPI{-1});
+DLA_S       = 4*(L_S - L_S{-1});
+
+D4L_GDP     = L_GDP - L_GDP{-4};
+D4L_CPI     = L_CPI - L_CPI{-4};
+D4L_S       = L_S - L_S{-4};
+
+%% === Gaps ===
+RR_GAP    = RR - RR_BAR;
+L_Z_GAP   = L_Z - L_Z_BAR;
+L_GDP_GAP = L_GDP - L_GDP_BAR;
+
+%% === Trends ===
+D4L_CPI_TAR = rho_D4L_CPI_TAR*D4L_CPI_TAR{-1} + (1-rho_D4L_CPI_TAR)*ss_D4L_CPI_TAR + SHK_D4L_CPI_TAR;
+DLA_Z_BAR   = rho_DLA_Z_BAR*DLA_Z_BAR{-1} + (1-rho_DLA_Z_BAR)*ss_DLA_Z_BAR + SHK_DLA_Z_BAR;
+RR_BAR      = rho_RR_BAR*RR_BAR{-1} + (1-rho_RR_BAR)*ss_RR_BAR + SHK_RR_BAR;
+DLA_GDP_BAR = rho_DLA_GDP_BAR*DLA_GDP_BAR{-1} + (1-rho_DLA_GDP_BAR)*ss_DLA_GDP_BAR + SHK_DLA_GDP_BAR;
+
+%% === Foreign Sector Equations ===
+L_GDP_RW_GAP = rho_L_GDP_RW_GAP*L_GDP_RW_GAP{-1} + SHK_L_GDP_RW_GAP;
+DLA_CPI_RW   = rho_DLA_CPI_RW*DLA_CPI_RW{-1} + (1-rho_DLA_CPI_RW)*ss_DLA_CPI_RW + SHK_DLA_CPI_RW;
+RS_RW        = rho_RS_RW*RS_RW{-1} + (1-rho_RS_RW)*(RR_RW_BAR + DLA_CPI_RW) + SHK_RS_RW;
+RR_RW_BAR    = rho_RR_RW_BAR*RR_RW_BAR{-1} + (1-rho_RR_RW_BAR)*ss_RR_RW_BAR + SHK_RR_RW_BAR;
+RR_RW        = RS_RW - DLA_CPI_RW;
+RR_RW_GAP    = RR_RW - RR_RW_BAR;
+
+DLA_CPI_RW   = 4*(L_CPI_RW - L_CPI_RW{-1});
+
+%% ------------------------------------------------------------------------------- %
+!measurement_variables
+OBS_L_GDP
+OBS_L_CPI
+OBS_RS
+OBS_L_S
+OBS_D4L_CPI_TAR
+
+OBS_L_GDP_RW_GAP
+OBS_DLA_CPI_RW 
+OBS_RS_RW
+
+!measurement_equations
+OBS_L_GDP = L_GDP;
+OBS_L_CPI = L_CPI;
+OBS_RS    = RS;
+OBS_L_S   = L_S;
+OBS_D4L_CPI_TAR = D4L_CPI_TAR;
+
+OBS_L_GDP_RW_GAP = L_GDP_RW_GAP;
+OBS_DLA_CPI_RW   = DLA_CPI_RW;
+OBS_RS_RW        = RS_RW;
+
+%% ------------------------------------------------------------------------------- %
+Legend
+_GAP        cyclical deviation from a trend
+_BAR        trend (equilibrium)
+ss_         steady-state value  
+DLA_        q-o-q change
+D4L_        y-o-y change  
+_RW         foreign variable
+SHK_        equation residual
+\end{verbatim}
+
+Sin embargo, la \textbf{Ecuación de Transición} de los estados presentes dependen de los estados pasados, mientras que el \emph{Modelo QPM} es prospectivo, es decir, las variables dependen de sus expectativas así que la ecuación toma la forma de
+
+\begin{equation}
+F \mathbb{E}_t[X_{t+1}] + G X_t + H X_{t-1} + M \eta_t = 0 
+\label{eq:Pros}
+\end{equation}
+
+donde \(F\), \(G\), \(H\), \(M\) son matrices de parámetros estructurales conocidos, \(\mathbb{E}_t\) es el operador de expectativas y \(\eta_t\) es un vector de choques estructurales. Para pasar de este modelo a la \emph{Forma Estado-Espacio}, tenemos que resolver para \emph{Expectativas Racionales}. Para esto, proponemos una \emph{hipótesis de solución}
+
+\begin{equation}
+X_t = A X_{t-1} + P \eta_t
+\quad \text{con} \quad
+\varepsilon_t \equiv P \eta_t 
+\label{eq:Hip}
+\end{equation}
+
+Ahora, suponemos que \(\eta_t\) sigue un proceso autorregresivo, es decir, tiene su propia dinámica:
+
+\begin{equation}
+\eta_{t+1} = S \eta_t + \gamma_{t+1} 
+\quad \text{donde} \quad 
+\gamma_{t+1} \sim iid(0,W)
+\end{equation}
+
+Así, sabemos que
+
+\begin{equation}
+\mathbb{E}_t[X_{t+1}] = A X_t + P \mathbb{E}_t[\eta_{t+1}] = A (A X_{t-1} + P \eta_t) + P S \eta_t
+\end{equation}
+
+De este modo, si sustituimos la ecuación \eqref{eq:Hip} en la \eqref{eq:Pros}, tenemos que las matrices deben de satisfacer la identidad
+
+\begin{equation}
+F [A (A X_{t-1} + P \eta_t) + P (S \eta_t)] + G [A X_{t-1} + P \eta_t] + H X_{t-1} + M \eta_t = 0
+\label{eq:Iden}
+\end{equation}
+
+para todos los valores \(X_{t-1}\) y \(\eta_t\), de tal modo que \(A\) y \(P\) son las soluciones de ecuaciones
+
+\begin{equation}
+F A^2 + G A + H = 0, 
+\quad \quad
+F A P + F P S + G P + M = 0
+\label{eq:Sol}
+\end{equation}
+
+De esta forma, obtenemos nuestro modelo en la \emph{Forma Estado-Espacio}.
+
+\hypertarget{recursiuxf3n-del-filtro-kalman}{%
+\subsection{Recursión del Filtro Kalman}\label{recursiuxf3n-del-filtro-kalman}}
+
+Ya que tenemos nuestro modelo en la \emph{Forma Estado-Espacio} como se muestra en las ecuaciones \eqref{eq:Obs} y \eqref{eq:Tra}, podemos hacer uso del \textbf{Filtro Kalman}.
+
+Para comenzar, definamos \(Y_{t/t-1}\) y \(X_{t/t-1}\) como los valores predichos de \(Y_t\) y \(X_t\), respectivamente, condicionado a la información del periodo \(_{t-1}\). Además, definamos \(X_{t/t}\) como la estimación de \(X_t\) condicionada a la información del periodo \(_t\).
+
+Como se mencionó en un inicio, el \textbf{Filtro Kalman} utiliza un algoritmo recursivo para cada periodo \(1,2,...,T\). Cada recursión está compuesta de dos pasos. Supongamos que tenemos los datos observados y las estimaciones del estado para el periodo \(_{t-1}\), es decir, conocemos \(Y_{t-1}\) y \(X_{t-1/t-1}\). De este modo, para el periodo \(_t\):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Paso 1.} Predicción del estado y observación de las variables en el periodo \(_t\) dada la información de \(_{t-1}\). Como no tenemos nueva información, el promedio de la predicción se basa en el \emph{Modelo Estado-Espacio} \eqref{eq:Obs} - \eqref{eq:Tra}:
+\end{itemize}
+
+\begin{equation}
+X_{t/t-1} = A X_{t-1/t-1}
+\label{eq:Xt}
+\end{equation}
+
+\begin{equation}
+Y_{t/t-1} = C X_{t/t-1}
+\label{eq:Yt}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Paso 2.} Actualización de la estimación del estado dada la información en el periodo \(_t\). Una vez que conocemos la nueva información del periodo \(_t\), existirá una discrepancia entre la información actual (\(Y_t\)) y la predicción del modelo (\(Y_{t/t-1}\)). El \textbf{Filtro Kalman} utiliza dicha discrepancia para actualizar la estimación de los estados no observables utilizando la matriz \(K_t\), que se llama \textbf{Ganancia de Kalman}:
+\end{itemize}
+
+\begin{equation}
+X_{t/t} = X_{t/t-1} + K_t (Y_t - Y_{t/t-1})
+\label{eq:Xt1}
+\end{equation}
+
+\hypertarget{ganancia-de-kalman}{%
+\subsection{Ganancia de Kalman}\label{ganancia-de-kalman}}
+
+Supongamos que los errores siguen una distribución normal, es decir, \(v_t \sim N(0,R), \varepsilon_t \sim N(0,Q)\).
+
+Para la primera estimación (Paso 1) de la \emph{Recursión de Kalman}, \(P_{t/t-1}\) denota la varianza del error de predicción de las variables de estado (\(X_t\)) dada la información del periodo \(_{t-1}\), o sea, \(P_{t/t-1} = Var_{t-1}[(X_t - X_{t/t-1})]\). De manera similar, \(F_{t/t-1}\) es la varianza del error de predicción de las variables observables (\(Y_t\)) dada la información del periodo \(_{t-1}\), o bien, \(F_{t/t-1} = Var_{t-1}[(Y_t - Y_{t/t-1})]\).
+
+Para la actualización (Paso 2) de la \emph{Recursión de Kalman}, \(P_{t/t}\) denota la varianza del error de las variables de estado (\(X_t\)) dada la información del periodo \(_t\), es decir, \(P_{t/t} = Var_t[(X_t - X_{t/t})]\).
+
+Así, la distribución multivariada del vector \((Y_t,X_t)\) toma la forma
+
+\begin{equation}
+\begin{pmatrix}
+Y_t \\ X_t
+\end{pmatrix}
+\Bigg|
+Y_t,...,Y_{t-1} \sim N
+\Bigg(\begin{pmatrix}
+Y_{t/t-1} \\ X_{t/t-1}
+\end{pmatrix},
+\begin{pmatrix}
+F_{t/t-1} & C P_{t/t-1} \\
+P_{t/t-1} C' & P_{t/t-1}
+\end{pmatrix}\Bigg).
+\label{eq:Mat}
+\end{equation}
+
+De \eqref{eq:Mat}, la distribución condicional de \(X_t\) dado \(Y_t\) toma la forma de
+
+\begin{equation}
+X_t \mid Y_t, Y_1, ... , Y_{t-1} \sim N
+\begin{aligned}
+( & X_{t|t-1} + P_{t|t-1} C' F_{t|t-1} {}^{-1} [Y_t - Y_{t|t-1}], \\ 
+& P_{t|t-1} - P_{t|t-1} C' F_{t|t-1} {}^{-1} C P_{t|t-1} )
+\end{aligned}
+\label{eq:Xt2}
+\end{equation}
+
+Y de la ecuación \eqref{eq:Xt2} obtenemos directamente que
+
+\begin{equation}
+X_{t|t} = X_{t|t-1} + P_{t|t-1} C' F_{t|t-1} {}^{-1} \left[ Y_t - Y_{t|t-1} \right] = X_{t|t-1} + K_t \left[ Y_t - Y_{t|t-1} \right],
+\label{eq:Xt3}
+\end{equation}
+
+\begin{equation}
+P_{t|t} = P_{t|t-1} - P_{t|t-1} C' F_{t|t-1} {}^{-1} C P_{t|t-1} = (I - K_t C) P_{t|t-1},
+\label{eq:Pt}
+\end{equation}
+
+en donde la \textbf{Ganancia de Kalman} es
+
+\begin{equation}
+K_t = P_{t/t-1} C' F_{t/t-1} {}^{-1}.
+\label{eq:Kt}
+\end{equation}
+
+Notese que \(F_{t/t-1}\) sigue:
+
+\begin{equation}
+F_{t|t-1} = Var_{t-1} \left[( Y_t - Y_{t|t-1} \right)] = Var_{t-1} \left[( C X_t + v_t - C X_{t|t-1} \right)] = C P_{t|t-1} C' + R
+\end{equation}
+
+Por el contrario, \(P_{t/t-1}\) sigue:
+
+\begin{align}
+P_{t|t-1} &= Var_{t-1} \left[( X_t - X_{t|t-1} \right)] 
+\\ &= Var_{t-1} \left[( A X_{t-1} + \varepsilon_t - A X_{t-1|t-1} \right)] 
+\\ &= A P_{t-1|t-1} A' + Q 
+\\ &= A (I - K_{t-1} C) P_{t-1|t-2} A' + Q
+\end{align}
+
+Y si sustituimos \(F_{t/t-1}\) y \(P_{t/t-1}\) en las ecuaciones \eqref{eq:Xt3} - \eqref{eq:Kt}, obtenemos las siguientes ecuaciones para el algoritmo del \textbf{Filtro Kalman}
+
+\begin{equation}
+K_t = P_{t/t-1} C' (C P_{t/t-1} C' + R)^{-1}
+\label{eq:Kt1}
+\end{equation}
+
+\begin{equation}
+X_{t/t} = X_{t/t-1} + K_t [Y_t - Y_{t/t-1}]
+\label{eq:Xt4}
+\end{equation}
+
+\begin{equation}
+P_{t+1|t} = A (I - K_t C) P_{t/t-1} A' + Q
+\label{eq:Pt1}
+\end{equation}
+
+De este modo, la \textbf{Ganancia de Kalman} en \eqref{eq:Kt1} depende de manera positiva de la varianza del error de predicción del estado (\(P_{t/t-1}\)) y de manera negativa de la varianza de la ecuación de observación \(R\). Esto es bastante intuitivo:
+
+\begin{itemize}
+\item
+  Si existen grandes errores en las predicciones del estado \(X_{t/t-1}\) en el Paso 1 de la \emph{Recursión de Kalman}, es decir, \(P_{t/t-1}\) es grande, se le da más peso a la nueva información observada \(Y_t\), lo cual significa que la \textbf{Ganancia de Kalman} es grande. En particular, esto es cierto para las ecuaciones de transición que no se cumplen de manera estricta, es decir, \(Q\) es grande;
+\item
+  Si la información es ruidosa, o sea, \(R\) es grande, se le da menos peso a la información nueva por lo que \(K_t\) es pequeño.
+\end{itemize}
+
+\hypertarget{algoritmo-del-filtro-kalman-y-del-suavizador-de-kalman}{%
+\subsection{Algoritmo del Filtro Kalman y del Suavizador de Kalman}\label{algoritmo-del-filtro-kalman-y-del-suavizador-de-kalman}}
+
+Ya que encontramos las expresiones más relevantes, podemos combinar todas para entender cómo funciona el \textbf{Filtro Kalman}.
+
+Sabemos que el filtro es recursivo. De este modo, para poder correrlo necesitamos \emph{condiciones iniciales} para todos los estados al principio de la muestra (\(X_{0|0}\)), al igual que para la varianza del error de predicción del estado (\(P_{0|0}\)). Para muestras pequeñas, las \emph{condiciones iniciales} pueden afectar significativamente los resultados del filtro. Si no tenemos información previa, una opción es asumir que las \emph{condiciones iniciales} de los estados y de la varianza del error de predicción no están lejos de sus valores en estado estacionario. En particular, para modelos estacionarios, se puede establecer que las \emph{condiciones iniciales} son iguales a los valores en estado estacionario.
+
+Ahora, ya que hemos asignado las \emph{condiciones iniciales}, el \textbf{Filtro Kalman} corre el algortimo recursivo para cada periodo de tiempo \(1,2,...,T\). Cada recursión está compuesta de dos pasos:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Paso 1.} Predicción utilizando el \emph{Modelo Estado-Espacio}:
+\end{itemize}
+
+\begin{equation}
+X_{t/t-1} = A X_{t-1/t-1},
+\label{eq:P1}
+\end{equation}
+
+\begin{equation}
+Y_{t/t-1} = C X_{t/t-1}.
+\label{eq:P2}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Paso 2.} Actualización utilzando la información:
+\end{itemize}
+
+\begin{equation}
+K_t = P_{t/t-1} C' (C P_{t/t-1} C' + R)^{-1},
+\label{eq:A1}
+\end{equation}
+
+\begin{equation}
+X_{t/t} = X_{t/t-1} + K_t [Y_t - Y_{t/t-1}],
+\label{eq:A2}
+\end{equation}
+
+\begin{equation}
+P_{t+1/t} = A (I - K_t C) P_{t/t-1} A' + Q.
+\label{eq:A3}
+\end{equation}
+
+El \textbf{Filtro Kalman} nos proporciona el estimador lineal óptimo de mínimos cuadrados del estado, dada la información hasta el periodo \(_t\). Si los errores están distribuidos normalmente, es óptimo entre todos los estimadores de \(X_t\) condicionados a la información disponible hasta ese periodo.
+
+Para cada periodo \(_t\), el \textbf{Filtro Kalman} utiliza únicamente la información disponible hasta ese periodo para estimar \(X_t\). Dichas estimaciones se encuentran en \(X_{t/t-1}\) (del Paso 1) y en \(X_{t/t}\) (del Paso 2). Sin embargo, para estimar \(X_t\), comúnmente es deseable utilizar toda la información disponible, hasta el último periodo \(T\). Es decir, podría ser deseable obtener estimaciones \(X_{t/T}\), que se conocen como \textbf{estimaciones suavizadas} de los estados. Precisamente eso es lo que hace el \textbf{Suavizador de Kalman (Kalman smoother)}.
+
+Para correr el \textbf{Suavizador de Kalman}, necesitamos primero correr el \textbf{Filtro Kalman} y obtener todas las estimaciones de los estados: \(X_{1/1}, X_{2/2},...,X_{T/T}\).
+
+Después, el algortimo del \textbf{Suavizador de Kalman} funciona recursivamente hacia atrás, desde \(T-1, T-2,...,1\). Para cada periodo \(_{t+1}\), observamos la diferencia entre las estimaciones suavizadas y las estimaciones filtradas de los estados: \(X_{t+1/T}-X_{t+1/t}\). El \textbf{Suavizador de Kalman} utiliza la diferencia para actualizar las estimaciones filtradas de los estados en el periodo \(_t\), con el fin de obtener las estimaciones suavizadas:
+
+\begin{equation}
+X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
+\label{eq:Sua}
+\end{equation}
+
+En la \emph{Figura 5.16}, podemos observar los resultados del código de Matlab. Otra de las virtudes del \textbf{Filtro Kalman} es que podemos hacer una especie de descomposición de la varianza para, así, observar de donde vinieron los choques:
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{Plots/Filtration} 
+
+}
+
+\caption{Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF (2020).}\label{fig:unnamed-chunk-24}
+\end{figure}
+
+\textbf{\emph{Nota: Para este ejemplo, se ocupa el QPM básico presentado por IMF (2020) en su curso ``Monetary Policy Analysis and Forecasting'' que se puede tomar en la plataforma edX. Asimismo, el código de Matlab fue realizado por el IMF.}}
 
 \hypertarget{modelos-univariados-y-multivariados-de-volatilidad}{%
 \chapter{Modelos Univariados y Multivariados de Volatilidad}\label{modelos-univariados-y-multivariados-de-volatilidad}}
@@ -8426,19 +9006,19 @@ Para el análisis de temas financieros existe una librería de mucha utilidad ll
 
 \begin{verbatim}
 ##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
-## 2025-08-14     123339.4     124457.1    117254.9      118359.6   104055627395
-## 2025-08-15     118365.8     119332.3    116864.6      117398.4    68665353159
 ## 2025-08-16     117398.4     117996.1    117272.0      117491.4    48036922378
 ## 2025-08-17     117492.8     118595.8    117279.5      117453.1    45852169525
 ## 2025-08-18     117453.9     117614.2    114723.7      116252.3    72787808090
-## 2025-08-19     116270.0     116709.3    112902.3      113086.6    69277687808
+## 2025-08-19     116241.9     116764.5    112730.4      112831.2    71657600353
+## 2025-08-20     112828.0     114625.8    112388.0      114274.7    67993811526
+## 2025-08-21     114269.5     114691.3    113622.9      113848.4    66622791680
 ##            BTC-USD.Adjusted
-## 2025-08-14         118359.6
-## 2025-08-15         117398.4
 ## 2025-08-16         117491.4
 ## 2025-08-17         117453.1
 ## 2025-08-18         116252.3
-## 2025-08-19         113086.6
+## 2025-08-19         112831.2
+## 2025-08-20         114274.7
+## 2025-08-21         113848.4
 \end{verbatim}
 
 Para fines del ejercicio de esta clase, usaremos el valor de la acción ajustado. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas.
@@ -8549,7 +9129,7 @@ Ahora bien, una de las preguntas que nos podemos hacer es si los rendimientos de
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 14.6
+## [1] 14.61
 \end{verbatim}
 
 \begin{Shaded}
@@ -8579,7 +9159,7 @@ Ahora bien, una de las preguntas que nos podemos hacer es si los rendimientos de
 ##  Jarque-Bera Normality Test
 ## 
 ## data:  vector_ret
-## JB = 22719, p-value < 0.00000000000000022
+## JB = 22753, p-value < 0.00000000000000022
 ## alternative hypothesis: greater
 \end{verbatim}
 
@@ -8761,22 +9341,22 @@ Ahora busquemos una prueba formal. El primer enfoque para comprobar aceptar o re
 \begin{verbatim}
 ## 
 ## Time series regression with "ts" data:
-## Start = 1, End = 3989
+## Start = 1, End = 3991
 ## 
 ## Call:
 ## dynlm(formula = logret ~ 1)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.46611 -0.01387 -0.00012  0.01485  0.22374 
+## -0.46611 -0.01386 -0.00012  0.01483  0.22374 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)  
-## (Intercept) 0.001381   0.000567   2.436   0.0149 *
+##              Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) 0.0013824  0.0005667   2.439   0.0148 *
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.03581 on 3988 degrees of freedom
+## Residual standard error: 0.0358 on 3990 degrees of freedom
 \end{verbatim}
 
 \begin{Shaded}
@@ -8792,25 +9372,25 @@ Ahora busquemos una prueba formal. El primer enfoque para comprobar aceptar o re
 \begin{verbatim}
 ## 
 ## Time series regression with "ts" data:
-## Start = 2, End = 3989
+## Start = 2, End = 3991
 ## 
 ## Call:
 ## dynlm(formula = ehatsq ~ L(ehatsq))
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
-## -0.017236 -0.001113 -0.000986 -0.000307  0.216147 
+## -0.017239 -0.001113 -0.000985 -0.000307  0.216149 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value            Pr(>|t|)    
-## (Intercept) 0.00111263 0.00007693  14.463 <0.0000000000000002 ***
-## L(ehatsq)   0.13123319 0.01570035   8.359 <0.0000000000000002 ***
+## (Intercept) 0.00111209 0.00007689  14.463 <0.0000000000000002 ***
+## L(ehatsq)   0.13124874 0.01569650   8.362 <0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.004689 on 3986 degrees of freedom
+## Residual standard error: 0.004688 on 3988 degrees of freedom
 ## Multiple R-squared:  0.01723,    Adjusted R-squared:  0.01698 
-## F-statistic: 69.87 on 1 and 3986 DF,  p-value: < 0.00000000000000022
+## F-statistic: 69.92 on 1 and 3988 DF,  p-value: < 0.00000000000000022
 \end{verbatim}
 
 \begin{Shaded}
@@ -8840,7 +9420,7 @@ Ahora busquemos una prueba formal. El primer enfoque para comprobar aceptar o re
 ##  ARCH LM-test; Null hypothesis: no ARCH effects
 ## 
 ## data:  logret
-## Chi-squared = 68.697, df = 1, p-value < 0.00000000000000022
+## Chi-squared = 68.747, df = 1, p-value < 0.00000000000000022
 \end{verbatim}
 
 La prueba puede repetirse para diferentes especificaciones de ARCH, sin embargo, para efectos ilustrativos usaremos un ARCH(1). Estimemos un ARCH(1), considerando la siguente especificación:
@@ -8931,11 +9511,11 @@ shape & 2.347586356 & 0.1135148037 & 20.680883 & 0.000000e+00 \\
 ## 
 ## Coefficients:
 ##           ar1     ar2    mean
-##       -0.0227  0.0106  0.0014
+##       -0.0228  0.0106  0.0014
 ## s.e.   0.0158  0.0158  0.0006
 ## 
-## sigma^2 = 0.001282:  log likelihood = 7623.15
-## AIC=-15238.29   AICc=-15238.28   BIC=-15213.13
+## sigma^2 = 0.001282:  log likelihood = 7627.86
+## AIC=-15247.72   AICc=-15247.71   BIC=-15222.56
 \end{verbatim}
 
 \begin{Shaded}
@@ -8958,12 +9538,12 @@ shape & 2.347586356 & 0.1135148037 & 20.680883 & 0.000000e+00 \\
 
 \begin{verbatim}
 ##            Estimate   Std. Error    t value       Pr(>|t|)
-## mu      0.001532701 0.0003377137  4.5384625 0.000005666587
-## ar1    -0.053140702 0.0156827031 -3.3884912 0.000702782721
-## ar2    -0.003615020 0.0128708011 -0.2808698 0.778810252747
-## omega   0.001894004 0.0004647256  4.0755318 0.000045909299
-## alpha1  0.765973883 0.2204829175  3.4740736 0.000512620403
-## shape   2.341437689 0.1100593326 21.2743221 0.000000000000
+## mu      0.001533153 0.0003372857  4.5455629 0.000005478863
+## ar1    -0.053488931 0.0156702298 -3.4134108 0.000641551571
+## ar2    -0.003574044 0.0128610322 -0.2778971 0.781091318092
+## omega   0.001899027 0.0004676134  4.0611051 0.000048840972
+## alpha1  0.768548082 0.2218148450  3.4648181 0.000530590302
+## shape   2.339763015 0.1097843607 21.3123527 0.000000000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -8987,16 +9567,16 @@ shape & 2.347586356 & 0.1135148037 & 20.680883 & 0.000000e+00 \\
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3989-01-01
+## Date (T[0]): 3991-01-01
 ## 
 ## Series (summary):
 ##          min      q.25     mean     q.75     max forecast[analytic]
-## t+1 -0.54016 -0.011468 0.002767 0.017833 0.23436           0.003124
+## t+1 -0.46649 -0.010675 0.001515 0.014601 0.20108           0.001775
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.050726 0.050726 0.050726 0.050726 0.050726           0.050726
+## t+1 0.043779 0.043779 0.043779 0.043779 0.043779           0.043779
 ## .....................
 \end{verbatim}
 
@@ -9073,12 +9653,12 @@ shape & 2.515980e+00 & 2.796609e-02 & 89.9653552 & 0.000000e+00 \\
 
 \begin{verbatim}
 ##              Estimate       Std. Error       t value       Pr(>|t|)
-## mu     0.001641001763 0.00035505856500     4.6217777 0.000003804656
-## ar1   -0.061916534061 0.01330195173402    -4.6546954 0.000003244599
-## ar2   -0.005058238672 0.01279187783173    -0.3954258 0.692528663168
-## omega  0.000004158196 0.00000006655024    62.4820524 0.000000000000
-## beta1  0.997834098183 0.00003920295550 25453.0324446 0.000000000000
-## shape  2.519110045711 0.02702137130225    93.2265805 0.000000000000
+## mu     0.001633928242 0.00035471634895     4.6062953 0.000004099062
+## ar1   -0.062287298275 0.01330160588629    -4.6826901 0.000002831344
+## ar2   -0.004627082887 0.01279336245566    -0.3616784 0.717592368774
+## omega  0.000004364163 0.00000006731874    64.8283429 0.000000000000
+## beta1  0.997708584743 0.00004207935059 23710.1706839 0.000000000000
+## shape  2.523521563642 0.02710634646569    93.0970748 0.000000000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -9101,16 +9681,16 @@ shape & 2.515980e+00 & 2.796609e-02 & 89.9653552 & 0.000000e+00 \\
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3989-01-01
+## Date (T[0]): 3991-01-01
 ## 
 ## Series (summary):
-##          min      q.25     mean     q.75     max forecast[analytic]
-## t+1 -0.46396 -0.011038 0.002926 0.018054 0.24134           0.003512
+##          min      q.25   mean     q.75     max forecast[analytic]
+## t+1 -0.46532 -0.012576 0.0014 0.016353 0.23934           0.001917
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.043815 0.043815 0.043815 0.043815 0.043815           0.043815
+## t+1 0.043641 0.043641 0.043641 0.043641 0.043641           0.043641
 ## .....................
 \end{verbatim}
 
@@ -9154,10 +9734,10 @@ Hannan-Quinn & -4.080410 \\
 
 \begin{verbatim}
 ##                       
-## Akaike       -4.119482
-## Bayes        -4.110019
-## Shibata      -4.119487
-## Hannan-Quinn -4.116127
+## Akaike       -4.120182
+## Bayes        -4.110723
+## Shibata      -4.120186
+## Hannan-Quinn -4.116828
 \end{verbatim}
 
 \hypertarget{selecciuxf3n-del-modelo-uxf3ptimo}{%
@@ -9205,22 +9785,22 @@ Podemos hacer una búsqueda del mejor modelo de entre varios que probemos en un 
 
 \begin{verbatim}
 ##       q p       AIC Optimo
-##  [1,] 1 1 -11.01755      0
-##  [2,] 1 2 -11.01730      0
-##  [3,] 1 3 -11.01948      0
-##  [4,] 1 4 -11.01898      0
-##  [5,] 2 1 -11.01695      0
-##  [6,] 2 2 -11.01727      0
-##  [7,] 2 3 -11.01696      0
-##  [8,] 2 4 -11.01922      0
-##  [9,] 3 1 -11.01645      0
-## [10,] 3 2 -11.01662      0
-## [11,] 3 3 -11.01635      0
-## [12,] 3 4 -11.01866      0
-## [13,] 4 1 -11.01846      0
-## [14,] 4 2 -11.01958      1
-## [15,] 4 3 -11.01722      0
-## [16,] 4 4 -11.01924      0
+##  [1,] 1 1 -11.01907      0
+##  [2,] 1 2 -11.01941      0
+##  [3,] 1 3 -11.01907      0
+##  [4,] 1 4 -11.02019      0
+##  [5,] 2 1 -11.01857      0
+##  [6,] 2 2 -11.01893      0
+##  [7,] 2 3 -11.01868      0
+##  [8,] 2 4 -11.02078      1
+##  [9,] 3 1 -11.01777      0
+## [10,] 3 2 -11.01800      0
+## [11,] 3 3 -11.01793      0
+## [12,] 3 4 -11.02028      0
+## [13,] 4 1 -11.01991      0
+## [14,] 4 2 -11.02071      0
+## [15,] 4 3 -11.01885      0
+## [16,] 4 4 -11.02020      0
 \end{verbatim}
 
 \hypertarget{estimaciuxf3n-de-modelo-uxf3ptimo}{%
@@ -9294,18 +9874,18 @@ shape & 3.183045e+00 & 1.305307e-01 & 2.438541e+01 & 0.000000e+00 \\
 \end{Shaded}
 
 \begin{verbatim}
-##                 Estimate    Std. Error         t value           Pr(>|t|)
-## mu      0.00127326817241 0.00031051105  4.100556690343 0.0000412157449554
-## ar1    -0.04992877741202 0.01458915308 -3.422321852505 0.0006208876992233
-## ar2    -0.00119497509805 0.01357043521 -0.088057242085 0.9298311801848014
-## omega   0.00002737045796 0.00000454339  6.024236784560 0.0000000016990946
-## alpha1  0.13031022766888 0.02128979790  6.120782746757 0.0000000009311678
-## alpha2  0.00000010245199 0.04032053665  0.000002540938 0.9999979726245931
-## alpha3  0.00000003213759 0.02492235557  0.000001289509 0.9999989711209376
-## alpha4  0.02894219953046 0.02294187025  1.261544905343 0.2071125917918657
-## beta1   0.43380128661342 0.23613508792  1.837089483116 0.0661966864728836
-## beta2   0.40594614918188 0.19429497640  2.089329105211 0.0366781081436631
-## shape   3.17590024282538 0.13095558171 24.251736363202 0.0000000000000000
+##                 Estimate     Std. Error         t value           Pr(>|t|)
+## mu      0.00127431846326 0.000310016025  4.110492238865 0.0000394816551619
+## ar1    -0.05043940906507 0.014578268430 -3.459903987027 0.0005403680260374
+## ar2    -0.00118565480491 0.013554426468 -0.087473624035 0.9302950500228699
+## omega   0.00002712017695 0.000004539222  5.974631686506 0.0000000023061060
+## alpha1  0.13002379592178 0.021263901527  6.114766650699 0.0000000009669836
+## alpha2  0.00000034065677 0.040085714409  0.000008498209 0.9999932194104486
+## alpha3  0.00000008107872 0.024881041011  0.000003258655 0.9999973999697527
+## alpha4  0.02872099361214 0.022852869499  1.256778437118 0.2088338761998922
+## beta1   0.43272444998772 0.235611728606  1.836599784521 0.0662689991645959
+## beta2   0.40753030009967 0.193897651433  2.101780486187 0.0355725092842449
+## shape   3.17568857589049 0.130728859377 24.292176884399 0.0000000000000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -9329,16 +9909,16 @@ shape & 3.183045e+00 & 1.305307e-01 & 2.438541e+01 & 0.000000e+00 \\
 ## Model : sGARCH
 ## n.ahead : 1
 ## Bootstrap method:  partial
-## Date (T[0]): 3989-01-01
+## Date (T[0]): 3991-01-01
 ## 
 ## Series (summary):
 ##          min      q.25     mean     q.75     max forecast[analytic]
-## t+1 -0.27862 -0.006878 0.002849 0.013182 0.21346           0.002729
+## t+1 -0.25981 -0.007714 0.001473 0.011172 0.19728           0.001514
 ## .....................
 ## 
 ## Sigma (summary):
 ##          min    q0.25     mean    q0.75      max forecast[analytic]
-## t+1 0.022751 0.022751 0.022751 0.022751 0.022751           0.022751
+## t+1 0.021108 0.021108 0.021108 0.021108 0.021108           0.021108
 ## .....................
 \end{verbatim}
 
@@ -9374,19 +9954,19 @@ Esta función precisa como argumentos nuestra estimación del modelo GARCH, con 
 \end{Shaded}
 
 \begin{verbatim}
-##      3989-01-01
-## T+1  0.02214563
-## T+2  0.02253673
-## T+3  0.02292078
-## T+4  0.02329812
-## T+5  0.02366908
-## T+6  0.02403395
-## T+7  0.02439301
-## T+8  0.02474651
-## T+9  0.02509468
-## T+10 0.02543774
-## T+11 0.02577591
-## T+12 0.02610936
+##      3991-01-01
+## T+1  0.02121260
+## T+2  0.02161771
+## T+3  0.02201497
+## T+4  0.02240480
+## T+5  0.02278758
+## T+6  0.02316366
+## T+7  0.02353337
+## T+8  0.02389700
+## T+9  0.02425482
+## T+10 0.02460709
+## T+11 0.02495404
+## T+12 0.02529590
 \end{verbatim}
 
 \begin{Shaded}
@@ -9396,19 +9976,19 @@ Esta función precisa como argumentos nuestra estimación del modelo GARCH, con 
 \end{Shaded}
 
 \begin{verbatim}
-##       3989-01-01
-## T+1  0.002686185
-## T+2  0.001159340
-## T+3  0.001275676
-## T+4  0.001520963
-## T+5  0.001179925
-## T+6  0.001045300
-## T+7  0.001404678
-## T+8  0.001445608
-## T+9  0.001092120
-## T+10 0.001139159
-## T+11 0.001465577
-## T+12 0.001341052
+##       3991-01-01
+## T+1  0.001465389
+## T+2  0.001605238
+## T+3  0.001116383
+## T+4  0.001013733
+## T+5  0.001474082
+## T+6  0.001461704
+## T+7  0.001025356
+## T+8  0.001143766
+## T+9  0.001531446
+## T+10 0.001323668
+## T+11 0.001004290
+## T+12 0.001280706
 \end{verbatim}
 
 \begin{Shaded}
@@ -9429,18 +10009,18 @@ Esta función precisa como argumentos nuestra estimación del modelo GARCH, con 
 ## 
 ## 0-roll forecast [T0=]:
 ##        Series   Sigma
-## T+1  0.002686 0.02215
-## T+2  0.001159 0.02254
-## T+3  0.001276 0.02292
-## T+4  0.001521 0.02330
-## T+5  0.001180 0.02367
-## T+6  0.001045 0.02403
-## T+7  0.001405 0.02439
-## T+8  0.001446 0.02475
-## T+9  0.001092 0.02509
-## T+10 0.001139 0.02544
-## T+11 0.001466 0.02578
-## T+12 0.001341 0.02611
+## T+1  0.001465 0.02121
+## T+2  0.001605 0.02162
+## T+3  0.001116 0.02201
+## T+4  0.001014 0.02240
+## T+5  0.001474 0.02279
+## T+6  0.001462 0.02316
+## T+7  0.001025 0.02353
+## T+8  0.001144 0.02390
+## T+9  0.001531 0.02425
+## T+10 0.001324 0.02461
+## T+11 0.001004 0.02495
+## T+12 0.001281 0.02530
 \end{verbatim}
 
 \hypertarget{modelos-arch-y-garch-multivariados}{%
@@ -10164,7 +10744,7 @@ Plot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-39-1.pdf}
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-40-1.pdf}
 
 Hagamos una pruebas de Raíces Unitarias.
 
@@ -11004,7 +11584,7 @@ Sstability of the autoregressive process:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-60-1.pdf}
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-61-1.pdf}
 
 Generate impulse response functions.
 
@@ -11227,7 +11807,7 @@ Plotting
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-64-1.pdf}
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-65-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11236,7 +11816,7 @@ Plotting
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-64-2.pdf}
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-65-2.pdf}
 
 The tsDyn package in R has simplified this code into a handful of steps:
 
@@ -11318,7 +11898,7 @@ The tsDyn package in R has simplified this code into a handful of steps:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-1.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-2.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-3.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-4.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-5.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-6.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-7.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-8.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-9.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-10.pdf}
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-1.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-2.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-3.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-4.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-5.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-6.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-7.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-8.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-9.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-10.pdf}
 
 If we do not provide a threshold to the th option, setar searches over a grid to choose a threshold \textasciitilde{} 0.038:
 
@@ -11393,7 +11973,7 @@ If we do not provide a threshold to the th option, setar searches over a grid to
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-1.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-2.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-3.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-4.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-5.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-6.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-7.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-8.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-9.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-10.pdf}
+\includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-1.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-2.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-3.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-4.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-5.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-6.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-7.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-8.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-9.pdf} \includegraphics{Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-10.pdf}
 
   \bibliography{book.bib,packages.bib}
 

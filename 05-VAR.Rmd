@@ -80,7 +80,8 @@ entre las dos series:
 \end{enumerate}
 
 Por lo anterior, representaremos mediante un $AR(p)$ con variables
-exógenas lo siguiente: \begin{equation}
+exógenas lo siguiente: 
+\begin{equation}
     A(L) 
     \begin{bmatrix}
     Y_t \\ X_t
@@ -288,7 +289,8 @@ Para cualquier $i = 1, 2, \ldots, p$: \begin{equation*}
 
 Donde cada $X_{kt}$ en $\mathbf{X}_t$ es una serie de tiempo por sí
 misma. De esta forma, la expresión reducida del modelo o el proceso
-$VAR(p)$ estará dado por: \begin{equation}
+$VAR(p)$ estará dado por: 
+\begin{equation}
     \mathbf{X}_t = \boldsymbol{\delta} + A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \ldots + A_p \mathbf{X}_{t-p} + \mathbf{U}_{t}
     (\#eq:VARp)
 \end{equation}
@@ -338,7 +340,8 @@ puramente aleatorio, este debe cumplir con las siguientes condiciones:
       \end{equation}
 
 2.  Existe una matriz de varianzas y covarianzas entre los términos de
-    error contemporáneos dada por: \begin{eqnarray}
+    error contemporáneos dada por: 
+    \begin{eqnarray}
        \mathbb{E}[\mathbf{U}_t \mathbf{U}_t'] 
        & = &
        \mathbb{E} \left[
@@ -367,7 +370,8 @@ puramente aleatorio, este debe cumplir con las siguientes condiciones:
       \end{eqnarray}
 
 3.  La matriz de varianzas y covarianzas no contemporáneas es nula. Es
-    decir, que para todo $t \neq s$: \begin{eqnarray}
+    decir, que para todo $t \neq s$: 
+    \begin{eqnarray}
         \mathbb{E} [\mathbf{U}_t \mathbf{U}_s'] 
         & = &
         \mathbb{E} \left[
@@ -410,7 +414,8 @@ al un proceso de MA. Al respecto, de forma similar a la siguiente
 ecuación podemos construir un modelo $VARMA(p,q)$, el cual no estudiamos
 es este curso.
 
-Reromando el primer planteamiento, podemos escribir: \begin{eqnarray}
+Reromando el primer planteamiento, podemos escribir: 
+\begin{eqnarray}
     \mathbf{X}_t & = & \mathbf{A}^{-1}(L) \boldsymbol{\delta} + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
     & = & \boldsymbol{\mu} + \boldsymbol{\beta}(L) \mathbf{U}_t
     (\#eq:VARMAq)
@@ -1414,7 +1419,8 @@ generador de datos. También es posible llegar a una especificación del
 mecanismo corrector de errores a partir de una trasformación lineal del
 ARDL.
 
-Consideremos la siguiente ecuación: \begin{equation}
+Consideremos la siguiente ecuación: 
+\begin{equation}
     Y_t = \alpha + \delta X_t + \gamma Z_t + U_t
     (\#eq:EqARDL)
 \end{equation}
@@ -1681,19 +1687,19 @@ i_t = g_1 i_{t-1} + (1 - g_1) \left\{ i_t^n + g_2 \left( \mathbb{E}_t [\pi_{t+N}
 
 En este caso, todas las variables siguen procesos autorregresivos simples
 
+$$
 \begin{array}{ll}
-\textbf{Brecha del Producto Foránea} & \textbf{Tasa natural (tendencia) de intéres real foránea} \\
-\hat{y}^*_t = \rho_y \hat{y}^*_{t-1} + \varepsilon^{\hat{y}^*}_t 
-& \tilde{r}^*_t = \rho_{\tilde{r}} \tilde{r}^*_{t-1} + (1 - \rho_{\tilde{r}}) \tilde{r}^{*SS} + \varepsilon^{\tilde{r}^*}_t \\[1.5ex]
-
-\textbf{Tasa de interés nominal foránea} & \textbf{Brecha de la Tasa de interés real foránea} \\
-i^*_t = \rho_i i^*_{t-1} + (1 - \rho_i)(r^*_t + \pi^*_t) + \varepsilon^{i^*}_t 
-& \hat{r}^*_t = r^*_t - \tilde{r}^*_t \\[1.5ex]
-
-\textbf{Tasa de interés real foránea} & \textbf{Inflación foránea} \\
-r^*_t = i^*_t - \pi^*_t 
-& \pi^*_t = \rho_\pi \pi^*_{t-1} + (1 - \rho_\pi)\pi^{*SS} + \varepsilon^{\pi^*}_t
+\text{\textbf{Brecha del producto foráneo}} & \text{\textbf{Tasa natural (tendencia) de interés real foránea}} \\
+\hat{y}^{*}_{t} = \rho_{y}\,\hat{y}^{*}_{t-1} + \varepsilon^{\hat{y}^{*}}_{t} 
+& \tilde{r}^{*}_{t} = \rho_{\tilde r}\,\tilde{r}^{*}_{t-1} + (1 - \rho_{\tilde r})\,\tilde{r}^{*\,\mathrm{SS}} + \varepsilon^{\tilde{r}^{*}}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés nominal foránea}} & \text{\textbf{Brecha de la tasa de interés real foránea}} \\
+i^{*}_{t} = \rho_{i}\,i^{*}_{t-1} + (1 - \rho_{i})(r^{*}_{t} + \pi^{*}_{t}) + \varepsilon^{i^{*}}_{t} 
+& \hat{r}^{*}_{t} = r^{*}_{t} - \tilde{r}^{*}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés real foránea}} & \text{\textbf{Inflación foránea}} \\
+r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t} 
+& \pi^{*}_{t} = \rho_{\pi}\,\pi^{*}_{t-1} + (1 - \rho_{\pi})\,\pi^{*\,\mathrm{SS}} + \varepsilon^{\pi^{*}}_{t}
 \end{array}
+$$
 
 #### Modelos Estado-Espacio
 

@@ -1,362 +1,90 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Notas de Clase: Series de Tiempo</title>
-  <meta name="description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Page not found | Notas de Clase: Series de Tiempo" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
-  <meta name="github-repo" content="https://github.com/benjov/Series-Tiempo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Notas de Clase: Series de Tiempo" />
-  
-  <meta name="twitter:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com" />
-  
-
-<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres" />
-
-
-<meta name="date" content="2025-07-24" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-
-
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Page not found | Notas de Clase: Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres">
+<meta name="description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Page not found | Notas de Clase: Series de Tiempo">
+<meta property="og:type" content="book">
+<meta property="og:description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Page not found | Notas de Clase: Series de Tiempo">
+<meta name="twitter:description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path=""><a href="#an%C3%A1lisis-de-series-de-tiempo"><i class="fa fa-check"></i>Análisis de Series de Tiempo</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Contexto del documento</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path=""><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path=""><a href="#introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia"><i class="fa fa-check"></i><b>2</b> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><i class="fa fa-check"></i><b>2.1</b> La naturaleza de los datos de Series de Tiempo</a></li>
-<li class="chapter" data-level="2.2" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ejemplos-y-aplicaciones-de-las-series-de-tiempo"><i class="fa fa-check"></i><b>2.2</b> Ejemplos y aplicaciones de las Series de Tiempo</a></li>
-<li class="chapter" data-level="2.3" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-para-procesos-deterministas"><i class="fa fa-check"></i><b>2.3</b> Ecuaciones en Diferencia para procesos deterministas</a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-lineales-de-primer-orden"><i class="fa fa-check"></i><b>2.3.1</b> Ecuaciones en Diferencia Lineales de Primer Orden</a></li>
-<li class="chapter" data-level="2.3.2" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior"><i class="fa fa-check"></i><b>2.3.2</b> Ecuaciones en Diferencia Lineales de Segundo Orden y de orden superior</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><a href="introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html#operador-de-rezago-l"><i class="fa fa-check"></i><b>2.4</b> Operador de rezago L</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html"><i class="fa fa-check"></i><b>3</b> Procesos Estacionarios y Modelos Univariados</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path=""><a href="#definici%C3%B3n-de-ergodicidad-y-estacionariedad"><i class="fa fa-check"></i><b>3.1</b> Definición de ergodicidad y estacionariedad</a></li>
-<li class="chapter" data-level="3.2" data-path=""><a href="#funci%C3%B3n-de-autocorrelaci%C3%B3n"><i class="fa fa-check"></i><b>3.2</b> Función de autocorrelación</a></li>
-<li class="chapter" data-level="3.3" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#procesos-estacionarios-univariados"><i class="fa fa-check"></i><b>3.3</b> Procesos estacionarios univariados</a></li>
-<li class="chapter" data-level="3.4" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#procesos-autoregresivos-ar"><i class="fa fa-check"></i><b>3.4</b> Procesos Autoregresivos (AR)</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#ar1"><i class="fa fa-check"></i><b>3.4.1</b> AR(1)</a></li>
-<li class="chapter" data-level="3.4.2" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#ar2"><i class="fa fa-check"></i><b>3.4.2</b> AR(2)</a></li>
-<li class="chapter" data-level="3.4.3" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#arp"><i class="fa fa-check"></i><b>3.4.3</b> AR(p)</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path=""><a href="#procesos-de-medias-m%C3%B3viles-ma"><i class="fa fa-check"></i><b>3.5</b> Procesos de Medias Móviles (MA)</a>
-<ul>
-<li class="chapter" data-level="3.5.1" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#ma1"><i class="fa fa-check"></i><b>3.5.1</b> MA(1)</a></li>
-<li class="chapter" data-level="3.5.2" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#maq"><i class="fa fa-check"></i><b>3.5.2</b> MA(q)</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#procesos-armap-q-y-arimap-d-q"><i class="fa fa-check"></i><b>3.6</b> Procesos ARMA(p, q) y ARIMA(p, d, q)</a>
-<ul>
-<li class="chapter" data-level="3.6.1" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#arma1-1"><i class="fa fa-check"></i><b>3.6.1</b> ARMA(1, 1)</a></li>
-<li class="chapter" data-level="3.6.2" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#armap-q"><i class="fa fa-check"></i><b>3.6.2</b> ARMA(p, q)</a></li>
-</ul></li>
-<li class="chapter" data-level="3.7" data-path=""><a href="#funci%C3%B3n-de-autocorrelaci%C3%B3n-parcial"><i class="fa fa-check"></i><b>3.7</b> Función de Autocorrelación Parcial</a></li>
-<li class="chapter" data-level="3.8" data-path=""><a href="#selecci%C3%B3n-de-las-constantes-p-q-d-en-un-arp-un-maq-un-armap-q-o-un-arimap-d-q"><i class="fa fa-check"></i><b>3.8</b> Selección de las constantes p, q, d en un AR(p), un MA(q), un ARMA(p, q) o un ARIMA(p, d, q)</a></li>
-<li class="chapter" data-level="3.9" data-path=""><a href="#pron%C3%B3sticos"><i class="fa fa-check"></i><b>3.9</b> Pronósticos</a></li>
-<li class="chapter" data-level="3.10" data-path=""><a href="#desestacionalizaci%C3%B3n-y-filtrado-de-series"><i class="fa fa-check"></i><b>3.10</b> Desestacionalización y filtrado de Series</a></li>
-<li class="chapter" data-level="3.11" data-path=""><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>3.11</b> Motivación</a></li>
-<li class="chapter" data-level="3.12" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#filtro-hodrick-prescott"><i class="fa fa-check"></i><b>3.12</b> Filtro Hodrick-Prescott</a>
-<ul>
-<li class="chapter" data-level="3.12.1" data-path="procesos-estacionarios-y-modelos-univariados.html"><a href="procesos-estacionarios-y-modelos-univariados.html#filtro-hodrick-prescott-planteado-por-st-amant-van-norden"><i class="fa fa-check"></i><b>3.12.1</b> Filtro Hodrick-Prescott planteado por St-Amant &amp; van Norden</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="procesos-no-estacionarios-univariados.html"><a href="procesos-no-estacionarios-univariados.html"><i class="fa fa-check"></i><b>4</b> Procesos No Estacionarios Univariados</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path=""><a href="#definici%C3%B3n-y-formas-de-no-estacionariedad"><i class="fa fa-check"></i><b>4.1</b> Definición y formas de No Estacionariedad</a></li>
-<li class="chapter" data-level="4.2" data-path=""><a href="#pruebas-de-ra%C3%ADces-unitarias"><i class="fa fa-check"></i><b>4.2</b> Pruebas de Raíces Unitarias</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="procesos-no-estacionarios-univariados.html"><a href="procesos-no-estacionarios-univariados.html#dickey---fuller-df"><i class="fa fa-check"></i><b>4.2.1</b> Dickey - Fuller (DF)</a></li>
-<li class="chapter" data-level="4.2.2" data-path="procesos-no-estacionarios-univariados.html"><a href="procesos-no-estacionarios-univariados.html#dickey---fuller-aumentada-adf"><i class="fa fa-check"></i><b>4.2.2</b> Dickey - Fuller Aumentada (ADF)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="procesos-no-estacionarios-univariados.html"><a href="procesos-no-estacionarios-univariados.html#phillips---perron-pp"><i class="fa fa-check"></i><b>4.2.3</b> Phillips - Perron (PP)</a></li>
-<li class="chapter" data-level="4.2.4" data-path="procesos-no-estacionarios-univariados.html"><a href="procesos-no-estacionarios-univariados.html#kwiatkowsky---phillips---schmidt---shin-kpss"><i class="fa fa-check"></i><b>4.2.4</b> Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path=""><a href="#causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraci%C3%B3n-modelos-ardl-y-filtro-multivariado"><i class="fa fa-check"></i><b>5</b> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html"><a href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html"><i class="fa fa-check"></i><b>5.1</b> Causalidad de Granger</a></li>
-<li class="chapter" data-level="5.2" data-path=""><a href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-de-vectores-autorregresicos-varp"><i class="fa fa-check"></i><b>5.2</b> Definición y representación del Sistema o Modelo de Vectores Autorregresicos (VAR(p))</a></li>
-<li class="chapter" data-level="5.3" data-path=""><a href="#an%C3%A1lisis-de-impulso-respuesta"><i class="fa fa-check"></i><b>5.3</b> Análisis de Impulso-Respuesta</a></li>
-<li class="chapter" data-level="5.4" data-path=""><a href="#identificaci%C3%B3n-de-los-choques-estructurales-en-los-modelos-var"><i class="fa fa-check"></i><b>5.4</b> Identificación de los Choques Estructurales en los Modelos VAR</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path=""><a href="#var-recursivo---identificaci%C3%B3n-recursiva"><i class="fa fa-check"></i><b>5.4.1</b> VAR Recursivo - Identificación Recursiva</a></li>
-<li class="chapter" data-level="5.4.2" data-path=""><a href="#var-estructural---restricci%C3%B3n-de-largo-plazo"><i class="fa fa-check"></i><b>5.4.2</b> VAR Estructural - Restricción de largo plazo</a></li>
-<li class="chapter" data-level="5.4.3" data-path=""><a href="#var-estructural---imposici%C3%B3n-de-restricciones-de-signo"><i class="fa fa-check"></i><b>5.4.3</b> VAR Estructural - Imposición de restricciones de signo</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path=""><a href="#cointegraci%C3%B3n"><i class="fa fa-check"></i><b>5.5</b> Cointegración</a>
-<ul>
-<li class="chapter" data-level="5.5.1" data-path=""><a href="#definici%C3%B3n-y-propiedades-del-proceso-de-cointegraci%C3%B3n"><i class="fa fa-check"></i><b>5.5.1</b> Definición y propiedades del proceso de cointegración</a></li>
-<li class="chapter" data-level="5.5.2" data-path=""><a href="#cointegraci%C3%B3n-para-modelos-de-m%C3%A1s-de-una-ecuaci%C3%B3n-o-para-modelos-basados-en-vectores-autoregresivos"><i class="fa fa-check"></i><b>5.5.2</b> Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos</a></li>
-</ul></li>
-<li class="chapter" data-level="5.6" data-path="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html"><a href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html#modelos-adrl"><i class="fa fa-check"></i><b>5.6</b> Modelos ADRL</a>
-<ul>
-<li class="chapter" data-level="5.6.1" data-path=""><a href="#teor%C3%ADa"><i class="fa fa-check"></i><b>5.6.1</b> Teoría</a></li>
-<li class="chapter" data-level="5.6.2" data-path="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html"><a href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html#ejemplo"><i class="fa fa-check"></i><b>5.6.2</b> Ejemplo</a></li>
-</ul></li>
-<li class="chapter" data-level="5.7" data-path="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html"><a href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html#filtro-kalman"><i class="fa fa-check"></i><b>5.7</b> Filtro Kalman</a>
-<ul>
-<li class="chapter" data-level="5.7.1" data-path=""><a href="#modelos-estado-espacio-y-teor%C3%ADa-econ%C3%B3mica"><i class="fa fa-check"></i><b>5.7.1</b> Modelos Estado-Espacio y Teoría Económica</a></li>
-<li class="chapter" data-level="5.7.2" data-path=""><a href="#recursi%C3%B3n-del-filtro-kalman"><i class="fa fa-check"></i><b>5.7.2</b> Recursión del Filtro Kalman</a></li>
-<li class="chapter" data-level="5.7.3" data-path="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html"><a href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html#ganancia-de-kalman"><i class="fa fa-check"></i><b>5.7.3</b> Ganancia de Kalman</a></li>
-<li class="chapter" data-level="5.7.4" data-path="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html"><a href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegración-modelos-ardl-y-filtro-multivariado.html#algoritmo-del-filtro-kalman-y-del-suavizador-de-kalman"><i class="fa fa-check"></i><b>5.7.4</b> Algoritmo del Filtro Kalman y del Suavizador de Kalman</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html"><i class="fa fa-check"></i><b>6</b> Modelos Univariados y Multivariados de Volatilidad</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path=""><a href="#motivaci%C3%B3n-1"><i class="fa fa-check"></i><b>6.1</b> Motivación</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#value-at-risk-var"><i class="fa fa-check"></i><b>6.1.1</b> Value at Risk (VaR)</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#prueba-de-normalidad"><i class="fa fa-check"></i><b>6.2</b> Prueba de normalidad</a></li>
-<li class="chapter" data-level="6.3" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#modelos-arch-y-garch-univariados"><i class="fa fa-check"></i><b>6.3</b> Modelos ARCH y GARCH Univariados</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#ejemplo-arch1"><i class="fa fa-check"></i><b>6.3.1</b> Ejemplo ARCH(1)</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#ejemplo-garch01"><i class="fa fa-check"></i><b>6.4</b> Ejemplo GARCH(0,1)</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path=""><a href="#selecci%C3%B3n-garchpq-%C3%B3ptimo"><i class="fa fa-check"></i><b>6.4.1</b> Selección GARCH(p,q) óptimo</a></li>
-</ul></li>
-<li class="chapter" data-level="6.5" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#modelos-arch-y-garch-multivariados"><i class="fa fa-check"></i><b>6.5</b> Modelos ARCH y GARCH Multivariados</a></li>
-<li class="chapter" data-level="6.6" data-path="modelos-univariados-y-multivariados-de-volatilidad.html"><a href="modelos-univariados-y-multivariados-de-volatilidad.html#pruebas-para-detectar-efectos-arch"><i class="fa fa-check"></i><b>6.6</b> Pruebas para detectar efectos ARCH</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><i class="fa fa-check"></i><b>7</b> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#modelos-de-datos-panel-y-panel-var"><i class="fa fa-check"></i><b>7.1</b> Modelos de Datos Panel y Panel VAR</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path=""><a href="#motivaci%C3%B3n-2"><i class="fa fa-check"></i><b>7.1.1</b> Motivación</a></li>
-<li class="chapter" data-level="7.1.2" data-path=""><a href="#pruebas-de-ra%C3%ADces-unitarias-en-panel"><i class="fa fa-check"></i><b>7.1.2</b> Pruebas de Raíces Unitarias en Panel</a></li>
-<li class="chapter" data-level="7.1.3" data-path=""><a href="#ejemplo-pruebas-de-ra%C3%ADces-unitarias-en-panel"><i class="fa fa-check"></i><b>7.1.3</b> Ejemplo: Pruebas de Raíces Unitarias en Panel</a></li>
-<li class="chapter" data-level="7.1.4" data-path=""><a href="#ejemplo-modelo-dif-in-dif-para-el-inpc-de-an%C3%A1lisis-cl%C3%ADnicos-update-nov-2022"><i class="fa fa-check"></i><b>7.1.4</b> Ejemplo: Modelo Dif-in-Dif para el INPC de análisis clínicos (update nov-2022)</a></li>
-<li class="chapter" data-level="7.1.5" data-path="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#panel-var"><i class="fa fa-check"></i><b>7.1.5</b> Panel VAR</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#ejemplos-panel-varp"><i class="fa fa-check"></i><b>7.2</b> Ejemplos: Panel VAR(p)</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#ejemplo-1"><i class="fa fa-check"></i><b>7.2.1</b> Ejemplo 1</a></li>
-<li class="chapter" data-level="7.2.2" data-path="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#ejemplo-2"><i class="fa fa-check"></i><b>7.2.2</b> Ejemplo 2:</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path=""><a href="#cointegraci%C3%B3n-1"><i class="fa fa-check"></i><b>7.3</b> Cointegración</a></li>
-<li class="chapter" data-level="7.4" data-path="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#modelos-no-lineales"><i class="fa fa-check"></i><b>7.4</b> Modelos No Lineales</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path=""><a href="#modelos-de-cambio-de-r%C3%A9gimen"><i class="fa fa-check"></i><b>7.4.1</b> Modelos de cambio de régimen</a></li>
-<li class="chapter" data-level="7.4.2" data-path=""><a href="#reg%C3%ADmenes-determinados-por-informaci%C3%B3n-observable"><i class="fa fa-check"></i><b>7.4.2</b> Regímenes determinados por información observable</a></li>
-<li class="chapter" data-level="7.4.3" data-path=""><a href="#reg%C3%ADmenes-determinados-por-variables-no-observables"><i class="fa fa-check"></i><b>7.4.3</b> Regímenes determinados por variables no observables</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path=""><a href="#ejemplo-modelos-de-cambio-de-reg%C3%ADmen-tar"><i class="fa fa-check"></i><b>7.5</b> Ejemplo: Modelos de Cambio de Regímen (TAR)</a></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notas de Clase: Series de Tiempo</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="procesos-no-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
+<li><a class="" href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraci%C3%B3n-modelos-ardl-y-filtro-multivariado.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="page-not-found" class="section level1">
+<h1>Page not found<a class="anchor" aria-label="anchor" href="#page-not-found"><i class="fas fa-link"></i></a>
+</h1>
 <p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
 <p>You may want to try searching to find the page's new location, or use
 the table of contents to find the page you are looking for.</p>
 </div>
-            </section>
-
-          </div>
-        </div>
-      </div>
-
-
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/%s",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Notas-Series-Tiempo.pdf", "Notas-Series-Tiempo.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera &amp; Emiliano Pérez Caullieres. It was last built on 2025-08-21.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -368,7 +96,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

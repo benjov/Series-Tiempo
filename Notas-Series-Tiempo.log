@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.2)  19 AUG 2025 13:02
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.2)  21 AUG 2025 01:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1460,34 +1460,37 @@ Underfull \vbox (badness 2961) has occurred while \output is active []
 
 [137] [138] [139] [140]
 Chapter 5.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [141
 
 ]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 142 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 142 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [142] [143]
 File: Notas-Series-Tiempo_files/figure-latex/fig61-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig61-1.pdf>
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 144 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 144 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [144] [145]
-Underfull \hbox (badness 2221) in paragraph at lines 5600--5600
+Underfull \hbox (badness 2221) in paragraph at lines 5651--5651
 []\TU/lmr/bx/n/14.4 Definición y representación del Sistema
  []
 
 
-Underfull \hbox (badness 5077) in paragraph at lines 5600--5600
+Underfull \hbox (badness 5077) in paragraph at lines 5651--5651
 \TU/lmr/bx/n/14.4 o Modelo de Vectores Autorregresicos
  []
 
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 146 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 146 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [146]
@@ -1500,8 +1503,11 @@ Overfull \hbox (214.75903pt too wide) has occurred while \output is active
 [147]
 Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 148 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Underfull \vbox (badness 6348) has occurred while \output is active []
+
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 148 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [148]
@@ -1516,231 +1522,225 @@ Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=t
 Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 150 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 150 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [150]
-File: Notas-Series-Tiempo_files/figure-latex/fig62-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/fig62-1.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/fig63-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/fig63-1.pdf>
-
 Overfull \hbox (214.75903pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/10 5.2.  DEFINICIÓN Y REPRESENTACIÓN DEL SISTEMA O MODELO DE VECTORES AUTORREGRESICOS (VAR(P)) \TU/lmr/m/n/10 151
  []
 
 [151]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 152 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+File: Notas-Series-Tiempo_files/figure-latex/fig62-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig62-1.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/fig63-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig63-1.pdf>
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 152 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [152]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
-[]\TU/lmtt/m/n/10 ##                                    1                             2[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
-[]\TU/lmtt/m/n/10 ## AIC(n) -43.4369385930444451560106245 -43.4878280980991220872056147[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
-[]\TU/lmtt/m/n/10 ## HQ(n)  -43.2759374580961733158801508 -43.1926593506939511257769482[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
-[]\TU/lmtt/m/n/10 ## SC(n)  -43.0360414131631969780755753 -42.7528499349835016118959174[] 
- []
-
-
 Overfull \hbox (214.75903pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/10 5.2.  DEFINICIÓN Y REPRESENTACIÓN DEL SISTEMA O MODELO DE VECTORES AUTORREGRESICOS (VAR(P)) \TU/lmr/m/n/10 153
  []
 
 [153]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
+[]\TU/lmtt/m/n/10 ##                                    1                             2[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
+[]\TU/lmtt/m/n/10 ## AIC(n) -43.4369385930444451560106245 -43.4878280980991220872056147[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
+[]\TU/lmtt/m/n/10 ## HQ(n)  -43.2759374580961733158801508 -43.1926593506939511257769482[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
+[]\TU/lmtt/m/n/10 ## SC(n)  -43.0360414131631969780755753 -42.7528499349835016118959174[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001366449   0.0000000000000000001298899[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ##                                    3                             4[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## AIC(n) -43.4268489491758202802884625 -43.3868843889051234441467386[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.9975125893137573029889609 -42.8233804165861613455490442[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## SC(n)  -42.3577898028258275076041173 -41.9837442593207583740877453[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001381225   0.0000000000000000001438821[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (12.0pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ##                                   5                             6[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (12.0pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## AIC(n) -43.293163285544032703455741 -43.2431704133633161291072611[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (12.0pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.595491700768178588987212 -42.4113312161305699987678963[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (12.0pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## SC(n)  -41.555942172725302441449458 -41.1718683173102135697263293[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (12.0pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## FPE(n)   0.000000000000000000158246   0.0000000000000000001667106[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ##                                    7                             8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## AIC(n) -43.2902076769675190348607430 -43.2419352439015938216471113[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.3242008672778737832231855 -42.1417608217550565541387186[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## SC(n)  -40.8848245976800441781051632 -40.5024711813797466675168835[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001595179   0.0000000000000000001680601[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ##                                    9                            10[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## AIC(n) -43.2201406224138153788771888 -43.1788072276712782127106038[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## HQ(n)  -41.9857985878103789900706033 -41.8102975806109569134605408[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## SC(n)  -40.1465955766575959273723129 -39.7711811986806935692584375[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001726236   0.0000000000000000001810365[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ##                                   11                            12[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## AIC(n) -43.1191364389135785017970193 -43.0502244962885995960277796[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## HQ(n)  -41.6164591793963580812487635 -41.4133796243144800541813311[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 154 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[154]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## SC(n)  -39.3774294266886144555428473 -38.9744365008292632523989596[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 5953--5953
+Overfull \hbox (17.25pt too wide) in paragraph at lines 6106--6106
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001936459   0.0000000000000000002093856[] 
  []
 
 Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 154 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[154]
 Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 6174--6174
-[]\TU/lmtt/m/n/10 ##  0.53  0.53 0.4501 0.4501 0.4425 0.4425 0.3251 0.3251 0.1677 0.1677[] 
- []
-
 
 Overfull \hbox (214.75903pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/10 5.2.  DEFINICIÓN Y REPRESENTACIÓN DEL SISTEMA O MODELO DE VECTORES AUTORREGRESICOS (VAR(P)) \TU/lmr/m/n/10 155
  []
 
 [155]
-Overfull \hbox (363.75pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (22.5pt too wide) in paragraph at lines 6369--6369
+[]\TU/lmtt/m/n/10 ##  0.53  0.53 0.4501 0.4501 0.4425 0.4425 0.3251 0.3251 0.1677 0.1677[] 
+ []
+
+
+Overfull \hbox (363.75pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLINPC = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (1.5pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLINPC.l1    0.387061   0.063100   6.134 0.0000000030610259 ***[] 
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (1.5pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## const        0.002325   0.000294   7.908 0.0000000000000688 ***[] 
  []
 
 
-Overfull \hbox (353.25pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 156 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[156]
+Overfull \hbox (353.25pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLTC = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const[] 
  []
 
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 156 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[156]
-Overfull \hbox (374.25pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (374.25pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLCETE28 = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const[] 
- []
-
-
-Overfull \hbox (363.75pt too wide) in paragraph at lines 6174--6174
-[]\TU/lmtt/m/n/10 ## DLIGAE = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const[] 
  []
 
 
@@ -1749,76 +1749,86 @@ Overfull \hbox (214.75903pt too wide) has occurred while \output is active
  []
 
 [157]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (363.75pt too wide) in paragraph at lines 6369--6369
+[]\TU/lmtt/m/n/10 ## DLIGAE = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const[] 
+ []
+
+
+Overfull \hbox (27.75pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## F-statistic: 13.03 on 10 and 268 DF,  p-value: < 0.00000000000000022[] 
  []
 
 
-Overfull \hbox (358.5pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (358.5pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLIPI = DLINPC.l1 + DLTC.l1 + DLCETE28.l1 + DLIGAE.l1 + DLIPI.l1 + DLINPC.l2 + DLTC.l2 + DLCETE28.l2 + DLIGAE.l2 + DLIPI.l2 + const[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 158 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[158]
+Overfull \hbox (54.0pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ##                 DLINPC          DLTC    DLCETE28       DLIGAE       DLIPI[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (54.0pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLINPC    0.0000047345 -0.0000001939 0.000004559  0.000006652  0.00000700[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (54.0pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLTC     -0.0000001939  0.0006606619 0.000369751 -0.000035441 -0.00003174[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (54.0pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLCETE28  0.0000045591  0.0003697510 0.004120747  0.000063618  0.00008525[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (54.0pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLIGAE    0.0000066522 -0.0000354410 0.000063618  0.000184234  0.00011641[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 6174--6174
+Overfull \hbox (54.0pt too wide) in paragraph at lines 6369--6369
 []\TU/lmtt/m/n/10 ## DLIPI     0.0000069998 -0.0000317443 0.000085254  0.000116407  0.00012685[] 
  []
 
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 158 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[158]
 Overfull \hbox (214.75903pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/10 5.2.  DEFINICIÓN Y REPRESENTACIÓN DEL SISTEMA O MODELO DE VECTORES AUTORREGRESICOS (VAR(P)) \TU/lmr/m/n/10 159
  []
 
 [159]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 160 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 160 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-[160] [161]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 162 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+[160]
+Overfull \hbox (214.75903pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 5.2.  DEFINICIÓN Y REPRESENTACIÓN DEL SISTEMA O MODELO DE VECTORES AUTORREGRESICOS (VAR(P)) \TU/lmr/m/n/10 161
+ []
+
+[161]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 162 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [162] [163]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 164 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 164 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [164] [165]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 166 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 166 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-[166]
+[166] [167]
 File: Notas-Series-Tiempo_files/figure-latex/fig64-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig64-1.pdf>
 File: Notas-Series-Tiempo_files/figure-latex/fig64-2.pdf Graphic file (type pdf)
@@ -1829,1408 +1839,1197 @@ File: Notas-Series-Tiempo_files/figure-latex/fig64-4.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig64-4.pdf>
 File: Notas-Series-Tiempo_files/figure-latex/fig64-5.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig64-5.pdf>
-Missing character: There is no 𝛿 (U+1D6FF) in font [lmroman10-bold]:mapping=tex-text;!
-[167]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 168 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 168 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-[168] [169]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 170 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+[168]
+Overfull \hbox (76.60123pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 5.4.  IDENTIFICACIÓN DE LOS CHOQUES ESTRUCTURALES EN LOS MODELOS VAR \TU/lmr/m/n/10 169
+ []
+
+[169]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 170 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [170]
-Missing character: There is no 𝛤 (U+1D6E4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛤 (U+1D6E4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛤 (U+1D6E4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛤 (U+1D6E4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-[171]
-Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝛴 (U+1D6F4) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman7-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no 𝜀 (U+1D700) in font [lmroman10-bold]:mapping=tex-text;!
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 172 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (76.60123pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 5.4.  IDENTIFICACIÓN DE LOS CHOQUES ESTRUCTURALES EN LOS MODELOS VAR \TU/lmr/m/n/10 171
  []
 
-[172] [173]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 174 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+[171]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 172 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[172]
+Overfull \hbox (76.60123pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 5.4.  IDENTIFICACIÓN DE LOS CHOQUES ESTRUCTURALES EN LOS MODELOS VAR \TU/lmr/m/n/10 173
+ []
+
+[173]
+Overfull \hbox (22.5pt too wide) in paragraph at lines 7021--7021
+[]\TU/lmtt/m/n/10 ## Estimated B Matrix (unique decomposition of the covariance matrix):[] 
+ []
+
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 174 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [174]
-Overfull \hbox (248.25pt too wide) in paragraph at lines 6970--6970
-[]\TU/lmtt/m/n/10 ## DLINPC = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const[] 
- []
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-13-1.pdf>
 
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 6970--6970
-[]\TU/lmtt/m/n/10 ## DLINPC.l1    0.3936901  0.0621471   6.335 0.0000000009896467 ***[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 6970--6970
-[]\TU/lmtt/m/n/10 ## const        0.0023387  0.0002932   7.976 0.0000000000000432 ***[] 
- []
-
-
-Overfull \hbox (248.25pt too wide) in paragraph at lines 6970--6970
-[]\TU/lmtt/m/n/10 ## DLIGAE = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const[] 
+Overfull \hbox (76.60123pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 5.4.  IDENTIFICACIÓN DE LOS CHOQUES ESTRUCTURALES EN LOS MODELOS VAR \TU/lmr/m/n/10 175
  []
 
 [175]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 6970--6970
-[]\TU/lmtt/m/n/10 ## F-statistic: 13.85 on 8 and 270 DF,  p-value: < 0.00000000000000022[] 
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 176 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-
-Overfull \hbox (258.75pt too wide) in paragraph at lines 6970--6970
-[]\TU/lmtt/m/n/10 ## DLCETE28 = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const[] 
+[176]
+Overfull \hbox (76.60123pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 5.4.  IDENTIFICACIÓN DE LOS CHOQUES ESTRUCTURALES EN LOS MODELOS VAR \TU/lmr/m/n/10 177
  []
 
-
-Overfull \hbox (237.75pt too wide) in paragraph at lines 6970--6970
-[]\TU/lmtt/m/n/10 ## DLTC = DLINPC.l1 + DLIGAE.l1 + DLCETE28.l1 + DLTC.l1 + DLINPC.l2 + DLIGAE.l2 + DLCETE28.l2 + DLTC.l2 + const[] 
- []
-
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 176 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[176] [177]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 178 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+[177]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 178 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [178]
-File: Notas-Series-Tiempo_files/figure-latex/fig65-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/fig65-1.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/fig65-2.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/fig65-2.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/fig65-3.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/fig65-3.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/fig65-4.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/fig65-4.pdf>
-
-Overfull \hbox (2.78868pt too wide) in paragraph at lines 7098--7098
-[]\TU/lmr/bx/n/14.4 Otras opciones del análisis impulso-respuesta 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
+Overfull \hbox (76.60123pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 5.4.  IDENTIFICACIÓN DE LOS CHOQUES ESTRUCTURALES EN LOS MODELOS VAR \TU/lmr/m/n/10 179
  []
 
 [179]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 180 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 180 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [180]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Underfull \vbox (badness 1226) has occurred while \output is active []
+Underfull \vbox (badness 3240) has occurred while \output is active []
 
 [181]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 182 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 182 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [182]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-[183]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 184 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[184]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-[185]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 186 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[186]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 7408--7408
-[]\TU/lmtt/m/n/10 ## Warning in SVAR(x = varboot, Amat = a.mat, Bmat = b.mat, max.iter = 10000, :[] 
- []
-
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-1.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-2.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-2.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-3.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-3.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-4.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-14-4.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 7416--7417
-[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 7416--7417
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 7416--7417
-[]
- []
-
-
-Underfull \vbox (badness 6204) has occurred while \output is active []
-
-[187]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 188 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[188]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[189]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 190 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[190] [191]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 192 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[192]
 File: Notas-Series-Tiempo_files/figure-latex/fig81-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig81-1.pdf>
+[183]
 File: Notas-Series-Tiempo_files/figure-latex/fig82-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig82-1.pdf>
 File: Notas-Series-Tiempo_files/figure-latex/fig83-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig83-1.pdf>
-[193]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 194 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 184 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-[194]
-Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ⋮ (U+22EE) in font [lmroman10-regular]:mapping=tex-text;!
-[195]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+[184] [185]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ##                                    1                             2[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## AIC(n) -43.1308318646810135987834656 -43.5668661854371990216350241[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.9445592539269327403417265 -43.2475417098587726627556549[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## SC(n)  -42.6668499811502783813921269 -42.7714686708130784609238617[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001855848   0.0000000000000000001200259[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ##                                    3                             4[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## AIC(n) -43.5797269785975984746073664 -43.5035550099222803055454278[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## HQ(n)  -43.1273506381948337207177246 -42.9181268046951771566455136[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## SC(n)  -42.4529138328800996760037378 -42.0453262331114032690493332[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001185548   0.0000000000000000001280605[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ##                                    5                             6[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## AIC(n) -43.4665644031667497415583057 -43.3662074624718840709647338[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.7480843331153010922207613 -42.5146755275960970266169170[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## SC(n)  -41.6769199952624873617423873 -41.2451474234742434532563493[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001330869   0.0000000000000000001474594[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ##                                    7                             8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## AIC(n) -43.3576732552204475723556243 -43.4475783817780367712657608[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.3730894555203079221428197 -42.3299427172535587260426837[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## SC(n)  -40.9051975851294216113274160 -40.6636870805936325723450864[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001491718   0.0000000000000000001368875[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ##                                    9                            10[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## AIC(n) -43.3742641642367701138027769 -43.3660356138277762738653109[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.1235766348879465681420697 -41.9822962196546143331943313[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## SC(n)  -40.2589572319589734661349212 -39.9193130504566013883049891[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7655--7655
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7564--7564
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001480478   0.0000000000000000001502148[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 186 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[186]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ##                                    1                             2[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## AIC(n) -43.0218334558386885646541486 -43.4733608627676417768270767[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.8621712180494753852144640 -43.1806467601540902023771196[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## SC(n)  -42.6241346985266318370122463 -42.7442464743621997058653506[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000002069525   0.0000000000000000001317817[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ##                                    3                             4[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## AIC(n) -43.4926570116813877575623337 -43.4403901004477006608794909[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## HQ(n)  -43.0668910442434906826747465 -42.8815722681854651909816312[] 
  []
 
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 196 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[196]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## SC(n)  -42.4321269921825603432807839 -42.0484444498554950087054749[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001293226   0.0000000000000000001363788[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ##                                    5                             6[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## AIC(n) -43.4055918510038054591859691 -43.3210122680509144288407697[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.7137221539172173834231216 -42.4960907061399879580676497[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## SC(n)  -41.6822305693182144636921294 -41.2662353552719451954544638[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001414042   0.0000000000000000001541996[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ##                                    7                             8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## AIC(n) -43.3018930975745490741246613 -43.3631837990786621617189667[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.3439196708392771029139112 -42.2721585075190517954979441[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## SC(n)  -40.9157005537021944974185317 -40.6455756241129293471203709[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001576227   0.0000000000000000001488111[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ##                                    9                           10[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## AIC(n) -43.3123078988938914335449226 -43.289311818269602838427090[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.0882307425099355668862700 -41.932182797061308576758165[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## SC(n)  -40.2632840928347732756265032 -39.908872381117106442616205[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7694--7694
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7603--7603
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001573361   0.000000000000000000161972[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ##                                    1                            2[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## AIC(n) -43.0529318587713945021278050 -43.495191294123372927060700[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.8932696209821813226881204 -43.202477191509821352610743[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## SC(n)  -42.6552331014593377744859026 -42.766076905717930856098974[] 
  []
 
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+[187]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000002006156   0.000000000000000000128936[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ##                                    3                             4[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## AIC(n) -43.5086218228659333817631705 -43.4510965812944505159975961[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## HQ(n)  -43.0828558554280363068755833 -42.8922787490322150460997364[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## SC(n)  -42.4480918033671059674816206 -42.0591509307022448638235801[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001272744   0.0000000000000000001349265[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ##                                    5                            6[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## AIC(n) -43.4144752420798099024068506 -43.325553474358613925687678[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.7226055449932289320713608 -42.500631912447687454914558[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## SC(n)  -41.6911139603942189069130109 -41.270776561579644692301372[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001401536   0.000000000000000000153501[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ##                                    7                             8[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## AIC(n) -43.3069657328556019137977273 -43.3724989978216228792007314[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.3489923061203299425869773 -42.2814737062620125129797088[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## SC(n)  -40.9207731889832473370915977 -40.6548908228558900646021357[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001568252   0.0000000000000000001474313[] 
  []
 
-[197]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ##                                   9                            10[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## AIC(n) -43.316467649333738165751129 -43.2911053192979622394886974[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.092390492949782299092476 -41.9339762980896679778197722[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## SC(n)  -40.267443843274620007832709 -39.9106658821454658436778118[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7733--7733
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7642--7642
 []\TU/lmtt/m/n/10 ## FPE(n)   0.000000000000000000156683   0.0000000000000000001616817[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ##                                   1                             2[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## AIC(n) -43.009650989538556586921914 -43.4653473630038362784944184[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.876599124714218191911641 -43.1992436333551523830465158[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## SC(n)  -42.678235358445178349029447 -42.8025161008170726972821285[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## FPE(n)   0.000000000000000000209486   0.0000000000000000001328347[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ##                                    3                             4[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## AIC(n) -43.4961615576300175689539174 -43.4416013221261536614292709[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## HQ(n)  -43.0970059631569952784957422 -42.9093938628287787651061080[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## SC(n)  -42.5019146643498757498491614 -42.1159387977526264990046911[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001288547   0.0000000000000000001361851[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (6.75pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ##                                    5                           6[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (6.75pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## AIC(n) -43.3978234579566617412638152 -43.31937496312242075191534[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (6.75pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.7325641338349484499303799 -42.52106377417636196014428[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (6.75pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## SC(n)  -41.7407453024897563409467693 -41.33088117656213000827847[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (6.75pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001424605   0.00000000000000000015438[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 188 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[188]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ##                                    7                            8[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## AIC(n) -43.2856068136311264993310033 -43.342694393587237300380366[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.3542437598607293125496653 -42.278279474992494613161398[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## SC(n)  -40.9656973959774575178016676 -40.691369344840175870103849[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (12.0pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001601088   0.000000000000000000151765[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ##                                    9                            10[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## AIC(n) -43.2981268022445746623816376 -43.2689202279021429831118439[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## HQ(n)  -42.1006600188254935801523970 -41.9384015796587164004449733[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## SC(n)  -40.3153861224041349942126544 -39.9547639169683179716230370[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 7772--7772
+Overfull \hbox (17.25pt too wide) in paragraph at lines 7681--7681
 []\TU/lmtt/m/n/10 ## FPE(n)   0.0000000000000000001594144   0.0000000000000000001650919[] 
  []
 
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 198 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[198] [199]
-Overfull \hbox (85.5pt too wide) in paragraph at lines 7897--7897
+[189]
+Overfull \hbox (85.5pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## Test type: trace statistic , without linear trend and constant in cointegration[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (80.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## [1] 0.2242278157790942305638 0.0714829742929301154009 0.0471697381127354625763[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (80.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## [4] 0.0323558252755368550013 0.0170373866386099859227 0.0000000000000001925707[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 190 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[190]
+Overfull \hbox (38.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ##              INPC_Ad.l3   TC_Ad.l3 CETE28_Ad.l3 IGAE_Ad.l3   IPI_Ad.l3[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (38.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## INPC_Ad.l3    1.0000000  1.0000000    1.0000000   1.000000  1.00000000[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (38.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## TC_Ad.l3      0.2100057  0.3958412    0.6038714  -3.946863 -0.66160415[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (38.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## CETE28_Ad.l3  0.4812626 -0.3505729    0.2932620   1.025381  0.02134859[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (38.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## IGAE_Ad.l3   -2.8386112 -4.9448228   -4.1431506  10.685831 -1.62038123[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (38.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## IPI_Ad.l3    -1.2576912  0.8682351    2.2789480 -19.080015  1.60589077[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (38.25pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## constant     14.2887887 13.2882018    1.6072247  43.673551 -2.75645487[] 
  []
 
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 200 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[200]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (22.5pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ##               INPC_Ad.l3       TC_Ad.l3  CETE28_Ad.l3    IGAE_Ad.l3[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (22.5pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## INPC_Ad.d    0.001551917  0.00004896886  0.0002254138 -0.0001685412[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (22.5pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## TC_Ad.d      0.002200808 -0.00575637923 -0.0293306746 -0.0003866727[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (22.5pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## CETE28_Ad.d -0.009399815 -0.02250446234 -0.0166361225 -0.0160384399[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (22.5pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## IGAE_Ad.d    0.001105776  0.01441007456  0.0023574644 -0.0015712694[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 7897--7897
+Overfull \hbox (22.5pt too wide) in paragraph at lines 7819--7819
 []\TU/lmtt/m/n/10 ## IPI_Ad.d     0.001442047  0.01286401841 -0.0014986278 -0.0011379265[] 
  []
 
+[191]
 File: Notas-Series-Tiempo_files/figure-latex/fig84-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig84-1.pdf>
-[201]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 192 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[192]
 File: Plots/TimeSeries_Models.png Graphic file (type bmp)
 <Plots/TimeSeries_Models.png>
-
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 202 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+[193]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 194 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-[202] [203]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 204 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
- []
-
-[204]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8112--8112
+[194] [195]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8062--8062
 []\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
  []
 
-[205]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 8112--8112
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 8062--8062
 []\TU/lmtt/m/n/10 ## (Intercept)    L(LRM, 1)    L(LRM, 2)    L(LRM, 3)          LRY    L(LRY, 1)[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 8112--8112
+Overfull \hbox (69.75pt too wide) in paragraph at lines 8062--8062
 []\TU/lmtt/m/n/10 ##      2.6202       0.3192       0.5326      -0.2687       0.6728      -0.2574[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 8112--8112
+Overfull \hbox (69.75pt too wide) in paragraph at lines 8062--8062
 []\TU/lmtt/m/n/10 ##         IBO    L(IBO, 1)    L(IBO, 2)    L(IBO, 3)          IDE    L(IDE, 1)[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 8112--8112
+Overfull \hbox (69.75pt too wide) in paragraph at lines 8062--8062
 []\TU/lmtt/m/n/10 ##     -1.0785      -0.1062       0.2877      -0.9947       0.1255      -0.3280[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8157--8157
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8107--8107
 []\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
  []
 
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 206 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 196 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-[206]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 8157--8157
+[196]
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8107--8107
 []\TU/lmtt/m/n/10 ## F-statistic: 266.8 on 12 and 39 DF,  p-value: < 0.00000000000000022[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8209--8209
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8159--8159
 []\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
  []
 
-[207]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8259--8259
+[197]
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8210--8210
 []\TU/lmtt/m/n/10 ## dynlm::dynlm(formula = full_formula, data = data, start = start,[] 
  []
 
 
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 208 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 198 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
-[208]
-Overfull \hbox (568.5pt too wide) in paragraph at lines 8285--8285
+[198]
+Overfull \hbox (568.5pt too wide) in paragraph at lines 8236--8236
 []\TU/lmtt/m/n/10 ## data:  d(LRM) ~ L(LRM, 1) + L(LRY, 1) + L(IBO, 1) + L(IDE, 1) + d(L(LRM,     1)) + d(L(LRM, 2)) + d(LRY) + d(IBO) + d(L(IBO, 1)) + d(L(IBO,     2)) + d(IDE) + d(L(IDE, 1))[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8307--8307
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8259--8259
 []\TU/lmtt/m/n/10 ##          Term   Estimate Std. Error   t value           Pr(>|t|)[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8307--8307
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8259--8259
 []\TU/lmtt/m/n/10 ## 1 (Intercept)  6.2856579  0.7719160  8.142930 0.0000000006107445[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8307--8307
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8259--8259
 []\TU/lmtt/m/n/10 ## 2         LRY  0.9964676  0.1239310  8.040503 0.0000000008358472[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8307--8307
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8259--8259
 []\TU/lmtt/m/n/10 ## 3         IBO -4.5381160  0.5202961 -8.722180 0.0000000001058619[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8307--8307
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8259--8259
 []\TU/lmtt/m/n/10 ## 4         IDE  2.8915201  0.9950853  2.905801 0.0060092393605960[] 
  []
 
+[199]
 File: Notas-Series-Tiempo_files/figure-latex/fig92-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig92-1.pdf>
-[209]
-Overfull \hbox (406.62794pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 210 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, Y MODELOS ARDL
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 200 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[200] [201]
+Overfull \hbox (4.17078pt too wide) detected at line 8368
+[][][][][] [] [][] [] [][][][][][][][][] [] [][] [] [] [][]
+ []
+
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 202 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[202]
+Overfull \hbox (75.16002pt too wide) detected at line 8434
+[]
+ []
+
+File: Plots/StateSpace.png Graphic file (type bmp)
+<Plots/StateSpace.png>
+[203]
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real GDP (100*log)'                                               L_GDP[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Trend in Real GDP (100*log)'                                      L_GDP_BAR[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Output Gap (in %)'                                                L_GDP_GAP[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Quarterly Growth in Real GDP(in % pa)'                            DLA_GDP[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real GDP Growth YoY (in % pa)'                                    D4L_GDP[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real GDP Trend Growth QoQ annualized (in % pa)'                   DLA_GDP_BAR[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real Monetary Condition Index (in % pa)'                          MCI[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'CPI (level, 100*log)'                                             L_CPI[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'CPI Inflation QoQ annualized (in % pa)'                           DLA_CPI[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Expected CPI Inflation QoQ annualized (in % pa)'                  E_DLA_CPI[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'CPI Inflation YoY (in % pa)'                                      D4L_CPI[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Inflation Target (in % pa)'                                       D4L_CPI_TAR[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real Marginal Cost  (in %)'                                       RMC[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Nominal Exchange Rate (LCY/FCY, 100*log)'                         L_S[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Nominal Exch. Rate Depreciation QoQ annualized (in % pa)'         DLA_S[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Nominal Exch. Rate Depreciation YoY (in % pa)'                    D4L_S[] 
+ []
+
+
+Overfull \hbox (27.75pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Country Risk Premium (in % pa)'                                   PREM[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Nominal Policy Interest Rate (in % pa)'                           RS[] 
+ []
+
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 204 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[204]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real Interest Rate (in % pa)'                                     RR[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Trend Real Interest Rate (in % pa)'                               RR_BAR[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real Interest Rate Gap (in %)'                                    RR_GAP[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Nominal Policy Neutral Interest Rate (in % pa)'                   RSNEUTRAL[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real Exchange Rate (level, 100*log)'                              L_Z[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Trend Real Exchange Rate (level, 100*log)'                        L_Z_BAR[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real Exchange Rate Gap (in %)'                                    L_Z_GAP[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Real Exchange Rate Depreciation QoQ annualized (in % pa)'         DLA_Z[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Trend Real Exchange Rate Depreciation QoQ annualized(in % pa)'    DLA_Z_BAR[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Foreign Output Gap (in %)'                                        L_GDP_RW_GAP[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Foreign Nominal Interest Rate (in % pa)'                          RS_RW[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Foreign Real Interest Rate (in % pa)'                             RR_RW[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Foreign Real Interest Rate Trend (in % pa)'                       RR_RW_BAR[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Foreign Real Interest Rate Gap (in %)'                            RR_RW_GAP[] 
+ []
+
+
+Overfull \hbox (48.75pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Foreign CPI (level, 100*log)'                                     L_CPI_RW[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Foreign Inflation QoQ annualized (in % pa)'                       DLA_CPI_RW[] 
+ []
+
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 % ------------------------------------------------------------------------------- %[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Output gap (demand)'                                       SHK_L_GDP_GAP[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: CPI inflation (cost-push)'                                 SHK_DLA_CPI[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Exchange rate (UIP)'                                       SHK_L_S[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Interest rate (monetary policy)'                           SHK_RS[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Inflation target'                                          SHK_D4L_CPI_TAR[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Real interest rate'                                        SHK_RR_BAR[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Real exchange rate depreciation'                           SHK_DLA_Z_BAR[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Potential GDP growth'                                      SHK_DLA_GDP_BAR[] 
+ []
+
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Foreign output gap'                                        SHK_L_GDP_RW_GAP[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Foreign nominal interest rate'                             SHK_RS_RW[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Foreign inflation'                                         SHK_DLA_CPI_RW[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 'Shock: Foreign real interest rate'                                SHK_RR_RW_BAR[] 
+ []
+
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 % ------------------------------------------------------------------------------- %[] 
+ []
+
+[205]
+Overfull \hbox (96.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 %% ------------------------------------------------------------------------------- %[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 L_GDP_GAP = b1*L_GDP_GAP{-1} - b2*MCI + b3*L_GDP_RW_GAP + SHK_L_GDP_GAP;[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 DLA_CPI =  a1*DLA_CPI{-1} + (1-a1)*DLA_CPI{+1} + a2*RMC + SHK_DLA_CPI;[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 %% === Monetary policy reaction function (a forward-looking Taylor-type Rule) ===[] 
+ []
+
+
+Overfull \hbox (164.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 RS = g1*RS{-1} + (1-g1)*(RSNEUTRAL + g2*(D4L_CPI{+4} - D4L_CPI_TAR{+4}) + g3*L_GDP_GAP) + SHK_RS;[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 %% === Modified Uncovered Interest Rate Parity (UIP) condition ===[] 
+ []
+
+
+Overfull \hbox (285.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 L_S = (1-e1)*L_S{+1} + e1*(L_S{-1} + 2/4*(D4L_CPI_TAR - ss_DLA_CPI_RW + DLA_Z_BAR)) + (- RS + RS_RW + PREM)/4 + SHK_L_S;[] 
+ []
+
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 206 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[206]
+Overfull \hbox (185.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 D4L_CPI_TAR = rho_D4L_CPI_TAR*D4L_CPI_TAR{-1} + (1-rho_D4L_CPI_TAR)*ss_D4L_CPI_TAR + SHK_D4L_CPI_TAR;[] 
+ []
+
+
+Overfull \hbox (132.75pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 DLA_Z_BAR   = rho_DLA_Z_BAR*DLA_Z_BAR{-1} + (1-rho_DLA_Z_BAR)*ss_DLA_Z_BAR + SHK_DLA_Z_BAR;[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 RR_BAR      = rho_RR_BAR*RR_BAR{-1} + (1-rho_RR_BAR)*ss_RR_BAR + SHK_RR_BAR;[] 
+ []
+
+
+Overfull \hbox (185.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 DLA_GDP_BAR = rho_DLA_GDP_BAR*DLA_GDP_BAR{-1} + (1-rho_DLA_GDP_BAR)*ss_DLA_GDP_BAR + SHK_DLA_GDP_BAR;[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 L_GDP_RW_GAP = rho_L_GDP_RW_GAP*L_GDP_RW_GAP{-1} + SHK_L_GDP_RW_GAP;[] 
+ []
+
+
+Overfull \hbox (164.25pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 DLA_CPI_RW   = rho_DLA_CPI_RW*DLA_CPI_RW{-1} + (1-rho_DLA_CPI_RW)*ss_DLA_CPI_RW + SHK_DLA_CPI_RW;[] 
+ []
+
+
+Overfull \hbox (117.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 RS_RW        = rho_RS_RW*RS_RW{-1} + (1-rho_RS_RW)*(RR_RW_BAR + DLA_CPI_RW) + SHK_RS_RW;[] 
+ []
+
+
+Overfull \hbox (138.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 RR_RW_BAR    = rho_RR_RW_BAR*RR_RW_BAR{-1} + (1-rho_RR_RW_BAR)*ss_RR_RW_BAR + SHK_RR_RW_BAR;[] 
+ []
+
+
+Overfull \hbox (96.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 %% ------------------------------------------------------------------------------- %[] 
+ []
+
+[207]
+Overfull \hbox (96.0pt too wide) in paragraph at lines 8662--8662
+[]\TU/lmtt/m/n/10 %% ------------------------------------------------------------------------------- %[] 
+ []
+
+
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 208 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[208] [209]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 210 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
  []
 
 [210]
-Chapter 6.
-[211
+Overfull \hbox (7.76512pt too wide) detected at line 8809
+[][][][][] [] [][][][] [][] [] [][][][] [][] [] [][][][][] [] []
+ []
+
+[211]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 212 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[212]
+File: Plots/Filtration.png Graphic file (type bmp)
+<Plots/Filtration.png>
+[213]
+Overfull \hbox (529.40575pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 214 \TU/lmr/m/sl/10 CHAPTER 5.  CAUSALIDAD DE GRANGER, MODELOS MULTIVARIADOS DE VECTORES AUTOREGRESIVOS Y DE COINTEGRACIÓN, MODELOS ARDL Y FILTRO MULTIVARIADO
+ []
+
+[214
 
 ]
+Chapter 6.
+[215]
 File: Notas-Series-Tiempo_files/figure-latex/Data_ARCH-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/Data_ARCH-1.pdf>
 
@@ -3238,140 +3037,140 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 212 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
+\TU/lmr/m/n/10 216 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[212]
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8419--8419
+[216]
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8999--8999
 []\TU/lmtt/m/n/10 ##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8419--8419
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8999--8999
 []\TU/lmtt/m/n/10 ## 2014-09-17      465.864      468.174     452.422       457.334       21056800[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8419--8419
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8999--8999
 []\TU/lmtt/m/n/10 ## 2014-09-18      456.860      456.860     413.104       424.440       34483200[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8419--8419
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8999--8999
 []\TU/lmtt/m/n/10 ## 2014-09-19      424.103      427.835     384.532       394.796       37919700[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8419--8419
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8999--8999
 []\TU/lmtt/m/n/10 ## 2014-09-20      394.673      423.296     389.883       408.904       36863600[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8419--8419
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8999--8999
 []\TU/lmtt/m/n/10 ## 2014-09-21      408.085      412.426     393.181       398.821       26580100[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8419--8419
+Overfull \hbox (75.0pt too wide) in paragraph at lines 8999--8999
 []\TU/lmtt/m/n/10 ## 2014-09-22      399.100      406.916     397.130       402.152       24127600[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8442--8442
+Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
 []\TU/lmtt/m/n/10 ##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8442--8442
-[]\TU/lmtt/m/n/10 ## 2025-08-14     123339.4     124457.1    117254.9      118359.6   104055627395[] 
- []
-
-
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8442--8442
-[]\TU/lmtt/m/n/10 ## 2025-08-15     118365.8     119332.3    116864.6      117398.4    68665353159[] 
- []
-
-
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8442--8442
+Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
 []\TU/lmtt/m/n/10 ## 2025-08-16     117398.4     117996.1    117272.0      117491.4    48036922378[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8442--8442
+Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
 []\TU/lmtt/m/n/10 ## 2025-08-17     117492.8     118595.8    117279.5      117453.1    45852169525[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8442--8442
+Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
 []\TU/lmtt/m/n/10 ## 2025-08-18     117453.9     117614.2    114723.7      116252.3    72787808090[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 8442--8442
-[]\TU/lmtt/m/n/10 ## 2025-08-19     116270.0     116709.3    112902.3      113086.6    69277687808[] 
+Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
+[]\TU/lmtt/m/n/10 ## 2025-08-19     116241.9     116764.5    112730.4      112831.2    71657600353[] 
  []
 
-[213]
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
+[]\TU/lmtt/m/n/10 ## 2025-08-20     112828.0     114625.8    112388.0      114274.7    67993811526[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
+[]\TU/lmtt/m/n/10 ## 2025-08-21     114269.5     114691.3    113622.9      113848.4    66622791680[] 
+ []
+
+[217]
 File: Notas-Series-Tiempo_files/figure-latex/fig101-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig101-1.pdf>
 
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 214 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
+\TU/lmr/m/n/10 218 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[214]
+[218]
 File: Notas-Series-Tiempo_files/figure-latex/fig102-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig102-1.pdf>
-[215]
+[219]
 File: Notas-Series-Tiempo_files/figure-latex/fig103-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig103-1.pdf>
 File: Notas-Series-Tiempo_files/figure-latex/fig104-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig104-1.pdf>
 
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 216 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
+\TU/lmr/m/n/10 220 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[216] [217]
+[220] [221]
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 218 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
+\TU/lmr/m/n/10 222 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[218] [219]
+[222] [223]
 File: Notas-Series-Tiempo_files/figure-latex/fig105-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig105-1.pdf>
 File: Notas-Series-Tiempo_files/figure-latex/fig106-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig106-1.pdf>
 
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 220 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
+\TU/lmr/m/n/10 224 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[220]
+[224]
 File: Notas-Series-Tiempo_files/figure-latex/fig107-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig107-1.pdf>
 File: Notas-Series-Tiempo_files/figure-latex/fig108-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig108-1.pdf>
 File: Notas-Series-Tiempo_files/figure-latex/fig109-1.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/fig109-1.pdf>
-[221]
+[225]
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 222 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
+\TU/lmr/m/n/10 226 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[222] [223]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 8814--8814
-[]\TU/lmtt/m/n/10 ## (Intercept) 0.00111263 0.00007693  14.463 <0.0000000000000002 ***[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 8814--8814
-[]\TU/lmtt/m/n/10 ## L(ehatsq)   0.13123319 0.01570035   8.359 <0.0000000000000002 ***[] 
+[226] [227]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 9394--9394
+[]\TU/lmtt/m/n/10 ## (Intercept) 0.00111209 0.00007689  14.463 <0.0000000000000002 ***[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 8814--8814
-[]\TU/lmtt/m/n/10 ## F-statistic: 69.87 on 1 and 3986 DF,  p-value: < 0.00000000000000022[] 
+Overfull \hbox (12.0pt too wide) in paragraph at lines 9394--9394
+[]\TU/lmtt/m/n/10 ## L(ehatsq)   0.13124874 0.01569650   8.362 <0.0000000000000002 ***[] 
+ []
+
+
+Overfull \hbox (27.75pt too wide) in paragraph at lines 9394--9394
+[]\TU/lmtt/m/n/10 ## F-statistic: 69.92 on 1 and 3988 DF,  p-value: < 0.00000000000000022[] 
  []
 
 File: Notas-Series-Tiempo_files/figure-latex/ArchTest-1.pdf Graphic file (type pdf)
@@ -3381,135 +3180,40 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 224 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
- []
-
-[224]
-File: Notas-Series-Tiempo_files/figure-latex/ArchTest-2.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/ArchTest-2.pdf>
-[225]
-Overfull \hbox (3.84592pt too wide) in paragraph at lines 8865--8866
-[]\TU/lmr/bx/n/10 Parameter  
- []
-
-
-Overfull \hbox (3.84592pt too wide) in paragraph at lines 8879--8880
-[]\TU/lmr/bx/n/10 Parameter  
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 8909--8911
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 8911--8913
-
- []
-
-
-Underfull \hbox (badness 2951) in paragraph at lines 8913--8915
-[]\TU/lmr/m/n/10 La fila de encabezados va seguida por una fila de separadores
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 8913--8915
-
- []
-
-
-Overfull \hbox (50.06453pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 226 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
- []
-
-[226]
-Underfull \hbox (badness 10000) in paragraph at lines 8915--8917
-
- []
-
-[227]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9001--9001
-[]\TU/lmtt/m/n/10 ##          min      q.25     mean     q.75     max forecast[analytic][] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9001--9001
-[]\TU/lmtt/m/n/10 ## t+1 -0.54016 -0.011468 0.002767 0.017833 0.23436           0.003124[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9001--9001
-[]\TU/lmtt/m/n/10 ##          min    q0.25     mean    q0.75      max forecast[analytic][] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9001--9001
-[]\TU/lmtt/m/n/10 ## t+1 0.050726 0.050726 0.050726 0.050726 0.050726           0.050726[] 
- []
-
-
-Overfull \hbox (1.48915pt too wide) in paragraph at lines 9057--9057
- []|\TU/lmr/m/n/10 2.515980e+00|
- []
-
-
-Overfull \hbox (50.06453pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 228 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
 [228]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9082--9082
-[]\TU/lmtt/m/n/10 ##              Estimate       Std. Error       t value       Pr(>|t|)[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9082--9082
-[]\TU/lmtt/m/n/10 ## mu     0.001641001763 0.00035505856500     4.6217777 0.000003804656[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9082--9082
-[]\TU/lmtt/m/n/10 ## ar1   -0.061916534061 0.01330195173402    -4.6546954 0.000003244599[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9082--9082
-[]\TU/lmtt/m/n/10 ## ar2   -0.005058238672 0.01279187783173    -0.3954258 0.692528663168[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9082--9082
-[]\TU/lmtt/m/n/10 ## omega  0.000004158196 0.00000006655024    62.4820524 0.000000000000[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9082--9082
-[]\TU/lmtt/m/n/10 ## beta1  0.997834098183 0.00003920295550 25453.0324446 0.000000000000[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9082--9082
-[]\TU/lmtt/m/n/10 ## shape  2.519110045711 0.02702137130225    93.2265805 0.000000000000[] 
- []
-
+File: Notas-Series-Tiempo_files/figure-latex/ArchTest-2.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/ArchTest-2.pdf>
 [229]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9115--9115
-[]\TU/lmtt/m/n/10 ##          min      q.25     mean     q.75     max forecast[analytic][] 
+Overfull \hbox (3.84592pt too wide) in paragraph at lines 9445--9446
+[]\TU/lmr/bx/n/10 Parameter  
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9115--9115
-[]\TU/lmtt/m/n/10 ## t+1 -0.46396 -0.011038 0.002926 0.018054 0.24134           0.003512[] 
+Overfull \hbox (3.84592pt too wide) in paragraph at lines 9459--9460
+[]\TU/lmr/bx/n/10 Parameter  
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9115--9115
-[]\TU/lmtt/m/n/10 ##          min    q0.25     mean    q0.75      max forecast[analytic][] 
+Underfull \hbox (badness 10000) in paragraph at lines 9489--9491
+
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9115--9115
-[]\TU/lmtt/m/n/10 ## t+1 0.043815 0.043815 0.043815 0.043815 0.043815           0.043815[] 
+Underfull \hbox (badness 10000) in paragraph at lines 9491--9493
+
+ []
+
+
+Underfull \hbox (badness 2951) in paragraph at lines 9493--9495
+[]\TU/lmr/m/n/10 La fila de encabezados va seguida por una fila de separadores
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9493--9495
+
  []
 
 
@@ -3517,94 +3221,34 @@ Overfull \hbox (50.06453pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 230 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[230] [231]
-Overfull \hbox (0.8141pt too wide) in paragraph at lines 9240--9241
-[]\TU/lmr/bx/n/10 Parameter  
+[230]
+Underfull \hbox (badness 10000) in paragraph at lines 9495--9497
+
+ []
+
+[231]
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
+[]\TU/lmtt/m/n/10 ##          min      q.25     mean     q.75     max forecast[analytic][] 
  []
 
 
-Overfull \hbox (0.8141pt too wide) in paragraph at lines 9254--9255
-[]\TU/lmr/bx/n/10 Parameter  
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
+[]\TU/lmtt/m/n/10 ## t+1 -0.46649 -0.010675 0.001515 0.014601 0.20108           0.001775[] 
  []
 
 
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9268--9268
- []|\TU/lmr/m/n/10 4.186229e+00|
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
+[]\TU/lmtt/m/n/10 ##          min    q0.25     mean    q0.75      max forecast[analytic][] 
  []
 
 
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9269--9269
- \TU/lmr/m/n/10 3.286636e+00|
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
+[]\TU/lmtt/m/n/10 ## t+1 0.043779 0.043779 0.043779 0.043779 0.043779           0.043779[] 
  []
 
 
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9271--9271
- []|\TU/lmr/m/n/10 5.355984e+00|
- []
-
-
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9272--9272
- []|\TU/lmr/m/n/10 5.961363e+00|
- []
-
-
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9275--9275
- []|\TU/lmr/m/n/10 1.488923e+00|
- []
-
-
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9276--9276
- []|\TU/lmr/m/n/10 1.881972e+00|
- []
-
-
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9277--9277
- []|\TU/lmr/m/n/10 2.256730e+00|
- []
-
-
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9278--9278
- []|\TU/lmr/m/n/10 3.183045e+00|
- []
-
-
-Overfull \hbox (0.6009pt too wide) in paragraph at lines 9278--9278
- []|\TU/lmr/m/n/10 2.438541e+01|
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ##                 Estimate    Std. Error         t value           Pr(>|t|)[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## mu      0.00127326817241 0.00031051105  4.100556690343 0.0000412157449554[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## ar1    -0.04992877741202 0.01458915308 -3.422321852505 0.0006208876992233[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## ar2    -0.00119497509805 0.01357043521 -0.088057242085 0.9298311801848014[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## omega   0.00002737045796 0.00000454339  6.024236784560 0.0000000016990946[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## alpha1  0.13031022766888 0.02128979790  6.120782746757 0.0000000009311678[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## alpha2  0.00000010245199 0.04032053665  0.000002540938 0.9999979726245931[] 
+Overfull \hbox (1.48915pt too wide) in paragraph at lines 9637--9637
+ []|\TU/lmr/m/n/10 2.515980e+00|
  []
 
 
@@ -3613,58 +3257,153 @@ Overfull \hbox (50.06453pt too wide) has occurred while \output is active
  []
 
 [232]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## alpha3  0.00000003213759 0.02492235557  0.000001289509 0.9999989711209376[] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ##              Estimate       Std. Error       t value       Pr(>|t|)[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## alpha4  0.02894219953046 0.02294187025  1.261544905343 0.2071125917918657[] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## mu     0.001633928242 0.00035471634895     4.6062953 0.000004099062[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## beta1   0.43380128661342 0.23613508792  1.837089483116 0.0661966864728836[] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## ar1   -0.062287298275 0.01330160588629    -4.6826901 0.000002831344[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## beta2   0.40594614918188 0.19429497640  2.089329105211 0.0366781081436631[] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## ar2   -0.004627082887 0.01279336245566    -0.3616784 0.717592368774[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9309--9309
-[]\TU/lmtt/m/n/10 ## shape   3.17590024282538 0.13095558171 24.251736363202 0.0000000000000000[] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## omega  0.000004364163 0.00000006731874    64.8283429 0.000000000000[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9343--9343
-[]\TU/lmtt/m/n/10 ##          min      q.25     mean     q.75     max forecast[analytic][] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## beta1  0.997708584743 0.00004207935059 23710.1706839 0.000000000000[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9343--9343
-[]\TU/lmtt/m/n/10 ## t+1 -0.27862 -0.006878 0.002849 0.013182 0.21346           0.002729[] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## shape  2.523521563642 0.02710634646569    93.0970748 0.000000000000[] 
+ []
+
+[233]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 9695--9695
+[]\TU/lmtt/m/n/10 ##          min      q.25   mean     q.75     max forecast[analytic][] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9343--9343
+Overfull \hbox (12.0pt too wide) in paragraph at lines 9695--9695
+[]\TU/lmtt/m/n/10 ## t+1 -0.46532 -0.012576 0.0014 0.016353 0.23934           0.001917[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9695--9695
 []\TU/lmtt/m/n/10 ##          min    q0.25     mean    q0.75      max forecast[analytic][] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9343--9343
-[]\TU/lmtt/m/n/10 ## t+1 0.022751 0.022751 0.022751 0.022751 0.022751           0.022751[] 
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9695--9695
+[]\TU/lmtt/m/n/10 ## t+1 0.043641 0.043641 0.043641 0.043641 0.043641           0.043641[] 
  []
 
-[233]
+
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 234 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
 [234] [235]
-Overfull \hbox (10.59906pt too wide) detected at line 9473
-[][][][][][][][][][][] [] [][] [] [][][][][][][][][][][][] [] [] [] [][][][][][][][][][][][][][][][] [] [][][][][][]
+Overfull \hbox (0.8141pt too wide) in paragraph at lines 9820--9821
+[]\TU/lmr/bx/n/10 Parameter  
+ []
+
+
+Overfull \hbox (0.8141pt too wide) in paragraph at lines 9834--9835
+[]\TU/lmr/bx/n/10 Parameter  
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9848--9848
+ []|\TU/lmr/m/n/10 4.186229e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9849--9849
+ \TU/lmr/m/n/10 3.286636e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9851--9851
+ []|\TU/lmr/m/n/10 5.355984e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9852--9852
+ []|\TU/lmr/m/n/10 5.961363e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9855--9855
+ []|\TU/lmr/m/n/10 1.488923e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9856--9856
+ []|\TU/lmr/m/n/10 1.881972e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9857--9857
+ []|\TU/lmr/m/n/10 2.256730e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9858--9858
+ []|\TU/lmr/m/n/10 3.183045e+00|
+ []
+
+
+Overfull \hbox (0.6009pt too wide) in paragraph at lines 9858--9858
+ []|\TU/lmr/m/n/10 2.438541e+01|
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ##                 Estimate     Std. Error         t value           Pr(>|t|)[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## mu      0.00127431846326 0.000310016025  4.110492238865 0.0000394816551619[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## ar1    -0.05043940906507 0.014578268430 -3.459903987027 0.0005403680260374[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## ar2    -0.00118565480491 0.013554426468 -0.087473624035 0.9302950500228699[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## omega   0.00002712017695 0.000004539222  5.974631686506 0.0000000023061060[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha1  0.13002379592178 0.021263901527  6.114766650699 0.0000000009669836[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha2  0.00000034065677 0.040085714409  0.000008498209 0.9999932194104486[] 
  []
 
 
@@ -3672,285 +3411,95 @@ Overfull \hbox (50.06453pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 236 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[236] [237]
+[236]
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha3  0.00000008107872 0.024881041011  0.000003258655 0.9999973999697527[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha4  0.02872099361214 0.022852869499  1.256778437118 0.2088338761998922[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## beta1   0.43272444998772 0.235611728606  1.836599784521 0.0662689991645959[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## beta2   0.40753030009967 0.193897651433  2.101780486187 0.0355725092842449[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## shape   3.17568857589049 0.130728859377 24.292176884399 0.0000000000000000[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
+[]\TU/lmtt/m/n/10 ##          min      q.25     mean     q.75     max forecast[analytic][] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
+[]\TU/lmtt/m/n/10 ## t+1 -0.25981 -0.007714 0.001473 0.011172 0.19728           0.001514[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
+[]\TU/lmtt/m/n/10 ##          min    q0.25     mean    q0.75      max forecast[analytic][] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
+[]\TU/lmtt/m/n/10 ## t+1 0.021108 0.021108 0.021108 0.021108 0.021108           0.021108[] 
+ []
+
+[237]
 Overfull \hbox (50.06453pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 238 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-[238]
-Chapter 7.
-[239
-
-]
-Overfull \hbox (110.52016pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 240 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
- []
-
-[240]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 9693--9693
-[]\TU/lmtt/m/n/10 ##  [1] "X1"  "X2"  "X3"  "X4"  "X5"  "X6"  "X7"  "X8"  "X9"  "X10"[] 
+[238] [239]
+Overfull \hbox (10.59906pt too wide) detected at line 10053
+[][][][][][][][][][][] [] [][] [] [][][][][][][][][][][][] [] [] [] [][][][][][][][][][][][][][][][] [] [][][][][][]
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 9708--9708
-[]\TU/lmtt/m/n/10 ##  [1] "Firm_1"  "Firm_2"  "Firm_3"  "Firm_4"  "Firm_5"  "Firm_6"  "Firm_7"[] 
+Overfull \hbox (50.06453pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 240 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
-File: Notas-Series-Tiempo_files/figure-latex/fig111-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/fig111-1.pdf>
-[241]
-Overfull \hbox (1.5pt too wide) in paragraph at lines 9762--9762
-[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)[] 
- []
-
-
-Overfull \hbox (110.52016pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 242 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
+[240] [241]
+Overfull \hbox (50.06453pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 242 \TU/lmr/m/sl/10 CHAPTER 6.  MODELOS UNIVARIADOS Y MULTIVARIADOS DE VOLATILIDAD
  []
 
 [242]
-Overfull \hbox (1.5pt too wide) in paragraph at lines 9793--9793
-[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)[] 
- []
+Chapter 7.
+[243
 
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ##         lags obs          rho        trho     p.trho   sigma2ST    sigma2LT[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_1     0  19  0.006034802  0.05068864 0.96193110 0.03592530 0.014769876[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 0.05020448 0.014565004[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 0.03073205 0.019141095[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 0.06196079 0.018454390[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 0.04165516 0.006949122[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_6     2  17  0.062922587  0.72626225 0.99275186 0.02442139 0.009212851[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 0.03230724 0.007274365[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 0.06270208 0.026960667[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 0.05073398 0.013291332[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 9824--9824
-[]\TU/lmtt/m/n/10 ## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 0.07672404 0.062496477[] 
- []
-
-
-Overfull \hbox (1.5pt too wide) in paragraph at lines 9844--9844
-[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)[] 
- []
-
-[243]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ##         lags obs        rho      trho            p.trho   sigma2ST    sigma2LT[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 0.03693616 0.007853674[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 0.02832436 0.031954702[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 0.03819653 0.022971185[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 0.04231849 0.030313940[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 0.02737020 0.015226407[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 0.02517911 0.008588652[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 0.03232079 0.012780800[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 0.03277746 0.034905699[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 0.05666016 0.019502840[] 
- []
-
-
-Overfull \hbox (80.25pt too wide) in paragraph at lines 9875--9875
-[]\TU/lmtt/m/n/10 ## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 0.08661396 0.030216984[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 9893--9893
-[]\TU/lmtt/m/n/10 ##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)[] 
- []
-
-
+]
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 244 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
 [244]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ##         lags obs          rho        trho     p.trho    mean    var[] 
+Overfull \hbox (6.75pt too wide) in paragraph at lines 10273--10273
+[]\TU/lmtt/m/n/10 ##  [1] "X1"  "X2"  "X3"  "X4"  "X5"  "X6"  "X7"  "X8"  "X9"  "X10"[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_1     0  19  0.006034802  0.05068864 0.96193110 -1.5204 0.8654[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 10288--10288
+[]\TU/lmtt/m/n/10 ##  [1] "Firm_1"  "Firm_2"  "Firm_3"  "Firm_4"  "Firm_5"  "Firm_6"  "Firm_7"[] 
  []
 
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 -1.5108 0.9534[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 -1.3754 1.1522[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 -1.5204 0.8654[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 -1.5108 0.9534[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_6     2  17  0.062922587  0.72626225 0.99275186 -1.4034 1.0344[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 -1.4034 1.0344[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 -1.5108 0.9534[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 -1.5204 0.8654[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9920--9920
-[]\TU/lmtt/m/n/10 ## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 -1.5108 0.9534[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 9936--9936
-[]\TU/lmtt/m/n/10 ##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ##         lags obs        rho      trho            p.trho    mean    var[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 -1.5188 0.8798[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 -1.3660 1.1810[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 -1.3952 1.0562[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 -1.5082 0.9726[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 -1.3952 1.0562[] 
- []
-
+File: Notas-Series-Tiempo_files/figure-latex/fig111-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/fig111-1.pdf>
 [245]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 -1.5082 0.9726[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 -1.5082 0.9726[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 -1.3952 1.0562[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 -1.5188 0.8798[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 9963--9963
-[]\TU/lmtt/m/n/10 ## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 -1.5188 0.8798[] 
+Overfull \hbox (1.5pt too wide) in paragraph at lines 10342--10342
+[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)[] 
  []
 
 
@@ -3959,58 +3508,128 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [246]
-Overfull \hbox (24.20201pt too wide) in paragraph at lines 10017--10018
-[]\TU/lmr/m/n/10 Así, la diferencia en diferencia resulta de restar la ecuación @ref(eq:eq_DiD_NoTreat)
+Overfull \hbox (1.5pt too wide) in paragraph at lines 10373--10373
+[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ##   Fecha   Mes  Anio Ciudad INPC  Dummy_FIRMA Marca_01 Marca_02 Marca_03 Marca_04[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ##         lags obs          rho        trho     p.trho   sigma2ST    sigma2LT[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ##   <chr> <dbl> <dbl> <chr>  <chr>       <dbl>    <dbl>    <dbl>    <dbl>    <dbl>[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_1     0  19  0.006034802  0.05068864 0.96193110 0.03592530 0.014769876[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## 1 Jul ~     7  2002 Área ~ 68.3~           0        0        0        0        0[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 0.05020448 0.014565004[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## 2 Ago ~     8  2002 Área ~ 68.3~           0        0        0        0        0[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 0.03073205 0.019141095[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## 3 Sep ~     9  2002 Área ~ 68.3~           0        0        0        0        0[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 0.06196079 0.018454390[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## 4 Oct ~    10  2002 Área ~ 68.3~           0        0        0        0        0[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 0.04165516 0.006949122[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## 5 Nov ~    11  2002 Área ~ 68.3~           0        0        0        0        0[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_6     2  17  0.062922587  0.72626225 0.99275186 0.02442139 0.009212851[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## 6 Dic ~    12  2002 Área ~ 68.3~           0        0        0        0        0[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 0.03230724 0.007274365[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## # i 7 more variables: Marca_05 <dbl>, Marca_06 <dbl>, Marca_07 <dbl>,[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 0.06270208 0.026960667[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 0.05073398 0.013291332[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10404--10404
+[]\TU/lmtt/m/n/10 ## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 0.07672404 0.062496477[] 
+ []
+
+
+Overfull \hbox (1.5pt too wide) in paragraph at lines 10424--10424
+[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts)[] 
  []
 
 [247]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 10042--10042
-[]\TU/lmtt/m/n/10 ## #   Marca_08 <dbl>, Marca_09 <dbl>, Marca_10 <dbl>, Marca_11 <dbl>[] 
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ##         lags obs        rho      trho            p.trho   sigma2ST    sigma2LT[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 0.03693616 0.007853674[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 0.02832436 0.031954702[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 0.03819653 0.022971185[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 0.04231849 0.030313940[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 0.02737020 0.015226407[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 0.02517911 0.008588652[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 0.03232079 0.012780800[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 0.03277746 0.034905699[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 0.05666016 0.019502840[] 
+ []
+
+
+Overfull \hbox (80.25pt too wide) in paragraph at lines 10455--10455
+[]\TU/lmtt/m/n/10 ## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 0.08661396 0.030216984[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 10473--10473
+[]\TU/lmtt/m/n/10 ##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)[] 
  []
 
 
@@ -4019,18 +3638,119 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [248]
-Underfull \vbox (badness 10000) detected at line 10151
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ##         lags obs          rho        trho     p.trho    mean    var[] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 10151
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_1     0  19  0.006034802  0.05068864 0.96193110 -1.5204 0.8654[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 -1.5108 0.9534[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 -1.3754 1.1522[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 -1.5204 0.8654[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 -1.5108 0.9534[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_6     2  17  0.062922587  0.72626225 0.99275186 -1.4034 1.0344[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 -1.4034 1.0344[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 -1.5108 0.9534[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 -1.5204 0.8654[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 10500--10500
+[]\TU/lmtt/m/n/10 ## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 -1.5108 0.9534[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 10516--10516
+[]\TU/lmtt/m/n/10 ##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ##         lags obs        rho      trho            p.trho    mean    var[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 -1.5188 0.8798[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 -1.3660 1.1810[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 -1.3952 1.0562[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 -1.5082 0.9726[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 -1.3952 1.0562[] 
  []
 
 [249]
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-39-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-39-1.pdf>
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 -1.5082 0.9726[] 
+ []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 -1.5082 0.9726[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 -1.3952 1.0562[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 -1.5188 0.8798[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 10543--10543
+[]\TU/lmtt/m/n/10 ## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 -1.5188 0.8798[] 
+ []
 
 
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
@@ -4038,78 +3758,58 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [250]
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ##   Fecha    `Acapulco, Gro.` `Aguascalientes, Ags.` Área Metropolitana de la Cd~1[] 
+Overfull \hbox (24.20201pt too wide) in paragraph at lines 10597--10598
+[]\TU/lmr/m/n/10 Así, la diferencia en diferencia resulta de restar la ecuación @ref(eq:eq_DiD_NoTreat)
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ##   <chr>               <dbl>                  <dbl>                         <dbl>[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ##   Fecha   Mes  Anio Ciudad INPC  Dummy_FIRMA Marca_01 Marca_02 Marca_03 Marca_04[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## 1 Abr 2003             4.39                   4.35                          4.26[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ##   <chr> <dbl> <dbl> <chr>  <chr>       <dbl>    <dbl>    <dbl>    <dbl>    <dbl>[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## 2 Abr 2004             4.39                   4.36                          4.31[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## 1 Jul ~     7  2002 Área ~ 68.3~           0        0        0        0        0[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## 3 Abr 2005             4.44                   4.36                          4.36[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## 2 Ago ~     8  2002 Área ~ 68.3~           0        0        0        0        0[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## 4 Abr 2006             4.47                   4.33                          4.40[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## 3 Sep ~     9  2002 Área ~ 68.3~           0        0        0        0        0[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## 5 Abr 2007             4.54                   4.38                          4.42[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## 4 Oct ~    10  2002 Área ~ 68.3~           0        0        0        0        0[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## 6 Abr 2008             4.60                   4.41                          4.44[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## 5 Nov ~    11  2002 Área ~ 68.3~           0        0        0        0        0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## # i abbreviated name: 1: `Área Metropolitana de la Cd. de México`[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## 6 Dic ~    12  2002 Área ~ 68.3~           0        0        0        0        0[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## # i 44 more variables: `Campeche, Camp.` <dbl>, `Cd. Acuña, Coah.` <dbl>,[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## #   `Chetumal, Q.R.` <dbl>, `Chihuahua, Chih.` <dbl>, `Colima, Col.` <dbl>,[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## #   `Córdoba, Ver.` <dbl>, `Cortazar, Gto.` <dbl>, `Cuernavaca, Mor.` <dbl>,[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10190--10190
-[]\TU/lmtt/m/n/10 ## #   `Culiacán, Sin.` <dbl>, `Durango, Dgo.` <dbl>, `Fresnillo, Zac.` <dbl>,[] 
+Overfull \hbox (33.0pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## # i 7 more variables: Marca_05 <dbl>, Marca_06 <dbl>, Marca_07 <dbl>,[] 
  []
 
 [251]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 10235--10235
-[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 10252--10252
-[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and[] 
+Overfull \hbox (17.25pt too wide) in paragraph at lines 10622--10622
+[]\TU/lmtt/m/n/10 ## #   Marca_08 <dbl>, Marca_09 <dbl>, Marca_10 <dbl>, Marca_11 <dbl>[] 
  []
 
 
@@ -4118,99 +3818,18 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [252]
-Overfull \hbox (48.75pt too wide) in paragraph at lines 10270--10270
-[]\TU/lmtt/m/n/10 ##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)[] 
+Underfull \vbox (badness 10000) detected at line 10731
  []
 
 
-Overfull \hbox (48.75pt too wide) in paragraph at lines 10286--10286
-[]\TU/lmtt/m/n/10 ##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 10305--10305
-[]\TU/lmtt/m/n/10 ##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 10322--10322
-[]\TU/lmtt/m/n/10 ##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.[] 
+Underfull \vbox (badness 10000) detected at line 10731
  []
 
 [253]
-Overfull \hbox (243.0pt too wide) in paragraph at lines 10340--10340
-[]\TU/lmtt/m/n/10 ## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame[] 
- []
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-40-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-40-1.pdf>
 
-
-Overfull \hbox (75.0pt too wide) in paragraph at lines 10340--10340
-[]\TU/lmtt/m/n/10 ##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## plm(formula = LINPC ~ Dummy_FIRMA + Marca_01 + Marca_02 + Marca_03 +[] 
- []
-
-
-Overfull \hbox (33.0pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ##     Marca_04 + Marca_05 + Marca_06 + Marca_07 + Marca_08 + Marca_09 +[] 
- []
-
-
-Overfull \hbox (75.0pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ##     Marca_10 + Marca_11 + as.numeric(Periodo), data = Data, model = "within",[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Dummy_FIRMA         -0.05972092  0.01892851  -3.1551 0.0016087 **[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_01             0.04545555  0.02069006   2.1970 0.0280423 *[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_02             0.05452288  0.02372909   2.2977 0.0215956 *[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_04            -0.07440826  0.02418665  -3.0764 0.0021000 **[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_05             0.02633713  0.01045219   2.5198 0.0117567 *[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_06             0.12521494  0.01991655   6.2870 3.356e-10 ***[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_07            -0.09242328  0.02514895  -3.6750 0.0002389 ***[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_09             0.05630828  0.02121641   2.6540 0.0079655 **[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## Marca_10            -0.04866105  0.02638856  -1.8440 0.0652062 .[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 10386--10386
-[]\TU/lmtt/m/n/10 ## as.numeric(Periodo)  0.00220384  0.00001018 216.4961 < 2.2e-16 ***[] 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
@@ -4218,63 +3837,78 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [254]
-Overfull \hbox (243.0pt too wide) in paragraph at lines 10401--10401
-[]\TU/lmtt/m/n/10 ## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ##   Fecha    `Acapulco, Gro.` `Aguascalientes, Ags.` Área Metropolitana de la Cd~1[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 10401--10401
-[]\TU/lmtt/m/n/10 ##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ##   <chr>               <dbl>                  <dbl>                         <dbl>[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 10434--10434
-[]\TU/lmtt/m/n/10 ## plm(formula = LINPC ~ Dummy_FIRMA + as.numeric(Periodo), data = Data,[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## 1 Abr 2003             4.39                   4.35                          4.26[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 10434--10434
-[]\TU/lmtt/m/n/10 ##                        Estimate  Std. Error  t-value      Pr(>|t|)[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## 2 Abr 2004             4.39                   4.36                          4.31[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 10434--10434
-[]\TU/lmtt/m/n/10 ## Dummy_FIRMA         -0.02239578  0.00417897  -5.3592 0.00000008525 ***[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## 3 Abr 2005             4.44                   4.36                          4.36[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 10434--10434
-[]\TU/lmtt/m/n/10 ## as.numeric(Periodo)  0.00220318  0.00001032 213.4825     < 2.2e-16 ***[] 
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## 4 Abr 2006             4.47                   4.33                          4.40[] 
+ []
+
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## 5 Abr 2007             4.54                   4.38                          4.42[] 
+ []
+
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## 6 Abr 2008             4.60                   4.41                          4.44[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## # i abbreviated name: 1: `Área Metropolitana de la Cd. de México`[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## # i 44 more variables: `Campeche, Camp.` <dbl>, `Cd. Acuña, Coah.` <dbl>,[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## #   `Chetumal, Q.R.` <dbl>, `Chihuahua, Chih.` <dbl>, `Colima, Col.` <dbl>,[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## #   `Córdoba, Ver.` <dbl>, `Cortazar, Gto.` <dbl>, `Cuernavaca, Mor.` <dbl>,[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 10770--10770
+[]\TU/lmtt/m/n/10 ## #   `Culiacán, Sin.` <dbl>, `Durango, Dgo.` <dbl>, `Fresnillo, Zac.` <dbl>,[] 
  []
 
 [255]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10479--10479
-[]\TU/lmtt/m/n/10 ##  [1] "c1"       "ind"      "year"     "emp"      "wage"     "cap"[] 
+Overfull \hbox (17.25pt too wide) in paragraph at lines 10815--10815
+[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10479--10479
-[]\TU/lmtt/m/n/10 ##  [7] "indoutpt" "n"        "w"        "k"        "ys"       "rec"[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10479--10479
-[]\TU/lmtt/m/n/10 ## [13] "yearm1"   "id"       "nL1"      "nL2"      "wL1"      "kL1"[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 10479--10479
-[]\TU/lmtt/m/n/10 ## [19] "kL2"      "ysL1"     "ysL2"     "yr1976"   "yr1977"   "yr1978"[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 10479--10479
-[]\TU/lmtt/m/n/10 ## [25] "yr1979"   "yr1980"   "yr1981"   "yr1982"   "yr1983"   "yr1984"[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ##    c1 ind year   emp    wage    cap indoutpt        n        w          k[] 
+Overfull \hbox (17.25pt too wide) in paragraph at lines 10832--10832
+[]\TU/lmtt/m/n/10 ##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and[] 
  []
 
 
@@ -4283,113 +3917,163 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [256]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 1 1-1   7 1977 5.041 13.1516 0.5894  95.7072 1.617604 2.576543 -0.5286502[] 
+Overfull \hbox (48.75pt too wide) in paragraph at lines 10850--10850
+[]\TU/lmtt/m/n/10 ##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 2 2-1   7 1978 5.600 12.3018 0.6318  97.3569 1.722767 2.509746 -0.4591824[] 
+Overfull \hbox (48.75pt too wide) in paragraph at lines 10866--10866
+[]\TU/lmtt/m/n/10 ##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 3 3-1   7 1979 5.015 12.8395 0.6771  99.6083 1.612433 2.552526 -0.3899363[] 
+Overfull \hbox (27.75pt too wide) in paragraph at lines 10885--10885
+[]\TU/lmtt/m/n/10 ##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 4 4-1   7 1980 4.715 13.8039 0.6171 100.5501 1.550749 2.624951 -0.4827242[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 5 5-1   7 1981 4.093 14.2897 0.5076  99.5581 1.409278 2.659539 -0.6780615[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 6 6-1   7 1982 3.166 14.8681 0.4229  98.6151 1.152469 2.699218 -0.8606195[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ##         ys rec yearm1 id      nL1      nL2      wL1        kL1        kL2[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 1 4.561294   1   1977  1       NA       NA       NA         NA         NA[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 2 4.578383   2   1977  1 1.617604       NA 2.576543 -0.5286502         NA[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 3 4.601245   3   1978  1 1.722767 1.617604 2.509746 -0.4591824 -0.5286502[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 4 4.610656   4   1979  1 1.612433 1.722767 2.552526 -0.3899363 -0.4591824[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 5 4.600741   5   1980  1 1.550749 1.612433 2.624951 -0.4827242 -0.3899363[] 
- []
-
-
-Overfull \hbox (54.0pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 6 4.591224   6   1981  1 1.409278 1.550749 2.659539 -0.6780615 -0.4827242[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ##       ysL1     ysL2 yr1976 yr1977 yr1978 yr1979 yr1980 yr1981 yr1982 yr1983[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 1       NA       NA      0      1      0      0      0      0      0      0[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 2 4.561294       NA      0      0      1      0      0      0      0      0[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 3 4.578383 4.561294      0      0      0      1      0      0      0      0[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 4 4.601245 4.578383      0      0      0      0      1      0      0      0[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 5 4.610656 4.601245      0      0      0      0      0      1      0      0[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 10510--10510
-[]\TU/lmtt/m/n/10 ## 6 4.600741 4.610656      0      0      0      0      0      0      1      0[] 
+Overfull \hbox (27.75pt too wide) in paragraph at lines 10902--10902
+[]\TU/lmtt/m/n/10 ##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.[] 
  []
 
 [257]
+Overfull \hbox (243.0pt too wide) in paragraph at lines 10920--10920
+[]\TU/lmtt/m/n/10 ## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 10920--10920
+[]\TU/lmtt/m/n/10 ##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")[] 
+ []
+
+
+Overfull \hbox (27.75pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## plm(formula = LINPC ~ Dummy_FIRMA + Marca_01 + Marca_02 + Marca_03 +[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ##     Marca_04 + Marca_05 + Marca_06 + Marca_07 + Marca_08 + Marca_09 +[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ##     Marca_10 + Marca_11 + as.numeric(Periodo), data = Data, model = "within",[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Dummy_FIRMA         -0.05972092  0.01892851  -3.1551 0.0016087 **[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_01             0.04545555  0.02069006   2.1970 0.0280423 *[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_02             0.05452288  0.02372909   2.2977 0.0215956 *[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_04            -0.07440826  0.02418665  -3.0764 0.0021000 **[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_05             0.02633713  0.01045219   2.5198 0.0117567 *[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_06             0.12521494  0.01991655   6.2870 3.356e-10 ***[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_07            -0.09242328  0.02514895  -3.6750 0.0002389 ***[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_09             0.05630828  0.02121641   2.6540 0.0079655 **[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## Marca_10            -0.04866105  0.02638856  -1.8440 0.0652062 .[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 10966--10966
+[]\TU/lmtt/m/n/10 ## as.numeric(Periodo)  0.00220384  0.00001018 216.4961 < 2.2e-16 ***[] 
+ []
+
+
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 258 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
-[258] [259]
-Overfull \hbox (48.75pt too wide) in paragraph at lines 10678--10678
-[]\TU/lmtt/m/n/10 ## [1] "id"           "year"         "expenditures" "revenues"     "grants"[] 
+[258]
+Overfull \hbox (243.0pt too wide) in paragraph at lines 10981--10981
+[]\TU/lmtt/m/n/10 ## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame[] 
+ []
+
+
+Overfull \hbox (75.0pt too wide) in paragraph at lines 10981--10981
+[]\TU/lmtt/m/n/10 ##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 11014--11014
+[]\TU/lmtt/m/n/10 ## plm(formula = LINPC ~ Dummy_FIRMA + as.numeric(Periodo), data = Data,[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 11014--11014
+[]\TU/lmtt/m/n/10 ##                        Estimate  Std. Error  t-value      Pr(>|t|)[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 11014--11014
+[]\TU/lmtt/m/n/10 ## Dummy_FIRMA         -0.02239578  0.00417897  -5.3592 0.00000008525 ***[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 11014--11014
+[]\TU/lmtt/m/n/10 ## as.numeric(Periodo)  0.00220318  0.00001032 213.4825     < 2.2e-16 ***[] 
+ []
+
+[259]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 11059--11059
+[]\TU/lmtt/m/n/10 ##  [1] "c1"       "ind"      "year"     "emp"      "wage"     "cap"[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 11059--11059
+[]\TU/lmtt/m/n/10 ##  [7] "indoutpt" "n"        "w"        "k"        "ys"       "rec"[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 11059--11059
+[]\TU/lmtt/m/n/10 ## [13] "yearm1"   "id"       "nL1"      "nL2"      "wL1"      "kL1"[] 
+ []
+
+
+Overfull \hbox (27.75pt too wide) in paragraph at lines 11059--11059
+[]\TU/lmtt/m/n/10 ## [19] "kL2"      "ysL1"     "ysL2"     "yr1976"   "yr1977"   "yr1978"[] 
+ []
+
+
+Overfull \hbox (27.75pt too wide) in paragraph at lines 11059--11059
+[]\TU/lmtt/m/n/10 ## [25] "yr1979"   "yr1980"   "yr1981"   "yr1982"   "yr1983"   "yr1984"[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ##    c1 ind year   emp    wage    cap indoutpt        n        w          k[] 
  []
 
 
@@ -4398,13 +4082,103 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [260]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 10719--10719
-[]\TU/lmtt/m/n/10 ## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 1 1-1   7 1977 5.041 13.1516 0.5894  95.7072 1.617604 2.576543 -0.5286502[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10719--10719
-[]\TU/lmtt/m/n/10 ## The matrix D_e is singular, therefore the general inverse is used[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 2 2-1   7 1978 5.600 12.3018 0.6318  97.3569 1.722767 2.509746 -0.4591824[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 3 3-1   7 1979 5.015 12.8395 0.6771  99.6083 1.612433 2.552526 -0.3899363[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 4 4-1   7 1980 4.715 13.8039 0.6171 100.5501 1.550749 2.624951 -0.4827242[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 5 5-1   7 1981 4.093 14.2897 0.5076  99.5581 1.409278 2.659539 -0.6780615[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 6 6-1   7 1982 3.166 14.8681 0.4229  98.6151 1.152469 2.699218 -0.8606195[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ##         ys rec yearm1 id      nL1      nL2      wL1        kL1        kL2[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 1 4.561294   1   1977  1       NA       NA       NA         NA         NA[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 2 4.578383   2   1977  1 1.617604       NA 2.576543 -0.5286502         NA[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 3 4.601245   3   1978  1 1.722767 1.617604 2.509746 -0.4591824 -0.5286502[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 4 4.610656   4   1979  1 1.612433 1.722767 2.552526 -0.3899363 -0.4591824[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 5 4.600741   5   1980  1 1.550749 1.612433 2.624951 -0.4827242 -0.3899363[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 6 4.591224   6   1981  1 1.409278 1.550749 2.659539 -0.6780615 -0.4827242[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ##       ysL1     ysL2 yr1976 yr1977 yr1978 yr1979 yr1980 yr1981 yr1982 yr1983[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 1       NA       NA      0      1      0      0      0      0      0      0[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 2 4.561294       NA      0      0      1      0      0      0      0      0[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 3 4.578383 4.561294      0      0      0      1      0      0      0      0[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 4 4.601245 4.578383      0      0      0      0      1      0      0      0[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 5 4.610656 4.601245      0      0      0      0      0      1      0      0[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 11090--11090
+[]\TU/lmtt/m/n/10 ## 6 4.600741 4.610656      0      0      0      0      0      0      1      0[] 
  []
 
 [261]
@@ -4412,166 +4186,94 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 262 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
-[262]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 10836--10836
-[]\TU/lmtt/m/n/10 ## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :[] 
+[262] [263]
+Overfull \hbox (48.75pt too wide) in paragraph at lines 11258--11258
+[]\TU/lmtt/m/n/10 ## [1] "id"           "year"         "expenditures" "revenues"     "grants"[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 10836--10836
-[]\TU/lmtt/m/n/10 ## The matrix D_e is singular, therefore the general inverse is used[] 
- []
-
-[263]
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 264 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
-[264] [265]
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-60-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-60-1.pdf>
+[264]
+Overfull \hbox (80.25pt too wide) in paragraph at lines 11299--11299
+[]\TU/lmtt/m/n/10 ## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :[] 
+ []
 
-Underfull \vbox (badness 3229) has occurred while \output is active []
 
+Overfull \hbox (12.0pt too wide) in paragraph at lines 11299--11299
+[]\TU/lmtt/m/n/10 ## The matrix D_e is singular, therefore the general inverse is used[] 
+ []
 
+[265]
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 266 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
-[266] [267]
+[266]
+Overfull \hbox (80.25pt too wide) in paragraph at lines 11416--11416
+[]\TU/lmtt/m/n/10 ## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 11416--11416
+[]\TU/lmtt/m/n/10 ## The matrix D_e is singular, therefore the general inverse is used[] 
+ []
+
+[267]
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 268 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
 [268] [269]
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-61-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-61-1.pdf>
+
+Underfull \vbox (badness 3229) has occurred while \output is active []
+
+
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 270 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
-[270]
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-64-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-64-1.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-64-2.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-64-2.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[271]
-Overfull \hbox (237.75pt too wide) in paragraph at lines 11254--11254
-[]\TU/lmtt/m/n/10 ## With the threshold you gave (0.05) there is a regime with less than trim=15% observations (86.51%, 13.49%, )[] 
- []
-
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 11259--11259
-[]\TU/lmtt/m/n/10 ## Warning: Possible unit root in the high regime. Roots are: 0.6182 0.6244 0.6244[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 11313--11313
-[]\TU/lmtt/m/n/10 ##      const.L       phiL.1       phiL.2       phiL.3       phiL.4[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 11313--11313
-[]\TU/lmtt/m/n/10 ##  0.004432028  0.501179574 -0.206693004  0.120140800 -0.122254140[] 
- []
-
-
+[270] [271]
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 272 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
-[272]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 11313--11313
-[]\TU/lmtt/m/n/10 ## Proportion of points in low regime: 86.51%    High regime: 13.49%[] 
- []
-
-
-Overfull \hbox (6.75pt too wide) in paragraph at lines 11313--11313
-[]\TU/lmtt/m/n/10 ## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)[] 
- []
-
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-1.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-1.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-2.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-2.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-3.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-3.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-4.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-4.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-5.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-5.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-6.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-6.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-7.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-7.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-8.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-8.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-9.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-9.pdf>
-File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-10.pdf Graphic file (type pdf)
-<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-66-10.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11321--11322
-[]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[273]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[272] [273]
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 274 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
 [274]
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-65-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-65-1.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-65-2.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-65-2.pdf>
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [275]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (237.75pt too wide) in paragraph at lines 11834--11834
+[]\TU/lmtt/m/n/10 ## With the threshold you gave (0.05) there is a regime with less than trim=15% observations (86.51%, 13.49%, )[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 11839--11839
+[]\TU/lmtt/m/n/10 ## Warning: Possible unit root in the high regime. Roots are: 0.6182 0.6244 0.6244[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 11893--11893
+[]\TU/lmtt/m/n/10 ##      const.L       phiL.1       phiL.2       phiL.3       phiL.4[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 11893--11893
+[]\TU/lmtt/m/n/10 ##  0.004432028  0.501179574 -0.206693004  0.120140800 -0.122254140[] 
+ []
 
 
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
@@ -4579,38 +4281,12 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [276]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[277]
-Overfull \hbox (85.5pt too wide) in paragraph at lines 11334--11334
-[]\TU/lmtt/m/n/10 ## Warning: Possible unit root in the high regime. Roots are: 0.6316 0.7222 0.7222[] 
+Overfull \hbox (12.0pt too wide) in paragraph at lines 11893--11893
+[]\TU/lmtt/m/n/10 ## Proportion of points in low regime: 86.51%    High regime: 13.49%[] 
  []
 
 
-Underfull \vbox (badness 2753) has occurred while \output is active []
-
-
-Overfull \hbox (110.52016pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 278 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
- []
-
-[278]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 11388--11388
-[]\TU/lmtt/m/n/10 ##        const.L         phiL.1         phiL.2         phiL.3         phiL.4[] 
- []
-
-
-Overfull \hbox (59.25pt too wide) in paragraph at lines 11388--11388
-[]\TU/lmtt/m/n/10 ## -0.00006287604  0.44640751264 -0.23158878472  0.10701408961 -0.14406085874[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 11388--11388
-[]\TU/lmtt/m/n/10 ## Proportion of points in low regime: 84.92%    High regime: 15.08%[] 
- []
-
-[279]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 11388--11388
+Overfull \hbox (6.75pt too wide) in paragraph at lines 11893--11893
 []\TU/lmtt/m/n/10 ## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)[] 
  []
 
@@ -4635,51 +4311,65 @@ File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-9.pdf Graphic file
 File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-10.pdf Graphic file (type pdf)
 <use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-67-10.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11396--11397
+Underfull \hbox (badness 10000) in paragraph at lines 11901--11902
 []
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[277]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (110.52016pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 278 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
+ []
+
+[278]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[279]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -4691,7 +4381,12 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [281]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (85.5pt too wide) in paragraph at lines 11914--11914
+[]\TU/lmtt/m/n/10 ## Warning: Possible unit root in the high regime. Roots are: 0.6316 0.7222 0.7222[] 
+ []
+
+
+Underfull \vbox (badness 2753) has occurred while \output is active []
 
 
 Overfull \hbox (110.52016pt too wide) has occurred while \output is active
@@ -4699,10 +4394,90 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
  []
 
 [282]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (59.25pt too wide) in paragraph at lines 11968--11968
+[]\TU/lmtt/m/n/10 ##        const.L         phiL.1         phiL.2         phiL.3         phiL.4[] 
+ []
+
+
+Overfull \hbox (59.25pt too wide) in paragraph at lines 11968--11968
+[]\TU/lmtt/m/n/10 ## -0.00006287604  0.44640751264 -0.23158878472  0.10701408961 -0.14406085874[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 11968--11968
+[]\TU/lmtt/m/n/10 ## Proportion of points in low regime: 84.92%    High regime: 15.08%[] 
+ []
 
 [283]
-No file Notas-Series-Tiempo.bbl.
+Overfull \hbox (6.75pt too wide) in paragraph at lines 11968--11968
+[]\TU/lmtt/m/n/10 ## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)[] 
+ []
+
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-1.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-1.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-2.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-2.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-3.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-3.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-4.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-4.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-5.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-5.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-6.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-6.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-7.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-7.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-8.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-8.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-9.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-9.pdf>
+File: Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-10.pdf Graphic file (type pdf)
+<use Notas-Series-Tiempo_files/figure-latex/unnamed-chunk-68-10.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11976--11977
+[]
+ []
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -4711,7 +4486,31 @@ Overfull \hbox (110.52016pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 284 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
  []
 
-[284] [285] (./Notas-Series-Tiempo.aux)
+[284]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[285]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (110.52016pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 286 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
+ []
+
+[286]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[287]
+No file Notas-Series-Tiempo.bbl.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (110.52016pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 288 \TU/lmr/m/sl/10 CHAPTER 7.  MODELOS DE DATOS PANEL, PANEL VAR Y OTROS MODELOS NO LINEALES
+ []
+
+[288] [289] (./Notas-Series-Tiempo.aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-11-09>
@@ -4720,15 +4519,15 @@ L3 programming layer <2023-11-09>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Notas-Series-Tiempo.out' has not changed.
-(rerunfilecheck)             Checksum: 45080371421E2190CBFBF23F59A05388;11006.
+(rerunfilecheck)             Checksum: B56A37547A332393C00287DFF016230B;11199.
  ) 
 Here is how much of TeX's memory you used:
- 20355 strings out of 476929
- 403875 string characters out of 5805663
- 1993186 words of memory out of 5000000
- 41803 multiletter control sequences out of 15000+600000
- 566191 words of font info for 113 fonts, out of 8000000 for 9000
+ 20360 strings out of 476929
+ 401692 string characters out of 5805663
+ 1997186 words of memory out of 5000000
+ 41811 multiletter control sequences out of 15000+600000
+ 566199 words of font info for 114 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,14n,120p,904b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,14n,120p,1055b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Notas-Series-Tiempo.pdf (285 pages).
+Output written on Notas-Series-Tiempo.pdf (289 pages).
