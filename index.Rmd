@@ -1,6 +1,6 @@
 --- 
 title: "Notas de Clase: Series de Tiempo"
-author: "Benjamín Oliva, Omar Alfaro Rivera & Emiliano Pérez Caullieres"
+author: "Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruíz"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -26,9 +26,9 @@ library(readxl)
 
 **Notas de Clase**
 
-__Otoño 2024__
+__Agosto de 2025__
 
-by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruiz
+by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruíz
 
 
 ```{r eval=FALSE, include=FALSE}
@@ -38,11 +38,11 @@ by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerard
 ```
 
 
-![](Portada.png){ width="400" height="300" style="display: block; margin: 0 auto" }
+![](Portada.jpg){ width="400" height="300" style="display: block; margin: 0 auto" }
 
 ## Contexto del documento {-}
 
-Estas son notas de clase de la materia de Análisis de Series de Tiempo de la Facultad de Economía de la Universidad Nacional Autónoma de México.
+Estas son notas de clase de la materia de Análisis de Series de Tiempo de la Facultad de Economía de la Universidad Nacional Autónoma de México y de la Clase de Econometría III del Tecnológico de Monterrey.
 
 Este es un trabajo siempre en proceso de mejora. Para cualquier comentario o aclaración escribir a los correos benjov@ciencias.unam.mx o omarxalpha@gmail.com.
 

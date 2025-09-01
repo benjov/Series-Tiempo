@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.2)  21 AUG 2025 01:40
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.2)  1 SEP 2025 13:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -800,7 +800,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 148.
 (/Users/benjamin/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (5.86801pt too wide) in paragraph at lines 148--148
+Overfull \hbox (107.84401pt too wide) in paragraph at lines 148--148
  [][] 
  []
 
@@ -831,8 +831,8 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 \openout5 = `Notas-Series-Tiempo.toc'.
 
 [4]
-File: Portada.png Graphic file (type bmp)
-<Portada.png>
+File: Portada.jpg Graphic file (type bmp)
+<Portada.jpg>
 [5
 
 ] [6]
@@ -3082,32 +3082,32 @@ Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
 
 
 Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
-[]\TU/lmtt/m/n/10 ## 2025-08-16     117398.4     117996.1    117272.0      117491.4    48036922378[] 
+[]\TU/lmtt/m/n/10 ## 2025-08-27     111795.7     112619.4    110398.3      111222.1    62137056409[] 
  []
 
 
 Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
-[]\TU/lmtt/m/n/10 ## 2025-08-17     117492.8     118595.8    117279.5      117453.1    45852169525[] 
+[]\TU/lmtt/m/n/10 ## 2025-08-28     111219.1     113450.1    110900.9      112544.8    58860155962[] 
  []
 
 
 Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
-[]\TU/lmtt/m/n/10 ## 2025-08-18     117453.9     117614.2    114723.7      116252.3    72787808090[] 
+[]\TU/lmtt/m/n/10 ## 2025-08-29     112550.5     112619.1    107559.6      108410.8    77843379644[] 
  []
 
 
 Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
-[]\TU/lmtt/m/n/10 ## 2025-08-19     116241.9     116764.5    112730.4      112831.2    71657600353[] 
+[]\TU/lmtt/m/n/10 ## 2025-08-30     108409.4     108929.4    107444.4      108808.1    51486264208[] 
  []
 
 
 Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
-[]\TU/lmtt/m/n/10 ## 2025-08-20     112828.0     114625.8    112388.0      114274.7    67993811526[] 
+[]\TU/lmtt/m/n/10 ## 2025-08-31     108818.5     109491.0    108104.7      108236.7    47986191770[] 
  []
 
 
 Overfull \hbox (75.0pt too wide) in paragraph at lines 9022--9022
-[]\TU/lmtt/m/n/10 ## 2025-08-21     114269.5     114691.3    113622.9      113848.4    66622791680[] 
+[]\TU/lmtt/m/n/10 ## 2025-09-01     108251.7     109830.2    107310.2      109246.9    62259355648[] 
  []
 
 [217]
@@ -3160,17 +3160,17 @@ Overfull \hbox (50.06453pt too wide) has occurred while \output is active
 
 [226] [227]
 Overfull \hbox (12.0pt too wide) in paragraph at lines 9394--9394
-[]\TU/lmtt/m/n/10 ## (Intercept) 0.00111209 0.00007689  14.463 <0.0000000000000002 ***[] 
+[]\TU/lmtt/m/n/10 ## (Intercept) 0.00111007 0.00007668  14.477 <0.0000000000000002 ***[] 
  []
 
 
 Overfull \hbox (12.0pt too wide) in paragraph at lines 9394--9394
-[]\TU/lmtt/m/n/10 ## L(ehatsq)   0.13124874 0.01569650   8.362 <0.0000000000000002 ***[] 
+[]\TU/lmtt/m/n/10 ## L(ehatsq)   0.13131606 0.01567475   8.378 <0.0000000000000002 ***[] 
  []
 
 
 Overfull \hbox (27.75pt too wide) in paragraph at lines 9394--9394
-[]\TU/lmtt/m/n/10 ## F-statistic: 69.92 on 1 and 3988 DF,  p-value: < 0.00000000000000022[] 
+[]\TU/lmtt/m/n/10 ## F-statistic: 70.18 on 1 and 3999 DF,  p-value: < 0.00000000000000022[] 
  []
 
 File: Notas-Series-Tiempo_files/figure-latex/ArchTest-1.pdf Graphic file (type pdf)
@@ -3233,7 +3233,7 @@ Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
 
 
 Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
-[]\TU/lmtt/m/n/10 ## t+1 -0.46649 -0.010675 0.001515 0.014601 0.20108           0.001775[] 
+[]\TU/lmtt/m/n/10 ## t+1 -0.47011 -0.011525 0.000846 0.013939 0.20166           0.001114[] 
  []
 
 
@@ -3243,7 +3243,7 @@ Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
 
 
 Overfull \hbox (22.5pt too wide) in paragraph at lines 9581--9581
-[]\TU/lmtt/m/n/10 ## t+1 0.043779 0.043779 0.043779 0.043779 0.043779           0.043779[] 
+[]\TU/lmtt/m/n/10 ## t+1 0.043865 0.043865 0.043865 0.043865 0.043865           0.043865[] 
  []
 
 
@@ -3257,48 +3257,48 @@ Overfull \hbox (50.06453pt too wide) has occurred while \output is active
  []
 
 [232]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
-[]\TU/lmtt/m/n/10 ##              Estimate       Std. Error       t value       Pr(>|t|)[] 
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ##             Estimate       Std. Error       t value            Pr(>|t|)[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
-[]\TU/lmtt/m/n/10 ## mu     0.001633928242 0.00035471634895     4.6062953 0.000004099062[] 
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## mu     0.00162001443 0.00023328672141     6.9443062 0.00000000000380318[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
-[]\TU/lmtt/m/n/10 ## ar1   -0.062287298275 0.01330160588629    -4.6826901 0.000002831344[] 
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## ar1   -0.06260321005 0.01326544909256    -4.7192680 0.00000236694762390[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
-[]\TU/lmtt/m/n/10 ## ar2   -0.004627082887 0.01279336245566    -0.3616784 0.717592368774[] 
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## ar2   -0.00399834837 0.01252505973250    -0.3192279 0.74955371037405949[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
-[]\TU/lmtt/m/n/10 ## omega  0.000004364163 0.00000006731874    64.8283429 0.000000000000[] 
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## omega  0.00001009529 0.00000005273992   191.4163842 0.00000000000000000[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
-[]\TU/lmtt/m/n/10 ## beta1  0.997708584743 0.00004207935059 23710.1706839 0.000000000000[] 
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## beta1  0.99481975876 0.00001909317836 52103.4130602 0.00000000000000000[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 9662--9662
-[]\TU/lmtt/m/n/10 ## shape  2.523521563642 0.02710634646569    93.0970748 0.000000000000[] 
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9662--9662
+[]\TU/lmtt/m/n/10 ## shape  2.49219742936 0.01461274619242   170.5495597 0.00000000000000000[] 
  []
 
 [233]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 9695--9695
-[]\TU/lmtt/m/n/10 ##          min      q.25   mean     q.75     max forecast[analytic][] 
+Overfull \hbox (17.25pt too wide) in paragraph at lines 9695--9695
+[]\TU/lmtt/m/n/10 ##          min     q.25     mean     q.75     max forecast[analytic][] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 9695--9695
-[]\TU/lmtt/m/n/10 ## t+1 -0.46532 -0.012576 0.0014 0.016353 0.23934           0.001917[] 
+Overfull \hbox (17.25pt too wide) in paragraph at lines 9695--9695
+[]\TU/lmtt/m/n/10 ## t+1 -0.46529 -0.01325 0.000664 0.015462 0.23611           0.001167[] 
  []
 
 
@@ -3308,7 +3308,7 @@ Overfull \hbox (22.5pt too wide) in paragraph at lines 9695--9695
 
 
 Overfull \hbox (22.5pt too wide) in paragraph at lines 9695--9695
-[]\TU/lmtt/m/n/10 ## t+1 0.043641 0.043641 0.043641 0.043641 0.043641           0.043641[] 
+[]\TU/lmtt/m/n/10 ## t+1 0.044145 0.044145 0.044145 0.044145 0.044145           0.044145[] 
  []
 
 
@@ -3372,38 +3372,38 @@ Overfull \hbox (0.6009pt too wide) in paragraph at lines 9858--9858
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ##                 Estimate     Std. Error         t value           Pr(>|t|)[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ##                Estimate    Std. Error         t value            Pr(>|t|)[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## mu      0.00127431846326 0.000310016025  4.110492238865 0.0000394816551619[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## mu      0.0012595319245 0.00030988658  4.064493351394 0.00004813691099459[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## ar1    -0.05043940906507 0.014578268430 -3.459903987027 0.0005403680260374[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## ar1    -0.0514293404094 0.01456526415 -3.530958303477 0.00041405701416775[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## ar2    -0.00118565480491 0.013554426468 -0.087473624035 0.9302950500228699[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## ar2    -0.0002229591373 0.01353274066 -0.016475534620 0.98685501998470193[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## omega   0.00002712017695 0.000004539222  5.974631686506 0.0000000023061060[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## omega   0.0000279307147 0.00000411386  6.789418174664 0.00000000001125877[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## alpha1  0.13002379592178 0.021263901527  6.114766650699 0.0000000009669836[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha1  0.1305271896788 0.02130999473  6.125162927049 0.00000000090590868[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## alpha2  0.00000034065677 0.040085714409  0.000008498209 0.9999932194104486[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha2  0.0000003250396 0.04128963594  0.000007872184 0.99999371890603883[] 
  []
 
 
@@ -3412,28 +3412,28 @@ Overfull \hbox (50.06453pt too wide) has occurred while \output is active
  []
 
 [236]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## alpha3  0.00000008107872 0.024881041011  0.000003258655 0.9999973999697527[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha3  0.0000001207817 0.02439373777  0.000004951339 0.99999604940289233[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## alpha4  0.02872099361214 0.022852869499  1.256778437118 0.2088338761998922[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## alpha4  0.0301693915456 0.02268685313  1.329818259611 0.18357815825772628[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## beta1   0.43272444998772 0.235611728606  1.836599784521 0.0662689991645959[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## beta1   0.4309243855677 0.24210248516  1.779925494304 0.07508815477640329[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## beta2   0.40753030009967 0.193897651433  2.101780486187 0.0355725092842449[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## beta2   0.4073785510874 0.19968899591  2.040065098407 0.04134384234987909[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 9889--9889
-[]\TU/lmtt/m/n/10 ## shape   3.17568857589049 0.130728859377 24.292176884399 0.0000000000000000[] 
+Overfull \hbox (54.0pt too wide) in paragraph at lines 9889--9889
+[]\TU/lmtt/m/n/10 ## shape   3.1753656454103 0.13085422571 24.266435631869 0.00000000000000000[] 
  []
 
 
@@ -3443,7 +3443,7 @@ Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
 
 
 Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
-[]\TU/lmtt/m/n/10 ## t+1 -0.25981 -0.007714 0.001473 0.011172 0.19728           0.001514[] 
+[]\TU/lmtt/m/n/10 ## t+1 -0.28435 -0.009297 0.000815 0.011408 0.21473           0.000848[] 
  []
 
 
@@ -3453,7 +3453,7 @@ Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
 
 
 Overfull \hbox (22.5pt too wide) in paragraph at lines 9923--9923
-[]\TU/lmtt/m/n/10 ## t+1 0.021108 0.021108 0.021108 0.021108 0.021108           0.021108[] 
+[]\TU/lmtt/m/n/10 ## t+1 0.023151 0.023151 0.023151 0.023151 0.023151           0.023151[] 
  []
 
 [237]
@@ -4522,9 +4522,9 @@ Package rerunfilecheck Info: File `Notas-Series-Tiempo.out' has not changed.
 (rerunfilecheck)             Checksum: B56A37547A332393C00287DFF016230B;11199.
  ) 
 Here is how much of TeX's memory you used:
- 20360 strings out of 476929
- 401692 string characters out of 5805663
- 1997186 words of memory out of 5000000
+ 20361 strings out of 476929
+ 401696 string characters out of 5805663
+ 1998186 words of memory out of 5000000
  41811 multiletter control sequences out of 15000+600000
  566199 words of font info for 114 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
