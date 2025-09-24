@@ -174,7 +174,9 @@ tab:ARMApq
 fig:fig416
 eq:ARMApqFor
 fig:fig417
+eq:ARIMAseas
 fig:fig51
+eq:HPEq
 fig:fig52
 fig:fig53
 eq:YTrend

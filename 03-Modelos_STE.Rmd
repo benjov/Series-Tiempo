@@ -1888,39 +1888,39 @@ Predict_Datos <- read_excel("BD/Predict_Base_Transporte_ARIMA.xlsx",
                             sheet = "Datos", col_names = TRUE)
 
 D_Mar2020_f	<- ts(Predict_Datos$D_Mar2020, 
-                start = c(2022, 7), 
+                start = c(2025, 7), 
                 freq = 12)
 
 D_Abr2020_f	<- ts(Predict_Datos$D_Abr2020, 
-                start = c(2022, 7), 
+                start = c(2025, 7), 
                 freq = 12)
 
 D_Jun2020_f	<- ts(Predict_Datos$D_Jun2020, 
-                start = c(2022, 7), 
+                start = c(2025, 7), 
                 freq = 12)
 
 D_Jul2020_f <- ts(Predict_Datos$D_Jul2020, 
-                start = c(2022, 7), 
+                start = c(2025, 7), 
                 freq = 12)
 
 D_Mar2021_f <- ts(Predict_Datos$D_Mar2021, 
-                start = c(2022, 7), 
+                start = c(2025, 7), 
                 freq = 12)
 
 D_Ene_f <- ts(Predict_Datos$D_Ene, 
-            start = c(2022, 7), 
+            start = c(2025, 7), 
             freq = 12)
 
 D_Feb_f <- ts(Predict_Datos$D_Feb, 
-            start = c(2022, 7), 
+            start = c(2025, 7), 
             freq = 12)
 
 D_Jul_f <- ts(Predict_Datos$D_Jul, 
-           start = c(2022, 7), 
+           start = c(2025, 7), 
             freq = 12)
 
 D_Dic_f <- ts(Predict_Datos$D_Dic, 
-            start = c(2022, 7), 
+            start = c(2025, 7), 
             freq = 12)
 
 DLPax_Nal_f <- predict(ARMA_Ex_DLPax_Nal_2, n.ahead = 24, 
@@ -1935,8 +1935,8 @@ Pronostico_Arima <- read_excel("BD/Pronostico_Arima.xlsx",
 Pronostico_Arima$Pax_Nal_f <- Pronostico_Arima$Pax_Nal
 
 for(i in 1:24){
-  Pronostico_Arima$Pax_Nal_f[281 + i] <- 
-    Pronostico_Arima$Pax_Nal_f[281 + i - 1]*(1 + DLPax_Nal_f$pred[i])
+  Pronostico_Arima$Pax_Nal_f[306 + i] <- 
+    Pronostico_Arima$Pax_Nal_f[306 + i - 1]*(1 + DLPax_Nal_f$pred[i])
 }
 
 options(scipen = 999) # NO notacion cientifica
@@ -1977,12 +1977,12 @@ Un modelo ARIMA estacional emplea la serie en diferencias y como regresores los 
 El modelo ARIMA estacional incluye como componentes autorregresivos y de medias móviles a los valores rezagados de la serie en el periodo $s$ en diferencias. El ARIMA(p, d, q)(P, D, Q) estacional puede ser expresado de la siguiente manera utilizando el operador rezago $L$:
 \begin{equation}
     \Theta_P(L^s) \theta_p(L) (1 - L^s)^D (1 - L)^d X_t = \Psi_Q(L^s) \psi_q(L) U_t
-    (\#eq:ARIMA_seas)
+    (\#eq:ARIMAseas)
 \end{equation}
 
-Donde $\Theta_P(.)$, $\theta_p(.)$, $\Psi_Q(.)$ y $\psi_q(.)$ son polinomios de $L$ de orden $P$, $p$, $Q$ y $q$ respectivamente. En general, la representación es de una serie no estacionaria, aunque si $D = d = 0$ y las raíces del polinomio característico (de los polinomios del lado izquierdo de la ecuación \@ref(eq:ARIMA_seas) todas  son más grandes que 1 en valor absoluto, el proceso modelado será estacionario.
+Donde $\Theta_P(.)$, $\theta_p(.)$, $\Psi_Q(.)$ y $\psi_q(.)$ son polinomios de $L$ de orden $P$, $p$, $Q$ y $q$ respectivamente. En general, la representación es de una serie no estacionaria, aunque si $D = d = 0$ y las raíces del polinomio característico (de los polinomios del lado izquierdo de la ecuación \@ref(eq:ARIMAseas) todas  son más grandes que 1 en valor absoluto, el proceso modelado será estacionario.
 
-Si bien es cierto que existen otras formas de modelar la desestacionalización, como la modelación en diferencias con dummies para identificar ciertos patrones regulares, en los algoritmos disponibles como el X11 o X13-ARIMA-SEATS se emplea la formulación de la ecuación \@ref(eq:ARIMA_seas). A continuación, implementaremos la desestacionalización de una serie.
+Si bien es cierto que existen otras formas de modelar la desestacionalización, como la modelación en diferencias con dummies para identificar ciertos patrones regulares, en los algoritmos disponibles como el X11 o X13-ARIMA-SEATS se emplea la formulación de la ecuación \@ref(eq:ARIMAseas). A continuación, implementaremos la desestacionalización de una serie.
 
 Como ejemplo utilizaremos la serie del Índice Nacional de Precios al Consumidor (INPC).\footnote{Las definiciones de las variables ocupadas es:
 * INPC: Indice Nacional de Precios al Consumidor (2QJul2018 = 100)
@@ -2077,10 +2077,10 @@ Como último tema de los procesos univariados y que no necesariamente aplican a 
 El marco conceptual de Hodrick y Prescott (1997) parte de suponer una serie $X_t$ que se puede descomponer en la suma de componente de crecimiento tendencial, $g_t$, y su componente de ciclio de negocios, $c_t$, de esta forma para $t = 1, 2, \ldots, T$ tenemos que:
 \begin{equation}
     X_t = g_t + c_t
-    (\#eq:HP_Eq)
+    (\#eq:HPEq)
 \end{equation}
 
-En la ecuación \@ref(eq:HP_Eq) se asume que el ajuste de la ruta seguida por $g_t$ es resultado de la suma de los cuadrados de su segunda diferencia. En esa misma ecuación asumiremos que $c_t$ son las desviaciones de $g_t$, las cuales en el largo plazo tienen una media igual a cero (0). Por esta razón, se suele decir que el filtro de Hodrick y Prescott representa una descomposición de la serie en su componente de crecimiento natural y de sus desviaciones transitorias que en promedio son cero, en el largo plazo.
+En la ecuación \@ref(eq:HPEq) se asume que el ajuste de la ruta seguida por $g_t$ es resultado de la suma de los cuadrados de su segunda diferencia. En esa misma ecuación asumiremos que $c_t$ son las desviaciones de $g_t$, las cuales en el largo plazo tienen una media igual a cero (0). Por esta razón, se suele decir que el filtro de Hodrick y Prescott representa una descomposición de la serie en su componente de crecimiento natural y de sus desviaciones transitorias que en promedio son cero, en el largo plazo.
 
 Estas consideraciones que hemos mencionado señalan que el procesimiento de Hodrick y Prescott (1997) implican resolver el siguiente problema minimización para determinar cada uno de los componentes en que $X_t$ se puede descomponer:
 \begin{equation}
