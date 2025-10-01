@@ -330,7 +330,7 @@ Así, juntando la ecuación \@ref(eq:PROC01) y la ecuación \@ref(eq:eqs) tenemo
 
 No debe pasar desapercibido que esta solución es la misma que la mostrada en la ecuación \@ref(eq:SOLITER), por lo que en realidad ambas ecuaciones son una solución general indistintamente entre las ecuaciones \@ref(eq:SOLITER) y \@ref(eq:SOLGEN). Ambas convergen a la expresión como la ecuación \@ref(eq:trayec), con la misma condición de convergencia $|a_1| < 1$. Para ilustrar estas ecuaciones, veamos algunos ejemplos al respecto. 
 
-\textbf{Ejemplo}. Consideremos que tenemos un proceso $Z_t$ que es descrito por una ecuación en diferencia lineal de primer orden dada por:
+**Ejemplo**. Consideremos que tenemos un proceso $Z_t$ que es descrito por una ecuación en diferencia lineal de primer orden dada por:
 \begin{equation}
     Z_t = 2 + 0.9 Z_{t-1}
 (\#eq:ex1)
@@ -344,7 +344,7 @@ Siguiendo la expresión mostrada en la ecuación \@ref(eq:SOLGEN), obtenemos la 
 
 Donde asumiremos que el valor inicial es $Z_0 = 10$ y que la expresión debe converger al valor de 20, cuando $t$ es muy grande o tiende a infinito. 
 
-\textbf{Ejemplo}. De forma similar, tomemos otro ejemplo en el cual asumimos la siguiente expresión:
+**Ejemplo**. De forma similar, tomemos otro ejemplo en el cual asumimos la siguiente expresión:
 \begin{equation}
     Z_t = 2 - 0.5 Z_{t-1}
 (\#eq:ex3)

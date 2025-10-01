@@ -136,7 +136,7 @@ prueba F, en la cual se prueba la siguiente hipótesis nula:
     H_0: a^1_{12} = a^2_{12} = \ldots = a^{k2}_{12} = 0
 \end{equation}
 
-\textbf{Ejemplo}. Consideremos como variables analizadas al Índice
+**Ejemplo**. Consideremos como variables analizadas al Índice
 Nacional de Precios al Consumidor ($INPC_t$), al Tipo de Cambio
 ($TDC_t$) y al rendimiento anual de los Cetes a 28 días ($CETE28_t$),
 todas desestacionalizadas para el periodo de enero de 2000 a julio de
@@ -472,7 +472,7 @@ por: \begin{equation*}
             \right]
     \end{equation*}
 
-\textbf{Ejemplo}. Ahora veámos un ejemplo de estimación de $VAR(p)$.
+**Ejemplo**. Ahora veámos un ejemplo de estimación de $VAR(p)$.
 Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio,
 rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción
 Industrial de los Estados Unidos, todas desestacionalizadas y para el
@@ -705,7 +705,7 @@ $\mathbf{X}_t$ cada una de las innovaciones pasadas. Por lo que el
 análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas
 matrices en las que hemos descompuesto a $\mathbf{B}(L)$.
 
-\textbf{Ejemplo}. Retomando el modelo $VAR(2)$ anteriormente estimado,
+**Ejemplo**. Retomando el modelo $VAR(2)$ anteriormente estimado,
 en las siguientes figuras reportamos las gráficas de Impulso-Respuesta
 de la serie $DLTC_t$ ante cambios en los residuales del resto de las
 series y de la propia serie.
@@ -1185,7 +1185,7 @@ estadísticas con las que se determina el rango $r$ de $\Pi$:
     $r$ valores propios positivos o Existen $r$ relaciones de largo
     plazo estacionarias.
 
-\textbf{Ejemplo}. Para ejemplificar el procedimiento de cointegración
+**Ejemplo**. Para ejemplificar el procedimiento de cointegración
 utilizaremos las series de INPC, Tipo de Cambio, rendimiento de los
 Cetes a 28 días, IGAE e Índice de Producción Industrial de Estados
 Unidos. Quizá el marco teórico de la relación entre las variables no sea

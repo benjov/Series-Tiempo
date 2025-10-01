@@ -84,9 +84,9 @@
 <span class="header-section-number">7.1.2</span> Pruebas de Raíces Unitarias en Panel<a class="anchor" aria-label="anchor" href="#pruebas-de-ra%C3%ADces-unitarias-en-panel"><i class="fas fa-link"></i></a>
 </h3>
 <p>Las pruebas de raíces unitarias para panel suelen ser usadas principalmente en casos macroeconómicos. De forma similar al caso de series univariadas, asumiremos una forma de AR(1) para una serie en panel:
-<span class="math display">\[\begin{equation}
+<span class="math display" id="eq:eqARPanel">\[\begin{equation}
     \Delta Y_{it} = \mu_i + \rho_i Y_{i t-1} + \sum_{i = 1}^{k_i} \varphi_{ij} \Delta Y_{i t-j} + \varepsilon_{it}
-    (\#eq:eq_AR_Panel)
+    \tag{7.1}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(i = 1, \ldots, N\)</span>, <span class="math inline">\(t = 1, \ldots, T\)</span> y <span class="math inline">\(\varepsilon_{it}\)</span> es una v.a. iid que cumple con:
 <span class="math display">\[\begin{eqnarray*}
@@ -310,35 +310,35 @@ Figure 7.1: Evolución de la inversión por empresa
 <p>Dependencies and Setup</p>
 Importamos Datos desde un archivo de Excel. Los datos están en formato panel e incluyen:
 <p>Partamos de la siguiente ecuación:
-<span class="math display">\[\begin{equation}
+<span class="math display" id="eq:eqDiD">\[\begin{equation}
     y_{it} = \beta_1 + \beta_2 T_t + \beta_3 D_t + \theta T_t \times D_t + \boldsymbol{\gamma} \mathbf{X}_{it} + \varepsilon_{it}
-    (\#eq:eq_DiD)
+    \tag{7.2}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(y_{it}\)</span> es la variable sobre la cual queremos evaluar el efecto de un tratamiento, <span class="math inline">\(\mathbf{X}_{it}\)</span> es un conjunto de variables de control, que incluye a las variables de efectos fijos (temporales, de individuos o del tipo que se decida) y, en su caso, una tendencia, entre otras. Finalmente, las variables <span class="math inline">\(T_t\)</span> y <span class="math inline">\(D_i\)</span> son variables dicotómicas que identifican con el valor de 1 el momento a partir del cual se observa el tratamiento y con 0 en cualquier otro caso, y con 1 los individuos que fueron tratados y con 0 en cualquier otro caso, respectivamente.</p>
 <p>De esta forma, el producto <span class="math inline">\(T_t \times D_t\)</span> sería una variable dicotómica que indicaría con un 1 a aquellos individuos que fueron tratados a partir del momento en que se implementó el tratamiento y con 0 en cualquier otro caso. Bajo este escenario, <span class="math inline">\(\theta\)</span> es un coeficiente que captura el efecto del tratamiento, condicional a que se ha controlado por una serie de factores.</p>
-<p>Otra forma de ver lo que se indica en la ecuación @ref(eq:eq_DiD) es como la comparación de la diferencia en diferencia descrita por:
-<span class="math display">\[\begin{eqnarray}
+<p>Otra forma de ver lo que se indica en la ecuación <a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#eq:eqDiD">(7.2)</a> es como la comparación de la diferencia en diferencia descrita por:
+<span class="math display" id="eq:eqDiDE">\[\begin{eqnarray}
     E &amp; = &amp; [ (\overline{y}_{exit} | treatment) - (\overline{y}_{baseline} | treatment) ] \nonumber \\  
     &amp;  &amp; - [ (\overline{y}_{exit} | placebo) - (\overline{y}_{baseline} | placebo) ]
-    (\#eq:eq_DiD_E)
+    \tag{7.3}
 \end{eqnarray}\]</span></p>
-<p>La expresión @ref(eq:eq_DiD_E) cuantifica el efecto que tiene el tratamiento como la diferencia de medias de dos grupos: un grupo tratado y otro no tratado. Dentro de los cuales se han comparado las medias respecto de una línea base. Podemos plantear esto desde esta otra perspectiva. Pensemos que solo tenemos dos periodos <span class="math inline">\(t = {1, 2}\)</span>, en el cual en 1 no ha ocurrido el tratamiento y en 2 ya ha ocurrido. Así, el cambio en la variable de respuesta para los individuos tratados será (suponiendo que omitimos la matriz <span class="math inline">\(\mathbf{X}_{it}\)</span> en la ecuación @ref(eq:eq_DiD)):
-<span class="math display">\[\begin{eqnarray}
+<p>La expresión <a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#eq:eqDiDE">(7.3)</a> cuantifica el efecto que tiene el tratamiento como la diferencia de medias de dos grupos: un grupo tratado y otro no tratado. Dentro de los cuales se han comparado las medias respecto de una línea base. Podemos plantear esto desde esta otra perspectiva. Pensemos que solo tenemos dos periodos <span class="math inline">\(t = {1, 2}\)</span>, en el cual en 1 no ha ocurrido el tratamiento y en 2 ya ha ocurrido. Así, el cambio en la variable de respuesta para los individuos tratados será (suponiendo que omitimos la matriz <span class="math inline">\(\mathbf{X}_{it}\)</span> en la ecuación <a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#eq:eqDiD">(7.2)</a>):
+<span class="math display" id="eq:eqDiDTreat">\[\begin{eqnarray}
     \mathbb{E}[ y_{i2} | D_i = 1 ] - \mathbb{E}[ y_{i1} | D_i = 1 ] &amp; = &amp; ( \beta_1 + \beta_2 + \beta_3 + \theta ) - ( \beta_1 + \beta_3 + \theta ) \nonumber \\  
     &amp; = &amp; \beta_2 + \theta
-    (\#eq:eq_DiD_Treat)
+    \tag{7.4}
 \end{eqnarray}\]</span></p>
 <p>Ahora, sobre los no tratados:
-<span class="math display">\[\begin{eqnarray}
+<span class="math display" id="eq:eqDiDNoTreat">\[\begin{eqnarray}
     \mathbb{E}[ y_{i2} | D_i = 0 ] - \mathbb{E}[ y_{i1} | D_i = 0 ] &amp; = &amp; ( \beta_1 + \beta_2 ) - ( \beta_1 ) \nonumber \\  
     &amp; = &amp; \beta_2
-    (\#eq:eq_DiD_NoTreat)
+    \tag{7.5}
 \end{eqnarray}\]</span></p>
-<p>Así, la diferencia en diferencia resulta de restar la ecuación @ref(eq:eq_DiD_NoTreat) a la ecuación @ref(eq:eq_DiD_Treat):
-<span class="math display">\[\begin{eqnarray}
+<p>Así, la diferencia en diferencia resulta de restar la ecuación <a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#eq:eqDiDNoTreat">(7.5)</a> a la ecuación <a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#eq:eqDiDTreat">(7.4)</a>:
+<span class="math display" id="eq:eqAplicada">\[\begin{eqnarray}
     &amp; &amp; ( \mathbb{E}[ y_{i2} | D_i = 1 ] - \mathbb{E}[ y_{i1} | D_i = 1 ] ) - ( \mathbb{E}[ y_{i2} | D_i = 0 ] - \mathbb{E}[ y_{i1} | D_i = 0 ] ) \nonumber \\
     &amp; &amp; = \theta
-    (\#eq:eq_Aplicada)
+    \tag{7.6}
 \end{eqnarray}\]</span></p>
 <p>En nuestro caso, utilizaremos como tratamiento la entrada al mercado de un laboratorio de análisis clínicos en una ciudad determinada.</p>
 <pre><code>## [1] 13420    17</code></pre>
@@ -649,9 +649,9 @@ Importamos Datos desde un archivo de Excel. Los datos están en formato panel e 
 <span class="header-section-number">7.1.5</span> Panel VAR<a class="anchor" aria-label="anchor" href="#panel-var"><i class="fas fa-link"></i></a>
 </h3>
 <p>En esta sección extenderemos el caso del modelo VAR(p) a uno en forma panel. En este caso asumimos que las variables exógenas son los <span class="math inline">\(p\)</span> rezagos de las <span class="math inline">\(k\)</span> variables endógenas. Consideremos el siguiente caso de un modelo panel VAR con efectos fijos –ciertamente es posible hacer estimaciones con efectos aleatorios, no obstante, requiere de supuestos adicionales que no contemplamos en estas notas–, el cual es la forma más común de estimación:
-<span class="math display">\[\begin{equation}
+<span class="math display" id="eq:eqPVAR">\[\begin{equation}
     \mathbf{Y}_{it} = \mu_i + \sum_{l = 1}^p \mathbf{A}_l \mathbf{Y}_{i t - l} + \mathbf{B} \mathbf{X}_{it} + \varepsilon_{it}
-   (\#eq:eq_PVAR)
+   \tag{7.7}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\mathbf{Y}_{it}\)</span> es un vector de variables endógenas estacionarias para la unidad de corte transversal <span class="math inline">\(i\)</span> en el tiempo <span class="math inline">\(t\)</span>, <span class="math inline">\(\mathbf{X}_{it}\)</span> es una matriz que contiene variables exógenas, y <span class="math inline">\(\varepsilon_{it}\)</span> es un término de error que cumple con:
 <span class="math display">\[\begin{eqnarray*}
@@ -659,12 +659,12 @@ Importamos Datos desde un archivo de Excel. Los datos están en formato panel e 
     Var[\varepsilon_{it}] &amp; = &amp; \Sigma_\varepsilon
 \end{eqnarray*}\]</span></p>
 <p>Donde <span class="math inline">\(\Sigma_\varepsilon\)</span> es una matriz definida positiva.</p>
-<p>Para el porceso de estimación, la ecuación @ref(eq:eq_PVAR) se modifica en su versión en diferencias para quedar como:
-<span class="math display">\[\begin{equation}
+<p>Para el porceso de estimación, la ecuación <a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#eq:eqPVAR">(7.7)</a> se modifica en su versión en diferencias para quedar como:
+<span class="math display" id="eq:eqDinamicPVAR">\[\begin{equation}
     \Delta \mathbf{Y}_{it} = \sum_{l = 1}^p \mathbf{A}_l \Delta \mathbf{Y}_{i t - l} + \mathbf{B} \Delta \mathbf{X}_{it} + \Delta \varepsilon_{it}
-    (\#eq:eq_Dinamic_PVAR)
+    \tag{7.8}
 \end{equation}\]</span></p>
-<p>La ecuación @ref(eq:eq_Dinamic_PVAR) se estima por un GMM.</p>
+<p>La ecuación <a href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html#eq:eqDinamicPVAR">(7.8)</a> se estima por un GMM.</p>
 </div>
 </div>
 <div id="ejemplos-panel-varp" class="section level2" number="7.2">
@@ -1492,7 +1492,7 @@ Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan cier
         \phi_{01} + \phi_{11} y_{t-1} + \varepsilon_t \text{ si } s_t = 1 \\
         \phi_{02} + \phi_{12} y_{t-1} + \varepsilon_t \text{ si } s_t = 2
     \end{cases}
-    \label{eq_swching_obs}
+    \label{eqSwchingObs}
 \end{equation}\]</span></p>
 <p>O en un formato más corto de notación:
 <span class="math display">\[\begin{equation}
@@ -1728,7 +1728,7 @@ Finalmente, plantearemos el procedimiento empírico seguido para la estimación 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on 2025-09-23.</p>
+    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on 2025-09-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

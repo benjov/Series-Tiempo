@@ -276,7 +276,15 @@ tab:info-criteria
 tab:criterios
 tab:garch-estimates
 eq:ARCH-LM
+eq:eqARPanel
 fig:fig111
+eq:eqDiD
+eq:eqDiDE
+eq:eqDiDTreat
+eq:eqDiDNoTreat
+eq:eqAplicada
+eq:eqPVAR
+eq:eqDinamicPVAR
 introducción
 introducción-al-análisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia
 la-naturaleza-de-los-datos-de-series-de-tiempo

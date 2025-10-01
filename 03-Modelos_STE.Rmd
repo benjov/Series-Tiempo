@@ -151,7 +151,7 @@ Definiremos a la estacionariedad por sus momentos del correspondiente proceso es
 
 Puesto que resulta poco factible asumir una estacionariedad diferente a la débil, es adelante siempre que digamos que un proceso es estacionario se referirá al caso débil y sólo diremos que el proceso es estacionario, sin el apelativo de débil. 
 
-\textbf{Ejemplo}. Supongamos una serie de tiempo denotada por: $\{U_t\}^T_{t = 0}$. Decimos que el proceso estocástico $\{U_t\}$ es un _proceso estocástico puramente aleatorio_ o es un _proceso estocástico de ruido blanco o caminata aleatoria_, si este tiene las siguientes propiedades: 
+**Ejemplo**. Supongamos una serie de tiempo denotada por: $\{U_t\}^T_{t = 0}$. Decimos que el proceso estocástico $\{U_t\}$ es un _proceso estocástico puramente aleatorio_ o es un _proceso estocástico de ruido blanco o caminata aleatoria_, si este tiene las siguientes propiedades: 
 
 1. $\mathbb{E}[U_t] = 0$, $\forall t$;
 
@@ -380,7 +380,7 @@ Usando el valor de las estadísticas para medir el sesgo y la curtosis, $S$ y $K
 
 La cual tiene una distribución $\chi^2$ con $2$ grados de libertad y donde $T$ es el tamaño de la muestra. La hipótesis de que las observaciones están distribuidas de forma normal se rechaza si el valor de la estadística de prueba es más grande que los correspondientes valores críticos en tablas.
 
-\textbf{Ejemplo}. Veamos un ejemplo para ilustrar el uso de la función de autocorrelación. Tomemos como variable al número de pasajeros transportados por el sistema de transporte del metro de la CDMX.^[Los datos y algoritmo está disponible en el repositorio de GitHub y corresponde a la Clase 3.] Los datos empleados fueron tomados del INEGI y son una serie de tiempo en el período que va de enero de 2000 a mayo de 2023, es decir, 281 observaciones. Como se puede apreciar en la Figura \@ref(fig:fig32), el número de pasajeros por mes ha oscilado significativamente a lo largo del tiempo. Incluso podemos observar un cambio estructural de la serie entre 2011 y 2012. Asimismo, podemos ubicar una caída atípica que ocurrió en septiembre de 2017. Pero lo más relevante es la caída asociada a la pandemia de COVID-19 de 2020.
+**Ejemplo**. Veamos un ejemplo para ilustrar el uso de la función de autocorrelación. Tomemos como variable al número de pasajeros transportados por el sistema de transporte del metro de la CDMX.^[Los datos y algoritmo está disponible en el repositorio de GitHub y corresponde a la Clase 3.] Los datos empleados fueron tomados del INEGI y son una serie de tiempo en el período que va de enero de 2000 a mayo de 2023, es decir, 281 observaciones. Como se puede apreciar en la Figura \@ref(fig:fig32), el número de pasajeros por mes ha oscilado significativamente a lo largo del tiempo. Incluso podemos observar un cambio estructural de la serie entre 2011 y 2012. Asimismo, podemos ubicar una caída atípica que ocurrió en septiembre de 2017. Pero lo más relevante es la caída asociada a la pandemia de COVID-19 de 2020.
 
 ```{r fig32, fig.cap = "Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023", fig.align='center'}
 
@@ -583,7 +583,7 @@ teórica como sigue:
 
 Donde $\tau = 1, 2, 3, \ldots$ y $ |a_1| < 1 $. Este último resultado significa que cuando el proceso autoregresivo es de orden 1 (es decir, AR(1)) la función de autocorrelación teóricamente es igual al parámetro $a_1$ elevado al número de rezagos considerados. No obstante, note que esto no significa que la autocorrelación observada sea como lo expresa en el planteamiento anterior. Por el contrario, una observación sencilla mostraría que la autocorrelación observada sería ligeramente distinta a la autocorrelación teórica. Ahora veamos algunos ejemplos.
 
-\textbf{Ejemplo}. En el primer ejemplo simularemos una serie y mostraremos el análisis de un proceso construido considerando un proceso puramente aleatorio como componente $U_t$. Por su parte, en un segundo ejemplo aplicaremos el análisis a una serie de tiempo de una variable económica observada.
+**Ejemplo**. En el primer ejemplo simularemos una serie y mostraremos el análisis de un proceso construido considerando un proceso puramente aleatorio como componente $U_t$. Por su parte, en un segundo ejemplo aplicaremos el análisis a una serie de tiempo de una variable económica observada.
 
 Para el primer ejemplo, consideremos un proceso dado por la forma de un $AR(1)$ como en la ecuación \@ref(eq:AR01) cuya solución está dada por la ecuación \@ref(eq:AR1Sol). En específico, supongamos que el término o componente estocástico $U_t$ es una serie generada a partir de números aleatorios de una función normal con media $0$ y desviación estándar $4$. Los detalles del proceso simulado se muestran en las siguientes gráficas.
 
@@ -716,7 +716,7 @@ ggsave("G_AR_1_Comb.png", width = 20, height = 10, units = "cm")
 
 ```
 
-\textbf{Ejemplo}. Para el segundo ejemplo consideremos una aplicación a una serie de tiempo en especifico: Pasajeros transportados mensualmente en el Sistema de Transporte Colectivo Metro (pasajeros medidos en millones).\footnote{Fuente: INEGI, \url{https://www.inegi.org.mx/app/indicadores/?tm=0&t=1090}.}
+**Ejemplo**. Para el segundo ejemplo consideremos una aplicación a una serie de tiempo en especifico: Pasajeros transportados mensualmente en el Sistema de Transporte Colectivo Metro (pasajeros medidos en millones).\footnote{Fuente: INEGI, \url{https://www.inegi.org.mx/app/indicadores/?tm=0&t=1090}.}
 
 A la serie se le aplicará una metodología de estimación dada por el método de Máxima Verosimilitud (ML, por sus siglas en inglés). Antes de realizar el proceso de estimación, consideremos una transformación de diferencias logarítmicas con el objeto de obtener una serie de tiempo expresada en tasas de crecimiento\footnote{Estas tasas no son porcentuales, para hacerlas porcentuales faltaría multiplicar por 100 cada calor de la serie.} y con un comportamiento parecido a un proceso estacionario.
 
@@ -909,7 +909,7 @@ Recordemos que las funciones de autocorrelación se obtienen de la división de 
     \rho(\tau) - a_1 \rho(\tau - 1) - a_2 \rho(\tau - 2) = 0
 \end{equation}
 
-\textbf{Ejemplo}. Utilizaremos la serie de Pasajeros en vuelos nacionales (en vuelos de salidas) para estimar un $AR(2)$ mediante el método de máxima verosimilitud (ML, por sus siglas en inglés). Antes de realizar el proceso de estimación, consideremos una transformación de la serie en logaritmos y una más en diferencias logarítmicas; lo anterior con el objeto de obtener una serie de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
+**Ejemplo**. Utilizaremos la serie de Pasajeros en vuelos nacionales (en vuelos de salidas) para estimar un $AR(2)$ mediante el método de máxima verosimilitud (ML, por sus siglas en inglés). Antes de realizar el proceso de estimación, consideremos una transformación de la serie en logaritmos y una más en diferencias logarítmicas; lo anterior con el objeto de obtener una serie de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
 
 Así, para cada una de las series que analicemos en diferencias logarítmicas, las expresaremos bajo la siguiente transformación:
 \begin{equation*}
@@ -1128,7 +1128,7 @@ Es decir, podemos obtener la siguiente expresión:
     \mathbf{a} = \mathbf{R}^{-1} \boldsymbol{\rho}
 \end{equation}
 
-\textbf{Ejemplo}. Utilizaremos la serie de Pasajeros en vuelos internacionales de salida para estimar un $AR(p)$ mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación, consideremos una transformación de la serie en logaritmos y una más en diferencias logarítmicas; lo anterior con el objeto de obtener una serie de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
+**Ejemplo**. Utilizaremos la serie de Pasajeros en vuelos internacionales de salida para estimar un $AR(p)$ mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación, consideremos una transformación de la serie en logaritmos y una más en diferencias logarítmicas; lo anterior con el objeto de obtener una serie de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
 
 Primero, para decidir si se realizará un $AR(p)$ para la serie en niveles o en diferencias, analizaremos su gráfica. La serie de Pasajeros en vuelos internacionales de salidas se muestra en la Figura \@ref(fig:fig49). En esta se muestra la gráfica de la serie en niveles (sin transformación logarítmica y con transformación logarítmica) y en diferencias logarítmicas mensuales (es decir, con diferencia respecto del mes inmediato anterior).
 
@@ -1354,7 +1354,7 @@ Donde se cumple que: $1 = (1 - b_1 L^1 - b_2 L^2 - \ldots - b_q L^q)(1 - c_1 L -
 
 El cual debe cumplir que $ | x_i | < 1 $ y que $1 - b_1 - b_2 - \ldots b_q < 1$.
 
-\textbf{Ejemplo}. Ahora veamos un ejemplo del proceso $MA(q)$, para lo cual retomaremos la serie de Pasajeros transportados en el metro de la CDMX ($PaxMetro$). Estimaremos el $MA(q)$ mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación, consideremos una transformación de la serie en logaritmos y una más en diferencias logarítmicas; lo anterior con el objeto de obtener una serie de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
+**Ejemplo**. Ahora veamos un ejemplo del proceso $MA(q)$, para lo cual retomaremos la serie de Pasajeros transportados en el metro de la CDMX ($PaxMetro$). Estimaremos el $MA(q)$ mediante el método de máxima verosimilitud (ML). Antes de realizar el proceso de estimación, consideremos una transformación de la serie en logaritmos y una más en diferencias logarítmicas; lo anterior con el objeto de obtener una serie de tiempo suavizada y expresada en tasas de crecimiento, con un comportamiento parecido a un proceso estacionario.
 
 La serie de Pasajeros transportados en el metro de la CDMX se muestra en la Figura \@ref(fig:fig46). En esta, se muestra la gráfica de la serie en niveles (sin transformación logarítmica y con transformación logarítmica) y en diferencias logarítmicas mensuales (es decir, con una diferencia respecto del mes inmediato anterior). Utilizaremos la serie en diferencias, ya que es la que parece ser estacionaria. Esta serie tiene la peculiaridad de que tiene un salto a la baja y uno al alza entre septiembre de 2017 y octubre de 2017. Para controlar ese efecto, en nuestro modelo $MA(q)$ incluiremos dos variables dummies para dichos meses.
 
@@ -1699,7 +1699,7 @@ Table: (\#tab:AcAcp) Relación entre la Función de Autocorrelación y la Funci�
 | MA(q) | Rompimienttos en la función | No hay rompimientos |
 | AR(p) | No hay rompimientos | Rompimienttos en la función |
 
-\textbf{Ejemplo}. Continuando con el ejemplo en la Figura \@ref(fig:fig414) mostramos tanto la Función de Autocorrelación como la Función de Autocorrelación Parcial. En esta identificamos que ambas gráficas muestran que el modelo que explica a la variable $DLPaxNal_t$ tiene tanto componentes AR como MA. Sin embargo, dado lo errático del comportamiento de ambas funciones, resulta complicado determinar cuál sería un buen número de parámetros $p$ y $q$ a considerar en el $ARMA(p,q)$. Por esta razón, a continuación, plantearemos algunas pruebas más formales para determinar dichos parámetros.
+**Ejemplo**. Continuando con el ejemplo en la Figura \@ref(fig:fig414) mostramos tanto la Función de Autocorrelación como la Función de Autocorrelación Parcial. En esta identificamos que ambas gráficas muestran que el modelo que explica a la variable $DLPaxNal_t$ tiene tanto componentes AR como MA. Sin embargo, dado lo errático del comportamiento de ambas funciones, resulta complicado determinar cuál sería un buen número de parámetros $p$ y $q$ a considerar en el $ARMA(p,q)$. Por esta razón, a continuación, plantearemos algunas pruebas más formales para determinar dichos parámetros.
 
 ```{r fig414, out.width='95%', fig.cap = "Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $DLPaxNal_t$", fig.align='center'}
 
@@ -1742,7 +1742,7 @@ Donde $\hat{U}_t^{(p)}$ son los residuales estimados mediante un proceso ARIMA y
 
 Por esta razón, durante el curso solo utilizaremos el criterio de Akaike para determinar el orden óptimo del proceso ARMA, ya que ello garantiza el orden más grande posible.
 
-\textbf{Ejemplo}. Ahora veamos un ejemplo de estimación del número de rezagos óptimo de un $ARMA(p, q)$. Retomemos la serie en diferencias logarítmicas de los pasajeros en vuelos nacionales de salidas, pero ahora incluiremos las variables exógenas de dummies estacionales: enero, febrero, julio y diciembre.
+**Ejemplo**. Ahora veamos un ejemplo de estimación del número de rezagos óptimo de un $ARMA(p, q)$. Retomemos la serie en diferencias logarítmicas de los pasajeros en vuelos nacionales de salidas, pero ahora incluiremos las variables exógenas de dummies estacionales: enero, febrero, julio y diciembre.
 
 Como mencionamos, las gráficas de las funciones de autocorrelación permiten observar el valor de la correlación existente entre la variable en el momento $t$ con cada uno de los rezagos. Incluso la Función de Autocorrelación Parcial puede ayudar a determinar el número máximo de rezagos que se debe incluir en el proceso $AR(p)$. No obstante, una métrica más formal es el uso de los criterios de información. En nuestro caso, dado lo discutido, sólo utilizaremos el criterio de Akaike.
 
