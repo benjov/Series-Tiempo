@@ -32,3 +32,10 @@ G_AR_1_Real.png
 G_AR_1_Teo.png
 Pax_Metro.png
 Pax_Nal_f.png
+
+# Archivos del template bookdown-demo (eliminados del proyecto)
+DESCRIPTION
+Dockerfile
+_build.sh
+_deploy.sh
+now.json
