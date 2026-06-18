@@ -416,11 +416,11 @@ Table: (\#tab:criterios) Resumen de criterios de información en función de \te
 | 4 | 3 | -10.93924 | 0 |
 | 4 | 4 | -10.93816 | 0 |
 
-```{r LagOptGARCH}
+```{r LagOptGARCH, cache=TRUE, warning=FALSE, message=FALSE}
 
 source("Lag_Opt_GARCH.R")
 
-Lag_Opt_GARCH(ehatsq,4,4)
+Lag_Opt_GARCH(ehatsq, 4, 4)
 
 ```
 
