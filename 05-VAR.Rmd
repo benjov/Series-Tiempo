@@ -49,7 +49,7 @@ error estimado de una regresión dada. Dicho lo anterior, digamos que:
 
 Es decir, que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de toda la información aplicada a un pronóstico de $Y_{t+1}$ es MENOR que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de la información de $Y$ aplicada a un pronóstico de $Y_{t+1}$.
 
-  \item Existe Causalidad de Granger Instantanéa o $X$ causa de forma instantanéa a $Y$ si y solo si, una regresión lineal da como resultado:
+  \item Existe Causalidad de Granger Instantánea o $X$ causa de forma instantánea a $Y$ si y solo si, una regresión lineal da como resultado:
     \begin{equation}
         \sigma^2 (Y_{t+1} | \{ I_t, X_{t+1} \}) < \sigma^2 (Y_{t+1} | I_t)
     \end{equation}
@@ -63,7 +63,7 @@ entre las dos series:
 \begin{enumerate}
     \item $X$ y $Y$ son independientes: $(X, Y)$;
 
-    \item Existe solo causalidad instantanéa: $(X - Y)$;
+    \item Existe solo causalidad instantánea: $(X - Y)$;
 
     \item $X$ causa a $Y$: $(X \longrightarrow Y)$;
 
@@ -400,14 +400,14 @@ polinomio que resulta de tomar la matriz $\mathbf{A}(L)$ en la ecuación
 \end{equation}
 
 Donde las raíces del polinomio cumplen que $|z| \leq 1$, es decir, se
-ubican dentro del circulo unitario.
+ubican dentro del círculo unitario.
 
-La ecuación \@ref(eq:VARCorto) puede ser rexpresada en una forma similar
+La ecuación \@ref(eq:VARCorto) puede ser reescrita en una forma similar
 al un proceso de MA. Al respecto, de forma similar a la siguiente
 ecuación podemos construir un modelo $VARMA(p,q)$, el cual no estudiamos
-es este curso.
+en este curso.
 
-Reromando el primer planteamiento, podemos escribir: 
+Retomando el primer planteamiento, podemos escribir: 
 \begin{eqnarray}
     \mathbf{X}_t & = & \mathbf{A}^{-1}(L) \boldsymbol{\delta} + \mathbf{A}^{-1}(L) \mathbf{U}_t \nonumber \\
     & = & \boldsymbol{\mu} + \boldsymbol{\beta}(L) \mathbf{U}_t
@@ -655,25 +655,25 @@ VAR(2).
 
 ### Diagnostic tests
 
-#### Normalidad:
+**Normalidad:**
 
 normality.test(VAR_p)
 
-#### Autocorrelacion Serial:
+**Autocorrelación Serial:**
 
-#### LAGS = 2:
+**LAGS = 2:**
 
 serial.test(VAR_p, lags.bg = 2, type = "BG")
 
-#### LAGS = 4:
+**LAGS = 4:**
 
 serial.test(VAR_p, lags.bg = 4, type = "BG")
 
-#### LAGS = 6:
+**LAGS = 6:**
 
 serial.test(VAR_p, lags.bg = 6, type = "BG")
 
-#### Homocedasticidad:
+**Homocedasticidad:**
 
 arch.test(VAR_p, lags.multi = 6)
 
@@ -850,7 +850,7 @@ entonces una solución válida al problema de identificación estructural es asu
 
 Sin embargo, es importante destacar que esta ortogonalización de los errores solo es válida si la estructura recursiva impuesta por la matriz $P$ se puede justificar con fundamentos económicos. El método impone que la primera variable del sistema responde solo a su propio shock contemporáneo, la segunda puede responder al shock de la primera, la tercera a los dos primeros, y así sucesivamente. Por eso se dice que el modelo estructural resultante es recursivo: se impone una estructura jerárquica de causalidad contemporánea, en lugar de inferirla directamente de los datos.
 
-En este sentido, la **descomposición de Cholesky** no descubre las relaciones estructurales sino que las impone. Por lo tanto, el orden de las variables en el VAR **si importa**, ya que determina la interpretación de los shocks estructurales. Por esta razón, se recomienda justificar el orden mediante teoría económica. Por ejemplo, en aplicaciones del Banco de México, el orden se suele establecer de acuerdo con la hipótesis de una economía pequeña y abierta, ordenando las variables de la más exógena a la más endógena.
+En este sentido, la **descomposición de Cholesky** no descubre las relaciones estructurales sino que las impone. Por lo tanto, el orden de las variables en el VAR **sí importa**, ya que determina la interpretación de los shocks estructurales. Por esta razón, se recomienda justificar el orden mediante teoría económica. Por ejemplo, en aplicaciones del Banco de México, el orden se suele establecer de acuerdo con la hipótesis de una economía pequeña y abierta, ordenando las variables de la más exógena a la más endógena.
 
 Veamos un ejemplo rápido de la *identificación recursiva* mediante la **descomposición de Cholesky**:
 
@@ -1208,7 +1208,7 @@ library(vars)
 load("BD/Datos_Ad.RData")
 
 #
-## Conversion a series de tiempo:
+### Conversión a series de tiempo
 Datos <- ts(Datos_Ad[7: 11], 
             start = c(2000, 1), 
             freq = 12)
@@ -1273,7 +1273,7 @@ especificaciones de modelos VAR(p) con término constante y tendencia de
 las series $LINPC_t$, $LTC_t$, $LCETE28_t$, $LIGAE_t$ y $LIPI_t$.
 
 ```{r warning=FALSE, message=FALSE}
-## VAR(p) Seleccion:
+### Selección de rezagos VAR(p)
 
 VARselect(LDatos, lag.max = 10, type = "both")
 
@@ -1331,7 +1331,7 @@ estará dada por: \begin{eqnarray*}
 \end{eqnarray*}
 
 ```{r warning=FALSE, message=FALSE}
-## VAR Estimacion:
+### Estimación del VAR(p)
 
 VAR_1 <- VAR(LDatos, p = 3, type = "both")
 
@@ -2094,7 +2094,7 @@ Ya que encontramos las expresiones más relevantes, podemos combinar todas para 
 
 Sabemos que el filtro es recursivo. De este modo, para poder correrlo necesitamos *condiciones iniciales* para todos los estados al principio de la muestra ($X_{0|0}$), al igual que para la varianza del error de predicción del estado ($P_{0|0}$). Para muestras pequeñas, las *condiciones iniciales* pueden afectar significativamente los resultados del filtro. Si no tenemos información previa, una opción es asumir que las *condiciones iniciales* de los estados y de la varianza del error de predicción no están lejos de sus valores en estado estacionario. En particular, para modelos estacionarios, se puede establecer que las *condiciones iniciales* son iguales a los valores en estado estacionario.
 
-Ahora, ya que hemos asignado las *condiciones iniciales*, el **Filtro Kalman** corre el algortimo recursivo para cada periodo de tiempo $1,2,...,T$. Cada recursión está compuesta de dos pasos:
+Ahora, ya que hemos asignado las *condiciones iniciales*, el **Filtro Kalman** corre el algoritmo recursivo para cada periodo de tiempo $1,2,...,T$. Cada recursión está compuesta de dos pasos:
 
 - **Paso 1.** Predicción utilizando el *Modelo Estado-Espacio*:
 
@@ -2108,7 +2108,7 @@ Y_{t/t-1} = C X_{t/t-1}.
 (\#eq:P2)
 \end{equation}
 
-- **Paso 2.** Actualización utilzando la información:
+- **Paso 2.** Actualización utilizando la información:
 
 \begin{equation}
 K_t = P_{t/t-1} C' (C P_{t/t-1} C' + R)^{-1},
@@ -2131,7 +2131,7 @@ Para cada periodo $_t$, el **Filtro Kalman** utiliza únicamente la información
 
 Para correr el **Suavizador de Kalman**, necesitamos primero correr el **Filtro Kalman** y obtener todas las estimaciones de los estados: $X_{1/1}, X_{2/2},...,X_{T/T}$.
 
-Después, el algortimo del **Suavizador de Kalman** funciona recursivamente hacia atrás, desde $T-1, T-2,...,1$. Para cada periodo $_{t+1}$, observamos la diferencia entre las estimaciones suavizadas y las estimaciones filtradas de los estados: $X_{t+1/T}-X_{t+1/t}$. El **Suavizador de Kalman** utiliza la diferencia para actualizar las estimaciones filtradas de los estados en el periodo $_t$, con el fin de obtener las estimaciones suavizadas:
+Después, el algoritmo del **Suavizador de Kalman** funciona recursivamente hacia atrás, desde $T-1, T-2,...,1$. Para cada periodo $_{t+1}$, observamos la diferencia entre las estimaciones suavizadas y las estimaciones filtradas de los estados: $X_{t+1/T}-X_{t+1/t}$. El **Suavizador de Kalman** utiliza la diferencia para actualizar las estimaciones filtradas de los estados en el periodo $_t$, con el fin de obtener las estimaciones suavizadas:
 
 \begin{equation}
 X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
@@ -2146,4 +2146,21 @@ knitr::include_graphics("Plots/Filtration.png")
 
 ```
 
-***Nota: Para este ejemplo, se ocupa el QPM básico presentado por IMF (2020) en su curso "Monetary Policy Analysis and Forecasting" que se puede tomar en la plataforma edX. Asimismo, el código de Matlab fue realizado por el IMF.***
+> **Nota:** Para este ejemplo, se ocupa el QPM básico presentado por IMF (2020) en su curso "Monetary Policy Analysis and Forecasting" disponible en la plataforma edX. El código de Matlab fue realizado por el IMF.
+
+## Resumen del capítulo
+
+En este capítulo extendimos el análisis univariado a sistemas multivariados, introduciendo herramientas para capturar la dinámica conjunta de varias series de tiempo.
+
+**Causalidad de Granger.** Dos series $X$ y $Y$ exhiben causalidad de Granger de $X$ a $Y$ cuando la información pasada de $X$ mejora la predicción de $Y$ más allá de lo que aporta la historia de $Y$ sola. Es una noción estadística de precedencia temporal, no de causalidad económica en sentido estricto. El test se implementa comparando las varianzas del error de dos regresiones auxiliares mediante una prueba $F$.
+
+**Modelos VAR(p).** El VAR(p) generaliza el AR(p) a sistemas de $k$ variables, donde cada variable depende de sus propios rezagos y de los rezagos de todas las demás. La condición de estacionariedad requiere que todas las raíces del polinomio matricial característico caigan fuera del círculo unitario. La selección del orden $p$ se realiza mediante los criterios AIC, SC, HQ y FPE. Las funciones de impulso-respuesta (IRF) cuantifican la reacción dinámica del sistema ante un choque unitario en una de las innovaciones.
+
+**VAR Estructural (SVAR).** La identificación de los choques estructurales requiere imponer restricciones adicionales. Los tres enfoques principales son: (i) descomposición de Cholesky (identificación recursiva), que impone una estructura triangular inferior en la matriz de impacto contemporáneo; (ii) restricciones de largo plazo de Blanchard y Quah (1989), que restringen el efecto acumulado permanente de ciertos choques; y (iii) restricciones de signo, que imponen solo la dirección del impacto.
+
+**Cointegración y VEC.** Cuando series no estacionarias $I(1)$ comparten una tendencia estocástica común, se dice que cointegran. El procedimiento de Johansen determina el número de vectores de cointegración (rango de cointegración) mediante las estadísticas de la traza y del máximo valor propio. El modelo VEC (Vector de Corrección de Error) incorpora tanto la dinámica de corto plazo como el ajuste hacia el equilibrio de largo plazo.
+
+**Modelos ARDL.** El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith (2001) permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de $I(0)$ e $I(1)$. La prueba de límites (*bounds test*) contrasta si existe una relación de nivel entre las variables.
+
+**Filtro de Kalman y Modelos Estado-Espacio.** El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones.
+
