@@ -3,10 +3,10 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">A Minimal Book Example</a></li>
+        <li><a href="./">Notas de Series de Tiempo</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+        <li><a href="https://github.com/benjov/Series-Tiempo" target="blank">Repositorio en GitHub</a></li>
+    edit: https://github.com/benjov/Series-Tiempo/edit/main/%s
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:

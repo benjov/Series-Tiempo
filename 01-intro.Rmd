@@ -8,7 +8,7 @@ Este es un trabajo siempre en proceso de mejora, para cualquier comentario o acl
 
 En estas notas se estudian los temas que típicamente son incluidos como parte de un curso estándar de análisis de series de tiempo y agrega otros tantos, los cuales son:
 
-   1. Modelos estacionarios univaraidos: $AR(p)$, $MA(q)$, $ARMA(p, q)$ y $ARIMA(p, d, q)$, y filtros para eliminar estacionalidad, entre otros;
+   1. Modelos estacionarios univariados: $AR(p)$, $MA(q)$, $ARMA(p, q)$ y $ARIMA(p, d, q)$, y filtros para eliminar estacionalidad, entre otros;
 
    2. Modelos no estacionarios univariados y Pruebas de raíz unitaria (o pruebas para determinar que una serie es estacionaria);
    
