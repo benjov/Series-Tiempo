@@ -115,7 +115,7 @@ Ambos casos no son estacionarios en media, pero sí lo son en varianza. De ambos
 
 Antes de presentar las pruebas formales, resulta útil visualizar la diferencia entre un proceso estacionario y uno con raíz unitaria. El siguiente ejemplo simula dos series de $T = 300$ observaciones generadas con el mismo ruido blanco $U_t \sim N(0,1)$: un $AR(1)$ estacionario con $\phi = 0.7$ y una caminata aleatoria ($\phi = 1$).
 
-```{r fig_sim_ur, fig.cap="AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el mismo ruido blanco.", fig.align='center', warning=FALSE}
+```{r fig-sim-ur, fig.cap="AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el mismo ruido blanco.", fig.align='center', warning=FALSE}
 set.seed(2024)
 T   <- 300
 e   <- rnorm(T)

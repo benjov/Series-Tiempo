@@ -342,7 +342,7 @@ Table: (\#tab:estimaciones) Resumen de estimaciones del modelo GARCH(0,1)
 | beta1     | 9.981016e-01  | 3.215075e-05 | 31044.4303 | 0.000000e+00   |
 | shape     | 2.515980e+00  | 2.796609e-02 | 89.9653552 | 0.000000e+00   |
 
-```{r GARCH_0_1}
+```{r GARCH-0-1}
 model.spec = ugarchspec(variance.model = list(model = 'sGARCH' , 
                                               garchOrder = c(0,1)), 
                         mean.model = list(armaOrder = c(2,0)), 
