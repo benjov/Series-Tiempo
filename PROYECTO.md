@@ -67,7 +67,7 @@ Para cada capítulo aplicar:
 - [ ] Revisión ortográfica y de estilo
 - [ ] Optimización de código R (paquetes actualizados, código limpio, reproducible)
 - [ ] Mejora de contenido (claridad, nivel licenciatura UNAM)
-- [ ] Verificar que las referencias bibliográficas estén correctas en `book.bib`
+- [x] ~~Verificar referencias bibliográficas en `book.bib`~~ ✓ 2026-06-18: `book.bib` reescrito con 35 entradas (ADF, PP, KPSS, ZA, Box-Jenkins, ARCH, GARCH, VAR, Cointegración, ARDL, Kalman, HP, panel, Markov-switching, libros de texto). Creado `08-bibliografia.Rmd` para anclar sección al final del libro.
 
 ---
 
