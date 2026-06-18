@@ -31,7 +31,7 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 | `01-intro.Rmd` | Introducción | ~100 | ✓ Redactado 2026-06-18 (sobre notas, estructura, prerrequisitos, R, notación) |
 | `02-Elementos_Eq_Diff.Rmd` | Introducción al Análisis de ST y Ecuaciones en Diferencia | 922 | En revisión |
 | `03-Modelos_STE.Rmd` | Procesos Estacionarios y Modelos Univariados | 2246 | En revisión |
-| `04-No_Estacionarios.Rmd` | Procesos No Estacionarios Univariados | 481 | **Corto**, necesita expansión |
+| `04-No_Estacionarios.Rmd` | Procesos No Estacionarios Univariados | 577 | ✓ Expandido 2026-06-18: simulación caminata aleatoria, prueba Zivot-Andrews, resumen y guía de decisión; typos corregidos |
 | `05-VAR.Rmd` | VAR, Cointegración, ARDL | 2150 | En revisión |
 | `06-Modelos_Volatilidad.Rmd` | Modelos ARCH/GARCH univariados y multivariados | 648 | En revisión |
 | `07-Datos_Panel.Rmd` | Datos Panel, Panel VAR y Modelos No Lineales | 927 | En revisión, modelos no lineales incompletos |
