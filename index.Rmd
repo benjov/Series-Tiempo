@@ -1,7 +1,7 @@
 ---
 title: "Análisis de Series de Tiempo"
 author: "Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruíz"
-date: "`r format(Sys.Date(), '%B de %Y')`"
+date: "`r c('enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre')[as.integer(format(Sys.Date(),'%m'))]` de `r format(Sys.Date(),'%Y')`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
