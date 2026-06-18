@@ -4,22 +4,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Análisis de Series de Tiempo | Notas de Clase: Series de Tiempo</title>
+<title>Análisis de Series de Tiempo</title>
 <meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
-<meta name="description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com">
+<meta name="description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Análisis de Series de Tiempo | Notas de Clase: Series de Tiempo">
+<meta property="og:title" content="Análisis de Series de Tiempo">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com">
+<meta property="og:description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Análisis de Series de Tiempo | Notas de Clase: Series de Tiempo">
-<meta name="twitter:description" content="Estas notas corresponde al curso de Series de Tiempo de la Facultad de Economía de la UNAM. Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com">
+<meta name="twitter:title" content="Análisis de Series de Tiempo">
+<meta name="twitter:description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -30,7 +52,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+        <a href="index.html" title="">Análisis de Series de Tiempo</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -44,12 +66,13 @@
         <ul class="book-toc list-unstyled">
 <li><a class="active" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
-<li><a class="" href="procesos-no-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
-<li><a class="" href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraci%C3%B3n-modelos-ardl-y-filtro-multivariado.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="" href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
+<li><a class="" href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="cap-noestacionarios.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
+<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="" href="cap-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="cap-panel.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
+<li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
 </ul>
 
         <div class="book-extra">
@@ -60,18 +83,49 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="análisis-de-series-de-tiempo" class="section level1 unnumbered">
 <h1>Análisis de Series de Tiempo<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-de-series-de-tiempo"><i class="fas fa-link"></i></a>
 </h1>
-<p><strong>Notas de Clase</strong></p>
-<p><strong>Agosto de 2025</strong></p>
-<p>by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz</p>
+<p><strong>Facultad de Economía, Universidad Nacional Autónoma de México</strong></p>
+<p>Benjamín Oliva · Omar Alfaro Rivera · Emiliano Pérez Caullieres · Luis Gerardo Ruíz</p>
+<p><em>Versión: Junio 2026</em></p>
 <div class="inline-figure"><img src="Portada.jpg" style="display: block; margin: 0 auto" width="400" height="300"></div>
-<div id="contexto-del-documento" class="section level2 unnumbered">
-<h2>Contexto del documento<a class="anchor" aria-label="anchor" href="#contexto-del-documento"><i class="fas fa-link"></i></a>
+<div id="presentación" class="section level2 unnumbered">
+<h2>Presentación<a class="anchor" aria-label="anchor" href="#presentaci%C3%B3n"><i class="fas fa-link"></i></a>
 </h2>
-<p>Estas son notas de clase de la materia de Análisis de Series de Tiempo de la Facultad de Economía de la Universidad Nacional Autónoma de México y de la Clase de Econometría III del Tecnológico de Monterrey.</p>
-<p>Este es un trabajo siempre en proceso de mejora. Para cualquier comentario o aclaración escribir a los correos <a href="mailto:benjov@ciencias.unam.mx" class="email">benjov@ciencias.unam.mx</a> o <a href="mailto:omarxalpha@gmail.com" class="email">omarxalpha@gmail.com</a>.</p>
-<p>La versión PDF de estas notas se encuentra en: <a href="https://github.com/benjov/Series-Tiempo/blob/main/docs/Notas-Series-Tiempo.pdf" class="uri">https://github.com/benjov/Series-Tiempo/blob/main/docs/Notas-Series-Tiempo.pdf</a></p>
-<p>Las tablas de datos empleadas en los diferentes ejemplos se encuentran en: <a href="https://github.com/benjov/Series-Tiempo/tree/main/BD" class="uri">https://github.com/benjov/Series-Tiempo/tree/main/BD</a></p>
-
+<p>Estas notas corresponden al curso de <strong>Análisis de Series de Tiempo</strong> de la Facultad de Economía de la Universidad Nacional Autónoma de México (UNAM) y al curso de <strong>Econometría III</strong> del Tecnológico de Monterrey. Están orientadas a estudiantes de licenciatura con conocimientos previos de econometría y probabilidad, y tienen como objetivo ofrecer una introducción rigurosa pero accesible a los principales modelos de series de tiempo, tanto desde la perspectiva teórica como computacional.</p>
+<p>El material cubre los siguientes temas:</p>
+<ol style="list-style-type: decimal">
+<li>Ecuaciones en diferencia y su relación con los procesos estocásticos.</li>
+<li>Procesos estacionarios y modelos univariados (AR, MA, ARMA, ARIMA).</li>
+<li>Pruebas de raíz unitaria y procesos no estacionarios.</li>
+<li>Modelos multivariados: VAR, cointegración, VEC y ARDL.</li>
+<li>Modelos de volatilidad: ARCH y GARCH univariados y multivariados.</li>
+<li>Datos en panel y modelos no lineales de cambio de régimen.</li>
+</ol>
+<p>Todos los ejemplos se implementan en <strong>R</strong> utilizando paquetes especializados (<code>forecast</code>, <code>urca</code>, <code>vars</code>, <code>rugarch</code>, <code>plm</code>, entre otros). El código está disponible en el repositorio de GitHub junto con las bases de datos empleadas.</p>
+<p>Este es un trabajo en proceso de mejora continua. Para comentarios o correcciones escribir a: <a href="mailto:benjov@ciencias.unam.mx" class="email">benjov@ciencias.unam.mx</a> o <a href="mailto:omarxalpha@gmail.com" class="email">omarxalpha@gmail.com</a>.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="52%">
+<col width="47%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Recurso</th>
+<th align="left">Enlace</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sitio web</td>
+<td align="left"><a href="https://benjov.github.io/Series-Tiempo/" class="uri">https://benjov.github.io/Series-Tiempo/</a></td>
+</tr>
+<tr class="even">
+<td align="left">Repositorio (código y datos)</td>
+<td align="left"><a href="https://github.com/benjov/Series-Tiempo" class="uri">https://github.com/benjov/Series-Tiempo</a></td>
+</tr>
+<tr class="odd">
+<td align="left">Versión PDF</td>
+<td align="left"><a href="https://github.com/benjov/Series-Tiempo/blob/main/docs/Notas-Series-Tiempo.pdf" class="uri">https://github.com/benjov/Series-Tiempo/blob/main/docs/Notas-Series-Tiempo.pdf</a></td>
+</tr>
+</tbody>
+</table></div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -81,7 +135,7 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#an%C3%A1lisis-de-series-de-tiempo">Análisis de Series de Tiempo</a></li>
-<li><a class="nav-link" href="#contexto-del-documento">Contexto del documento</a></li>
+<li><a class="nav-link" href="#presentaci%C3%B3n">Presentación</a></li>
 </ul>
 
       <div class="book-extra">
@@ -98,7 +152,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on 2025-09-30.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on June de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
