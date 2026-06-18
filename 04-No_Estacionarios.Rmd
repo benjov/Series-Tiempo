@@ -534,21 +534,39 @@ El estadístico de la prueba sigue una distribución no estándar cuyos valores 
 
 **Ejemplo**. La siguiente Tabla y el código en R muestran la aplicación de la prueba ZA a la serie $LTC_t$. Rechazamos la hipótesis nula si el estadístico es menor (en valor absoluto más grande) que el valor crítico correspondiente.
 
-Table: (\#tab:ZA-summary) Resumen de resultados de la prueba Zivot-Andrews (ZA) para $LTC_t$.
+```{r tab-ZA-summary, warning=FALSE}
+## Zivot - Andrews: los tres modelos
 
-| **Modelo** | **Estadístico** | **1% CV** | **5% CV** | **10% CV** | **Quiebre estimado** |
-|:-----------|:----------------|:---------:|:---------:|:----------:|:--------------------:|
-| Modelo A   | —               | \(-5.34\) | \(-4.80\) | \(-4.58\)  | —                   |
-| Modelo B   | —               | \(-4.93\) | \(-4.42\) | \(-4.11\)  | —                   |
-| Modelo C   | —               | \(-5.57\) | \(-5.08\) | \(-4.82\)  | —                   |
+za_A <- ur.za(LDatos[, 2], model = "intercept", lag = 5)
+za_B <- ur.za(LDatos[, 2], model = "trend",     lag = 5)
+za_C <- ur.za(LDatos[, 2], model = "both",      lag = 5)
 
-```{r warning=FALSE}
-## Zivot - Andrews
+# Convierte índice de quiebre a cadena "AAAA-MM"
+bp_fecha <- function(x, bp) {
+  t  <- time(x)
+  yr <- floor(t[bp])
+  mo <- round((t[bp] - yr) * 12) + 1
+  paste0(yr, "-", sprintf("%02d", mo))
+}
 
-### NIVELES: Tipo de cambio
+za_df <- data.frame(
+  Modelo      = c("Modelo A (intercepto)", "Modelo B (tendencia)", "Modelo C (ambos)"),
+  Estadistico = round(c(za_A@teststat, za_B@teststat, za_C@teststat), 4),
+  CV_1pct     = c(za_A@cval[1], za_B@cval[1], za_C@cval[1]),
+  CV_5pct     = c(za_A@cval[2], za_B@cval[2], za_C@cval[2]),
+  CV_10pct    = c(za_A@cval[3], za_B@cval[3], za_C@cval[3]),
+  Quiebre     = c(bp_fecha(LDatos[, 2], za_A@bpoint),
+                  bp_fecha(LDatos[, 2], za_B@bpoint),
+                  bp_fecha(LDatos[, 2], za_C@bpoint))
+)
 
-summary(ur.za(LDatos[, 2], model = "both", lag = 5))
-
+knitr::kable(
+  za_df,
+  col.names = c("Modelo", "Estadístico", "CV 1%", "CV 5%", "CV 10%", "Quiebre est."),
+  caption   = "Resumen de resultados de la prueba Zivot-Andrews (ZA) para $LTC_t$.",
+  align     = c("l", "r", "r", "r", "r", "r"),
+  booktabs  = TRUE
+)
 ```
 
 ## Resumen y Guía de Decisión
