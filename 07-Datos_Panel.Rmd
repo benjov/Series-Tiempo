@@ -36,7 +36,7 @@ Al igual que en el caso univariado, en este tipo de pruebas buscamos identificar
     H_0 : \rho_i = 0
 \end{equation}
 
-Por su parte, en el caso de la hipótesis nula tendremos dos:
+Por su parte, en el caso de la hipótesis alternativa tendremos dos:
 \begin{itemize}
     \item $H_1^A :$ Todas las series son I(0) -- caso homogéneo, o
     
@@ -45,7 +45,7 @@ Por su parte, en el caso de la hipótesis nula tendremos dos:
 
 ### Ejemplo: Pruebas de Raíces Unitarias en Panel
 
-Dependencies and Setup
+Dependencias y configuración:
 
 ```{r setup_Panel, include = FALSE, warning = FALSE, message = FALSE}
 
@@ -53,7 +53,7 @@ library(plm)
 
 ```
 
-Download data from library PLM
+Descarga de datos de la librería `plm`:
 
 ```{r DataPanel}
 
@@ -67,7 +67,7 @@ data("Wages", package="plm")
 
 ```
 
-Describe data: Grunfeld data (Grunfeld 1958) comprising 20 annual observations on the three variables real gross investment (invest), real value of the firm (value), and real value of the capital stock (capital) for 10 large US firms for the years 1935–1954
+Descripción de los datos: Grunfeld (1958) contiene 20 observaciones anuales de inversión bruta real (invest), valor real de la empresa (value) y valor real del capital (capital) para 10 grandes empresas de EE.UU. durante 1935–1954.
 
 ```{r}
 
@@ -99,7 +99,7 @@ names(Invest)
 
 ```
 
-Plot:
+Gráfica:
 
 ```{r fig111, fig.cap = "Evolución de la inversión por empresa", fig.align='center'}
 
@@ -120,7 +120,7 @@ legend("topleft", legend=c("Firm_1", "Firm_2", "Firm_3", "Firm_4", "Firm_5",
 
 ```
 
-Unit Root Test: Test specifies the type of test to be performed among Levin et al. (2002), Im et al. (2003), Maddala and Wu (1999) and Hadri (2000)
+Prueba de raíz unitaria en panel (Levin et al. 2002, Im et al. 2003, Maddala y Wu 1999, Hadri 2000):
 
 Consider Levin et al. (2002)
 
@@ -131,7 +131,7 @@ purtest(log(Invest), test = "levinlin", exo = "intercept",
 
 ```
 
-Same via:
+Alternativamente:
 
 ```{r}
 
@@ -188,7 +188,7 @@ summary(purtest(ts_DLInvest, test = "ips", exo = "intercept",
 
 Este ejemplo modela el efecto que tiene que una empresa de laboratorios de análisis clínicos compre a sus competidores en diferentes ciudades del país. Para lo cual usaremos información del Índice Nacional de Precios al Consumidor de los servicios de análisis clínicos.
 
-Dependencies and Setup
+Dependencias y configuración:
 
 ```{r setup_Dif, include = FALSE, warning = FALSE, message = FALSE}
 
@@ -291,7 +291,7 @@ Data <- Data[ which( Data$Ciudad != 'Atlacomulco, Edo. de Méx.' &
 
 ```
 
-Tranformaciones:
+Transformaciones:
 
 ```{r}
 # Log de INPC
@@ -384,7 +384,7 @@ Data$Periodo <- factor(Data$Fecha, order = TRUE,
 
 ```
 
-Plot
+Gráfica:
 
 ```{r echo = TRUE}
 
@@ -401,7 +401,7 @@ Data %>%
 
 Hagamos una pruebas de Raíces Unitarias.
 
-Change to format wide:
+Conversión a formato ancho:
 
 ```{r echo = FALSE}
 
@@ -411,7 +411,7 @@ head(LINPC)
 
 ```
 
-Time Series:
+Series de tiempo:
 
 ```{r}
 
@@ -427,9 +427,9 @@ ts_DLINPC <- diff(ts( LINPC[c( 2:48 )],
 
 ```
 
-Unit Root Test: Test specifies the type of test to be performed among Levin et al. (2002), Im et al. (2003), Maddala and Wu (1999) and Hadri (2000)
+Prueba de raíz unitaria en panel:
 
-Optimal lags:
+Rezagos óptimos:
 \begin{eqnarray*}
   p & = & Int(4*(T/100)^{(1/4)}) \\
    & = & Int(4*(244/100)^{(1/4)}) \\
@@ -437,7 +437,7 @@ Optimal lags:
    & = & 4
 \end{eqnarray*}
 
-Consider Levin et al. (2002):
+Prueba de Levin et al. (2002):
 
 ```{r}
 
@@ -453,7 +453,7 @@ purtest(ts_DLINPC, test = "levinlin", exo = "trend", # exo = c("none", "intercep
 
 ```
 
-Consider Choi (2001):
+Prueba de Choi (2001):
 
 ```{r}
 
@@ -469,7 +469,7 @@ purtest(ts_DLINPC, test = "logit", exo = "trend", # exo = c("none", "intercept",
 
 ```
 
-Consider Hadri (2000):
+Prueba de Hadri (2000):
 
 ```{r}
 
@@ -537,7 +537,7 @@ La ecuación \@ref(eq:eqDinamicPVAR) se estima por un GMM.
 
 ## Ejemplos: Panel VAR(p)
 
-Dependencies and Setup
+Dependencias y configuración:
 ```{r setup_PVAR, include = FALSE, warning = FALSE, message = FALSE}
 
 library(panelvar)
@@ -547,7 +547,7 @@ library(panelvar)
 ### Ejemplo 1
 
 We used the dynamic panel literature by Arellano and Bond (1991), Blundell and Bond (1998) and Roodman (2009b). 
-This data set describes employment, wages, capital and output of 140 firms in the United Kingdom from 1976 to 1984. 
+Este conjunto de datos describe el empleo, los salarios, el capital y la producción de 140 empresas en el Reino Unido durante 1976–1984. 
 We estimate: Employment is explained by past values of employment ("l" lags), current and first lag of wages and output and current value of capital. 
 
 ```{r echo = FALSE}
@@ -625,7 +625,7 @@ summary(ex1_dahlberg_data)
 
 ```
 
-Model selection procedure of Andrews and Lu (2001) to select the optimal lag length for our example
+Selección de rezagos óptimos mediante el procedimiento de Andrews y Lu (2001):
 
 ```{r}
 
@@ -662,7 +662,7 @@ Andrews_Lu_MMSC(ex2_dahlberg_data)
 
 ```
 
-Sstability of the autoregressive process:
+Estabilidad del proceso autorregresivo:
 
 ```{r}
 
@@ -674,7 +674,7 @@ plot(stab_ex1_dahlberg_data)
 
 ```
 
-Generate impulse response functions.
+Funciones de impulso-respuesta (comentadas; descomentar para ejecutar):
 
 ```{r}
 
@@ -693,7 +693,9 @@ Generate impulse response functions.
 
 ## Cointegración
 
-[PENDIENTE]
+La extensión de los conceptos de cointegración al contexto panel sigue la misma lógica que en el caso univariado: si las series $Y_{it}$ son $I(1)$ pero existe una combinación lineal estacionaria, se dice que cointegran. El procedimiento más utilizado es el propuesto por Pedroni (1999, 2004), que plantea siete estadísticos de prueba bajo la hipótesis nula de no cointegración, permitiendo tanto coeficientes de cointegración homogéneos como heterogéneos entre individuos.
+
+> **Nota:** El desarrollo completo de las pruebas de cointegración en panel (Pedroni, Kao, Westerlund) y el modelo de corrección de error en panel (PVEC) se incluirá en una versión posterior de estas notas.
 
 
 ## Modelos No Lineales
@@ -704,7 +706,7 @@ En años recientes, los modelos de serie de tiempo han sido incorporados en aná
 
 En general distinguimos que existen dos tipos de modelos:
 \begin{enumerate}
-    \item Modelos caracterizados por una variable observable, por lo que tenemos certeza de los régimanes en cada uno de los momentos.
+    \item Modelos caracterizados por una variable observable, por lo que tenemos certeza de los regímenes en cada uno de los momentos.
     
     \item Modelos en los que el régimen no puede ser observado por una variable, pero si conocemos el proceso estocástico subyacente. 
 \end{enumerate}
@@ -832,7 +834,7 @@ Donde las probabilidades de transición estarán dadas por:
     p_{ij} = \mathbb{P}(s_t = j | s_{t-1} = i) \text{ para } i , j = 1, 2, \ldots, m
 \end{equation}
 
-Donde la ecuación anterior satisface que $p_{ij} > 0$, $\forall i, j = = 1, 2, \ldots, m$ y que:
+Donde la ecuación anterior satisface que $p_{ij} > 0$, $\forall i, j = 1, 2, \ldots, m$ y que:
 \begin{equation*}
     \sum_{j=1}^m p_{ij} = 1 \text{ para } i = 1, 2, \ldots, m
 \end{equation*}
@@ -841,20 +843,20 @@ Finalmente, plantearemos el procedimiento empírico seguido para la estimación 
 \begin{enumerate}
     \item Estimar un proceso AR(p)
     
-    \item Probar una hipótesis nula de no linealidad de acurdo con alguno de los modelos SERAR, STAR o MSM
+    \item Probar una hipótesis nula de no linealidad de acuerdo con alguno de los modelos SERAR, STAR o MSM
     
     \item Estimar lo parámetros
     
-    \item Evluar los resultados del modelo
+    \item Evaluar los resultados del modelo
     
     \item Ajustar, en su caso, la estimación o modelo
     
-    \item Pronósticar o realizar análisis impluso-respuesta
+    \item Pronosticar o realizar análisis impulso-respuesta
 \end{enumerate}
 
-## Ejemplo: Modelos de Cambio de Regímen (TAR)
+## Ejemplo: Modelos de Cambio de Régimen (TAR)
 
-Dependencies and Setup:
+Dependencias y configuración:
 
 ```{r setupTAR, include = FALSE, warning = FALSE, message = FALSE}
 
@@ -863,7 +865,7 @@ library(tsDyn)
 
 ```
 
-Data: Monthly rates of deaths due to flu in the United States for 11 years
+Datos: tasas mensuales de muertes por gripe en Estados Unidos (11 años):
 
 ```{r echo = FALSE}
 
@@ -873,7 +875,7 @@ head(flu)
 
 ```
 
-Convert time series
+Conversión a series de tiempo:
 
 ```{r}
 
@@ -883,7 +885,7 @@ D_flu = diff(flu, lag = 1)
 
 ```
 
-Plotting
+Gráficas:
 
 ```{r}
 
@@ -895,7 +897,7 @@ plot(D_flu, type="b", col = "darkred", ylab = "",
 
 ```
 
-The tsDyn package in R has simplified this code into a handful of steps:
+El paquete `tsDyn` simplifica la estimación en pocos pasos:
 
 ```{r}
 
@@ -913,7 +915,7 @@ plot(D_flu_tar4_05)
 
 ```
 
-If we do not provide a threshold to the th option, setar searches over a grid to choose a threshold ~ 0.038:
+Si no se especifica el umbral (`th`), `setar` lo busca automáticamente en una grilla (resultado típico: ~0.038):
 
 ```{r}
 
@@ -924,3 +926,23 @@ summary(D_flu_tar4)
 plot(D_flu_tar4)
 
 ```
+
+## Resumen del capítulo
+
+Este capítulo amplió el análisis de series de tiempo a dos dimensiones adicionales: la dimensión transversal (datos panel) y la no linealidad (modelos de cambio de régimen).
+
+**Datos panel.** Los datos panel combinan series de tiempo para múltiples individuos o unidades ($N$ individuos, $T$ periodos). El modelo básico incluye efectos fijos $\alpha_i$ que capturan heterogeneidad no observada constante en el tiempo. Las pruebas de raíz unitaria en panel (Levin et al. 2002, Im et al. 2003, Maddala y Wu 1999, Hadri 2000) amplían el poder estadístico al explotar la dimensión transversal; plantean hipótesis nulas de no estacionariedad con hipótesis alternativas homogéneas o heterogéneas según la prueba.
+
+**Diferencia en diferencias (DiD).** El estimador DiD identifica el efecto causal de un tratamiento comparando la variación en el tiempo del grupo tratado con la del grupo de control. Su validez descansa en el supuesto de tendencias paralelas: en ausencia del tratamiento, ambos grupos habrían seguido trayectorias paralelas.
+
+**Panel VAR.** El Panel VAR (PVAR) combina las ventajas del VAR clásico con la dimensión transversal del panel. Se estima mediante GMM con instrumentos basados en los rezagos de las propias variables, controlando por efectos fijos mediante transformación de primeras diferencias o desviaciones ortogonales. La selección del número de rezagos sigue el criterio de Andrews y Lu (2001).
+
+**Modelos no lineales.** Cuando la dinámica de una serie cambia de forma discreta según el estado del sistema, los modelos de cambio de régimen son más apropiados que los modelos lineales.
+
+- *TAR (Threshold Autoregressive):* el régimen depende de si una variable observable supera un umbral $c$. En la variante SETAR, el umbral lo determina la propia serie rezagada.
+
+- *STAR (Smooth Transition AR):* la transición entre regímenes es gradual y está gobernada por una función logística paramétrica $G(y_{t-1};\gamma,c)$.
+
+- *Markov Switching (MSM):* el régimen $s_t$ es una variable latente que sigue una cadena de Markov de primer orden. Las probabilidades de transición $p_{ij} = \mathbb{P}(s_t = j \mid s_{t-1} = i)$ son estimadas junto con los parámetros del modelo AR condicional al régimen.
+
+En todos los casos, el procedimiento empírico incluye: estimar un AR(p) lineal, probar la hipótesis de linealidad, estimar el modelo no lineal seleccionado, evaluar resultados y, finalmente, generar pronósticos o funciones de impulso-respuesta.
