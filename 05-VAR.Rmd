@@ -653,28 +653,21 @@ VAR(2).
 
 ```{r warning=FALSE, message=FALSE}
 
-### Diagnostic tests
+# --- Pruebas de diagnóstico ---
 
-**Normalidad:**
-
+# Normalidad (Jarque-Bera multivariado):
 normality.test(VAR_p)
 
-**Autocorrelación Serial:**
-
-**LAGS = 2:**
-
+# Autocorrelación serial — LAGS = 2:
 serial.test(VAR_p, lags.bg = 2, type = "BG")
 
-**LAGS = 4:**
-
+# Autocorrelación serial — LAGS = 4:
 serial.test(VAR_p, lags.bg = 4, type = "BG")
 
-**LAGS = 6:**
-
+# Autocorrelación serial — LAGS = 6:
 serial.test(VAR_p, lags.bg = 6, type = "BG")
 
-**Homocedasticidad:**
-
+# Homocedasticidad (ARCH multivariado):
 arch.test(VAR_p, lags.multi = 6)
 
 ```
