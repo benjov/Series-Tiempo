@@ -4,22 +4,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Introducción | Notas de Clase: Series de Tiempo</title>
+<title>Capítulo 1 Introducción | Análisis de Series de Tiempo</title>
 <meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
-<meta name="description" content="Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014),...">
+<meta name="description" content="1.1 Sobre estas notas Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009),...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Introducción | Notas de Clase: Series de Tiempo">
+<meta property="og:title" content="Capítulo 1 Introducción | Análisis de Series de Tiempo">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014),...">
+<meta property="og:description" content="1.1 Sobre estas notas Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009),...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Introducción | Notas de Clase: Series de Tiempo">
-<meta name="twitter:description" content="Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014),...">
+<meta name="twitter:title" content="Capítulo 1 Introducción | Análisis de Series de Tiempo">
+<meta name="twitter:description" content="1.1 Sobre estas notas Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009),...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -30,7 +52,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">Notas de Clase: Series de Tiempo</a>
+        <a href="index.html" title="">Análisis de Series de Tiempo</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -44,12 +66,13 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Análisis de Series de Tiempo</a></li>
 <li><a class="active" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
-<li><a class="" href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
-<li><a class="" href="procesos-estacionarios-y-modelos-univariados.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
-<li><a class="" href="procesos-no-estacionarios-univariados.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
-<li><a class="" href="causalidad-de-granger-modelos-multivariados-de-vectores-autoregresivos-y-de-cointegraci%C3%B3n-modelos-ardl-y-filtro-multivariado.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
-<li><a class="" href="modelos-univariados-y-multivariados-de-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
-<li><a class="" href="modelos-de-datos-panel-panel-var-y-otros-modelos-no-lineales.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
+<li><a class="" href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
+<li><a class="" href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
+<li><a class="" href="cap-noestacionarios.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
+<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="" href="cap-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
+<li><a class="" href="cap-panel.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
+<li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
 </ul>
 
         <div class="book-extra">
@@ -59,29 +82,140 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introducción" class="section level1" number="1">
 <h1>
-<span class="header-section-number">1</span> Introducción<a class="anchor" aria-label="anchor" href="#introducci%C3%B3n"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Capítulo 1</span> Introducción<a class="anchor" aria-label="anchor" href="#introducci%C3%B3n"><i class="fas fa-link"></i></a>
 </h1>
-<p>Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgassner, Wolters, y Hassler (2012), Lutkepohl (2005), Wei (2019), entre otros. En algunos casos se incorpora información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).</p>
-<p>El objetivo de este documento es proporcionar un conjunto de apuntes o notas que sirvan de apoyo para la clase de Series de Tiempo en la Facultad de Economía de la UNAM. Por esta razón, no deben considerarse como notas exhaustivas o como un sustituto de la clase y los laboratorios. Asimismo, es deseable que los alumnos puedan aportar sus observaciones y correcciones a estas notas, las observaciones a estas notas son esperadas y siempre serán bienvenidas y agradecidas.</p>
-<p>Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo <a href="mailto:benjov@ciencias.unam.mx" class="email">benjov@ciencias.unam.mx</a> o <a href="mailto:omarxalpha@gmail.com" class="email">omarxalpha@gmail.com</a>.</p>
-<p>En estas notas se estudian los temas que típicamente son incluidos como parte de un curso estándar de análisis de series de tiempo y agrega otros tantos, los cuales son:</p>
-<ol style="list-style-type: decimal">
-<li><p>Modelos estacionarios univaraidos: <span class="math inline">\(AR(p)\)</span>, <span class="math inline">\(MA(q)\)</span>, <span class="math inline">\(ARMA(p, q)\)</span> y <span class="math inline">\(ARIMA(p, d, q)\)</span>, y filtros para eliminar estacionalidad, entre otros;</p></li>
-<li><p>Modelos no estacionarios univariados y Pruebas de raíz unitaria (o pruebas para determinar que una serie es estacionaria);</p></li>
-<li><p>Modelos multivariados, entre lo que se incluye a los Vectores Autoregresivos (VAR) y los procedimientos de Cointegración</p></li>
-<li><p>Modelación de series univariadas con errores con heterocedasticidad y autocorrelación: ARCH(r), GARCH(n), etc.;</p></li>
-<li><p>Modelos multivariados con errores con heterocedasticidad y autocorrelación: M-GARCH y M-GARCH-M;</p></li>
-<li><p>Casos particulares en los que las series incluidas en un modelo multivariado no son del mismo orden de integración, conocidos como modelos ADRL.</p></li>
-<li><p>Modelos de Datos Panel en series de tiempo, y</p></li>
-<li><p>Modelos no lineales como los de cambios de régimen.</p></li>
-</ol>
+<div id="sobre-estas-notas" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Sobre estas notas<a class="anchor" aria-label="anchor" href="#sobre-estas-notas"><i class="fas fa-link"></i></a>
+</h2>
+<p>Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgässner, Wolters y Hassler (2012), Lütkepohl (2005), Wei (2019), entre otros. En algunos casos se incorpora información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).</p>
+<p>El objetivo de este documento es proporcionar un conjunto de apuntes que sirvan de apoyo para la clase de Análisis de Series de Tiempo en la Facultad de Economía de la UNAM. Por esta razón, no deben considerarse como notas exhaustivas ni como un sustituto de la clase y los laboratorios. Es deseable que los alumnos aporten sus observaciones y correcciones; los comentarios a estas notas son siempre bienvenidos y agradecidos.</p>
+<p>Para cualquier comentario o aclaración escribir a los correos <a href="mailto:benjov@ciencias.unam.mx" class="email">benjov@ciencias.unam.mx</a> o <a href="mailto:omarxalpha@gmail.com" class="email">omarxalpha@gmail.com</a>.</p>
+</div>
+<div id="estructura-del-libro" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Estructura del libro<a class="anchor" aria-label="anchor" href="#estructura-del-libro"><i class="fas fa-link"></i></a>
+</h2>
+<p>En estas notas se estudian los temas que típicamente se incluyen en un curso estándar de análisis de series de tiempo, además de algunos tópicos adicionales. Los capítulos están organizados de la siguiente manera:</p>
+<p><strong>Capítulo <a href="cap-eqdiff.html#cap-eqdiff">2</a>. Elementos de Ecuaciones en Diferencia</strong> — Se presentan los conceptos fundamentales de las ecuaciones en diferencia, herramienta matemática central para modelar la dinámica de las series de tiempo. Se introduce la notación del operador de rezagos y se estudian las condiciones de estabilidad de procesos lineales.</p>
+<p><strong>Capítulo <a href="cap-estacionarios.html#cap-estacionarios">3</a>. Procesos Estacionarios y Modelos Univariados</strong> — Se definen formalmente los conceptos de estacionariedad y ergodicidad. Se estudian los modelos autorregresivos <span class="math inline">\(AR(p)\)</span>, de medias móviles <span class="math inline">\(MA(q)\)</span>, mixtos <span class="math inline">\(ARMA(p,q)\)</span>, y su extensión integrada <span class="math inline">\(ARIMA(p,d,q)\)</span>. Se incluyen también modelos con variables exógenas <span class="math inline">\(ARIMAX\)</span> y procedimientos de desestacionalización.</p>
+<p><strong>Capítulo <a href="cap-noestacionarios.html#cap-noestacionarios">4</a>. Procesos No Estacionarios Univariados</strong> — Se estudian los procesos con raíz unitaria y las principales pruebas estadísticas para detectarlos: Dickey-Fuller, Dickey-Fuller Aumentada (ADF) y Phillips-Perron, entre otras. Se analiza la diferencia entre tendencia determinística y tendencia estocástica.</p>
+<p><strong>Capítulo <a href="cap-var.html#cap-var">5</a>. Modelos Multivariados: VAR y Cointegración</strong> — Se extiende el análisis univariado al caso de múltiples series. Se presentan los Vectores Autoregresivos (<span class="math inline">\(VAR\)</span>), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos (<span class="math inline">\(ARDL\)</span>).</p>
+<p><strong>Capítulo <a href="cap-volatilidad.html#cap-volatilidad">6</a>. Modelos de Volatilidad</strong> — Se introducen los modelos que capturan heterocedasticidad condicional: <span class="math inline">\(ARCH(r)\)</span>, <span class="math inline">\(GARCH(p,q)\)</span> y sus extensiones multivariadas (<span class="math inline">\(M\)</span>-<span class="math inline">\(GARCH\)</span>). Se discute su aplicación a datos financieros de alta frecuencia.</p>
+<p><strong>Capítulo <a href="cap-panel.html#cap-panel">7</a>. Modelos de Datos Panel y Modelos No Lineales</strong> — Se aborda el análisis de datos panel con dimensión temporal, incluyendo pruebas de raíz unitaria en panel y modelos Panel-VAR. Se introduce también la modelación no lineal mediante modelos de cambio de régimen (Markov-Switching).</p>
+</div>
+<div id="prerrequisitos" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Prerrequisitos<a class="anchor" aria-label="anchor" href="#prerrequisitos"><i class="fas fa-link"></i></a>
+</h2>
+<p>Estas notas asumen que el lector tiene conocimientos previos de:</p>
+<ul>
+<li>
+<strong>Probabilidad y estadística</strong>: variables aleatorias, distribuciones de probabilidad, esperanza matemática, varianza y covarianza.</li>
+<li>
+<strong>Econometría básica</strong>: regresión lineal por Mínimos Cuadrados Ordinarios (MCO), pruebas de hipótesis, problemas de autocorrelación y heterocedasticidad.</li>
+<li>
+<strong>Álgebra lineal</strong>: operaciones con matrices, valores y vectores propios.</li>
+<li>
+<strong>Cálculo</strong>: derivadas e integrales básicas.</li>
+</ul>
+<p>El dominio de R a nivel introductorio es deseable, aunque no indispensable para seguir los ejemplos. La Sección <a href="introducci%C3%B3n.html#sec-R">1.4</a> ofrece una guía de los paquetes empleados a lo largo del texto.</p>
+</div>
+<div id="sec-R" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Software: R<a class="anchor" aria-label="anchor" href="#sec-R"><i class="fas fa-link"></i></a>
+</h2>
+<p>Todos los ejemplos y ejercicios en estas notas están programados en <strong>R</strong> <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-R-base">R Core Team 2023</a>)</span>, un entorno de software libre para cómputo estadístico y gráficos. R puede descargarse gratuitamente desde <a href="https://cran.r-project.org">https://cran.r-project.org</a>. Se recomienda también instalar <strong>RStudio</strong> como entorno de desarrollo integrado (IDE), disponible en <a href="https://posit.co/downloads">https://posit.co/downloads</a>.</p>
+<p>Los paquetes de R utilizados con mayor frecuencia a lo largo de estas notas son:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="32%">
+<col width="67%">
+</colgroup>
+<thead><tr class="header">
+<th>Paquete</th>
+<th>Propósito principal</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>readxl</code></td>
+<td>Importación de datos desde archivos Excel</td>
+</tr>
+<tr class="even">
+<td><code>ggplot2</code></td>
+<td>Visualización de datos</td>
+</tr>
+<tr class="odd">
+<td><code>forecast</code></td>
+<td>Modelación y pronóstico de series de tiempo (ARIMA, etc.)</td>
+</tr>
+<tr class="even">
+<td><code>tseries</code></td>
+<td>Pruebas de raíz unitaria (ADF, KPSS, etc.)</td>
+</tr>
+<tr class="odd">
+<td><code>urca</code></td>
+<td>Pruebas de raíz unitaria y cointegración</td>
+</tr>
+<tr class="even">
+<td><code>vars</code></td>
+<td>Estimación de modelos VAR y VEC</td>
+</tr>
+<tr class="odd">
+<td><code>rugarch</code></td>
+<td>Modelos GARCH univariados</td>
+</tr>
+<tr class="even">
+<td><code>rmgarch</code></td>
+<td>Modelos GARCH multivariados</td>
+</tr>
+<tr class="odd">
+<td><code>plm</code></td>
+<td>Modelos de datos panel</td>
+</tr>
+<tr class="even">
+<td><code>MSwM</code></td>
+<td>Modelos de cambio de régimen (Markov-Switching)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Para instalar todos los paquetes necesarios en una sola instrucción:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"readxl"</span>, <span class="st">"ggplot2"</span>, <span class="st">"forecast"</span>, <span class="st">"tseries"</span>, <span class="st">"urca"</span>,</span>
+<span>                   <span class="st">"vars"</span>, <span class="st">"rugarch"</span>, <span class="st">"rmgarch"</span>, <span class="st">"plm"</span>, <span class="st">"MSwM"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Los datos empleados en los ejemplos están disponibles en la carpeta <code>BD/</code> del repositorio del proyecto en GitHub: <a href="https://github.com/benjov/Series-Tiempo/tree/main/BD">https://github.com/benjov/Series-Tiempo/tree/main/BD</a>.</p>
+</div>
+<div id="convenciones-notacionales" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Convenciones notacionales<a class="anchor" aria-label="anchor" href="#convenciones-notacionales"><i class="fas fa-link"></i></a>
+</h2>
+<p>A lo largo del texto se usan las siguientes convenciones:</p>
+<ul>
+<li>Las series de tiempo se denotan con letras mayúsculas: <span class="math inline">\(X_t\)</span>, <span class="math inline">\(Y_t\)</span>, <span class="math inline">\(Z_t\)</span>.</li>
+<li>Los parámetros poblacionales se denotan con letras griegas: <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\phi\)</span>, <span class="math inline">\(\theta\)</span>.</li>
+<li>El operador de rezagos se denota con <span class="math inline">\(L\)</span>, de modo que <span class="math inline">\(L^k X_t = X_{t-k}\)</span>.</li>
+<li>El operador de primeras diferencias se denota con <span class="math inline">\(\Delta\)</span>, de modo que <span class="math inline">\(\Delta X_t = X_t - X_{t-1}\)</span>.</li>
+<li>
+<span class="math inline">\(\mathbb{E}[\cdot]\)</span> denota la esperanza matemática (o valor esperado).</li>
+<li>
+<span class="math inline">\(\text{Var}(\cdot)\)</span> y <span class="math inline">\(\text{Cov}(\cdot, \cdot)\)</span> denotan la varianza y covarianza, respectivamente.</li>
+<li>Las ecuaciones numeradas se referencian como, por ejemplo, la ecuación <a href="cap-estacionarios.html#eq:Serie">(3.2)</a>.</li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Análisis de Series de Tiempo</a></div>
-<div class="next"><a href="introducci%C3%B3n-al-an%C3%A1lisis-de-series-de-tiempo-y-elementos-de-ecuaciones-en-diferencia.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></div>
+<div class="next"><a href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#introducci%C3%B3n"><span class="header-section-number">1</span> Introducción</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducci%C3%B3n"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="nav-link" href="#sobre-estas-notas"><span class="header-section-number">1.1</span> Sobre estas notas</a></li>
+<li><a class="nav-link" href="#estructura-del-libro"><span class="header-section-number">1.2</span> Estructura del libro</a></li>
+<li><a class="nav-link" href="#prerrequisitos"><span class="header-section-number">1.3</span> Prerrequisitos</a></li>
+<li><a class="nav-link" href="#sec-R"><span class="header-section-number">1.4</span> Software: R</a></li>
+<li><a class="nav-link" href="#convenciones-notacionales"><span class="header-section-number">1.5</span> Convenciones notacionales</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -97,7 +231,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Notas de Clase: Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on 2025-09-30.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on June de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
