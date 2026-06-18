@@ -1,4 +1,4 @@
-# Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales
+# Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales {#cap-panel}
 
 ## Modelos de Datos Panel y Panel VAR
 

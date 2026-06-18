@@ -1,11 +1,4 @@
----
-editor_options:
-  markdown:
-    wrap: 72
-output: pdf_document
----
-
-# Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado
+# Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado {#cap-var}
 
 En este capítulo removeremos el supuesto de que el análisis es
 univariado, ya que introduciremos la posibilidad de que los procesos

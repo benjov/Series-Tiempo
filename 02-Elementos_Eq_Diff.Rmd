@@ -1,4 +1,4 @@
-# Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia
+# Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia {#cap-eqdiff}
 
 ## La naturaleza de los datos de Series de Tiempo 
 

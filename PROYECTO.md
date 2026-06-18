@@ -27,14 +27,14 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 
 | Archivo | Título | Líneas | Estado |
 |---------|--------|--------|--------|
-| `index.Rmd` | Portada y contexto | 53 | Funcional, revisar |
-| `01-intro.Rmd` | Introducción | 26 | **Problema**: usado como carátula, necesita contenido real |
-| `02-Elementos_Eq_Diff.Rmd` | Elementos de Ecuaciones en Diferencia | 921 | En revisión |
-| `03-Modelos_STE.Rmd` | Modelos Estacionarios (AR, MA, ARMA, ARIMA, ARIMAX) | 2245 | En revisión |
-| `04-No_Estacionarios.Rmd` | Procesos No Estacionarios y Pruebas de Raíz Unitaria | 480 | **Corto**, necesita expansión |
-| `05-VAR.Rmd` | VAR, Cointegración, ARDL | 2156 | En revisión |
-| `06-Modelos_Volatilidad.Rmd` | Modelos ARCH/GARCH univariados y multivariados | 647 | En revisión |
-| `07-Datos_Panel.Rmd` | Datos Panel, Panel VAR y Modelos No Lineales | 926 | En revisión, modelos no lineales incompletos |
+| `index.Rmd` | Portada y contexto | 53 | Funcional, revisar fecha |
+| `01-intro.Rmd` | Introducción | ~100 | ✓ Redactado 2026-06-18 (sobre notas, estructura, prerrequisitos, R, notación) |
+| `02-Elementos_Eq_Diff.Rmd` | Introducción al Análisis de ST y Ecuaciones en Diferencia | 922 | En revisión |
+| `03-Modelos_STE.Rmd` | Procesos Estacionarios y Modelos Univariados | 2246 | En revisión |
+| `04-No_Estacionarios.Rmd` | Procesos No Estacionarios Univariados | 481 | **Corto**, necesita expansión |
+| `05-VAR.Rmd` | VAR, Cointegración, ARDL | 2150 | En revisión |
+| `06-Modelos_Volatilidad.Rmd` | Modelos ARCH/GARCH univariados y multivariados | 648 | En revisión |
+| `07-Datos_Panel.Rmd` | Datos Panel, Panel VAR y Modelos No Lineales | 927 | En revisión, modelos no lineales incompletos |
 
 ---
 
@@ -52,7 +52,9 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 - [x] ~~`_bookdown.yml`: `chapter_name: "Chapter "` → debe ser `"Capítulo "` (está en inglés)~~ ✓ Corregido 2026-06-18
 - [x] ~~`_output.yml`: Tiene texto del demo de bookdown: "A Minimal Book Example" y URL de `rstudio/bookdown-demo`~~ ✓ Corregido 2026-06-18 (título, enlace al repo real y URL de edición)
 - [x] ~~`01-intro.Rmd`: Typo "univaraidos"~~ ✓ Corregido 2026-06-18
-- [ ] `01-intro.Rmd`: Capítulo demasiado corto (26 líneas); necesita redacción como introducción real con motivación y estructura del libro
+- [x] ~~`01-intro.Rmd`: Capítulo demasiado corto~~ ✓ Reescrito 2026-06-18 con 6 secciones: sobre las notas, estructura del libro, prerrequisitos, R, convenciones notacionales
+- [x] ~~Capítulos sin etiqueta de referencia cruzada~~ ✓ Agregado `{#cap-xxx}` a los 6 capítulos 2026-06-18
+- [x] ~~`05-VAR.Rmd`: Tenía YAML `output: pdf_document` inválido para bookdown~~ ✓ Eliminado 2026-06-18
 - [ ] `index.Rmd`: La fecha usa `r Sys.Date()` — para la versión PDF editorial conviene fijar una fecha de publicación
 - [x] ~~`_publish.R`: Script demo del template~~ ✓ Eliminado 2026-06-18
 - [x] ~~`_book/`: Directorio de artefactos de build antiguos~~ ✓ Eliminado 2026-06-18
