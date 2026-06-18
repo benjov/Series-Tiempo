@@ -1,10 +1,392 @@
+%% Bibliografía: Notas de Análisis de Series de Tiempo
+%% Facultad de Economía, UNAM
+
+%% ---- Libros de texto generales ----
+
 @Book{xie2015,
-  title = {Dynamic Documents with {R} and knitr},
-  author = {Yihui Xie},
+  title     = {Dynamic Documents with {R} and knitr},
+  author    = {Yihui Xie},
   publisher = {Chapman and Hall/CRC},
-  address = {Boca Raton, Florida},
-  year = {2015},
-  edition = {2nd},
-  note = {ISBN 978-1498716963},
-  url = {http://yihui.name/knitr/},
+  address   = {Boca Raton, Florida},
+  year      = {2015},
+  edition   = {2nd},
+  note      = {ISBN 978-1498716963},
+  url       = {http://yihui.name/knitr/},
+}
+
+@Book{enders2015,
+  title     = {Applied Econometric Time Series},
+  author    = {Enders, Walter},
+  publisher = {Wiley},
+  address   = {Hoboken, NJ},
+  year      = {2015},
+  edition   = {4th},
+}
+
+@Book{lutkepohl2005,
+  title     = {New Introduction to Multiple Time Series Analysis},
+  author    = {L{\"u}tkepohl, Helmut},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {2005},
+}
+
+@Book{hamilton1994,
+  title     = {Time Series Analysis},
+  author    = {Hamilton, James D.},
+  publisher = {Princeton University Press},
+  address   = {Princeton, NJ},
+  year      = {1994},
+}
+
+@Book{brooks2019,
+  title     = {Introductory Econometrics for Finance},
+  author    = {Brooks, Chris},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2019},
+  edition   = {4th},
+}
+
+@Book{wei2019,
+  title     = {Multivariate Time Series Analysis and Applications},
+  author    = {Wei, William W. S.},
+  publisher = {Wiley},
+  address   = {Hoboken, NJ},
+  year      = {2019},
+}
+
+@Book{cowpertwait2009,
+  title     = {Introductory Time Series with {R}},
+  author    = {Cowpertwait, Paul S. P. and Metcalfe, Andrew V.},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {2009},
+}
+
+%% ---- Modelos ARMA / ARIMA ----
+
+@Book{boxjenkins1970,
+  title     = {Time Series Analysis: Forecasting and Control},
+  author    = {Box, George E. P. and Jenkins, Gwilym M.},
+  publisher = {Holden-Day},
+  address   = {San Francisco},
+  year      = {1970},
+}
+
+@Article{boxpierce1970,
+  title   = {Distribution of Residual Autocorrelations in Autoregressive-Integrated Moving Average Time Series Models},
+  author  = {Box, George E. P. and Pierce, David A.},
+  journal = {Journal of the American Statistical Association},
+  year    = {1970},
+  volume  = {65},
+  number  = {332},
+  pages   = {1509--1526},
+}
+
+@Article{ljungbox1978,
+  title   = {On a Measure of Lack of Fit in Time Series Models},
+  author  = {Ljung, Greta M. and Box, George E. P.},
+  journal = {Biometrika},
+  year    = {1978},
+  volume  = {65},
+  number  = {2},
+  pages   = {297--303},
+}
+
+@Article{breusch1978,
+  title   = {Testing for Autocorrelation in Dynamic Linear Models},
+  author  = {Breusch, Trevor S.},
+  journal = {Australian Economic Papers},
+  year    = {1978},
+  volume  = {17},
+  number  = {31},
+  pages   = {334--355},
+}
+
+@Article{godfrey1978,
+  title   = {Testing Against General Autoregressive and Moving Average Error Models when the Regressors Include Lagged Dependent Variables},
+  author  = {Godfrey, Leslie G.},
+  journal = {Econometrica},
+  year    = {1978},
+  volume  = {46},
+  number  = {6},
+  pages   = {1293--1301},
+}
+
+@Article{jarquebera1980,
+  title   = {Efficient Tests for Normality, Homoscedasticity and Serial Independence of Regression Residuals},
+  author  = {Jarque, Carlos M. and Bera, Anil K.},
+  journal = {Economics Letters},
+  year    = {1980},
+  volume  = {6},
+  number  = {3},
+  pages   = {255--259},
+}
+
+%% ---- Procesos no estacionarios y pruebas de raíz unitaria ----
+
+@Article{dickeyfuller1979,
+  title   = {Distribution of the Estimators for Autoregressive Time Series with a Unit Root},
+  author  = {Dickey, David A. and Fuller, Wayne A.},
+  journal = {Journal of the American Statistical Association},
+  year    = {1979},
+  volume  = {74},
+  number  = {366},
+  pages   = {427--431},
+}
+
+@Article{dickeyfuller1981,
+  title   = {Likelihood Ratio Statistics for Autoregressive Time Series with a Unit Root},
+  author  = {Dickey, David A. and Fuller, Wayne A.},
+  journal = {Econometrica},
+  year    = {1981},
+  volume  = {49},
+  number  = {4},
+  pages   = {1057--1072},
+}
+
+@Article{phillipsperron1988,
+  title   = {Testing for a Unit Root in Time Series Regression},
+  author  = {Phillips, Peter C. B. and Perron, Pierre},
+  journal = {Biometrika},
+  year    = {1988},
+  volume  = {75},
+  number  = {2},
+  pages   = {335--346},
+}
+
+@Article{kpss1992,
+  title   = {Testing the Null Hypothesis of Stationarity against the Alternative of a Unit Root},
+  author  = {Kwiatkowski, Denis and Phillips, Peter C. B. and Schmidt, Peter and Shin, Yongcheol},
+  journal = {Journal of Econometrics},
+  year    = {1992},
+  volume  = {54},
+  number  = {1--3},
+  pages   = {159--178},
+}
+
+@Article{zivotandrews1992,
+  title   = {Further Evidence on the Great Crash, the Oil-Price Shock, and the Unit-Root Hypothesis},
+  author  = {Zivot, Eric and Andrews, Donald W. K.},
+  journal = {Journal of Business \& Economic Statistics},
+  year    = {1992},
+  volume  = {10},
+  number  = {3},
+  pages   = {251--270},
+}
+
+%% ---- VAR y causalidad de Granger ----
+
+@Article{granger1969,
+  title   = {Investigating Causal Relations by Econometric Models and Cross-spectral Methods},
+  author  = {Granger, Clive W. J.},
+  journal = {Econometrica},
+  year    = {1969},
+  volume  = {37},
+  number  = {3},
+  pages   = {424--438},
+}
+
+@Article{sims1980,
+  title   = {Macroeconomics and Reality},
+  author  = {Sims, Christopher A.},
+  journal = {Econometrica},
+  year    = {1980},
+  volume  = {48},
+  number  = {1},
+  pages   = {1--48},
+}
+
+@Article{lucas1976,
+  title   = {Econometric Policy Evaluation: A Critique},
+  author  = {Lucas, Robert E.},
+  journal = {Carnegie-Rochester Conference Series on Public Policy},
+  year    = {1976},
+  volume  = {1},
+  pages   = {19--46},
+}
+
+%% ---- Cointegración y VEC ----
+
+@Article{englegrangercointegration1987,
+  title   = {Co-Integration and Error Correction: Representation, Estimation, and Testing},
+  author  = {Engle, Robert F. and Granger, Clive W. J.},
+  journal = {Econometrica},
+  year    = {1987},
+  volume  = {55},
+  number  = {2},
+  pages   = {251--276},
+}
+
+@Article{johansen1988,
+  title   = {Statistical Analysis of Cointegration Vectors},
+  author  = {Johansen, S{\o}ren},
+  journal = {Journal of Economic Dynamics and Control},
+  year    = {1988},
+  volume  = {12},
+  number  = {2--3},
+  pages   = {231--254},
+}
+
+@Article{stockwatson1988,
+  title   = {Testing for Common Trends},
+  author  = {Stock, James H. and Watson, Mark W.},
+  journal = {Journal of the American Statistical Association},
+  year    = {1988},
+  volume  = {83},
+  number  = {404},
+  pages   = {1097--1107},
+}
+
+@Article{blanchardquah1989,
+  title   = {The Dynamic Effects of Aggregate Demand and Supply Disturbances},
+  author  = {Blanchard, Olivier J. and Quah, Danny},
+  journal = {American Economic Review},
+  year    = {1989},
+  volume  = {79},
+  number  = {4},
+  pages   = {655--673},
+}
+
+%% ---- ARDL ----
+
+@Article{pesaranshinsmith2001,
+  title   = {Bounds Testing Approaches to the Analysis of Level Relationships},
+  author  = {Pesaran, M. Hashem and Shin, Yongcheol and Smith, Richard J.},
+  journal = {Journal of Applied Econometrics},
+  year    = {2001},
+  volume  = {16},
+  number  = {3},
+  pages   = {289--326},
+}
+
+%% ---- Filtro de Kalman ----
+
+@Article{kalman1960,
+  title   = {A New Approach to Linear Filtering and Prediction Problems},
+  author  = {K{\'a}lm{\'a}n, Rudolf E.},
+  journal = {Journal of Basic Engineering},
+  year    = {1960},
+  volume  = {82},
+  number  = {1},
+  pages   = {35--45},
+}
+
+%% ---- Filtro Hodrick-Prescott ----
+
+@Article{hodrickprescott1997,
+  title   = {Postwar U.S. Business Cycles: An Empirical Investigation},
+  author  = {Hodrick, Robert J. and Prescott, Edward C.},
+  journal = {Journal of Money, Credit and Banking},
+  year    = {1997},
+  volume  = {29},
+  number  = {1},
+  pages   = {1--16},
+}
+
+%% ---- Modelos ARCH/GARCH ----
+
+@Article{engle1982,
+  title   = {Autoregressive Conditional Heteroscedasticity with Estimates of the Variance of United Kingdom Inflation},
+  author  = {Engle, Robert F.},
+  journal = {Econometrica},
+  year    = {1982},
+  volume  = {50},
+  number  = {4},
+  pages   = {987--1007},
+}
+
+@Article{bollerslev1986,
+  title   = {Generalized Autoregressive Conditional Heteroskedasticity},
+  author  = {Bollerslev, Tim},
+  journal = {Journal of Econometrics},
+  year    = {1986},
+  volume  = {31},
+  number  = {3},
+  pages   = {307--327},
+}
+
+%% ---- Datos panel y pruebas de raíz unitaria en panel ----
+
+@Article{levinlinchu2002,
+  title   = {Unit Root Tests in Panel Data: Asymptotic and Finite-Sample Properties},
+  author  = {Levin, Andrew and Lin, Chien-Fu and Chu, Chia-Shang James},
+  journal = {Journal of Econometrics},
+  year    = {2002},
+  volume  = {108},
+  number  = {1},
+  pages   = {1--24},
+}
+
+@Article{impeseranshin2003,
+  title   = {Testing for Unit Roots in Heterogeneous Panels},
+  author  = {Im, Kyung So and Pesaran, M. Hashem and Shin, Yongcheol},
+  journal = {Journal of Econometrics},
+  year    = {2003},
+  volume  = {115},
+  number  = {1},
+  pages   = {53--74},
+}
+
+@Article{maddalachoi1999,
+  title   = {A Comparative Study of Unit Root Tests with Panel Data and a New Simple Test},
+  author  = {Maddala, G. S. and Wu, Shaowen},
+  journal = {Oxford Bulletin of Economics and Statistics},
+  year    = {1999},
+  volume  = {61},
+  number  = {S1},
+  pages   = {631--652},
+}
+
+@Article{hadri2000,
+  title   = {Testing for Stationarity in Heterogeneous Panel Data},
+  author  = {Hadri, Kaddour},
+  journal = {Econometrics Journal},
+  year    = {2000},
+  volume  = {3},
+  number  = {2},
+  pages   = {148--161},
+}
+
+@Article{arrellanobond1991,
+  title   = {Some Tests of Specification for Panel Data: Monte Carlo Evidence and an Application to Employment Equations},
+  author  = {Arellano, Manuel and Bond, Stephen},
+  journal = {Review of Economic Studies},
+  year    = {1991},
+  volume  = {58},
+  number  = {2},
+  pages   = {277--297},
+}
+
+@Article{blundellbond1998,
+  title   = {Initial Conditions and Moment Restrictions in Dynamic Panel Data Models},
+  author  = {Blundell, Richard and Bond, Stephen},
+  journal = {Journal of Econometrics},
+  year    = {1998},
+  volume  = {87},
+  number  = {1},
+  pages   = {115--143},
+}
+
+@Article{andrewslu2001,
+  title   = {Consistent Model and Moment Selection Procedures for {GMM} Estimation with Application to Dynamic Panel Data Models},
+  author  = {Andrews, Donald W. K. and Lu, Biao},
+  journal = {Journal of Econometrics},
+  year    = {2001},
+  volume  = {101},
+  number  = {1},
+  pages   = {123--164},
+}
+
+%% ---- Modelos no lineales ----
+
+@Article{hamilton1989,
+  title   = {A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle},
+  author  = {Hamilton, James D.},
+  journal = {Econometrica},
+  year    = {1989},
+  volume  = {57},
+  number  = {2},
+  pages   = {357--384},
 }

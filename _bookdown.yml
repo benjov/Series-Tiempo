@@ -4,3 +4,13 @@ language:
     chapter_name: "Capítulo "
 delete_merged_file: true
 output_dir: "docs"
+rmd_files:
+  - index.Rmd
+  - 01-intro.Rmd
+  - 02-Elementos_Eq_Diff.Rmd
+  - 03-Modelos_STE.Rmd
+  - 04-No_Estacionarios.Rmd
+  - 05-VAR.Rmd
+  - 06-Modelos_Volatilidad.Rmd
+  - 07-Datos_Panel.Rmd
+  - 08-bibliografia.Rmd

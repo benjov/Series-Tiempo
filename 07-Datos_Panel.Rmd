@@ -546,7 +546,7 @@ library(panelvar)
 
 ### Ejemplo 1
 
-We used the dynamic panel literature by Arellano and Bond (1991), Blundell and Bond (1998) and Roodman (2009b). 
+La estimación sigue la literatura de panel dinámico de Arellano y Bond (1991), Blundell y Bond (1998) y Roodman (2009). 
 Este conjunto de datos describe el empleo, los salarios, el capital y la producción de 140 empresas en el Reino Unido durante 1976–1984. 
 We estimate: Employment is explained by past values of employment ("l" lags), current and first lag of wages and output and current value of capital. 
 
