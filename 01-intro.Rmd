@@ -1,26 +1,76 @@
-# Introducción 
+# Introducción
 
-Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgassner, Wolters, y Hassler (2012), Lutkepohl (2005), Wei (2019), entre otros. En algunos casos se incorpora información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).
+## Sobre estas notas
 
-El objetivo de este documento es proporcionar un conjunto de apuntes o notas que sirvan de apoyo para la clase de Series de Tiempo en la Facultad de Economía de la UNAM. Por esta razón, no deben considerarse como notas exhaustivas o como un sustituto de la clase y los laboratorios. Asimismo, es deseable que los alumnos puedan aportar sus observaciones y correcciones a estas notas, las observaciones a estas notas son esperadas y siempre serán bienvenidas y agradecidas.
+Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgässner, Wolters y Hassler (2012), Lütkepohl (2005), Wei (2019), entre otros. En algunos casos se incorpora información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).
 
-Este es un trabajo siempre en proceso de mejora, para cualquier comentario o aclaración, contactar al correo benjov@ciencias.unam.mx o omarxalpha@gmail.com.
+El objetivo de este documento es proporcionar un conjunto de apuntes que sirvan de apoyo para la clase de Análisis de Series de Tiempo en la Facultad de Economía de la UNAM. Por esta razón, no deben considerarse como notas exhaustivas ni como un sustituto de la clase y los laboratorios. Es deseable que los alumnos aporten sus observaciones y correcciones; los comentarios a estas notas son siempre bienvenidos y agradecidos.
 
-En estas notas se estudian los temas que típicamente son incluidos como parte de un curso estándar de análisis de series de tiempo y agrega otros tantos, los cuales son:
+Para cualquier comentario o aclaración escribir a los correos benjov@ciencias.unam.mx o omarxalpha@gmail.com.
 
-   1. Modelos estacionarios univariados: $AR(p)$, $MA(q)$, $ARMA(p, q)$ y $ARIMA(p, d, q)$, y filtros para eliminar estacionalidad, entre otros;
+## Estructura del libro
 
-   2. Modelos no estacionarios univariados y Pruebas de raíz unitaria (o pruebas para determinar que una serie es estacionaria);
-   
-   3. Modelos multivariados, entre lo que se incluye a los Vectores Autoregresivos (VAR) y los procedimientos de Cointegración
+En estas notas se estudian los temas que típicamente se incluyen en un curso estándar de análisis de series de tiempo, además de algunos tópicos adicionales. Los capítulos están organizados de la siguiente manera:
 
-   4. Modelación de series univariadas con errores con heterocedasticidad y autocorrelación: ARCH(r), GARCH(n), etc.;
+**Capítulo \@ref(cap-eqdiff). Elementos de Ecuaciones en Diferencia** — Se presentan los conceptos fundamentales de las ecuaciones en diferencia, herramienta matemática central para modelar la dinámica de las series de tiempo. Se introduce la notación del operador de rezagos y se estudian las condiciones de estabilidad de procesos lineales.
 
-   5. Modelos multivariados con errores con heterocedasticidad y autocorrelación: M-GARCH y M-GARCH-M;
-   
-   6. Casos particulares en los que las series incluidas en un modelo multivariado no son del mismo orden de integración, conocidos como modelos ADRL.
-   
-   7. Modelos de Datos Panel en series de tiempo, y
+**Capítulo \@ref(cap-estacionarios). Procesos Estacionarios y Modelos Univariados** — Se definen formalmente los conceptos de estacionariedad y ergodicidad. Se estudian los modelos autorregresivos $AR(p)$, de medias móviles $MA(q)$, mixtos $ARMA(p,q)$, y su extensión integrada $ARIMA(p,d,q)$. Se incluyen también modelos con variables exógenas $ARIMAX$ y procedimientos de desestacionalización.
 
-   8. Modelos no lineales como los de cambios de régimen.
+**Capítulo \@ref(cap-noestacionarios). Procesos No Estacionarios Univariados** — Se estudian los procesos con raíz unitaria y las principales pruebas estadísticas para detectarlos: Dickey-Fuller, Dickey-Fuller Aumentada (ADF) y Phillips-Perron, entre otras. Se analiza la diferencia entre tendencia determinística y tendencia estocástica.
 
+**Capítulo \@ref(cap-var). Modelos Multivariados: VAR y Cointegración** — Se extiende el análisis univariado al caso de múltiples series. Se presentan los Vectores Autoregresivos ($VAR$), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos ($ARDL$).
+
+**Capítulo \@ref(cap-volatilidad). Modelos de Volatilidad** — Se introducen los modelos que capturan heterocedasticidad condicional: $ARCH(r)$, $GARCH(p,q)$ y sus extensiones multivariadas ($M$-$GARCH$). Se discute su aplicación a datos financieros de alta frecuencia.
+
+**Capítulo \@ref(cap-panel). Modelos de Datos Panel y Modelos No Lineales** — Se aborda el análisis de datos panel con dimensión temporal, incluyendo pruebas de raíz unitaria en panel y modelos Panel-VAR. Se introduce también la modelación no lineal mediante modelos de cambio de régimen (Markov-Switching).
+
+## Prerrequisitos
+
+Estas notas asumen que el lector tiene conocimientos previos de:
+
+- **Probabilidad y estadística**: variables aleatorias, distribuciones de probabilidad, esperanza matemática, varianza y covarianza.
+- **Econometría básica**: regresión lineal por Mínimos Cuadrados Ordinarios (MCO), pruebas de hipótesis, problemas de autocorrelación y heterocedasticidad.
+- **Álgebra lineal**: operaciones con matrices, valores y vectores propios.
+- **Cálculo**: derivadas e integrales básicas.
+
+El dominio de R a nivel introductorio es deseable, aunque no indispensable para seguir los ejemplos. La Sección \@ref(sec-R) ofrece una guía de los paquetes empleados a lo largo del texto.
+
+## Software: R {#sec-R}
+
+Todos los ejemplos y ejercicios en estas notas están programados en **R** [@R-base], un entorno de software libre para cómputo estadístico y gráficos. R puede descargarse gratuitamente desde [https://cran.r-project.org](https://cran.r-project.org). Se recomienda también instalar **RStudio** como entorno de desarrollo integrado (IDE), disponible en [https://posit.co/downloads](https://posit.co/downloads).
+
+Los paquetes de R utilizados con mayor frecuencia a lo largo de estas notas son:
+
+| Paquete | Propósito principal |
+|---------|-------------------|
+| `readxl` | Importación de datos desde archivos Excel |
+| `ggplot2` | Visualización de datos |
+| `forecast` | Modelación y pronóstico de series de tiempo (ARIMA, etc.) |
+| `tseries` | Pruebas de raíz unitaria (ADF, KPSS, etc.) |
+| `urca` | Pruebas de raíz unitaria y cointegración |
+| `vars` | Estimación de modelos VAR y VEC |
+| `rugarch` | Modelos GARCH univariados |
+| `rmgarch` | Modelos GARCH multivariados |
+| `plm` | Modelos de datos panel |
+| `MSwM` | Modelos de cambio de régimen (Markov-Switching) |
+
+Para instalar todos los paquetes necesarios en una sola instrucción:
+
+```{r install_packages, eval=FALSE}
+install.packages(c("readxl", "ggplot2", "forecast", "tseries", "urca",
+                   "vars", "rugarch", "rmgarch", "plm", "MSwM"))
+```
+
+Los datos empleados en los ejemplos están disponibles en la carpeta `BD/` del repositorio del proyecto en GitHub: [https://github.com/benjov/Series-Tiempo/tree/main/BD](https://github.com/benjov/Series-Tiempo/tree/main/BD).
+
+## Convenciones notacionales
+
+A lo largo del texto se usan las siguientes convenciones:
+
+- Las series de tiempo se denotan con letras mayúsculas: $X_t$, $Y_t$, $Z_t$.
+- Los parámetros poblacionales se denotan con letras griegas: $\alpha$, $\beta$, $\phi$, $\theta$.
+- El operador de rezagos se denota con $L$, de modo que $L^k X_t = X_{t-k}$.
+- El operador de primeras diferencias se denota con $\Delta$, de modo que $\Delta X_t = X_t - X_{t-1}$.
+- $\mathbb{E}[\cdot]$ denota la esperanza matemática (o valor esperado).
+- $\text{Var}(\cdot)$ y $\text{Cov}(\cdot, \cdot)$ denotan la varianza y covarianza, respectivamente.
+- Las ecuaciones numeradas se referencian como, por ejemplo, la ecuación \@ref(eq:Serie).

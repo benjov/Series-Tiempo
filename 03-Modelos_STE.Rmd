@@ -1,4 +1,4 @@
-# Procesos Estacionarios y Modelos Univariados
+# Procesos Estacionarios y Modelos Univariados {#cap-estacionarios}
 
 ## Definición de ergodicidad y estacionariedad
 
