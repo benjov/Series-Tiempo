@@ -1,5 +1,34 @@
+# R / RStudio
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# macOS
 .DS_Store
+
+# Claude Code session data
+.claude/
+
+# Bookdown build cache (figuras generadas automáticamente)
+_bookdown_files/
+Notas-Series-Tiempo_files/
+bookdown-demo_files/
+
+# Archivos intermedios de compilación
+Notas-Series-Tiempo.Rmd
+Notas-Series-Tiempo.tex
+Notas-Series-Tiempo.log
+Notas-Series-Tiempo.pdf
+docs/Notas-Series-Tiempo.tex
+bookdown-demo.log
+
+# Bibliografía auto-generada por knitr::write_bib()
+packages.bib
+
+# Gráficas generadas en la raíz del proyecto durante compilación
+G_AR_1_Comb.png
+G_AR_1_Real.png
+G_AR_1_Teo.png
+Pax_Metro.png
+Pax_Nal_f.png
