@@ -29,7 +29,7 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 |---------|--------|--------|--------|
 | `index.Rmd` | Portada y contexto | 53 | Funcional, revisar fecha |
 | `01-intro.Rmd` | Introducción | ~100 | ✓ Redactado 2026-06-18 (sobre notas, estructura, prerrequisitos, R, notación) |
-| `02-Elementos_Eq_Diff.Rmd` | Introducción al Análisis de ST y Ecuaciones en Diferencia | 922 | En revisión |
+| `02-Elementos_Eq_Diff.Rmd` | Introducción al Análisis de ST y Ecuaciones en Diferencia | 949 | ✓ Revisado 2026-06-18: errores matemáticos (g1 duplicado, exponentes), encoding en comentarios R, typos de texto; sección de cierre que conecta con cap. 3 |
 | `03-Modelos_STE.Rmd` | Procesos Estacionarios y Modelos Univariados | 2246 | En revisión |
 | `04-No_Estacionarios.Rmd` | Procesos No Estacionarios Univariados | 577 | ✓ Expandido 2026-06-18: simulación caminata aleatoria, prueba Zivot-Andrews, resumen y guía de decisión; typos corregidos |
 | `05-VAR.Rmd` | VAR, Cointegración, ARDL | 2150 | En revisión |
