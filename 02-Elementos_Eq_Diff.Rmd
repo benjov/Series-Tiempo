@@ -934,13 +934,11 @@ Donde $U_t$ es un proceso de ruido blanco con $\mathbb{E}[U_t] = 0$, $\text{Var}
 Usando el operador de rezagos $L$, la ecuación \@ref(eq:AR_p) se puede escribir de forma compacta como:
 \begin{equation}
     (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p) Z_t = a_0 + U_t
-    (\#eq:AR_p_L)
 \end{equation}
 
 O bien, definiendo el polinomio $\alpha(L) = 1 - a_1 L - a_2 L^2 - \ldots - a_p L^p$:
 \begin{equation}
     \alpha(L) Z_t = a_0 + U_t
-    (\#eq:AR_p_compact)
 \end{equation}
 
 La conexión con las ecuaciones deterministas es directa: las **condiciones de convergencia** que estudiamos en las secciones anteriores se convierten en las **condiciones de estacionariedad** del proceso estocástico. En concreto, el proceso $AR(p)$ descrito en la ecuación \@ref(eq:AR_p) será **estacionario** si y solo si todas las raíces del polinomio característico $\alpha(x) = 0$ se ubican **fuera del círculo unitario**, o equivalentemente, si todos los valores $|g_i| < 1$ para $i = 1, 2, \ldots, p$.
