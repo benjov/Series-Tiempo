@@ -73,7 +73,7 @@ o,
 \right]
 \end{equation*}
 
-Y en su variaza:
+Y en su varianza:
 \begin{equation*}
     Var[X_t] = \mathbb{E}[(X_t - \mathbb{E}[X_t])^2]
 \end{equation*}
@@ -151,7 +151,7 @@ Definiremos a la estacionariedad por sus momentos del correspondiente proceso es
 
 Puesto que resulta poco factible asumir una estacionariedad diferente a la débil, es adelante siempre que digamos que un proceso es estacionario se referirá al caso débil y sólo diremos que el proceso es estacionario, sin el apelativo de débil. 
 
-**Ejemplo**. Supongamos una serie de tiempo denotada por: $\{U_t\}^T_{t = 0}$. Decimos que el proceso estocástico $\{U_t\}$ es un _proceso estocástico puramente aleatorio_ o es un _proceso estocástico de ruido blanco o caminata aleatoria_, si este tiene las siguientes propiedades: 
+**Ejemplo**. Supongamos una serie de tiempo denotada por: $\{U_t\}^T_{t = 0}$. Decimos que el proceso estocástico $\{U_t\}$ es un _proceso estocástico puramente aleatorio_ o simplemente un _proceso de ruido blanco_, si este tiene las siguientes propiedades: 
 
 1. $\mathbb{E}[U_t] = 0$, $\forall t$;
 
@@ -211,7 +211,7 @@ Lo anterior, dado que hemos supuesto que en la caminata aleatoria todas las vari
     & = & min(t,s)
 \end{eqnarray*}
 
-Así, el proceso estocástico dado por la caminata alaeatoria sin un término de ajuste es estacionario en media, pero no en varianza o en covarianza, y consecuentemente, en general no estacionario, condición que contraria al caso del proceso simple descrito en $U_t$.
+Así, el proceso estocástico dado por la caminata aleatoria sin un término de ajuste es estacionario en media, pero no en varianza o en covarianza, y consecuentemente, en general no estacionario, condición que contraria al caso del proceso simple descrito en $U_t$.
 
 Es fácil ver que muchas de las posibilidades de realización de este proceso estocástico (series de tiempo) pueden tomar cualquiera de las rutas consideradas en la Figura \@ref(fig:fig31).
 
@@ -301,7 +301,7 @@ No hacemos la demostración en estas notas --sería deseable que el alumno revis
   (\#eq:eqautocorr)
 \end{equation}
 
-El estimador de la ecuación \@ref(eq:eqautocorr) es asintóticamente insesgado. Por ejemplo, para el caso de un proceso de ruido blanco o caminata aleatoria, su varianza puede ser aproximada por el valor dado $1/T$. Ésta tiene, asintóticamente, una distribución normal. Dado esto, el intervalo de confianza al $95\%$ será el dado por $\pm 2/\sqrt{T}$, en el cual se encuentra la mayoría de los coeficientes de autocorrelación estimados.
+El estimador de la ecuación \@ref(eq:eqautocorr) es asintóticamente insesgado. Por ejemplo, para el caso de un proceso de ruido blanco, su varianza puede ser aproximada por el valor dado $1/T$. Ésta tiene, asintóticamente, una distribución normal. Dado esto, el intervalo de confianza al $95\%$ será el dado por $\pm 2/\sqrt{T}$, en el cual se encuentra la mayoría de los coeficientes de autocorrelación estimados.
 
 Ahora discutamos algunos ejemplos o aplicaciones. Cuando se realiza la evaluación de la estimación de un modelo de series de tiempo es importante saber si los residuales del modelo realmente tienen propiedades de un proceso puramente aleatorio, en particular, si ellos no están correlacionados entre sí. Así, la hipótesis a probar será:
 \begin{equation}
@@ -309,13 +309,13 @@ Ahora discutamos algunos ejemplos o aplicaciones. Cuando se realiza la evaluaci�
     (\#eq:eqautocorr1)
 \end{equation}
 
-Esta expresión se puede interpretar como una prueba respecto de si la correlación entre la información de periodos atrás es cero con la información contemporánea. Para hacer una pruena global de la hipotésis de sí un número $m$ de coeficientes de autocovarianzas son cero Box y Pierce (1970) desarrollarón la siguiente estadística:
+Esta expresión se puede interpretar como una prueba respecto de si la correlación entre la información de periodos atrás es cero con la información contemporánea. Para hacer una prueba global de la hipótesis de si un número $m$ de coeficientes de autocovarianzas son cero, Box y Pierce (1970) desarrollaron la siguiente estadística:
 \begin{equation}
     Q^* = T \sum_{j = 1}^{m} \hat{\rho} (j)^2
     (\#eq:eqautocorr2)
 \end{equation}
 
-Bajo la hipotésis nula esta estadística se distribulle asintóticamente como una chi cuadrado ($\chi^2$) con $m-k$ grados de libertad y con $k$ que representa al número de paramétros estimados.
+Bajo la hipótesis nula esta estadística se distribuye asintóticamente como una chi cuadrado ($\chi^2$) con $m-k$ grados de libertad y con $k$ que representa al número de parámetros estimados.
 
 Haciendo una aplicación estricta de la distribución de esta estadística, sabemos que esta se mantiene asintóticamente. Greta, Ljung y Box (1978) propusieron la siguiente modificación de la estadística para muestras pequeñas:
 \begin{equation}
@@ -323,15 +323,15 @@ Haciendo una aplicación estricta de la distribución de esta estadística, sabe
     (\#eq:eqautocorr3)
 \end{equation}
 
-La cual también se distribulle asintóticamente como $\chi^2$ con $m-k$ grados de libertad.
+La cual también se distribuye asintóticamente como $\chi^2$ con $m-k$ grados de libertad.
 
-También es intuitivamente claro que la hipótesis nula de no autocorrelación de residuales debería ser rechazada si alguno de los valores $\hat{\rho} (j)$ es muy grande, es decir, si $Q$ o $Q^*$ es muy grande. O más precisamente, si estas estadísticas son más grandes que los correspondientes valores críticos de la distribución $\chi^2$ con $m-k$ grados de libertad a algún grado dado de signficancia.
+También es intuitivamente claro que la hipótesis nula de no autocorrelación de residuales debería ser rechazada si alguno de los valores $\hat{\rho} (j)$ es muy grande, es decir, si $Q$ o $Q^*$ es muy grande. O más precisamente, si estas estadísticas son más grandes que los correspondientes valores críticos de la distribución $\chi^2$ con $m-k$ grados de libertad a algún grado dado de significancia.
 
 Una alternativa para esta prueba es una del tipo Multiplicadores de Lagrange (o LM) desarrollada por Breusch (1978) y Godfrey (1978). La cual, al igual que las estadísticas $Q$ y $Q^*$, la hipotesis nula está dada por:
 
 > $H_0$: Los residuales no están autocorrelacionados.
 
-> $H_a$: Los residuales muestran alguna acutocorrelación de forma autoregresiva o de medias móviles.
+> $H_a$: Los residuales muestran alguna autocorrelación de forma autoregresiva o de medias móviles.
 
 La prueba consiste en realizar una regresión auxiliar en la cual los residuales se estiman en función de las variables explicativas del modelo original y en los residuales mismos pero rezagados hasta el término $m$ (regresión auxiliar). La prueba resulta en una estadística con una distribución $\chi^2$ con $m$ grados de libertad la cual está dada por la expresión:
 \begin{equation}
@@ -347,7 +347,7 @@ En comparación con una prueba Durbin - Watson que es comúnmente usada en la ec
 
 2. Los resultados se mantienen aún y cuando exista una probable variable endógena en forma rezagada, y
 
-3. No depende del orden o la forma en que se acomoden las observaciones, algo que es muy probalble que ocurra en la econometría tradicional.
+3. No depende del orden o la forma en que se acomoden las observaciones, algo que es muy probable que ocurra en la econometría tradicional.
 
 El hecho de que los residuales no estén autocorrelacionados no implica que estos sean independientes y normalmente distribuidos. La ausencia de autocorrelación no implica una independencia estocástica si las variables son normalmente distribuidas.
 
@@ -411,7 +411,7 @@ ggsave("Pax_Metro.png", width = 20, height = 15, units = "cm")
 
 ```
 
-A esta serie de tiempo le calculamos los pincipales estadísticos hasta ahora estudiados y obtenemos el Cuadro \@ref(tab:foo). En dicho cuadro se destaca que se muestra la función de autocirrelación para los tres primeros rezagos. Para mayor detalle, en la Figura \@ref(fig:fig33) se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza dentro de las cuales no se puede rechazar la hipotésis nula de que $H_0: \hat{\rho}(p) = 0$, para todo $\tau = 1, 2, \ldots, T-1$.
+A esta serie de tiempo le calculamos los principales estadísticos hasta ahora estudiados y obtenemos el Cuadro \@ref(tab:foo). En dicho cuadro se destaca que se muestra la función de autocorrelación para los tres primeros rezagos. Para mayor detalle, en la Figura \@ref(fig:fig33) se muestra la función de autocorrelación, en donde las bandas descritas por las líneas azules son el intervalo de confianza dentro de las cuales no se puede rechazar la hipótesis nula de que $H_0: \hat{\rho}(p) = 0$, para todo $\tau = 1, 2, \ldots, T-1$.
 
 Table: (\#tab:foo) Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2019
 
@@ -843,7 +843,7 @@ Desarrollando la ecuación \@ref(eq:InvAlpha) tenemos la siguiente expresión:
   &  &  - a_2 \psi_0 L^2 - a_2 \psi_1 L^3 - \ldots
 \end{eqnarray*}
 
-Ahora, podemos agrupar todos los términos en función del exponente asociado al operador rezago $L$. La siguiente es una solución partícular y es una de las múltiples que podrían existir que cumpla con la ecuación \@ref(eq:InvAlpha). Sin embargo, para efectos del análisis, sólo necesitamos una de esas soluciones. Utilizaremos las siguientes condiciones que deben cumplirse en una de las posibles soluciones:
+Ahora, podemos agrupar todos los términos en función del exponente asociado al operador rezago $L$. La siguiente es una solución particular y es una de las múltiples que podrían existir que cumpla con la ecuación \@ref(eq:InvAlpha). Sin embargo, para efectos del análisis, sólo necesitamos una de esas soluciones. Utilizaremos las siguientes condiciones que deben cumplirse en una de las posibles soluciones:
 \begin{eqnarray*}
   L^0 & : & \Rightarrow \psi_0 = 1 \\
   L^1 & : & \psi_1 - a_1 \psi_0 = 0 \Rightarrow \psi_1 = a_1 \\
@@ -860,7 +860,7 @@ Así, de las relaciones antes mencionadas y considerando que $\alpha^{-1} (L)$ a
     (\#eq:AR2EqSol)
 \end{equation}
 
-Donde todos los parámetros $\psi_i$ están determinados por los parámetros $a_0$, $a_1$ y $a_2$. En particular, $\psi_0 = 1$ y $\psi_1 = a_1$, como describimos anteriormente. Al igual que en el caso del $AR(1)$, en la ecuación \@ref(eq:AR2EqSol) las condiciones de estabilidad estarán dadas por las soluciones del siguiente polinomio característico:\footnote{Note que raíces son equivalentes al inversio de las del polinomio dado por $\lambda^2 a_2 - \lambda a_1 - 1 = 0$.}
+Donde todos los parámetros $\psi_i$ están determinados por los parámetros $a_0$, $a_1$ y $a_2$. En particular, $\psi_0 = 1$ y $\psi_1 = a_1$, como describimos anteriormente. Al igual que en el caso del $AR(1)$, en la ecuación \@ref(eq:AR2EqSol) las condiciones de estabilidad estarán dadas por las soluciones del siguiente polinomio característico:\footnote{Note que raíces son equivalentes al inverso de las del polinomio dado por $\lambda^2 a_2 - \lambda a_1 - 1 = 0$.}
 \begin{equation}
     \lambda^2 - \lambda a_1 - a_2 = 0
 \end{equation}
@@ -880,9 +880,9 @@ Lo anterior es cierto puesto que $\mathbb{E}[U_{t - i}] = 0$, para todo $i = 0, 
 
 Donde $\tau = 0, 1, 2, 3, \ldots$ y $\mathbb{E}[U_{t} X_{t - \tau}] = 0$ para todo $\tau \neq 0$.\footnote{ Es fácil demostrar está afirmación, sólo requiere de desarrollar la expresión y utilizar el hecho de que $U_t$ es un proceso pueramente aleatorio, por lo que la covarianza es cero (0).} Dicho esto, podemos derivar el valor del valor esperado para diferentes valores de $\tau$:
 \begin{eqnarray*}
-    \tau = 0 & : & \gamma(0) = \alpha_1 \gamma(1) + \alpha_2 \gamma(2) + \sigma^2 \\
-    \tau = 1 & : & \gamma(1) = \alpha_1 \gamma(0) + \alpha_2 \gamma(1) \\
-    \tau = 2 & : & \gamma(2) = \alpha_1 \gamma(1) + \alpha_2 \gamma(0) \\
+    \tau = 0 & : & \gamma(0) = a_1 \gamma(1) + a_2 \gamma(2) + \sigma^2 \\
+    \tau = 1 & : & \gamma(1) = a_1 \gamma(0) + a_2 \gamma(1) \\
+    \tau = 2 & : & \gamma(2) = a_1 \gamma(1) + a_2 \gamma(0) \\
     & \vdots & 
 \end{eqnarray*}
 
@@ -1247,7 +1247,7 @@ Por su parte, la varianza estará dada por:
     Var[X_t] & = & \mathbb{E}[(X_t - \mu)^2] \nonumber \\
     & = & \mathbb{E}[(U_t - b_1 U_{t-1})^2] \nonumber \\
     & = & \mathbb{E}[U_t^2 - 2 b_1 U_t U_{t-1} + b_1^2 U_{t - 1}^2] \nonumber \\
-    & = &\mathbb{E}[U_t^2] - 2 b_1 \mathbb{E}[U_t U_{t-1}] + b_1^2 \mathbb{E}[U_{t - 1}^2]] \nonumber \\
+    & = &\mathbb{E}[U_t^2] - 2 b_1 \mathbb{E}[U_t U_{t-1}] + b_1^2 \mathbb{E}[U_{t - 1}^2] \nonumber \\
     & = & \sigma^2 + b_1^2 \sigma^2 \nonumber \\
     & = & (1 + b_1^2) \sigma^2 = \gamma(0)
 \end{eqnarray}
@@ -1267,7 +1267,7 @@ Si hacemos sustituciones de diferentes valores de $\tau$ en la ecuación \@ref(e
     \mathbb{E}[(x_t - \mu)(x_{t + 1} - \mu)] & = & \mathbb{E}[(x_t - \mu)(x_{t - 1} - \mu)] \nonumber \\
     & = & - b_1 \mathbb{E}[U_t U_{t}] \nonumber \\
     & = & - b_1 \mathbb{E}[U_{t - 1} U_{t - 1}] \nonumber \\ 
-    & = & - b_1^2 \sigma^2 = \gamma(1)
+    & = & - b_1 \sigma^2 = \gamma(1)
 \end{eqnarray}
 
 De esta forma tendremos que las funciones de autocorrelación estarán dadas por los siguientes casos: 
@@ -1653,7 +1653,7 @@ La idea es construir una métrica de la correlación que existe entre las difere
     (\#eq:PACFEq)
 \end{equation}
 
-Donde $\phi_{ki}$ es el coeficiente de la variable dada con el rezago $i$ si el proceso tiene un órden $k$. Así, los coeficientes $\phi_{kk}$ son los coeficientes de la autocorrelación parcial (considerando un proceso AR(k)). Observemos que la autocorrelación parcial mide la correlación entre $X_t$ y $X_{t-k}$ que se mantiene cuando el efecto de las variables $X_{t-1}$, $X_{t-2}$, $\ldots$ y $X_{t-k-1}$ en $X_{t}$ y $X_{t-k}$ ha sido eliminado.
+Donde $\phi_{ki}$ es el coeficiente de la variable dada con el rezago $i$ si el proceso tiene un orden $k$. Así, los coeficientes $\phi_{kk}$ son los coeficientes de la autocorrelación parcial (considerando un proceso AR(k)). Observemos que la autocorrelación parcial mide la correlación entre $X_t$ y $X_{t-k}$ que se mantiene cuando el efecto de las variables $X_{t-1}$, $X_{t-2}$, $\ldots$ y $X_{t-k-1}$ en $X_{t}$ y $X_{t-k}$ ha sido eliminado.
 
 Dada la expresión considerada en la ecuación \@ref(eq:PACFEq), podemos resolver el problema de establecer el valor de cada $\phi_{ki}$ mediante la solución del sistema que se representa en lo siguiente:
 \begin{equation}
@@ -1696,8 +1696,8 @@ Table: (\#tab:AcAcp) Relación entre la Función de Autocorrelación y la Funci�
 
 | Modelo | Función de Autocorrelación | Función de Autocorrelación Parcial |
 |:---:|:---:|:---:|
-| MA(q) | Rompimienttos en la función | No hay rompimientos |
-| AR(p) | No hay rompimientos | Rompimienttos en la función |
+| MA(q) | Rompimientos en la función | No hay rompimientos |
+| AR(p) | No hay rompimientos | Rompimientos en la función |
 
 **Ejemplo**. Continuando con el ejemplo en la Figura \@ref(fig:fig414) mostramos tanto la Función de Autocorrelación como la Función de Autocorrelación Parcial. En esta identificamos que ambas gráficas muestran que el modelo que explica a la variable $DLPaxNal_t$ tiene tanto componentes AR como MA. Sin embargo, dado lo errático del comportamiento de ambas funciones, resulta complicado determinar cuál sería un buen número de parámetros $p$ y $q$ a considerar en el $ARMA(p,q)$. Por esta razón, a continuación, plantearemos algunas pruebas más formales para determinar dichos parámetros.
 
@@ -2188,7 +2188,7 @@ Método modificado de HP consiste en minimizar los valores de la serie $\{ \tau_
 
 Donde $\lambda$ es una parámetro fijo (determinado ex-ante), $\tau_t$ es un componente de tendencia de $y_t$, y los nuevos parámetros son $u_{ss}$ y $\lambda_{ss}$ ajustadas por el procedimiento de Marcet y Ravn (2004).
 
-Este procedimiento asume que parte del filtro HP y que esta versión tiene el problema de pérdida de información al final y al principio de la muestra. La razón es que es un procedimeinto univariado que requiere de mucha información futura y pasada para mejorar el ajuste.
+Este procedimiento asume que parte del filtro HP y que esta versión tiene el problema de pérdida de información al final y al principio de la muestra. La razón es que es un procedimiento univariado que requiere de mucha información futura y pasada para mejorar el ajuste.
 
 El compoenente adicional al filtro HP es un componente de castigo por desviaciones de la tasa de crecimiento de largo plazo, $u_{ss}$.
 
@@ -2242,4 +2242,20 @@ Dicho lo anterior, podemos modificar $F(\lambda)$ para el filtro HP convencional
   F(\lambda) = \frac{G' K' K G}{(Y - G)'(Y - G)}
 \end{equation}
 
+## Resumen del capítulo
 
+En este capítulo estudiamos los fundamentos de los procesos estocásticos estacionarios y los principales modelos univariados de series de tiempo.
+
+**Estacionariedad y ergodicidad.** Un proceso es débilmente estacionario si su media, varianza y estructura de covarianzas no dependen del tiempo. La ergodicidad garantiza que los promedios temporales convergen a los promedios del conjunto. El proceso de ruido blanco, $U_t \sim (0, \sigma^2)$, es el bloque elemental a partir del cual se construyen todos los modelos de este capítulo.
+
+**Herramientas de diagnóstico.** La función de autocorrelación (ACF) y la función de autocorrelación parcial (PACF) son el puente entre la teoría y la práctica: permiten identificar el orden de los componentes AR y MA, respectivamente. Las pruebas Box-Pierce ($Q^*$), Ljung-Box ($Q$) y Breusch-Godfrey (LM) contrastan formalmente si los residuales de un modelo presentan autocorrelación; la prueba de Jarque-Bera evalúa normalidad.
+
+**Modelos AR, MA y ARMA.** Los procesos autoregresivos $AR(p)$ modelan $X_t$ en función de sus propios rezagos; son estacionarios si todas las raíces del polinomio característico caen dentro del círculo unitario. Los procesos de medias móviles $MA(q)$ expresan $X_t$ como combinación lineal de errores pasados; son siempre estacionarios e invertibles si sus raíces caen dentro del círculo unitario. El modelo $ARMA(p,q)$ combina ambos componentes y, bajo diferenciación $d$ veces, da lugar al $ARIMA(p,d,q)$.
+
+**Selección de modelos.** Los criterios AIC y BIC equilibran el ajuste del modelo con el principio de parsimonia. El patrón de la ACF y la PACF —corte abrupto vs.\ decaimiento gradual— orienta la selección inicial del orden $(p,q)$.
+
+**Pronósticos.** En el horizonte $h$, el pronóstico óptimo (mínimo error cuadrático medio) es la esperanza condicional $\mathbb{E}[X_{t+h} | \mathcal{F}_t]$. El intervalo de predicción se amplía con $h$ porque la incertidumbre se acumula.
+
+**Desestacionalización y filtrado.** El filtro Hodrick-Prescott separa la tendencia de largo plazo ($\tau_t$) del ciclo de corto plazo; la elección del parámetro $\lambda$ depende de la frecuencia de los datos ($\lambda = 1600$ para datos trimestrales, $\lambda = 14400$ para datos mensuales). La variante St-Amant y van Norden corrige el problema de pérdida de información en los extremos de la muestra.
+
+El siguiente capítulo extiende este marco a series no estacionarias y presenta las pruebas de raíz unitaria que determinan si es necesario diferenciar una serie antes de modelarla con las herramientas aquí desarrolladas.
