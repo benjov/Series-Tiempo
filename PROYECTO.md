@@ -27,7 +27,7 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 
 | Archivo | Título | Líneas | Estado |
 |---------|--------|--------|--------|
-| `index.Rmd` | Portada y contexto | 53 | Funcional, revisar fecha |
+| `index.Rmd` | Portada y contexto | ~60 | ✓ Revisado 2026-06-18: título → "Análisis de Series de Tiempo", fecha dinámica mejorada, sección "Presentación" con lista de temas, tabla de recursos, descripción SEO mejorada |
 | `01-intro.Rmd` | Introducción | ~100 | ✓ Redactado 2026-06-18 (sobre notas, estructura, prerrequisitos, R, notación) |
 | `02-Elementos_Eq_Diff.Rmd` | Introducción al Análisis de ST y Ecuaciones en Diferencia | 949 | ✓ Revisado 2026-06-18: errores matemáticos (g1 duplicado, exponentes), encoding en comentarios R, typos de texto; sección de cierre que conecta con cap. 3 |
 | `03-Modelos_STE.Rmd` | Procesos Estacionarios y Modelos Univariados | ~2270 | ✓ Revisado 2026-06-18: error conceptual (ruido blanco ≠ caminata aleatoria), error math MA(1) covarianza (-b₁² → -b₁), notación Yule-Walker (α→a), 12+ typos corregidos, sección de resumen añadida |
@@ -55,7 +55,7 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 - [x] ~~`01-intro.Rmd`: Capítulo demasiado corto~~ ✓ Reescrito 2026-06-18 con 6 secciones: sobre las notas, estructura del libro, prerrequisitos, R, convenciones notacionales
 - [x] ~~Capítulos sin etiqueta de referencia cruzada~~ ✓ Agregado `{#cap-xxx}` a los 6 capítulos 2026-06-18
 - [x] ~~`05-VAR.Rmd`: Tenía YAML `output: pdf_document` inválido para bookdown~~ ✓ Eliminado 2026-06-18
-- [ ] `index.Rmd`: La fecha usa `r Sys.Date()` — para la versión PDF editorial conviene fijar una fecha de publicación
+- [x] ~~`index.Rmd`: La fecha usa `r Sys.Date()`~~ ✓ Corregido 2026-06-18: fecha dinámica con formato "Mes de Año" + etiqueta estática "Versión: Junio 2026"
 - [x] ~~`_publish.R`: Script demo del template~~ ✓ Eliminado 2026-06-18
 - [x] ~~`_book/`: Directorio de artefactos de build antiguos~~ ✓ Eliminado 2026-06-18
 
