@@ -49,8 +49,8 @@ plot(ICC, type = "l", lwd = 1, col = "red", ylab = "Indice",
 # Comando que indica a R que sin borrar la grafica anterior, 
 # grafique la siguiente.
 par(new = T) 
-# Indice ??Como considera usted la situacion economica del pais 
-# hoy en dia comparada con la de hace 12 meses?, base enero 2003
+# Índice ¿Cómo considera usted la situación económica del país
+# hoy en día comparada con la de hace 12 meses?, base enero 2003
 plot(ICC_LAG, type = "l", lwd = 1, col = "blue", ylab = "Indice", 
      xlab = "Tiempo", ylim = c(29,50))
 # Leyenda
@@ -109,7 +109,7 @@ Finalmente, la Figura \@ref(fig:fig5) ilustra una característica que también r
 ```{r fig5, fig.cap = "Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023",  echo=TRUE, fig.align='center'}
 
 par(mfrow=c(3,1))
-# Indicador Global de la Actividad Econ?mica, base 2008
+# Indicador Global de la Actividad Económica, base 2008
 plot(diff(log(IGAE_2013), lag = 1), type = "l", lwd = 1, 
      col = "darkred", ylab = "Var. %", xlab = "Tiempo", 
      main = "Indicador Global de la Actividad Economica") 
@@ -527,7 +527,7 @@ Dichas raíces las podemos escribir en coordenadas polares como:
     g_2^{-1}  =  r e^{-i \theta} = r (cos(\theta) - i sen(\theta))
     (\#eq:Conver4)
 \end{eqnarray}
-Donde: $r = \sqrt{u^2 + v^2}$, a esta expresión también se le conoce como módulo Alternativamente, podemos escribir que $r = \sqrt{g_1 g_2}$. La única condición es que $r < 1$ para que el proceso descrito en la ecuación \@ref(eq:SOLGEN2) sea convergente. 
+Donde: $r = \sqrt{u^2 + v^2}$, a esta expresión también se le conoce como módulo. Alternativamente, podemos escribir que $r = \sqrt{g_1 g_2}$. La única condición es que $r < 1$ para que el proceso descrito en la ecuación \@ref(eq:SOLGEN2) sea convergente. 
 
 Al igual que en el __Caso I__, el punto de equilibrio de la ecuación se debería ubicar alrededor de la ecuación \@ref(eq:Conver), siempre que $r < 1$, por lo que el factor que determina la convergencia es el módulo, ya que si el módulo es mayor a 1, el proceso será divergente, pero si es menor a 1 convergerá a \@ref(eq:Conver). Para ilustrar, el caso contrario es divergente puesto que representa trayectorias senoidales (oscilatorias) que sólo pueden converger si a medida que pasa el tiempo las ondas son menos amplias.
 
@@ -723,7 +723,7 @@ Donde $t = \ldots, -2, -1, 0, 1, 2, \ldots$ y $a_p \neq 0$. La ecuación \@ref(e
 
 Por el Teorema Fundamental del Álgebra es posible escribir la ecuación \@ref(eq:EDOP2) como:
 \begin{eqnarray}
-    (1 - g_1 L)(1 - g_1 L) \ldots (1 - g_p L) Z_t & = & a_0
+    (1 - g_1 L)(1 - g_2 L) \ldots (1 - g_p L) Z_t & = & a_0
     (\#eq:EDOP3)
 \end{eqnarray}
 
@@ -739,7 +739,7 @@ Utilizando la ecuación \@ref(eq:EDOP2) y la ecuación \@ref(eq:EDOP3) tenemos q
 
 Donde $s_1$, $s_2$, ..., $s_p$ son constantes que se determinan utilizando $p$ valores partículares de $Z_t$, y la solución general descrita en las ecuaciones \@ref(eq:EDOPGEN) y \@ref(eq:EDOPGEN2) implica encontrar $p$ raíces: $x_1 = g^{-1}_1$, $x_2 = g^{-1}_2$, ..., $x_p = g^{-1}_p$ de los siguientes polinomios equivalentes:
 \begin{eqnarray}
-    (1 - g_1)(1 - g_1) \ldots (1 - g_p) = 0
+    (1 - g_1 x)(1 - g_2 x) \ldots (1 - g_p x) = 0
     (\#eq:POLGEN1)
 \end{eqnarray}
 
@@ -786,7 +786,7 @@ Así, en el extremo cuando $m = p$ la solución general podría estar dada por:
 
 Donde $|{g} < 1|$, $t = \ldots, -2, -1, 0, 1, 2, \ldots$. Para finalizar esta sección, plantearemos la expresión del polinomio característico que nos permitirá hacer el análisis de convergencia de los procesos. Partamos de que la ecuación \@ref(eq:POLGEN3) se puede escribir como:
 \begin{equation}
-    (x^{-1})^p - a_1 (x^{-1})^{p-1} - a_2 (x^{-1})^{p-1} - \ldots - a_p = 0
+    (x^{-1})^p - a_1 (x^{-1})^{p-1} - a_2 (x^{-1})^{p-2} - \ldots - a_p = 0
     (\#eq:POLGEN55)
 \end{equation}
 
@@ -866,7 +866,7 @@ De lo anterior, podemos inferir el siguiente resultado:
     (\#eq:Lag5)
 \end{equation}
 
-En el caso de la diferencia de órden cuatro o cuarta diferencia se puede expresar como:
+En el caso de la diferencia de orden cuatro o cuarta diferencia se puede expresar como:
 \begin{equation}
     \Delta_{4} Z_{t} = Z_{t} - Z_{t-4} = (1 - L^4) Z_{t}
 (\#eq:Diff4)
@@ -918,4 +918,32 @@ De tal forma que el producto de ambos procesos se puede escribir como:
 \end{equation}
 
 Es decir, que el producto de dos polinomios, uno de diferencias y otro más de medias móviles, resulta en uno de diferencias pero de mayor grado, en este caso de grado 4.
+
+## De las Ecuaciones en Diferencia a los Procesos Estocásticos
+
+Hasta aquí hemos estudiado ecuaciones en diferencia **deterministas**: dado un valor inicial $Z_0$, la trayectoria futura del proceso queda completamente determinada por los parámetros $a_0, a_1, \ldots, a_p$. Sin embargo, en las aplicaciones económicas y financieras raramente observamos series que sigan una trayectoria perfectamente predecible. En la práctica, las series de tiempo se ven afectadas por **choques aleatorios** —innovaciones, perturbaciones o errores— que las hacen impredecibles en su detalle, aunque sí modelables en su estructura probabilística.
+
+La extensión natural de una ecuación en diferencia determinista de orden $p$ a un proceso estocástico consiste en agregar un término de error $U_t$:
+\begin{equation}
+    Z_t = a_0 + a_1 Z_{t-1} + a_2 Z_{t-2} + \ldots + a_p Z_{t-p} + U_t
+    (\#eq:AR_p)
+\end{equation}
+
+Donde $U_t$ es un proceso de ruido blanco con $\mathbb{E}[U_t] = 0$, $\text{Var}(U_t) = \sigma^2$ y $\text{Cov}(U_t, U_s) = 0$ para $t \neq s$. A la ecuación \@ref(eq:AR_p) se le conoce como un proceso **Autoregresivo de orden** $p$, denotado $AR(p)$, y constituye la base de los modelos de series de tiempo que se estudiarán en los capítulos siguientes.
+
+Usando el operador de rezagos $L$, la ecuación \@ref(eq:AR_p) se puede escribir de forma compacta como:
+\begin{equation}
+    (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p) Z_t = a_0 + U_t
+    (\#eq:AR_p_L)
+\end{equation}
+
+O bien, definiendo el polinomio $\alpha(L) = 1 - a_1 L - a_2 L^2 - \ldots - a_p L^p$:
+\begin{equation}
+    \alpha(L) Z_t = a_0 + U_t
+    (\#eq:AR_p_compact)
+\end{equation}
+
+La conexión con las ecuaciones deterministas es directa: las **condiciones de convergencia** que estudiamos en las secciones anteriores se convierten en las **condiciones de estacionariedad** del proceso estocástico. En concreto, el proceso $AR(p)$ descrito en la ecuación \@ref(eq:AR_p) será **estacionario** si y solo si todas las raíces del polinomio característico $\alpha(x) = 0$ se ubican **fuera del círculo unitario**, o equivalentemente, si todos los valores $|g_i| < 1$ para $i = 1, 2, \ldots, p$.
+
+Esta equivalencia es el vínculo fundamental entre el presente capítulo y el Capítulo \@ref(cap-estacionarios), en el que se estudiarán formalmente los procesos estocásticos estacionarios, sus propiedades y los métodos de estimación e identificación de modelos $AR(p)$, $MA(q)$ y $ARMA(p,q)$.
 
