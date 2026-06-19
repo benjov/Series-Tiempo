@@ -206,17 +206,25 @@ logarítmicas. En cada una de las pruebas se compara el modelo
 considerado como regresor a la variable que es candidata de causar,
 respecto del modelo sin considerar a dicha variable.
 
-| Rezagos | Estadiística F | Probabilidad ($>$F) | Significancia |
-|:-------:|:--------------:|:-------------------:|:-------------:|
-|    4    |     3.2621     |       0.01265       |      \*       |
-|    8    |     1.9079     |       0.06030       |               |
-|   12    |     2.2577     |       0.01067       |      \*       |
-|   16    |     1.6735     |       0.05495       |      \*       |
-| Notas:  |     \*\*\*     |       signif.       |    al 0.1%    |
-|         |      \*\*      |       signif.       |     al 1%     |
-|         |       \*       |       signif.       |     al 5%     |
-
-: (#tab:Granger) Prueba de si $DLINPC_t$ Granger causa a $DLTC_t$.
+```{r Granger, warning=FALSE, message=FALSE}
+granger_rows <- lapply(c(4, 8, 12, 16), function(p) {
+  gt  <- grangertest(DLTC ~ DLINPC, order = p)
+  pv  <- gt$`Pr(>F)`[2]
+  data.frame(Rezagos = p,
+             Fstat   = round(gt$F[2], 4),
+             Prob    = round(pv, 5),
+             Signif  = ifelse(pv < 0.001, "***",
+                       ifelse(pv < 0.01,  "**",
+                       ifelse(pv < 0.05,  "*", ""))))
+})
+knitr::kable(
+  do.call(rbind, granger_rows),
+  col.names = c("Rezagos", "Estadística $F$", "Probabilidad ($>F$)", "Signif."),
+  caption   = "Prueba de si $DLINPC_t$ Granger causa a $DLTC_t$.",
+  align     = c("c", "c", "c", "c"),
+  booktabs  = TRUE
+)
+```
 
 De acuerdo con el Cuadro \@ref(tab:Granger), podemos concluir que existe
 información estadísticamente significativa para concluir que la
@@ -548,30 +556,31 @@ el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que
 el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es
 una buena práctica utilizarlo como referente principal.
 
-| **AIC** | **HQ** | **SC** | **FPE** |
-|:-------:|:------:|:------:|:-------:|
-|    2    |   1    |   1    |    2    |
+```{r NumSelectVAR, warning=FALSE, message=FALSE}
+vs <- VARselect(Datos, lag.max = 12, type = "const")
+knitr::kable(
+  as.data.frame(t(vs$selection)),
+  col.names = c("AIC", "HQ", "SC", "FPE"),
+  caption   = paste("Número de rezagos según cada criterio de información para",
+                    "modelos VAR($p$) con constante: series $DLINPC_t$, $DLTC_t$,",
+                    "$DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$."),
+  align     = rep("c", 4),
+  booktabs  = TRUE
+)
+```
 
-: (#tab:NumSelectVAR) Número de rezagos determinados por cada uno de los
-criterios de información para diferentes especificaciones de modelos
-VAR(p) con término constante de la series $DLINPC_t$, $DLTC_t$,
-$DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$.
-
-| Rezagos  |      AIC      |      HQ       |      SC       |     FPE      |
-|:--------:|:-------------:|:-------------:|:-------------:|:------------:|
-|    1     | -4.636412e+01 | -4.617847e+01 | -4.590430e+01 | 7.317262e-21 |
-|    2     | -4.639541e+01 | -4.605506e+01 | -4.555241e+01 | 7.094216e-21 |
-|    3     | -4.635305e+01 | -4.585799e+01 | -4.512686e+01 | 7.407479e-21 |
-| $\vdots$ |   $\vdots$    |   $\vdots$    |   $\vdots$    |   $\vdots$   |
-
-: (#tab:SelectVAR) Criterios de información para diferentes
-especificaciones de modelos VAR(p) con término constante de la series
-$DLINPC_t$, $DLTC_t$, $DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$.
-
-```{r selVAR, warning=FALSE, message=FALSE}
-
-VARselect(Datos, lag.max = 12, type = "const")
-
+```{r SelectVAR, warning=FALSE, message=FALSE}
+crit_df         <- as.data.frame(t(vs$criteria))
+crit_df         <- cbind(Rezagos = seq_len(nrow(crit_df)), crit_df)
+knitr::kable(
+  crit_df,
+  col.names = c("Rezagos", "AIC", "HQ", "SC", "FPE"),
+  caption   = paste("Criterios de información para modelos VAR($p$) con constante:",
+                    "$DLINPC_t$, $DLTC_t$, $DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$."),
+  align     = c("c", "r", "r", "r", "r"),
+  digits    = 4,
+  booktabs  = TRUE
+)
 ```
 
 De esta forma, justificamos la estimación de un $VAR(2)$. Los resultados
@@ -584,50 +593,60 @@ el Cuadro \@ref(tab:IGAEVAR) (por simplicidad se omiten las otras cuatro
 ecuaciones del VAR(2)), y del Cuadro \@ref(tab:SigmaVARp) con la matriz
 $\mathbf{\Sigma}_{\hat{U}\hat{U}}$ estimada del VAR.
 
-|        |        |        |        |         |
-|:------:|:------:|:------:|:------:|:-------:|
-| 0.7452 | 0.4403 | 0.4403 | 0.3503 | 0.3503  |
-| 0.3342 | 0.3342 | 0.3339 | 0.3339 | 0.06951 |
-
-: (#tab:RootsVAR) Raíces del polinomio característico de un VAR(2).
-
-|     Variable     | Coeficiente | Error Est. | Estad. t |  Prob.($>$ t)   |
-|:----------------:|:-----------:|:----------:|:--------:|:---------------:|
-|  $DLINPC_{t-1}$  | -0.2584978  | 0.1658396  |  -1.559  |    0.120493     |
-|   $DLTC_{t-1}$   |  0.0022016  | 0.0152876  |  0.144   |    0.885620     |
-| $DLCETE28_{t-1}$ |  0.0009547  | 0.0049115  |  0.194   |    0.846054     |
-|  $DLIGAE_{t-1}$  | -0.2351453  | 0.0699797  |  -3.360  | 0.000917 \*\*\* |
-|  $DLIPI_{t-1}$   |  0.2442406  | 0.0600502  |  4.067   | 6.62e-05 \*\*\* |
-|  $DLINPC_{t-2}$  | -0.0775039  | 0.1694809  |  -0.457  |    0.647904     |
-|   $DLTC_{t-2}$   | -0.0413316  | 0.0144650  |  -2.857  |  0.004680 \*\*  |
-| $DLCETE28_{t-2}$ |  0.0005341  | 0.0048058  |  0.111   |    0.911612     |
-|  $DLIGAE_{t-2}$  | -0.0646890  | 0.0693711  |  -0.933  |    0.352092     |
-|  $DLIPI_{t-2}$   |  0.1796286  | 0.0620861  |  2.893   |  0.004195 \*\*  |
-|    $\delta_4$    |  0.0030377  | 0.0008077  |  3.761   | 0.000217 \*\*\* |
-|                  |   Notas:    |   \*\*\*   | signif.  |     al 0.1%     |
-|                  |             |    \*\*    | signif.  |      al 1%      |
-|                  |             |     \*     | signif.  |      al 5%      |
-
-: (#tab:IGAEVAR) Criterios de información para diferentes
-especificaciones de modelos VAR(p) con término constante de la series
-$DLINPC_t$, $DLTC_t$, $DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$.
-
-|            |            |          |            |            |            |
-|:----------:|:----------:|:--------:|:----------:|:----------:|:----------:|
-|            | $DLINPC_t$ | $DLTC_t$ | $DLCE28_t$ | $DLIGAE_t$ | $DLIGAE_t$ |
-| $DLINPC_t$ |  3.95e-06  | 3.19e-06 | -1.83e-06  |  -5.29-07  |  1.34e-06  |
-|  $DLTC_t$  |  3.19e-06  | 5.04e-04 |  4.27e-04  |  9.81e-06  |  1.61e-05  |
-| $DLCE28_t$ | -1.83e-06  | 4.27e-04 |  4.63e-03  |  1.26e-05  |  2.76e-05  |
-| $DLIGAE_t$ | -5.29e-07  | 9.81e-06 |  1.26e-05  |  2.43e-05  |  8.75e-06  |
-| $DLIGAE_t$ |  1.34e-06  | 1.61e-05 |  2.76e-05  |  8.75e-06  |  3.13e-05  |
-
-: (#tab:SigmaVARp) Matriz $\mathbf{\Sigma}_{\hat{U}\hat{U}}$ estimada
-del VAR(2).
-
 ```{r EstimacionVAR, warning=FALSE, message=FALSE}
 VAR_p <- VAR(Datos, p = 2, type = "const")
-
 summary(VAR_p)
+```
+
+```{r RootsVAR, warning=FALSE, message=FALSE}
+rts     <- roots(VAR_p)
+rts_mat <- matrix(round(rts, 4), nrow = 2, byrow = TRUE)
+knitr::kable(
+  rts_mat,
+  col.names = rep("", ncol(rts_mat)),
+  caption   = "Módulos de las raíces del polinomio característico del VAR(2).",
+  booktabs  = TRUE
+)
+```
+
+```{r IGAEVAR, warning=FALSE, message=FALSE}
+coef_IGAE <- summary(VAR_p)$varresult$DLIGAE$coefficients
+coef_df   <- as.data.frame(coef_IGAE)
+lbl_map <- c(
+  DLINPC.l1   = "$DLINPC_{t-1}$",   DLTC.l1     = "$DLTC_{t-1}$",
+  DLCETE28.l1 = "$DLCETE28_{t-1}$", DLIGAE.l1   = "$DLIGAE_{t-1}$",
+  DLIPI.l1    = "$DLIPI_{t-1}$",    DLINPC.l2   = "$DLINPC_{t-2}$",
+  DLTC.l2     = "$DLTC_{t-2}$",     DLCETE28.l2 = "$DLCETE28_{t-2}$",
+  DLIGAE.l2   = "$DLIGAE_{t-2}$",   DLIPI.l2    = "$DLIPI_{t-2}$",
+  const       = "$\\delta_4$"
+)
+rownames(coef_df) <- lbl_map[rownames(coef_df)]
+coef_df$Signif <- ifelse(coef_df[, 4] < 0.001, "***",
+                  ifelse(coef_df[, 4] < 0.01,  "**",
+                  ifelse(coef_df[, 4] < 0.05,  "*",
+                  ifelse(coef_df[, 4] < 0.1,   ".", ""))))
+knitr::kable(
+  coef_df,
+  col.names = c("Coef.", "Error Est.", "Estad. $t$", "Prob. $(>|t|)$", "Signif."),
+  caption   = "Ecuación $DLIGAE_t$ estimada en el VAR(2).",
+  align     = c("r", "r", "r", "r", "c"),
+  digits    = 4,
+  booktabs  = TRUE
+)
+```
+
+```{r SigmaVARp, warning=FALSE, message=FALSE}
+sig_mat <- summary(VAR_p)$covres
+vnames  <- c("$DLINPC$", "$DLTC$", "$DLCETE28$", "$DLIGAE$", "$DLIPI$")
+colnames(sig_mat) <- vnames
+rownames(sig_mat) <- vnames
+knitr::kable(
+  sig_mat,
+  caption     = "Matriz $\\mathbf{\\Sigma}_{\\hat{U}\\hat{U}}$ estimada del VAR(2).",
+  digits      = 4,
+  booktabs    = TRUE,
+  format.args = list(scientific = TRUE, digits = 3)
+)
 ```
 
 Finalmente, en el Cuadro \@ref(tab:DiagnosVAR) reportamos las pruebas de
@@ -640,36 +659,40 @@ se observa que los residuales no lo son, por lo que se requeriría
 mejorar la especificación del VAR. Finalmente, se observa que los
 residuales no son homocedásticos.
 
-| Estadística (rezagos) | Coeficiente | p-value | Conclusión |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| Correlación Serial ($\chi^2 (2)$) | 59.436 | 0.1696 | Existe autocorrelación serial |
-| Correlación Serial ($\chi^2 (4)$) | 127.17 | 0.03461 | No existe autocorrelación serial |
-| Correlación Serial ($\chi^2 (6)$) | 183.14 | 0.03393 | No existe autocorrelación serial |
-| Normalidad - JB ($\chi^2$) | 2335 | 0.0000 | Los residuales no son normales |
-| ARCH ($\chi^2 (2)$) | 691.58 | 0.0000 | Los residuales no son homocedásticos |
+```{r DiagnosVAR, warning=FALSE, message=FALSE}
+diag_s2 <- serial.test(VAR_p, lags.bg = 2, type = "BG")
+diag_s4 <- serial.test(VAR_p, lags.bg = 4, type = "BG")
+diag_s6 <- serial.test(VAR_p, lags.bg = 6, type = "BG")
+diag_n  <- normality.test(VAR_p)
+diag_a  <- arch.test(VAR_p, lags.multi = 6)
 
-: (#tab:DiagnosVAR) Pruebas de diagnóstico sobre los residuales del
-VAR(2).
+diagn_fila <- function(nombre, stat, pval) {
+  data.frame(
+    Prueba      = nombre,
+    Estadistico = round(stat, 3),
+    pvalor      = round(pval, 4),
+    Conclusion  = ifelse(pval < 0.05, "Se rechaza $H_0$", "No se rechaza $H_0$")
+  )
+}
 
-```{r warning=FALSE, message=FALSE}
-
-# --- Pruebas de diagnóstico ---
-
-# Normalidad (Jarque-Bera multivariado):
-normality.test(VAR_p)
-
-# Autocorrelación serial — LAGS = 2:
-serial.test(VAR_p, lags.bg = 2, type = "BG")
-
-# Autocorrelación serial — LAGS = 4:
-serial.test(VAR_p, lags.bg = 4, type = "BG")
-
-# Autocorrelación serial — LAGS = 6:
-serial.test(VAR_p, lags.bg = 6, type = "BG")
-
-# Homocedasticidad (ARCH multivariado):
-arch.test(VAR_p, lags.multi = 6)
-
+knitr::kable(
+  rbind(
+    diagn_fila("Corr. serial — $\\chi^2(2)$",
+               as.numeric(diag_s2$serial$statistic), diag_s2$serial$p.value),
+    diagn_fila("Corr. serial — $\\chi^2(4)$",
+               as.numeric(diag_s4$serial$statistic), diag_s4$serial$p.value),
+    diagn_fila("Corr. serial — $\\chi^2(6)$",
+               as.numeric(diag_s6$serial$statistic), diag_s6$serial$p.value),
+    diagn_fila("Normalidad JB — $\\chi^2$",
+               as.numeric(diag_n$jb.mul$JB$statistic), diag_n$jb.mul$JB$p.value),
+    diagn_fila("ARCH multivariado — $\\chi^2$",
+               as.numeric(diag_a$arch.mul$statistic), diag_a$arch.mul$p.value)
+  ),
+  col.names = c("Prueba", "Estadístico", "p-valor", "Conclusión"),
+  caption   = "Pruebas de diagnóstico sobre los residuales del VAR(2).",
+  align     = c("l", "r", "r", "l"),
+  booktabs  = TRUE
+)
 ```
 
 ## Análisis de Impulso-Respuesta
