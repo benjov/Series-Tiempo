@@ -295,40 +295,42 @@ Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo
 
 Iniciaremos implementando una prueba de DF simple (o una ADF sin rezagos). En este caso obtenemos los resultados mostrados en la siguiente Tabla. En esta se reportan los resultados de la prueba para cada uno de los 3 modelos (A, B y C) y los valores críticos (CV, por sus siglas en inglés) de la prueba para los niveles 1\%, 5\% y 10\%--estos valores son los reportados por MacKinnon (1996) para una prueba con distribución de 1 cola (izquierda). La convención es utilizar el nivel del 5\% de significancia.
 
-Los resultados deben leerse de la siguiente forma. La siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es comparar el estadístico con el valor crítico. Así, rechazaremos la hipótesis nula en los casos en que el estadístico $t$ se ubique por encima del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+Los resultados se presentan en el Cuadro \@ref(tab:tab-DF-summary), donde se reportan los estadísticos $\tau$ y los valores críticos de MacKinnon (1996) para los tres modelos, tanto en niveles ($LTC_t$) como en primeras diferencias ($\Delta LTC_t$). Rechazaremos la hipótesis nula cuando el estadístico $t$ sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.
 
-Table: (\#tab:DF-summary) Resumen de resultados de la prueba Dickey-Fuller (DF).
+```{r tab-DF-summary, warning=FALSE}
+## Dickey-Fuller — Niveles
+df_nA <- ur.df(LDatos[, 2], type = "trend", lags = 0)
+df_nB <- ur.df(LDatos[, 2], type = "drift", lags = 0)
+df_nC <- ur.df(LDatos[, 2], type = "none",  lags = 0)
 
-| **Model**   | **Estadístico** | **1% CV** | **5% CV** | **10% CV** |
-|:------------|:----------------|:---------:|:---------:|:----------:|
-| **LTC_t**   |                 |           |           |            |
-| Modelo A    | \(t=-2.0752\)   | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
-| Modelo B    | \(t=-1.1724\)   | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
-| Modelo C    | \(t=1.1815\)    | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
-| **\(\Delta LTC_t\)** |       |           |           |            |
-| Modelo A    | \(t=-12.6805\)  | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
-| Modelo B    | \(t=-12.6899\)  | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
-| Modelo C    | \(t=-12.6515\)  | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
+## Dickey-Fuller — Diferencias
+df_dA <- ur.df(DLDatos[, 2], type = "trend", lags = 0)
+df_dB <- ur.df(DLDatos[, 2], type = "drift", lags = 0)
+df_dC <- ur.df(DLDatos[, 2], type = "none",  lags = 0)
 
-```{r warning=FALSE}
+summary(df_nA); summary(df_nB); summary(df_nC)
+summary(df_dA); summary(df_dB); summary(df_dC)
 
-## Dickey-Fuller:
+urdf_fila <- function(lbl, obj) {
+  data.frame(Modelo      = lbl,
+             Estadistico = round(obj@teststat[1], 4),
+             CV_1pct     = round(obj@cval[1, 1], 4),
+             CV_5pct     = round(obj@cval[2, 1], 4),
+             CV_10pct    = round(obj@cval[3, 1], 4))
+}
 
-### NIVELES: Tipo de cambio
-
-summary(ur.df(LDatos[, 2], type = "trend", lags = 0))
-
-summary(ur.df(LDatos[, 2], type = "drift", lags = 0))
-
-summary(ur.df(LDatos[, 2], type = "none", lags = 0))
-
-### DIFERENCIAS: Tipo de cambio
-
-summary(ur.df(DLDatos[, 2], type = "trend", lags = 0))
-
-summary(ur.df(DLDatos[, 2], type = "drift", lags = 0))
-
-summary(ur.df(DLDatos[, 2], type = "none", lags = 0))
+knitr::kable(
+  rbind(urdf_fila("$LTC_t$ — Modelo A (tendencia)",        df_nA),
+        urdf_fila("$LTC_t$ — Modelo B (intercepto)",       df_nB),
+        urdf_fila("$LTC_t$ — Modelo C (sin det.)",         df_nC),
+        urdf_fila("$\\Delta LTC_t$ — Modelo A (tendencia)",  df_dA),
+        urdf_fila("$\\Delta LTC_t$ — Modelo B (intercepto)", df_dB),
+        urdf_fila("$\\Delta LTC_t$ — Modelo C (sin det.)",   df_dC)),
+  col.names = c("Modelo", "Estadístico $t$", "CV 1%", "CV 5%", "CV 10%"),
+  caption   = "Resumen: prueba Dickey-Fuller (DF) para $LTC_t$.",
+  align     = c("l", "r", "r", "r", "r"),
+  booktabs  = TRUE
+)
 ```
 
 ### Dickey - Fuller Aumentada (ADF)
@@ -375,40 +377,34 @@ Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo
   \end{equation*}
 Buscamos probar si $H_0 : \beta = \rho - 1 = 0$ contra $H_a : \beta < 0$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.
 
-**Ejemplo**. La siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$ de una prueba ADF. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es, al igual que en el caso anterior, comparar el estadístico con el valor crítico. Así, rechazaremos la hipótesis nula en los casos en que el estadístico $t$ se ubique por encima del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+**Ejemplo**. El Cuadro \@ref(tab:tab-ADF-summary) muestra los resultados de la prueba ADF con 5 rezagos ($p = int \{ 4 (282/100)^{(1/4)} \} = 5$) para $LTC_t$ y $\Delta LTC_t$. Al igual que en el caso anterior, rechazaremos la hipótesis nula cuando el estadístico $t$ sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.
 
-Table: (\#tab:ADF-summary) Resumen de resultados de la prueba Augmented Dickey-Fuller (ADF) con 5 rezagos (resultado de $p = int \{ 4 (282/100)^{(1/4)} \} = 5$).
+```{r tab-ADF-summary, warning=FALSE}
+## Augmented Dickey-Fuller — Niveles
+adf_nA <- ur.df(LDatos[, 2], type = "trend", lags = 5)
+adf_nB <- ur.df(LDatos[, 2], type = "drift", lags = 5)
+adf_nC <- ur.df(LDatos[, 2], type = "none",  lags = 5)
 
-| **Model**   | **Estadístico** | **1% CV** | **5% CV** | **10% CV** |
-|:------------|:----------------|:---------:|:---------:|:----------:|
-| **LTC_t**   |                |           |           |            |
-| Modelo A    | \(t=-2.4972\)  | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
-| Modelo B    | \(t=-1.1265\)  | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
-| Modelo C    | \(t=1.0273\)   | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
-| **\(\Delta LTC_t\)** |       |           |           |            |
-| Modelo A    | \(t=-7.4125\)  | \(-3.98\) | \(-3.42\) | \(-3.13\)  |
-| Modelo B    | \(t=-7.4034\)  | \(-3.44\) | \(-2.87\) | \(-2.57\)  |
-| Modelo C    | \(t=-7.2639\)  | \(-2.58\) | \(-1.95\) | \(-1.62\)  |
+## Augmented Dickey-Fuller — Diferencias
+adf_dA <- ur.df(DLDatos[, 2], type = "trend", lags = 5)
+adf_dB <- ur.df(DLDatos[, 2], type = "drift", lags = 5)
+adf_dC <- ur.df(DLDatos[, 2], type = "none",  lags = 5)
 
-```{r warning=FALSE}
-## Augmented Dickey - Fuller
+summary(adf_nA); summary(adf_nB); summary(adf_nC)
+summary(adf_dA); summary(adf_dB); summary(adf_dC)
 
-### NIVELES: Tipo de cambio
-
-summary(ur.df(LDatos[, 2], type = "trend", lags = 5))
-
-summary(ur.df(LDatos[, 2], type = "drift", lags = 5))
-
-summary(ur.df(LDatos[, 2], type = "none", lags = 5))
-
-### DIFERENCIAS: Tipo de cambio
-
-summary(ur.df(DLDatos[, 2], type = "trend", lags = 5))
-
-summary(ur.df(DLDatos[, 2], type = "drift", lags = 5))
-
-summary(ur.df(DLDatos[, 2], type = "none", lags = 5))
-
+knitr::kable(
+  rbind(urdf_fila("$LTC_t$ — Modelo A (tendencia)",        adf_nA),
+        urdf_fila("$LTC_t$ — Modelo B (intercepto)",       adf_nB),
+        urdf_fila("$LTC_t$ — Modelo C (sin det.)",         adf_nC),
+        urdf_fila("$\\Delta LTC_t$ — Modelo A (tendencia)",  adf_dA),
+        urdf_fila("$\\Delta LTC_t$ — Modelo B (intercepto)", adf_dB),
+        urdf_fila("$\\Delta LTC_t$ — Modelo C (sin det.)",   adf_dC)),
+  col.names = c("Modelo", "Estadístico $t$", "CV 1%", "CV 5%", "CV 10%"),
+  caption   = "Resumen: prueba Augmented Dickey-Fuller (ADF, 5 rezagos) para $LTC_t$.",
+  align     = c("l", "r", "r", "r", "r"),
+  booktabs  = TRUE
+)
 ```
 
 ### Phillips - Perron (PP)
@@ -442,34 +438,39 @@ Buscamos probar si $H_0 : \rho = 1$ contra $H_a : | \rho | < 1$, por lo que es u
   \end{equation*}
 Buscamos probar si $H_0 : \rho = 1$ contra $H_a : | \rho | < 1$, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una constante.
 
-**Ejemplo**. La siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$ de una prueba PP. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es, al igual que en los casos anteriores, comparar el estadístico con el valor crítico ($Z_\alpha$ o $Z_\tau$). Así, rechazaremos la hipótesis nula en los casos en que el estadístico $Z_\alpha$ o $Z_\tau$ se ubique por encima del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+**Ejemplo**. El Cuadro \@ref(tab:tab-PP-summary) muestra los resultados de la prueba PP con 5 rezagos para $LTC_t$ y $\Delta LTC_t$. Rechazaremos la hipótesis nula cuando el estadístico $Z_\tau$ sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.
 
-Table: (\#tab:PP-summary) Resumen de resultados de la prueba Phillips-Perron (PP) con 5 rezagos (resultado de $p = int \{ 4 (282/100)^{(1/4)} \} = 5$).
+```{r tab-PP-summary, warning=FALSE}
+## Phillips-Perron — Niveles
+pp_nA <- ur.pp(LDatos[, 2], type = "Z-tau", model = "trend",    use.lag = 5)
+pp_nB <- ur.pp(LDatos[, 2], type = "Z-tau", model = "constant", use.lag = 5)
 
-| **Model**     | **Estadístico**    | **1% CV**     | **5% CV**     | **10% CV**     |
-|:--------------|:-------------------|:-------------:|:-------------:|:--------------:|
-| **LTC_t**     |                   |               |               |                |
-| Modelo A      | \(Z_\tau = -2.5039\)  | \(-3.994127\) | \(-3.427199\) | \(-3.136601\)  |
-| Modelo B      | \(Z_\tau = -1.2297\)  | \(-3.455219\) | \(-2.87195\)  | \(-2.572274\)  |
-| **\(\Delta LTC_t\)** |            |               |               |                |
-| Modelo A      | \(Z_\tau = -12.3906\) | \(-3.994127\) | \(-3.427199\) | \(-3.136601\)  |
-| Modelo B      | \(Z_\tau = -12.4037\) | \(-3.455219\) | \(-2.87195\)  | \(-2.572274\)  |
+## Phillips-Perron — Diferencias
+pp_dA <- ur.pp(DLDatos[, 2], type = "Z-tau", model = "trend",    use.lag = 5)
+pp_dB <- ur.pp(DLDatos[, 2], type = "Z-tau", model = "constant", use.lag = 5)
 
-```{r warning=FALSE}
-## PP: Phillips - Perron Test
+summary(pp_nA); summary(pp_nB)
+summary(pp_dA); summary(pp_dB)
 
-### NIVELES: Tipo de cambio
+urpp_fila <- function(lbl, obj) {
+  cv <- as.numeric(obj@cval)
+  data.frame(Modelo      = lbl,
+             Estadistico = round(as.numeric(obj@teststat), 4),
+             CV_1pct     = round(cv[1], 4),
+             CV_5pct     = round(cv[2], 4),
+             CV_10pct    = round(cv[3], 4))
+}
 
-summary(ur.pp(LDatos[, 2], type = "Z-tau", model = "trend", use.lag = 5))
-
-summary(ur.pp(LDatos[, 2], type = "Z-tau", model = "constant", use.lag = 5))
-
-### DIFERENCIAS: Tipo de cambio
-
-summary(ur.pp(DLDatos[, 2], type = "Z-tau", model = "trend", use.lag = 5))
-
-summary(ur.pp(DLDatos[, 2], type = "Z-tau", model = "constant", use.lag = 5))
-
+knitr::kable(
+  rbind(urpp_fila("$LTC_t$ — Modelo A (tendencia)",          pp_nA),
+        urpp_fila("$LTC_t$ — Modelo B (intercepto)",         pp_nB),
+        urpp_fila("$\\Delta LTC_t$ — Modelo A (tendencia)",  pp_dA),
+        urpp_fila("$\\Delta LTC_t$ — Modelo B (intercepto)", pp_dB)),
+  col.names = c("Modelo", "Estadístico $Z_\\tau$", "CV 1%", "CV 5%", "CV 10%"),
+  caption   = "Resumen: prueba Phillips-Perron (PP, 5 rezagos) para $LTC_t$.",
+  align     = c("l", "r", "r", "r", "r"),
+  booktabs  = TRUE
+)
 ```
 
 ### Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)
@@ -487,35 +488,40 @@ Así, bajo la hipótesis nula $H_0 : \sigma^2_\varepsilon = 0$, $\xi$ se vuelve 
 
 2. \textbf{Modelo B}: 0.463, para un modelo con constante (estadístico $\mu$).
 
-**Ejemplo**. Finalmente, la siguiente Tabla muestra los resultados de la prueba para la serie en niveles, $LTC_t$, y en diferencias $\Delta LTC_t$ de una prueba KPSS. De esta forma, podremos comparar si la serie es estacionaria en niveles o en diferencias. La manera de determinarlo es, al igual que en los casos anteriores, comparar el estadístico con el valor crítico ($\mu$ y $\tau$). No obstante, en este caso buscaremos aceptar la hipótesis nula en los casos en que los estadísticos $\mu$ y $\tau$ se ubique por debajo del valor crítico. En este caso, podemos observar que la serie se vuelve estacionaria hasta su primera diferencia--caso en el que rechazamos la hipótesis nula en todos los modelos.
+**Ejemplo**. Finalmente, el Cuadro \@ref(tab:tab-KPSS-summary) muestra los resultados de la prueba KPSS para $LTC_t$ y $\Delta LTC_t$. En este caso se acepta $H_0$ (estacionariedad) cuando el estadístico es **menor** que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.
 
-Table: (\#tab:KPSS-summary) Resumen de resultados de la prueba Kwiatkowsky - Phillips - Schmidt - Shin (KPSS)).
+```{r tab-KPSS-summary, warning=FALSE}
+## KPSS — Niveles
+kpss_nA <- ur.kpss(LDatos[, 2], type = "tau")
+kpss_nB <- ur.kpss(LDatos[, 2], type = "mu")
 
-| **Model**     | **Estadístico** | **1% CV** | **5% CV** | **10% CV** |
-|:--------------|:----------------|:---------:|:---------:|:----------:|
-| **LTC_t**     |                |           |           |           |
-| Modelo A      | \(\tau = 0.3433\) | 0.216    | 0.146    | 0.119     |
-| Modelo B      | \(\mu = 4.429\)   | 0.739    | 0.463    | 0.347     |
-| **\(\Delta LTC_t\)** |          |           |          |           |
-| Modelo A      | \(\tau = 0.0701\) | 0.216    | 0.146    | 0.119     |
-| Modelo B      | \(\mu = 0.0801\)  | 0.739    | 0.463    | 0.347     |
+## KPSS — Diferencias
+kpss_dA <- ur.kpss(DLDatos[, 2], type = "tau")
+kpss_dB <- ur.kpss(DLDatos[, 2], type = "mu")
 
+summary(kpss_nA); summary(kpss_nB)
+summary(kpss_dA); summary(kpss_dB)
 
-```{r warning=FALSE}
-## KPSS:
+# @cval en ur.kpss: orden 10%, 5%, 2.5%, 1% (posiciones 1,2,3,4)
+urkpss_fila <- function(lbl, obj) {
+  cv <- as.numeric(obj@cval)
+  data.frame(Modelo      = lbl,
+             Estadistico = round(as.numeric(obj@teststat), 4),
+             CV_1pct     = round(cv[4], 4),
+             CV_5pct     = round(cv[2], 4),
+             CV_10pct    = round(cv[1], 4))
+}
 
-### NIVELES: Tipo de cambio
-
-summary(ur.kpss(LDatos[, 2], type = "tau"))
-
-summary(ur.kpss(LDatos[, 2], type = "mu"))
-
-### DIFERENCIAS: Tipo de cambio
-
-summary(ur.kpss(DLDatos[, 2], type = "tau"))
-
-summary(ur.kpss(DLDatos[, 2], type = "mu"))
-
+knitr::kable(
+  rbind(urkpss_fila("$LTC_t$ — Modelo A ($\\tau$, tendencia)",         kpss_nA),
+        urkpss_fila("$LTC_t$ — Modelo B ($\\mu$, intercepto)",         kpss_nB),
+        urkpss_fila("$\\Delta LTC_t$ — Modelo A ($\\tau$, tendencia)", kpss_dA),
+        urkpss_fila("$\\Delta LTC_t$ — Modelo B ($\\mu$, intercepto)", kpss_dB)),
+  col.names = c("Modelo", "Estadístico", "CV 1%", "CV 5%", "CV 10%"),
+  caption   = "Resumen: prueba KPSS para $LTC_t$ (rechazar $H_0$ si estadístico $>$ CV).",
+  align     = c("l", "r", "r", "r", "r"),
+  booktabs  = TRUE
+)
 ```
 
 ### Zivot - Andrews (ZA)
