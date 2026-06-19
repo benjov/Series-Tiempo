@@ -8,6 +8,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
+nocite: '@*'
 github-repo: https://github.com/benjov/Series-Tiempo
 description: "Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx"
 ---
