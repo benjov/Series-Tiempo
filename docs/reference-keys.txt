@@ -197,12 +197,12 @@ fig:fig74
 fig:fig75
 eq:URDFG
 eq:URDF
-tab:DF-summary
+tab:tab-DF-summary
 eq:URADF
-tab:ADF-summary
+tab:tab-ADF-summary
 eq:URPP
-tab:PP-summary
-tab:KPSS-summary
+tab:tab-PP-summary
+tab:tab-KPSS-summary
 tab:tab-ZA-summary
 eq:GrangerEq
 fig:fig61
@@ -238,7 +238,7 @@ eq:EqARDL
 fig:fig92
 eq:Obs
 eq:Tra
-fig:unnamed-chunk-22
+fig:unnamed-chunk-17
 eq:Pros
 eq:Hip
 eq:Iden
@@ -260,7 +260,7 @@ eq:A1
 eq:A2
 eq:A3
 eq:Sua
-fig:unnamed-chunk-23
+fig:unnamed-chunk-18
 fig:fig101
 fig:fig102
 fig:fig103
