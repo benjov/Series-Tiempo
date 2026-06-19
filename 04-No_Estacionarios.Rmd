@@ -315,8 +315,8 @@ urdf_fila <- function(lbl, obj) {
   data.frame(Modelo      = lbl,
              Estadistico = round(obj@teststat[1], 4),
              CV_1pct     = round(obj@cval[1, 1], 4),
-             CV_5pct     = round(obj@cval[2, 1], 4),
-             CV_10pct    = round(obj@cval[3, 1], 4))
+             CV_5pct     = round(obj@cval[1, 2], 4),
+             CV_10pct    = round(obj@cval[1, 3], 4))
 }
 
 knitr::kable(
