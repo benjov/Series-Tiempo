@@ -187,7 +187,7 @@ estacionarias, utilizaremos las diferencias logarítmicas de cada una de
 las tres series (es decir, utilizaremos una transformación del tipo
 <span class="math inline">\(ln(X_t) - ln(X_{t-1})\)</span>). La Figura <a href="cap-var.html#fig:fig61">5.1</a> muestra las series
 en su transformación de diferencias logarítmicas.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -220,7 +220,7 @@ en su transformación de diferencias logarítmicas.</p>
 <span>             freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">DLCETE28</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">CETE28_Ad</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="co">#png("Plots/DLGranger.png", width = 800, height = 1200)</span></span>
 <span></span>
@@ -243,7 +243,7 @@ en su transformación de diferencias logarítmicas.</p>
 Figure 5.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
 </p>
 </div>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
@@ -253,57 +253,94 @@ de aplicar el test de Granger a diferentes especificaciones, con rezagos
 logarítmicas. En cada una de las pruebas se compara el modelo
 considerado como regresor a la variable que es candidata de causar,
 respecto del modelo sin considerar a dicha variable.</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">granger_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">12</span>, <span class="fl">16</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">gt</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/grangertest.html">grangertest</a></span><span class="op">(</span><span class="va">DLTC</span> <span class="op">~</span> <span class="va">DLINPC</span>, order <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>
+<span>  <span class="va">pv</span>  <span class="op">&lt;-</span> <span class="va">gt</span><span class="op">$</span><span class="va">`Pr(&gt;F)`</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Rezagos <span class="op">=</span> <span class="va">p</span>,</span>
+<span>             Fstat   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">gt</span><span class="op">$</span><span class="cn">F</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>             Prob    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pv</span>, <span class="fl">5</span><span class="op">)</span>,</span>
+<span>             Signif  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">pv</span> <span class="op">&lt;</span> <span class="fl">0.001</span>, <span class="st">"***"</span>,</span>
+<span>                       <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">pv</span> <span class="op">&lt;</span> <span class="fl">0.01</span>,  <span class="st">"**"</span>,</span>
+<span>                       <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">pv</span> <span class="op">&lt;</span> <span class="fl">0.05</span>,  <span class="st">"*"</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">granger_rows</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Rezagos"</span>, <span class="st">"Estadística $F$"</span>, <span class="st">"Probabilidad ($&gt;F$)"</span>, <span class="st">"Signif."</span><span class="op">)</span>,</span>
+<span>  caption   <span class="op">=</span> <span class="st">"Prueba de si $DLINPC_t$ Granger causa a $DLTC_t$."</span>,</span>
+<span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span><span class="op">)</span>,</span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:Granger">Table 5.1: </span> Prueba de si <span class="math inline">\(DLINPC_t\)</span> Granger causa a <span class="math inline">\(DLTC_t\)</span>.</caption>
-<thead><tr class="header">
-<th align="center">Rezagos</th>
-<th align="center">Estadiística F</th>
-<th align="center">Probabilidad (<span class="math inline">\(&gt;\)</span>F)</th>
-<th align="center">Significancia</th>
+<span id="tab:Granger">Table 5.1: </span>Prueba de si <span class="math inline">\(DLINPC_t\)</span> Granger causa a <span class="math inline">\(DLTC_t\)</span>.
+</caption>
+<thead><tr>
+<th style="text-align:center;">
+Rezagos
+</th>
+<th style="text-align:center;">
+Estadística <span class="math inline">\(F\)</span>
+</th>
+<th style="text-align:center;">
+Probabilidad (<span class="math inline">\(&amp;gt;F\)</span>)
+</th>
+<th style="text-align:center;">
+Signif.
+</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="center">4</td>
-<td align="center">3.2621</td>
-<td align="center">0.01265</td>
-<td align="center">*</td>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1.3488
+</td>
+<td style="text-align:center;">
+0.25219
+</td>
+<td style="text-align:center;">
+</td>
 </tr>
-<tr class="even">
-<td align="center">8</td>
-<td align="center">1.9079</td>
-<td align="center">0.06030</td>
-<td align="center"></td>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+1.0029
+</td>
+<td style="text-align:center;">
+0.43425
+</td>
+<td style="text-align:center;">
+</td>
 </tr>
-<tr class="odd">
-<td align="center">12</td>
-<td align="center">2.2577</td>
-<td align="center">0.01067</td>
-<td align="center">*</td>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+1.0098
+</td>
+<td style="text-align:center;">
+0.44036
+</td>
+<td style="text-align:center;">
+</td>
 </tr>
-<tr class="even">
-<td align="center">16</td>
-<td align="center">1.6735</td>
-<td align="center">0.05495</td>
-<td align="center">*</td>
-</tr>
-<tr class="odd">
-<td align="center">Notas:</td>
-<td align="center">***</td>
-<td align="center">signif.</td>
-<td align="center">al 0.1%</td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center">**</td>
-<td align="center">signif.</td>
-<td align="center">al 1%</td>
-</tr>
-<tr class="odd">
-<td align="center"></td>
-<td align="center">*</td>
-<td align="center">signif.</td>
-<td align="center">al 5%</td>
+<tr>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+0.8123
+</td>
+<td style="text-align:center;">
+0.67111
+</td>
+<td style="text-align:center;">
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -536,7 +573,7 @@ período de enero de 2000 a julio de 2019. Dado que el supuesto
 estacionariedad sigue presente en nuestro análisis, emplearemos cada una
 de las series en su versión de diferencias logaritmicas. Las Figuras
 <a href="cap-var.html#fig:fig62">5.2</a> y <a href="cap-var.html#fig:fig63">5.3</a> muestra las series referidas.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -566,7 +603,7 @@ de las series en su versión de diferencias logaritmicas. Las Figuras
 <span></span>
 <span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos</span>, </span>
 <span>            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2</span><span class="op">)</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"s"</span>, </span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"black"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logaritmicas"</span>, </span>
@@ -581,7 +618,7 @@ de las series en su versión de diferencias logaritmicas. Las Figuras
 Figure 5.2: Series en diferencias logarítmicas (Forma 1)
 </p>
 </div>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"m"</span>, </span>
 <span>     col <span class="op">=</span> <span class="st">"darkgreen"</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logaritmicas"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
@@ -608,112 +645,290 @@ concluye que el número óptimo de rezagos es 2 (según el criterio AIC y
 el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que
 el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es
 una buena práctica utilizarlo como referente principal.</p>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">Datos</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">vs</span><span class="op">$</span><span class="va">selection</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AIC"</span>, <span class="st">"HQ"</span>, <span class="st">"SC"</span>, <span class="st">"FPE"</span><span class="op">)</span>,</span>
+<span>  caption   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Número de rezagos según cada criterio de información para"</span>,</span>
+<span>                    <span class="st">"modelos VAR($p$) con constante: series $DLINPC_t$, $DLTC_t$,"</span>,</span>
+<span>                    <span class="st">"$DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$."</span><span class="op">)</span>,</span>
+<span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:NumSelectVAR">Table 5.2: </span> Número de rezagos determinados por cada uno de los
-criterios de información para diferentes especificaciones de modelos
-VAR(p) con término constante de la series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>,
-<span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
-<thead><tr class="header">
-<th align="center"><strong>AIC</strong></th>
-<th align="center"><strong>HQ</strong></th>
-<th align="center"><strong>SC</strong></th>
-<th align="center"><strong>FPE</strong></th>
+<span id="tab:NumSelectVAR">Table 5.2: </span>Número de rezagos según cada criterio de información para modelos VAR(<span class="math inline">\(p\)</span>) con constante: series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.
+</caption>
+<thead><tr>
+<th style="text-align:center;">
+AIC
+</th>
+<th style="text-align:center;">
+HQ
+</th>
+<th style="text-align:center;">
+SC
+</th>
+<th style="text-align:center;">
+FPE
+</th>
 </tr></thead>
-<tbody><tr class="odd">
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">2</td>
+<tbody><tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
 </tr></tbody>
 </table></div>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">crit_df</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">vs</span><span class="op">$</span><span class="va">criteria</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">crit_df</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Rezagos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">crit_df</span><span class="op">)</span><span class="op">)</span>, <span class="va">crit_df</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="va">crit_df</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Rezagos"</span>, <span class="st">"AIC"</span>, <span class="st">"HQ"</span>, <span class="st">"SC"</span>, <span class="st">"FPE"</span><span class="op">)</span>,</span>
+<span>  caption   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Criterios de información para modelos VAR($p$) con constante:"</span>,</span>
+<span>                    <span class="st">"$DLINPC_t$, $DLTC_t$, $DLCETE28_t$, $DLIGAE_t$ y $DLIPI_t$."</span><span class="op">)</span>,</span>
+<span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
+<span>  digits    <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:SelectVAR">Table 5.3: </span> Criterios de información para diferentes
-especificaciones de modelos VAR(p) con término constante de la series
-<span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
-<colgroup>
-<col width="14%">
-<col width="21%">
-<col width="21%">
-<col width="21%">
-<col width="20%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Rezagos</th>
-<th align="center">AIC</th>
-<th align="center">HQ</th>
-<th align="center">SC</th>
-<th align="center">FPE</th>
+<span id="tab:SelectVAR">Table 5.3: </span>Criterios de información para modelos VAR(<span class="math inline">\(p\)</span>) con constante: <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.
+</caption>
+<thead><tr>
+<th style="text-align:center;">
+Rezagos
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+HQ
+</th>
+<th style="text-align:right;">
+SC
+</th>
+<th style="text-align:right;">
+FPE
+</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="center">1</td>
-<td align="center">-4.636412e+01</td>
-<td align="center">-4.617847e+01</td>
-<td align="center">-4.590430e+01</td>
-<td align="center">7.317262e-21</td>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+-43.4369
+</td>
+<td style="text-align:right;">
+-43.2759
+</td>
+<td style="text-align:right;">
+-43.0360
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="center">2</td>
-<td align="center">-4.639541e+01</td>
-<td align="center">-4.605506e+01</td>
-<td align="center">-4.555241e+01</td>
-<td align="center">7.094216e-21</td>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+-43.4878
+</td>
+<td style="text-align:right;">
+-43.1927
+</td>
+<td style="text-align:right;">
+-42.7528
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="center">3</td>
-<td align="center">-4.635305e+01</td>
-<td align="center">-4.585799e+01</td>
-<td align="center">-4.512686e+01</td>
-<td align="center">7.407479e-21</td>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:right;">
+-43.4268
+</td>
+<td style="text-align:right;">
+-42.9975
+</td>
+<td style="text-align:right;">
+-42.3578
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:right;">
+-43.3869
+</td>
+<td style="text-align:right;">
+-42.8234
+</td>
+<td style="text-align:right;">
+-41.9837
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:right;">
+-43.2932
+</td>
+<td style="text-align:right;">
+-42.5955
+</td>
+<td style="text-align:right;">
+-41.5559
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:right;">
+-43.2432
+</td>
+<td style="text-align:right;">
+-42.4113
+</td>
+<td style="text-align:right;">
+-41.1719
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:right;">
+-43.2902
+</td>
+<td style="text-align:right;">
+-42.3242
+</td>
+<td style="text-align:right;">
+-40.8848
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:right;">
+-43.2419
+</td>
+<td style="text-align:right;">
+-42.1418
+</td>
+<td style="text-align:right;">
+-40.5025
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:right;">
+-43.2201
+</td>
+<td style="text-align:right;">
+-41.9858
+</td>
+<td style="text-align:right;">
+-40.1466
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:right;">
+-43.1788
+</td>
+<td style="text-align:right;">
+-41.8103
+</td>
+<td style="text-align:right;">
+-39.7712
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:right;">
+-43.1191
+</td>
+<td style="text-align:right;">
+-41.6165
+</td>
+<td style="text-align:right;">
+-39.3774
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:right;">
+-43.0502
+</td>
+<td style="text-align:right;">
+-41.4134
+</td>
+<td style="text-align:right;">
+-38.9744
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">Datos</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## $selection
-## AIC(n)  HQ(n)  SC(n) FPE(n) 
-##      2      1      1      2 
-## 
-## $criteria
-##                                    1                             2
-## AIC(n) -43.4369385930444451560106245 -43.4878280980991220872056147
-## HQ(n)  -43.2759374580961733158801508 -43.1926593506939511257769482
-## SC(n)  -43.0360414131631969780755753 -42.7528499349835016118959174
-## FPE(n)   0.0000000000000000001366449   0.0000000000000000001298899
-##                                    3                             4
-## AIC(n) -43.4268489491758202802884625 -43.3868843889051234441467386
-## HQ(n)  -42.9975125893137573029889609 -42.8233804165861613455490442
-## SC(n)  -42.3577898028258275076041173 -41.9837442593207583740877453
-## FPE(n)   0.0000000000000000001381225   0.0000000000000000001438821
-##                                   5                             6
-## AIC(n) -43.293163285544032703455741 -43.2431704133633161291072611
-## HQ(n)  -42.595491700768178588987212 -42.4113312161305699987678963
-## SC(n)  -41.555942172725302441449458 -41.1718683173102135697263293
-## FPE(n)   0.000000000000000000158246   0.0000000000000000001667106
-##                                    7                             8
-## AIC(n) -43.2902076769675190348607430 -43.2419352439015938216471113
-## HQ(n)  -42.3242008672778737832231855 -42.1417608217550565541387186
-## SC(n)  -40.8848245976800441781051632 -40.5024711813797466675168835
-## FPE(n)   0.0000000000000000001595179   0.0000000000000000001680601
-##                                    9                            10
-## AIC(n) -43.2201406224138153788771888 -43.1788072276712782127106038
-## HQ(n)  -41.9857985878103789900706033 -41.8102975806109569134605408
-## SC(n)  -40.1465955766575959273723129 -39.7711811986806935692584375
-## FPE(n)   0.0000000000000000001726236   0.0000000000000000001810365
-##                                   11                            12
-## AIC(n) -43.1191364389135785017970193 -43.0502244962885995960277796
-## HQ(n)  -41.6164591793963580812487635 -41.4133796243144800541813311
-## SC(n)  -39.3774294266886144555428473 -38.9744365008292632523989596
-## FPE(n)   0.0000000000000000001936459   0.0000000000000000002093856</code></pre>
 <p>De esta forma, justificamos la estimación de un <span class="math inline">\(VAR(2)\)</span>. Los resultados
 del mismo se reportan en los siguientes cuadros, en los que se muestra
 el resultado de una de las ecuaciones. Los resultados restantes se
@@ -723,212 +938,8 @@ resultados de las raíces del polinomio característico en el Cuadro
 el Cuadro <a href="cap-var.html#tab:IGAEVAR">5.5</a> (por simplicidad se omiten las otras cuatro
 ecuaciones del VAR(2)), y del Cuadro <a href="cap-var.html#tab:SigmaVARp">5.6</a> con la matriz
 <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR.</p>
-<div class="inline-table"><table class="table table-sm">
-<caption>
-<span id="tab:RootsVAR">Table 5.4: </span> Raíces del polinomio característico de un VAR(2).</caption>
-<tbody>
-<tr class="odd">
-<td align="center">0.7452</td>
-<td align="center">0.4403</td>
-<td align="center">0.4403</td>
-<td align="center">0.3503</td>
-<td align="center">0.3503</td>
-</tr>
-<tr class="even">
-<td align="center">0.3342</td>
-<td align="center">0.3342</td>
-<td align="center">0.3339</td>
-<td align="center">0.3339</td>
-<td align="center">0.06951</td>
-</tr>
-</tbody>
-</table></div>
-<div class="inline-table"><table class="table table-sm">
-<caption>
-<span id="tab:IGAEVAR">Table 5.5: </span> Criterios de información para diferentes
-especificaciones de modelos VAR(p) con término constante de la series
-<span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.</caption>
-<colgroup>
-<col width="25%">
-<col width="18%">
-<col width="17%">
-<col width="14%">
-<col width="24%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Variable</th>
-<th align="center">Coeficiente</th>
-<th align="center">Error Est.</th>
-<th align="center">Estad. t</th>
-<th align="center">Prob.(<span class="math inline">\(&gt;\)</span> t)</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center"><span class="math inline">\(DLINPC_{t-1}\)</span></td>
-<td align="center">-0.2584978</td>
-<td align="center">0.1658396</td>
-<td align="center">-1.559</td>
-<td align="center">0.120493</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLTC_{t-1}\)</span></td>
-<td align="center">0.0022016</td>
-<td align="center">0.0152876</td>
-<td align="center">0.144</td>
-<td align="center">0.885620</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(DLCETE28_{t-1}\)</span></td>
-<td align="center">0.0009547</td>
-<td align="center">0.0049115</td>
-<td align="center">0.194</td>
-<td align="center">0.846054</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLIGAE_{t-1}\)</span></td>
-<td align="center">-0.2351453</td>
-<td align="center">0.0699797</td>
-<td align="center">-3.360</td>
-<td align="center">0.000917 ***</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(DLIPI_{t-1}\)</span></td>
-<td align="center">0.2442406</td>
-<td align="center">0.0600502</td>
-<td align="center">4.067</td>
-<td align="center">6.62e-05 ***</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLINPC_{t-2}\)</span></td>
-<td align="center">-0.0775039</td>
-<td align="center">0.1694809</td>
-<td align="center">-0.457</td>
-<td align="center">0.647904</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(DLTC_{t-2}\)</span></td>
-<td align="center">-0.0413316</td>
-<td align="center">0.0144650</td>
-<td align="center">-2.857</td>
-<td align="center">0.004680 **</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLCETE28_{t-2}\)</span></td>
-<td align="center">0.0005341</td>
-<td align="center">0.0048058</td>
-<td align="center">0.111</td>
-<td align="center">0.911612</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(DLIGAE_{t-2}\)</span></td>
-<td align="center">-0.0646890</td>
-<td align="center">0.0693711</td>
-<td align="center">-0.933</td>
-<td align="center">0.352092</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLIPI_{t-2}\)</span></td>
-<td align="center">0.1796286</td>
-<td align="center">0.0620861</td>
-<td align="center">2.893</td>
-<td align="center">0.004195 **</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\delta_4\)</span></td>
-<td align="center">0.0030377</td>
-<td align="center">0.0008077</td>
-<td align="center">3.761</td>
-<td align="center">0.000217 ***</td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center">Notas:</td>
-<td align="center">***</td>
-<td align="center">signif.</td>
-<td align="center">al 0.1%</td>
-</tr>
-<tr class="odd">
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">**</td>
-<td align="center">signif.</td>
-<td align="center">al 1%</td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">*</td>
-<td align="center">signif.</td>
-<td align="center">al 5%</td>
-</tr>
-</tbody>
-</table></div>
-<div class="inline-table"><table class="table table-sm">
-<caption>
-<span id="tab:SigmaVARp">Table 5.6: </span> Matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada
-del VAR(2).</caption>
-<colgroup>
-<col width="17%">
-<col width="17%">
-<col width="14%">
-<col width="17%">
-<col width="17%">
-<col width="17%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="center"></td>
-<td align="center"><span class="math inline">\(DLINPC_t\)</span></td>
-<td align="center"><span class="math inline">\(DLTC_t\)</span></td>
-<td align="center"><span class="math inline">\(DLCE28_t\)</span></td>
-<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
-<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLINPC_t\)</span></td>
-<td align="center">3.95e-06</td>
-<td align="center">3.19e-06</td>
-<td align="center">-1.83e-06</td>
-<td align="center">-5.29-07</td>
-<td align="center">1.34e-06</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(DLTC_t\)</span></td>
-<td align="center">3.19e-06</td>
-<td align="center">5.04e-04</td>
-<td align="center">4.27e-04</td>
-<td align="center">9.81e-06</td>
-<td align="center">1.61e-05</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLCE28_t\)</span></td>
-<td align="center">-1.83e-06</td>
-<td align="center">4.27e-04</td>
-<td align="center">4.63e-03</td>
-<td align="center">1.26e-05</td>
-<td align="center">2.76e-05</td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
-<td align="center">-5.29e-07</td>
-<td align="center">9.81e-06</td>
-<td align="center">1.26e-05</td>
-<td align="center">2.43e-05</td>
-<td align="center">8.75e-06</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(DLIGAE_t\)</span></td>
-<td align="center">1.34e-06</td>
-<td align="center">1.61e-05</td>
-<td align="center">2.76e-05</td>
-<td align="center">8.75e-06</td>
-<td align="center">3.13e-05</td>
-</tr>
-</tbody>
-</table></div>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">VAR_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">Datos</span>, p <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## VAR Estimation Results:
@@ -1084,6 +1095,470 @@ del VAR(2).</caption>
 ## DLCETE28  0.032640  0.224095  1.00000  0.07301  0.1179
 ## DLIGAE    0.225240 -0.101585  0.07301  1.00000  0.7615
 ## DLIPI     0.285629 -0.109656  0.11792  0.76147  1.0000</code></pre>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rts</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/roots.html">roots</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span>
+<span><span class="va">rts_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">rts</span>, <span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="va">rts_mat</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">rts_mat</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  caption   <span class="op">=</span> <span class="st">"Módulos de las raíces del polinomio característico del VAR(2)."</span>,</span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:RootsVAR">Table 5.4: </span>Módulos de las raíces del polinomio característico del VAR(2).
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+</th>
+<th style="text-align:right;">
+</th>
+<th style="text-align:right;">
+</th>
+<th style="text-align:right;">
+</th>
+<th style="text-align:right;">
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.5300
+</td>
+<td style="text-align:right;">
+0.5300
+</td>
+<td style="text-align:right;">
+0.4501
+</td>
+<td style="text-align:right;">
+0.4501
+</td>
+<td style="text-align:right;">
+0.4425
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.4425
+</td>
+<td style="text-align:right;">
+0.3251
+</td>
+<td style="text-align:right;">
+0.3251
+</td>
+<td style="text-align:right;">
+0.1677
+</td>
+<td style="text-align:right;">
+0.1677
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">coef_IGAE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span><span class="op">$</span><span class="va">varresult</span><span class="op">$</span><span class="va">DLIGAE</span><span class="op">$</span><span class="va">coefficients</span></span>
+<span><span class="va">coef_df</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">coef_IGAE</span><span class="op">)</span></span>
+<span><span class="va">lbl_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  DLINPC.l1   <span class="op">=</span> <span class="st">"$DLINPC_{t-1}$"</span>,   DLTC.l1     <span class="op">=</span> <span class="st">"$DLTC_{t-1}$"</span>,</span>
+<span>  DLCETE28.l1 <span class="op">=</span> <span class="st">"$DLCETE28_{t-1}$"</span>, DLIGAE.l1   <span class="op">=</span> <span class="st">"$DLIGAE_{t-1}$"</span>,</span>
+<span>  DLIPI.l1    <span class="op">=</span> <span class="st">"$DLIPI_{t-1}$"</span>,    DLINPC.l2   <span class="op">=</span> <span class="st">"$DLINPC_{t-2}$"</span>,</span>
+<span>  DLTC.l2     <span class="op">=</span> <span class="st">"$DLTC_{t-2}$"</span>,     DLCETE28.l2 <span class="op">=</span> <span class="st">"$DLCETE28_{t-2}$"</span>,</span>
+<span>  DLIGAE.l2   <span class="op">=</span> <span class="st">"$DLIGAE_{t-2}$"</span>,   DLIPI.l2    <span class="op">=</span> <span class="st">"$DLIPI_{t-2}$"</span>,</span>
+<span>  const       <span class="op">=</span> <span class="st">"$\\delta_4$"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">coef_df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">lbl_map</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">coef_df</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">coef_df</span><span class="op">$</span><span class="va">Signif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">coef_df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0.001</span>, <span class="st">"***"</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">coef_df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0.01</span>,  <span class="st">"**"</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">coef_df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0.05</span>,  <span class="st">"*"</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">coef_df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0.1</span>,   <span class="st">"."</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="va">coef_df</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Coef."</span>, <span class="st">"Error Est."</span>, <span class="st">"Estad. $t$"</span>, <span class="st">"Prob. $(&gt;|t|)$"</span>, <span class="st">"Signif."</span><span class="op">)</span>,</span>
+<span>  caption   <span class="op">=</span> <span class="st">"Ecuación $DLIGAE_t$ estimada en el VAR(2)."</span>,</span>
+<span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"c"</span><span class="op">)</span>,</span>
+<span>  digits    <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:IGAEVAR">Table 5.5: </span>Ecuación <span class="math inline">\(DLIGAE_t\)</span> estimada en el VAR(2).
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Coef.
+</th>
+<th style="text-align:right;">
+Error Est.
+</th>
+<th style="text-align:right;">
+Estad. <span class="math inline">\(t\)</span>
+</th>
+<th style="text-align:right;">
+Prob. <span class="math inline">\((&amp;gt;|t|)\)</span>
+</th>
+<th style="text-align:center;">
+Signif.
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLINPC_{t-1}\)</span>
+</td>
+<td style="text-align:right;">
+0.7199
+</td>
+<td style="text-align:right;">
+0.3936
+</td>
+<td style="text-align:right;">
+1.8288
+</td>
+<td style="text-align:right;">
+0.0685
+</td>
+<td style="text-align:center;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLTC_{t-1}\)</span>
+</td>
+<td style="text-align:right;">
+-0.2185
+</td>
+<td style="text-align:right;">
+0.0330
+</td>
+<td style="text-align:right;">
+-6.6267
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:center;">
+***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLCETE28_{t-1}\)</span>
+</td>
+<td style="text-align:right;">
+0.0077
+</td>
+<td style="text-align:right;">
+0.0130
+</td>
+<td style="text-align:right;">
+0.5955
+</td>
+<td style="text-align:right;">
+0.5520
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLIGAE_{t-1}\)</span>
+</td>
+<td style="text-align:right;">
+0.0376
+</td>
+<td style="text-align:right;">
+0.0941
+</td>
+<td style="text-align:right;">
+0.3993
+</td>
+<td style="text-align:right;">
+0.6900
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLIPI_{t-1}\)</span>
+</td>
+<td style="text-align:right;">
+0.3899
+</td>
+<td style="text-align:right;">
+0.1208
+</td>
+<td style="text-align:right;">
+3.2280
+</td>
+<td style="text-align:right;">
+0.0014
+</td>
+<td style="text-align:center;">
+**
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLINPC_{t-2}\)</span>
+</td>
+<td style="text-align:right;">
+-0.7377
+</td>
+<td style="text-align:right;">
+0.3969
+</td>
+<td style="text-align:right;">
+-1.8587
+</td>
+<td style="text-align:right;">
+0.0642
+</td>
+<td style="text-align:center;">
+.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLTC_{t-2}\)</span>
+</td>
+<td style="text-align:right;">
+0.0738
+</td>
+<td style="text-align:right;">
+0.0343
+</td>
+<td style="text-align:right;">
+2.1534
+</td>
+<td style="text-align:right;">
+0.0322
+</td>
+<td style="text-align:center;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLCETE28_{t-2}\)</span>
+</td>
+<td style="text-align:right;">
+-0.0135
+</td>
+<td style="text-align:right;">
+0.0128
+</td>
+<td style="text-align:right;">
+-1.0585
+</td>
+<td style="text-align:right;">
+0.2908
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLIGAE_{t-2}\)</span>
+</td>
+<td style="text-align:right;">
+-0.1428
+</td>
+<td style="text-align:right;">
+0.0891
+</td>
+<td style="text-align:right;">
+-1.6025
+</td>
+<td style="text-align:right;">
+0.1102
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLIPI_{t-2}\)</span>
+</td>
+<td style="text-align:right;">
+-0.1548
+</td>
+<td style="text-align:right;">
+0.1225
+</td>
+<td style="text-align:right;">
+-1.2643
+</td>
+<td style="text-align:right;">
+0.2072
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\delta_4\)</span>
+</td>
+<td style="text-align:right;">
+0.0016
+</td>
+<td style="text-align:right;">
+0.0018
+</td>
+<td style="text-align:right;">
+0.8926
+</td>
+<td style="text-align:right;">
+0.3729
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sig_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span><span class="op">$</span><span class="va">covres</span></span>
+<span><span class="va">vnames</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"$DLINPC$"</span>, <span class="st">"$DLTC$"</span>, <span class="st">"$DLCETE28$"</span>, <span class="st">"$DLIGAE$"</span>, <span class="st">"$DLIPI$"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">sig_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">vnames</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">sig_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">vnames</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="va">sig_mat</span>,</span>
+<span>  caption     <span class="op">=</span> <span class="st">"Matriz $\\mathbf{\\Sigma}_{\\hat{U}\\hat{U}}$ estimada del VAR(2)."</span>,</span>
+<span>  digits      <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  booktabs    <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  format.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:SigmaVARp">Table 5.6: </span>Matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR(2).
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(DLINPC\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(DLTC\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(DLCETE28\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(DLIGAE\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(DLIPI\)</span>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLINPC\)</span>
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+0.0e+00
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLTC\)</span>
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+7e-04
+</td>
+<td style="text-align:right;">
+4.0e-04
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLCETE28\)</span>
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+4e-04
+</td>
+<td style="text-align:right;">
+4.1e-03
+</td>
+<td style="text-align:right;">
+1e-04
+</td>
+<td style="text-align:right;">
+1e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLIGAE\)</span>
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+1.0e-04
+</td>
+<td style="text-align:right;">
+2e-04
+</td>
+<td style="text-align:right;">
+1e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(DLIPI\)</span>
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+<td style="text-align:right;">
+1.0e-04
+</td>
+<td style="text-align:right;">
+1e-04
+</td>
+<td style="text-align:right;">
+1e-04
+</td>
+</tr>
+</tbody>
+</table></div>
 <p>Finalmente, en el Cuadro <a href="cap-var.html#tab:DiagnosVAR">5.7</a> reportamos las pruebas de
 diagnóstico del VAR(2). Incluimos las pruebas de correlación serial (o
 autocorrelación), normalidad y de heterocedasticidad. De acuerdo con esa
@@ -1093,114 +1568,148 @@ se elimina conforme los rezagos se incrementan. En cuanto a normalidad,
 se observa que los residuales no lo son, por lo que se requeriría
 mejorar la especificación del VAR. Finalmente, se observa que los
 residuales no son homocedásticos.</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">diag_s2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span>
+<span><span class="va">diag_s4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">4</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span>
+<span><span class="va">diag_s6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span>
+<span><span class="va">diag_n</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/normality.html">normality.test</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span>
+<span><span class="va">diag_a</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/arch.html">arch.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.multi <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">diagn_fila</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nombre</span>, <span class="va">stat</span>, <span class="va">pval</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    Prueba      <span class="op">=</span> <span class="va">nombre</span>,</span>
+<span>    Estadistico <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">stat</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    pvalor      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pval</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>    Conclusion  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">pval</span> <span class="op">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Se rechaza $H_0$"</span>, <span class="st">"No se rechaza $H_0$"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
+<span>    <span class="fu">diagn_fila</span><span class="op">(</span><span class="st">"Corr. serial — $\\chi^2(2)$"</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">diag_s2</span><span class="op">$</span><span class="va">serial</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span>, <span class="va">diag_s2</span><span class="op">$</span><span class="va">serial</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span>,</span>
+<span>    <span class="fu">diagn_fila</span><span class="op">(</span><span class="st">"Corr. serial — $\\chi^2(4)$"</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">diag_s4</span><span class="op">$</span><span class="va">serial</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span>, <span class="va">diag_s4</span><span class="op">$</span><span class="va">serial</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span>,</span>
+<span>    <span class="fu">diagn_fila</span><span class="op">(</span><span class="st">"Corr. serial — $\\chi^2(6)$"</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">diag_s6</span><span class="op">$</span><span class="va">serial</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span>, <span class="va">diag_s6</span><span class="op">$</span><span class="va">serial</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span>,</span>
+<span>    <span class="fu">diagn_fila</span><span class="op">(</span><span class="st">"Normalidad JB — $\\chi^2$"</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">diag_n</span><span class="op">$</span><span class="va">jb.mul</span><span class="op">$</span><span class="va">JB</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span>, <span class="va">diag_n</span><span class="op">$</span><span class="va">jb.mul</span><span class="op">$</span><span class="va">JB</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span>,</span>
+<span>    <span class="fu">diagn_fila</span><span class="op">(</span><span class="st">"ARCH multivariado — $\\chi^2$"</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">diag_a</span><span class="op">$</span><span class="va">arch.mul</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span>, <span class="va">diag_a</span><span class="op">$</span><span class="va">arch.mul</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Prueba"</span>, <span class="st">"Estadístico"</span>, <span class="st">"p-valor"</span>, <span class="st">"Conclusión"</span><span class="op">)</span>,</span>
+<span>  caption   <span class="op">=</span> <span class="st">"Pruebas de diagnóstico sobre los residuales del VAR(2)."</span>,</span>
+<span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"l"</span><span class="op">)</span>,</span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:DiagnosVAR">Table 5.7: </span> Pruebas de diagnóstico sobre los residuales del
-VAR(2).</caption>
-<colgroup>
-<col width="25%">
-<col width="25%">
-<col width="25%">
-<col width="25%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Estadística (rezagos)</th>
-<th align="center">Coeficiente</th>
-<th align="center">p-value</th>
-<th align="center">Conclusión</th>
+<span id="tab:DiagnosVAR">Table 5.7: </span>Pruebas de diagnóstico sobre los residuales del VAR(2).
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Prueba
+</th>
+<th style="text-align:right;">
+Estadístico
+</th>
+<th style="text-align:right;">
+p-valor
+</th>
+<th style="text-align:left;">
+Conclusión
+</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="center">Correlación Serial (<span class="math inline">\(\chi^2 (2)\)</span>)</td>
-<td align="center">59.436</td>
-<td align="center">0.1696</td>
-<td align="center">Existe autocorrelación serial</td>
+<tr>
+<td style="text-align:left;">
+Chi-squared
+</td>
+<td style="text-align:left;">
+Corr. serial — <span class="math inline">\(\chi^2(2)\)</span>
+</td>
+<td style="text-align:right;">
+74.839
+</td>
+<td style="text-align:right;">
+0.0130
+</td>
+<td style="text-align:left;">
+Se rechaza <span class="math inline">\(H_0\)</span>
+</td>
 </tr>
-<tr class="even">
-<td align="center">Correlación Serial (<span class="math inline">\(\chi^2 (4)\)</span>)</td>
-<td align="center">127.17</td>
-<td align="center">0.03461</td>
-<td align="center">No existe autocorrelación serial</td>
+<tr>
+<td style="text-align:left;">
+Chi-squared1
+</td>
+<td style="text-align:left;">
+Corr. serial — <span class="math inline">\(\chi^2(4)\)</span>
+</td>
+<td style="text-align:right;">
+131.687
+</td>
+<td style="text-align:right;">
+0.0185
+</td>
+<td style="text-align:left;">
+Se rechaza <span class="math inline">\(H_0\)</span>
+</td>
 </tr>
-<tr class="odd">
-<td align="center">Correlación Serial (<span class="math inline">\(\chi^2 (6)\)</span>)</td>
-<td align="center">183.14</td>
-<td align="center">0.03393</td>
-<td align="center">No existe autocorrelación serial</td>
+<tr>
+<td style="text-align:left;">
+Chi-squared2
+</td>
+<td style="text-align:left;">
+Corr. serial — <span class="math inline">\(\chi^2(6)\)</span>
+</td>
+<td style="text-align:right;">
+201.633
+</td>
+<td style="text-align:right;">
+0.0031
+</td>
+<td style="text-align:left;">
+Se rechaza <span class="math inline">\(H_0\)</span>
+</td>
 </tr>
-<tr class="even">
-<td align="center">Normalidad - JB (<span class="math inline">\(\chi^2\)</span>)</td>
-<td align="center">2335</td>
-<td align="center">0.0000</td>
-<td align="center">Los residuales no son normales</td>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Normalidad JB — <span class="math inline">\(\chi^2\)</span>
+</td>
+<td style="text-align:right;">
+36186.086
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:left;">
+Se rechaza <span class="math inline">\(H_0\)</span>
+</td>
 </tr>
-<tr class="odd">
-<td align="center">ARCH (<span class="math inline">\(\chi^2 (2)\)</span>)</td>
-<td align="center">691.58</td>
-<td align="center">0.0000</td>
-<td align="center">Los residuales no son homocedásticos</td>
+<tr>
+<td style="text-align:left;">
+Chi-squared3
+</td>
+<td style="text-align:left;">
+ARCH multivariado — <span class="math inline">\(\chi^2\)</span>
+</td>
+<td style="text-align:right;">
+2122.423
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:left;">
+Se rechaza <span class="math inline">\(H_0\)</span>
+</td>
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># --- Pruebas de diagnóstico ---</span></span>
-<span></span>
-<span><span class="co"># Normalidad (Jarque-Bera multivariado):</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/normality.html">normality.test</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## $JB
-## 
-##  JB-Test (multivariate)
-## 
-## data:  Residuals of VAR object VAR_p
-## Chi-squared = 36186, df = 10, p-value &lt; 0.00000000000000022
-## 
-## 
-## $Skewness
-## 
-##  Skewness only (multivariate)
-## 
-## data:  Residuals of VAR object VAR_p
-## Chi-squared = 1261, df = 5, p-value &lt; 0.00000000000000022
-## 
-## 
-## $Kurtosis
-## 
-##  Kurtosis only (multivariate)
-## 
-## data:  Residuals of VAR object VAR_p
-## Chi-squared = 34925, df = 5, p-value &lt; 0.00000000000000022</code></pre>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Autocorrelación serial — LAGS = 2:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-##  Breusch-Godfrey LM test
-## 
-## data:  Residuals of VAR object VAR_p
-## Chi-squared = 74.839, df = 50, p-value = 0.013</code></pre>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Autocorrelación serial — LAGS = 4:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">4</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-##  Breusch-Godfrey LM test
-## 
-## data:  Residuals of VAR object VAR_p
-## Chi-squared = 131.69, df = 100, p-value = 0.01849</code></pre>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Autocorrelación serial — LAGS = 6:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-##  Breusch-Godfrey LM test
-## 
-## data:  Residuals of VAR object VAR_p
-## Chi-squared = 201.63, df = 150, p-value = 0.003147</code></pre>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Homocedasticidad (ARCH multivariado):</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/arch.html">arch.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.multi <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-##  ARCH (multivariate)
-## 
-## data:  Residuals of VAR object VAR_p
-## Chi-squared = 2122.4, df = 1350, p-value &lt; 0.00000000000000022</code></pre>
 </div>
 <div id="análisis-de-impulso-respuesta" class="section level2" number="5.3">
 <h2>
@@ -1225,7 +1734,7 @@ matrices en las que hemos descompuesto a <span class="math inline">\(\mathbf{B}(
 en las siguientes figuras reportamos las gráficas de Impulso-Respuesta
 de la serie <span class="math inline">\(DLTC_t\)</span> ante cambios en los residuales del resto de las
 series y de la propia serie.</p>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IR_DLINPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/irf.html">irf</a></span><span class="op">(</span><span class="va">VAR_p</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, boot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                 ci <span class="op">=</span> <span class="fl">0.95</span>, response <span class="op">=</span> <span class="st">"DLINPC"</span><span class="op">)</span></span>
 <span></span>
@@ -1475,9 +1984,9 @@ series y de la propia serie.</p>
 ## [11,] 0.000002565717
 ## [12,] 0.000002802144
 ## [13,] 0.000001089726</code></pre>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot(IR_DLINPC)</span></span></code></pre></div>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IR_DLTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/irf.html">irf</a></span><span class="op">(</span><span class="va">VAR_p</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, boot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>               ci <span class="op">=</span> <span class="fl">0.95</span>, response <span class="op">=</span> <span class="st">"DLTC"</span><span class="op">)</span></span>
 <span></span>
@@ -1617,7 +2126,7 @@ p_{31} &amp; p_{32} &amp; p_{33}
 <p>Sin embargo, es importante destacar que esta ortogonalización de los errores solo es válida si la estructura recursiva impuesta por la matriz <span class="math inline">\(P\)</span> se puede justificar con fundamentos económicos. El método impone que la primera variable del sistema responde solo a su propio shock contemporáneo, la segunda puede responder al shock de la primera, la tercera a los dos primeros, y así sucesivamente. Por eso se dice que el modelo estructural resultante es recursivo: se impone una estructura jerárquica de causalidad contemporánea, en lugar de inferirla directamente de los datos.</p>
 <p>En este sentido, la <strong>descomposición de Cholesky</strong> no descubre las relaciones estructurales sino que las impone. Por lo tanto, el orden de las variables en el VAR <strong>sí importa</strong>, ya que determina la interpretación de los shocks estructurales. Por esta razón, se recomienda justificar el orden mediante teoría económica. Por ejemplo, en aplicaciones del Banco de México, el orden se suele establecer de acuerdo con la hipótesis de una economía pequeña y abierta, ordenando las variables de la más exógena a la más endógena.</p>
 <p>Veamos un ejemplo rápido de la <em>identificación recursiva</em> mediante la <strong>descomposición de Cholesky</strong>:</p>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("svars")</span></span>
 <span><span class="co"># install.packages("ggplot2")</span></span>
 <span><span class="co"># install.packages("ggfortify")</span></span>
@@ -1640,7 +2149,7 @@ p_{31} &amp; p_{32} &amp; p_{33}
 ## x   0.68338360 0.0000000 0.0000000
 ## pi -0.03642697 1.0726563 0.0000000
 ## i   0.22450359 0.1818031 0.7672318</code></pre>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># x  = Porcentaje de desviación logarítmica del PIB real con respecto a la </span></span>
 <span><span class="co">#      estimación del producto potencial</span></span>
 <span><span class="co"># pi = Crecimiento anualizado trimestre a trimestre del deflactor del PIB</span></span>
@@ -1650,7 +2159,7 @@ p_{31} &amp; p_{32} &amp; p_{33}
 <span><span class="va">boot.svar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/svars/man/wild.boot.html">wild.boot</a></span><span class="op">(</span><span class="va">var.estructural</span>, n.ahead <span class="op">=</span> <span class="fl">24</span>, nboot <span class="op">=</span> <span class="fl">1000</span>, nc <span class="op">=</span> <span class="va">cores</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">boot.svar</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></div>
 </div>
 <div id="var-estructural---restricción-de-largo-plazo" class="section level3" number="5.4.2">
 <h3>
@@ -1918,7 +2427,7 @@ cierto (ver Scrip para mayores detalles). En las Figuras
 <a href="cap-var.html#fig:fig81">5.9</a>, <a href="cap-var.html#fig:fig82">5.10</a> y <a href="cap-var.html#fig:fig83">5.11</a> se muestran las
 series en niveles y en diferencias, con lo cual ilustramos como es
 viable que las series sean I(1).</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -1944,7 +2453,7 @@ viable que las series sean I(1).</p>
 <span><span class="va">DLDatos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos</span>, base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                lag <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>                differences <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">LDatos</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -1956,7 +2465,7 @@ viable que las series sean I(1).</p>
 Figure 5.9: Series en niveles (logaritmos) para la prueba de Cointegración
 </p>
 </div>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DLDatos</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -1968,7 +2477,7 @@ Figure 5.9: Series en niveles (logaritmos) para la prueba de Cointegración
 Figure 5.10: Series en Diferencias Logarítmicas para la prueba de Cointegración
 </p>
 </div>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">LDatos</span>, <span class="va">DLDatos</span><span class="op">)</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -2045,7 +2554,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Selección de rezagos VAR(p)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span></code></pre></div>
@@ -2079,7 +2588,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 ## HQ(n)  -42.1235766348879465681420697 -41.9822962196546143331943313
 ## SC(n)  -40.2589572319589734661349212 -39.9193130504566013883049891
 ## FPE(n)   0.0000000000000000001480478   0.0000000000000000001502148</code></pre>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"trend"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
@@ -2111,7 +2620,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 ## HQ(n)  -42.0882307425099355668862700 -41.932182797061308576758165
 ## SC(n)  -40.2632840928347732756265032 -39.908872381117106442616205
 ## FPE(n)   0.0000000000000000001573361   0.000000000000000000161972</code></pre>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
@@ -2143,7 +2652,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 ## HQ(n)  -42.092390492949782299092476 -41.9339762980896679778197722
 ## SC(n)  -40.267443843274620007832709 -39.9106658821454658436778118
 ## FPE(n)   0.000000000000000000156683   0.0000000000000000001616817</code></pre>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
@@ -2255,7 +2764,7 @@ estará dada por: <span class="math display">\[\begin{eqnarray*}
     &amp;  &amp; + 2.8386112 LIGAE_t + 1.2576912 LIPI_t \\
     &amp;  &amp; - 14.2887887
 \end{eqnarray*}\]</span></p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Estimación del VAR(p)</span></span>
 <span></span>
 <span><span class="va">VAR_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">LDatos</span>, p <span class="op">=</span> <span class="fl">3</span>, type <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span>
@@ -2343,7 +2852,7 @@ forma, una prueba deseable es aplicar todas las pruebas de raíces
 unitarias a esta serie para mostrar que es I(0). En el Scrip llamado
 Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre
 esta serie y se encuentra que es posible que no sea estacionaria.</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">282</span><span class="op">)</span>, </span>
 <span>         start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
 <span>         freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
@@ -2376,7 +2885,7 @@ Figure 5.12: Residuales estimados de la ecuación de cointegración
 problema consiste en seleccionar el modelo correcto. La Figura
 <a href="cap-var.html#fig:fig91">5.13</a> muestra un esquema o diagrama de cómo podríamos
 proceder para seleccionar el modelo correcto.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/TimeSeries_Models.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig91"></span>
@@ -2445,7 +2954,7 @@ a 1987:Q3 de las siguientes variables:</p>
 <p>LPY: logarithm of price deflator</p>
 <p>IBO: bond rate</p>
 <p>IDE: bank deposit rate</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://zoo.R-Forge.R-project.org/">zoo</a></span><span class="op">)</span> </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/xts">xts</a></span><span class="op">)</span> </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Natsiopoulos/ARDL">ARDL</a></span><span class="op">)</span></span>
@@ -2464,12 +2973,12 @@ a 1987:Q3 de las siguientes variables:</p>
 <li>Calculamos un auto ADRL para determinar la combinación óptima de
 rezagos.</li>
 </ol>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/auto_ardl.html">auto_ardl</a></span><span class="op">(</span><span class="va">LRM</span> <span class="op">~</span> <span class="va">LRY</span> <span class="op">+</span> <span class="va">IBO</span> <span class="op">+</span> <span class="va">IDE</span>, data <span class="op">=</span> <span class="va">denmark</span>, max_order <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "best_model" "best_order" "top_orders"</code></pre>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">models</span><span class="op">$</span><span class="va">top_orders</span></span></code></pre></div>
 <pre><code>##    LRM LRY IBO IDE       AIC
@@ -2493,12 +3002,12 @@ rezagos.</li>
 ## 18   5   5   5   5 -243.3120
 ## 19   4   1   3   2 -243.0728
 ## 20   4   1   3   3 -242.4378</code></pre>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">models</span><span class="op">$</span><span class="va">best_order</span></span></code></pre></div>
 <pre><code>## LRM LRY IBO IDE 
 ##   3   1   3   2</code></pre>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">models</span><span class="op">$</span><span class="va">best_model</span></span></code></pre></div>
 <pre><code>## 
@@ -2516,7 +3025,7 @@ rezagos.</li>
 ##     -1.0785      -0.1062       0.2877      -0.9947       0.1255      -0.3280  
 ##   L(IDE, 2)  
 ##      1.4079</code></pre>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">BestMod</span> <span class="op">&lt;-</span> <span class="va">models</span><span class="op">$</span><span class="va">best_model</span></span>
 <span></span>
@@ -2557,7 +3066,7 @@ rezagos.</li>
 <ol start="2" style="list-style-type: decimal">
 <li>UECM (Unrestricted Error Correction Model) of the underlying ARDL.</li>
 </ol>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">UECM_BestMod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/uecm.html">uecm</a></span><span class="op">(</span><span class="va">BestMod</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">UECM_BestMod</span><span class="op">)</span></span></code></pre></div>
@@ -2599,7 +3108,7 @@ rezagos.</li>
 allowing the constant to join the short-run relationship (case 2),
 instead of the long-run (case 3)</li>
 </ol>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RECM_BestMod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/recm.html">recm</a></span><span class="op">(</span><span class="va">UECM_BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">RECM_BestMod</span><span class="op">)</span></span></code></pre></div>
@@ -2636,7 +3145,7 @@ instead of the long-run (case 3)</li>
 <ol start="4" style="list-style-type: decimal">
 <li>long-run levels relationship (cointegration)</li>
 </ol>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/bounds_f_test.html">bounds_f_test</a></span><span class="op">(</span><span class="va">BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Bounds F-test (Wald) for no cointegration
@@ -2651,14 +3160,14 @@ instead of the long-run (case 3)</li>
 <li>Long-run multipliers (with standard errors, t-statistics and
 p-values)</li>
 </ol>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/multipliers.html">multipliers</a></span><span class="op">(</span><span class="va">BestMod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##          Term   Estimate Std. Error   t value           Pr(&gt;|t|)
 ## 1 (Intercept)  6.2856579  0.7719160  8.142930 0.0000000006107445
 ## 2         LRY  0.9964676  0.1239310  8.040503 0.0000000008358472
 ## 3         IBO -4.5381160  0.5202961 -8.722180 0.0000000001058619
 ## 4         IDE  2.8915201  0.9950853  2.905801 0.0060092393605960</code></pre>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">Result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/coint_eq.html">coint_eq</a></span><span class="op">(</span><span class="va">BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -2666,7 +3175,7 @@ p-values)</li>
 <h4>
 <span class="header-section-number">5.6.2.4</span> Make the plot<a class="anchor" aria-label="anchor" href="#make-the-plot"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/zoo/man/merge.zoo.html">cbind.zoo</a></span><span class="op">(</span>LRM <span class="op">=</span> <span class="va">denmark</span><span class="op">[</span>,<span class="st">"LRM"</span><span class="op">]</span>, <span class="va">Result</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xts/man/xts.html">xts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">)</span></span>
@@ -2806,7 +3315,7 @@ X_t = A X_{t-1} + \varepsilon_t,
 <p>en donde <span class="math inline">\(A\)</span> es una matriz de parámetros conocidos, <span class="math inline">\(\varepsilon_t\)</span> es un vector de errores, los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza <span class="math inline">\(Q\)</span>, es decir, <span class="math inline">\(\varepsilon_t \sim iid(0,Q)\)</span>. Adicionalmente, se asume que <span class="math inline">\(v_t\)</span> y <span class="math inline">\(\varepsilon_t\)</span> son independientes entre sí, es decir, <span class="math inline">\(Cov(v_t,\varepsilon_t) = 0\)</span>.</p>
 <p>En la <em>Figura 5.15</em> se puede observar un ejemplo de la relación de las variables en los <em>Modelos Estado-Espacio</em> en el <em>QPM</em> básico del IMF (2020).</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-22"></span>
+<span style="display:block;" id="fig:unnamed-chunk-17"></span>
 <img src="Plots/StateSpace.png" alt="State-space models. Recuperado de IMF (2020)." width="60%"><p class="caption">
 Figure 5.15: State-space models. Recuperado de IMF (2020).
 </p>
@@ -3190,7 +3699,7 @@ X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
 \end{equation}\]</span></p>
 <p>En la <em>Figura 5.16</em>, podemos observar los resultados del código de Matlab. Otra de las virtudes del <strong>Filtro Kalman</strong> es que podemos hacer una especie de descomposición de la varianza para, así, observar de donde vinieron los choques:</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-23"></span>
+<span style="display:block;" id="fig:unnamed-chunk-18"></span>
 <img src="Plots/Filtration.png" alt="Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF (2020)." width="80%"><p class="caption">
 Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF (2020).
 </p>
