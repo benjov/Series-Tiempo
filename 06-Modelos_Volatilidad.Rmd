@@ -275,49 +275,36 @@ La prueba puede repetirse para diferentes especificaciones de ARCH, sin embargo,
     \varepsilon & \sim & N(0,1)
 \end{eqnarray*}
 
-Considerando que la media es una AR(2), los resultados de esta estimación son los siguientes:
+Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro \@ref(tab:arima-summary).
 
-Table: (\#tab:arima-summary) Resumen de la estimación ARIMA(2,0,0) con media distinta de cero (y posible componente GARCH) _\( \sigma^2 = 0.001324, \ \text{log-likelihood} = 7170.99,\ \text{AIC}=-14333.99,\ \text{AICc}=-14333.97,\ \text{BIC}=-14309.03 \)_  
-
-| **Parameter** | **Estimate**    | **Std. Error**   | **t value**   | **Pr(\(>\mid t\mid\))** |
-|:--------------|-----------------:|-----------------:|--------------:|------------------------:|
-| mu            |  0.001642394    | 0.0003553101     |  4.622424     |  3.792818e-06          |
-| ar1           | -0.051859993    | 0.0160262284     | -3.235945     |  1.212408e-03          |
-| ar2           | -0.001225748    | 0.0132050756     | -0.092824     |  9.260434e-01          |
-| omega         |  0.001956396    | 0.0004839458     |  4.042593     |  5.286335e-05          |
-| alpha1        |  0.730450078    | 0.2140120509     |  3.413126     |  6.422226e-04          |
-| shape         |  2.347586356    | 0.1135148037     | 20.680883     |  0.000000e+00          |
-
-
-```{r ARCH_1}
-
+```{r arima-summary, warning=FALSE, message=FALSE}
 library(rugarch)
 
 auto.arima(logret)
 
-#?ugarchspec
-
-model.spec = ugarchspec( variance.model = list(model = 'sGARCH' , 
-                                               garchOrder = c(1, 0)), 
-                        mean.model = list(armaOrder = c(2,0)), 
+model.spec = ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(1, 0)),
+                        mean.model     = list(armaOrder = c(2, 0)),
                         distribution.model = "std")
 
-#?ugarchfit
+arch.fit = ugarchfit(spec = model.spec, data = logret, solver = 'solnp')
 
-arch.fit = ugarchfit(spec = model.spec , data = logret, 
-                     solver = 'solnp')
+df_arch <- as.data.frame(arch.fit@fit$matcoef)
+df_arch$Signif <- ifelse(df_arch[, 4] < 0.001, "***",
+                  ifelse(df_arch[, 4] < 0.01,  "**",
+                  ifelse(df_arch[, 4] < 0.05,  "*",
+                  ifelse(df_arch[, 4] < 0.1,   ".", ""))))
+knitr::kable(
+  df_arch,
+  col.names = c("Estimado", "Error Est.", "Estad. $t$", "Prob. $(>|t|)$", "Signif."),
+  caption   = "Estimación del modelo ARCH(1) con media AR(2).",
+  align     = c("r", "r", "r", "r", "c"),
+  digits    = 4,
+  booktabs  = TRUE
+)
 
-arch.fit@fit$matcoef
-
-boot.garch <- ugarchboot(arch.fit,
-                         method = "Partial",
-                         sampling = "raw",  #bootstrap from fitted varepsilon
-                         n.ahead = 1,          #simulation horizon
-                         n.bootpred = 100000, #number of simulations 
-                         solver = "solnp")
-
+boot.garch <- ugarchboot(arch.fit, method = "Partial", sampling = "raw",
+                         n.ahead = 1, n.bootpred = 100000, solver = "solnp")
 boot.garch
-
 ```
 
 ### Ejemplo GARCH(0,1)
@@ -329,38 +316,32 @@ Y_t & = & \mu+\sqrt{h_t}\varepsilon_t \\
     \varepsilon & \sim & N(0,1) 
 \end{eqnarray*}
 
-Considerando que la media es una AR(2), los resultados de esta estimación son los siguientes:
+Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro \@ref(tab:estimaciones).
 
-Table: (\#tab:estimaciones) Resumen de estimaciones del modelo GARCH(0,1)
-
-| Parameter | Estimate     | Std. Error    | t value     | Pr(>\|t\|)      |
-|:----------|------------:|-------------:|-----------:|---------------:|
-| mu        | 1.743510e-03 | 3.728562e-04 |  4.6760931 | 2.923919e-06   |
-| ar1       | -6.104183e-02 | 1.366530e-02 | -4.4669219 | 7.935308e-06   |
-| ar2       | -4.231427e-03 | 1.311300e-02 | -0.3226895 | 7.469304e-01   |
-| omega     | 3.843436e-06  | 6.414905e-08 | 59.9141495 | 0.000000e+00   |
-| beta1     | 9.981016e-01  | 3.215075e-05 | 31044.4303 | 0.000000e+00   |
-| shape     | 2.515980e+00  | 2.796609e-02 | 89.9653552 | 0.000000e+00   |
-
-```{r GARCH-0-1}
-model.spec = ugarchspec(variance.model = list(model = 'sGARCH' , 
-                                              garchOrder = c(0,1)), 
-                        mean.model = list(armaOrder = c(2,0)), 
+```{r estimaciones, warning=FALSE, message=FALSE}
+model.spec = ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(0, 1)),
+                        mean.model     = list(armaOrder = c(2, 0)),
                         distribution.model = "std")
 
-fit.garch.n = ugarchfit(spec = model.spec, data = logret, 
-                        solver = "solnp")
+fit.garch.n = ugarchfit(spec = model.spec, data = logret, solver = "solnp")
 
-fit.garch.n@fit$matcoef
+df_garch01 <- as.data.frame(fit.garch.n@fit$matcoef)
+df_garch01$Signif <- ifelse(df_garch01[, 4] < 0.001, "***",
+                     ifelse(df_garch01[, 4] < 0.01,  "**",
+                     ifelse(df_garch01[, 4] < 0.05,  "*",
+                     ifelse(df_garch01[, 4] < 0.1,   ".", ""))))
+knitr::kable(
+  df_garch01,
+  col.names = c("Estimado", "Error Est.", "Estad. $t$", "Prob. $(>|t|)$", "Signif."),
+  caption   = "Estimación del modelo GARCH(0,1) con media AR(2).",
+  align     = c("r", "r", "r", "r", "c"),
+  digits    = 4,
+  booktabs  = TRUE
+)
 
-boot.garch <- ugarchboot(fit.garch.n,
-                         method = "Partial",
-                         sampling = "raw",  #bootstrap from fitted varepsilon
-                         n.ahead = 1,          #simulation horizon
-                         n.bootpred = 100000, #number of simulations 
-                         solver = "solnp")
+boot.garch <- ugarchboot(fit.garch.n, method = "Partial", sampling = "raw",
+                         n.ahead = 1, n.bootpred = 100000, solver = "solnp")
 boot.garch
-
 ```
 
 ### Selección GARCH(p,q) óptimo
@@ -375,98 +356,61 @@ $\varepsilon \sim N(0,1)$
 
 #### Criterios de información 
 
-Table: (\#tab:info-criteria) Comparación de criterios de información.
-
-| **Criterio**   | **Valor**   |
-|:---------------|------------:|
-| Akaike         | -4.083927   |
-| Bayes          | -4.074035   |
-| Shibata        | -4.083932   |
-| Hannan-Quinn   | -4.080410   |
-
-
-```{r AIC_GARCH}
-
-infocriteria(fit.garch.n)
-
+```{r info-criteria, warning=FALSE, message=FALSE}
+ic <- infocriteria(fit.garch.n)
+knitr::kable(
+  data.frame(Criterio = names(ic), Valor = round(as.numeric(ic), 6)),
+  caption  = "Criterios de información del modelo GARCH(0,1).",
+  align    = c("l", "r"),
+  booktabs = TRUE
+)
 ```
 
 #### Selección del modelo óptimo
 
 Podemos hacer una búsqueda del mejor modelo de entre varios que probemos en un espectro de hasta un GARCH(4,4). Los resultados son los reportados en el siguiente Cuadro.
 
-Table: (\#tab:criterios) Resumen de criterios de información en función de \texttt{p} y \texttt{q} de un GARCH(p,q).
-
-| **q** | **p** | **AIC**     | **Óptimo** |
-|-----:|-----:|-----------:|-----------:|
-| 1 | 1 | -10.93647 | 0 |
-| 1 | 2 | -10.93657 | 0 |
-| 1 | 3 | -10.93799 | 0 |
-| 1 | 4 | -10.93727 | 0 |
-| 2 | 1 | -10.93579 | 0 |
-| 2 | 2 | -10.93607 | 0 |
-| 2 | 3 | -10.93743 | 0 |
-| 2 | 4 | -10.93510 | 0 |
-| 3 | 1 | -10.93524 | 0 |
-| 3 | 2 | -10.93510 | 0 |
-| 3 | 3 | -10.93765 | 0 |
-| 3 | 4 | -10.93645 | 0 |
-| 4 | 1 | -10.93840 | 0 |
-| 4 | 2 | -10.93935 | 1 |
-| 4 | 3 | -10.93924 | 0 |
-| 4 | 4 | -10.93816 | 0 |
-
-```{r LagOptGARCH, cache=TRUE, warning=FALSE, message=FALSE}
-
+```{r criterios, cache=TRUE, warning=FALSE, message=FALSE}
 source("Lag_Opt_GARCH.R")
-
-Lag_Opt_GARCH(ehatsq, 4, 4)
-
+crit_garch <- as.data.frame(Lag_Opt_GARCH(ehatsq, 4, 4))
+knitr::kable(
+  crit_garch,
+  col.names = c("$q$", "$p$", "AIC", "Óptimo"),
+  caption   = "Criterios de información AIC en función de $p$ y $q$ para GARCH($p$,$q$).",
+  align     = c("c", "c", "r", "c"),
+  digits    = 5,
+  booktabs  = TRUE
+)
 ```
 
 #### Estimación de modelo óptimo 
 
-De esta forma, el modelo óptimo es un GARCH(2,4). Los resultados de la estimación son los del Cuadro
+De esta forma, el modelo óptimo es un GARCH(2,4). Los resultados de la estimación se muestran en el Cuadro \@ref(tab:garch-estimates).
 
-Table: (\#tab:garch-estimates) Resumen de estimaciones del modelo (parámetros, errores estándar, estadísticos t y p-values).
-
-| **Parameter** | **Estimate**   | **Std. Error**  | **t value**    | **Pr(>\|t\|)**  |
-|:-------------|---------------:|----------------:|---------------:|----------------:|
-| mu      | 1.353612e-03  | 3.233488e-04  |  4.186229e+00 | 2.836277e-05  |
-| ar1     | -4.916331e-02 | 1.495855e-02  | -3.286636e+00 | 1.013919e-03  |
-| ar2     | 7.273432e-04  | 1.385161e-02  |  5.250964e-02 | 9.581226e-01  |
-| omega   | 2.759072e-05  | 5.151381e-06  |  5.355984e+00 | 8.509188e-08  |
-| alpha1  | 1.290996e-01  | 2.165606e-02  |  5.961363e+00 | 2.501419e-09  |
-| alpha2  | 1.768468e-07  | 3.676320e-02  |  4.810430e-06 | 9.999962e-01  |
-| alpha3  | 6.424436e-08  | 2.663630e-02  |  2.411910e-06 | 9.999981e-01  |
-| alpha4  | 3.333343e-02  | 2.238762e-02  |  1.488923e+00 | 1.365077e-01  |
-| beta1   | 4.260058e-01  | 2.263614e-01  |  1.881972e+00 | 5.983983e-02  |
-| beta2   | 4.105609e-01  | 1.819274e-01  |  2.256730e+00 | 2.402498e-02  |
-| shape   | 3.183045e+00  | 1.305307e-01  |  2.438541e+01 | 0.000000e+00  |
-
-```{r}
-
-model.spec = ugarchspec(variance.model = list(model = 'sGARCH', 
-                                              garchOrder = c(4,2)), 
-                        mean.model = list(armaOrder = c(2,0)), 
+```{r garch-estimates, warning=FALSE, message=FALSE}
+model.spec = ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(4, 2)),
+                        mean.model     = list(armaOrder = c(2, 0)),
                         distribution.model = "std")
 
+model.fit = ugarchfit(spec = model.spec, data = logret, solver = 'solnp')
 
-model.fit = ugarchfit(spec = model.spec , data = logret, 
-                      solver = 'solnp')
+df_opt <- as.data.frame(model.fit@fit$matcoef)
+df_opt$Signif <- ifelse(df_opt[, 4] < 0.001, "***",
+                 ifelse(df_opt[, 4] < 0.01,  "**",
+                 ifelse(df_opt[, 4] < 0.05,  "*",
+                 ifelse(df_opt[, 4] < 0.1,   ".", ""))))
+knitr::kable(
+  df_opt,
+  col.names = c("Estimado", "Error Est.", "Estad. $t$", "Prob. $(>|t|)$", "Signif."),
+  caption   = "Estimación del modelo GARCH(2,4) óptimo con media AR(2).",
+  align     = c("r", "r", "r", "r", "c"),
+  digits    = 4,
+  booktabs  = TRUE
+)
 
-model.fit@fit$matcoef
-
-
-boot.garch <- ugarchboot(model.fit,
-                         method = "Partial",
-                         sampling = "raw",  #bootstrap from fitted varepsilon
-                         n.ahead = 1,          #simulation horizon
-                         n.bootpred = 100000, #number of simulations 
-                         solver = "solnp")
-
+boot.garch <- ugarchboot(model.fit, method = "Partial", sampling = "raw",
+                         n.ahead = 1, n.bootpred = 100000, solver = "solnp")
 boot.garch
-
 ```
 
 #### Pronósticos con GARCH(1,1)
