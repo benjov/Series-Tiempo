@@ -359,7 +359,7 @@ $\varepsilon \sim N(0,1)$
 ```{r info-criteria, warning=FALSE, message=FALSE}
 ic <- infocriteria(fit.garch.n)
 knitr::kable(
-  data.frame(Criterio = names(ic), Valor = round(as.numeric(ic), 6)),
+  data.frame(Criterio = rownames(ic), Valor = round(as.numeric(ic), 6)),
   caption  = "Criterios de información del modelo GARCH(0,1).",
   align    = c("l", "r"),
   booktabs = TRUE
