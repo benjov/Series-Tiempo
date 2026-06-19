@@ -59,6 +59,21 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 - [x] ~~`_publish.R`: Script demo del template~~ ✓ Eliminado 2026-06-18
 - [x] ~~`_book/`: Directorio de artefactos de build antiguos~~ ✓ Eliminado 2026-06-18
 
+### Correcciones de compilación PDF/HTML (2026-06-18, sesión 2)
+
+- [x] ~~`05-VAR.Rmd`: `**texto**` y `#### Encabezados` dentro de chunks R → error `unexpected '^'`~~ ✓ Convertidos a comentarios R
+- [x] ~~`02-Elementos_Eq_Diff.Rmd`: Labels con doble guión bajo `_p_` en ecuaciones → LaTeX interpretaba como cursiva, partiendo el label~~ ✓ Labels sin referencias eliminados
+- [x] ~~`04-No_Estacionarios.Rmd`: Chunk `fig_sim_ur` con `_sim_` → mismo problema de cursiva~~ ✓ Renombrado `fig-sim-ur`
+- [x] ~~`06-Modelos_Volatilidad.Rmd`: Chunk `GARCH_0_1` con `_0_` → mismo problema~~ ✓ Renombrado `GARCH-0-1`
+- [x] ~~`lag_opt_GARCH.R`: `ugarchfit()` fallaba con datos en vivo de Bitcoin~~ ✓ `tryCatch` + `solver="hybrid"` + `cache=TRUE`
+- [x] ~~PDF: Fecha de portada en inglés ("June de 2026")~~ ✓ Array de meses en español en `index.Rmd`
+- [x] ~~PDF: "Contents", "Chapter", "Figure", "Table", "Bibliography" en inglés~~ ✓ `\renewcommand` en `preamble.tex`
+- [x] ~~PDF: Número de página pegado al título del capítulo en encabezados~~ ✓ `fancyhdr` en `preamble.tex`
+- [x] ~~PDF: Bibliografía con solo una entrada (R Core Team)~~ ✓ `\nocite{*}` en `preamble.tex`
+- [x] ~~HTML: Bibliografía vacía~~ ✓ `nocite: '@*'` en YAML de `index.Rmd`
+- [x] ~~`docs/`: 25 HTML obsoletos de builds anteriores (ago-sep 2025)~~ ✓ Eliminados; solo 10 archivos actuales
+- [x] ~~`.gitignore`: Artefactos de build, `.claude/`, PNGs temporales no ignorados~~ ✓ Actualizado
+
 ---
 
 ## Tareas de revisión por capítulo (todos los capítulos)
