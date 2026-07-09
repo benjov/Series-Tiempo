@@ -5,7 +5,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 1 Introducción | Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<meta name="author" content="Benjamín Oliva">
+<meta name="author" content="Jaime Vázquez Alamilla">
+<meta name="author" content="Omar Alfaro Rivera">
+<meta name="author" content="Emiliano Pérez Caullieres">
+<meta name="author" content="Luis Gerardo Ruíz">
 <meta name="description" content="1.1 Sobre estas notas Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009),...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Capítulo 1 Introducción | Análisis de Series de Tiempo">
@@ -69,7 +73,7 @@
 <li><a class="" href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
 <li><a class="" href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
 <li><a class="" href="cap-noestacionarios.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
-<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
 <li><a class="" href="cap-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
 <li><a class="" href="cap-panel.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
@@ -88,7 +92,7 @@
 <h2>
 <span class="header-section-number">1.1</span> Sobre estas notas<a class="anchor" aria-label="anchor" href="#sobre-estas-notas"><i class="fas fa-link"></i></a>
 </h2>
-<p>Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgässner, Wolters y Hassler (2012), Levendis(2023), Lütkepohl (2005), Neusser(2025), Wei (2019), entre otros. En algunos casos se incorporan papers y otra información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).</p>
+<p>Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-brooks2019">2019</a>)</span>, Cowpertwait y Metcalfe <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-cowpertwait2009">2009</a>)</span>, Guerrero <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-guerrero2003">2003</a>)</span>, Enders <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-enders2015">2015</a>)</span>, Franses y van Dijk <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-fransesvandijk2000">2000</a>)</span>, Kirchgässner, Wolters y Hassler <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-kirchgassner2013">2013</a>)</span>, Levendis <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-levendis2023">2023</a>)</span>, Lütkepohl <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-lutkepohl2005">2005</a>)</span>, Neusser <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-neusser2025">2025</a>)</span>, Wei <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-wei2019">2019</a>)</span>, entre otros. En algunos casos se incorporan papers y otra información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).</p>
 <p>El objetivo de este documento es proporcionar un conjunto de apuntes que sirvan de apoyo para las clases de Análisis de Series de Tiempo en la Facultad de Economía de la UNAM y de Econometría II del Tecnológico de Monterrey, Campus Santa Fe. Por esta razón, no deben considerarse como notas exhaustivas ni como un sustituto de la clase, los laboratorios y la lectura de los textos recomendados en clase. Es deseable que los alumnos aporten sus observaciones y correcciones; los comentarios a estas notas son siempre bienvenidos y agradecidos.</p>
 <p>Para cualquier comentario o aclaración escribir a los correos <a href="mailto:benjov@ciencias.unam.mx" class="email">benjov@ciencias.unam.mx</a> o <a href="mailto:omarxalpha@gmail.com" class="email">omarxalpha@gmail.com</a>.</p>
 </div>
@@ -100,7 +104,7 @@
 <p><strong>Capítulo <a href="cap-eqdiff.html#cap-eqdiff">2</a>. Elementos de Ecuaciones en Diferencia</strong> — Se presentan los conceptos fundamentales de las ecuaciones en diferencia, herramienta matemática central para modelar la dinámica de las series de tiempo. Se introduce la notación del operador de rezagos y se estudian las condiciones de estabilidad de procesos lineales basados en ecuaciones en diferencia.</p>
 <p><strong>Capítulo <a href="cap-estacionarios.html#cap-estacionarios">3</a>. Procesos Estacionarios y Modelos Univariados</strong> — Se definen formalmente los conceptos de estacionariedad y ergodicidad. Se estudian los modelos autorregresivos <span class="math inline">\(AR(p)\)</span>, de medias móviles <span class="math inline">\(MA(q)\)</span>, mixtos <span class="math inline">\(ARMA(p,q)\)</span>, y su extensión integrada <span class="math inline">\(ARIMA(p,d,q)\)</span>. Se incluyen también modelos con variables exógenas <span class="math inline">\(ARIMAX\)</span> y procedimientos de desestacionalización, así como la extensión <span class="math inline">\(SARIMAX\)</span>.</p>
 <p><strong>Capítulo <a href="cap-noestacionarios.html#cap-noestacionarios">4</a>. Procesos No Estacionarios Univariados</strong> — Se estudian los procesos con raíz unitaria y las principales pruebas estadísticas para detectarlos: Dickey-Fuller, Dickey-Fuller Aumentada (ADF) y Phillips-Perron, entre otras. Se analiza la diferencia entre tendencia determinística y tendencia estocástica. Finalmente, se introducen pruebas de detección de raíz unitaria bajo escenarios de cambio estructural.</p>
-<p><strong>Capítulo <a href="cap-var.html#cap-var">5</a>. Modelos Multivariados: VAR y Cointegración</strong> — Se extiende el análisis univariado de series al caso de múltiples series o vector de series. Se presentan los Vectores Autoregresivos (<span class="math inline">\(VAR\)</span>), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos (<span class="math inline">\(ARDL\)</span>).</p>
+<p><strong>Capítulo <a href="cap-var.html#cap-var">5</a>. Modelos Multivariados: VAR y Cointegración</strong> — Se extiende el análisis univariado de series al caso de múltiples series o vector de series. Se presentan los Vectores Autorregresivos (<span class="math inline">\(VAR\)</span>), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos (<span class="math inline">\(ARDL\)</span>).</p>
 <p><strong>Capítulo <a href="cap-volatilidad.html#cap-volatilidad">6</a>. Modelos de Volatilidad</strong> — Se introducen los modelos univariados que capturan heterocedasticidad condicional: <span class="math inline">\(ARCH(r)\)</span>, <span class="math inline">\(GARCH(p,q)\)</span> y sus extensiones multivariadas (<span class="math inline">\(M\)</span>-<span class="math inline">\(GARCH\)</span> y <span class="math inline">\(M\)</span>-<span class="math inline">\(GARCH\)</span>-<span class="math inline">\(M\)</span>). Se discute su aplicación a datos financieros de alta frecuencia y otras aplicaciones en el ámbito de la economía.</p>
 <p><strong>Capítulo <a href="cap-panel.html#cap-panel">7</a>. Modelos de Datos Panel y Modelos No Lineales</strong> — Se aborda el análisis de datos panel con dimensión temporal, incluyendo pruebas de raíz unitaria en panel y modelos Panel-VAR. Se introduce también la modelación no lineal mediante modelos de cambio de régimen.</p>
 </div>
@@ -243,7 +247,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres, Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

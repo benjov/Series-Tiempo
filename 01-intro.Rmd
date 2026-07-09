@@ -2,7 +2,7 @@
 
 ## Sobre estas notas
 
-Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgässner, Wolters y Hassler (2012), Levendis(2023), Lütkepohl (2005), Neusser(2025), Wei (2019), entre otros. En algunos casos se incorporan papers y otra información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).
+Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks [-@brooks2019], Cowpertwait y Metcalfe [-@cowpertwait2009], Guerrero [-@guerrero2003], Enders [-@enders2015], Franses y van Dijk [-@fransesvandijk2000], Kirchgässner, Wolters y Hassler [-@kirchgassner2013], Levendis [-@levendis2023], Lütkepohl [-@lutkepohl2005], Neusser [-@neusser2025], Wei [-@wei2019], entre otros. En algunos casos se incorporan papers y otra información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).
 
 El objetivo de este documento es proporcionar un conjunto de apuntes que sirvan de apoyo para las clases de Análisis de Series de Tiempo en la Facultad de Economía de la UNAM y de Econometría II del Tecnológico de Monterrey, Campus Santa Fe. Por esta razón, no deben considerarse como notas exhaustivas ni como un sustituto de la clase, los laboratorios y la lectura de los textos recomendados en clase. Es deseable que los alumnos aporten sus observaciones y correcciones; los comentarios a estas notas son siempre bienvenidos y agradecidos.
 
@@ -18,7 +18,7 @@ En estas notas se estudian los temas que típicamente se incluyen en un curso es
 
 **Capítulo \@ref(cap-noestacionarios). Procesos No Estacionarios Univariados** — Se estudian los procesos con raíz unitaria y las principales pruebas estadísticas para detectarlos: Dickey-Fuller, Dickey-Fuller Aumentada (ADF) y Phillips-Perron, entre otras. Se analiza la diferencia entre tendencia determinística y tendencia estocástica. Finalmente, se introducen pruebas de detección de raíz unitaria bajo escenarios de cambio estructural.
 
-**Capítulo \@ref(cap-var). Modelos Multivariados: VAR y Cointegración** — Se extiende el análisis univariado de series al caso de múltiples series o vector de series. Se presentan los Vectores Autoregresivos ($VAR$), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos ($ARDL$).
+**Capítulo \@ref(cap-var). Modelos Multivariados: VAR y Cointegración** — Se extiende el análisis univariado de series al caso de múltiples series o vector de series. Se presentan los Vectores Autorregresivos ($VAR$), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos ($ARDL$).
 
 **Capítulo \@ref(cap-volatilidad). Modelos de Volatilidad** — Se introducen los modelos univariados que capturan heterocedasticidad condicional: $ARCH(r)$, $GARCH(p,q)$ y sus extensiones multivariadas ($M$-$GARCH$ y $M$-$GARCH$-$M$). Se discute su aplicación a datos financieros de alta frecuencia y otras aplicaciones en el ámbito de la economía.
 

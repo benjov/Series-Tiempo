@@ -1,6 +1,11 @@
 ---
 title: "Análisis de Series de Tiempo"
-author: "Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruíz"
+author:
+  - "Benjamín Oliva"
+  - "Jaime Vázquez Alamilla"
+  - "Omar Alfaro Rivera"
+  - "Emiliano Pérez Caullieres"
+  - "Luis Gerardo Ruíz"
 date: "`r c('enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre')[as.integer(format(Sys.Date(),'%m'))]` de `r format(Sys.Date(),'%Y')`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -17,18 +22,27 @@ description: "Notas de clase del curso Análisis de Series de Tiempo de la Facul
 # automatically create a bib database for R packages
 knitr::write_bib( c( .packages(), 'bookdown', 'knitr', 'rmarkdown' ), 'packages.bib' )
 
+# Ancho máximo de las salidas impresas de R (evita desbordes en el PDF)
+options(width = 70)
+
 library(readxl)
 
 ```
 
 # Análisis de Series de Tiempo {-}
 
-**Facultad de Economía, Universidad Nacional Autónoma de México**
-**Departamento de Economía, Tecnológico de Monterrey, Campus Santa Fe**
-
-Benjamín Oliva · Omar Alfaro Rivera · Emiliano Pérez Caullieres · Luis Gerardo Ruíz
-
-*Versión: Julio 2026*
+```{r portada-web, echo=FALSE, results='asis'}
+# Portada del sitio web: estos elementos duplican la portada propia del PDF
+# (\maketitle), por lo que solo se emiten en la salida HTML.
+if (knitr::is_html_output()) cat(
+  "**Facultad de Economía, Universidad Nacional Autónoma de México**\\",
+  "**Departamento de Economía, Tecnológico de Monterrey, Campus Santa Fe**",
+  "",
+  "Benjamín Oliva · Jaime Vázquez Alamilla · Omar Alfaro Rivera · Emiliano Pérez Caullieres · Luis Gerardo Ruíz",
+  "",
+  "*Versión: Julio 2026*",
+  sep = "\n")
+```
 
 ![](Portada.jpg){ width="400" height="300" style="display: block; margin: 0 auto" }
 

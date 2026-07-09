@@ -1,4 +1,4 @@
-# Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado {#cap-var}
+# Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado {#cap-var}
 
 En este capítulo removeremos el supuesto de que el análisis es
 univariado, ya que introduciremos la posibilidad de que los procesos
@@ -6,8 +6,8 @@ generadores de datos compartan información entre dos o más series. Como
 primera aproximación desarrollaremos el concepto de Causalidad de
 Granger. Mediante esta metodología discutiremos cuándo dos series se
 causan estadísticamente. Posteriormente, introduciremos una técnica más
-sofisticada conocida como la metodología de Vectores Autoregresivos
-(VAR), la cual es una generalización de los procesos Autoregresivos (AR)
+sofisticada conocida como la metodología de Vectores Autorregresivos
+(VAR), la cual es una generalización de los procesos Autorregresivos (AR)
 que analizamos al principio del curso. Finalmente, introduciremos la
 técnica de cointegración y de rezagos distribuidos (ARDL) para los casos
 en que las series que analicemos sean procesos no estacionarios.
@@ -23,8 +23,8 @@ Hasta ahora hemos supuesto que una serie puede ser explicada únicamente
 con la información contenida en ella misma. No obstante, en adelante
 trataremos de analizar el caso en el que buscamos determinar relaciones
 entre variables y cómo el comportamiento de una serie influye en las
-demás. Algunas relaciones más importantes son las llamadas: causalidad.
-En este caso analizaremos el procedimiento de Granger (1969), conocido
+demás. Una de las relaciones más importantes entre variables es la de
+causalidad. En este caso analizaremos el procedimiento de Granger [-@granger1969], conocido
 como causalidad de Granger. En adelante asumiremos que las series
 involucradas son débilmente estacionarias.
 
@@ -220,7 +220,8 @@ knitr::kable(
   col.names = c("Rezagos", "Estadística $F$", "Probabilidad ($>F$)", "Signif."),
   caption   = "Prueba de si $DLINPC_t$ Granger causa a $DLTC_t$.",
   align     = c("c", "c", "c", "c"),
-  booktabs  = TRUE
+  booktabs  = TRUE,
+  escape    = FALSE
 )
 ```
 
@@ -231,7 +232,7 @@ las diferencias logarítmicas. El resto de los resultados para las otras
 combinaciones de causalidad se encuentran en el R Markdown llamado Clase
 13 ubicado en el repositorio de GitHub.
 
-## Definición y representación del Sistema o Modelo de Vectores Autorregresicos (VAR(p))
+## Definición y representación del Sistema o Modelo de Vectores Autorregresivos (VAR(p))
 
 En esta sección ampliaremos la discusión planteada en el apartado
 anterior. En el sentido de que en la sección pasada nuestra discusión se
@@ -251,14 +252,14 @@ con múltiples sentidos de causalidad. En esta sección analizaremos una
 mejor aproximación al problema de cómo identificar la causalidad
 múltiple. Por lo tanto, como mecanismo para solucionar el problema
 planteado, analizaremos el caso de un Sistema o Modelo de Vectores
-Autoregresivos conocido como VAR.
+Autorregresivos conocido como VAR.
 
 El primer supuesto del que partiremos es que existe algún grado de
 endogeneidad entre las variables consideradas en el análisis.
 Adicionalmente, el segundo supuesto que estableceremos es que requerimos
 que las variables que tengamos consideradas sean estacionarias.
 
-Por lo anterior, diremos que un modelo de Vectores Autoregresivos (VAR)
+Por lo anterior, diremos que un modelo de Vectores Autorregresivos (VAR)
 es un procedimiento que sigue fundado en el supuesto de que las
 variables consideradas son estacionarias. Así, hasta este momento del
 curso hemos pasado de modelos univariados a modelos multivariados, pero
@@ -629,7 +630,8 @@ knitr::kable(
   caption   = "Ecuación $DLIGAE_t$ estimada en el VAR(2).",
   align     = c("r", "r", "r", "r", "c"),
   digits    = 4,
-  booktabs  = TRUE
+  booktabs  = TRUE,
+  escape    = FALSE
 )
 ```
 
@@ -643,6 +645,7 @@ knitr::kable(
   caption     = "Matriz $\\mathbf{\\Sigma}_{\\hat{U}\\hat{U}}$ estimada del VAR(2).",
   digits      = 4,
   booktabs    = TRUE,
+  escape      = FALSE,
   format.args = list(scientific = TRUE, digits = 3)
 )
 ```
@@ -669,7 +672,7 @@ diagn_fila <- function(nombre, stat, pval) {
     Prueba      = nombre,
     Estadistico = round(stat, 3),
     pvalor      = round(pval, 4),
-    Conclusion  = ifelse(pval < 0.05, "Se rechaza $H_0$", "No se rechaza $H_0$")
+    Conclusion  = ifelse(pval < 0.05, "Se rechaza", "No se rechaza")
   )
 }
 
@@ -686,10 +689,12 @@ knitr::kable(
     diagn_fila("ARCH multivariado — $\\chi^2$",
                as.numeric(diag_a$arch.mul$statistic), diag_a$arch.mul$p.value)
   ),
-  col.names = c("Prueba", "Estadístico", "p-valor", "Conclusión"),
+  col.names = c("Prueba", "Estadístico", "p-valor", "Conclusión ($H_0$)"),
   caption   = "Pruebas de diagnóstico sobre los residuales del VAR(2).",
   align     = c("l", "r", "r", "l"),
-  booktabs  = TRUE
+  booktabs  = TRUE,
+  escape    = FALSE,
+  row.names = FALSE
 )
 ```
 
@@ -745,7 +750,7 @@ resultados de Impulso-Respuesta se encuentra en el Script llamado Clase
 
 ## Identificación de los Choques Estructurales en los Modelos VAR
 
-En su trabajo seminal *"Macroeconomics and Reality"*, Sims (1980)
+En su trabajo seminal *"Macroeconomics and Reality"*, Sims [-@sims1980]
 cuestionó los modelos macroeconométricos utilizados en ese momento.
 Antes de la aparición de los modelos de referencia modernos, como los
 Vectores Autorregresivos (VAR) y los modelos estocásticos dinámicos de
@@ -762,7 +767,7 @@ estructurales que, en muchos casos, eran impuestas de manera arbitraria.
 Estos modelos estaban altamente parametrizados y basados en supuestos
 teóricos fuertes –como las expectativas adaptativas–, lo que los hacía
 sensibles a errores específicos. De esta situación surge en parte la
-*Crítica de Lucas*, en la cual Robert Lucas (1976) mostró que este tipo
+*Crítica de Lucas*, en la cual Robert Lucas [-@lucas1976] mostró que este tipo
 de modelos fallaba al capturar cambios en el comportamiento cuando las
 políticas cambiaban, debido a que no trataban adecuadamente las
 expectativas racionales.
@@ -895,7 +900,7 @@ plot(boot.svar)
 
 ### VAR Estructural - Restricción de largo plazo
 
-Otra manera de identificar las innovaciones estructurales de un modelo VAR, es mediante el método propuesto por Blanchard y Quah (1989) en *"The Dynamic Effects of Aggregate Demand and Supply Disturbances"*. 
+Otra manera de identificar las innovaciones estructurales de un modelo VAR, es mediante el método propuesto por Blanchard y Quah [-@blanchardquah1989] en *"The Dynamic Effects of Aggregate Demand and Supply Disturbances"*.
 
 La intuición de este método es simple: Blanchard y Quah querían medir el efecto de choques de oferta agregada $w_t^{AS}$ y demanda agregada $w_t^{AD}$ sobre el Producto y el Desempleo, imponiendo restricciones en la respuesta acumulada, es decir, en el efecto acumulado permanente (horizonte $h \rightarrow \infty$). La lógica económica detrás de este método es, básicamente, que el choque de demanda agregada no tiene efectos de largo plazo sobre el nivel del PIB real.
 
@@ -1074,8 +1079,8 @@ la estacionariedad en varianza) y que establecimos una serie de pruebas
 para determinar cuándo una serie es estadísticamente estacionaria, ahora
 podemos plantear una técnica llamada Cointegración. Para esta técnica
 consideraremos sólo series que son $I(1)$ y reconoceremos que se originó
-con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen
-(1988).
+con los trabajos de Engle y Granger [-@englegrangercointegration1987],
+Stock [-@stock1987] y Johansen [-@johansen1988].
 
 ### Definición y propiedades del proceso de cointegración
 
@@ -1083,8 +1088,8 @@ Cointegración puede ser caracterizada o definida en palabras sencillas
 como que dos o más variables tienen una relación común estable en el
 largo plazo. Es decir, estas no suelen tomar caminos o trayectorias
 diferentes, excepto por períodos de tiempo transitorios y eventuales. A
-continuación, utilizaremos la definición de Engle y Granger (1987) de
-cointegración.
+continuación, utilizaremos la definición de Engle y Granger
+[-@englegrangercointegration1987] de cointegración.
 
 Sea $\mathbf{Y}$ un vector de k-series de tiempo, decimos que los
 elementos en $\mathbf{Y}$ están cointegrados en un orden (d, c), es
@@ -1114,7 +1119,7 @@ Adicionalmente, asumiremos que $c = d = 1$, por lo que la relación de
 cointegración, en su caso, generará combinaciones lineales $\mathbf{Z}$
 estacionarias.
 
-### Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos
+### Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autorregresivos
 
 Sean $Y_1, Y_2, \ldots, Y_k$ son series que forman $\mathbf{Y}$ y que
 todas son I(1), entonces los siguientes casos son posibles:
@@ -1175,7 +1180,7 @@ Donde $\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}$ son $r$
 combinaciones linealmente independientes que son estacionarias.
 
 Dada la ecuación \@ref(eq:VARVEC) podemos establecer la aproximación de
-Johansen (1988) que se realiza mediante una estimación por Máxima
+Johansen [-@johansen1988] que se realiza mediante una estimación por Máxima
 Verosimilitud de la ecuación: \begin{equation}
     \Delta \mathbf{Y}_t + \Gamma \boldsymbol{\beta}' \mathbf{Y}_{t-1} = \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
 \end{equation}
@@ -1414,7 +1419,7 @@ problema consiste en seleccionar el modelo correcto. La Figura
 \@ref(fig:fig91) muestra un esquema o diagrama de cómo podríamos
 proceder para seleccionar el modelo correcto.
 
-```{r fig91, out.width='95%', fig.cap = "Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)", fig.align='center'}
+```{r fig91, out.width='95%', fig.cap = "Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta [-@shresthabhatta2018]", fig.align='center'}
 
 knitr::include_graphics("Plots/TimeSeries_Models.png") 
 
@@ -1588,11 +1593,11 @@ En secciones pasadas, entendimos la naturaleza del filtrado univariado como, por
 
 De este modo, el **Filtro Kalman** puede ser una alternativa viable y metodológicamente robusta, sobre todo si queremos trabajar con variables no observables como el *Producto Potencial* o, incluso, la *Tasa de interés neutral*, variable clave en la decisión de Política Monetaria de los Bancos Centrales.
 
-En este sentido, el **Filtro Kalman** nació a partir del artículo seminal de Rudolf E. Kálmán (1960) *A New Approach to Linear Filtering and Prediction Problems*. La idea principal de Kálmán era describir los procesos estocásticos con un modelo de "estado" y resolver, de alguna manera, el problema de estimación con un ciclo *predicción-corrección* ejecutado en tiempo real. Así, el **Filtro Kalman** es un algoritmo de estimación recursivo a partir de mediciones ruidosas. De este modo, también podemos entender al **Filtro Kalman** como una especie de filtro multivariado. Sus aplicaciones no se han limitado únicamente a la Economía, pues ha sido utilizado para trabajos de la *NASA* como el pronóstico de la posición y velocidad del *Apollo 11* en 1969.
+En este sentido, el **Filtro Kalman** nació a partir del artículo seminal de Rudolf E. Kálmán [-@kalman1960] *A New Approach to Linear Filtering and Prediction Problems*. La idea principal de Kálmán era describir los procesos estocásticos con un modelo de "estado" y resolver, de alguna manera, el problema de estimación con un ciclo *predicción-corrección* ejecutado en tiempo real. Así, el **Filtro Kalman** es un algoritmo de estimación recursivo a partir de mediciones ruidosas. De este modo, también podemos entender al **Filtro Kalman** como una especie de filtro multivariado. Sus aplicaciones no se han limitado únicamente a la Economía, pues ha sido utilizado para trabajos de la *NASA* como el pronóstico de la posición y velocidad del *Apollo 11* en 1969.
 
 ### Modelos Estado-Espacio y Teoría Económica
 
-Para hacer uso del **Filtro Kalman**, necesitamos de un modelo estructural que vincule a nuestras variables (observables y no observables), representado en la *Forma Estado-Espacio*. En general, casi todos los modelos de series de tiempo pueden ser representados como *Modelos Estado-Espacio*. El modelo estructural puede basarse en la teoría económica como, por ejemplo, un modelo DSGE. Para efectos prácticos, tomaremos como ejemplo el *Modelo de Proyección Trimestral (QPM)* del IMF (2020). No nos enfocaremos en el por qué y cómo del *Modelo QPM*, pues el objetivo principal es entender el **Filtro Kalman** y su aplicación.
+Para hacer uso del **Filtro Kalman**, necesitamos de un modelo estructural que vincule a nuestras variables (observables y no observables), representado en la *Forma Estado-Espacio*. En general, casi todos los modelos de series de tiempo pueden ser representados como *Modelos Estado-Espacio*. El modelo estructural puede basarse en la teoría económica como, por ejemplo, un modelo DSGE. Para efectos prácticos, tomaremos como ejemplo el *Modelo de Proyección Trimestral (QPM)* del IMF [-@imf2020]. No nos enfocaremos en el por qué y cómo del *Modelo QPM*, pues el objetivo principal es entender el **Filtro Kalman** y su aplicación.
 
 #### Modelo de Proyección Trimestral (QPM) del IMF (2020)
 
@@ -1700,16 +1705,19 @@ i_t = g_1 i_{t-1} + (1 - g_1) \left\{ i_t^n + g_2 \left( \mathbb{E}_t [\pi_{t+N}
 En este caso, todas las variables siguen procesos autorregresivos simples
 
 $$
-\begin{array}{ll}
-\text{\textbf{Brecha del producto foráneo}} & \text{\textbf{Tasa natural (tendencia) de interés real foránea}} \\
-\hat{y}^{*}_{t} = \rho_{y}\,\hat{y}^{*}_{t-1} + \varepsilon^{\hat{y}^{*}}_{t} 
-& \tilde{r}^{*}_{t} = \rho_{\tilde r}\,\tilde{r}^{*}_{t-1} + (1 - \rho_{\tilde r})\,\tilde{r}^{*\,\mathrm{SS}} + \varepsilon^{\tilde{r}^{*}}_{t} \\[1.5ex]
-\text{\textbf{Tasa de interés nominal foránea}} & \text{\textbf{Brecha de la tasa de interés real foránea}} \\
-i^{*}_{t} = \rho_{i}\,i^{*}_{t-1} + (1 - \rho_{i})(r^{*}_{t} + \pi^{*}_{t}) + \varepsilon^{i^{*}}_{t} 
-& \hat{r}^{*}_{t} = r^{*}_{t} - \tilde{r}^{*}_{t} \\[1.5ex]
-\text{\textbf{Tasa de interés real foránea}} & \text{\textbf{Inflación foránea}} \\
-r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t} 
-& \pi^{*}_{t} = \rho_{\pi}\,\pi^{*}_{t-1} + (1 - \rho_{\pi})\,\pi^{*\,\mathrm{SS}} + \varepsilon^{\pi^{*}}_{t}
+\begin{array}{l}
+\text{\textbf{Brecha del producto foráneo}} \\
+\hat{y}^{*}_{t} = \rho_{y}\,\hat{y}^{*}_{t-1} + \varepsilon^{\hat{y}^{*}}_{t} \\[1.5ex]
+\text{\textbf{Tasa natural (tendencia) de interés real foránea}} \\
+\tilde{r}^{*}_{t} = \rho_{\tilde r}\,\tilde{r}^{*}_{t-1} + (1 - \rho_{\tilde r})\,\tilde{r}^{*\,\mathrm{SS}} + \varepsilon^{\tilde{r}^{*}}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés nominal foránea}} \\
+i^{*}_{t} = \rho_{i}\,i^{*}_{t-1} + (1 - \rho_{i})(r^{*}_{t} + \pi^{*}_{t}) + \varepsilon^{i^{*}}_{t} \\[1.5ex]
+\text{\textbf{Brecha de la tasa de interés real foránea}} \\
+\hat{r}^{*}_{t} = r^{*}_{t} - \tilde{r}^{*}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés real foránea}} \\
+r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t} \\[1.5ex]
+\text{\textbf{Inflación foránea}} \\
+\pi^{*}_{t} = \rho_{\pi}\,\pi^{*}_{t-1} + (1 - \rho_{\pi})\,\pi^{*\,\mathrm{SS}} + \varepsilon^{\pi^{*}}_{t}
 \end{array}
 $$
 
@@ -1733,9 +1741,9 @@ X_t = A X_{t-1} + \varepsilon_t,
 
 en donde $A$ es una matriz de parámetros conocidos, $\varepsilon_t$ es un vector de errores, los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza $Q$, es decir, $\varepsilon_t \sim iid(0,Q)$. Adicionalmente, se asume que $v_t$ y $\varepsilon_t$ son independientes entre sí, es decir, $Cov(v_t,\varepsilon_t) = 0$.
 
-En la *Figura 5.15* se puede observar un ejemplo de la relación de las variables en los *Modelos Estado-Espacio* en el *QPM* básico del IMF (2020).
+En la *Figura 5.15* se puede observar un ejemplo de la relación de las variables en los *Modelos Estado-Espacio* en el *QPM* básico del IMF [-@imf2020].
 
-```{r, echo = FALSE, out.width='60%', fig.cap = "State-space models. Recuperado de IMF (2020).", fig.align='center'}
+```{r, echo = FALSE, out.width='60%', fig.cap = "State-space models. Recuperado de IMF [-@imf2020].", fig.align='center'}
 
 knitr::include_graphics("Plots/StateSpace.png") 
 
@@ -2159,13 +2167,13 @@ X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
 
 En la *Figura 5.16*, podemos observar los resultados del código de Matlab. Otra de las virtudes del **Filtro Kalman** es que podemos hacer una especie de descomposición de la varianza para, así, observar de donde vinieron los choques:
 
-```{r, echo = FALSE, out.width='80%', fig.cap = "Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF (2020).", fig.align='center'}
+```{r, echo = FALSE, out.width='80%', fig.cap = "Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF [-@imf2020].", fig.align='center'}
 
 knitr::include_graphics("Plots/Filtration.png") 
 
 ```
 
-> **Nota:** Para este ejemplo, se ocupa el QPM básico presentado por IMF (2020) en su curso "Monetary Policy Analysis and Forecasting" disponible en la plataforma edX. El código de Matlab fue realizado por el IMF.
+> **Nota:** Para este ejemplo, se ocupa el QPM básico presentado por el IMF [-@imf2020] en su curso "Monetary Policy Analysis and Forecasting" disponible en la plataforma edX. El código de Matlab fue realizado por el IMF.
 
 ## Resumen del capítulo
 
@@ -2175,11 +2183,11 @@ En este capítulo extendimos el análisis univariado a sistemas multivariados, i
 
 **Modelos VAR(p).** El VAR(p) generaliza el AR(p) a sistemas de $k$ variables, donde cada variable depende de sus propios rezagos y de los rezagos de todas las demás. La condición de estacionariedad requiere que todas las raíces del polinomio matricial característico caigan fuera del círculo unitario. La selección del orden $p$ se realiza mediante los criterios AIC, SC, HQ y FPE. Las funciones de impulso-respuesta (IRF) cuantifican la reacción dinámica del sistema ante un choque unitario en una de las innovaciones.
 
-**VAR Estructural (SVAR).** La identificación de los choques estructurales requiere imponer restricciones adicionales. Los tres enfoques principales son: (i) descomposición de Cholesky (identificación recursiva), que impone una estructura triangular inferior en la matriz de impacto contemporáneo; (ii) restricciones de largo plazo de Blanchard y Quah (1989), que restringen el efecto acumulado permanente de ciertos choques; y (iii) restricciones de signo, que imponen solo la dirección del impacto.
+**VAR Estructural (SVAR).** La identificación de los choques estructurales requiere imponer restricciones adicionales. Los tres enfoques principales son: (i) descomposición de Cholesky (identificación recursiva), que impone una estructura triangular inferior en la matriz de impacto contemporáneo; (ii) restricciones de largo plazo de Blanchard y Quah [-@blanchardquah1989], que restringen el efecto acumulado permanente de ciertos choques; y (iii) restricciones de signo, que imponen solo la dirección del impacto.
 
 **Cointegración y VEC.** Cuando series no estacionarias $I(1)$ comparten una tendencia estocástica común, se dice que cointegran. El procedimiento de Johansen determina el número de vectores de cointegración (rango de cointegración) mediante las estadísticas de la traza y del máximo valor propio. El modelo VEC (Vector de Corrección de Error) incorpora tanto la dinámica de corto plazo como el ajuste hacia el equilibrio de largo plazo.
 
-**Modelos ARDL.** El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith (2001) permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de $I(0)$ e $I(1)$. La prueba de límites (*bounds test*) contrasta si existe una relación de nivel entre las variables.
+**Modelos ARDL.** El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith [-@pesaranshinsmith2001] permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de $I(0)$ e $I(1)$. La prueba de límites (*bounds test*) contrasta si existe una relación de nivel entre las variables.
 
 **Filtro de Kalman y Modelos Estado-Espacio.** El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones.
 

@@ -1104,8 +1104,8 @@ ggplot(circle_data, aes(x=x, y=y)) +
 Denotemos, como se ha mencionado con anterioridad, con $L$ al operador
 de rezago, el cual nos permitirá construir una relación entre
 diferencias y medias móviles como se verá más adelante en los procesos
-univariados Autoregresivos de orden $p$, $AR(p)$, y de medias móviles de
-orden $q$, $MA(q)$ y, en general, Autoregresivos de Media Móviles
+univariados Autorregresivos de orden $p$, $AR(p)$, y de medias móviles de
+orden $q$, $MA(q)$ y, en general, Autorregresivos de Media Móviles
 Integrados $ARIMA(p, d, q)$. Sean $X$, $Y$ o $Z$ variables con las que
 denotaremos a una serie de tiempo (note que hasta el momento no hemos
 definido qué es una serie de tiempo, no obstante, no es necesario
@@ -1246,7 +1246,7 @@ $U_t$: \begin{equation}
 Donde $U_t$ es un proceso de ruido blanco con $\mathbb{E}[U_t] = 0$,
 $\text{Var}(U_t) = \sigma^2$ y $\text{Cov}(U_t, U_s) = 0$ para
 $t \neq s$. A la ecuación \@ref(eq:AR_p) se le conoce como un proceso
-**Autoregresivo de orden** $p$, denotado $AR(p)$, y constituye la base
+**Autorregresivo de orden** $p$, denotado $AR(p)$, y constituye la base
 de los modelos de series de tiempo que se estudiarán en los capítulos
 siguientes.
 

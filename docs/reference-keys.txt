@@ -218,7 +218,7 @@ cap-estacionarios
 definición-de-ergodicidad-y-estacionariedad
 función-de-autocorrelación
 procesos-estacionarios-univariados
-procesos-autoregresivos-ar
+procesos-autorregresivos-ar
 ar1
 ar2
 arp
@@ -234,7 +234,7 @@ pronósticos
 desestacionalización-y-filtrado-de-series
 motivación
 filtro-hodrick-prescott
-filtro-hodrick-prescott-planteado-por-st-amant-van-norden
+filtro-hodrick-prescott-planteado-por-st-amant-y-van-norden
 resumen-del-capítulo
 cap-noestacionarios
 definición-y-formas-de-no-estacionariedad
@@ -248,7 +248,7 @@ zivot---andrews-za
 resumen-y-guía-de-decisión
 cap-var
 causalidad-de-granger
-definición-y-representación-del-sistema-o-modelo-de-vectores-autorregresicos-varp
+definición-y-representación-del-sistema-o-modelo-de-vectores-autorregresivos-varp
 análisis-de-impulso-respuesta
 identificación-de-los-choques-estructurales-en-los-modelos-var
 var-recursivo---identificación-recursiva
@@ -256,7 +256,7 @@ var-estructural---restricción-de-largo-plazo
 var-estructural---imposición-de-restricciones-de-signo
 cointegración
 definición-y-propiedades-del-proceso-de-cointegración
-cointegración-para-modelos-de-más-de-una-ecuación-o-para-modelos-basados-en-vectores-autoregresivos
+cointegración-para-modelos-de-más-de-una-ecuación-o-para-modelos-basados-en-vectores-autorregresivos
 modelos-ardl
 teoría
 ejemplo
@@ -283,7 +283,7 @@ selección-garchpq-óptimo
 criterios-de-información
 selección-del-modelo-óptimo
 estimación-de-modelo-óptimo
-pronósticos-con-garch11
+pronósticos-con-el-modelo-garch-óptimo
 modelos-arch-y-garch-multivariados
 pruebas-para-detectar-efectos-arch
 resumen-del-capítulo-2

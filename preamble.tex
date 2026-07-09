@@ -1,5 +1,12 @@
 \usepackage{booktabs}
 \usepackage{amsthm}
+
+% Quiebre automático de líneas largas en los bloques de código:
+% - Highlighting: código fuente R resaltado por pandoc
+% - verbatim: salidas de R sin resaltar
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
 \makeatletter
 \def\thm@space@setup{%
   \thm@preskip=8pt plus 2pt minus 4pt
@@ -7,7 +14,7 @@
 }
 \makeatother
 
-% Traducción al español de etiquetas automáticas de LaTeX
+% Traducción al español de etiquetas automáticas de LaTeX 
 \renewcommand{\contentsname}{Índice general}
 \renewcommand{\chaptername}{Capítulo}
 \renewcommand{\figurename}{Figura}

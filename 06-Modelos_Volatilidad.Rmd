@@ -2,7 +2,7 @@
 
 ## Motivación
 
-En este capítulo discutiremos los modelos de Heterocedasticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y los modelos de Heterocedasticidad Condicional Autoregresiva Generalizados (GARCH, por sus siglas en inglés), los cuales tienen la característica de modelar situaciones como las que ilustra la Figura \@ref(fig:fig102). Es decir: 
+En este capítulo discutiremos los modelos de Heterocedasticidad Condicional Autorregresiva (ARCH, por sus siglas en inglés) y los modelos de Heterocedasticidad Condicional Autorregresiva Generalizados (GARCH, por sus siglas en inglés), los cuales tienen la característica de modelar situaciones como las que ilustra la Figura \@ref(fig:fig102). Es decir: 
 
 1) Existen zonas donde la variación de los datos es mayor y zonas donde la variación es más estable--a estas situaciones se les conoce como de variabilidad por clúster--, y 
 
@@ -32,14 +32,21 @@ library(Rcpp)
 
 ```
 
-Para el análisis de temas financieros existe una librería de mucha utilidad llamada __quantmod__. En primer lugar esta librería permite acceder a datos financieros de un modo muy simple, es posible descargar series financieras desde _yahoo_, la _FRED (Federal Reserve Economic Data)_, _google_, etc. Por otro lado, también es una librería que permite realizar gráficos altamente estéticos con unas cuantas líneas de código. Ahora, usaremos datos de Yahoo Finance respecto de la cotización del bitcoin (ticker: "BTC-USD"). 
+Para el análisis de temas financieros existe una librería de mucha utilidad llamada __quantmod__. En primer lugar esta librería permite acceder a datos financieros de un modo muy simple, es posible descargar series financieras desde _yahoo_, la _FRED (Federal Reserve Economic Data)_, _google_, etc. Por otro lado, también es una librería que permite realizar gráficos altamente estéticos con unas cuantas líneas de código. Usaremos datos de la cotización del bitcoin (ticker: "BTC-USD") descargados de Yahoo Finance, con corte al 7 de julio de 2026; la serie está almacenada en la carpeta `BD/` del repositorio para garantizar la reproducibilidad de los resultados que se discuten en el texto.
+
 ```{r Data_ARCH, warning=FALSE, message=FALSE}
 
-options("getSymbols.warning4.0"=FALSE)
+## Datos congelados (corte: 2026-07-07) para reproducibilidad.
+## Quien desee replicar el ejercicio con datos vivos puede descomentar
+## las siguientes líneas para descargar la serie actualizada desde
+## Yahoo Finance (los resultados numéricos cambiarán con cada descarga):
+#
+# options("getSymbols.warning4.0" = FALSE)
+# BTC <- getSymbols("BTC-USD", src = "yahoo", auto.assign = FALSE)
+# BTC <- na.omit(BTC)
+# save(BTC, file = "BD/BTC_USD.RData")
 
-BTC <-getSymbols("BTC-USD", src = "yahoo", auto.assign = FALSE)
-
-BTC <- na.omit(BTC)
+load("BD/BTC_USD.RData")
 
 chartSeries(BTC,TA='addBBands();
                     addBBands(draw="p");
@@ -53,14 +60,14 @@ tail(BTC)
 
 ```
 
-Para fines del ejercicio de esta clase, usaremos el valor de la acción ajustado. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas. 
+Para fines del ejercicio de este capítulo, usaremos el precio ajustado del activo. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas.
 
 ```{r fig101, fig.cap = "Evolución del precio del Bitcoin", fig.align='center'}
 
 plot(BTC$`BTC-USD.Adjusted`)
 
 ```
-Una de las preguntas relevantes al observar la serie en diferencias, es si podríamos afirmar que esta serie cumple con el supuesto de homoscedasticidad. Para ello, la Figura \@ref(fig:fig102) muestra que las variaciones en el precio del Bitcoin muestran un escenario en el que no se cumple el supuesto de la homocedasticidad.
+Una de las preguntas relevantes al observar la serie en diferencias, es si podríamos afirmar que esta serie cumple con el supuesto de homocedasticidad. Para ello, la Figura \@ref(fig:fig102) muestra que las variaciones en el precio del Bitcoin muestran un escenario en el que no se cumple dicho supuesto.
 
 ```{r fig102, fig.cap = "Evolución del rendimiento (diferencias logarítmicas) del Bitcoin", fig.align='center'}
 
@@ -119,9 +126,9 @@ round(skewness(vector_ret),2)
 
 ```
 
-## Prueba de normalidad 
+### Prueba de normalidad
 
-$H_0: K=S=0$
+Formalicemos la observación anterior con la prueba de Jarque-Bera, cuya hipótesis nula es que la serie se distribuye como una normal, es decir, $H_0: K = S = 0$, donde $K$ es el exceso de curtosis y $S$ el sesgo:
 
 ```{r JB_ARCH}
 
@@ -177,7 +184,7 @@ Así, de forma similar a un proceso MA(q) podemos decir que la varianza condicio
 
 Donde $\mathbb{E}[\nu_t] = 0$, $\omega > 0$ y $\alpha_i \geq 0$, para $i = 1, 2, \ldots, q$. Estas condiciones son necesarias para garantizar que la varianza sea positiva. En general, la varianza condicional se expresa de la forma $\sigma^2_{t | t-1}$, no obstante, para facilitar la notación, nos referiremos en cada caso a esta simplemente como $\sigma^2_{t}$.
 
-Podemos generalizar esta situación si asumimos a la varianza condicional como dependiente de los valores de la varianza rezagados, es decir, como si fuera un proceso AR de orden $p$ para la varianza y juntándolo con la ecuación \@ref(eq:ARCHEffect). Bollerslev (1986) y Taylor (1986) generalizaron el problema de heterocedasticidad condicional. El modelo se conoce como GARCH(p, q), el cual se especifica como:
+Podemos generalizar esta situación si asumimos a la varianza condicional como dependiente de los valores de la varianza rezagados, es decir, como si fuera un proceso AR de orden $p$ para la varianza y juntándolo con la ecuación \@ref(eq:ARCHEffect). Bollerslev [-@bollerslev1986] y Taylor [-@taylor1986] generalizaron el problema de heterocedasticidad condicional. El modelo se conoce como GARCH(p, q), el cual se especifica como:
 \begin{eqnarray}
     \sigma^2_t & = & \omega + \alpha_1 U_{t-1}^2 + \alpha_2 U_{t-2}^2 + \ldots + \alpha_q U_{t-q}^2 \\ \nonumber
     & & + \beta_1 \sigma^2_{t-1} + \beta_2 \sigma^2_{t-2} + \ldots + \beta_p \sigma^2_{t-p}
@@ -212,13 +219,13 @@ $\frac{\alpha(L)}{1 - \beta(L)} = \sum_{i=1}^\infty c_i L^i$.
 
 Hasta ahora, las distribuciones utilizadas para medir el Valor en Riesgo de un activo (Bitcoin, en este caso) asumen que no existe correlación serial en los retornos diarios del activo. Observemos un par de gráficas de la función de autocorrelación para corroborar este hecho--ver la Figura \@ref(fig:fig105)--. 
 
-```{r fig105, fig.cap = "Función de autocorrelación parcial de los rendimientos del Bitcoin", fig.align='center', message=FALSE, warning=TRUE}
+```{r fig105, fig.cap = "Función de autocorrelación de los rendimientos del Bitcoin", fig.align='center', message=FALSE, warning=TRUE}
 
 acf(logret)
 
 ```
 
-La idea de clusterización de volatilidad asume que períodos de alta volatilidad serán seguidos por alta volatilidad y viceversa. Por esta razón, la función de autocorrelación útil para saber si existen clústers de volatilidad es utilizando el valor absoluto, ya que lo que importa es saber si la serie está autocorrelacionada en la magnitud de los movimientos. La Figura \@ref(fig:fig106) muestra el comportamiento de los rendimientos en valor absoluto y la Figura \@ref(fig:fig107) la función de autocorrelación parcial.
+La idea de clusterización de volatilidad asume que períodos de alta volatilidad serán seguidos por alta volatilidad y viceversa. Por esta razón, la función de autocorrelación útil para saber si existen clústers de volatilidad es utilizando el valor absoluto, ya que lo que importa es saber si la serie está autocorrelacionada en la magnitud de los movimientos. La Figura \@ref(fig:fig106) muestra el comportamiento de los rendimientos en valor absoluto y la Figura \@ref(fig:fig107) su función de autocorrelación.
 
 ```{r fig106, fig.cap = "Evolución de los rendimientos del Bitcoin en valor absoluto", fig.align='center', message=FALSE, warning=TRUE}
 
@@ -226,7 +233,7 @@ plot(abs(logret))
 
 ```
 
-```{r fig107, fig.cap = "Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto", fig.align='center', message=FALSE, warning=TRUE}
+```{r fig107, fig.cap = "Función de autocorrelación de los rendimientos del Bitcoin en valor absoluto", fig.align='center', message=FALSE, warning=TRUE}
 
 acf(abs(logret))
 
@@ -234,7 +241,7 @@ acf(abs(logret))
 
 Otra manera de corroborar esta idea es volviendo IID nuestra serie de datos y observar que de este modo se pierde la autocorrelación serial, lo que refuerza la idea de que en esta serie existen clusters de volatilidad. 
 
-```{r fig108, fig.cap = "Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto", fig.align='center', message=FALSE, warning=FALSE}
+```{r fig108, fig.cap = "Función de autocorrelación del valor absoluto de los rendimientos del Bitcoin reordenados aleatoriamente", fig.align='center', message=FALSE, warning=FALSE}
 
 logret_random <- sample(as.vector(logret), size =  length(logret), replace = FALSE)
 
@@ -242,7 +249,7 @@ acf(abs(logret_random))
 
 ```
 
-```{r fig109, fig.cap = "Función de autocorrelación parcial de los rendimientos del Bitcoin en valor absoluto", fig.align='center', message=FALSE, warning=FALSE}
+```{r fig109, fig.cap = "Rendimientos del Bitcoin: serie original vs. serie reordenada aleatoriamente", fig.align='center', message=FALSE, warning=FALSE}
 
 par(mfrow = c(1,2))
 plot(logret)
@@ -283,8 +290,6 @@ Considerando que la media es una AR(2), los resultados de esta estimación se mu
 ```{r arima-summary, warning=FALSE, message=FALSE}
 library(rugarch)
 
-auto.arima(logret)
-
 model.spec = ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(1, 0)),
                         mean.model     = list(armaOrder = c(2, 0)),
                         distribution.model = "std")
@@ -302,12 +307,9 @@ knitr::kable(
   caption   = "Estimación del modelo ARCH(1) con media AR(2).",
   align     = c("r", "r", "r", "r", "c"),
   digits    = 4,
-  booktabs  = TRUE
+  booktabs  = TRUE,
+  escape    = FALSE
 )
-
-boot.garch <- ugarchboot(arch.fit, method = "Partial", sampling = "raw",
-                         n.ahead = 1, n.bootpred = 100000, solver = "solnp")
-boot.garch
 ```
 
 ### Ejemplo GARCH(0,1)
@@ -339,17 +341,14 @@ knitr::kable(
   caption   = "Estimación del modelo GARCH(0,1) con media AR(2).",
   align     = c("r", "r", "r", "r", "c"),
   digits    = 4,
-  booktabs  = TRUE
+  booktabs  = TRUE,
+  escape    = FALSE
 )
-
-boot.garch <- ugarchboot(fit.garch.n, method = "Partial", sampling = "raw",
-                         n.ahead = 1, n.bootpred = 100000, solver = "solnp")
-boot.garch
 ```
 
 ### Selección GARCH(p,q) óptimo
 
-¿Cómo seleccionamos el orden adecuado para un GARCH(p,q)? Acá una respuesta.
+¿Cómo seleccionamos el orden adecuado para un GARCH(p,q)? Una respuesta la ofrecen los criterios de información, partiendo de la especificación general:
 
 $Y_t = \mu+\sqrt{h_t}\varepsilon_t$
 
@@ -371,27 +370,28 @@ knitr::kable(
 
 #### Selección del modelo óptimo
 
-Podemos hacer una búsqueda del mejor modelo de entre varios que probemos en un espectro de hasta un GARCH(4,4). Los resultados son los reportados en el siguiente Cuadro.
+Podemos hacer una búsqueda del mejor modelo de entre varios que probemos en un espectro de hasta un GARCH(4,4), manteniendo para la media condicional la misma especificación AR(2) empleada en las estimaciones anteriores. Los resultados son los reportados en el siguiente Cuadro.
 
 ```{r criterios, cache=TRUE, warning=FALSE, message=FALSE}
-source("Lag_Opt_GARCH.R")
-crit_garch <- as.data.frame(Lag_Opt_GARCH(ehatsq, 4, 4))
+source("lag_opt_GARCH.R")
+crit_garch <- as.data.frame(Lag_Opt_GARCH(logret, 4, 4, arma = c(2, 0)))
 knitr::kable(
   crit_garch,
   col.names = c("$q$", "$p$", "AIC", "Óptimo"),
   caption   = "Criterios de información AIC en función de $p$ y $q$ para GARCH($p$,$q$).",
   align     = c("c", "c", "r", "c"),
   digits    = 5,
-  booktabs  = TRUE
+  booktabs  = TRUE,
+  escape    = FALSE
 )
 ```
 
 #### Estimación de modelo óptimo 
 
-De esta forma, el modelo óptimo es un GARCH(2,4). Los resultados de la estimación se muestran en el Cuadro \@ref(tab:garch-estimates).
+De esta forma, con los datos al corte señalado, el modelo óptimo es un GARCH(3,1). Los resultados de la estimación se muestran en el Cuadro \@ref(tab:garch-estimates).
 
 ```{r garch-estimates, warning=FALSE, message=FALSE}
-model.spec = ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(4, 2)),
+model.spec = ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(1, 3)),
                         mean.model     = list(armaOrder = c(2, 0)),
                         distribution.model = "std")
 
@@ -405,30 +405,19 @@ df_opt$Signif <- ifelse(df_opt[, 4] < 0.001, "***",
 knitr::kable(
   df_opt,
   col.names = c("Estimado", "Error Est.", "Estad. $t$", "Prob. $(>|t|)$", "Signif."),
-  caption   = "Estimación del modelo GARCH(2,4) óptimo con media AR(2).",
+  caption   = "Estimación del modelo GARCH(3,1) óptimo con media AR(2).",
   align     = c("r", "r", "r", "r", "c"),
   digits    = 4,
-  booktabs  = TRUE
+  booktabs  = TRUE,
+  escape    = FALSE
 )
-
-boot.garch <- ugarchboot(model.fit, method = "Partial", sampling = "raw",
-                         n.ahead = 1, n.bootpred = 100000, solver = "solnp")
-boot.garch
 ```
 
-#### Pronósticos con GARCH(1,1)
+#### Pronósticos con el modelo GARCH óptimo
 
-Para realizar pronósticos con la estimación de un GARCH, utilizando la librería _rugarch_, es necesario utilizar la función __ugarchforecast()__. 
+Para realizar pronósticos con la estimación de un GARCH, utilizando la librería _rugarch_, es necesario utilizar la función __ugarchforecast()__. Emplearemos el modelo GARCH(3,1) con media AR(2) que resultó óptimo en la sección anterior (objeto `model.fit`):
 
 ```{r}
-model.spec = ugarchspec(variance.model = list(model = 'sGARCH', 
-                                              garchOrder = c(1,1)), 
-                        mean.model = list(armaOrder = c(4,2)), 
-                        distribution.model = "std")
-
-model.fit = ugarchfit(spec = model.spec , data = logret, 
-                      solver = 'solnp')
-
 spec = getspec(model.fit)
 
 setfixed(spec) <- as.list(coef(model.fit))
@@ -532,10 +521,11 @@ Como notarán, este tipo de procedimientos implica la estimación de muchos par�
 \end{equation*}
 
 Finalmente y de forma análoga al caso univariado, podemos plantear un modelo M-GARCH(p, q) como:
-\begin{equation}
-    Vech(\Sigma_{t | t-1}) = \boldsymbol{\gamma}_0 + \sum_{j = 1}^q \Gamma_j Vech(\mathbf{U}_{t-j} \mathbf{U}_{t-j}') + \sum_{m = 1}^p \mathbf{G}_m Vech(\Sigma_{t-m | t-m-1})
+\begin{eqnarray}
+    Vech(\Sigma_{t | t-1}) & = & \boldsymbol{\gamma}_0 + \sum_{j = 1}^q \Gamma_j Vech(\mathbf{U}_{t-j} \mathbf{U}_{t-j}') \nonumber \\
+    &  & + \sum_{m = 1}^p \mathbf{G}_m Vech(\Sigma_{t-m | t-m-1})
         (\#eq:M_GARCH)
-\end{equation}
+\end{eqnarray}
 
 Donde cada una de las $\mathbf{G}_m$ es una matriz de coeficientes. Para ilustrar este caso, retomemos el ejemplo anterior, pero ahora para un modelo M-GARCH(1, 1) con $K = 2$ de forma que tendríamos:
 \begin{eqnarray*}
@@ -590,9 +580,9 @@ En este capítulo introdujimos los modelos de heterocedasticidad condicional, di
 
 **Motivación.** Las series de rendimientos financieros presentan dos hechos estilizados que los modelos ARMA estándar no capturan: (i) períodos de alta volatilidad seguidos de alta volatilidad y períodos de baja volatilidad seguidos de baja volatilidad, y (ii) colas pesadas en la distribución de los rendimientos. La prueba ARCH-LM (Engle, 1982) contrasta formalmente si los residuales al cuadrado presentan autocorrelación, lo que indica efectos ARCH.
 
-**Modelos ARCH y GARCH univariados.** El modelo ARCH($q$) de Engle (1982) especifica la varianza condicional como función de los cuadrados de los errores pasados:
+**Modelos ARCH y GARCH univariados.** El modelo ARCH($q$) de Engle [-@engle1982] especifica la varianza condicional como función de los cuadrados de los errores pasados:
 $$h_t = \omega + \alpha_1 U_{t-1}^2 + \ldots + \alpha_q U_{t-q}^2$$
-El modelo GARCH($p,q$) de Bollerslev (1986) añade términos de varianza condicional rezagada, logrando parsimonia frente al ARCH($\infty$) equivalente:
+El modelo GARCH($p,q$) de Bollerslev [-@bollerslev1986] añade términos de varianza condicional rezagada, logrando parsimonia frente al ARCH($\infty$) equivalente:
 $$h_t = \omega + \sum_{i=1}^q \alpha_i U_{t-i}^2 + \sum_{j=1}^p \beta_j h_{t-j}$$
 La condición de estacionariedad débil requiere $\sum_{i} \alpha_i + \sum_{j} \beta_j < 1$. La selección del orden $(p,q)$ se realiza con los criterios AIC, BIC, Shibata y Hannan-Quinn disponibles en la función `infocriteria()` del paquete `rugarch`. En la práctica, el GARCH(1,1) es suficiente para la mayoría de las series financieras.
 

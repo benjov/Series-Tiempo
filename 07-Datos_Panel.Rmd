@@ -65,7 +65,7 @@ data("Wages", package="plm")
 
 ```
 
-Descripción de los datos: Grunfeld (1958) contiene 20 observaciones anuales de inversión bruta real (invest), valor real de la empresa (value) y valor real del capital (capital) para 10 grandes empresas de EE.UU. durante 1935–1954.
+Descripción de los datos: Grunfeld [-@grunfeld1958] contiene 20 observaciones anuales de inversión bruta real (invest), valor real de la empresa (value) y valor real del capital (capital) para 10 grandes empresas de EE.UU. durante 1935–1954.
 
 ```{r}
 
@@ -118,9 +118,9 @@ legend("topleft", legend=c("Firm_1", "Firm_2", "Firm_3", "Firm_4", "Firm_5",
 
 ```
 
-Prueba de raíz unitaria en panel (Levin et al. 2002, Im et al. 2003, Maddala y Wu 1999, Hadri 2000):
+Prueba de raíz unitaria en panel [@levinlinchu2002; @impeseranshin2003; @maddalachoi1999; @hadri2000]:
 
-Consider Levin et al. (2002)
+Consideremos la prueba de Levin et al. [-@levinlinchu2002]:
 
 ```{r}
 
@@ -160,7 +160,7 @@ summary(purtest(ts_DLInvest, test = "levinlin", exo = "intercept",
 
 ```
 
-Consider Im-Pesaran-Shin Unit-Root Test (2003)
+Consideremos la prueba de raíz unitaria de Im, Pesaran y Shin [-@impeseranshin2003]:
 
 ```{r}
 
@@ -433,7 +433,7 @@ Rezagos óptimos:
    & = & 4
 \end{eqnarray*}
 
-Prueba de Levin et al. (2002):
+Prueba de Levin et al. [-@levinlinchu2002]:
 
 ```{r}
 
@@ -449,7 +449,7 @@ purtest(ts_DLINPC, test = "levinlin", exo = "trend", # exo = c("none", "intercep
 
 ```
 
-Prueba de Choi (2001):
+Prueba de Choi [-@choi2001]:
 
 ```{r}
 
@@ -465,7 +465,7 @@ purtest(ts_DLINPC, test = "logit", exo = "trend", # exo = c("none", "intercept",
 
 ```
 
-Prueba de Hadri (2000):
+Prueba de Hadri [-@hadri2000]:
 
 ```{r}
 
@@ -542,7 +542,7 @@ library(panelvar)
 
 ### Ejemplo 1
 
-La estimación sigue la literatura de panel dinámico de Arellano y Bond (1991), Blundell y Bond (1998) y Roodman (2009). 
+La estimación sigue la literatura de panel dinámico de Arellano y Bond [-@arrellanobond1991], Blundell y Bond [-@blundellbond1998] y Roodman [-@roodman2009].
 Este conjunto de datos describe el empleo, los salarios, el capital y la producción de 140 empresas en el Reino Unido durante 1976–1984. 
 Se estima un modelo en el que el empleo ($n$) es explicado por sus valores pasados (2 rezagos), los valores actuales y el primer rezago de los salarios ($w$) y la producción ($ys$), y el valor actual del capital ($k$).
 
@@ -581,7 +581,7 @@ summary(Arellano_Bond_1991_table4b)
 
 ### Ejemplo 2:
 
-Se utiliza un conjunto de datos panel de 265 municipios suecos durante 9 años (1979–1987). Las variables incluyen el gasto total (`expenditures`), los ingresos propios (`revenues`) y las transferencias intergubernamentales recibidas por el municipio (`grants`). Fuente: Dahlberg y Johansson (2000). Las transferencias del gobierno central al gobierno local son de tres tipos: apoyo a municipios con baja capacidad fiscal, transferencias para financiar ciertas actividades del gobierno local, y transferencias destinadas a inversiones específicas.
+Se utiliza un conjunto de datos panel de 265 municipios suecos durante 9 años (1979–1987). Las variables incluyen el gasto total (`expenditures`), los ingresos propios (`revenues`) y las transferencias intergubernamentales recibidas por el municipio (`grants`). Fuente: Dahlberg y Johansson [-@dahlbergjohansson2000]. Las transferencias del gobierno central al gobierno local son de tres tipos: apoyo a municipios con baja capacidad fiscal, transferencias para financiar ciertas actividades del gobierno local, y transferencias destinadas a inversiones específicas.
 
 ```{r}
 
@@ -617,7 +617,7 @@ summary(ex1_dahlberg_data)
 
 ```
 
-Selección de rezagos óptimos mediante el procedimiento de Andrews y Lu (2001):
+Selección de rezagos óptimos mediante el procedimiento de Andrews y Lu [-@andrewslu2001]:
 
 ```{r}
 
@@ -706,7 +706,7 @@ Para construir los estadísticos se estima, para cada $i$, la regresión auxilia
     (\#eq:eqResidPanel)
 \end{equation}
 
-A partir de los residuales $\hat{v}_{it}$ y de las varianzas de largo plazo $\hat{L}_{11i}^2$ (que corrigen la correlación serial), Pedroni (1999) construye siete estadísticos divididos en dos grupos:
+A partir de los residuales $\hat{v}_{it}$ y de las varianzas de largo plazo $\hat{L}_{11i}^2$ (que corrigen la correlación serial), Pedroni [-@pedroni1999] construye siete estadísticos divididos en dos grupos:
 
 **Estadísticos de dimensión interna (within-dimension).** Imponen un coeficiente autorregresivo $\rho_i = \rho$ común al hacer la suma sobre individuos. Se componen del estadístico Panel-$\nu$ (cociente de varianzas, diverge hacia la derecha bajo $H_1$), el Panel-$\rho$ (análogo al estadístico $\rho$ de Phillips-Perron), el Panel-$t$ no paramétrico y el Panel-ADF paramétrico.
 
@@ -743,7 +743,7 @@ En general distinguimos que existen dos tipos de modelos:
 
 ### Regímenes determinados por información observable
 
-En estos casos asumimos que el régimen ocurre en un momento $t$ y puede ser determinado por una variable observable. Este modelo es conocido como el modelo autoregresivo con umbral (TAR, Threshold Autoregressive model). En este caso también diremos que cuando el régimen está determinado por la información de la misma serie será llamado Self-Exciting TAR (SETAR).
+En estos casos asumimos que el régimen ocurre en un momento $t$ y puede ser determinado por una variable observable. Este modelo es conocido como el modelo autorregresivo con umbral (TAR, Threshold Autoregressive model). En este caso también diremos que cuando el régimen está determinado por la información de la misma serie será llamado Self-Exciting TAR (SETAR).
 
 Veamos un caso particular. Supongamos que existe un umbral, $c$, para el régimen que está determinado por $q_t = y_{t-1}$ y que el estado de la naturaleza nos permite establecer dos estados o regímenes:
 \begin{equation}
@@ -961,7 +961,7 @@ Este capítulo amplió el análisis de series de tiempo a dos dimensiones adicio
 
 **Diferencia en diferencias (DiD).** El estimador DiD identifica el efecto causal de un tratamiento comparando la variación en el tiempo del grupo tratado con la del grupo de control. Su validez descansa en el supuesto de tendencias paralelas: en ausencia del tratamiento, ambos grupos habrían seguido trayectorias paralelas.
 
-**Panel VAR.** El Panel VAR (PVAR) combina las ventajas del VAR clásico con la dimensión transversal del panel. Se estima mediante GMM con instrumentos basados en los rezagos de las propias variables, controlando por efectos fijos mediante transformación de primeras diferencias o desviaciones ortogonales. La selección del número de rezagos sigue el criterio de Andrews y Lu (2001).
+**Panel VAR.** El Panel VAR (PVAR) combina las ventajas del VAR clásico con la dimensión transversal del panel. Se estima mediante GMM con instrumentos basados en los rezagos de las propias variables, controlando por efectos fijos mediante transformación de primeras diferencias o desviaciones ortogonales. La selección del número de rezagos sigue el criterio de Andrews y Lu [-@andrewslu2001].
 
 **Modelos no lineales.** Cuando la dinámica de una serie cambia de forma discreta según el estado del sistema, los modelos de cambio de régimen son más apropiados que los modelos lineales.
 

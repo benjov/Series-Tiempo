@@ -5,7 +5,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 2 Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia | Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<meta name="author" content="Benjamín Oliva">
+<meta name="author" content="Jaime Vázquez Alamilla">
+<meta name="author" content="Omar Alfaro Rivera">
+<meta name="author" content="Emiliano Pérez Caullieres">
+<meta name="author" content="Luis Gerardo Ruíz">
 <meta name="description" content="2.1 La naturaleza de los datos de Series de Tiempo El análisis de series de tiempo tiene muchas aplicaciones en diversos campos de la ciencia. Por ejemplo, en la economía continuamente se está...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Capítulo 2 Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia | Análisis de Series de Tiempo">
@@ -69,7 +73,7 @@
 <li><a class="active" href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
 <li><a class="" href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
 <li><a class="" href="cap-noestacionarios.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
-<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
 <li><a class="" href="cap-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
 <li><a class="" href="cap-panel.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
@@ -145,7 +149,7 @@ se muestra la evolución del Indicador Global de la Actividad Económica
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig1"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig1-1.png" alt="Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2025" width="672"><p class="caption">
-Figure 2.1: Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2025
+Figura 2.1: Indicador Global de Actividad Económica (IGAE) Global y para las Actividades Primarias (2008=100), Ene.2002 - May.2025
 </p>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -188,7 +192,7 @@ economía en relación el año anterior.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig2"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2025" width="672"><p class="caption">
-Figure 2.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2025
+Figura 2.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2025
 </p>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -223,7 +227,7 @@ invertido en las empresas que cotizan en la BMV.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig3"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2025" width="672"><p class="caption">
-Figure 2.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2025
+Figura 2.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2025
 </p>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -256,7 +260,7 @@ mes de la muestra.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig4"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig4-1.png" alt="Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos, enero de 2002 = 100), pesos por dólar, Ene.2002-May.2025 " width="672"><p class="caption">
-Figure 2.4: Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos, enero de 2002 = 100), pesos por dólar, Ene.2002-May.2025
+Figura 2.4: Índice del índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores e Índice del Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera (ambos, enero de 2002 = 100), pesos por dólar, Ene.2002-May.2025
 </p>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -290,7 +294,7 @@ de IGAE de la actividad total, el IPC y el TDC.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig5"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023" width="672"><p class="caption">
-Figure 2.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023
+Figura 2.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023
 </p>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -626,7 +630,7 @@ Cuadro <a href="cap-eqdiff.html#tab:table1">2.1</a> se ilustra en las siguientes
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>font_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:table1">Table 2.1: </span>Dos ejemplos de Ecuaciones Lineales de Primer Orden</caption>
+<span id="tab:table1">Cuadro 2.1: </span>Dos ejemplos de Ecuaciones Lineales de Primer Orden</caption>
 <thead><tr class="header">
 <th align="right">Tiempo</th>
 <th align="right"><span class="math inline">\(Z_t =2+0.9Z_{t-1}\)</span></th>
@@ -750,7 +754,7 @@ Cuadro <a href="cap-eqdiff.html#tab:table1">2.1</a> se ilustra en las siguientes
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig21"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig21-1.png" alt="Evolución del proceso dado por $Z_t =2+0.9Z_{t-1}$" width="672"><p class="caption">
-Figure 2.6: Evolución del proceso dado por <span class="math inline">\(Z_t =2+0.9Z_{t-1}\)</span>
+Figura 2.6: Evolución del proceso dado por <span class="math inline">\(Z_t =2+0.9Z_{t-1}\)</span>
 </p>
 </div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -761,7 +765,7 @@ Figure 2.6: Evolución del proceso dado por <span class="math inline">\(Z_t =2+0
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig22"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig22-1.png" alt="Evolución del proceso dado por $Z_t =2-0.5Z_{t-1}$" width="672"><p class="caption">
-Figure 2.7: Evolución del proceso dado por <span class="math inline">\(Z_t =2-0.5Z_{t-1}\)</span>
+Figura 2.7: Evolución del proceso dado por <span class="math inline">\(Z_t =2-0.5Z_{t-1}\)</span>
 </p>
 </div>
 </div>
@@ -1062,7 +1066,7 @@ de la trayectoria para 100 períodos.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>font_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:table2">Table 2.2: </span>Un ejemplo de Ecuación de Segundo Orden</caption>
+<span id="tab:table2">Cuadro 2.2: </span>Un ejemplo de Ecuación de Segundo Orden</caption>
 <thead><tr class="header">
 <th align="right">Tiempo</th>
 <th align="right"><span class="math inline">\(Z_t =10-450(0.4)^t+440(0.5)^t\)</span></th>
@@ -1162,7 +1166,7 @@ de la trayectoria para 100 períodos.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig23"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig23-1.png" alt="Evolución del proceso dado por $Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}$" width="672"><p class="caption">
-Figure 2.8: Evolución del proceso dado por <span class="math inline">\(Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}\)</span>
+Figura 2.8: Evolución del proceso dado por <span class="math inline">\(Z_t =3+0.9Z_{t-1}-0.2Z_{t-2}\)</span>
 </p>
 </div>
 <p>Finalmente, discutiremos la solución para las Ecuaciones Lineales en
@@ -1291,7 +1295,7 @@ decir que el proceso es convergente en el largo plazo.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig24"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig24-1.png" alt="Circulo unitario en el que se cumple que $|g_i|&lt;1$ y $(g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1$" width="384"><p class="caption">
-Figure 2.9: Circulo unitario en el que se cumple que <span class="math inline">\(|g_i|&lt;1\)</span> y <span class="math inline">\((g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1\)</span>
+Figura 2.9: Circulo unitario en el que se cumple que <span class="math inline">\(|g_i|&lt;1\)</span> y <span class="math inline">\((g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1\)</span>
 </p>
 </div>
 </div>
@@ -1303,8 +1307,8 @@ Figure 2.9: Circulo unitario en el que se cumple que <span class="math inline">\
 <p>Denotemos, como se ha mencionado con anterioridad, con <span class="math inline">\(L\)</span> al operador
 de rezago, el cual nos permitirá construir una relación entre
 diferencias y medias móviles como se verá más adelante en los procesos
-univariados Autoregresivos de orden <span class="math inline">\(p\)</span>, <span class="math inline">\(AR(p)\)</span>, y de medias móviles de
-orden <span class="math inline">\(q\)</span>, <span class="math inline">\(MA(q)\)</span> y, en general, Autoregresivos de Media Móviles
+univariados Autorregresivos de orden <span class="math inline">\(p\)</span>, <span class="math inline">\(AR(p)\)</span>, y de medias móviles de
+orden <span class="math inline">\(q\)</span>, <span class="math inline">\(MA(q)\)</span> y, en general, Autorregresivos de Media Móviles
 Integrados <span class="math inline">\(ARIMA(p, d, q)\)</span>. Sean <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> o <span class="math inline">\(Z\)</span> variables con las que
 denotaremos a una serie de tiempo (note que hasta el momento no hemos
 definido qué es una serie de tiempo, no obstante, no es necesario
@@ -1427,7 +1431,7 @@ probabilística.</p>
 <p>Donde <span class="math inline">\(U_t\)</span> es un proceso de ruido blanco con <span class="math inline">\(\mathbb{E}[U_t] = 0\)</span>,
 <span class="math inline">\(\text{Var}(U_t) = \sigma^2\)</span> y <span class="math inline">\(\text{Cov}(U_t, U_s) = 0\)</span> para
 <span class="math inline">\(t \neq s\)</span>. A la ecuación @ref(eq:AR_p) se le conoce como un proceso
-<strong>Autoregresivo de orden</strong> <span class="math inline">\(p\)</span>, denotado <span class="math inline">\(AR(p)\)</span>, y constituye la base
+<strong>Autorregresivo de orden</strong> <span class="math inline">\(p\)</span>, denotado <span class="math inline">\(AR(p)\)</span>, y constituye la base
 de los modelos de series de tiempo que se estudiarán en los capítulos
 siguientes.</p>
 <p>Usando el operador de rezagos <span class="math inline">\(L\)</span>, la ecuación @ref(eq:AR_p) se puede
@@ -1488,7 +1492,7 @@ los métodos de estimación e identificación de modelos <span class="math inlin
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres, Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

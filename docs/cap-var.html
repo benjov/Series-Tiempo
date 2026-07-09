@@ -4,15 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<title>Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo</title>
+<meta name="author" content="Benjamín Oliva">
+<meta name="author" content="Jaime Vázquez Alamilla">
+<meta name="author" content="Omar Alfaro Rivera">
+<meta name="author" content="Emiliano Pérez Caullieres">
+<meta name="author" content="Luis Gerardo Ruíz">
 <meta name="description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo">
+<meta property="og:title" content="Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo">
 <meta property="og:type" content="book">
 <meta property="og:description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo">
+<meta name="twitter:title" content="Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo">
 <meta name="twitter:description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -69,7 +73,7 @@
 <li><a class="" href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
 <li><a class="" href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
 <li><a class="" href="cap-noestacionarios.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
-<li><a class="active" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="active" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
 <li><a class="" href="cap-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
 <li><a class="" href="cap-panel.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
@@ -82,7 +86,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap-var" class="section level1" number="5">
 <h1>
-<span class="header-section-number">Capítulo 5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado<a class="anchor" aria-label="anchor" href="#cap-var"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Capítulo 5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado<a class="anchor" aria-label="anchor" href="#cap-var"><i class="fas fa-link"></i></a>
 </h1>
 <p>En este capítulo removeremos el supuesto de que el análisis es
 univariado, ya que introduciremos la posibilidad de que los procesos
@@ -90,8 +94,8 @@ generadores de datos compartan información entre dos o más series. Como
 primera aproximación desarrollaremos el concepto de Causalidad de
 Granger. Mediante esta metodología discutiremos cuándo dos series se
 causan estadísticamente. Posteriormente, introduciremos una técnica más
-sofisticada conocida como la metodología de Vectores Autoregresivos
-(VAR), la cual es una generalización de los procesos Autoregresivos (AR)
+sofisticada conocida como la metodología de Vectores Autorregresivos
+(VAR), la cual es una generalización de los procesos Autorregresivos (AR)
 que analizamos al principio del curso. Finalmente, introduciremos la
 técnica de cointegración y de rezagos distribuidos (ARDL) para los casos
 en que las series que analicemos sean procesos no estacionarios.</p>
@@ -107,8 +111,8 @@ modelos ARDL.</p>
 con la información contenida en ella misma. No obstante, en adelante
 trataremos de analizar el caso en el que buscamos determinar relaciones
 entre variables y cómo el comportamiento de una serie influye en las
-demás. Algunas relaciones más importantes son las llamadas: causalidad.
-En este caso analizaremos el procedimiento de Granger (1969), conocido
+demás. Una de las relaciones más importantes entre variables es la de
+causalidad. En este caso analizaremos el procedimiento de Granger <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-granger1969">1969</a>)</span>, conocido
 como causalidad de Granger. En adelante asumiremos que las series
 involucradas son débilmente estacionarias.</p>
 <p>Sean <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> dos series débilmente estacionarias. Definamos a <span class="math inline">\(I_t\)</span> un
@@ -209,7 +213,7 @@ estacionarias, utilizaremos las diferencias logarítmicas de cada una de
 las tres series (es decir, utilizaremos una transformación del tipo
 <span class="math inline">\(ln(X_t) - ln(X_{t-1})\)</span>). La Figura <a href="cap-var.html#fig:fig61">5.1</a> muestra las series
 en su transformación de diferencias logarítmicas.</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -242,7 +246,7 @@ en su transformación de diferencias logarítmicas.</p>
 <span>             freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">DLCETE28</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">CETE28_Ad</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="co">#png("Plots/DLGranger.png", width = 800, height = 1200)</span></span>
 <span></span>
@@ -262,10 +266,10 @@ en su transformación de diferencias logarítmicas.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig61"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig61-1.png" alt="Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(INPC_t) - ln(INPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$." width="672"><p class="caption">
-Figure 5.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(INPC_t) - ln(INPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
+Figura 5.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(INPC_t) - ln(INPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
 </p>
 </div>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#dev.off()</span></span></code></pre></div>
@@ -275,7 +279,7 @@ de aplicar el test de Granger a diferentes especificaciones, con rezagos
 logarítmicas. En cada una de las pruebas se compara el modelo
 considerado como regresor a la variable que es candidata de causar,
 respecto del modelo sin considerar a dicha variable.</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">granger_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">12</span>, <span class="fl">16</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">gt</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/grangertest.html">grangertest</a></span><span class="op">(</span><span class="va">DLTC</span> <span class="op">~</span> <span class="va">DLINPC</span>, order <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>
 <span>  <span class="va">pv</span>  <span class="op">&lt;-</span> <span class="va">gt</span><span class="op">$</span><span class="va">`Pr(&gt;F)`</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
@@ -291,11 +295,12 @@ respecto del modelo sin considerar a dicha variable.</p>
 <span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Rezagos"</span>, <span class="st">"Estadística $F$"</span>, <span class="st">"Probabilidad ($&gt;F$)"</span>, <span class="st">"Signif."</span><span class="op">)</span>,</span>
 <span>  caption   <span class="op">=</span> <span class="st">"Prueba de si $DLINPC_t$ Granger causa a $DLTC_t$."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span><span class="op">)</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:Granger">Table 5.1: </span>Prueba de si <span class="math inline">\(DLINPC_t\)</span> Granger causa a <span class="math inline">\(DLTC_t\)</span>.
+<span id="tab:Granger">Cuadro 5.1: </span>Prueba de si <span class="math inline">\(DLINPC_t\)</span> Granger causa a <span class="math inline">\(DLTC_t\)</span>.
 </caption>
 <thead><tr>
 <th style="text-align:center;">
@@ -305,7 +310,7 @@ Rezagos
 Estadística <span class="math inline">\(F\)</span>
 </th>
 <th style="text-align:center;">
-Probabilidad (<span class="math inline">\(&amp;gt;F\)</span>)
+Probabilidad (<span class="math inline">\(&gt;F\)</span>)
 </th>
 <th style="text-align:center;">
 Signif.
@@ -373,9 +378,9 @@ las diferencias logarítmicas. El resto de los resultados para las otras
 combinaciones de causalidad se encuentran en el R Markdown llamado Clase
 13 ubicado en el repositorio de GitHub.</p>
 </div>
-<div id="definición-y-representación-del-sistema-o-modelo-de-vectores-autorregresicos-varp" class="section level2" number="5.2">
+<div id="definición-y-representación-del-sistema-o-modelo-de-vectores-autorregresivos-varp" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">5.2</span> Definición y representación del Sistema o Modelo de Vectores Autorregresicos (VAR(p))<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-de-vectores-autorregresicos-varp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Definición y representación del Sistema o Modelo de Vectores Autorregresivos (VAR(p))<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-de-vectores-autorregresivos-varp"><i class="fas fa-link"></i></a>
 </h2>
 <p>En esta sección ampliaremos la discusión planteada en el apartado
 anterior. En el sentido de que en la sección pasada nuestra discusión se
@@ -393,12 +398,12 @@ con múltiples sentidos de causalidad. En esta sección analizaremos una
 mejor aproximación al problema de cómo identificar la causalidad
 múltiple. Por lo tanto, como mecanismo para solucionar el problema
 planteado, analizaremos el caso de un Sistema o Modelo de Vectores
-Autoregresivos conocido como VAR.</p>
+Autorregresivos conocido como VAR.</p>
 <p>El primer supuesto del que partiremos es que existe algún grado de
 endogeneidad entre las variables consideradas en el análisis.
 Adicionalmente, el segundo supuesto que estableceremos es que requerimos
 que las variables que tengamos consideradas sean estacionarias.</p>
-<p>Por lo anterior, diremos que un modelo de Vectores Autoregresivos (VAR)
+<p>Por lo anterior, diremos que un modelo de Vectores Autorregresivos (VAR)
 es un procedimiento que sigue fundado en el supuesto de que las
 variables consideradas son estacionarias. Así, hasta este momento del
 curso hemos pasado de modelos univariados a modelos multivariados, pero
@@ -595,7 +600,7 @@ período de enero de 2000 a julio de 2019. Dado que el supuesto
 estacionariedad sigue presente en nuestro análisis, emplearemos cada una
 de las series en su versión de diferencias logarítmicas. Las Figuras
 <a href="cap-var.html#fig:fig62">5.2</a> y <a href="cap-var.html#fig:fig63">5.3</a> muestra las series referidas.</p>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -625,7 +630,7 @@ de las series en su versión de diferencias logarítmicas. Las Figuras
 <span></span>
 <span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos</span>, </span>
 <span>            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2</span><span class="op">)</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"s"</span>, </span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"black"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logarítmicas"</span>, </span>
@@ -637,17 +642,17 @@ de las series en su versión de diferencias logarítmicas. Las Figuras
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig62"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig62-1.png" alt="Series en diferencias logarítmicas (Forma 1)" width="672"><p class="caption">
-Figure 5.2: Series en diferencias logarítmicas (Forma 1)
+Figura 5.2: Series en diferencias logarítmicas (Forma 1)
 </p>
 </div>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"m"</span>, </span>
 <span>     col <span class="op">=</span> <span class="st">"darkgreen"</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logarítmicas"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig63"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig63-1.png" alt="Series en diferencias logarítmicas (Forma 2)" width="672"><p class="caption">
-Figure 5.3: Series en diferencias logarítmicas (Forma 2)
+Figura 5.3: Series en diferencias logarítmicas (Forma 2)
 </p>
 </div>
 <p>Dicho lo anterior, a continuación mostraremos la tabla que resume el
@@ -667,7 +672,7 @@ concluye que el número óptimo de rezagos es 2 (según el criterio AIC y
 el FPE) y 1 (según el criterio HQ y el SC). Recordemos que es común que
 el criterio AIC siempre reporte el mayor valor de rezagos, por lo que es
 una buena práctica utilizarlo como referente principal.</p>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">Datos</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">vs</span><span class="op">$</span><span class="va">selection</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -680,7 +685,7 @@ una buena práctica utilizarlo como referente principal.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:NumSelectVAR">Table 5.2: </span>Número de rezagos según cada criterio de información para modelos VAR(<span class="math inline">\(p\)</span>) con constante: series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.
+<span id="tab:NumSelectVAR">Cuadro 5.2: </span>Número de rezagos según cada criterio de información para modelos VAR(<span class="math inline">\(p\)</span>) con constante: series <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.
 </caption>
 <thead><tr>
 <th style="text-align:center;">
@@ -711,7 +716,7 @@ FPE
 </td>
 </tr></tbody>
 </table></div>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">crit_df</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">vs</span><span class="op">$</span><span class="va">criteria</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">crit_df</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Rezagos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">crit_df</span><span class="op">)</span><span class="op">)</span>, <span class="va">crit_df</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
@@ -725,7 +730,7 @@ FPE
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:SelectVAR">Table 5.3: </span>Criterios de información para modelos VAR(<span class="math inline">\(p\)</span>) con constante: <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.
+<span id="tab:SelectVAR">Cuadro 5.3: </span>Criterios de información para modelos VAR(<span class="math inline">\(p\)</span>) con constante: <span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span>, <span class="math inline">\(DLCETE28_t\)</span>, <span class="math inline">\(DLIGAE_t\)</span> y <span class="math inline">\(DLIPI_t\)</span>.
 </caption>
 <thead><tr>
 <th style="text-align:center;">
@@ -960,7 +965,7 @@ resultados de las raíces del polinomio característico en el Cuadro
 el Cuadro <a href="cap-var.html#tab:IGAEVAR">5.5</a> (por simplicidad se omiten las otras cuatro
 ecuaciones del VAR(2)), y del Cuadro <a href="cap-var.html#tab:SigmaVARp">5.6</a> con la matriz
 <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR.</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">VAR_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">Datos</span>, p <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -1103,12 +1108,18 @@ ecuaciones del VAR(2)), y del Cuadro <a href="cap-var.html#tab:SigmaVARp">5.6</a
 ## 
 ## 
 ## Covariance matrix of residuals:
-##                 DLINPC          DLTC    DLCETE28       DLIGAE       DLIPI
-## DLINPC    0.0000047345 -0.0000001939 0.000004559  0.000006652  0.00000700
-## DLTC     -0.0000001939  0.0006606619 0.000369751 -0.000035441 -0.00003174
-## DLCETE28  0.0000045591  0.0003697510 0.004120747  0.000063618  0.00008525
-## DLIGAE    0.0000066522 -0.0000354410 0.000063618  0.000184234  0.00011641
-## DLIPI     0.0000069998 -0.0000317443 0.000085254  0.000116407  0.00012685
+##                 DLINPC          DLTC    DLCETE28       DLIGAE
+## DLINPC    0.0000047345 -0.0000001939 0.000004559  0.000006652
+## DLTC     -0.0000001939  0.0006606619 0.000369751 -0.000035441
+## DLCETE28  0.0000045591  0.0003697510 0.004120747  0.000063618
+## DLIGAE    0.0000066522 -0.0000354410 0.000063618  0.000184234
+## DLIPI     0.0000069998 -0.0000317443 0.000085254  0.000116407
+##                DLIPI
+## DLINPC    0.00000700
+## DLTC     -0.00003174
+## DLCETE28  0.00008525
+## DLIGAE    0.00011641
+## DLIPI     0.00012685
 ## 
 ## Correlation matrix of residuals:
 ##             DLINPC      DLTC DLCETE28   DLIGAE   DLIPI
@@ -1117,7 +1128,7 @@ ecuaciones del VAR(2)), y del Cuadro <a href="cap-var.html#tab:SigmaVARp">5.6</a
 ## DLCETE28  0.032640  0.224095  1.00000  0.07301  0.1179
 ## DLIGAE    0.225240 -0.101585  0.07301  1.00000  0.7615
 ## DLIPI     0.285629 -0.109656  0.11792  0.76147  1.0000</code></pre>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rts</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/roots.html">roots</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span></span>
 <span><span class="va">rts_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">rts</span>, <span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
@@ -1128,7 +1139,7 @@ ecuaciones del VAR(2)), y del Cuadro <a href="cap-var.html#tab:SigmaVARp">5.6</a
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:RootsVAR">Table 5.4: </span>Módulos de las raíces del polinomio característico del VAR(2).
+<span id="tab:RootsVAR">Cuadro 5.4: </span>Módulos de las raíces del polinomio característico del VAR(2).
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -1179,7 +1190,7 @@ ecuaciones del VAR(2)), y del Cuadro <a href="cap-var.html#tab:SigmaVARp">5.6</a
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coef_IGAE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span><span class="op">$</span><span class="va">varresult</span><span class="op">$</span><span class="va">DLIGAE</span><span class="op">$</span><span class="va">coefficients</span></span>
 <span><span class="va">coef_df</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">coef_IGAE</span><span class="op">)</span></span>
 <span><span class="va">lbl_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
@@ -1201,11 +1212,12 @@ ecuaciones del VAR(2)), y del Cuadro <a href="cap-var.html#tab:SigmaVARp">5.6</a
 <span>  caption   <span class="op">=</span> <span class="st">"Ecuación $DLIGAE_t$ estimada en el VAR(2)."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"c"</span><span class="op">)</span>,</span>
 <span>  digits    <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:IGAEVAR">Table 5.5: </span>Ecuación <span class="math inline">\(DLIGAE_t\)</span> estimada en el VAR(2).
+<span id="tab:IGAEVAR">Cuadro 5.5: </span>Ecuación <span class="math inline">\(DLIGAE_t\)</span> estimada en el VAR(2).
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1220,7 +1232,7 @@ Error Est.
 Estad. <span class="math inline">\(t\)</span>
 </th>
 <th style="text-align:right;">
-Prob. <span class="math inline">\((&amp;gt;|t|)\)</span>
+Prob. <span class="math inline">\((&gt;|t|)\)</span>
 </th>
 <th style="text-align:center;">
 Signif.
@@ -1443,7 +1455,7 @@ Signif.
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sig_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">VAR_p</span><span class="op">)</span><span class="op">$</span><span class="va">covres</span></span>
 <span><span class="va">vnames</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"$DLINPC$"</span>, <span class="st">"$DLTC$"</span>, <span class="st">"$DLCETE28$"</span>, <span class="st">"$DLIGAE$"</span>, <span class="st">"$DLIPI$"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">sig_mat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">vnames</span></span>
@@ -1453,11 +1465,12 @@ Signif.
 <span>  caption     <span class="op">=</span> <span class="st">"Matriz $\\mathbf{\\Sigma}_{\\hat{U}\\hat{U}}$ estimada del VAR(2)."</span>,</span>
 <span>  digits      <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>  booktabs    <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape      <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  format.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scientific <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:SigmaVARp">Table 5.6: </span>Matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR(2).
+<span id="tab:SigmaVARp">Cuadro 5.6: </span>Matriz <span class="math inline">\(\mathbf{\Sigma}_{\hat{U}\hat{U}}\)</span> estimada del VAR(2).
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1590,7 +1603,7 @@ se elimina conforme los rezagos se incrementan. En cuanto a normalidad,
 se observa que los residuales no lo son, por lo que se requeriría
 mejorar la especificación del VAR. Finalmente, se observa que los
 residuales no son homocedásticos.</p>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">diag_s2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span>
 <span><span class="va">diag_s4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">4</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span>
 <span><span class="va">diag_s6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/serial.html">serial.test</a></span><span class="op">(</span><span class="va">VAR_p</span>, lags.bg <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">"BG"</span><span class="op">)</span></span>
@@ -1602,7 +1615,7 @@ residuales no son homocedásticos.</p>
 <span>    Prueba      <span class="op">=</span> <span class="va">nombre</span>,</span>
 <span>    Estadistico <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">stat</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>    pvalor      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">pval</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span>    Conclusion  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">pval</span> <span class="op">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Se rechaza $H_0$"</span>, <span class="st">"No se rechaza $H_0$"</span><span class="op">)</span></span>
+<span>    Conclusion  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">pval</span> <span class="op">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Se rechaza"</span>, <span class="st">"No se rechaza"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -1619,18 +1632,18 @@ residuales no son homocedásticos.</p>
 <span>    <span class="fu">diagn_fila</span><span class="op">(</span><span class="st">"ARCH multivariado — $\\chi^2$"</span>,</span>
 <span>               <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">diag_a</span><span class="op">$</span><span class="va">arch.mul</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span>, <span class="va">diag_a</span><span class="op">$</span><span class="va">arch.mul</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Prueba"</span>, <span class="st">"Estadístico"</span>, <span class="st">"p-valor"</span>, <span class="st">"Conclusión"</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Prueba"</span>, <span class="st">"Estadístico"</span>, <span class="st">"p-valor"</span>, <span class="st">"Conclusión ($H_0$)"</span><span class="op">)</span>,</span>
 <span>  caption   <span class="op">=</span> <span class="st">"Pruebas de diagnóstico sobre los residuales del VAR(2)."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"l"</span><span class="op">)</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  row.names <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:DiagnosVAR">Table 5.7: </span>Pruebas de diagnóstico sobre los residuales del VAR(2).
+<span id="tab:DiagnosVAR">Cuadro 5.7: </span>Pruebas de diagnóstico sobre los residuales del VAR(2).
 </caption>
 <thead><tr>
-<th style="text-align:left;">
-</th>
 <th style="text-align:left;">
 Prueba
 </th>
@@ -1641,14 +1654,11 @@ Estadístico
 p-valor
 </th>
 <th style="text-align:left;">
-Conclusión
+Conclusión (<span class="math inline">\(H_0\)</span>)
 </th>
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-Chi-squared
-</td>
 <td style="text-align:left;">
 Corr. serial — <span class="math inline">\(\chi^2(2)\)</span>
 </td>
@@ -1659,13 +1669,10 @@ Corr. serial — <span class="math inline">\(\chi^2(2)\)</span>
 0.0130
 </td>
 <td style="text-align:left;">
-Se rechaza <span class="math inline">\(H_0\)</span>
+Se rechaza
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Chi-squared1
-</td>
 <td style="text-align:left;">
 Corr. serial — <span class="math inline">\(\chi^2(4)\)</span>
 </td>
@@ -1676,13 +1683,10 @@ Corr. serial — <span class="math inline">\(\chi^2(4)\)</span>
 0.0185
 </td>
 <td style="text-align:left;">
-Se rechaza <span class="math inline">\(H_0\)</span>
+Se rechaza
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Chi-squared2
-</td>
 <td style="text-align:left;">
 Corr. serial — <span class="math inline">\(\chi^2(6)\)</span>
 </td>
@@ -1693,13 +1697,10 @@ Corr. serial — <span class="math inline">\(\chi^2(6)\)</span>
 0.0031
 </td>
 <td style="text-align:left;">
-Se rechaza <span class="math inline">\(H_0\)</span>
+Se rechaza
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-1
-</td>
 <td style="text-align:left;">
 Normalidad JB — <span class="math inline">\(\chi^2\)</span>
 </td>
@@ -1710,13 +1711,10 @@ Normalidad JB — <span class="math inline">\(\chi^2\)</span>
 0.0000
 </td>
 <td style="text-align:left;">
-Se rechaza <span class="math inline">\(H_0\)</span>
+Se rechaza
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Chi-squared3
-</td>
 <td style="text-align:left;">
 ARCH multivariado — <span class="math inline">\(\chi^2\)</span>
 </td>
@@ -1727,7 +1725,7 @@ ARCH multivariado — <span class="math inline">\(\chi^2\)</span>
 0.0000
 </td>
 <td style="text-align:left;">
-Se rechaza <span class="math inline">\(H_0\)</span>
+Se rechaza
 </td>
 </tr>
 </tbody>
@@ -1756,7 +1754,7 @@ matrices en las que hemos descompuesto a <span class="math inline">\(\mathbf{B}(
 en las siguientes figuras reportamos las gráficas de Impulso-Respuesta
 de la serie <span class="math inline">\(DLTC_t\)</span> ante cambios en los residuales del resto de las
 series y de la propia serie.</p>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IR_DLINPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/irf.html">irf</a></span><span class="op">(</span><span class="va">VAR_p</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, boot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                 ci <span class="op">=</span> <span class="fl">0.95</span>, response <span class="op">=</span> <span class="st">"DLINPC"</span><span class="op">)</span></span>
 <span></span>
@@ -2006,9 +2004,9 @@ series y de la propia serie.</p>
 ## [11,] 0.000002565717
 ## [12,] 0.000002802144
 ## [13,] 0.000001089726</code></pre>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#plot(IR_DLINPC)</span></span></code></pre></div>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IR_DLTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/irf.html">irf</a></span><span class="op">(</span><span class="va">VAR_p</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, boot <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>               ci <span class="op">=</span> <span class="fl">0.95</span>, response <span class="op">=</span> <span class="st">"DLTC"</span><span class="op">)</span></span>
 <span></span>
@@ -2016,31 +2014,31 @@ series y de la propia serie.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-1"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-1.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 5.4: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figura 5.4: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-2"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-2.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 5.5: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figura 5.5: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-3"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-3.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 5.6: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figura 5.6: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-4"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-4.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 5.7: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figura 5.7: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig64-5"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig64-5.png" alt="Impulso - Respuesta en $DLTC_t$" width="672"><p class="caption">
-Figure 5.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
+Figura 5.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </p>
 </div>
 <p>Los resultados muestran que la respuesta de <span class="math inline">\(DLTC_t\)</span> ante impulsos en
@@ -2053,7 +2051,7 @@ resultados de Impulso-Respuesta se encuentra en el Script llamado Clase
 <h2>
 <span class="header-section-number">5.4</span> Identificación de los Choques Estructurales en los Modelos VAR<a class="anchor" aria-label="anchor" href="#identificaci%C3%B3n-de-los-choques-estructurales-en-los-modelos-var"><i class="fas fa-link"></i></a>
 </h2>
-<p>En su trabajo seminal <em>“Macroeconomics and Reality”</em>, Sims (1980)
+<p>En su trabajo seminal <em>“Macroeconomics and Reality”</em>, Sims <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-sims1980">1980</a>)</span>
 cuestionó los modelos macroeconométricos utilizados en ese momento.
 Antes de la aparición de los modelos de referencia modernos, como los
 Vectores Autorregresivos (VAR) y los modelos estocásticos dinámicos de
@@ -2069,7 +2067,7 @@ estructurales que, en muchos casos, eran impuestas de manera arbitraria.
 Estos modelos estaban altamente parametrizados y basados en supuestos
 teóricos fuertes –como las expectativas adaptativas–, lo que los hacía
 sensibles a errores específicos. De esta situación surge en parte la
-<em>Crítica de Lucas</em>, en la cual Robert Lucas (1976) mostró que este tipo
+<em>Crítica de Lucas</em>, en la cual Robert Lucas <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-lucas1976">1976</a>)</span> mostró que este tipo
 de modelos fallaba al capturar cambios en el comportamiento cuando las
 políticas cambiaban, debido a que no trataban adecuadamente las
 expectativas racionales.</p>
@@ -2148,7 +2146,7 @@ p_{31} &amp; p_{32} &amp; p_{33}
 <p>Sin embargo, es importante destacar que esta ortogonalización de los errores solo es válida si la estructura recursiva impuesta por la matriz <span class="math inline">\(P\)</span> se puede justificar con fundamentos económicos. El método impone que la primera variable del sistema responde solo a su propio shock contemporáneo, la segunda puede responder al shock de la primera, la tercera a los dos primeros, y así sucesivamente. Por eso se dice que el modelo estructural resultante es recursivo: se impone una estructura jerárquica de causalidad contemporánea, en lugar de inferirla directamente de los datos.</p>
 <p>En este sentido, la <strong>descomposición de Cholesky</strong> no descubre las relaciones estructurales sino que las impone. Por lo tanto, el orden de las variables en el VAR <strong>sí importa</strong>, ya que determina la interpretación de los shocks estructurales. Por esta razón, se recomienda justificar el orden mediante teoría económica. Por ejemplo, en aplicaciones del Banco de México, el orden se suele establecer de acuerdo con la hipótesis de una economía pequeña y abierta, ordenando las variables de la más exógena a la más endógena.</p>
 <p>Veamos un ejemplo rápido de la <em>identificación recursiva</em> mediante la <strong>descomposición de Cholesky</strong>:</p>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("svars")</span></span>
 <span><span class="co"># install.packages("ggplot2")</span></span>
 <span><span class="co"># install.packages("ggfortify")</span></span>
@@ -2171,7 +2169,7 @@ p_{31} &amp; p_{32} &amp; p_{33}
 ## x   0.68338360 0.0000000 0.0000000
 ## pi -0.03642697 1.0726563 0.0000000
 ## i   0.22450359 0.1818031 0.7672318</code></pre>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># x  = Porcentaje de desviación logarítmica del PIB real con respecto a la </span></span>
 <span><span class="co">#      estimación del producto potencial</span></span>
 <span><span class="co"># pi = Crecimiento anualizado trimestre a trimestre del deflactor del PIB</span></span>
@@ -2187,7 +2185,7 @@ p_{31} &amp; p_{32} &amp; p_{33}
 <h3>
 <span class="header-section-number">5.4.2</span> VAR Estructural - Restricción de largo plazo<a class="anchor" aria-label="anchor" href="#var-estructural---restricci%C3%B3n-de-largo-plazo"><i class="fas fa-link"></i></a>
 </h3>
-<p>Otra manera de identificar las innovaciones estructurales de un modelo VAR, es mediante el método propuesto por Blanchard y Quah (1989) en <em>“The Dynamic Effects of Aggregate Demand and Supply Disturbances”</em>.</p>
+<p>Otra manera de identificar las innovaciones estructurales de un modelo VAR, es mediante el método propuesto por Blanchard y Quah <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-blanchardquah1989">1989</a>)</span> en <em>“The Dynamic Effects of Aggregate Demand and Supply Disturbances”</em>.</p>
 <p>La intuición de este método es simple: Blanchard y Quah querían medir el efecto de choques de oferta agregada <span class="math inline">\(w_t^{AS}\)</span> y demanda agregada <span class="math inline">\(w_t^{AD}\)</span> sobre el Producto y el Desempleo, imponiendo restricciones en la respuesta acumulada, es decir, en el efecto acumulado permanente (horizonte <span class="math inline">\(h \rightarrow \infty\)</span>). La lógica económica detrás de este método es, básicamente, que el choque de demanda agregada no tiene efectos de largo plazo sobre el nivel del PIB real.</p>
 <p>Ahora bien, sean:</p>
 <ul>
@@ -2330,8 +2328,8 @@ la estacionariedad en varianza) y que establecimos una serie de pruebas
 para determinar cuándo una serie es estadísticamente estacionaria, ahora
 podemos plantear una técnica llamada Cointegración. Para esta técnica
 consideraremos sólo series que son <span class="math inline">\(I(1)\)</span> y reconoceremos que se originó
-con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen
-(1988).</p>
+con los trabajos de Engle y Granger <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-englegrangercointegration1987">1987</a>)</span>,
+Stock <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-stock1987">1987</a>)</span> y Johansen <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-johansen1988">1988</a>)</span>.</p>
 <div id="definición-y-propiedades-del-proceso-de-cointegración" class="section level3" number="5.5.1">
 <h3>
 <span class="header-section-number">5.5.1</span> Definición y propiedades del proceso de cointegración<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-y-propiedades-del-proceso-de-cointegraci%C3%B3n"><i class="fas fa-link"></i></a>
@@ -2340,8 +2338,8 @@ con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen
 como que dos o más variables tienen una relación común estable en el
 largo plazo. Es decir, estas no suelen tomar caminos o trayectorias
 diferentes, excepto por períodos de tiempo transitorios y eventuales. A
-continuación, utilizaremos la definición de Engle y Granger (1987) de
-cointegración.</p>
+continuación, utilizaremos la definición de Engle y Granger
+<span class="citation">(<a href="bibliograf%C3%ADa.html#ref-englegrangercointegration1987">1987</a>)</span> de cointegración.</p>
 <p>Sea <span class="math inline">\(\mathbf{Y}\)</span> un vector de k-series de tiempo, decimos que los
 elementos en <span class="math inline">\(\mathbf{Y}\)</span> están cointegrados en un orden (d, c), es
 decir, <span class="math inline">\(\mathbf{Y} \sim CI(d, c)\)</span>, si todos los elementos de
@@ -2367,9 +2365,9 @@ Adicionalmente, asumiremos que <span class="math inline">\(c = d = 1\)</span>, p
 cointegración, en su caso, generará combinaciones lineales <span class="math inline">\(\mathbf{Z}\)</span>
 estacionarias.</p>
 </div>
-<div id="cointegración-para-modelos-de-más-de-una-ecuación-o-para-modelos-basados-en-vectores-autoregresivos" class="section level3" number="5.5.2">
+<div id="cointegración-para-modelos-de-más-de-una-ecuación-o-para-modelos-basados-en-vectores-autorregresivos" class="section level3" number="5.5.2">
 <h3>
-<span class="header-section-number">5.5.2</span> Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos<a class="anchor" aria-label="anchor" href="#cointegraci%C3%B3n-para-modelos-de-m%C3%A1s-de-una-ecuaci%C3%B3n-o-para-modelos-basados-en-vectores-autoregresivos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5.2</span> Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autorregresivos<a class="anchor" aria-label="anchor" href="#cointegraci%C3%B3n-para-modelos-de-m%C3%A1s-de-una-ecuaci%C3%B3n-o-para-modelos-basados-en-vectores-autorregresivos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Sean <span class="math inline">\(Y_1, Y_2, \ldots, Y_k\)</span> son series que forman <span class="math inline">\(\mathbf{Y}\)</span> y que
 todas son I(1), entonces los siguientes casos son posibles:</p>
@@ -2423,7 +2421,7 @@ se puede factorizar como:
 <p>Donde <span class="math inline">\(\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}\)</span> son <span class="math inline">\(r\)</span>
 combinaciones linealmente independientes que son estacionarias.</p>
 <p>Dada la ecuación <a href="cap-var.html#eq:VARVEC">(5.8)</a> podemos establecer la aproximación de
-Johansen (1988) que se realiza mediante una estimación por Máxima
+Johansen <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-johansen1988">1988</a>)</span> que se realiza mediante una estimación por Máxima
 Verosimilitud de la ecuación: <span class="math display">\[\begin{equation}
     \Delta \mathbf{Y}_t + \Gamma \boldsymbol{\beta}' \mathbf{Y}_{t-1} = \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
 \end{equation}\]</span></p>
@@ -2453,7 +2451,7 @@ cierto (ver Script para mayores detalles). En las Figuras
 <a href="cap-var.html#fig:fig81">5.9</a>, <a href="cap-var.html#fig:fig82">5.10</a> y <a href="cap-var.html#fig:fig83">5.11</a> se muestran las
 series en niveles y en diferencias, con lo cual ilustramos como es
 viable que las series sean I(1).</p>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -2479,7 +2477,7 @@ viable que las series sean I(1).</p>
 <span><span class="va">DLDatos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos</span>, base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                lag <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>                differences <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">LDatos</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -2488,10 +2486,10 @@ viable que las series sean I(1).</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig81"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig81-1.png" alt="Series en niveles (logaritmos) para la prueba de Cointegración" width="672"><p class="caption">
-Figure 5.9: Series en niveles (logaritmos) para la prueba de Cointegración
+Figura 5.9: Series en niveles (logaritmos) para la prueba de Cointegración
 </p>
 </div>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DLDatos</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -2500,10 +2498,10 @@ Figure 5.9: Series en niveles (logaritmos) para la prueba de Cointegración
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig82"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig82-1.png" alt="Series en Diferencias Logarítmicas para la prueba de Cointegración" width="672"><p class="caption">
-Figure 5.10: Series en Diferencias Logarítmicas para la prueba de Cointegración
+Figura 5.10: Series en Diferencias Logarítmicas para la prueba de Cointegración
 </p>
 </div>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">LDatos</span>, <span class="va">DLDatos</span><span class="op">)</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -2512,7 +2510,7 @@ Figure 5.10: Series en Diferencias Logarítmicas para la prueba de Cointegració
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig83"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig83-1.png" alt="Comparación de Series en Diferencias para la prueba de Cointegración" width="672"><p class="caption">
-Figure 5.11: Comparación de Series en Diferencias para la prueba de Cointegración
+Figura 5.11: Comparación de Series en Diferencias para la prueba de Cointegración
 </p>
 </div>
 <p>Posteriormente, determinamos cuál es el orden adecuado de un VAR(p) en
@@ -2525,7 +2523,7 @@ posible elegir otros modelos de VAR que incluyan: solo tendencia, solo
 constante o ninguno de estos elementos.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:SelectVARVEC">Table 5.8: </span> Criterios de información para diferentes
+<span id="tab:SelectVARVEC">Cuadro 5.8: </span> Criterios de información para diferentes
 especificaciones de modelos VAR(p) con término constante y tendencia de
 las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inline">\(LTC_t\)</span>, <span class="math inline">\(LCETE28_t\)</span>, <span class="math inline">\(LIGAE_t\)</span> y <span class="math inline">\(LIPI_t\)</span>.</caption>
 <colgroup>
@@ -2580,7 +2578,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Selección de rezagos VAR(p)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span></code></pre></div>
@@ -2614,7 +2612,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 ## HQ(n)  -42.1235766348879465681420697 -41.9822962196546143331943313
 ## SC(n)  -40.2589572319589734661349212 -39.9193130504566013883049891
 ## FPE(n)   0.0000000000000000001480478   0.0000000000000000001502148</code></pre>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"trend"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
@@ -2646,7 +2644,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 ## HQ(n)  -42.0882307425099355668862700 -41.932182797061308576758165
 ## SC(n)  -40.2632840928347732756265032 -39.908872381117106442616205
 ## FPE(n)   0.0000000000000000001573361   0.000000000000000000161972</code></pre>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"const"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
@@ -2678,7 +2676,7 @@ las series <span class="math inline">\(LINPC_t\)</span>, <span class="math inlin
 ## HQ(n)  -42.092390492949782299092476 -41.9339762980896679778197722
 ## SC(n)  -40.267443843274620007832709 -39.9106658821454658436778118
 ## FPE(n)   0.000000000000000000156683   0.0000000000000000001616817</code></pre>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">LDatos</span>, lag.max <span class="op">=</span> <span class="fl">10</span>, type <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
@@ -2790,7 +2788,7 @@ estará dada por: <span class="math display">\[\begin{eqnarray*}
     &amp;  &amp; + 2.8386112 LIGAE_t + 1.2576912 LIPI_t \\
     &amp;  &amp; - 14.2887887
 \end{eqnarray*}\]</span></p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Estimación del VAR(p)</span></span>
 <span></span>
 <span><span class="va">VAR_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">LDatos</span>, p <span class="op">=</span> <span class="fl">3</span>, type <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span>
@@ -2825,8 +2823,9 @@ estará dada por: <span class="math display">\[\begin{eqnarray*}
 ## Test type: trace statistic , without linear trend and constant in cointegration 
 ## 
 ## Eigenvalues (lambda):
-## [1] 0.2242278157790942305638 0.0714829742929301154009 0.0471697381127354625763
-## [4] 0.0323558252755368550013 0.0170373866386099859227 0.0000000000000001925707
+## [1] 0.2242278157790942305638 0.0714829742929301154009
+## [3] 0.0471697381127354625763 0.0323558252755368550013
+## [5] 0.0170373866386099859227 0.0000000000000001925707
 ## 
 ## Values of teststatistic and critical values of test:
 ## 
@@ -2840,20 +2839,20 @@ estará dada por: <span class="math display">\[\begin{eqnarray*}
 ## Eigenvectors, normalised to first column:
 ## (These are the cointegration relations)
 ## 
-##              INPC_Ad.l3   TC_Ad.l3 CETE28_Ad.l3 IGAE_Ad.l3   IPI_Ad.l3
-## INPC_Ad.l3    1.0000000  1.0000000    1.0000000   1.000000  1.00000000
-## TC_Ad.l3      0.2100057  0.3958412    0.6038714  -3.946863 -0.66160415
-## CETE28_Ad.l3  0.4812626 -0.3505729    0.2932620   1.025381  0.02134859
-## IGAE_Ad.l3   -2.8386112 -4.9448228   -4.1431506  10.685831 -1.62038123
-## IPI_Ad.l3    -1.2576912  0.8682351    2.2789480 -19.080015  1.60589077
-## constant     14.2887887 13.2882018    1.6072247  43.673551 -2.75645487
-##                 constant
-## INPC_Ad.l3    1.00000000
-## TC_Ad.l3     -0.84381863
-## CETE28_Ad.l3  0.06866727
-## IGAE_Ad.l3    1.32792512
-## IPI_Ad.l3    -3.05544132
-## constant      5.81151022
+##              INPC_Ad.l3   TC_Ad.l3 CETE28_Ad.l3 IGAE_Ad.l3
+## INPC_Ad.l3    1.0000000  1.0000000    1.0000000   1.000000
+## TC_Ad.l3      0.2100057  0.3958412    0.6038714  -3.946863
+## CETE28_Ad.l3  0.4812626 -0.3505729    0.2932620   1.025381
+## IGAE_Ad.l3   -2.8386112 -4.9448228   -4.1431506  10.685831
+## IPI_Ad.l3    -1.2576912  0.8682351    2.2789480 -19.080015
+## constant     14.2887887 13.2882018    1.6072247  43.673551
+##                IPI_Ad.l3    constant
+## INPC_Ad.l3    1.00000000  1.00000000
+## TC_Ad.l3     -0.66160415 -0.84381863
+## CETE28_Ad.l3  0.02134859  0.06866727
+## IGAE_Ad.l3   -1.62038123  1.32792512
+## IPI_Ad.l3     1.60589077 -3.05544132
+## constant     -2.75645487  5.81151022
 ## 
 ## Weights W:
 ## (This is the loading matrix)
@@ -2878,7 +2877,7 @@ forma, una prueba deseable es aplicar todas las pruebas de raíces
 unitarias a esta serie para mostrar que es I(0). En el Script llamado
 Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre
 esta serie y se encuentra que es posible que no sea estacionaria.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">282</span><span class="op">)</span>, </span>
 <span>         start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, </span>
 <span>         freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
@@ -2894,7 +2893,7 @@ esta serie y se encuentra que es posible que no sea estacionaria.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig84"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig84-1.png" alt="Residuales estimados de la ecuación de cointegración" width="672"><p class="caption">
-Figure 5.12: Residuales estimados de la ecuación de cointegración
+Figura 5.12: Residuales estimados de la ecuación de cointegración
 </p>
 </div>
 </div>
@@ -2911,12 +2910,12 @@ Figure 5.12: Residuales estimados de la ecuación de cointegración
 problema consiste en seleccionar el modelo correcto. La Figura
 <a href="cap-var.html#fig:fig91">5.13</a> muestra un esquema o diagrama de cómo podríamos
 proceder para seleccionar el modelo correcto.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/TimeSeries_Models.png"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig91"></span>
-<img src="Plots/TimeSeries_Models.png" alt="Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)" width="95%"><p class="caption">
-Figure 5.13: Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)
+<img src="Plots/TimeSeries_Models.png" alt="Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta [-@shresthabhatta2018]" width="95%"><p class="caption">
+Figura 5.13: Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-shresthabhatta2018">2018</a>)</span>
 </p>
 </div>
 <p>En este caso incorporaremos a los modelos autoregressive distributed
@@ -2980,7 +2979,7 @@ a 1987:Q3 de las siguientes variables:</p>
 <p>LPY: logarithm of price deflator</p>
 <p>IBO: bond rate</p>
 <p>IDE: bank deposit rate</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://zoo.R-Forge.R-project.org/">zoo</a></span><span class="op">)</span> </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/xts">xts</a></span><span class="op">)</span> </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Natsiopoulos/ARDL">ARDL</a></span><span class="op">)</span></span>
@@ -2999,12 +2998,12 @@ a 1987:Q3 de las siguientes variables:</p>
 <li>Calculamos un auto ARDL para determinar la combinación óptima de
 rezagos.</li>
 </ol>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/auto_ardl.html">auto_ardl</a></span><span class="op">(</span><span class="va">LRM</span> <span class="op">~</span> <span class="va">LRY</span> <span class="op">+</span> <span class="va">IBO</span> <span class="op">+</span> <span class="va">IDE</span>, data <span class="op">=</span> <span class="va">denmark</span>, max_order <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "best_model" "best_order" "top_orders"</code></pre>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">models</span><span class="op">$</span><span class="va">top_orders</span></span></code></pre></div>
 <pre><code>##    LRM LRY IBO IDE       AIC
@@ -3028,12 +3027,12 @@ rezagos.</li>
 ## 18   5   5   5   5 -243.3120
 ## 19   4   1   3   2 -243.0728
 ## 20   4   1   3   3 -242.4378</code></pre>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">models</span><span class="op">$</span><span class="va">best_order</span></span></code></pre></div>
 <pre><code>## LRM LRY IBO IDE 
 ##   3   1   3   2</code></pre>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">models</span><span class="op">$</span><span class="va">best_model</span></span></code></pre></div>
 <pre><code>## 
@@ -3045,13 +3044,13 @@ rezagos.</li>
 ##     end = end)
 ## 
 ## Coefficients:
-## (Intercept)    L(LRM, 1)    L(LRM, 2)    L(LRM, 3)          LRY    L(LRY, 1)  
-##      2.6202       0.3192       0.5326      -0.2687       0.6728      -0.2574  
-##         IBO    L(IBO, 1)    L(IBO, 2)    L(IBO, 3)          IDE    L(IDE, 1)  
-##     -1.0785      -0.1062       0.2877      -0.9947       0.1255      -0.3280  
-##   L(IDE, 2)  
-##      1.4079</code></pre>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+## (Intercept)    L(LRM, 1)    L(LRM, 2)    L(LRM, 3)          LRY  
+##      2.6202       0.3192       0.5326      -0.2687       0.6728  
+##   L(LRY, 1)          IBO    L(IBO, 1)    L(IBO, 2)    L(IBO, 3)  
+##     -0.2574      -1.0785      -0.1062       0.2877      -0.9947  
+##         IDE    L(IDE, 1)    L(IDE, 2)  
+##      0.1255      -0.3280       1.4079</code></pre>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">BestMod</span> <span class="op">&lt;-</span> <span class="va">models</span><span class="op">$</span><span class="va">best_model</span></span>
 <span></span>
@@ -3092,7 +3091,7 @@ rezagos.</li>
 <ol start="2" style="list-style-type: decimal">
 <li>UECM (Unrestricted Error Correction Model) of the underlying ARDL.</li>
 </ol>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">UECM_BestMod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/uecm.html">uecm</a></span><span class="op">(</span><span class="va">BestMod</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">UECM_BestMod</span><span class="op">)</span></span></code></pre></div>
@@ -3134,7 +3133,7 @@ rezagos.</li>
 allowing the constant to join the short-run relationship (case 2),
 instead of the long-run (case 3)</li>
 </ol>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">RECM_BestMod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/recm.html">recm</a></span><span class="op">(</span><span class="va">UECM_BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">RECM_BestMod</span><span class="op">)</span></span></code></pre></div>
@@ -3171,7 +3170,7 @@ instead of the long-run (case 3)</li>
 <ol start="4" style="list-style-type: decimal">
 <li>long-run levels relationship (cointegration)</li>
 </ol>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/bounds_f_test.html">bounds_f_test</a></span><span class="op">(</span><span class="va">BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Bounds F-test (Wald) for no cointegration
@@ -3186,14 +3185,14 @@ instead of the long-run (case 3)</li>
 <li>Long-run multipliers (with standard errors, t-statistics and
 p-values)</li>
 </ol>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/multipliers.html">multipliers</a></span><span class="op">(</span><span class="va">BestMod</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##          Term   Estimate Std. Error   t value           Pr(&gt;|t|)
 ## 1 (Intercept)  6.2856579  0.7719160  8.142930 0.0000000006107445
 ## 2         LRY  0.9964676  0.1239310  8.040503 0.0000000008358472
 ## 3         IBO -4.5381160  0.5202961 -8.722180 0.0000000001058619
 ## 4         IDE  2.8915201  0.9950853  2.905801 0.0060092393605960</code></pre>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">Result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ARDL/man/coint_eq.html">coint_eq</a></span><span class="op">(</span><span class="va">BestMod</span>, case <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -3201,7 +3200,7 @@ p-values)</li>
 <h4>
 <span class="header-section-number">5.6.2.4</span> Make the plot<a class="anchor" aria-label="anchor" href="#make-the-plot"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/zoo/man/merge.zoo.html">cbind.zoo</a></span><span class="op">(</span>LRM <span class="op">=</span> <span class="va">denmark</span><span class="op">[</span>,<span class="st">"LRM"</span><span class="op">]</span>, <span class="va">Result</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xts/man/xts.html">xts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">)</span></span>
@@ -3210,7 +3209,7 @@ p-values)</li>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig92"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig92-1.png" alt="Gráfica de la ecuación de cointegración" width="95%"><p class="caption">
-Figure 5.14: Gráfica de la ecuación de cointegración
+Figura 5.14: Gráfica de la ecuación de cointegración
 </p>
 </div>
 </div>
@@ -3222,12 +3221,12 @@ Figure 5.14: Gráfica de la ecuación de cointegración
 </h2>
 <p>En secciones pasadas, entendimos la naturaleza del filtrado univariado como, por ejemplo, el <em>Filtro Hodrick-Prescott</em>. Este ha sido utilizado ampliamente en la literatura macroeconométrica, sobre todo para la estimación del Producto Potencial y, de este modo, la Brecha del Producto. Sin embargo, este método presenta dos limitaciones importantes: 1) es univariado, es decir, únicamente se explica por sí mismo y, 2) el llamado “problema de colas”, que sí bien entendimos que se puede solucionar aplicando la metodología de “colas pesadas”, la estimación del <span class="math inline">\(\lambda\)</span> es un tanto ambigua.</p>
 <p>De este modo, el <strong>Filtro Kalman</strong> puede ser una alternativa viable y metodológicamente robusta, sobre todo si queremos trabajar con variables no observables como el <em>Producto Potencial</em> o, incluso, la <em>Tasa de interés neutral</em>, variable clave en la decisión de Política Monetaria de los Bancos Centrales.</p>
-<p>En este sentido, el <strong>Filtro Kalman</strong> nació a partir del artículo seminal de Rudolf E. Kálmán (1960) <em>A New Approach to Linear Filtering and Prediction Problems</em>. La idea principal de Kálmán era describir los procesos estocásticos con un modelo de “estado” y resolver, de alguna manera, el problema de estimación con un ciclo <em>predicción-corrección</em> ejecutado en tiempo real. Así, el <strong>Filtro Kalman</strong> es un algoritmo de estimación recursivo a partir de mediciones ruidosas. De este modo, también podemos entender al <strong>Filtro Kalman</strong> como una especie de filtro multivariado. Sus aplicaciones no se han limitado únicamente a la Economía, pues ha sido utilizado para trabajos de la <em>NASA</em> como el pronóstico de la posición y velocidad del <em>Apollo 11</em> en 1969.</p>
+<p>En este sentido, el <strong>Filtro Kalman</strong> nació a partir del artículo seminal de Rudolf E. Kálmán <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-kalman1960">1960</a>)</span> <em>A New Approach to Linear Filtering and Prediction Problems</em>. La idea principal de Kálmán era describir los procesos estocásticos con un modelo de “estado” y resolver, de alguna manera, el problema de estimación con un ciclo <em>predicción-corrección</em> ejecutado en tiempo real. Así, el <strong>Filtro Kalman</strong> es un algoritmo de estimación recursivo a partir de mediciones ruidosas. De este modo, también podemos entender al <strong>Filtro Kalman</strong> como una especie de filtro multivariado. Sus aplicaciones no se han limitado únicamente a la Economía, pues ha sido utilizado para trabajos de la <em>NASA</em> como el pronóstico de la posición y velocidad del <em>Apollo 11</em> en 1969.</p>
 <div id="modelos-estado-espacio-y-teoría-económica" class="section level3" number="5.7.1">
 <h3>
 <span class="header-section-number">5.7.1</span> Modelos Estado-Espacio y Teoría Económica<a class="anchor" aria-label="anchor" href="#modelos-estado-espacio-y-teor%C3%ADa-econ%C3%B3mica"><i class="fas fa-link"></i></a>
 </h3>
-<p>Para hacer uso del <strong>Filtro Kalman</strong>, necesitamos de un modelo estructural que vincule a nuestras variables (observables y no observables), representado en la <em>Forma Estado-Espacio</em>. En general, casi todos los modelos de series de tiempo pueden ser representados como <em>Modelos Estado-Espacio</em>. El modelo estructural puede basarse en la teoría económica como, por ejemplo, un modelo DSGE. Para efectos prácticos, tomaremos como ejemplo el <em>Modelo de Proyección Trimestral (QPM)</em> del IMF (2020). No nos enfocaremos en el por qué y cómo del <em>Modelo QPM</em>, pues el objetivo principal es entender el <strong>Filtro Kalman</strong> y su aplicación.</p>
+<p>Para hacer uso del <strong>Filtro Kalman</strong>, necesitamos de un modelo estructural que vincule a nuestras variables (observables y no observables), representado en la <em>Forma Estado-Espacio</em>. En general, casi todos los modelos de series de tiempo pueden ser representados como <em>Modelos Estado-Espacio</em>. El modelo estructural puede basarse en la teoría económica como, por ejemplo, un modelo DSGE. Para efectos prácticos, tomaremos como ejemplo el <em>Modelo de Proyección Trimestral (QPM)</em> del IMF <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-imf2020">2020</a>)</span>. No nos enfocaremos en el por qué y cómo del <em>Modelo QPM</em>, pues el objetivo principal es entender el <strong>Filtro Kalman</strong> y su aplicación.</p>
 <div id="modelo-de-proyección-trimestral-qpm-del-imf-2020" class="section level4" number="5.7.1.1">
 <h4>
 <span class="header-section-number">5.7.1.1</span> Modelo de Proyección Trimestral (QPM) del IMF (2020)<a class="anchor" aria-label="anchor" href="#modelo-de-proyecci%C3%B3n-trimestral-qpm-del-imf-2020"><i class="fas fa-link"></i></a>
@@ -3310,16 +3309,19 @@ i_t = g_1 i_{t-1} + (1 - g_1) \left\{ i_t^n + g_2 \left( \mathbb{E}_t [\pi_{t+N}
 </ul>
 <p>En este caso, todas las variables siguen procesos autorregresivos simples</p>
 <p><span class="math display">\[
-\begin{array}{ll}
-\text{\textbf{Brecha del producto foráneo}} &amp; \text{\textbf{Tasa natural (tendencia) de interés real foránea}} \\
-\hat{y}^{*}_{t} = \rho_{y}\,\hat{y}^{*}_{t-1} + \varepsilon^{\hat{y}^{*}}_{t}
-&amp; \tilde{r}^{*}_{t} = \rho_{\tilde r}\,\tilde{r}^{*}_{t-1} + (1 - \rho_{\tilde r})\,\tilde{r}^{*\,\mathrm{SS}} + \varepsilon^{\tilde{r}^{*}}_{t} \\[1.5ex]
-\text{\textbf{Tasa de interés nominal foránea}} &amp; \text{\textbf{Brecha de la tasa de interés real foránea}} \\
-i^{*}_{t} = \rho_{i}\,i^{*}_{t-1} + (1 - \rho_{i})(r^{*}_{t} + \pi^{*}_{t}) + \varepsilon^{i^{*}}_{t}
-&amp; \hat{r}^{*}_{t} = r^{*}_{t} - \tilde{r}^{*}_{t} \\[1.5ex]
-\text{\textbf{Tasa de interés real foránea}} &amp; \text{\textbf{Inflación foránea}} \\
-r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t}
-&amp; \pi^{*}_{t} = \rho_{\pi}\,\pi^{*}_{t-1} + (1 - \rho_{\pi})\,\pi^{*\,\mathrm{SS}} + \varepsilon^{\pi^{*}}_{t}
+\begin{array}{l}
+\text{\textbf{Brecha del producto foráneo}} \\
+\hat{y}^{*}_{t} = \rho_{y}\,\hat{y}^{*}_{t-1} + \varepsilon^{\hat{y}^{*}}_{t} \\[1.5ex]
+\text{\textbf{Tasa natural (tendencia) de interés real foránea}} \\
+\tilde{r}^{*}_{t} = \rho_{\tilde r}\,\tilde{r}^{*}_{t-1} + (1 - \rho_{\tilde r})\,\tilde{r}^{*\,\mathrm{SS}} + \varepsilon^{\tilde{r}^{*}}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés nominal foránea}} \\
+i^{*}_{t} = \rho_{i}\,i^{*}_{t-1} + (1 - \rho_{i})(r^{*}_{t} + \pi^{*}_{t}) + \varepsilon^{i^{*}}_{t} \\[1.5ex]
+\text{\textbf{Brecha de la tasa de interés real foránea}} \\
+\hat{r}^{*}_{t} = r^{*}_{t} - \tilde{r}^{*}_{t} \\[1.5ex]
+\text{\textbf{Tasa de interés real foránea}} \\
+r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t} \\[1.5ex]
+\text{\textbf{Inflación foránea}} \\
+\pi^{*}_{t} = \rho_{\pi}\,\pi^{*}_{t-1} + (1 - \rho_{\pi})\,\pi^{*\,\mathrm{SS}} + \varepsilon^{\pi^{*}}_{t}
 \end{array}
 \]</span></p>
 </div>
@@ -3339,11 +3341,11 @@ X_t = A X_{t-1} + \varepsilon_t,
 \tag{5.11}
 \end{equation}\]</span></p>
 <p>en donde <span class="math inline">\(A\)</span> es una matriz de parámetros conocidos, <span class="math inline">\(\varepsilon_t\)</span> es un vector de errores, los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza <span class="math inline">\(Q\)</span>, es decir, <span class="math inline">\(\varepsilon_t \sim iid(0,Q)\)</span>. Adicionalmente, se asume que <span class="math inline">\(v_t\)</span> y <span class="math inline">\(\varepsilon_t\)</span> son independientes entre sí, es decir, <span class="math inline">\(Cov(v_t,\varepsilon_t) = 0\)</span>.</p>
-<p>En la <em>Figura 5.15</em> se puede observar un ejemplo de la relación de las variables en los <em>Modelos Estado-Espacio</em> en el <em>QPM</em> básico del IMF (2020).</p>
+<p>En la <em>Figura 5.15</em> se puede observar un ejemplo de la relación de las variables en los <em>Modelos Estado-Espacio</em> en el <em>QPM</em> básico del IMF <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-imf2020">2020</a>)</span>.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-17"></span>
-<img src="Plots/StateSpace.png" alt="State-space models. Recuperado de IMF (2020)." width="60%"><p class="caption">
-Figure 5.15: State-space models. Recuperado de IMF (2020).
+<img src="Plots/StateSpace.png" alt="State-space models. Recuperado de IMF [-@imf2020]." width="60%"><p class="caption">
+Figura 5.15: State-space models. Recuperado de IMF <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-imf2020">2020</a>)</span>.
 </p>
 </div>
 <p>Afortunadamente, nuestro <em>Modelo QPM</em> está construido de tal manera que tenemos <strong>ecuaciones de transición</strong> y <strong>observación</strong> que vinculan las variables observables con las no observables:</p>
@@ -3726,12 +3728,12 @@ X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
 <p>En la <em>Figura 5.16</em>, podemos observar los resultados del código de Matlab. Otra de las virtudes del <strong>Filtro Kalman</strong> es que podemos hacer una especie de descomposición de la varianza para, así, observar de donde vinieron los choques:</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-18"></span>
-<img src="Plots/Filtration.png" alt="Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF (2020)." width="80%"><p class="caption">
-Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF (2020).
+<img src="Plots/Filtration.png" alt="Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF [-@imf2020]." width="80%"><p class="caption">
+Figura 5.16: Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-imf2020">2020</a>)</span>.
 </p>
 </div>
 <blockquote>
-<p><strong>Nota:</strong> Para este ejemplo, se ocupa el QPM básico presentado por IMF (2020) en su curso “Monetary Policy Analysis and Forecasting” disponible en la plataforma edX. El código de Matlab fue realizado por el IMF.</p>
+<p><strong>Nota:</strong> Para este ejemplo, se ocupa el QPM básico presentado por el IMF <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-imf2020">2020</a>)</span> en su curso “Monetary Policy Analysis and Forecasting” disponible en la plataforma edX. El código de Matlab fue realizado por el IMF.</p>
 </blockquote>
 </div>
 </div>
@@ -3742,9 +3744,9 @@ Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 <p>En este capítulo extendimos el análisis univariado a sistemas multivariados, introduciendo herramientas para capturar la dinámica conjunta de varias series de tiempo.</p>
 <p><strong>Causalidad de Granger.</strong> Dos series <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> exhiben causalidad de Granger de <span class="math inline">\(X\)</span> a <span class="math inline">\(Y\)</span> cuando la información pasada de <span class="math inline">\(X\)</span> mejora la predicción de <span class="math inline">\(Y\)</span> más allá de lo que aporta la historia de <span class="math inline">\(Y\)</span> sola. Es una noción estadística de precedencia temporal, no de causalidad económica en sentido estricto. El test se implementa comparando las varianzas del error de dos regresiones auxiliares mediante una prueba <span class="math inline">\(F\)</span>.</p>
 <p><strong>Modelos VAR(p).</strong> El VAR(p) generaliza el AR(p) a sistemas de <span class="math inline">\(k\)</span> variables, donde cada variable depende de sus propios rezagos y de los rezagos de todas las demás. La condición de estacionariedad requiere que todas las raíces del polinomio matricial característico caigan fuera del círculo unitario. La selección del orden <span class="math inline">\(p\)</span> se realiza mediante los criterios AIC, SC, HQ y FPE. Las funciones de impulso-respuesta (IRF) cuantifican la reacción dinámica del sistema ante un choque unitario en una de las innovaciones.</p>
-<p><strong>VAR Estructural (SVAR).</strong> La identificación de los choques estructurales requiere imponer restricciones adicionales. Los tres enfoques principales son: (i) descomposición de Cholesky (identificación recursiva), que impone una estructura triangular inferior en la matriz de impacto contemporáneo; (ii) restricciones de largo plazo de Blanchard y Quah (1989), que restringen el efecto acumulado permanente de ciertos choques; y (iii) restricciones de signo, que imponen solo la dirección del impacto.</p>
+<p><strong>VAR Estructural (SVAR).</strong> La identificación de los choques estructurales requiere imponer restricciones adicionales. Los tres enfoques principales son: (i) descomposición de Cholesky (identificación recursiva), que impone una estructura triangular inferior en la matriz de impacto contemporáneo; (ii) restricciones de largo plazo de Blanchard y Quah <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-blanchardquah1989">1989</a>)</span>, que restringen el efecto acumulado permanente de ciertos choques; y (iii) restricciones de signo, que imponen solo la dirección del impacto.</p>
 <p><strong>Cointegración y VEC.</strong> Cuando series no estacionarias <span class="math inline">\(I(1)\)</span> comparten una tendencia estocástica común, se dice que cointegran. El procedimiento de Johansen determina el número de vectores de cointegración (rango de cointegración) mediante las estadísticas de la traza y del máximo valor propio. El modelo VEC (Vector de Corrección de Error) incorpora tanto la dinámica de corto plazo como el ajuste hacia el equilibrio de largo plazo.</p>
-<p><strong>Modelos ARDL.</strong> El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith (2001) permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de <span class="math inline">\(I(0)\)</span> e <span class="math inline">\(I(1)\)</span>. La prueba de límites (<em>bounds test</em>) contrasta si existe una relación de nivel entre las variables.</p>
+<p><strong>Modelos ARDL.</strong> El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-pesaranshinsmith2001">2001</a>)</span> permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de <span class="math inline">\(I(0)\)</span> e <span class="math inline">\(I(1)\)</span>. La prueba de límites (<em>bounds test</em>) contrasta si existe una relación de nivel entre las variables.</p>
 <p><strong>Filtro de Kalman y Modelos Estado-Espacio.</strong> El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones.</p>
 
 </div>
@@ -3755,9 +3757,9 @@ Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cap-var"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="nav-link" href="#cap-var"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
 <li><a class="nav-link" href="#causalidad-de-granger"><span class="header-section-number">5.1</span> Causalidad de Granger</a></li>
-<li><a class="nav-link" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-de-vectores-autorregresicos-varp"><span class="header-section-number">5.2</span> Definición y representación del Sistema o Modelo de Vectores Autorregresicos (VAR(p))</a></li>
+<li><a class="nav-link" href="#definici%C3%B3n-y-representaci%C3%B3n-del-sistema-o-modelo-de-vectores-autorregresivos-varp"><span class="header-section-number">5.2</span> Definición y representación del Sistema o Modelo de Vectores Autorregresivos (VAR(p))</a></li>
 <li><a class="nav-link" href="#an%C3%A1lisis-de-impulso-respuesta"><span class="header-section-number">5.3</span> Análisis de Impulso-Respuesta</a></li>
 <li>
 <a class="nav-link" href="#identificaci%C3%B3n-de-los-choques-estructurales-en-los-modelos-var"><span class="header-section-number">5.4</span> Identificación de los Choques Estructurales en los Modelos VAR</a><ul class="nav navbar-nav">
@@ -3769,7 +3771,7 @@ Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 <li>
 <a class="nav-link" href="#cointegraci%C3%B3n"><span class="header-section-number">5.5</span> Cointegración</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#definici%C3%B3n-y-propiedades-del-proceso-de-cointegraci%C3%B3n"><span class="header-section-number">5.5.1</span> Definición y propiedades del proceso de cointegración</a></li>
-<li><a class="nav-link" href="#cointegraci%C3%B3n-para-modelos-de-m%C3%A1s-de-una-ecuaci%C3%B3n-o-para-modelos-basados-en-vectores-autoregresivos"><span class="header-section-number">5.5.2</span> Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autoregresivos</a></li>
+<li><a class="nav-link" href="#cointegraci%C3%B3n-para-modelos-de-m%C3%A1s-de-una-ecuaci%C3%B3n-o-para-modelos-basados-en-vectores-autorregresivos"><span class="header-section-number">5.5.2</span> Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autorregresivos</a></li>
 </ul>
 </li>
 <li>
@@ -3803,7 +3805,7 @@ Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres, Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

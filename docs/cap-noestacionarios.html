@@ -5,7 +5,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 4 Procesos No Estacionarios Univariados | Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<meta name="author" content="Benjamín Oliva">
+<meta name="author" content="Jaime Vázquez Alamilla">
+<meta name="author" content="Omar Alfaro Rivera">
+<meta name="author" content="Emiliano Pérez Caullieres">
+<meta name="author" content="Luis Gerardo Ruíz">
 <meta name="description" content="4.1 Definición y formas de No Estacionariedad Hasta ahora hemos planteado una serie de técnicas de regresión (AR, MA, ARMA, ARIMA, ARIMAX, etc.) que aplican sólo a procesos o series estacionarias....">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Capítulo 4 Procesos No Estacionarios Univariados | Análisis de Series de Tiempo">
@@ -69,7 +73,7 @@
 <li><a class="" href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
 <li><a class="" href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
 <li><a class="active" href="cap-noestacionarios.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
-<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
 <li><a class="" href="cap-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
 <li><a class="" href="cap-panel.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
@@ -151,7 +155,7 @@
     Var[Y_t] &amp; = &amp; t \sigma^2 = \gamma(0, t) \\
     Cov(Y_t, Y_{t+\tau}) &amp; = &amp; t \sigma^2 = \gamma(t, \tau)
 \end{eqnarray*}\]</span></p>
-<p>De esta forma, la ecuación <a href="cap-noestacionarios.html#eq:UR3">(4.7)</a> no describe un proceso estacionario, sólo podría ser estacionario si <span class="math inline">\(t = 1\)</span>, en cualquier otro caso sería no estacionario en varianza. Ahora hagamos un resumen y acordemos notación que se utilizará en esta sección. Supongamos un proceso o serie de tiempo que es descrito por la siguiente ecuación:
+<p>De esta forma, la ecuación <a href="cap-noestacionarios.html#eq:UR3">(4.7)</a> no describe un proceso estacionario: tanto la media como la varianza dependen de <span class="math inline">\(t\)</span>, por lo que el proceso es no estacionario en media y en varianza. Ahora hagamos un resumen y acordemos notación que se utilizará en esta sección. Supongamos un proceso o serie de tiempo que es descrito por la siguiente ecuación:
 <span class="math display" id="eq:UR4">\[\begin{equation}
     Y_t = \delta + Y_{t-1} + X_t
     \tag{4.8}
@@ -180,7 +184,7 @@
 <span class="header-section-number">4.2</span> Simulación: Caminata Aleatoria vs. Proceso Estacionario<a class="anchor" aria-label="anchor" href="#simulaci%C3%B3n-caminata-aleatoria-vs.-proceso-estacionario"><i class="fas fa-link"></i></a>
 </h2>
 <p>Antes de presentar las pruebas formales, resulta útil visualizar la diferencia entre un proceso estacionario y uno con raíz unitaria. El siguiente ejemplo simula dos series de <span class="math inline">\(T = 300\)</span> observaciones generadas con el mismo ruido blanco <span class="math inline">\(U_t \sim N(0,1)\)</span>: un <span class="math inline">\(AR(1)\)</span> estacionario con <span class="math inline">\(\phi = 0.7\)</span> y una caminata aleatoria (<span class="math inline">\(\phi = 1\)</span>).</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2024</span><span class="op">)</span></span>
 <span><span class="cn">T</span>   <span class="op">&lt;-</span> <span class="fl">300</span></span>
 <span><span class="va">e</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="cn">T</span><span class="op">)</span></span>
@@ -206,10 +210,10 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig-sim-ur"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig-sim-ur-1.png" alt="AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el mismo ruido blanco." width="672"><p class="caption">
-Figure 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el mismo ruido blanco.
+Figura 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el mismo ruido blanco.
 </p>
 </div>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>La figura ilustra dos características clave. Primero, el <span class="math inline">\(AR(1)\)</span> estacionario regresa continuamente a su media (línea roja punteada), mientras que la caminata aleatoria se aleja de ella de forma permanente. Segundo, los choques en el proceso estacionario tienen un efecto transitorio —que se disipa con el tiempo—, en tanto que los choques en la caminata aleatoria se acumulan y tienen un efecto permanente sobre el nivel de la serie.</p>
 <p>En términos de sus momentos, la caminata aleatoria <span class="math inline">\(Y_t = Y_{t-1} + U_t\)</span> con valor inicial <span class="math inline">\(Y_0 = 0\)</span> satisface:
@@ -230,7 +234,7 @@ Figure 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el m
 <li><p>Estacionariedad alrededor del cero.</p></li>
 </ol>
 <p>A continuación, mostraremos como ejemplo la aplicación de las pruebas de raíces unitarias a la serie de Tipo de Cambio en forma logarítmica y de diferencias logarítmicas. Asumamos que determinamos el valor de los rezagos de la prueba con el criterio de <span class="math inline">\(p = int\{ 4 (T/100)^{1/4} \}\)</span>. En la práctica, existen otras formas de determinar el valor de <span class="math inline">\(p\)</span>, como el criterio de AIC, pero es decisión del investigador cuál usar.</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -260,8 +264,8 @@ Figure 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el m
 <span><span class="va">DaLDatos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Datos</span>, base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                 lag <span class="op">=</span> <span class="fl">12</span>, </span>
 <span>                 differences <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p>Como primer paso, exploraremos las series en niveles (bajo una transformación logarítmica), como en la Figura <a href="cap-noestacionarios.html#fig:fig71">4.2</a>, y en diferencias logarítmicas, como en la Figura <a href="cap-noestacionarios.html#fig:fig72">4.3</a>. De dicha exploración, podemos concluir que las series parecen estacionarias en diferencias, pero no en niveles.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<p>Como primer paso, exploraremos las series en niveles (bajo una transformación logarítmica), como en la Figura <a href="cap-noestacionarios.html#fig:fig71">4.2</a>, y en diferencias logarítmicas, como en la Figura <a href="cap-noestacionarios.html#fig:fig72">4.3</a>. La Figura <a href="cap-noestacionarios.html#fig:fig73">4.4</a> muestra las diferencias anuales logarítmicas; finalmente, las Figuras <a href="cap-noestacionarios.html#fig:fig74">4.5</a> y <a href="cap-noestacionarios.html#fig:fig75">4.6</a> comparan las transformaciones entre sí. De dicha exploración, podemos concluir que las series parecen estacionarias en diferencias, pero no en niveles.</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">LDatos</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -270,10 +274,10 @@ Figure 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el m
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig71"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig71-1.png" alt="Series en Logaritmos" width="672"><p class="caption">
-Figure 4.2: Series en Logaritmos
+Figura 4.2: Series en Logaritmos
 </p>
 </div>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DLDatos</span>,</span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>,</span>
@@ -282,10 +286,10 @@ Figure 4.2: Series en Logaritmos
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig72"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig72-1.png" alt="Series en Diferencias Logarítmicas" width="672"><p class="caption">
-Figure 4.3: Series en Diferencias Logarítmicas
+Figura 4.3: Series en Diferencias Logarítmicas
 </p>
 </div>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DaLDatos</span>,</span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>,</span>
@@ -294,31 +298,31 @@ Figure 4.3: Series en Diferencias Logarítmicas
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig73"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig73-1.png" alt="Series en Diferencias Anuales Logarítmicas" width="672"><p class="caption">
-Figure 4.4: Series en Diferencias Anuales Logarítmicas
+Figura 4.4: Series en Diferencias Anuales Logarítmicas
 </p>
 </div>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">DLDatos</span>, <span class="va">DaLDatos</span><span class="op">)</span>,</span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>,</span>
-<span>     main <span class="op">=</span> <span class="st">"Comparación de Series en Diferencias"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Comparación de Series en Diferencias Mensuales y Anuales"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig74"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig74-1.png" alt="Comparación de Series en Diferencias Anuales" width="672"><p class="caption">
-Figure 4.5: Comparación de Series en Diferencias Anuales
+<img src="Notas-Series-Tiempo_files/figure-html/fig74-1.png" alt="Comparación de Series en Diferencias Mensuales y Anuales (Logarítmicas)" width="672"><p class="caption">
+Figura 4.5: Comparación de Series en Diferencias Mensuales y Anuales (Logarítmicas)
 </p>
 </div>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">LDatos</span>, <span class="va">DLDatos</span><span class="op">)</span>,</span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>,</span>
-<span>     main <span class="op">=</span> <span class="st">"Comparación de Series en Diferencias"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Comparación de Series en Niveles y Diferencias"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig75"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig75-1.png" alt="Comparación de Series en Diferencias" width="672"><p class="caption">
-Figure 4.6: Comparación de Series en Diferencias
+<img src="Notas-Series-Tiempo_files/figure-html/fig75-1.png" alt="Comparación de Series en Niveles (Logaritmos) y en Diferencias Logarítmicas" width="672"><p class="caption">
+Figura 4.6: Comparación de Series en Niveles (Logaritmos) y en Diferencias Logarítmicas
 </p>
 </div>
 <div id="dickey---fuller-df" class="section level3" number="4.3.1">
@@ -359,10 +363,10 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
   \end{equation*}\]</span>
 Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</span> contra <span class="math inline">\(H_a : \beta &lt; 0\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.</p></li>
 </ol>
-<p><strong>Ejemplo</strong>. En los siguientes mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie <span class="math inline">\(LTC_t\)</span>, considerando <span class="math inline">\(p = int \{ 4 (234/100)^{(1/4)} \} = 4\)</span> para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS. La convención es implementar las pruebas de raíces unitarias iniciando con el modelo más general hasta llegar al más restringido. Es decir, iniciar con el Modelo A, pasar al Modelo B y cerrar con el Modelo C.</p>
+<p><strong>Ejemplo</strong>. A continuación mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie <span class="math inline">\(LTC_t\)</span> (<span class="math inline">\(T = 282\)</span> observaciones mensuales), considerando <span class="math inline">\(p = int \{ 4 (282/100)^{(1/4)} \} = 5\)</span> para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS. La convención es implementar las pruebas de raíces unitarias iniciando con el modelo más general hasta llegar al más restringido. Es decir, iniciar con el Modelo A, pasar al Modelo B y cerrar con el Modelo C.</p>
 <p>Iniciaremos implementando una prueba de DF simple (o una ADF sin rezagos). En este caso obtenemos los resultados mostrados en la siguiente Tabla. En esta se reportan los resultados de la prueba para cada uno de los 3 modelos (A, B y C) y los valores críticos (CV, por sus siglas en inglés) de la prueba para los niveles 1%, 5% y 10%–estos valores son los reportados por <span class="citation">MacKinnon (<a href="bibliograf%C3%ADa.html#ref-mackinnon1996">1996</a>)</span> para una prueba con distribución de 1 cola (izquierda). La convención es utilizar el nivel del 5% de significancia.</p>
 <p>Los resultados se presentan en el Cuadro <a href="cap-noestacionarios.html#tab:tab-DF-summary">4.1</a>, donde se reportan los estadísticos <span class="math inline">\(\tau\)</span> y los valores críticos de <span class="citation">MacKinnon (<a href="bibliograf%C3%ADa.html#ref-mackinnon1996">1996</a>)</span> para los tres modelos, tanto en niveles (<span class="math inline">\(LTC_t\)</span>) como en primeras diferencias (<span class="math inline">\(\Delta LTC_t\)</span>). Rechazaremos la hipótesis nula cuando el estadístico <span class="math inline">\(t\)</span> sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Dickey-Fuller — Niveles</span></span>
 <span><span class="va">df_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"trend"</span>, lags <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">df_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"drift"</span>, lags <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
@@ -373,205 +377,7 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 <span><span class="va">df_dB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"drift"</span>, lags <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">df_dC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"none"</span>,  lags <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">df_nA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">df_nB</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">df_nC</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression trend 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1 + tt)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.083973 -0.015415 -0.002526  0.009332  0.170645 
-## 
-## Coefficients:
-##                Estimate  Std. Error t value Pr(&gt;|t|)  
-## (Intercept)  0.08700923  0.04029878   2.159   0.0317 *
-## z.lag.1     -0.03844435  0.01852595  -2.075   0.0389 *
-## tt           0.00011203  0.00006246   1.794   0.0740 .
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02705 on 278 degrees of freedom
-## Multiple R-squared:  0.01629,    Adjusted R-squared:  0.00921 
-## F-statistic: 2.301 on 2 and 278 DF,  p-value: 0.102
-## 
-## 
-## Value of test-statistic is: -2.0752 2.1124 2.3013 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau3 -3.98 -3.42 -3.13
-## phi2  6.15  4.71  4.05
-## phi3  8.34  6.30  5.36</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression drift 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.089442 -0.014571 -0.002497  0.009620  0.171964 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  0.020316   0.015600   1.302    0.194
-## z.lag.1     -0.006946   0.005925  -1.172    0.242
-## 
-## Residual standard error: 0.02716 on 279 degrees of freedom
-## Multiple R-squared:  0.004903,   Adjusted R-squared:  0.001336 
-## F-statistic: 1.375 on 1 and 279 DF,  p-value: 0.242
-## 
-## 
-## Value of test-statistic is: -1.1724 1.5477 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau2 -3.44 -2.87 -2.57
-## phi1  6.47  4.61  3.79</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression none 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 - 1)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.089736 -0.014701 -0.003293  0.010359  0.169748 
-## 
-## Coefficients:
-##          Estimate Std. Error t value Pr(&gt;|t|)
-## z.lag.1 0.0007280  0.0006161   1.181    0.238
-## 
-## Residual standard error: 0.0272 on 280 degrees of freedom
-## Multiple R-squared:  0.004961,   Adjusted R-squared:  0.001407 
-## F-statistic: 1.396 on 1 and 280 DF,  p-value: 0.2384
-## 
-## 
-## Value of test-statistic is: 1.1815 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau1 -2.58 -1.95 -1.62</code></pre>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">df_dA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">df_dB</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">df_dC</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression trend 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1 + tt)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.09095 -0.01306 -0.00158  0.01055  0.17069 
-## 
-## Coefficients:
-##                 Estimate   Std. Error t value            Pr(&gt;|t|)    
-## (Intercept)  0.002881589  0.003163345   0.911               0.363    
-## z.lag.1     -0.736373275  0.058071315 -12.680 &lt;0.0000000000000002 ***
-## tt          -0.000009351  0.000019483  -0.480               0.632    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02634 on 277 degrees of freedom
-## Multiple R-squared:  0.3673, Adjusted R-squared:  0.3628 
-## F-statistic: 80.41 on 2 and 277 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic is: -12.6805 53.6071 80.4095 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau3 -3.98 -3.42 -3.13
-## phi2  6.15  4.71  4.05
-## phi3  8.34  6.30  5.36</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression drift 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.090664 -0.013492 -0.001331  0.010702  0.169754 
-## 
-## Coefficients:
-##              Estimate Std. Error t value            Pr(&gt;|t|)    
-## (Intercept)  0.001566   0.001577   0.993               0.322    
-## z.lag.1     -0.735658   0.057972 -12.690 &lt;0.0000000000000002 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02631 on 278 degrees of freedom
-## Multiple R-squared:  0.3668, Adjusted R-squared:  0.3645 
-## F-statistic:   161 on 1 and 278 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic is: -12.6899 80.5185 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau2 -3.44 -2.87 -2.57
-## phi1  6.47  4.61  3.79</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression none 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 - 1)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.089121 -0.011916  0.000311  0.012192  0.171310 
-## 
-## Coefficients:
-##         Estimate Std. Error t value            Pr(&gt;|t|)    
-## z.lag.1 -0.73093    0.05777  -12.65 &lt;0.0000000000000002 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02631 on 279 degrees of freedom
-## Multiple R-squared:  0.3646, Adjusted R-squared:  0.3623 
-## F-statistic: 160.1 on 1 and 279 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic is: -12.6515 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau1 -2.58 -1.95 -1.62</code></pre>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">urdf_fila</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lbl</span>, <span class="va">obj</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">urdf_fila</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lbl</span>, <span class="va">obj</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Modelo      <span class="op">=</span> <span class="va">lbl</span>,</span>
 <span>             Estadistico <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">obj</span><span class="op">@</span><span class="va">teststat</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span>             CV_1pct     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">obj</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span>,</span>
@@ -579,21 +385,27 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 <span>             CV_10pct    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">obj</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
+<span><span class="co"># Con escape = FALSE el LaTeX de las celdas (p. ej. $\Delta LTC_t$) se</span></span>
+<span><span class="co"># renderiza como fórmula; el % de los encabezados requiere \% solo en PDF.</span></span>
+<span><span class="va">pct</span>     <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/output_type.html">is_latex_output</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="st">"\\%"</span> <span class="kw">else</span> <span class="st">"%"</span></span>
+<span><span class="va">cv_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CV 1"</span>, <span class="st">"CV 5"</span>, <span class="st">"CV 10"</span><span class="op">)</span>, <span class="va">pct</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo A (tendencia)"</span>,        <span class="va">df_nA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo B (intercepto)"</span>,       <span class="va">df_nB</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo C (sin det.)"</span>,         <span class="va">df_nC</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo A (tendencia)"</span>,  <span class="va">df_dA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo B (intercepto)"</span>, <span class="va">df_dB</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo C (sin det.)"</span>,   <span class="va">df_dC</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico $t$"</span>, <span class="st">"CV 1%"</span>, <span class="st">"CV 5%"</span>, <span class="st">"CV 10%"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — A (tendencia)"</span>,        <span class="va">df_nA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — B (intercepto)"</span>,       <span class="va">df_nB</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — C (sin det.)"</span>,         <span class="va">df_nC</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — A (tendencia)"</span>,  <span class="va">df_dA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — B (intercepto)"</span>, <span class="va">df_dB</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — C (sin det.)"</span>,   <span class="va">df_dC</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico $t$"</span>, <span class="va">cv_cols</span><span class="op">)</span>,</span>
 <span>  caption   <span class="op">=</span> <span class="st">"Resumen: prueba Dickey-Fuller (DF) para $LTC_t$."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:tab-DF-summary">Table 4.1: </span>Resumen: prueba Dickey-Fuller (DF) para <span class="math inline">\(LTC_t\)</span>.
+<span id="tab:tab-DF-summary">Cuadro 4.1: </span>Resumen: prueba Dickey-Fuller (DF) para <span class="math inline">\(LTC_t\)</span>.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -615,7 +427,7 @@ CV 10%
 <tbody>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo A (tendencia)
+<span class="math inline">\(LTC_t\)</span> — A (tendencia)
 </td>
 <td style="text-align:right;">
 -2.0752
@@ -632,7 +444,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo B (intercepto)
+<span class="math inline">\(LTC_t\)</span> — B (intercepto)
 </td>
 <td style="text-align:right;">
 -1.1724
@@ -649,7 +461,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo C (sin det.)
+<span class="math inline">\(LTC_t\)</span> — C (sin det.)
 </td>
 <td style="text-align:right;">
 1.1815
@@ -666,7 +478,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo A (tendencia)
+<span class="math inline">\(\Delta LTC_t\)</span> — A (tendencia)
 </td>
 <td style="text-align:right;">
 -12.6805
@@ -683,7 +495,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo B (intercepto)
+<span class="math inline">\(\Delta LTC_t\)</span> — B (intercepto)
 </td>
 <td style="text-align:right;">
 -12.6899
@@ -700,7 +512,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo C (sin det.)
+<span class="math inline">\(\Delta LTC_t\)</span> — C (sin det.)
 </td>
 <td style="text-align:right;">
 -12.6515
@@ -759,7 +571,7 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</span> contra <span class="math inline">\(H_a : \beta &lt; 0\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.</p></li>
 </ol>
 <p><strong>Ejemplo</strong>. El Cuadro <a href="cap-noestacionarios.html#tab:tab-ADF-summary">4.2</a> muestra los resultados de la prueba ADF con 5 rezagos (<span class="math inline">\(p = int \{ 4 (282/100)^{(1/4)} \} = 5\)</span>) para <span class="math inline">\(LTC_t\)</span> y <span class="math inline">\(\Delta LTC_t\)</span>. Al igual que en el caso anterior, rechazaremos la hipótesis nula cuando el estadístico <span class="math inline">\(t\)</span> sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Augmented Dickey-Fuller — Niveles</span></span>
 <span><span class="va">adf_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"trend"</span>, lags <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">adf_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"drift"</span>, lags <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -770,253 +582,22 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 <span><span class="va">adf_dB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"drift"</span>, lags <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">adf_dC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"none"</span>,  lags <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">adf_nA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">adf_nB</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">adf_nC</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression trend 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.077054 -0.014133 -0.002281  0.011551  0.167611 
-## 
-## Coefficients:
-##                Estimate  Std. Error t value    Pr(&gt;|t|)    
-## (Intercept)  0.10899655  0.04255838   2.561      0.0110 *  
-## z.lag.1     -0.04919274  0.01969939  -2.497      0.0131 *  
-## tt           0.00015118  0.00006679   2.263      0.0244 *  
-## z.diff.lag1  0.32887766  0.06112000   5.381 0.000000162 ***
-## z.diff.lag2 -0.12845492  0.06432008  -1.997      0.0468 *  
-## z.diff.lag3 -0.01064885  0.06462312  -0.165      0.8692    
-## z.diff.lag4  0.05690285  0.06350714   0.896      0.3711    
-## z.diff.lag5 -0.01668349  0.06151762  -0.271      0.7864    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02597 on 268 degrees of freedom
-## Multiple R-squared:  0.1196, Adjusted R-squared:  0.09662 
-## F-statistic: 5.202 on 7 and 268 DF,  p-value: 0.00001414
-## 
-## 
-## Value of test-statistic is: -2.4972 2.5862 3.2058 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau3 -3.98 -3.42 -3.13
-## phi2  6.15  4.71  4.05
-## phi3  8.34  6.30  5.36</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression drift 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.081102 -0.013688 -0.002598  0.011536  0.167963 
-## 
-## Coefficients:
-##              Estimate Std. Error t value    Pr(&gt;|t|)    
-## (Intercept)  0.019078   0.015382   1.240      0.2160    
-## z.lag.1     -0.006575   0.005837  -1.126      0.2610    
-## z.diff.lag1  0.306455   0.060772   5.043 0.000000845 ***
-## z.diff.lag2 -0.156749   0.063575  -2.466      0.0143 *  
-## z.diff.lag3 -0.034594   0.064238  -0.539      0.5907    
-## z.diff.lag4  0.038455   0.063463   0.606      0.5451    
-## z.diff.lag5 -0.041998   0.060954  -0.689      0.4914    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02617 on 269 degrees of freedom
-## Multiple R-squared:  0.1028, Adjusted R-squared:  0.08277 
-## F-statistic: 5.136 on 6 and 269 DF,  p-value: 0.00005131
-## 
-## 
-## Value of test-statistic is: -1.1265 1.2978 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau2 -3.44 -2.87 -2.57
-## phi1  6.47  4.61  3.79</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression none 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.080975 -0.014773 -0.002006  0.011681  0.165789 
-## 
-## Coefficients:
-##               Estimate Std. Error t value    Pr(&gt;|t|)    
-## z.lag.1      0.0006247  0.0006081   1.027      0.3052    
-## z.diff.lag1  0.3052416  0.0608250   5.018 0.000000947 ***
-## z.diff.lag2 -0.1599301  0.0635869  -2.515      0.0125 *  
-## z.diff.lag3 -0.0366726  0.0642802  -0.571      0.5688    
-## z.diff.lag4  0.0367316  0.0635108   0.578      0.5635    
-## z.diff.lag5 -0.0449750  0.0609677  -0.738      0.4613    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.0262 on 270 degrees of freedom
-## Multiple R-squared:  0.1027, Adjusted R-squared:  0.08271 
-## F-statistic: 5.148 on 6 and 270 DF,  p-value: 0.00004979
-## 
-## 
-## Value of test-statistic is: 1.0273 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau1 -2.58 -1.95 -1.62</code></pre>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">adf_dA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">adf_dB</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">adf_dC</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression trend 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.069846 -0.013941 -0.001969  0.011796  0.166553 
-## 
-## Coefficients:
-##                Estimate  Std. Error t value         Pr(&gt;|t|)    
-## (Intercept)  0.00398042  0.00326372   1.220           0.2237    
-## z.lag.1     -0.96600985  0.13032157  -7.413 0.00000000000164 ***
-## tt          -0.00001242  0.00001981  -0.627           0.5310    
-## z.diff.lag1  0.27428705  0.11800103   2.324           0.0209 *  
-## z.diff.lag2  0.11502927  0.10628825   1.082           0.2801    
-## z.diff.lag3  0.07837533  0.09095430   0.862           0.3896    
-## z.diff.lag4  0.09775877  0.07423509   1.317           0.1890    
-## z.diff.lag5  0.07280186  0.06082666   1.197           0.2324    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02605 on 267 degrees of freedom
-## Multiple R-squared:  0.3901, Adjusted R-squared:  0.3741 
-## F-statistic: 24.39 on 7 and 267 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic is: -7.4125 18.3632 27.5402 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau3 -3.98 -3.42 -3.13
-## phi2  6.15  4.71  4.05
-## phi3  8.34  6.30  5.36</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression drift 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 + 1 + z.diff.lag)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.070858 -0.014250 -0.001793  0.011998  0.165361 
-## 
-## Coefficients:
-##              Estimate Std. Error t value         Pr(&gt;|t|)    
-## (Intercept)  0.002197   0.001601   1.372           0.1711    
-## z.lag.1     -0.963143   0.130094  -7.403 0.00000000000172 ***
-## z.diff.lag1  0.272137   0.117818   2.310           0.0217 *  
-## z.diff.lag2  0.113463   0.106139   1.069           0.2860    
-## z.diff.lag3  0.077366   0.090837   0.852           0.3951    
-## z.diff.lag4  0.097369   0.074148   1.313           0.1903    
-## z.diff.lag5  0.072725   0.060758   1.197           0.2324    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02602 on 268 degrees of freedom
-## Multiple R-squared:  0.3892, Adjusted R-squared:  0.3755 
-## F-statistic: 28.46 on 6 and 268 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic is: -7.4034 27.41 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau2 -3.44 -2.87 -2.57
-## phi1  6.47  4.61  3.79</code></pre>
-<pre><code>## 
-## ############################################### 
-## # Augmented Dickey-Fuller Test Unit Root Test # 
-## ############################################### 
-## 
-## Test regression none 
-## 
-## 
-## Call:
-## lm(formula = z.diff ~ z.lag.1 - 1 + z.diff.lag)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.069424 -0.012002  0.000317  0.013820  0.167787 
-## 
-## Coefficients:
-##             Estimate Std. Error t value         Pr(&gt;|t|)    
-## z.lag.1     -0.92780    0.12773  -7.264 0.00000000000407 ***
-## z.diff.lag1  0.24302    0.11608   2.094           0.0372 *  
-## z.diff.lag2  0.08889    0.10479   0.848           0.3970    
-## z.diff.lag3  0.05875    0.08997   0.653           0.5143    
-## z.diff.lag4  0.08492    0.07371   1.152           0.2503    
-## z.diff.lag5  0.06500    0.06060   1.073           0.2844    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02607 on 269 degrees of freedom
-## Multiple R-squared:  0.3849, Adjusted R-squared:  0.3712 
-## F-statistic: 28.05 on 6 and 269 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic is: -7.2639 
-## 
-## Critical values for test statistics: 
-##       1pct  5pct 10pct
-## tau1 -2.58 -1.95 -1.62</code></pre>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo A (tendencia)"</span>,        <span class="va">adf_nA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo B (intercepto)"</span>,       <span class="va">adf_nB</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo C (sin det.)"</span>,         <span class="va">adf_nC</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo A (tendencia)"</span>,  <span class="va">adf_dA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo B (intercepto)"</span>, <span class="va">adf_dB</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo C (sin det.)"</span>,   <span class="va">adf_dC</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico $t$"</span>, <span class="st">"CV 1%"</span>, <span class="st">"CV 5%"</span>, <span class="st">"CV 10%"</span><span class="op">)</span>,</span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — A (tendencia)"</span>,        <span class="va">adf_nA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — B (intercepto)"</span>,       <span class="va">adf_nB</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — C (sin det.)"</span>,         <span class="va">adf_nC</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — A (tendencia)"</span>,  <span class="va">adf_dA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — B (intercepto)"</span>, <span class="va">adf_dB</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urdf_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — C (sin det.)"</span>,   <span class="va">adf_dC</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico $t$"</span>, <span class="va">cv_cols</span><span class="op">)</span>,</span>
 <span>  caption   <span class="op">=</span> <span class="st">"Resumen: prueba Augmented Dickey-Fuller (ADF, 5 rezagos) para $LTC_t$."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:tab-ADF-summary">Table 4.2: </span>Resumen: prueba Augmented Dickey-Fuller (ADF, 5 rezagos) para <span class="math inline">\(LTC_t\)</span>.
+<span id="tab:tab-ADF-summary">Cuadro 4.2: </span>Resumen: prueba Augmented Dickey-Fuller (ADF, 5 rezagos) para <span class="math inline">\(LTC_t\)</span>.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1038,7 +619,7 @@ CV 10%
 <tbody>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo A (tendencia)
+<span class="math inline">\(LTC_t\)</span> — A (tendencia)
 </td>
 <td style="text-align:right;">
 -2.4972
@@ -1055,7 +636,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo B (intercepto)
+<span class="math inline">\(LTC_t\)</span> — B (intercepto)
 </td>
 <td style="text-align:right;">
 -1.1265
@@ -1072,7 +653,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo C (sin det.)
+<span class="math inline">\(LTC_t\)</span> — C (sin det.)
 </td>
 <td style="text-align:right;">
 1.0273
@@ -1089,7 +670,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo A (tendencia)
+<span class="math inline">\(\Delta LTC_t\)</span> — A (tendencia)
 </td>
 <td style="text-align:right;">
 -7.4125
@@ -1106,7 +687,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo B (intercepto)
+<span class="math inline">\(\Delta LTC_t\)</span> — B (intercepto)
 </td>
 <td style="text-align:right;">
 -7.4034
@@ -1123,7 +704,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo C (sin det.)
+<span class="math inline">\(\Delta LTC_t\)</span> — C (sin det.)
 </td>
 <td style="text-align:right;">
 -7.2639
@@ -1170,7 +751,7 @@ Y_t = \alpha + \rho Y_{t-1} + U_t
 Buscamos probar si <span class="math inline">\(H_0 : \rho = 1\)</span> contra <span class="math inline">\(H_a : | \rho | &lt; 1\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una constante.</p></li>
 </ol>
 <p><strong>Ejemplo</strong>. El Cuadro <a href="cap-noestacionarios.html#tab:tab-PP-summary">4.3</a> muestra los resultados de la prueba PP con 5 rezagos para <span class="math inline">\(LTC_t\)</span> y <span class="math inline">\(\Delta LTC_t\)</span>. Rechazaremos la hipótesis nula cuando el estadístico <span class="math inline">\(Z_\tau\)</span> sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Phillips-Perron — Niveles</span></span>
 <span><span class="va">pp_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.pp.html">ur.pp</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"Z-tau"</span>, model <span class="op">=</span> <span class="st">"trend"</span>,    use.lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">pp_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.pp.html">ur.pp</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"Z-tau"</span>, model <span class="op">=</span> <span class="st">"constant"</span>, use.lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -1179,155 +760,7 @@ Buscamos probar si <span class="math inline">\(H_0 : \rho = 1\)</span> contra <s
 <span><span class="va">pp_dA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.pp.html">ur.pp</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"Z-tau"</span>, model <span class="op">=</span> <span class="st">"trend"</span>,    use.lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">pp_dB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.pp.html">ur.pp</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"Z-tau"</span>, model <span class="op">=</span> <span class="st">"constant"</span>, use.lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">pp_nA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">pp_nB</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ################################## 
-## # Phillips-Perron Unit Root Test # 
-## ################################## 
-## 
-## Test regression with intercept and trend 
-## 
-## 
-## Call:
-## lm(formula = y ~ y.l1 + trend)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.083973 -0.015415 -0.002526  0.009332  0.170645 
-## 
-## Coefficients:
-##               Estimate Std. Error t value            Pr(&gt;|t|)    
-## (Intercept) 0.10275012 0.04851421   2.118              0.0351 *  
-## y.l1        0.96155565 0.01852595  51.903 &lt;0.0000000000000002 ***
-## trend       0.00011203 0.00006246   1.794              0.0740 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02705 on 278 degrees of freedom
-## Multiple R-squared:  0.9903, Adjusted R-squared:  0.9902 
-## F-statistic: 1.416e+04 on 2 and 278 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic, type: Z-tau  is: -2.5039 
-## 
-##            aux. Z statistics
-## Z-tau-mu              1.1638
-## Z-tau-beta            2.2617
-## 
-## Critical values for Z statistics: 
-##                      1pct      5pct     10pct
-## critical values -3.994127 -3.427199 -3.136601</code></pre>
-<pre><code>## 
-## ################################## 
-## # Phillips-Perron Unit Root Test # 
-## ################################## 
-## 
-## Test regression with intercept 
-## 
-## 
-## Call:
-## lm(formula = y ~ y.l1)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.089442 -0.014571 -0.002497  0.009620  0.171964 
-## 
-## Coefficients:
-##             Estimate Std. Error t value            Pr(&gt;|t|)    
-## (Intercept) 0.020316   0.015600   1.302               0.194    
-## y.l1        0.993054   0.005925 167.617 &lt;0.0000000000000002 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02716 on 279 degrees of freedom
-## Multiple R-squared:  0.9902, Adjusted R-squared:  0.9901 
-## F-statistic: 2.81e+04 on 1 and 279 DF,  p-value: &lt; 0.00000000000000022
-## 
-## 
-## Value of test-statistic, type: Z-tau  is: -1.2297 
-## 
-##          aux. Z statistics
-## Z-tau-mu            1.3459
-## 
-## Critical values for Z statistics: 
-##                      1pct     5pct     10pct
-## critical values -3.455219 -2.87195 -2.572274</code></pre>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">pp_dA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">pp_dB</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ################################## 
-## # Phillips-Perron Unit Root Test # 
-## ################################## 
-## 
-## Test regression with intercept and trend 
-## 
-## 
-## Call:
-## lm(formula = y ~ y.l1 + trend)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.09095 -0.01306 -0.00158  0.01055  0.17069 
-## 
-## Coefficients:
-##                 Estimate   Std. Error t value   Pr(&gt;|t|)    
-## (Intercept)  0.001572438  0.001579672   0.995      0.320    
-## y.l1         0.263626725  0.058071315   4.540 0.00000841 ***
-## trend       -0.000009351  0.000019483  -0.480      0.632    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02634 on 277 degrees of freedom
-## Multiple R-squared:  0.07036,    Adjusted R-squared:  0.06365 
-## F-statistic: 10.48 on 2 and 277 DF,  p-value: 0.00004089
-## 
-## 
-## Value of test-statistic, type: Z-tau  is: -12.3906 
-## 
-##            aux. Z statistics
-## Z-tau-mu              1.2352
-## Z-tau-beta           -0.4753
-## 
-## Critical values for Z statistics: 
-##                      1pct      5pct     10pct
-## critical values -3.994237 -3.427252 -3.136632</code></pre>
-<pre><code>## 
-## ################################## 
-## # Phillips-Perron Unit Root Test # 
-## ################################## 
-## 
-## Test regression with intercept 
-## 
-## 
-## Call:
-## lm(formula = y ~ y.l1)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.090664 -0.013492 -0.001331  0.010702  0.169754 
-## 
-## Coefficients:
-##             Estimate Std. Error t value   Pr(&gt;|t|)    
-## (Intercept) 0.001566   0.001577   0.993      0.322    
-## y.l1        0.264342   0.057972   4.560 0.00000768 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.02631 on 278 degrees of freedom
-## Multiple R-squared:  0.06959,    Adjusted R-squared:  0.06624 
-## F-statistic: 20.79 on 1 and 278 DF,  p-value: 0.000007682
-## 
-## 
-## Value of test-statistic, type: Z-tau  is: -12.4037 
-## 
-##          aux. Z statistics
-## Z-tau-mu             0.969
-## 
-## Critical values for Z statistics: 
-##                      1pct      5pct     10pct
-## critical values -3.455298 -2.871985 -2.572293</code></pre>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">urpp_fila</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lbl</span>, <span class="va">obj</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">urpp_fila</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lbl</span>, <span class="va">obj</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">cv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">obj</span><span class="op">@</span><span class="va">cval</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Modelo      <span class="op">=</span> <span class="va">lbl</span>,</span>
 <span>             Estadistico <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">obj</span><span class="op">@</span><span class="va">teststat</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>,</span>
@@ -1337,18 +770,19 @@ Buscamos probar si <span class="math inline">\(H_0 : \rho = 1\)</span> contra <s
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo A (tendencia)"</span>,          <span class="va">pp_nA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo B (intercepto)"</span>,         <span class="va">pp_nB</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo A (tendencia)"</span>,  <span class="va">pp_dA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo B (intercepto)"</span>, <span class="va">pp_dB</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico $Z_\\tau$"</span>, <span class="st">"CV 1%"</span>, <span class="st">"CV 5%"</span>, <span class="st">"CV 10%"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — A (tendencia)"</span>,          <span class="va">pp_nA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — B (intercepto)"</span>,         <span class="va">pp_nB</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — A (tendencia)"</span>,  <span class="va">pp_dA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urpp_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — B (intercepto)"</span>, <span class="va">pp_dB</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico $Z_\\tau$"</span>, <span class="va">cv_cols</span><span class="op">)</span>,</span>
 <span>  caption   <span class="op">=</span> <span class="st">"Resumen: prueba Phillips-Perron (PP, 5 rezagos) para $LTC_t$."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:tab-PP-summary">Table 4.3: </span>Resumen: prueba Phillips-Perron (PP, 5 rezagos) para <span class="math inline">\(LTC_t\)</span>.
+<span id="tab:tab-PP-summary">Cuadro 4.3: </span>Resumen: prueba Phillips-Perron (PP, 5 rezagos) para <span class="math inline">\(LTC_t\)</span>.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1370,7 +804,7 @@ CV 10%
 <tbody>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo A (tendencia)
+<span class="math inline">\(LTC_t\)</span> — A (tendencia)
 </td>
 <td style="text-align:right;">
 -2.5039
@@ -1387,7 +821,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo B (intercepto)
+<span class="math inline">\(LTC_t\)</span> — B (intercepto)
 </td>
 <td style="text-align:right;">
 -1.2297
@@ -1404,7 +838,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo A (tendencia)
+<span class="math inline">\(\Delta LTC_t\)</span> — A (tendencia)
 </td>
 <td style="text-align:right;">
 -12.3906
@@ -1421,7 +855,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo B (intercepto)
+<span class="math inline">\(\Delta LTC_t\)</span> — B (intercepto)
 </td>
 <td style="text-align:right;">
 -12.4037
@@ -1447,14 +881,14 @@ CV 10%
 <span class="math display">\[\begin{equation}
     Y_t = \delta t + \xi_t + U_t
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(U_t\)</span> es un proceso estacionario y <span class="math inline">\(\xi_t\)</span> es un ruido blanco descrito por la forma: <span class="math inline">\(\xi_t = \xi_{t-1} + \varepsilon_t\)</span>, donde <span class="math inline">\(\varepsilon_t\)</span> es un proceso normalmente distribuido con media cero y varianza <span class="math inline">\(\sigma^2_\varepsilon\)</span>.</p>
-<p>Así, bajo la hipótesis nula <span class="math inline">\(H_0 : \sigma^2_\varepsilon = 0\)</span>, <span class="math inline">\(\xi\)</span> se vuelve una constante y el proceso puede tener una tendencia estacionaria. Dado el planteamiento de la prueba, los valores críticos al 95% son:</p>
+<p>Donde <span class="math inline">\(U_t\)</span> es un proceso estacionario y <span class="math inline">\(\xi_t\)</span> es una caminata aleatoria descrita por la forma: <span class="math inline">\(\xi_t = \xi_{t-1} + \varepsilon_t\)</span>, donde <span class="math inline">\(\varepsilon_t\)</span> es un ruido blanco normalmente distribuido con media cero y varianza <span class="math inline">\(\sigma^2_\varepsilon\)</span>.</p>
+<p>Así, bajo la hipótesis nula <span class="math inline">\(H_0 : \sigma^2_\varepsilon = 0\)</span>, <span class="math inline">\(\xi_t\)</span> se vuelve una constante y el proceso es estacionario alrededor de una tendencia determinística (o de una constante, según la especificación). Dado el planteamiento de la prueba, los valores críticos al 95% son:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Modelo A</strong>: 0.146, para un modelo con tendencia (estadístico <span class="math inline">\(\tau\)</span>).</p></li>
 <li><p><strong>Modelo B</strong>: 0.463, para un modelo con constante (estadístico <span class="math inline">\(\mu\)</span>).</p></li>
 </ol>
 <p><strong>Ejemplo</strong>. Finalmente, el Cuadro <a href="cap-noestacionarios.html#tab:tab-KPSS-summary">4.4</a> muestra los resultados de la prueba KPSS para <span class="math inline">\(LTC_t\)</span> y <span class="math inline">\(\Delta LTC_t\)</span>. En este caso se acepta <span class="math inline">\(H_0\)</span> (estacionariedad) cuando el estadístico es <strong>menor</strong> que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## KPSS — Niveles</span></span>
 <span><span class="va">kpss_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.kpss.html">ur.kpss</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"tau"</span><span class="op">)</span></span>
 <span><span class="va">kpss_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.kpss.html">ur.kpss</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"mu"</span><span class="op">)</span></span>
@@ -1463,59 +897,7 @@ CV 10%
 <span><span class="va">kpss_dA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.kpss.html">ur.kpss</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"tau"</span><span class="op">)</span></span>
 <span><span class="va">kpss_dB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.kpss.html">ur.kpss</a></span><span class="op">(</span><span class="va">DLDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"mu"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">kpss_nA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">kpss_nB</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ####################### 
-## # KPSS Unit Root Test # 
-## ####################### 
-## 
-## Test is of type: tau with 5 lags. 
-## 
-## Value of test-statistic is: 0.3433 
-## 
-## Critical value for a significance level of: 
-##                 10pct  5pct 2.5pct  1pct
-## critical values 0.119 0.146  0.176 0.216</code></pre>
-<pre><code>## 
-## ####################### 
-## # KPSS Unit Root Test # 
-## ####################### 
-## 
-## Test is of type: mu with 5 lags. 
-## 
-## Value of test-statistic is: 4.429 
-## 
-## Critical value for a significance level of: 
-##                 10pct  5pct 2.5pct  1pct
-## critical values 0.347 0.463  0.574 0.739</code></pre>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">kpss_dA</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">kpss_dB</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## ####################### 
-## # KPSS Unit Root Test # 
-## ####################### 
-## 
-## Test is of type: tau with 5 lags. 
-## 
-## Value of test-statistic is: 0.0701 
-## 
-## Critical value for a significance level of: 
-##                 10pct  5pct 2.5pct  1pct
-## critical values 0.119 0.146  0.176 0.216</code></pre>
-<pre><code>## 
-## ####################### 
-## # KPSS Unit Root Test # 
-## ####################### 
-## 
-## Test is of type: mu with 5 lags. 
-## 
-## Value of test-statistic is: 0.0801 
-## 
-## Critical value for a significance level of: 
-##                 10pct  5pct 2.5pct  1pct
-## critical values 0.347 0.463  0.574 0.739</code></pre>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># @cval en ur.kpss: orden 10%, 5%, 2.5%, 1% (posiciones 1,2,3,4)</span></span>
+<span><span class="co"># @cval en ur.kpss: orden 10%, 5%, 2.5%, 1% (posiciones 1,2,3,4)</span></span>
 <span><span class="va">urkpss_fila</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lbl</span>, <span class="va">obj</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">cv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">obj</span><span class="op">@</span><span class="va">cval</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Modelo      <span class="op">=</span> <span class="va">lbl</span>,</span>
@@ -1526,18 +908,19 @@ CV 10%
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo A ($\\tau$, tendencia)"</span>,         <span class="va">kpss_nA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — Modelo B ($\\mu$, intercepto)"</span>,         <span class="va">kpss_nB</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo A ($\\tau$, tendencia)"</span>, <span class="va">kpss_dA</span><span class="op">)</span>,</span>
-<span>        <span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — Modelo B ($\\mu$, intercepto)"</span>, <span class="va">kpss_dB</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico"</span>, <span class="st">"CV 1%"</span>, <span class="st">"CV 5%"</span>, <span class="st">"CV 10%"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — A ($\\tau$, tendencia)"</span>,         <span class="va">kpss_nA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$LTC_t$ — B ($\\mu$, intercepto)"</span>,         <span class="va">kpss_nB</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — A ($\\tau$, tendencia)"</span>, <span class="va">kpss_dA</span><span class="op">)</span>,</span>
+<span>        <span class="fu">urkpss_fila</span><span class="op">(</span><span class="st">"$\\Delta LTC_t$ — B ($\\mu$, intercepto)"</span>, <span class="va">kpss_dB</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico"</span>, <span class="va">cv_cols</span><span class="op">)</span>,</span>
 <span>  caption   <span class="op">=</span> <span class="st">"Resumen: prueba KPSS para $LTC_t$ (rechazar $H_0$ si estadístico $&gt;$ CV)."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:tab-KPSS-summary">Table 4.4: </span>Resumen: prueba KPSS para <span class="math inline">\(LTC_t\)</span> (rechazar <span class="math inline">\(H_0\)</span> si estadístico <span class="math inline">\(&gt;\)</span> CV).
+<span id="tab:tab-KPSS-summary">Cuadro 4.4: </span>Resumen: prueba KPSS para <span class="math inline">\(LTC_t\)</span> (rechazar <span class="math inline">\(H_0\)</span> si estadístico <span class="math inline">\(&gt;\)</span> CV).
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1559,7 +942,7 @@ CV 10%
 <tbody>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo A (<span class="math inline">\(\tau\)</span>, tendencia)
+<span class="math inline">\(LTC_t\)</span> — A (<span class="math inline">\(\tau\)</span>, tendencia)
 </td>
 <td style="text-align:right;">
 0.3433
@@ -1576,7 +959,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(LTC_t\)</span> — Modelo B (<span class="math inline">\(\mu\)</span>, intercepto)
+<span class="math inline">\(LTC_t\)</span> — B (<span class="math inline">\(\mu\)</span>, intercepto)
 </td>
 <td style="text-align:right;">
 4.4290
@@ -1593,7 +976,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo A (<span class="math inline">\(\tau\)</span>, tendencia)
+<span class="math inline">\(\Delta LTC_t\)</span> — A (<span class="math inline">\(\tau\)</span>, tendencia)
 </td>
 <td style="text-align:right;">
 0.0701
@@ -1610,7 +993,7 @@ CV 10%
 </tr>
 <tr>
 <td style="text-align:left;">
-<span class="math inline">\(\Delta LTC_t\)</span> — Modelo B (<span class="math inline">\(\mu\)</span>, intercepto)
+<span class="math inline">\(\Delta LTC_t\)</span> — B (<span class="math inline">\(\mu\)</span>, intercepto)
 </td>
 <td style="text-align:right;">
 0.0801
@@ -1645,7 +1028,7 @@ CV 10%
 <p>En cada caso, la hipótesis nula es que la serie tiene una raíz unitaria sin quiebre estructural, contra la alternativa de que es estacionaria con un quiebre en la fecha <span class="math inline">\(\tau^*\)</span>. La fecha del quiebre se determina endógenamente como aquella que minimiza el estadístico <span class="math inline">\(t\)</span> de la prueba.</p>
 <p>El estadístico de la prueba sigue una distribución no estándar cuyos valores críticos al 1%, 5% y 10% son, respectivamente, <span class="math inline">\(-5.34\)</span>, <span class="math inline">\(-4.80\)</span> y <span class="math inline">\(-4.58\)</span> para el Modelo C.</p>
 <p><strong>Ejemplo</strong>. La siguiente Tabla y el código en R muestran la aplicación de la prueba ZA a la serie <span class="math inline">\(LTC_t\)</span>. Rechazamos la hipótesis nula si el estadístico es menor (en valor absoluto más grande) que el valor crítico correspondiente.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Zivot - Andrews: los tres modelos</span></span>
 <span></span>
 <span><span class="va">za_A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.za.html">ur.za</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, model <span class="op">=</span> <span class="st">"intercept"</span>, lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -1661,7 +1044,7 @@ CV 10%
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">za_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>  Modelo      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo A (intercepto)"</span>, <span class="st">"Modelo B (tendencia)"</span>, <span class="st">"Modelo C (ambos)"</span><span class="op">)</span>,</span>
+<span>  Modelo      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A (intercepto)"</span>, <span class="st">"B (tendencia)"</span>, <span class="st">"C (ambos)"</span><span class="op">)</span>,</span>
 <span>  Estadistico <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">za_A</span><span class="op">@</span><span class="va">teststat</span>, <span class="va">za_B</span><span class="op">@</span><span class="va">teststat</span>, <span class="va">za_C</span><span class="op">@</span><span class="va">teststat</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span>  CV_1pct     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">za_A</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">za_B</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">za_C</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>  CV_5pct     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">za_A</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">za_B</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="va">za_C</span><span class="op">@</span><span class="va">cval</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
@@ -1673,14 +1056,15 @@ CV 10%
 <span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
 <span>  <span class="va">za_df</span>,</span>
-<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico"</span>, <span class="st">"CV 1%"</span>, <span class="st">"CV 5%"</span>, <span class="st">"CV 10%"</span>, <span class="st">"Quiebre est."</span><span class="op">)</span>,</span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"Estadístico"</span>, <span class="va">cv_cols</span>, <span class="st">"Quiebre est."</span><span class="op">)</span>,</span>
 <span>  caption   <span class="op">=</span> <span class="st">"Resumen de resultados de la prueba Zivot-Andrews (ZA) para $LTC_t$."</span>,</span>
 <span>  align     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
-<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  booktabs  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  escape    <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:tab-ZA-summary">Table 4.5: </span>Resumen de resultados de la prueba Zivot-Andrews (ZA) para <span class="math inline">\(LTC_t\)</span>.
+<span id="tab:tab-ZA-summary">Cuadro 4.5: </span>Resumen de resultados de la prueba Zivot-Andrews (ZA) para <span class="math inline">\(LTC_t\)</span>.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1705,7 +1089,7 @@ Quiebre est.
 <tbody>
 <tr>
 <td style="text-align:left;">
-Modelo A (intercepto)
+A (intercepto)
 </td>
 <td style="text-align:right;">
 -4.1412
@@ -1725,7 +1109,7 @@ Modelo A (intercepto)
 </tr>
 <tr>
 <td style="text-align:left;">
-Modelo B (tendencia)
+B (tendencia)
 </td>
 <td style="text-align:right;">
 -3.0552
@@ -1745,7 +1129,7 @@ Modelo B (tendencia)
 </tr>
 <tr>
 <td style="text-align:left;">
-Modelo C (ambos)
+C (ambos)
 </td>
 <td style="text-align:right;">
 -3.9598
@@ -1838,7 +1222,7 @@ Modelo C (ambos)
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></div>
-<div class="next"><a href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></div>
+<div class="next"><a href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -1871,7 +1255,7 @@ Modelo C (ambos)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres, Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

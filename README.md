@@ -1,6 +1,6 @@
 # Análisis de Series de Tiempo
 
-Notas de clase para los cursos **Análisis de Series de Tiempo** (Facultad de Economía, UNAM) y **Econometría III** (Tecnológico de Monterrey). Orientadas a estudiantes de licenciatura con conocimientos previos de econometría y probabilidad.
+Notas de clase para los cursos **Análisis de Series de Tiempo** (Facultad de Economía, UNAM) y **Econometría II** (Tecnológico de Monterrey). Orientadas a estudiantes de licenciatura con conocimientos previos de econometría y probabilidad.
 
 ## Recursos
 
@@ -23,10 +23,34 @@ Todos los ejemplos se implementan en **R**. El código y los datos están dispon
 
 ## Compilación
 
+Desde R o RStudio:
+
 ```r
-bookdown::render_book("index.Rmd")          # HTML (gitbook)
-bookdown::render_book("index.Rmd", "bookdown::pdf_book")  # PDF
+bookdown::render_book("index.Rmd")                          # HTML (gitbook) → docs/
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")   # PDF → docs/Notas-Series-Tiempo.pdf
 ```
+
+Desde la terminal, `Rscript` necesita saber dónde está pandoc (en macOS, el que trae RStudio):
+
+```sh
+export RSTUDIO_PANDOC=/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools
+Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
+```
+
+### Requisitos
+
+- **Paquetes de R**: ver la sección *Software: R* del capítulo de Introducción (`install.packages(...)` con la lista completa).
+- **PDF**: XeLaTeX vía TinyTeX. Se requieren los paquetes LaTeX `fvextra`, `upquote` y `lineno` (quiebre de líneas largas en bloques de código). Si TinyTeX es de una edición anterior de TeX Live y el espejo por defecto falla, instalarlos desde el repositorio histórico congelado, por ejemplo:
+
+  ```sh
+  tlmgr --verify-repo=none install fvextra upquote lineno \
+    --repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2023/tlnet-final
+  ```
+
+### Reproducibilidad de los datos
+
+- Los datos de los ejemplos están en la carpeta `BD/`.
+- La serie del Bitcoin (capítulo de Volatilidad) está **congelada** en `BD/BTC_USD.RData` (Yahoo Finance, corte: 2026-07-07) para que los resultados del texto sean reproducibles. El chunk `Data_ARCH` incluye, comentado, el código para descargar datos vivos; si se actualiza el snapshot hay que **purgar el caché de knitr** del chunk de selección GARCH (`_bookdown_files/*_cache/*/criterios*`), porque `cache=TRUE` no se invalida al cambiar los datos, y revisar que las conclusiones del texto (orden GARCH óptimo) sigan siendo válidas.
 
 ## Autores
 

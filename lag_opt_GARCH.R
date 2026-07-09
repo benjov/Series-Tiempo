@@ -1,10 +1,12 @@
 # Funcion para determinar los rezagos OPTIMOS de un GARCH:
-Lag_Opt_GARCH <- function(X_t, q_max, p_max){
+
+Lag_Opt_GARCH <- function(X_t, q_max, p_max, arma = c(0, 0)){
 
   library(rugarch)
   # q_max: Rezagos maximos a evaluar del componente ARCH
   # p_max: Rezagos maximos a evaluar del componente GARCH
   # X_t: Serie de Tiempo modelada
+  # arma: Orden (p, q) del ARMA de la media condicional
 
   Criterio_AIC <- matrix(rep(0, 4 * (q_max * p_max)), ncol = 4)
   colnames(Criterio_AIC) <- c("q", "p", "AIC", "Optimo")
@@ -17,7 +19,7 @@ Lag_Opt_GARCH <- function(X_t, q_max, p_max){
 
       model.spec <- ugarchspec(
         variance.model = list(model = "sGARCH", garchOrder = c(i, j)),
-        mean.model     = list(armaOrder = c(0, 0)),
+        mean.model     = list(armaOrder = arma),
         distribution.model = "std"
       )
 

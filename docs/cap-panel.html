@@ -5,7 +5,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 7 Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales | Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<meta name="author" content="Benjamín Oliva">
+<meta name="author" content="Jaime Vázquez Alamilla">
+<meta name="author" content="Omar Alfaro Rivera">
+<meta name="author" content="Emiliano Pérez Caullieres">
+<meta name="author" content="Luis Gerardo Ruíz">
 <meta name="description" content="7.1 Modelos de Datos Panel y Panel VAR  7.1.1 Motivación Los datos panel son una extensión natural del análisis de series de tiempo en el que observamos una misma variable a lo largo del tiempo,...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Capítulo 7 Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales | Análisis de Series de Tiempo">
@@ -69,7 +73,7 @@
 <li><a class="" href="cap-eqdiff.html"><span class="header-section-number">2</span> Introducción al Análisis de Series de Tiempo y Elementos de Ecuaciones en Diferencia</a></li>
 <li><a class="" href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></li>
 <li><a class="" href="cap-noestacionarios.html"><span class="header-section-number">4</span> Procesos No Estacionarios Univariados</a></li>
-<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
+<li><a class="" href="cap-var.html"><span class="header-section-number">5</span> Causalidad de Granger, Modelos Multivariados de Vectores Autorregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado</a></li>
 <li><a class="" href="cap-volatilidad.html"><span class="header-section-number">6</span> Modelos Univariados y Multivariados de Volatilidad</a></li>
 <li><a class="active" href="cap-panel.html"><span class="header-section-number">7</span> Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales</a></li>
 <li><a class="" href="bibliograf%C3%ADa.html">Bibliografía</a></li>
@@ -134,7 +138,7 @@
 </h3>
 <p>Dependencias y configuración:</p>
 <p>Descarga de datos de la librería <code>plm</code>:</p>
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"EmplUK"</span>, package<span class="op">=</span><span class="st">"plm"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Produc"</span>, package<span class="op">=</span><span class="st">"plm"</span><span class="op">)</span></span>
@@ -142,11 +146,11 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Grunfeld"</span>, package<span class="op">=</span><span class="st">"plm"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Wages"</span>, package<span class="op">=</span><span class="st">"plm"</span><span class="op">)</span></span></code></pre></div>
-<p>Descripción de los datos: Grunfeld (1958) contiene 20 observaciones anuales de inversión bruta real (invest), valor real de la empresa (value) y valor real del capital (capital) para 10 grandes empresas de EE.UU. durante 1935–1954.</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<p>Descripción de los datos: Grunfeld <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-grunfeld1958">1958</a>)</span> contiene 20 observaciones anuales de inversión bruta real (invest), valor real de la empresa (value) y valor real del capital (capital) para 10 grandes empresas de EE.UU. durante 1935–1954.</p>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Grunfeld</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "firm"    "year"    "inv"     "value"   "capital"</code></pre>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Grunfeld</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   firm year   inv  value capital
 ## 1    1 1935 317.6 3078.5     2.8
@@ -155,21 +159,21 @@
 ## 4    1 1938 257.7 2792.2   209.2
 ## 5    1 1939 330.8 4313.2   203.4
 ## 6    1 1940 461.2 4643.9   207.2</code></pre>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Invest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span> <span class="va">Grunfeld</span><span class="op">$</span><span class="va">inv</span>, <span class="va">Grunfeld</span><span class="op">$</span><span class="va">firm</span> <span class="op">)</span><span class="op">)</span> <span class="co"># individuals in columns</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] "X1"  "X2"  "X3"  "X4"  "X5"  "X6"  "X7"  "X8"  "X9"  "X10"</code></pre>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="st">"Firm_1"</span>, <span class="st">"Firm_2"</span>, <span class="st">"Firm_3"</span>, <span class="st">"Firm_4"</span>, </span>
 <span>                    <span class="st">"Firm_5"</span>, <span class="st">"Firm_6"</span>, <span class="st">"Firm_7"</span>, <span class="st">"Firm_8"</span>, </span>
 <span>                    <span class="st">"Firm_9"</span>, <span class="st">"Firm_10"</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] "Firm_1"  "Firm_2"  "Firm_3"  "Firm_4"  "Firm_5"  "Firm_6"  "Firm_7" 
-##  [8] "Firm_8"  "Firm_9"  "Firm_10"</code></pre>
+<pre><code>##  [1] "Firm_1"  "Firm_2"  "Firm_3"  "Firm_4"  "Firm_5"  "Firm_6" 
+##  [7] "Firm_7"  "Firm_8"  "Firm_9"  "Firm_10"</code></pre>
 <p>Gráfica:</p>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">$</span><span class="va">Firm_1</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="fl">1</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylab <span class="op">=</span> <span class="st">"Real gross investment"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">$</span><span class="va">Firm_2</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="fl">2</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -187,12 +191,12 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig111"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig111-1.png" alt="Evolución de la inversión por empresa" width="672"><p class="caption">
-Figure 7.1: Evolución de la inversión por empresa
+Figura 7.1: Evolución de la inversión por empresa
 </p>
 </div>
-<p>Prueba de raíz unitaria en panel (Levin et al. 2002, Im et al. 2003, Maddala y Wu 1999, Hadri 2000):</p>
-<p>Consider Levin et al. (2002)</p>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<p>Prueba de raíz unitaria en panel <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-levinlinchu2002">Levin, Lin, and Chu 2002</a>; <a href="bibliograf%C3%ADa.html#ref-impeseranshin2003">Im, Pesaran, and Shin 2003</a>; <a href="bibliograf%C3%ADa.html#ref-maddalachoi1999">Maddala and Wu 1999</a>; <a href="bibliograf%C3%ADa.html#ref-hadri2000">Hadri 2000</a>)</span>:</p>
+<p>Consideremos la prueba de Levin et al. <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-levinlinchu2002">2002</a>)</span>:</p>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">)</span>, test <span class="op">=</span> <span class="st">"levinlin"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in selectT(l, theTs): the time series is short</code></pre>
@@ -203,12 +207,12 @@ Figure 7.1: Evolución de la inversión por empresa
 ## z = -0.63214, p-value = 0.2636
 ## alternative hypothesis: stationarity</code></pre>
 <p>Alternativamente:</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ts_LInvest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">)</span>, start <span class="op">=</span> <span class="fl">1935</span>, end <span class="op">=</span> <span class="fl">1954</span>, freq <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ts_DLInvest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Invest</span><span class="op">)</span>, start <span class="op">=</span> <span class="fl">1935</span>, end <span class="op">=</span> <span class="fl">1954</span>, freq <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, </span>
 <span>                     lag <span class="op">=</span> <span class="fl">1</span>, differences <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_LInvest</span>, test <span class="op">=</span> <span class="st">"levinlin"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in selectT(l, theTs): the time series is short</code></pre>
@@ -218,7 +222,7 @@ Figure 7.1: Evolución de la inversión por empresa
 ## data:  ts_LInvest
 ## z = -0.63214, p-value = 0.2636
 ## alternative hypothesis: stationarity</code></pre>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_LInvest</span>, test <span class="op">=</span> <span class="st">"levinlin"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in selectT(l, theTs): the time series is short</code></pre>
@@ -228,18 +232,29 @@ Figure 7.1: Evolución de la inversión por empresa
 ## statistic: -0.632 
 ## p-value: 0.264 
 ## 
-##         lags obs          rho        trho     p.trho   sigma2ST    sigma2LT
-## Firm_1     0  19  0.006034802  0.05068864 0.96193110 0.03592530 0.014769876
-## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 0.05020448 0.014565004
-## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 0.03073205 0.019141095
-## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 0.06196079 0.018454390
-## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 0.04165516 0.006949122
-## Firm_6     2  17  0.062922587  0.72626225 0.99275186 0.02442139 0.009212851
-## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 0.03230724 0.007274365
-## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 0.06270208 0.026960667
-## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 0.05073398 0.013291332
-## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 0.07672404 0.062496477</code></pre>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+##         lags obs          rho        trho     p.trho   sigma2ST
+## Firm_1     0  19  0.006034802  0.05068864 0.96193110 0.03592530
+## Firm_2     1  18 -0.597193025 -2.95851997 0.03895745 0.05020448
+## Firm_3     3  16 -0.257291999 -1.97135237 0.29979349 0.03073205
+## Firm_4     0  19 -0.172070863 -1.21388533 0.67084314 0.06196079
+## Firm_5     1  18 -0.444726602 -1.69693864 0.43286539 0.04165516
+## Firm_6     2  17  0.062922587  0.72626225 0.99275186 0.02442139
+## Firm_7     2  17 -0.013830411 -0.08442715 0.94937802 0.03230724
+## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 0.06270208
+## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 0.05073398
+## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 0.07672404
+##            sigma2LT
+## Firm_1  0.014769876
+## Firm_2  0.014565004
+## Firm_3  0.019141095
+## Firm_4  0.018454390
+## Firm_5  0.006949122
+## Firm_6  0.009212851
+## Firm_7  0.007274365
+## Firm_8  0.026960667
+## Firm_9  0.013291332
+## Firm_10 0.062496477</code></pre>
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_DLInvest</span>, test <span class="op">=</span> <span class="st">"levinlin"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in selectT(l, theTs): the time series is short</code></pre>
@@ -249,7 +264,7 @@ Figure 7.1: Evolución de la inversión por empresa
 ## data:  ts_DLInvest
 ## z = -8.5076, p-value &lt; 0.00000000000000022
 ## alternative hypothesis: stationarity</code></pre>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_DLInvest</span>, test <span class="op">=</span> <span class="st">"levinlin"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in selectT(l, theTs): the time series is short</code></pre>
@@ -259,28 +274,40 @@ Figure 7.1: Evolución de la inversión por empresa
 ## statistic: -8.508 
 ## p-value: 0 
 ## 
-##         lags obs        rho      trho            p.trho   sigma2ST    sigma2LT
-## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 0.03693616 0.007853674
-## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 0.02832436 0.031954702
-## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 0.03819653 0.022971185
-## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 0.04231849 0.030313940
-## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 0.02737020 0.015226407
-## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 0.02517911 0.008588652
-## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 0.03232079 0.012780800
-## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 0.03277746 0.034905699
-## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 0.05666016 0.019502840
-## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 0.08661396 0.030216984</code></pre>
-<p>Consider Im-Pesaran-Shin Unit-Root Test (2003)</p>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+##         lags obs        rho      trho            p.trho   sigma2ST
+## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 0.03693616
+## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 0.02832436
+## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 0.03819653
+## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 0.04231849
+## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 0.02737020
+## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 0.02517911
+## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 0.03232079
+## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 0.03277746
+## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 0.05666016
+## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 0.08661396
+##            sigma2LT
+## Firm_1  0.007853674
+## Firm_2  0.031954702
+## Firm_3  0.022971185
+## Firm_4  0.030313940
+## Firm_5  0.015226407
+## Firm_6  0.008588652
+## Firm_7  0.012780800
+## Firm_8  0.034905699
+## Firm_9  0.019502840
+## Firm_10 0.030216984</code></pre>
+<p>Consideremos la prueba de raíz unitaria de Im, Pesaran y Shin <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-impeseranshin2003">2003</a>)</span>:</p>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_LInvest</span>, test <span class="op">=</span> <span class="st">"ips"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)
+##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual
+##  Intercepts)
 ## 
 ## data:  ts_LInvest
 ## Wtbar = 0.6833, p-value = 0.7528
 ## alternative hypothesis: stationarity</code></pre>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_LInvest</span>, test <span class="op">=</span> <span class="st">"ips"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>                lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Im-Pesaran-Shin Unit-Root Test 
@@ -300,16 +327,17 @@ Figure 7.1: Evolución de la inversión por empresa
 ## Firm_8     1  18 -0.365024064 -2.26588313 0.18328720 -1.5108 0.9534
 ## Firm_9     0  19 -0.247940802 -1.72877417 0.41668489 -1.5204 0.8654
 ## Firm_10    1  18 -0.197003144 -1.52323519 0.52199891 -1.5108 0.9534</code></pre>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_DLInvest</span>, test <span class="op">=</span> <span class="st">"ips"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual Intercepts)
+##  Im-Pesaran-Shin Unit-Root Test (ex. var.: Individual
+##  Intercepts)
 ## 
 ## data:  ts_DLInvest
 ## Wtbar = -11.14, p-value &lt; 0.00000000000000022
 ## alternative hypothesis: stationarity</code></pre>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_DLInvest</span>, test <span class="op">=</span> <span class="st">"ips"</span>, exo <span class="op">=</span> <span class="st">"intercept"</span>, </span>
 <span>                lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Im-Pesaran-Shin Unit-Root Test 
@@ -318,17 +346,28 @@ Figure 7.1: Evolución de la inversión por empresa
 ## statistic (Wtbar): -11.14 
 ## p-value: 0 
 ## 
-##         lags obs        rho      trho            p.trho    mean    var
-## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 -1.5188 0.8798
-## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 -1.3660 1.1810
-## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 -1.3952 1.0562
-## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 -1.5082 0.9726
-## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 -1.3952 1.0562
-## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 -1.5082 0.9726
-## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 -1.5082 0.9726
-## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 -1.3952 1.0562
-## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 -1.5188 0.8798
-## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 -1.5188 0.8798</code></pre>
+##         lags obs        rho      trho            p.trho    mean
+## Firm_1     0  18 -0.9778879 -4.196070 0.000665206460867 -1.5188
+## Firm_2     3  15 -2.7288380 -4.327510 0.000392850467043 -1.3660
+## Firm_3     2  16 -1.7848678 -5.650917 0.000000790572465 -1.3952
+## Firm_4     1  17 -1.5737470 -5.320458 0.000004309793729 -1.5082
+## Firm_5     2  16 -2.8118586 -5.181259 0.000008564306919 -1.3952
+## Firm_6     1  17 -1.4850311 -4.776618 0.000057171776145 -1.5082
+## Firm_7     1  17 -2.1076263 -6.541451 0.000000005364403 -1.5082
+## Firm_8     2  16 -1.7790739 -4.976338 0.000022818242011 -1.3952
+## Firm_9     0  18 -1.2600946 -5.304469 0.000004667479100 -1.5188
+## Firm_10    0  18 -0.7889550 -3.421651 0.010275559745253 -1.5188
+##            var
+## Firm_1  0.8798
+## Firm_2  1.1810
+## Firm_3  1.0562
+## Firm_4  0.9726
+## Firm_5  1.0562
+## Firm_6  0.9726
+## Firm_7  0.9726
+## Firm_8  1.0562
+## Firm_9  0.8798
+## Firm_10 0.8798</code></pre>
 </div>
 <div id="ejemplo-modelo-dif-in-dif-para-el-inpc-de-análisis-clínicos-update-nov-2022" class="section level3" number="7.1.4">
 <h3>
@@ -378,18 +417,19 @@ Figure 7.1: Evolución de la inversión por empresa
 <p>En nuestro caso, utilizaremos como tratamiento la entrada al mercado de un laboratorio de análisis clínicos en una ciudad determinada.</p>
 <pre><code>## [1] 13420    17</code></pre>
 <pre><code>## # A tibble: 6 × 17
-##   Fecha   Mes  Anio Ciudad INPC  Dummy_FIRMA Marca_01 Marca_02 Marca_03 Marca_04
-##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-## 1 Jul …     7  2002 Área … 68.3…           0        0        0        0        0
-## 2 Ago …     8  2002 Área … 68.3…           0        0        0        0        0
-## 3 Sep …     9  2002 Área … 68.3…           0        0        0        0        0
-## 4 Oct …    10  2002 Área … 68.3…           0        0        0        0        0
-## 5 Nov …    11  2002 Área … 68.3…           0        0        0        0        0
-## 6 Dic …    12  2002 Área … 68.3…           0        0        0        0        0
-## # ℹ 7 more variables: Marca_05 &lt;dbl&gt;, Marca_06 &lt;dbl&gt;, Marca_07 &lt;dbl&gt;,
-## #   Marca_08 &lt;dbl&gt;, Marca_09 &lt;dbl&gt;, Marca_10 &lt;dbl&gt;, Marca_11 &lt;dbl&gt;</code></pre>
+##   Fecha      Mes  Anio Ciudad      INPC  Dummy_FIRMA Marca_01 Marca_02
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Jul 2002     7  2002 Área Metro… 68.3…           0        0        0
+## 2 Ago 2002     8  2002 Área Metro… 68.3…           0        0        0
+## 3 Sep 2002     9  2002 Área Metro… 68.3…           0        0        0
+## 4 Oct 2002    10  2002 Área Metro… 68.3…           0        0        0
+## 5 Nov 2002    11  2002 Área Metro… 68.3…           0        0        0
+## 6 Dic 2002    12  2002 Área Metro… 68.3…           0        0        0
+## # ℹ 9 more variables: Marca_03 &lt;dbl&gt;, Marca_04 &lt;dbl&gt;, Marca_05 &lt;dbl&gt;,
+## #   Marca_06 &lt;dbl&gt;, Marca_07 &lt;dbl&gt;, Marca_08 &lt;dbl&gt;, Marca_09 &lt;dbl&gt;,
+## #   Marca_10 &lt;dbl&gt;, Marca_11 &lt;dbl&gt;</code></pre>
 <p>Selección de ciudades:</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="va">Data</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span> <span class="va">Data</span><span class="op">$</span><span class="va">Ciudad</span> <span class="op">!=</span> <span class="st">'Atlacomulco, Edo. de Méx.'</span> <span class="op">&amp;</span> </span>
 <span>                     <span class="va">Data</span><span class="op">$</span><span class="va">Ciudad</span> <span class="op">!=</span> <span class="st">'Cancún, Q.R.'</span> <span class="op">&amp;</span></span>
 <span>                     <span class="va">Data</span><span class="op">$</span><span class="va">Ciudad</span> <span class="op">!=</span> <span class="st">'Coatzacoalcos, Ver.'</span> <span class="op">&amp;</span></span>
@@ -399,7 +439,7 @@ Figure 7.1: Evolución de la inversión por empresa
 <span>                     <span class="va">Data</span><span class="op">$</span><span class="va">Ciudad</span> <span class="op">!=</span> <span class="st">'Tuxtla Gutiérrez, Chis.'</span> <span class="op">&amp;</span></span>
 <span>                     <span class="va">Data</span><span class="op">$</span><span class="va">Ciudad</span> <span class="op">!=</span> <span class="st">'Zacatecas, Zac.'</span> <span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <p>Transformaciones:</p>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Log de INPC</span></span>
 <span><span class="va">Data</span><span class="op">$</span><span class="va">LINPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">INPC</span><span class="op">)</span> , base <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -488,7 +528,7 @@ Figure 7.1: Evolución de la inversión por empresa
 <span>                                   <span class="st">"Jul 2022"</span>, <span class="st">"Ago 2022"</span>, <span class="st">"Sep 2022"</span>, <span class="st">"</span></span>
 <span><span class="st">                                   Oct 2022"</span>, <span class="st">"Nov 2022"</span>, <span class="st">"Dic 2022"</span> <span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Gráfica:</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Periodo</span>, y <span class="op">=</span> <span class="va">LINPC</span>, group <span class="op">=</span> <span class="va">Ciudad</span>, color <span class="op">=</span> <span class="va">Ciudad</span> <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -500,23 +540,23 @@ Figure 7.1: Evolución de la inversión por empresa
 <p>Hagamos una prueba de Raíces Unitarias.</p>
 <p>Conversión a formato ancho:</p>
 <pre><code>## # A tibble: 6 × 48
-##   Fecha    `Acapulco, Gro.` `Aguascalientes, Ags.` Área Metropolitana de la Cd…¹
-##   &lt;chr&gt;               &lt;dbl&gt;                  &lt;dbl&gt;                         &lt;dbl&gt;
-## 1 Abr 2003             4.39                   4.35                          4.26
-## 2 Abr 2004             4.39                   4.36                          4.31
-## 3 Abr 2005             4.44                   4.36                          4.36
-## 4 Abr 2006             4.47                   4.33                          4.40
-## 5 Abr 2007             4.54                   4.38                          4.42
-## 6 Abr 2008             4.60                   4.41                          4.44
+##   Fecha `Acapulco, Gro.` `Aguascalientes, Ags.` Área Metropolitana d…¹
+##   &lt;chr&gt;            &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;
+## 1 Abr …             4.39                   4.35                   4.26
+## 2 Abr …             4.39                   4.36                   4.31
+## 3 Abr …             4.44                   4.36                   4.36
+## 4 Abr …             4.47                   4.33                   4.40
+## 5 Abr …             4.54                   4.38                   4.42
+## 6 Abr …             4.60                   4.41                   4.44
 ## # ℹ abbreviated name: ¹​`Área Metropolitana de la Cd. de México`
-## # ℹ 44 more variables: `Campeche, Camp.` &lt;dbl&gt;, `Cd. Acuña, Coah.` &lt;dbl&gt;,
-## #   `Cd. Jiménez, Chih.` &lt;dbl&gt;, `Cd. Juárez, Chih.` &lt;dbl&gt;,
-## #   `Chetumal, Q.R.` &lt;dbl&gt;, `Chihuahua, Chih.` &lt;dbl&gt;, `Colima, Col.` &lt;dbl&gt;,
-## #   `Córdoba, Ver.` &lt;dbl&gt;, `Cortazar, Gto.` &lt;dbl&gt;, `Cuernavaca, Mor.` &lt;dbl&gt;,
-## #   `Culiacán, Sin.` &lt;dbl&gt;, `Durango, Dgo.` &lt;dbl&gt;, `Fresnillo, Zac.` &lt;dbl&gt;,
-## #   `Guadalajara, Jal.` &lt;dbl&gt;, `Hermosillo, Son.` &lt;dbl&gt;, …</code></pre>
+## # ℹ 44 more variables: `Campeche, Camp.` &lt;dbl&gt;,
+## #   `Cd. Acuña, Coah.` &lt;dbl&gt;, `Cd. Jiménez, Chih.` &lt;dbl&gt;,
+## #   `Cd. Juárez, Chih.` &lt;dbl&gt;, `Chetumal, Q.R.` &lt;dbl&gt;,
+## #   `Chihuahua, Chih.` &lt;dbl&gt;, `Colima, Col.` &lt;dbl&gt;,
+## #   `Córdoba, Ver.` &lt;dbl&gt;, `Cortazar, Gto.` &lt;dbl&gt;,
+## #   `Cuernavaca, Mor.` &lt;dbl&gt;, `Culiacán, Sin.` &lt;dbl&gt;, …</code></pre>
 <p>Series de tiempo:</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ts_LINPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span> <span class="va">LINPC</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="fl">2</span><span class="op">:</span><span class="fl">48</span> <span class="op">)</span><span class="op">]</span>, </span>
 <span>               start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2002</span>, <span class="fl">7</span><span class="op">)</span>,</span>
 <span>               freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
@@ -534,69 +574,71 @@ Figure 7.1: Evolución de la inversión por empresa
    &amp; = &amp; Int(4.99) \\
    &amp; = &amp; 4
 \end{eqnarray*}\]</span></p>
-<p>Prueba de Levin et al. (2002):</p>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<p>Prueba de Levin et al. <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-levinlinchu2002">2002</a>)</span>:</p>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_LINPC</span>, test <span class="op">=</span> <span class="st">"levinlin"</span>, exo <span class="op">=</span> <span class="st">"trend"</span>, <span class="co"># exo = c("none", "intercept", "trend"),</span></span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and
-##  Trend)
+##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts
+##  and Trend)
 ## 
 ## data:  ts_LINPC
 ## z = -56.022, p-value &lt; 2.2e-16
 ## alternative hypothesis: stationarity</code></pre>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_DLINPC</span>, test <span class="op">=</span> <span class="st">"levinlin"</span>, exo <span class="op">=</span> <span class="st">"trend"</span>, <span class="co"># exo = c("none", "intercept", "trend"),</span></span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts and
-##  Trend)
+##  Levin-Lin-Chu Unit-Root Test (ex. var.: Individual Intercepts
+##  and Trend)
 ## 
 ## data:  ts_DLINPC
 ## z = -107.84, p-value &lt; 2.2e-16
 ## alternative hypothesis: stationarity</code></pre>
-<p>Prueba de Choi (2001):</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<p>Prueba de Choi <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-choi2001">2001</a>)</span>:</p>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_LINPC</span>, test <span class="op">=</span> <span class="st">"logit"</span>, exo <span class="op">=</span> <span class="st">"trend"</span>, <span class="co"># exo = c("none", "intercept", "trend"),</span></span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)
+##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts
+##  and Trend)
 ## 
 ## data:  ts_LINPC
 ## L* = -85.506, df = 239, p-value &lt; 2.2e-16
 ## alternative hypothesis: stationarity</code></pre>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_DLINPC</span>, test <span class="op">=</span> <span class="st">"logit"</span>, exo <span class="op">=</span> <span class="st">"trend"</span>, <span class="co"># exo = c("none", "intercept", "trend"),</span></span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts and Trend)
+##  Choi's Logit Unit-Root Test (ex. var.: Individual Intercepts
+##  and Trend)
 ## 
 ## data:  ts_DLINPC
 ## L* = -278.56, df = 239, p-value &lt; 2.2e-16
 ## alternative hypothesis: stationarity</code></pre>
-<p>Prueba de Hadri (2000):</p>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<p>Prueba de Hadri <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-hadri2000">2000</a>)</span>:</p>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_LINPC</span>, test <span class="op">=</span> <span class="st">"hadri"</span>, exo <span class="op">=</span> <span class="st">"trend"</span>, <span class="co"># exo = c("none", "intercept", "trend"),</span></span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.
-##  Consistent)
+##  Hadri Test (ex. var.: Individual Intercepts and Trend)
+##  (Heterosked. Consistent)
 ## 
 ## data:  ts_LINPC
 ## z = -2.7, p-value = 0.9965
 ## alternative hypothesis: at least one series has a unit root</code></pre>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/plm/man/purtest.html">purtest</a></span><span class="op">(</span><span class="va">ts_DLINPC</span>, test <span class="op">=</span> <span class="st">"hadri"</span>, exo <span class="op">=</span> <span class="st">"trend"</span>, <span class="co"># exo = c("none", "intercept", "trend"),</span></span>
 <span>        lags <span class="op">=</span> <span class="st">"AIC"</span>, pmax <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
-##  Hadri Test (ex. var.: Individual Intercepts and Trend) (Heterosked.
-##  Consistent)
+##  Hadri Test (ex. var.: Individual Intercepts and Trend)
+##  (Heterosked. Consistent)
 ## 
 ## data:  ts_DLINPC
 ## z = -8.9351, p-value = 1
 ## alternative hypothesis: at least one series has a unit root</code></pre>
 <p>Estimación PANEL con TREND:</p>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Modelo Final</span></span>
 <span><span class="va">fixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plm/man/plm.html">plm</a></span><span class="op">(</span> <span class="va">LINPC</span> <span class="op">~</span> <span class="va">Dummy_FIRMA</span> <span class="op">+</span> <span class="va">Marca_01</span> <span class="op">+</span> <span class="va">Marca_02</span> <span class="op">+</span> <span class="va">Marca_03</span> <span class="op">+</span> <span class="va">Marca_04</span> <span class="op">+</span> <span class="va">Marca_05</span> <span class="op">+</span> </span>
 <span>              <span class="va">Marca_06</span> <span class="op">+</span> <span class="va">Marca_07</span> <span class="op">+</span> <span class="va">Marca_08</span> <span class="op">+</span> <span class="va">Marca_09</span> <span class="op">+</span> <span class="va">Marca_10</span> <span class="op">+</span> <span class="va">Marca_11</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Periodo</span><span class="op">)</span>,</span>
@@ -605,7 +647,7 @@ Figure 7.1: Evolución de la inversión por empresa
 <span>             model <span class="op">=</span> <span class="st">"within"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame
 ##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")</code></pre>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">fixed</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Oneway (individual) effect Within Model
 ## 
@@ -644,7 +686,7 @@ Figure 7.1: Evolución de la inversión por empresa
 ## R-Squared:      0.81838
 ## Adj. R-Squared: 0.81743
 ## F-statistic: 3937.79 on 13 and 11361 DF, p-value: &lt; 2.22e-16</code></pre>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Modelo Final</span></span>
 <span><span class="va">fixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plm/man/plm.html">plm</a></span><span class="op">(</span> <span class="va">LINPC</span> <span class="op">~</span> <span class="va">Dummy_FIRMA</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Periodo</span><span class="op">)</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">Data</span>, </span>
@@ -652,7 +694,7 @@ Figure 7.1: Evolución de la inversión por empresa
 <span>             model <span class="op">=</span> <span class="st">"within"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in pdata.frame(data, index): at least one NA in at least one index dimension in resulting pdata.frame
 ##  to find out which, use, e.g., table(index(your_pdataframe), useNA = "ifany")</code></pre>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">fixed</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Oneway (individual) effect Within Model
 ## 
@@ -667,9 +709,12 @@ Figure 7.1: Evolución de la inversión por empresa
 ## -0.4337032 -0.0421466  0.0026796  0.0480377  0.2504866 
 ## 
 ## Coefficients:
-##                        Estimate  Std. Error  t-value      Pr(&gt;|t|)    
-## Dummy_FIRMA         -0.02239578  0.00417897  -5.3592 0.00000008525 ***
-## as.numeric(Periodo)  0.00220318  0.00001032 213.4825     &lt; 2.2e-16 ***
+##                        Estimate  Std. Error  t-value      Pr(&gt;|t|)
+## Dummy_FIRMA         -0.02239578  0.00417897  -5.3592 0.00000008525
+## as.numeric(Periodo)  0.00220318  0.00001032 213.4825     &lt; 2.2e-16
+##                        
+## Dummy_FIRMA         ***
+## as.numeric(Periodo) ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -711,7 +756,7 @@ Figure 7.1: Evolución de la inversión por empresa
 <h3>
 <span class="header-section-number">7.2.1</span> Ejemplo 1<a class="anchor" aria-label="anchor" href="#ejemplo-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>La estimación sigue la literatura de panel dinámico de Arellano y Bond (1991), Blundell y Bond (1998) y Roodman (2009).
+<p>La estimación sigue la literatura de panel dinámico de Arellano y Bond <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-arrellanobond1991">1991</a>)</span>, Blundell y Bond <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-blundellbond1998">1998</a>)</span> y Roodman <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-roodman2009">2009</a>)</span>.
 Este conjunto de datos describe el empleo, los salarios, el capital y la producción de 140 empresas en el Reino Unido durante 1976–1984.
 Se estima un modelo en el que el empleo (<span class="math inline">\(n\)</span>) es explicado por sus valores pasados (2 rezagos), los valores actuales y el primer rezago de los salarios (<span class="math inline">\(w\)</span>) y la producción (<span class="math inline">\(ys\)</span>), y el valor actual del capital (<span class="math inline">\(k\)</span>).</p>
 <pre><code>##  [1] "c1"       "ind"      "year"     "emp"      "wage"     "cap"     
@@ -719,36 +764,36 @@ Se estima un modelo en el que el empleo (<span class="math inline">\(n\)</span>)
 ## [13] "yearm1"   "id"       "nL1"      "nL2"      "wL1"      "kL1"     
 ## [19] "kL2"      "ysL1"     "ysL2"     "yr1976"   "yr1977"   "yr1978"  
 ## [25] "yr1979"   "yr1980"   "yr1981"   "yr1982"   "yr1983"   "yr1984"</code></pre>
-<pre><code>##    c1 ind year   emp    wage    cap indoutpt        n        w          k
-## 1 1-1   7 1977 5.041 13.1516 0.5894  95.7072 1.617604 2.576543 -0.5286502
-## 2 2-1   7 1978 5.600 12.3018 0.6318  97.3569 1.722767 2.509746 -0.4591824
-## 3 3-1   7 1979 5.015 12.8395 0.6771  99.6083 1.612433 2.552526 -0.3899363
-## 4 4-1   7 1980 4.715 13.8039 0.6171 100.5501 1.550749 2.624951 -0.4827242
-## 5 5-1   7 1981 4.093 14.2897 0.5076  99.5581 1.409278 2.659539 -0.6780615
-## 6 6-1   7 1982 3.166 14.8681 0.4229  98.6151 1.152469 2.699218 -0.8606195
-##         ys rec yearm1 id      nL1      nL2      wL1        kL1        kL2
-## 1 4.561294   1   1977  1       NA       NA       NA         NA         NA
-## 2 4.578383   2   1977  1 1.617604       NA 2.576543 -0.5286502         NA
-## 3 4.601245   3   1978  1 1.722767 1.617604 2.509746 -0.4591824 -0.5286502
-## 4 4.610656   4   1979  1 1.612433 1.722767 2.552526 -0.3899363 -0.4591824
-## 5 4.600741   5   1980  1 1.550749 1.612433 2.624951 -0.4827242 -0.3899363
-## 6 4.591224   6   1981  1 1.409278 1.550749 2.659539 -0.6780615 -0.4827242
-##       ysL1     ysL2 yr1976 yr1977 yr1978 yr1979 yr1980 yr1981 yr1982 yr1983
-## 1       NA       NA      0      1      0      0      0      0      0      0
-## 2 4.561294       NA      0      0      1      0      0      0      0      0
-## 3 4.578383 4.561294      0      0      0      1      0      0      0      0
-## 4 4.601245 4.578383      0      0      0      0      1      0      0      0
-## 5 4.610656 4.601245      0      0      0      0      0      1      0      0
-## 6 4.600741 4.610656      0      0      0      0      0      0      1      0
-##   yr1984
-## 1      0
-## 2      0
-## 3      0
-## 4      0
-## 5      0
-## 6      0</code></pre>
+<pre><code>##    c1 ind year   emp    wage    cap indoutpt        n        w
+## 1 1-1   7 1977 5.041 13.1516 0.5894  95.7072 1.617604 2.576543
+## 2 2-1   7 1978 5.600 12.3018 0.6318  97.3569 1.722767 2.509746
+## 3 3-1   7 1979 5.015 12.8395 0.6771  99.6083 1.612433 2.552526
+## 4 4-1   7 1980 4.715 13.8039 0.6171 100.5501 1.550749 2.624951
+## 5 5-1   7 1981 4.093 14.2897 0.5076  99.5581 1.409278 2.659539
+## 6 6-1   7 1982 3.166 14.8681 0.4229  98.6151 1.152469 2.699218
+##            k       ys rec yearm1 id      nL1      nL2      wL1
+## 1 -0.5286502 4.561294   1   1977  1       NA       NA       NA
+## 2 -0.4591824 4.578383   2   1977  1 1.617604       NA 2.576543
+## 3 -0.3899363 4.601245   3   1978  1 1.722767 1.617604 2.509746
+## 4 -0.4827242 4.610656   4   1979  1 1.612433 1.722767 2.552526
+## 5 -0.6780615 4.600741   5   1980  1 1.550749 1.612433 2.624951
+## 6 -0.8606195 4.591224   6   1981  1 1.409278 1.550749 2.659539
+##          kL1        kL2     ysL1     ysL2 yr1976 yr1977 yr1978 yr1979
+## 1         NA         NA       NA       NA      0      1      0      0
+## 2 -0.5286502         NA 4.561294       NA      0      0      1      0
+## 3 -0.4591824 -0.5286502 4.578383 4.561294      0      0      0      1
+## 4 -0.3899363 -0.4591824 4.601245 4.578383      0      0      0      0
+## 5 -0.4827242 -0.3899363 4.610656 4.601245      0      0      0      0
+## 6 -0.6780615 -0.4827242 4.600741 4.610656      0      0      0      0
+##   yr1980 yr1981 yr1982 yr1983 yr1984
+## 1      0      0      0      0      0
+## 2      0      0      0      0      0
+## 3      0      0      0      0      0
+## 4      1      0      0      0      0
+## 5      0      1      0      0      0
+## 6      0      0      1      0      0</code></pre>
 <p>Estimación</p>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#?pvargmm</span></span>
 <span></span>
 <span><span class="va">Arellano_Bond_1991_table4b</span> <span class="op">&lt;-</span> <span class="fu">pvargmm</span><span class="op">(</span> dependent_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span>,</span>
@@ -761,7 +806,7 @@ Se estima un modelo en el que el empleo (<span class="math inline">\(n\)</span>)
 <span>                                       max_instr_dependent_vars <span class="op">=</span> <span class="fl">99</span>,</span>
 <span>                                       min_instr_dependent_vars <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>                                       collapse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">Arellano_Bond_1991_table4b</span><span class="op">)</span></span></code></pre></div>
 <p>
 <b>Dynamic Panel VAR estimation, two-step GMM</b>
@@ -1009,13 +1054,14 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <h3>
 <span class="header-section-number">7.2.2</span> Ejemplo 2:<a class="anchor" aria-label="anchor" href="#ejemplo-2"><i class="fas fa-link"></i></a>
 </h3>
-<p>Se utiliza un conjunto de datos panel de 265 municipios suecos durante 9 años (1979–1987). Las variables incluyen el gasto total (<code>expenditures</code>), los ingresos propios (<code>revenues</code>) y las transferencias intergubernamentales recibidas por el municipio (<code>grants</code>). Fuente: Dahlberg y Johansson (2000). Las transferencias del gobierno central al gobierno local son de tres tipos: apoyo a municipios con baja capacidad fiscal, transferencias para financiar ciertas actividades del gobierno local, y transferencias destinadas a inversiones específicas.</p>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<p>Se utiliza un conjunto de datos panel de 265 municipios suecos durante 9 años (1979–1987). Las variables incluyen el gasto total (<code>expenditures</code>), los ingresos propios (<code>revenues</code>) y las transferencias intergubernamentales recibidas por el municipio (<code>grants</code>). Fuente: Dahlberg y Johansson <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-dahlbergjohansson2000">2000</a>)</span>. Las transferencias del gobierno central al gobierno local son de tres tipos: apoyo a municipios con baja capacidad fiscal, transferencias para financiar ciertas actividades del gobierno local, y transferencias destinadas a inversiones específicas.</p>
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Dahlberg"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Dahlberg</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "id"           "year"         "expenditures" "revenues"     "grants"</code></pre>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<pre><code>## [1] "id"           "year"         "expenditures" "revenues"    
+## [5] "grants"</code></pre>
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Dahlberg</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    id year expenditures  revenues    grants
 ## 1 114 1979    0.0229736 0.0181770 0.0054429
@@ -1025,7 +1071,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 ## 5 114 1983    0.0226474 0.0179979 0.0055908
 ## 6 114 1984    0.0215601 0.0179949 0.0047536</code></pre>
 <p>Estimación:</p>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex1_dahlberg_data</span> <span class="op">&lt;-</span> <span class="fu">pvargmm</span><span class="op">(</span>dependent_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"expenditures"</span>, <span class="st">"revenues"</span>, <span class="st">"grants"</span><span class="op">)</span>,</span>
 <span>          lags <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>          transformation <span class="op">=</span> <span class="st">"fod"</span>,</span>
@@ -1039,9 +1085,10 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <span>          min_instr_predet_vars <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>          collapse <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :
-## The matrix D_e is singular, therefore the general inverse is used</code></pre>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<pre><code>## Warning in pvargmm(dependent_vars = c("expenditures", "revenues",
+## "grants"), : The matrix D_e is singular, therefore the general
+## inverse is used</code></pre>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">ex1_dahlberg_data</span><span class="op">)</span></span></code></pre></div>
 <p>
 <b>Dynamic Panel VAR estimation, two-step GMM</b>
@@ -1166,8 +1213,8 @@ GMM-type<br><em>Dependent vars: L(2,7))<br>Collapse = FALSE</em>
 </p>
 <p>
 <b>Hansen test of overid. restrictions:</b> <em>chi2(243) = 263.01 Prob &gt; chi2 = 0.18<br>(Robust, but weakened by many instruments.)</em><br></p>
-<p>Selección de rezagos óptimos mediante el procedimiento de Andrews y Lu (2001):</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<p>Selección de rezagos óptimos mediante el procedimiento de Andrews y Lu <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-andrewslu2001">2001</a>)</span>:</p>
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">Andrews_Lu_MMSC</span><span class="op">(</span><span class="va">ex1_dahlberg_data</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $MMSC_BIC
 ## [1] -1610.877
@@ -1177,7 +1224,7 @@ GMM-type<br><em>Dependent vars: L(2,7))<br>Collapse = FALSE</em>
 ## 
 ## $MMSC_HQIC
 ## [1] -792.3698</code></pre>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex2_dahlberg_data</span> <span class="op">&lt;-</span> <span class="fu">pvargmm</span><span class="op">(</span>dependent_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"expenditures"</span>, <span class="st">"revenues"</span>, <span class="st">"grants"</span><span class="op">)</span>,</span>
 <span>                             lags <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                             transformation <span class="op">=</span> <span class="st">"fod"</span>,</span>
@@ -1190,9 +1237,10 @@ GMM-type<br><em>Dependent vars: L(2,7))<br>Collapse = FALSE</em>
 <span>                             min_instr_dependent_vars <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>                             min_instr_predet_vars <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>                             collapse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning in pvargmm(dependent_vars = c("expenditures", "revenues", "grants"), :
-## The matrix D_e is singular, therefore the general inverse is used</code></pre>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<pre><code>## Warning in pvargmm(dependent_vars = c("expenditures", "revenues",
+## "grants"), : The matrix D_e is singular, therefore the general
+## inverse is used</code></pre>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">ex2_dahlberg_data</span><span class="op">)</span></span></code></pre></div>
 <p>
 <b>Dynamic Panel VAR estimation, two-step GMM</b>
@@ -1401,7 +1449,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 </p>
 <p>
 <b>Hansen test of overid. restrictions:</b> <em>chi2(225) = 260.11 Prob &gt; chi2 = 0.054<br>(Robust, but weakened by many instruments.)</em><br></p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">Andrews_Lu_MMSC</span><span class="op">(</span><span class="va">ex2_dahlberg_data</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $MMSC_BIC
 ## [1] -1486.935
@@ -1412,7 +1460,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 ## $MMSC_HQIC
 ## [1] -734.1071</code></pre>
 <p>Estabilidad del proceso autorregresivo:</p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stab_ex1_dahlberg_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/stability.html">stability</a></span><span class="op">(</span><span class="va">ex1_dahlberg_data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">stab_ex1_dahlberg_data</span><span class="op">)</span></span></code></pre></div>
@@ -1425,18 +1473,18 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 ## 
 ## All the eigenvalues lie inside the unit circle.
 ## PVAR satisfies stability condition.</code></pre>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">stab_ex1_dahlberg_data</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning: `aes_()` was deprecated in ggplot2 3.0.0.
 ## ℹ Please use tidy evaluation idioms with `aes()`
 ## ℹ The deprecated feature was likely used in the panelvar package.
 ##   Please report the issue to the authors.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning
+## was generated.</code></pre>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-54-1.png" width="672"></div>
 <p>Funciones de impulso-respuesta (comentadas; descomentar para ejecutar):</p>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ex1_dahlberg_data_oirf &lt;-  oirf(ex1_dahlberg_data, n.ahead = 8)</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co"># ex1_dahlberg_data_girf &lt;-  girf(ex1_dahlberg_data, n.ahead = 8, ma_approx_steps= 8)</span></span>
@@ -1472,7 +1520,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
     \Delta \hat{e}_{it} = \hat{\rho}_i \hat{e}_{i,t-1} + \sum_{j=1}^{k_i} \hat{\psi}_{ij} \Delta \hat{e}_{i,t-j} + \hat{v}_{it}
     \tag{7.10}
 \end{equation}\]</span></p>
-<p>A partir de los residuales <span class="math inline">\(\hat{v}_{it}\)</span> y de las varianzas de largo plazo <span class="math inline">\(\hat{L}_{11i}^2\)</span> (que corrigen la correlación serial), Pedroni (1999) construye siete estadísticos divididos en dos grupos:</p>
+<p>A partir de los residuales <span class="math inline">\(\hat{v}_{it}\)</span> y de las varianzas de largo plazo <span class="math inline">\(\hat{L}_{11i}^2\)</span> (que corrigen la correlación serial), Pedroni <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-pedroni1999">1999</a>)</span> construye siete estadísticos divididos en dos grupos:</p>
 <p><strong>Estadísticos de dimensión interna (within-dimension).</strong> Imponen un coeficiente autorregresivo <span class="math inline">\(\rho_i = \rho\)</span> común al hacer la suma sobre individuos. Se componen del estadístico Panel-<span class="math inline">\(\nu\)</span> (cociente de varianzas, diverge hacia la derecha bajo <span class="math inline">\(H_1\)</span>), el Panel-<span class="math inline">\(\rho\)</span> (análogo al estadístico <span class="math inline">\(\rho\)</span> de Phillips-Perron), el Panel-<span class="math inline">\(t\)</span> no paramétrico y el Panel-ADF paramétrico.</p>
 <p><strong>Estadísticos de dimensión entre grupos (between-dimension).</strong> Promedian estadísticos individuales sobre los <span class="math inline">\(N\)</span> individuos, permitiendo que <span class="math inline">\(\rho_i\)</span> difiera entre individuos bajo la alternativa. Se componen del Group-<span class="math inline">\(\rho\)</span>, el Group-<span class="math inline">\(t\)</span> no paramétrico y el Group-ADF paramétrico.</p>
 <p>Bajo la hipótesis nula de no cointegración, todos los estadísticos estandarizados convergen en distribución a una normal estándar:
@@ -1514,7 +1562,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <h3>
 <span class="header-section-number">7.4.2</span> Regímenes determinados por información observable<a class="anchor" aria-label="anchor" href="#reg%C3%ADmenes-determinados-por-informaci%C3%B3n-observable"><i class="fas fa-link"></i></a>
 </h3>
-<p>En estos casos asumimos que el régimen ocurre en un momento <span class="math inline">\(t\)</span> y puede ser determinado por una variable observable. Este modelo es conocido como el modelo autoregresivo con umbral (TAR, Threshold Autoregressive model). En este caso también diremos que cuando el régimen está determinado por la información de la misma serie será llamado Self-Exciting TAR (SETAR).</p>
+<p>En estos casos asumimos que el régimen ocurre en un momento <span class="math inline">\(t\)</span> y puede ser determinado por una variable observable. Este modelo es conocido como el modelo autorregresivo con umbral (TAR, Threshold Autoregressive model). En este caso también diremos que cuando el régimen está determinado por la información de la misma serie será llamado Self-Exciting TAR (SETAR).</p>
 <p>Veamos un caso particular. Supongamos que existe un umbral, <span class="math inline">\(c\)</span>, para el régimen que está determinado por <span class="math inline">\(q_t = y_{t-1}\)</span> y que el estado de la naturaleza nos permite establecer dos estados o regímenes:
 <span class="math display">\[\begin{equation}
     y_t =
@@ -1643,29 +1691,29 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 ## 5 0.2525427
 ## 6 0.2466902</code></pre>
 <p>Conversión a series de tiempo:</p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">flu</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">D_flu</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">flu</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>Gráficas:</p>
-<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">flu</span>, type <span class="op">=</span> <span class="st">"b"</span>, col <span class="op">=</span> <span class="st">"darkred"</span>, ylab <span class="op">=</span> <span class="st">""</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">"Monthly rates of deaths due to flu in the United States"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-58-1.png" width="672"></div>
-<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">D_flu</span>, type<span class="op">=</span><span class="st">"b"</span>, col <span class="op">=</span> <span class="st">"darkred"</span>, ylab <span class="op">=</span> <span class="st">""</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">"Diff Monthly rates of deaths due to flu in the United States"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-58-2.png" width="672"></div>
 <p>El paquete <code>tsDyn</code> simplifica la estimación en pocos pasos:</p>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#?setar</span></span>
 <span></span>
 <span><span class="va">D_flu_tar4_05</span> <span class="op">&lt;-</span> <span class="fu">setar</span><span class="op">(</span><span class="va">D_flu</span>, m <span class="op">=</span> <span class="fl">4</span>, thDelay <span class="op">=</span> <span class="fl">0</span>, th <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>## Warning: 
 ## With the threshold you gave (0.05) there is a regime with less than trim=15% observations (86.51%, 13.49%, )</code></pre>
-<pre><code>## Warning: Possible unit root in the high regime. Roots are: 0.6182 0.6244 0.6244
-## 0.6182</code></pre>
-<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<pre><code>## Warning: Possible unit root in the high regime. Roots are: 0.6182
+## 0.6244 0.6244 0.6182</code></pre>
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">D_flu_tar4_05</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>## 
 ## Non linear autoregressive model
@@ -1712,15 +1760,15 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 ## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)
 ## 
 ## Value: 0.05 (fixed)</code></pre>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">D_flu_tar4_05</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-1.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-2.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-3.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-4.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-5.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-6.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-7.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-8.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-9.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-60-10.png" width="672"></p>
 <p>Si no se especifica el umbral (<code>th</code>), <code>setar</code> lo busca automáticamente en una grilla (resultado típico: ~0.038):</p>
-<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">D_flu_tar4</span> <span class="op">&lt;-</span> <span class="fu">setar</span><span class="op">(</span><span class="va">D_flu</span>, m <span class="op">=</span> <span class="fl">4</span>, thDelay <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning: Possible unit root in the high regime. Roots are: 0.6316 0.7222 0.7222
-## 0.6316</code></pre>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<pre><code>## Warning: Possible unit root in the high regime. Roots are: 0.6316
+## 0.7222 0.7222 0.6316</code></pre>
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">D_flu_tar4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Non linear autoregressive model
@@ -1728,8 +1776,10 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 ## SETAR model ( 2 regimes)
 ## Coefficients:
 ## Low regime:
-##        const.L         phiL.1         phiL.2         phiL.3         phiL.4 
-## -0.00006287604  0.44640751264 -0.23158878472  0.10701408961 -0.14406085874 
+##        const.L         phiL.1         phiL.2         phiL.3 
+## -0.00006287604  0.44640751264 -0.23158878472  0.10701408961 
+##         phiL.4 
+## -0.14406085874 
 ## 
 ## High regime:
 ##    const.H     phiH.1     phiH.2     phiH.3     phiH.4 
@@ -1767,7 +1817,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 ## Variable: Z(t) = + (1) X(t) + (0) X(t-1)+ (0) X(t-2)+ (0) X(t-3)
 ## 
 ## Value: 0.03798</code></pre>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">D_flu_tar4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-1.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-2.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-3.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-4.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-5.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-6.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-7.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-8.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-9.png" width="672"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-61-10.png" width="672"></p>
 </div>
@@ -1778,7 +1828,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <p>Este capítulo amplió el análisis de series de tiempo a dos dimensiones adicionales: la dimensión transversal (datos panel) y la no linealidad (modelos de cambio de régimen).</p>
 <p><strong>Datos panel.</strong> Los datos panel combinan series de tiempo para múltiples individuos o unidades (<span class="math inline">\(N\)</span> individuos, <span class="math inline">\(T\)</span> periodos). El modelo básico incluye efectos fijos <span class="math inline">\(\alpha_i\)</span> que capturan heterogeneidad no observada constante en el tiempo. Las pruebas de raíz unitaria en panel (Levin et al. 2002, Im et al. 2003, Maddala y Wu 1999, Hadri 2000) amplían el poder estadístico al explotar la dimensión transversal; plantean hipótesis nulas de no estacionariedad con hipótesis alternativas homogéneas o heterogéneas según la prueba.</p>
 <p><strong>Diferencia en diferencias (DiD).</strong> El estimador DiD identifica el efecto causal de un tratamiento comparando la variación en el tiempo del grupo tratado con la del grupo de control. Su validez descansa en el supuesto de tendencias paralelas: en ausencia del tratamiento, ambos grupos habrían seguido trayectorias paralelas.</p>
-<p><strong>Panel VAR.</strong> El Panel VAR (PVAR) combina las ventajas del VAR clásico con la dimensión transversal del panel. Se estima mediante GMM con instrumentos basados en los rezagos de las propias variables, controlando por efectos fijos mediante transformación de primeras diferencias o desviaciones ortogonales. La selección del número de rezagos sigue el criterio de Andrews y Lu (2001).</p>
+<p><strong>Panel VAR.</strong> El Panel VAR (PVAR) combina las ventajas del VAR clásico con la dimensión transversal del panel. Se estima mediante GMM con instrumentos basados en los rezagos de las propias variables, controlando por efectos fijos mediante transformación de primeras diferencias o desviaciones ortogonales. La selección del número de rezagos sigue el criterio de Andrews y Lu <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-andrewslu2001">2001</a>)</span>.</p>
 <p><strong>Modelos no lineales.</strong> Cuando la dinámica de una serie cambia de forma discreta según el estado del sistema, los modelos de cambio de régimen son más apropiados que los modelos lineales.</p>
 <ul>
 <li><p><em>TAR (Threshold Autoregressive):</em> el régimen depende de si una variable observable supera un umbral <span class="math inline">\(c\)</span>. En la variante SETAR, el umbral lo determina la propia serie rezagada.</p></li>
@@ -1843,7 +1893,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres, Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

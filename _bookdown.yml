@@ -1,5 +1,8 @@
 book_filename: "Notas-Series-Tiempo"
 language:
+  label:
+    fig: "Figura "
+    tab: "Cuadro "
   ui:
     chapter_name: "Capítulo "
 delete_merged_file: true
