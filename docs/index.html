@@ -5,15 +5,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
-<meta name="description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
+<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<meta name="description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría II del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Análisis de Series de Tiempo">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
+<meta property="og:description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría II del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Análisis de Series de Tiempo">
-<meta name="twitter:description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
+<meta name="twitter:description" content="Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría II del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -83,14 +83,15 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="análisis-de-series-de-tiempo" class="section level1 unnumbered">
 <h1>Análisis de Series de Tiempo<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-de-series-de-tiempo"><i class="fas fa-link"></i></a>
 </h1>
-<p><strong>Facultad de Economía, Universidad Nacional Autónoma de México</strong></p>
+<p><strong>Facultad de Economía, Universidad Nacional Autónoma de México</strong>
+<strong>Departamento de Economía, Tecnológico de Monterrey, Campus Santa Fe</strong></p>
 <p>Benjamín Oliva · Omar Alfaro Rivera · Emiliano Pérez Caullieres · Luis Gerardo Ruíz</p>
-<p><em>Versión: Junio 2026</em></p>
+<p><em>Versión: Julio 2026</em></p>
 <div class="inline-figure"><img src="Portada.jpg" style="display: block; margin: 0 auto" width="400" height="300"></div>
 <div id="presentación" class="section level2 unnumbered">
 <h2>Presentación<a class="anchor" aria-label="anchor" href="#presentaci%C3%B3n"><i class="fas fa-link"></i></a>
 </h2>
-<p>Estas notas corresponden al curso de <strong>Análisis de Series de Tiempo</strong> de la Facultad de Economía de la Universidad Nacional Autónoma de México (UNAM) y al curso de <strong>Econometría III</strong> del Tecnológico de Monterrey. Están orientadas a estudiantes de licenciatura con conocimientos previos de econometría y probabilidad, y tienen como objetivo ofrecer una introducción rigurosa pero accesible a los principales modelos de series de tiempo, tanto desde la perspectiva teórica como computacional.</p>
+<p>Estas notas corresponden al curso de <strong>Análisis de Series de Tiempo</strong> de la Facultad de Economía de la Universidad Nacional Autónoma de México (UNAM) y al curso de <strong>Econometría II</strong> del Tecnológico de Monterrey, Campus Santa Fe. Están orientadas a estudiantes de licenciatura con conocimientos previos de econometría y probabilidad, y tienen como objetivo ofrecer una introducción rigurosa pero accesible a los principales modelos de series de tiempo, tanto desde la perspectiva teórica y de matemática formal como computacional.</p>
 <p>El material cubre los siguientes temas:</p>
 <ol style="list-style-type: decimal">
 <li>Ecuaciones en diferencia y su relación con los procesos estocásticos.</li>
@@ -152,7 +153,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on junio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

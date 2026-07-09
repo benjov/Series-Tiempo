@@ -2,7 +2,7 @@
 
 ## Motivación
 
-En este capítulo discutiremos los modelos de Heterocedasticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y modelos de Heterocedasticidad Condicional Autoregresiva Generalizados (GARCH, por sus siglas en inglés) tienen la característica de modelar situaciones como las que ilustra la Figura \@ref(fig:fig102). Es decir: 
+En este capítulo discutiremos los modelos de Heterocedasticidad Condicional Autoregresiva (ARCH, por sus siglas en inglés) y los modelos de Heterocedasticidad Condicional Autoregresiva Generalizados (GARCH, por sus siglas en inglés), los cuales tienen la característica de modelar situaciones como las que ilustra la Figura \@ref(fig:fig102). Es decir: 
 
 1) Existen zonas donde la variación de los datos es mayor y zonas donde la variación es más estable--a estas situaciones se les conoce como de variabilidad por clúster--, y 
 
@@ -32,7 +32,7 @@ library(Rcpp)
 
 ```
 
-Para el análisis de temas financieros existe una librería de mucha utilidad llamada __quantmod__. En primer lugar esta librería permite acceder a datos financieros de un modo muy simple, es posible decargar series financieras desde _yahoo_, la _FRED (Federal Reserve Economic Data)_, _google_, etc. Por otro lado, también es una librería que permite realizar gráficos altamente estéticos con unas cuantas líneas de código. Ahora, usaremos datos de Yahoo Finance respecto de la cotización del bitcoin (ticker: "BTC-USD"). 
+Para el análisis de temas financieros existe una librería de mucha utilidad llamada __quantmod__. En primer lugar esta librería permite acceder a datos financieros de un modo muy simple, es posible descargar series financieras desde _yahoo_, la _FRED (Federal Reserve Economic Data)_, _google_, etc. Por otro lado, también es una librería que permite realizar gráficos altamente estéticos con unas cuantas líneas de código. Ahora, usaremos datos de Yahoo Finance respecto de la cotización del bitcoin (ticker: "BTC-USD"). 
 ```{r Data_ARCH, warning=FALSE, message=FALSE}
 
 options("getSymbols.warning4.0"=FALSE)
@@ -71,7 +71,7 @@ plot(logret)
 ```
 ### Value at Risk (VaR)
 
-Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente es un cálculo que nos permite estimar el monto que una acción o portafolio podría perder dada una probabilidad $(1-\alpha)$. Supongamos un $\alpha = 0.05$, de esta forma, la Figura \@ref(fig:fig103) ilustra la región de la distribución que consideraríamos como el VaR.
+Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente un cálculo que nos permite estimar el monto que una acción o portafolio podría perder dada una probabilidad $(1-\alpha)$. Supongamos un $\alpha = 0.05$, de esta forma, la Figura \@ref(fig:fig103) ilustra la región de la distribución que consideraríamos como el VaR.
 
 ```{r VaR, message=FALSE, warning=FALSE}
 
@@ -121,7 +121,7 @@ round(skewness(vector_ret),2)
 
 ## Prueba de normalidad 
 
-$H_o: K=S=0$
+$H_0: K=S=0$
 
 ```{r JB_ARCH}
 
@@ -147,15 +147,15 @@ Ahora, supongamos que este tipo de modelos pueden ser extendidos y generalizados
     X_t = \mathbf{Z}_t \boldsymbol{\beta} + U_t
 \end{equation}
 
-Donde $U_t$ es un proceso estacionario que representa el error asociado a un proceso ARMA(p, q) y donde siguen diendo válidos los supuestos:
+Donde $U_t$ es un proceso estacionario que representa el error asociado a un proceso ARMA(p, q) y donde siguen siendo válidos los supuestos:
 \begin{eqnarray*}
     \mathbb{E}[U_t] & = & 0 \\
-    Var[U_t^2] & = & \sigma^2
+    Var[U_t] & = & \sigma^2
 \end{eqnarray*}
 
 No obstante, en este caso podemos suponer que existe autocorrelación en el término de error al cuadrado que puede ser capturada por un proceso similar a uno de medias móviles (MA) dado por:
 \begin{equation}
-    U_t^2 = \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2 + \nu_t
+    U_t^2 = \omega + \alpha_1 U_{t-1}^2 + \alpha_2 U_{t-2}^2 + \ldots + \alpha_q U_{t-q}^2 + \nu_t
 \end{equation}
 
 Donde $\nu_t$ es un ruido blanco y $U_{t-i} = X_{t-i} - \mathbf{Z}_{t-i} \boldsymbol{\beta}$, $i = 1, 2 ,\ldots $. Si bien los procesos son estacionarios por los supuestos antes enunciados, la varianza condicional estará dada por:
@@ -171,45 +171,48 @@ Donde $\Omega_{t-1} = \{U_{t-1}, U_{t-2}, \ldots \}$ es el conjunto de toda la i
 
 Así, de forma similar a un proceso MA(q) podemos decir que la varianza condicional tendrá efectos ARCH de orden $q$ (ARCH(q)) cuando:
 \begin{equation}
-    \sigma^2_{t | t-1} = \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2
+    \sigma^2_{t | t-1} = \omega + \alpha_1 U_{t-1}^2 + \alpha_2 U_{t-2}^2 + \ldots + \alpha_q U_{t-q}^2
     (\#eq:ARCHEffect)
 \end{equation}
 
-Donde $\mathbb{E}[\nu_t] = 0$ y $\gamma_0$ y $\gamma_i \geq 0$, para $i = 1, 2, \ldots, q-1$ y  $\gamma_q > 0$. Estas condiciones son necesarias para garantizar que la varianza sea positiva. En general, la varianza condicional se expresa de la forma $\sigma^2_{t | t-1}$, no obstante, para facilitar la notación, nos referiremos en cada caso a esta simplemente como $\sigma^2_{t}$.
+Donde $\mathbb{E}[\nu_t] = 0$, $\omega > 0$ y $\alpha_i \geq 0$, para $i = 1, 2, \ldots, q$. Estas condiciones son necesarias para garantizar que la varianza sea positiva. En general, la varianza condicional se expresa de la forma $\sigma^2_{t | t-1}$, no obstante, para facilitar la notación, nos referiremos en cada caso a esta simplemente como $\sigma^2_{t}$.
 
 Podemos generalizar esta situación si asumimos a la varianza condicional como dependiente de los valores de la varianza rezagados, es decir, como si fuera un proceso AR de orden $p$ para la varianza y juntándolo con la ecuación \@ref(eq:ARCHEffect). Bollerslev (1986) y Taylor (1986) generalizaron el problema de heterocedasticidad condicional. El modelo se conoce como GARCH(p, q), el cual se especifica como:
 \begin{eqnarray}
-    \sigma^2_t & = & \gamma_0 + \gamma_1 U_{t-1}^2 + \gamma_2 U_{t-2}^2 + \ldots + \gamma_q U_{t-q}^2 \\ \nonumber 
+    \sigma^2_t & = & \omega + \alpha_1 U_{t-1}^2 + \alpha_2 U_{t-2}^2 + \ldots + \alpha_q U_{t-q}^2 \\ \nonumber
     & & + \beta_1 \sigma^2_{t-1} + \beta_2 \sigma^2_{t-2} + \ldots + \beta_p \sigma^2_{t-p}
     (\#eq:GARCHEffect)
 \end{eqnarray}
 
-Donde las condiciones de no negatividad son que $\gamma_0 > 0$, $\gamma_i \geq 0$, $i = 1, 2, \ldots, q-1$, $\beta_j \geq 0$, $j = 1, 2, \ldots, p-1$, $\gamma_q > 0$ y $\beta_p > 0$. Además, otra condición de convergencia es que:
+Donde las condiciones de no negatividad son que $\omega > 0$, $\alpha_i \geq 0$ para $i = 1, 2, \ldots, q$, y $\beta_j \geq 0$ para $j = 1, 2, \ldots, p$. Además, otra condición de convergencia es que:
 \begin{equation*}
-    \gamma_1 + \ldots + \gamma_q + \beta_1 + \ldots + \beta_p < 1
+    \alpha_1 + \ldots + \alpha_q + \beta_1 + \ldots + \beta_p < 1
 \end{equation*}
 
 Usando el operador rezago $L$ en la ecuación \@ref(eq:GARCHEffect) podemos obtener:
 \begin{equation}
-    \sigma^2_t = \gamma_0 + \alpha(L) U_t^2 + \beta(L) \sigma^2_t
+    \sigma^2_t = \omega + \alpha(L) U_t^2 + \beta(L) \sigma^2_t
     (\#eq:GARCHEffectL)
 \end{equation}
 
 De donde podemos establecer:
 \begin{equation}
-    \sigma^2_t = \frac{\gamma_0}{1 - \beta(L)} + \frac{\alpha(L)}{1 - \beta(L)} U_t^2 
+    \sigma^2_t = \frac{\omega}{1 - \beta(L)} + \frac{\alpha(L)}{1 - \beta(L)} U_t^2
 \end{equation}
 
 Por lo que la ecuación \@ref(eq:GARCHEffect) del GARCH(p, q) representa un ARCH($\infty$):
 \begin{equation}
-    \sigma^2_t = \frac{a_0}{1 - b_1 - b_2 - \ldots - b_p} + \sum_{i = 1}^\infty U_{t-i}^2 
+    \sigma^2_t = \frac{\omega}{1 - \beta_1 - \beta_2 - \ldots - \beta_p} + \sum_{i = 1}^\infty c_i U_{t-i}^2
 \end{equation}
+
+donde $c_i$ son los coeficientes de la expansión en serie de potencias
+$\frac{\alpha(L)}{1 - \beta(L)} = \sum_{i=1}^\infty c_i L^i$.
 
 ### Ejemplo ARCH(1) 
 
 Hasta ahora, las distribuciones utilizadas para medir el Valor en Riesgo de un activo (Bitcoin, en este caso) asumen que no existe correlación serial en los retornos diarios del activo. Observemos un par de gráficas de la función de autocorrelación para corroborar este hecho--ver la Figura \@ref(fig:fig105)--. 
 
-```{r fig105, fig.cap = "Función de autocorrelación parcial de lo rendimientos del Bitcoin", fig.align='center', message=FALSE, warning=TRUE}
+```{r fig105, fig.cap = "Función de autocorrelación parcial de los rendimientos del Bitcoin", fig.align='center', message=FALSE, warning=TRUE}
 
 acf(logret)
 
@@ -247,7 +250,7 @@ plot(logret_random, type = 'l')
 
 ```
 
-Ahora busquemos una prueba formal. El primer enfoque para comprobar aceptar o rechazar la hipótesis de que necesitamos estimar un ARCH(q) es realizar una prueba de efectos ARCH. De acuerdo con esta, nuestros datos de Bitcoin muestran que se rechaza la hipótesis de no efectos ARCH. Esta prueba resulta del siguiente código de R:
+Ahora busquemos una prueba formal. El primer enfoque para comprobar si debemos aceptar o rechazar la hipótesis de que necesitamos estimar un ARCH(q) es realizar una prueba de efectos ARCH. De acuerdo con esta, nuestros datos de Bitcoin muestran que se rechaza la hipótesis de no efectos ARCH. Esta prueba resulta del siguiente código de R:
 
 ```{r ArchTest}
 logret_mean = dynlm(logret~1)
@@ -271,8 +274,8 @@ La prueba puede repetirse para diferentes especificaciones de ARCH, sin embargo,
 
 \begin{eqnarray*}
     Y_t & = & \mu+\sqrt{h_t}\varepsilon_t \\
-    h_t & = & \omega+\alpha_1 U_{t-1}^2 \\
-    \varepsilon & \sim & N(0,1)
+    h_t & = & \omega+\alpha_1 \varepsilon_{t-1}^2 \\
+    \varepsilon_t & \sim & N(0,1)
 \end{eqnarray*}
 
 Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro \@ref(tab:arima-summary).
@@ -312,8 +315,8 @@ boot.garch
 Estimemos un GARCH(0,1) usando la siguiente especificación:
 \begin{eqnarray*}
 Y_t & = & \mu+\sqrt{h_t}\varepsilon_t \\
-    h_t & = & \omega+\beta_i \sigma^2_{t-i}+u_t \\
-    \varepsilon & \sim & N(0,1) 
+    h_t & = & \omega+\beta_1 \sigma^2_{t-1} \\
+    \varepsilon_t & \sim & N(0,1)
 \end{eqnarray*}
 
 Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro \@ref(tab:estimaciones).
@@ -350,9 +353,9 @@ boot.garch
 
 $Y_t = \mu+\sqrt{h_t}\varepsilon_t$
 
-$h_t = \omega+\beta_ih_{t-i}+\alpha_i\varepsilon^2_{t-i}+u_t$
+$h_t = \omega+\sum_{i=1}^p\beta_i h_{t-i}+\sum_{j=1}^q\alpha_j\varepsilon^2_{t-j}$
 
-$\varepsilon \sim N(0,1)$
+$\varepsilon_t \sim N(0,1)$
 
 #### Criterios de información 
 
@@ -471,7 +474,7 @@ Dicho lo anterior, entonces, el modelo ARCH(q) multivariado será descrito por:
     (\#eq:M_ARCH)
 \end{equation}
 
-Donde $Vech$ es un operador que apila en un vector la parte superior de la matriz a la cual se le aplique, $\boldsymbol{\gamma}_0$ es un vector de constantes, $\Gamma_i$, $i = 1, 2, \ldots$ son matrices de coeficientes asociados a la estimación.
+Donde $Vech$ es un operador que apila en un vector la parte triangular inferior (incluyendo la diagonal) de la matriz a la cual se le aplique, $\boldsymbol{\gamma}_0$ es un vector de constantes, $\Gamma_i$, $i = 1, 2, \ldots$ son matrices de coeficientes asociados a la estimación.
 
 Para ilustrar la ecuación \@ref(eq:M_ARCH), tomemos un ejemplo de $K = 2$, de esta forma tenemos que un M-ARCH(1) será:
 \begin{equation*}
@@ -570,8 +573,8 @@ Partamos de plantear:
 
 Dada la estimación en la ecuación \@ref(eq:ARCH-LM), plantearemos la estructura de hipótesis dada por:
 \begin{eqnarray*}
-    H_0 & : & \mathbf{B}_1 = \mathbf{B}_2 = \ldots = \mathbf{B}_q = 0 \\
-    H_a & : & No H_0    
+    H_0 & : & \mathbf{B}_1 = \mathbf{B}_2 = \ldots = \mathbf{B}_q = \mathbf{0} \\
+    H_a & : & \text{al menos una } \mathbf{B}_i \neq \mathbf{0}
 \end{eqnarray*}
 
 La estadística de prueba será determinada por:

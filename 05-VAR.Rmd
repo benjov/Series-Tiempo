@@ -41,36 +41,34 @@ $Y$, respectivamente. Es decir: \begin{eqnarray*}
 Adicionalmente, definamos $\sigma^2(*)$ como la varianza del término de
 error estimado de una regresión dada. Dicho lo anterior, digamos que:
 
-\begin{enumerate}
-  \item Existe Causalidad de Granger o $X$ causa a $Y$ si y solo si, una regresión lineal da como resultado que: 
+1. Existe Causalidad de Granger o $X$ causa a $Y$ si y solo si, una regresión lineal da como resultado que:
+
     \begin{equation}
-        \sigma^2 (Y_{t+1} | I_t) < \sigma^2 (Y_{t+1} | I_t - X_t)    
+        \sigma^2 (Y_{t+1} | I_t) < \sigma^2 (Y_{t+1} | I_t - X_t)
     \end{equation}
 
-Es decir, que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de toda la información aplicada a un pronóstico de $Y_{t+1}$ es MENOR que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de la información de $Y$ aplicada a un pronóstico de $Y_{t+1}$.
+    Es decir, que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de toda la información aplicada a un pronóstico de $Y_{t+1}$ es MENOR que la variabilidad del término de error de una regresión lineal de $Y$ sobre el conjunto de la información de $Y$ aplicada a un pronóstico de $Y_{t+1}$.
 
-  \item Existe Causalidad de Granger Instantánea o $X$ causa de forma instantánea a $Y$ si y solo si, una regresión lineal da como resultado:
+2. Existe Causalidad de Granger Instantánea o $X$ causa de forma instantánea a $Y$ si y solo si, una regresión lineal da como resultado:
+
     \begin{equation}
         \sigma^2 (Y_{t+1} | \{ I_t, X_{t+1} \}) < \sigma^2 (Y_{t+1} | I_t)
     \end{equation}
-\end{enumerate}
 
 La definición anterior aplica de igual forma si se reemplaza a $X$ por
 $Y$ y a $Y$ por $X$, respectivamente. De acuerdo a la definición
 anterior, existen 5 diferentes posibilidades de relaciones causales
 entre las dos series:
 
-\begin{enumerate}
-    \item $X$ y $Y$ son independientes: $(X, Y)$;
+1. $X$ y $Y$ son independientes: $(X, Y)$;
 
-    \item Existe solo causalidad instantánea: $(X - Y)$;
+2. Existe solo causalidad instantánea: $(X - Y)$;
 
-    \item $X$ causa a $Y$: $(X \longrightarrow Y)$;
+3. $X$ causa a $Y$: $(X \longrightarrow Y)$;
 
-    \item $Y$ causa a $X$: $(X \longleftarrow Y)$, y
+4. $Y$ causa a $X$: $(X \longleftarrow Y)$, y
 
-    \item Ambas series se causan: $(X \longleftrightarrow Y)$.
-\end{enumerate}
+5. Ambas series se causan: $(X \longleftrightarrow Y)$.
 
 Por lo anterior, representaremos mediante un $AR(p)$ con variables
 exógenas lo siguiente: 
@@ -175,7 +173,7 @@ CETE28 <- ts(Datos_Ad$CETE28_Ad,
 DLCETE28 <- diff(log( ts(Datos_Ad$CETE28_Ad, start = c(2000, 1), freq = 12) ))
 ```
 
-```{r fig61, fig.cap = "Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$.", fig.align='center', message=FALSE, warning=FALSE}
+```{r fig61, fig.cap = "Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(INPC_t) - ln(INPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$.", fig.align='center', message=FALSE, warning=FALSE}
 #
 #png("Plots/DLGranger.png", width = 800, height = 1200)
 
@@ -229,7 +227,7 @@ knitr::kable(
 De acuerdo con el Cuadro \@ref(tab:Granger), podemos concluir que existe
 información estadísticamente significativa para concluir que la
 inflación causa a la tasa de depreciación cambiaria, ambas medidas como
-las diferencias logaritmicas. El resto de los resultados para las otras
+las diferencias logarítmicas. El resto de los resultados para las otras
 combinaciones de causalidad se encuentran en el R Markdown llamado Clase
 13 ubicado en el repositorio de GitHub.
 
@@ -327,7 +325,7 @@ el operador rezago $L^j$ de forma análoga al caso del modelo $AR(p)$,
 pero aplicado a un vector, tenemos las siguientes ecuaciones:
 \begin{eqnarray}
     \mathbf{X}_t - A_1 \mathbf{X}_{t-1} - A_2 \mathbf{X}_{t-2} - \ldots - A_p \mathbf{X}_{t-p} & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
-    \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t-p} & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t} & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
     (I_k - \mathbf{A_1} L - \mathbf{A_2} L^2 - \ldots - \mathbf{A_p} L^p) \mathbf{X}_t & = & \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
     \mathbf{A}(L) \mathbf{X}_t & = & \boldsymbol{\delta} + \mathbf{U}_{t}
     (\#eq:VARCorto)
@@ -404,7 +402,7 @@ especificación del modelo $VAR(p)$ existen condiciones de estabilidad.
 Dichas condiciones están dadas por lo siguiente, definamos el siguiente
 polinomio que resulta de tomar la matriz $\mathbf{A}(L)$ en la ecuación
 \@ref(eq:VARCorto): \begin{equation}
-    Det[I_t - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
+    Det[I_k - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
 \end{equation}
 
 Donde las raíces del polinomio cumplen que $|z| \leq 1$, es decir, se
@@ -454,7 +452,7 @@ $AR(p)$ dados por:
          \end{equation}
 
 3.  Hannan - Quinn Criterion (HQ): \begin{equation}
-         HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(2))}{T}
+         HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(T))}{T}
          \end{equation}
 
 4.  Schwartz Criterion (SC): \begin{equation}
@@ -473,13 +471,13 @@ por: \begin{equation*}
             \right]
     \end{equation*}
 
-**Ejemplo**. Ahora veámos un ejemplo de estimación de $VAR(p)$.
+**Ejemplo**. Ahora veamos un ejemplo de estimación de $VAR(p)$.
 Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio,
 rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción
 Industrial de los Estados Unidos, todas desestacionalizadas y para el
 período de enero de 2000 a julio de 2019. Dado que el supuesto
 estacionariedad sigue presente en nuestro análisis, emplearemos cada una
-de las series en su versión de diferencias logaritmicas. Las Figuras
+de las series en su versión de diferencias logarítmicas. Las Figuras
 \@ref(fig:fig62) y \@ref(fig:fig63) muestra las series referidas.
 
 ```{r warning=FALSE, message=FALSE}
@@ -520,7 +518,7 @@ Datos <- ts(Datos,
 
 plot(Datos, plot.type = "s", 
      col = c("darkgreen", "darkblue", "darkred", "black", "purple"), 
-     main = "Series en Diferencias logaritmicas", 
+     main = "Series en Diferencias logarítmicas", 
      xlab = "Tiempo", ylab = "Variacion")
 
 legend("bottomright", c("INPC", "TC", "CETES28", "IGAE", "IPI"),
@@ -533,13 +531,13 @@ legend("bottomright", c("INPC", "TC", "CETES28", "IGAE", "IPI"),
 
 plot(Datos, plot.type = "m", 
      col = "darkgreen", 
-     main = "Series en Diferencias logaritmicas", xlab = "Tiempo")
+     main = "Series en Diferencias logarítmicas", xlab = "Tiempo")
 
 ```
 
 Dicho lo anterior, a continuación mostraremos la tabla que resume el
 valor de los distintos criterios de información para una especificación
-de un $VAR(p)$ con constante. Notése que es posible especificar un
+de un $VAR(p)$ con constante. Nótese que es posible especificar un
 $VAR(p)$ con tendencia, siempre que exista evidencia de que algunas de
 las series sean estacionarias alrededor de una tendencia. Caso que no
 aplica hasta este momento, ya que nuestro análisis de estacionariedad es
@@ -708,7 +706,7 @@ Partamos de la ecuación \@ref(eq:VARMAq) de forma que tenemos:
     & = & \mu + \Psi_0 \mathbf{U}_t + \Psi_1 \mathbf{U}_{t-1} + \Psi_2 \mathbf{U}_{t-2} + \Psi_3 \mathbf{U}_{t-3} + \ldots
 \end{eqnarray}
 
-Donde $\Psi_0 = I$ y cada una de las $\Psi_i = - \mathbf{B}_i$,
+Donde $\Psi_0 = I$ y cada una de las $\Psi_i = \mathbf{B}_i$,
 $i = 1, 2, \ldots$. De esta forma se verifica el efecto que tiene en
 $\mathbf{X}_t$ cada una de las innovaciones pasadas. Por lo que el
 análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas
@@ -741,8 +739,8 @@ plot(IR_DLTC)
 
 Los resultados muestran que la respuesta de $DLTC_t$ ante impulsos en
 los términos de error fue estadísticamente significativo sólo para
-alguunos de los casos y en periodos cortos de tiempo. El resto de los
-resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase
+algunos de los casos y en periodos cortos de tiempo. El resto de los
+resultados de Impulso-Respuesta se encuentra en el Script llamado Clase
 15 que se ubica en el repositorio de GitHub.
 
 ## Identificación de los Choques Estructurales en los Modelos VAR
@@ -789,7 +787,7 @@ choques estructurales y esto nos impide identificar la interacción contemporán
 
 Comencemos con la forma estructural del VAR para comprender sus parámetros:
 \begin{equation}
-B_0 Y_t = B_1 Y_{t-1} + ... B_p Y_{t-p} + w_t
+B_0 y_t = B_1 y_{t-1} + \ldots + B_p y_{t-p} + w_t
 \end{equation}
 
 donde $w_t$ es un término de error con media cero y no correlacionado en el tiempo, también conocido como innovación estructural o shock estructural. Además, se asume que el término de error es incondicionalmente homocedástico a menos de que se indique lo contrario. La matriz $B_0$ es no singular y establece la interacción contemporánea entre las variables del modelo. De este modo, el modelo puede escribirse de manera compacta como:
@@ -797,14 +795,14 @@ donde $w_t$ es un término de error con media cero y no correlacionado en el tie
 B(L) y_t = w_t
 \end{equation}
 
-donde $B(L) \equiv B_0 - B_1 L - B_2 L^2 - ...B_p L^p$ es el polinomio autorregresivo en rezagos. La matriz de covarianza del término de error estructural es normalizada tal que:
+donde $B(L) \equiv B_0 - B_1 L - B_2 L^2 - \ldots - B_p L^p$ es el polinomio autorregresivo en rezagos. La matriz de covarianza del término de error estructural es normalizada tal que:
 \begin{equation}
 \mathbb{E}(w_t w_t') \equiv \Sigma_w = I_K.
 \end{equation}
 
 Con esto, sabemos que existen tantos shocks estructurales como variables en el modelo. Asimismo, los shocks estructurales, por definición, son mutuamente no correlacionados lo que implica que $\Sigma_w$ es diagonal. Por último, también sabemos que si normalizamos la varianza de todos los shocks estructurales a uno, no implica una pérdida de generalidad siempre y cuando los elementos diagonales $B_0$ permanezcan sin restricciones. 
 
-Sin embargo, para que el modelo $B_0 Y_t = B_1 Y_{t-1} + ... B_p Y_{t-p} + w_t$ sea considerado como un VAR estructural no es suficiente con que los elementos de $w_t$ no se encuentren correlacionados, si no que los choques también deben ser económicamente interpretables. Para esto, derivamos la forma reducida de este modelo VAR estructural de tal modo que $y_t$ es una función de los rezagos de $y_t$ únicamente. Si multiplicamos ambos lados de la representación estructural del VAR por $B_0^{-1}$
+Sin embargo, para que el modelo $B_0 y_t = B_1 y_{t-1} + \ldots + B_p y_{t-p} + w_t$ sea considerado como un VAR estructural no es suficiente con que los elementos de $w_t$ no se encuentren correlacionados, sino que los choques también deben ser económicamente interpretables. Para esto, derivamos la forma reducida de este modelo VAR estructural de tal modo que $y_t$ es una función de los rezagos de $y_t$ únicamente. Si multiplicamos ambos lados de la representación estructural del VAR por $B_0^{-1}$
 \begin{equation}
 B_0^{-1} B_0 y_t = B_0^{-1} B_1 y_{t-1} + ... + B_0^{-1} B_p y_{t-p} + B_0^{-1} w_t
 \end{equation}
@@ -814,12 +812,12 @@ de tal modo que puede ser representado como
 y_t = A_1 y_{t-1} + ... + A_p y_{t-p} + u_t 
 \end{equation}
 
-donde $A_i = B_0^{-1} B_i$, $i = 1,...,p$, y $u_t = B_0^{-1} w_t$. Asi, las innovaciones en forma reducida de $u_t$ son un promedio ponderado de los shocks estructurales $w_t$. De manera compacta, el modelo puede ser expresado como:
+donde $A_i = B_0^{-1} B_i$, $i = 1,...,p$, y $u_t = B_0^{-1} w_t$. Así, las innovaciones en forma reducida de $u_t$ son un promedio ponderado de los shocks estructurales $w_t$. De manera compacta, el modelo puede ser expresado como:
 \begin{equation}
 A(L) y_t = u_t 
 \end{equation}
 
-donde $A(L) = I_K - A_1L - A_2 L^2 - ... A_p L^p$ es el polinomio autorregresivo en rezagos. Los métodos de estimación estándar permiten obtener estimaciones de los parámetros de la forma reducida $A_i$, para $i=1,...p$, de las innovaciones reducidas $u_t$ y de su matriz de covarianza $\mathbb{E}(u_t u_t') \equiv \Sigma_u$. 
+donde $A(L) = I_K - A_1L - A_2 L^2 - \ldots - A_p L^p$ es el polinomio autorregresivo en rezagos. Los métodos de estimación estándar permiten obtener estimaciones de los parámetros de la forma reducida $A_i$, para $i=1,...p$, de las innovaciones reducidas $u_t$ y de su matriz de covarianza $\mathbb{E}(u_t u_t') \equiv \Sigma_u$. 
 
 Sin embargo, el debate que se ha generado desde entonces es, una vez estimada la forma reducida, de qué manera se puede recuperar la representación estructural del modelo VAR. Es decir, queremos recuperar la matriz $B_0$ -o bien, su inversa- que contiene las relaciones estructurales contemporáneas de las variables, recordando que $u_t = B_0^{-1}w_t$.
 
@@ -918,13 +916,13 @@ Aunque $gdp_t \sim I(1)$, su primera diferencia es estacionaria ($I(0)$), lo cua
 A(L) z_t = u_t
 \end{equation}
 
-donde $A(L)=I_2-A_1L-...A_pL^p$, y $u_t \sim (0, \Sigma_u)$ es ruido blanco. Si lo representamos como su forma estructural, tenemos que:
+donde $A(L)=I_2-A_1L-\ldots-A_pL^p$, y $u_t \sim (0, \Sigma_u)$ es ruido blanco. Si lo representamos como su forma estructural, tenemos que:
 
 \begin{equation}
 B(L) z_t = w_t
 \end{equation}
 
-donde $B(L) = B_0-B_1L-...B_pL^p = B_0A(L)$, y si recordamos a qué es igual $w_t$, tenemos que:
+donde $B(L) = B_0-B_1L-\ldots-B_pL^p = B_0A(L)$, y si recordamos a qué es igual $w_t$, tenemos que:
 
 \begin{equation}
 w_t = B_0 u_t \rightarrow u_t = B_0^{-1} w_t \rightarrow \Sigma_u = B_0^{-1} (B_0^{-1})'
@@ -1085,7 +1083,7 @@ Cointegración puede ser caracterizada o definida en palabras sencillas
 como que dos o más variables tienen una relación común estable en el
 largo plazo. Es decir, estas no suelen tomar caminos o trayectorias
 diferentes, excepto por períodos de tiempo transitorios y eventuales. A
-continuación, utilizaremos la definición de Engle y Granger (1984) de
+continuación, utilizaremos la definición de Engle y Granger (1987) de
 cointegración.
 
 Sea $\mathbf{Y}$ un vector de k-series de tiempo, decimos que los
@@ -1147,22 +1145,27 @@ incluir un término de tendencia. Esto en razón de que hemos relajado el
 concepto de estacionariedad.
 
 Si reescribimos la ecuación \@ref(eq:VARCI) en su forma de Vector
-Corrector de Errores (VEC, por sus siglas en inglés) tenemos:
+Corrector de Errores (VEC, por sus siglas en inglés), restamos
+$\mathbf{Y}_{t-1}$ en ambos lados y usamos la identidad
+$\mathbf{Y}_{t-j} = \mathbf{Y}_{t-1} - \sum_{i=1}^{j-1} \Delta
+\mathbf{Y}_{t-i}$ válida para $j \geq 2$:
 \begin{eqnarray}
-    \mathbf{Y}_t - \mathbf{Y}_{t-1} & = & \Delta \mathbf{Y}_t \nonumber \\
+    \Delta \mathbf{Y}_t
     & = & \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t - \mathbf{Y}_{t-1} + \mathbf{U}_t \nonumber \\
     & = & (\mathbf{A}_1 - \mathbf{I}) \mathbf{Y}_{t-1} + \mathbf{A}_2 \mathbf{Y}_{t-2} + \ldots + \mathbf{A}_p \mathbf{Y}_{t-p} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
-    & = & \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
-    & = & - \left( \mathbf{I} - \sum_{j=1}^{p} \mathbf{A}_j \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
+    & = & \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} - \sum_{j=2}^{p} \mathbf{A}_j \sum_{i=1}^{j-1} \Delta \mathbf{Y}_{t-i} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
+    & = & \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
+    & = & - \left( \mathbf{I} - \sum_{j=1}^{p} \mathbf{A}_j \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
     \Delta \mathbf{Y}_t & = & - \Pi \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
     (\#eq:VARVEC)
 \end{eqnarray}
 
 Donde $\mathbf{A}_j^* = - \sum_{i=j+1}^p \mathbf{A}_i$,
-$i = 1, 2, \ldots, p-1$, y la matriz $\Pi$ representa todas las
-relaciones de largo plazo entre las variables, por lo que la matriz es
-de rango completo $k \times k$. Por lo tanto, tenemos que dicha matriz
-en la ecuación \@ref(eq:VARVEC) se puede factorizar como:
+para $j = 1, 2, \ldots, p-1$, y la matriz $\Pi$ captura todas las
+relaciones de largo plazo entre las variables. Para que exista
+cointegración, $\Pi$ debe tener rango reducido $r$, con $0 \leq r < k$.
+Por lo tanto, tenemos que dicha matriz en la ecuación \@ref(eq:VARVEC)
+se puede factorizar como:
 \begin{equation}
     \Pi_{(k \times k)} = \Gamma_{(k \times r)} \boldsymbol{\beta}_{(r \times k)}'
     (\#eq:Pi_Matrix)
@@ -1202,7 +1205,7 @@ del todo correcto, pero dejando de lado ese problema, estimaremos si las
 5 series cointegran.
 
 Por principio, probaremos que todas las series son I(1), lo cual es
-cierto (ver Scrip para mayores detalles). En las Figuras
+cierto (ver Script para mayores detalles). En las Figuras
 \@ref(fig:fig81), \@ref(fig:fig82) y \@ref(fig:fig83) se muestran las
 series en niveles y en diferencias, con lo cual ilustramos como es
 viable que las series sean I(1).
@@ -1257,12 +1260,12 @@ plot(DLDatos,
 
 ```
 
-```{r fig83, warning=FALSE, fig.cap="Comparacion de Series en Diferencias para la prueba de Cointegración", fig.align='center'}
+```{r fig83, warning=FALSE, fig.cap="Comparación de Series en Diferencias para la prueba de Cointegración", fig.align='center'}
 
 plot(cbind(LDatos, DLDatos), 
      plot.type = "m", nc = 2,
      col = c("darkgreen", "darkblue", "darkred", "orange", "purple"), 
-     #main = "Comparacion de Series en Diferencias", 
+     #main = "Comparación de Series en Diferencias", 
      xlab = "Tiempo")
 
 ```
@@ -1381,7 +1384,7 @@ ecuación de cointegración. En la Figura \@ref(fig:fig84) mostramos los
 residuales estimados. Derivado de la inspección visual, parecería que
 estos no son estacionarios, condición que debería ser cierta. De esta
 forma, una prueba deseable es aplicar todas las pruebas de raíces
-unitarias a esta serie para mostrar que es I(0). En el Scrip llamado
+unitarias a esta serie para mostrar que es I(0). En el Script llamado
 Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre
 esta serie y se encuentra que es posible que no sea estacionaria.
 
@@ -1402,7 +1405,7 @@ plot(U,
 
 ```
 
-## Modelos ADRL
+## Modelos ARDL
 
 ### Teoría
 
@@ -1417,15 +1420,15 @@ knitr::include_graphics("Plots/TimeSeries_Models.png")
 
 ```
 
-En este caso incorporaremos a los modelos autogregressive distributed
+En este caso incorporaremos a los modelos autoregressive distributed
 lag models (ARDL, por sus siglas en inglés). En estos casos el
-procedimiento de Johansen no podría aplicarse directamennte cuando las
+procedimiento de Johansen no podría aplicarse directamente cuando las
 variables incluidas son de un orden mixto o cuando simplemente todas no
 son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.
 
 Este tipo de modelos toma suficientes rezagos para capturar el mecanismo
 generador de datos. También es posible llegar a una especificación del
-mecanismo corrector de errores a partir de una trasformación lineal del
+mecanismo corrector de errores a partir de una transformación lineal del
 ARDL.
 
 Consideremos la siguiente ecuación: 
@@ -1447,13 +1450,13 @@ La hipótesis nula ($H_0$) es que las
 $\lambda_1 + \lambda_2 + \lambda_3 = 0$, es decir, que no existe
 relación de largo plazo.
 
-En la práctica estimamos una especificación con rezafos distribuidos:
+En la práctica estimamos una especificación con rezagos distribuidos:
 \begin{equation}
     Y_t = \alpha + \sum_{i = 1}^p \beta_i Y_{t-i} + \sum_{i = 1}^p \delta_i X_{t-i} + \sum_{i = 1}^p \gamma_i Z_{t-i} + U_t
 \end{equation}
 
 Además de verificar si las series involucradas son estacionarias y
-decidir el número de reagos $p$ mediante criterios de información.
+decidir el número de rezagos $p$ mediante criterios de información.
 
 ### Ejemplo
 
@@ -1500,7 +1503,7 @@ names(denmark)
 
 #### Procedimiento:
 
-1.  Calculamos un auto ADRL para determinar la combinación óptima de
+1.  Calculamos un auto ARDL para determinar la combinación óptima de
     rezagos.
 
 ```{r warning=FALSE}
@@ -1715,7 +1718,7 @@ $$
 La idea general detrás de los *Modelos Estado-Espacio* es que una (múltiples) variable observable $Y_1,...Y_T$ depende de un posible estado no observable $X_t$ que sigue un proceso estocástico. La relación entre $Y_t$ y $X_t$ es descrita por la **Ecuación de Observación**
 
 \begin{equation}
-Y_t = C X_T + v_t
+Y_t = C X_t + v_t
 (\#eq:Obs)
 \end{equation}
 
@@ -2066,7 +2069,7 @@ K_t = P_{t/t-1} C' F_{t/t-1} {}^{-1}.
 (\#eq:Kt)
 \end{equation}
 
-Notese que $F_{t/t-1}$ sigue:
+Nótese que $F_{t/t-1}$ sigue:
 
 \begin{equation}
 F_{t|t-1} = Var_{t-1} \left[( Y_t - Y_{t|t-1} \right)] = Var_{t-1} \left[( C X_t + v_t - C X_{t|t-1} \right)] = C P_{t|t-1} C' + R

@@ -1,6 +1,6 @@
 ---
 title: "Análisis de Series de Tiempo"
-author: "Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruíz"
+author: "Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres & Luis Gerardo Ruíz"
 date: "`r c('enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre')[as.integer(format(Sys.Date(),'%m'))]` de `r format(Sys.Date(),'%Y')`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -10,14 +10,12 @@ biblio-style: apalike
 link-citations: yes
 nocite: '@*'
 github-repo: https://github.com/benjov/Series-Tiempo
-description: "Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría III del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx"
+description: "Notas de clase del curso Análisis de Series de Tiempo de la Facultad de Economía de la UNAM y de Econometría II del Tecnológico de Monterrey. Cubre modelos univariados (ARIMA), pruebas de raíz unitaria, VAR, cointegración, modelos ARCH/GARCH, datos panel y modelos no lineales, con implementación en R. Comentarios: benjov@ciencias.unam.mx"
 ---
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+knitr::write_bib( c( .packages(), 'bookdown', 'knitr', 'rmarkdown' ), 'packages.bib' )
 
 library(readxl)
 
@@ -26,16 +24,17 @@ library(readxl)
 # Análisis de Series de Tiempo {-}
 
 **Facultad de Economía, Universidad Nacional Autónoma de México**
+**Departamento de Economía, Tecnológico de Monterrey, Campus Santa Fe**
 
 Benjamín Oliva · Omar Alfaro Rivera · Emiliano Pérez Caullieres · Luis Gerardo Ruíz
 
-*Versión: Junio 2026*
+*Versión: Julio 2026*
 
 ![](Portada.jpg){ width="400" height="300" style="display: block; margin: 0 auto" }
 
 ## Presentación {-}
 
-Estas notas corresponden al curso de **Análisis de Series de Tiempo** de la Facultad de Economía de la Universidad Nacional Autónoma de México (UNAM) y al curso de **Econometría III** del Tecnológico de Monterrey. Están orientadas a estudiantes de licenciatura con conocimientos previos de econometría y probabilidad, y tienen como objetivo ofrecer una introducción rigurosa pero accesible a los principales modelos de series de tiempo, tanto desde la perspectiva teórica como computacional.
+Estas notas corresponden al curso de **Análisis de Series de Tiempo** de la Facultad de Economía de la Universidad Nacional Autónoma de México (UNAM) y al curso de **Econometría II** del Tecnológico de Monterrey, Campus Santa Fe. Están orientadas a estudiantes de licenciatura con conocimientos previos de econometría y probabilidad, y tienen como objetivo ofrecer una introducción rigurosa pero accesible a los principales modelos de series de tiempo, tanto desde la perspectiva teórica y de matemática formal como computacional.
 
 El material cubre los siguientes temas:
 

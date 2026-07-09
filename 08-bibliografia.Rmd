@@ -3,4 +3,5 @@
 ```{r include=FALSE}
 # Este capítulo no tiene código; su función es anclar la sección de
 # bibliografía al final del libro en la versión HTML y PDF.
+
 ```

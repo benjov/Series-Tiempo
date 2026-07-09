@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
 <meta name="description" content="En este capítulo removeremos el supuesto de que el análisis es univariado, ya que introduciremos la posibilidad de que los procesos generadores de datos compartan información entre dos o más...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Capítulo 5 Causalidad de Granger, Modelos Multivariados de Vectores Autoregresivos y de Cointegración, Modelos ARDL y Filtro Multivariado | Análisis de Series de Tiempo">
@@ -122,10 +122,32 @@ conjuntos de toda la información disponible (actual y pasada) de <span class="m
 \end{eqnarray*}\]</span></p>
 <p>Adicionalmente, definamos <span class="math inline">\(\sigma^2(*)\)</span> como la varianza del término de
 error estimado de una regresión dada. Dicho lo anterior, digamos que:</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>Existe Causalidad de Granger o <span class="math inline">\(X\)</span> causa a <span class="math inline">\(Y\)</span> si y solo si, una regresión lineal da como resultado que:</p>
+<p><span class="math display">\[\begin{equation}
+     \sigma^2 (Y_{t+1} | I_t) &lt; \sigma^2 (Y_{t+1} | I_t - X_t)
+\end{equation}\]</span></p>
+<p>Es decir, que la variabilidad del término de error de una regresión lineal de <span class="math inline">\(Y\)</span> sobre el conjunto de toda la información aplicada a un pronóstico de <span class="math inline">\(Y_{t+1}\)</span> es MENOR que la variabilidad del término de error de una regresión lineal de <span class="math inline">\(Y\)</span> sobre el conjunto de la información de <span class="math inline">\(Y\)</span> aplicada a un pronóstico de <span class="math inline">\(Y_{t+1}\)</span>.</p>
+</li>
+<li>
+<p>Existe Causalidad de Granger Instantánea o <span class="math inline">\(X\)</span> causa de forma instantánea a <span class="math inline">\(Y\)</span> si y solo si, una regresión lineal da como resultado:</p>
+<p><span class="math display">\[\begin{equation}
+     \sigma^2 (Y_{t+1} | \{ I_t, X_{t+1} \}) &lt; \sigma^2 (Y_{t+1} | I_t)
+\end{equation}\]</span></p>
+</li>
+</ol>
 <p>La definición anterior aplica de igual forma si se reemplaza a <span class="math inline">\(X\)</span> por
 <span class="math inline">\(Y\)</span> y a <span class="math inline">\(Y\)</span> por <span class="math inline">\(X\)</span>, respectivamente. De acuerdo a la definición
 anterior, existen 5 diferentes posibilidades de relaciones causales
 entre las dos series:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> son independientes: <span class="math inline">\((X, Y)\)</span>;</p></li>
+<li><p>Existe solo causalidad instantánea: <span class="math inline">\((X - Y)\)</span>;</p></li>
+<li><p><span class="math inline">\(X\)</span> causa a <span class="math inline">\(Y\)</span>: <span class="math inline">\((X \longrightarrow Y)\)</span>;</p></li>
+<li><p><span class="math inline">\(Y\)</span> causa a <span class="math inline">\(X\)</span>: <span class="math inline">\((X \longleftarrow Y)\)</span>, y</p></li>
+<li><p>Ambas series se causan: <span class="math inline">\((X \longleftrightarrow Y)\)</span>.</p></li>
+</ol>
 <p>Por lo anterior, representaremos mediante un <span class="math inline">\(AR(p)\)</span> con variables
 exógenas lo siguiente:
 <span class="math display" id="eq:GrangerEq">\[\begin{equation}
@@ -239,8 +261,8 @@ en su transformación de diferencias logarítmicas.</p>
 <span>     col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig61"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig61-1.png" alt="Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$." width="672"><p class="caption">
-Figure 5.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(DLINPC_t) - ln(DLINPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
+<img src="Notas-Series-Tiempo_files/figure-html/fig61-1.png" alt="Series en diferencias logarítmicas dadas por las siguientes expresiones: $DLINPC_t = ln(INPC_t) - ln(INPC_{t-1})$, $DLTC_t = ln(TC_t) - ln(TC_{t-1})$ y $DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})$." width="672"><p class="caption">
+Figure 5.1: Series en diferencias logarítmicas dadas por las siguientes expresiones: <span class="math inline">\(DLINPC_t = ln(INPC_t) - ln(INPC_{t-1})\)</span>, <span class="math inline">\(DLTC_t = ln(TC_t) - ln(TC_{t-1})\)</span> y <span class="math inline">\(DLCETE28_t = ln(CETE28_t) - ln(CETE28_{t-1})\)</span>.
 </p>
 </div>
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
@@ -347,7 +369,7 @@ Signif.
 <p>De acuerdo con el Cuadro <a href="cap-var.html#tab:Granger">5.1</a>, podemos concluir que existe
 información estadísticamente significativa para concluir que la
 inflación causa a la tasa de depreciación cambiaria, ambas medidas como
-las diferencias logaritmicas. El resto de los resultados para las otras
+las diferencias logarítmicas. El resto de los resultados para las otras
 combinaciones de causalidad se encuentran en el R Markdown llamado Clase
 13 ubicado en el repositorio de GitHub.</p>
 </div>
@@ -434,7 +456,7 @@ el operador rezago <span class="math inline">\(L^j\)</span> de forma análoga al
 pero aplicado a un vector, tenemos las siguientes ecuaciones:
 <span class="math display" id="eq:VARCorto">\[\begin{eqnarray}
     \mathbf{X}_t - A_1 \mathbf{X}_{t-1} - A_2 \mathbf{X}_{t-2} - \ldots - A_p \mathbf{X}_{t-p} &amp; = &amp; \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
-    \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t-p} &amp; = &amp; \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
+    \mathbf{X}_t - A_1 L \mathbf{X}_{t} - A_2 L^2 \mathbf{X}_{t} - \ldots - A_p L^p \mathbf{X}_{t} &amp; = &amp; \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
     (I_k - \mathbf{A_1} L - \mathbf{A_2} L^2 - \ldots - \mathbf{A_p} L^p) \mathbf{X}_t &amp; = &amp; \boldsymbol{\delta} + \mathbf{U}_{t} \nonumber \\
     \mathbf{A}(L) \mathbf{X}_t &amp; = &amp; \boldsymbol{\delta} + \mathbf{U}_{t}
     \tag{5.3}
@@ -507,7 +529,7 @@ especificación del modelo <span class="math inline">\(VAR(p)\)</span> existen c
 Dichas condiciones están dadas por lo siguiente, definamos el siguiente
 polinomio que resulta de tomar la matriz <span class="math inline">\(\mathbf{A}(L)\)</span> en la ecuación
 <a href="cap-var.html#eq:VARCorto">(5.3)</a>: <span class="math display">\[\begin{equation}
-    Det[I_t - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
+    Det[I_k - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
 \end{equation}\]</span></p>
 <p>Donde las raíces del polinomio cumplen que <span class="math inline">\(|z| \leq 1\)</span>, es decir, se
 ubican dentro del círculo unitario.</p>
@@ -548,7 +570,7 @@ que nos permita determinar el número de rezagos óptimo <span class="math inlin
      AIC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2}{T}
      \end{equation}\]</span></p></li>
 <li><p>Hannan - Quinn Criterion (HQ): <span class="math display">\[\begin{equation}
-     HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(2))}{T}
+     HQ(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{2ln(ln(T))}{T}
      \end{equation}\]</span></p></li>
 <li><p>Schwartz Criterion (SC): <span class="math display">\[\begin{equation}
      SC(p) = ln|\mathbf{\Sigma}_{\hat{U}\hat{U}}(p)| + (k + p k^2) \frac{ln(T)}{T}
@@ -565,13 +587,13 @@ por: <span class="math display">\[\begin{equation*}
             \end{bmatrix}
             \right]
     \end{equation*}\]</span></p>
-<p><strong>Ejemplo</strong>. Ahora veámos un ejemplo de estimación de <span class="math inline">\(VAR(p)\)</span>.
+<p><strong>Ejemplo</strong>. Ahora veamos un ejemplo de estimación de <span class="math inline">\(VAR(p)\)</span>.
 Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio,
 rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción
 Industrial de los Estados Unidos, todas desestacionalizadas y para el
 período de enero de 2000 a julio de 2019. Dado que el supuesto
 estacionariedad sigue presente en nuestro análisis, emplearemos cada una
-de las series en su versión de diferencias logaritmicas. Las Figuras
+de las series en su versión de diferencias logarítmicas. Las Figuras
 <a href="cap-var.html#fig:fig62">5.2</a> y <a href="cap-var.html#fig:fig63">5.3</a> muestra las series referidas.</p>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
@@ -606,7 +628,7 @@ de las series en su versión de diferencias logaritmicas. Las Figuras
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"s"</span>, </span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"black"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
-<span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logaritmicas"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logarítmicas"</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylab <span class="op">=</span> <span class="st">"Variacion"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"INPC"</span>, <span class="st">"TC"</span>, <span class="st">"CETES28"</span>, <span class="st">"IGAE"</span>, <span class="st">"IPI"</span><span class="op">)</span>,</span>
@@ -621,7 +643,7 @@ Figure 5.2: Series en diferencias logarítmicas (Forma 1)
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">Datos</span>, plot.type <span class="op">=</span> <span class="st">"m"</span>, </span>
 <span>     col <span class="op">=</span> <span class="st">"darkgreen"</span>, </span>
-<span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logaritmicas"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
+<span>     main <span class="op">=</span> <span class="st">"Series en Diferencias logarítmicas"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig63"></span>
 <img src="Notas-Series-Tiempo_files/figure-html/fig63-1.png" alt="Series en diferencias logarítmicas (Forma 2)" width="672"><p class="caption">
@@ -630,7 +652,7 @@ Figure 5.3: Series en diferencias logarítmicas (Forma 2)
 </div>
 <p>Dicho lo anterior, a continuación mostraremos la tabla que resume el
 valor de los distintos criterios de información para una especificación
-de un <span class="math inline">\(VAR(p)\)</span> con constante. Notése que es posible especificar un
+de un <span class="math inline">\(VAR(p)\)</span> con constante. Nótese que es posible especificar un
 <span class="math inline">\(VAR(p)\)</span> con tendencia, siempre que exista evidencia de que algunas de
 las series sean estacionarias alrededor de una tendencia. Caso que no
 aplica hasta este momento, ya que nuestro análisis de estacionariedad es
@@ -1725,7 +1747,7 @@ Partamos de la ecuación <a href="cap-var.html#eq:VARMAq">(5.6)</a> de forma que
     &amp; = &amp; \mu + \mathbf{B}(L) \mathbf{U}_t \nonumber \\
     &amp; = &amp; \mu + \Psi_0 \mathbf{U}_t + \Psi_1 \mathbf{U}_{t-1} + \Psi_2 \mathbf{U}_{t-2} + \Psi_3 \mathbf{U}_{t-3} + \ldots
 \end{eqnarray}\]</span></p>
-<p>Donde <span class="math inline">\(\Psi_0 = I\)</span> y cada una de las <span class="math inline">\(\Psi_i = - \mathbf{B}_i\)</span>,
+<p>Donde <span class="math inline">\(\Psi_0 = I\)</span> y cada una de las <span class="math inline">\(\Psi_i = \mathbf{B}_i\)</span>,
 <span class="math inline">\(i = 1, 2, \ldots\)</span>. De esta forma se verifica el efecto que tiene en
 <span class="math inline">\(\mathbf{X}_t\)</span> cada una de las innovaciones pasadas. Por lo que el
 análisis de Impulso-Respuesta cuantifica el efecto de cada una de esas
@@ -2023,8 +2045,8 @@ Figure 5.8: Impulso - Respuesta en <span class="math inline">\(DLTC_t\)</span>
 </div>
 <p>Los resultados muestran que la respuesta de <span class="math inline">\(DLTC_t\)</span> ante impulsos en
 los términos de error fue estadísticamente significativo sólo para
-alguunos de los casos y en periodos cortos de tiempo. El resto de los
-resultados de Impulso-Respuesta se encuentra en el Scrip llamado Clase
+algunos de los casos y en periodos cortos de tiempo. El resto de los
+resultados de Impulso-Respuesta se encuentra en el Script llamado Clase
 15 que se ubica en el repositorio de GitHub.</p>
 </div>
 <div id="identificación-de-los-choques-estructurales-en-los-modelos-var" class="section level2" number="5.4">
@@ -2069,18 +2091,18 @@ de la forma reducida reflejan combinaciones lineales de múltiples
 choques estructurales y esto nos impide identificar la interacción contemporánea de las variables. Los choques <span class="math inline">\(u_t\)</span> no se pueden interpretar directamente porque no son ortogonales. En este sentido, para encontrar choques estructurales, debemos encontrar choques <span class="math inline">\(w_t\)</span> que sí sean ortogonales y tengan una interpretación económica.</p>
 <p>Comencemos con la forma estructural del VAR para comprender sus parámetros:
 <span class="math display">\[\begin{equation}
-B_0 Y_t = B_1 Y_{t-1} + ... B_p Y_{t-p} + w_t
+B_0 y_t = B_1 y_{t-1} + \ldots + B_p y_{t-p} + w_t
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(w_t\)</span> es un término de error con media cero y no correlacionado en el tiempo, también conocido como innovación estructural o shock estructural. Además, se asume que el término de error es incondicionalmente homocedástico a menos de que se indique lo contrario. La matriz <span class="math inline">\(B_0\)</span> es no singular y establece la interacción contemporánea entre las variables del modelo. De este modo, el modelo puede escribirse de manera compacta como:
 <span class="math display">\[\begin{equation}
 B(L) y_t = w_t
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(B(L) \equiv B_0 - B_1 L - B_2 L^2 - ...B_p L^p\)</span> es el polinomio autorregresivo en rezagos. La matriz de covarianza del término de error estructural es normalizada tal que:
+<p>donde <span class="math inline">\(B(L) \equiv B_0 - B_1 L - B_2 L^2 - \ldots - B_p L^p\)</span> es el polinomio autorregresivo en rezagos. La matriz de covarianza del término de error estructural es normalizada tal que:
 <span class="math display">\[\begin{equation}
 \mathbb{E}(w_t w_t') \equiv \Sigma_w = I_K.
 \end{equation}\]</span></p>
 <p>Con esto, sabemos que existen tantos shocks estructurales como variables en el modelo. Asimismo, los shocks estructurales, por definición, son mutuamente no correlacionados lo que implica que <span class="math inline">\(\Sigma_w\)</span> es diagonal. Por último, también sabemos que si normalizamos la varianza de todos los shocks estructurales a uno, no implica una pérdida de generalidad siempre y cuando los elementos diagonales <span class="math inline">\(B_0\)</span> permanezcan sin restricciones.</p>
-<p>Sin embargo, para que el modelo <span class="math inline">\(B_0 Y_t = B_1 Y_{t-1} + ... B_p Y_{t-p} + w_t\)</span> sea considerado como un VAR estructural no es suficiente con que los elementos de <span class="math inline">\(w_t\)</span> no se encuentren correlacionados, si no que los choques también deben ser económicamente interpretables. Para esto, derivamos la forma reducida de este modelo VAR estructural de tal modo que <span class="math inline">\(y_t\)</span> es una función de los rezagos de <span class="math inline">\(y_t\)</span> únicamente. Si multiplicamos ambos lados de la representación estructural del VAR por <span class="math inline">\(B_0^{-1}\)</span>
+<p>Sin embargo, para que el modelo <span class="math inline">\(B_0 y_t = B_1 y_{t-1} + \ldots + B_p y_{t-p} + w_t\)</span> sea considerado como un VAR estructural no es suficiente con que los elementos de <span class="math inline">\(w_t\)</span> no se encuentren correlacionados, sino que los choques también deben ser económicamente interpretables. Para esto, derivamos la forma reducida de este modelo VAR estructural de tal modo que <span class="math inline">\(y_t\)</span> es una función de los rezagos de <span class="math inline">\(y_t\)</span> únicamente. Si multiplicamos ambos lados de la representación estructural del VAR por <span class="math inline">\(B_0^{-1}\)</span>
 <span class="math display">\[\begin{equation}
 B_0^{-1} B_0 y_t = B_0^{-1} B_1 y_{t-1} + ... + B_0^{-1} B_p y_{t-p} + B_0^{-1} w_t
 \end{equation}\]</span></p>
@@ -2088,11 +2110,11 @@ B_0^{-1} B_0 y_t = B_0^{-1} B_1 y_{t-1} + ... + B_0^{-1} B_p y_{t-p} + B_0^{-1} 
 <span class="math display">\[\begin{equation}
 y_t = A_1 y_{t-1} + ... + A_p y_{t-p} + u_t
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(A_i = B_0^{-1} B_i\)</span>, <span class="math inline">\(i = 1,...,p\)</span>, y <span class="math inline">\(u_t = B_0^{-1} w_t\)</span>. Asi, las innovaciones en forma reducida de <span class="math inline">\(u_t\)</span> son un promedio ponderado de los shocks estructurales <span class="math inline">\(w_t\)</span>. De manera compacta, el modelo puede ser expresado como:
+<p>donde <span class="math inline">\(A_i = B_0^{-1} B_i\)</span>, <span class="math inline">\(i = 1,...,p\)</span>, y <span class="math inline">\(u_t = B_0^{-1} w_t\)</span>. Así, las innovaciones en forma reducida de <span class="math inline">\(u_t\)</span> son un promedio ponderado de los shocks estructurales <span class="math inline">\(w_t\)</span>. De manera compacta, el modelo puede ser expresado como:
 <span class="math display">\[\begin{equation}
 A(L) y_t = u_t
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(A(L) = I_K - A_1L - A_2 L^2 - ... A_p L^p\)</span> es el polinomio autorregresivo en rezagos. Los métodos de estimación estándar permiten obtener estimaciones de los parámetros de la forma reducida <span class="math inline">\(A_i\)</span>, para <span class="math inline">\(i=1,...p\)</span>, de las innovaciones reducidas <span class="math inline">\(u_t\)</span> y de su matriz de covarianza <span class="math inline">\(\mathbb{E}(u_t u_t') \equiv \Sigma_u\)</span>.</p>
+<p>donde <span class="math inline">\(A(L) = I_K - A_1L - A_2 L^2 - \ldots - A_p L^p\)</span> es el polinomio autorregresivo en rezagos. Los métodos de estimación estándar permiten obtener estimaciones de los parámetros de la forma reducida <span class="math inline">\(A_i\)</span>, para <span class="math inline">\(i=1,...p\)</span>, de las innovaciones reducidas <span class="math inline">\(u_t\)</span> y de su matriz de covarianza <span class="math inline">\(\mathbb{E}(u_t u_t') \equiv \Sigma_u\)</span>.</p>
 <p>Sin embargo, el debate que se ha generado desde entonces es, una vez estimada la forma reducida, de qué manera se puede recuperar la representación estructural del modelo VAR. Es decir, queremos recuperar la matriz <span class="math inline">\(B_0\)</span> -o bien, su inversa- que contiene las relaciones estructurales contemporáneas de las variables, recordando que <span class="math inline">\(u_t = B_0^{-1}w_t\)</span>.</p>
 <p>El método para recuperar dicha matriz ha generado gran debate en el análisis macroeconométrico, dando pie incluso a tesis doctorales al respecto. Con esto en mente, ahora veremos algunos de los métodos clásicos para recuperar las relaciones estructurales de las variables. Nos concentraremos en los siguientes:</p>
 <p><em>1. Identificación Recursiva</em></p>
@@ -2182,11 +2204,11 @@ z_t = \begin{bmatrix} \Delta gdp_t \\ ur_t \end{bmatrix} \sim I(0)
 <p><span class="math display">\[\begin{equation}
 A(L) z_t = u_t
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(A(L)=I_2-A_1L-...A_pL^p\)</span>, y <span class="math inline">\(u_t \sim (0, \Sigma_u)\)</span> es ruido blanco. Si lo representamos como su forma estructural, tenemos que:</p>
+<p>donde <span class="math inline">\(A(L)=I_2-A_1L-\ldots-A_pL^p\)</span>, y <span class="math inline">\(u_t \sim (0, \Sigma_u)\)</span> es ruido blanco. Si lo representamos como su forma estructural, tenemos que:</p>
 <p><span class="math display">\[\begin{equation}
 B(L) z_t = w_t
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(B(L) = B_0-B_1L-...B_pL^p = B_0A(L)\)</span>, y si recordamos a qué es igual <span class="math inline">\(w_t\)</span>, tenemos que:</p>
+<p>donde <span class="math inline">\(B(L) = B_0-B_1L-\ldots-B_pL^p = B_0A(L)\)</span>, y si recordamos a qué es igual <span class="math inline">\(w_t\)</span>, tenemos que:</p>
 <p><span class="math display">\[\begin{equation}
 w_t = B_0 u_t \rightarrow u_t = B_0^{-1} w_t \rightarrow \Sigma_u = B_0^{-1} (B_0^{-1})'
 \end{equation}\]</span></p>
@@ -2318,7 +2340,7 @@ con los trabajos de Engle y Granger (1987), Stock (1987) y Johansen
 como que dos o más variables tienen una relación común estable en el
 largo plazo. Es decir, estas no suelen tomar caminos o trayectorias
 diferentes, excepto por períodos de tiempo transitorios y eventuales. A
-continuación, utilizaremos la definición de Engle y Granger (1984) de
+continuación, utilizaremos la definición de Engle y Granger (1987) de
 cointegración.</p>
 <p>Sea <span class="math inline">\(\mathbf{Y}\)</span> un vector de k-series de tiempo, decimos que los
 elementos en <span class="math inline">\(\mathbf{Y}\)</span> están cointegrados en un orden (d, c), es
@@ -2375,21 +2397,25 @@ en este caso, a diferencia del VAR anteriormente estudiado, puede
 incluir un término de tendencia. Esto en razón de que hemos relajado el
 concepto de estacionariedad.</p>
 <p>Si reescribimos la ecuación <a href="cap-var.html#eq:VARCI">(5.7)</a> en su forma de Vector
-Corrector de Errores (VEC, por sus siglas en inglés) tenemos:
+Corrector de Errores (VEC, por sus siglas en inglés), restamos
+<span class="math inline">\(\mathbf{Y}_{t-1}\)</span> en ambos lados y usamos la identidad
+<span class="math inline">\(\mathbf{Y}_{t-j} = \mathbf{Y}_{t-1} - \sum_{i=1}^{j-1} \Delta \mathbf{Y}_{t-i}\)</span> válida para <span class="math inline">\(j \geq 2\)</span>:
 <span class="math display" id="eq:VARVEC">\[\begin{eqnarray}
-    \mathbf{Y}_t - \mathbf{Y}_{t-1} &amp; = &amp; \Delta \mathbf{Y}_t \nonumber \\
+    \Delta \mathbf{Y}_t
     &amp; = &amp; \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t - \mathbf{Y}_{t-1} + \mathbf{U}_t \nonumber \\
     &amp; = &amp; (\mathbf{A}_1 - \mathbf{I}) \mathbf{Y}_{t-1} + \mathbf{A}_2 \mathbf{Y}_{t-2} + \ldots + \mathbf{A}_p \mathbf{Y}_{t-p} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
-    &amp; = &amp; \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
-    &amp; = &amp; - \left( \mathbf{I} - \sum_{j=1}^{p} \mathbf{A}_j \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t \mathbf{U}_t \nonumber \\
+    &amp; = &amp; \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} - \sum_{j=2}^{p} \mathbf{A}_j \sum_{i=1}^{j-1} \Delta \mathbf{Y}_{t-i} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
+    &amp; = &amp; \left( \sum_{j=1}^{p} \mathbf{A}_j - \mathbf{I} \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
+    &amp; = &amp; - \left( \mathbf{I} - \sum_{j=1}^{p} \mathbf{A}_j \right) \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t \nonumber \\
     \Delta \mathbf{Y}_t &amp; = &amp; - \Pi \mathbf{Y}_{t-1} + \sum_{j=1}^{p-1} \mathbf{A}^*_j \Delta \mathbf{Y}_{t-j} + \mathbf{D}_t + \mathbf{U}_t
     \tag{5.8}
 \end{eqnarray}\]</span></p>
 <p>Donde <span class="math inline">\(\mathbf{A}_j^* = - \sum_{i=j+1}^p \mathbf{A}_i\)</span>,
-<span class="math inline">\(i = 1, 2, \ldots, p-1\)</span>, y la matriz <span class="math inline">\(\Pi\)</span> representa todas las
-relaciones de largo plazo entre las variables, por lo que la matriz es
-de rango completo <span class="math inline">\(k \times k\)</span>. Por lo tanto, tenemos que dicha matriz
-en la ecuación <a href="cap-var.html#eq:VARVEC">(5.8)</a> se puede factorizar como:
+para <span class="math inline">\(j = 1, 2, \ldots, p-1\)</span>, y la matriz <span class="math inline">\(\Pi\)</span> captura todas las
+relaciones de largo plazo entre las variables. Para que exista
+cointegración, <span class="math inline">\(\Pi\)</span> debe tener rango reducido <span class="math inline">\(r\)</span>, con <span class="math inline">\(0 \leq r &lt; k\)</span>.
+Por lo tanto, tenemos que dicha matriz en la ecuación <a href="cap-var.html#eq:VARVEC">(5.8)</a>
+se puede factorizar como:
 <span class="math display">\[\begin{equation}
     \Pi_{(k \times k)} = \Gamma_{(k \times r)} \boldsymbol{\beta}_{(r \times k)}'
     (\#eq:Pi_Matrix)
@@ -2423,7 +2449,7 @@ Unidos. Quizá el marco teórico de la relación entre las variables no sea
 del todo correcto, pero dejando de lado ese problema, estimaremos si las
 5 series cointegran.</p>
 <p>Por principio, probaremos que todas las series son I(1), lo cual es
-cierto (ver Scrip para mayores detalles). En las Figuras
+cierto (ver Script para mayores detalles). En las Figuras
 <a href="cap-var.html#fig:fig81">5.9</a>, <a href="cap-var.html#fig:fig82">5.10</a> y <a href="cap-var.html#fig:fig83">5.11</a> se muestran las
 series en niveles y en diferencias, con lo cual ilustramos como es
 viable que las series sean I(1).</p>
@@ -2481,12 +2507,12 @@ Figure 5.10: Series en Diferencias Logarítmicas para la prueba de Cointegració
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">LDatos</span>, <span class="va">DLDatos</span><span class="op">)</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
-<span>     <span class="co">#main = "Comparacion de Series en Diferencias", </span></span>
+<span>     <span class="co">#main = "Comparación de Series en Diferencias", </span></span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig83"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig83-1.png" alt="Comparacion de Series en Diferencias para la prueba de Cointegración" width="672"><p class="caption">
-Figure 5.11: Comparacion de Series en Diferencias para la prueba de Cointegración
+<img src="Notas-Series-Tiempo_files/figure-html/fig83-1.png" alt="Comparación de Series en Diferencias para la prueba de Cointegración" width="672"><p class="caption">
+Figure 5.11: Comparación de Series en Diferencias para la prueba de Cointegración
 </p>
 </div>
 <p>Posteriormente, determinamos cuál es el orden adecuado de un VAR(p) en
@@ -2849,7 +2875,7 @@ ecuación de cointegración. En la Figura <a href="cap-var.html#fig:fig84">5.12<
 residuales estimados. Derivado de la inspección visual, parecería que
 estos no son estacionarios, condición que debería ser cierta. De esta
 forma, una prueba deseable es aplicar todas las pruebas de raíces
-unitarias a esta serie para mostrar que es I(0). En el Scrip llamado
+unitarias a esta serie para mostrar que es I(0). En el Script llamado
 Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre
 esta serie y se encuentra que es posible que no sea estacionaria.</p>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
@@ -2873,9 +2899,9 @@ Figure 5.12: Residuales estimados de la ecuación de cointegración
 </div>
 </div>
 </div>
-<div id="modelos-adrl" class="section level2" number="5.6">
+<div id="modelos-ardl" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">5.6</span> Modelos ADRL<a class="anchor" aria-label="anchor" href="#modelos-adrl"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Modelos ARDL<a class="anchor" aria-label="anchor" href="#modelos-ardl"><i class="fas fa-link"></i></a>
 </h2>
 <div id="teoría" class="section level3" number="5.6.1">
 <h3>
@@ -2893,14 +2919,14 @@ proceder para seleccionar el modelo correcto.</p>
 Figure 5.13: Method selection for time series data. OLS: Ordinary least squares; VAR: Vector autoregressive; ARDL: Autoregressive distributed lags; ECM: Error correction models, retomado de: Shrestha y Bhatta (2018)
 </p>
 </div>
-<p>En este caso incorporaremos a los modelos autogregressive distributed
+<p>En este caso incorporaremos a los modelos autoregressive distributed
 lag models (ARDL, por sus siglas en inglés). En estos casos el
-procedimiento de Johansen no podría aplicarse directamennte cuando las
+procedimiento de Johansen no podría aplicarse directamente cuando las
 variables incluidas son de un orden mixto o cuando simplemente todas no
 son estacionarias. Un modelo ARDL está basado en procedimientos de MCO.</p>
 <p>Este tipo de modelos toma suficientes rezagos para capturar el mecanismo
 generador de datos. También es posible llegar a una especificación del
-mecanismo corrector de errores a partir de una trasformación lineal del
+mecanismo corrector de errores a partir de una transformación lineal del
 ARDL.</p>
 <p>Consideremos la siguiente ecuación:
 <span class="math display" id="eq:EqARDL">\[\begin{equation}
@@ -2917,12 +2943,12 @@ dinámica de corto plazo y las <span class="math inline">\(\lambda\)</span>’s 
 <p>La hipótesis nula (<span class="math inline">\(H_0\)</span>) es que las
 <span class="math inline">\(\lambda_1 + \lambda_2 + \lambda_3 = 0\)</span>, es decir, que no existe
 relación de largo plazo.</p>
-<p>En la práctica estimamos una especificación con rezafos distribuidos:
+<p>En la práctica estimamos una especificación con rezagos distribuidos:
 <span class="math display">\[\begin{equation}
     Y_t = \alpha + \sum_{i = 1}^p \beta_i Y_{t-i} + \sum_{i = 1}^p \delta_i X_{t-i} + \sum_{i = 1}^p \gamma_i Z_{t-i} + U_t
 \end{equation}\]</span></p>
 <p>Además de verificar si las series involucradas son estacionarias y
-decidir el número de reagos <span class="math inline">\(p\)</span> mediante criterios de información.</p>
+decidir el número de rezagos <span class="math inline">\(p\)</span> mediante criterios de información.</p>
 </div>
 <div id="ejemplo" class="section level3" number="5.6.2">
 <h3>
@@ -2970,7 +2996,7 @@ a 1987:Q3 de las siguientes variables:</p>
 <span class="header-section-number">5.6.2.3</span> Procedimiento:<a class="anchor" aria-label="anchor" href="#procedimiento"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
-<li>Calculamos un auto ADRL para determinar la combinación óptima de
+<li>Calculamos un auto ARDL para determinar la combinación óptima de
 rezagos.</li>
 </ol>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
@@ -3303,7 +3329,7 @@ r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t}
 </h4>
 <p>La idea general detrás de los <em>Modelos Estado-Espacio</em> es que una (múltiples) variable observable <span class="math inline">\(Y_1,...Y_T\)</span> depende de un posible estado no observable <span class="math inline">\(X_t\)</span> que sigue un proceso estocástico. La relación entre <span class="math inline">\(Y_t\)</span> y <span class="math inline">\(X_t\)</span> es descrita por la <strong>Ecuación de Observación</strong></p>
 <p><span class="math display" id="eq:Obs">\[\begin{equation}
-Y_t = C X_T + v_t
+Y_t = C X_t + v_t
 \tag{5.10}
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(C\)</span> es una matriz de parámetros conocidos y <span class="math inline">\(v_t\)</span> es un vector de errores observados (si los hay), los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza <span class="math inline">\(R\)</span>, es decir, <span class="math inline">\(v_t \sim iid(0, R)\)</span>. De este modo, la ecuación <a href="cap-var.html#eq:Obs">(5.10)</a> describe la relación estática entre las variables observables y no observables.</p>
@@ -3624,7 +3650,7 @@ P_{t|t} = P_{t|t-1} - P_{t|t-1} C' F_{t|t-1} {}^{-1} C P_{t|t-1} = (I - K_t C) P
 K_t = P_{t/t-1} C' F_{t/t-1} {}^{-1}.
 \tag{5.23}
 \end{equation}\]</span></p>
-<p>Notese que <span class="math inline">\(F_{t/t-1}\)</span> sigue:</p>
+<p>Nótese que <span class="math inline">\(F_{t/t-1}\)</span> sigue:</p>
 <p><span class="math display">\[\begin{equation}
 F_{t|t-1} = Var_{t-1} \left[( Y_t - Y_{t|t-1} \right)] = Var_{t-1} \left[( C X_t + v_t - C X_{t|t-1} \right)] = C P_{t|t-1} C' + R
 \end{equation}\]</span></p>
@@ -3747,7 +3773,7 @@ Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#modelos-adrl"><span class="header-section-number">5.6</span> Modelos ADRL</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#modelos-ardl"><span class="header-section-number">5.6</span> Modelos ARDL</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#teor%C3%ADa"><span class="header-section-number">5.6.1</span> Teoría</a></li>
 <li><a class="nav-link" href="#ejemplo"><span class="header-section-number">5.6.2</span> Ejemplo</a></li>
 </ul>
@@ -3777,7 +3803,7 @@ Figure 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on junio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

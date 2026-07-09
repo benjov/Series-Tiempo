@@ -74,6 +74,19 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 - [x] ~~`docs/`: 25 HTML obsoletos de builds anteriores (ago-sep 2025)~~ ✓ Eliminados; solo 10 archivos actuales
 - [x] ~~`.gitignore`: Artefactos de build, `.claude/`, PNGs temporales no ignorados~~ ✓ Actualizado
 
+### Corrección de contenido perdido en HTML (2026-07-08)
+
+- [x] ~~Bloques de LaTeX crudo (`\begin{itemize}`, `\begin{enumerate}`, `\textbf{}` en prosa) descartados por pandoc en la salida HTML: el sitio web omitía la definición de proceso integrado I(d) y los valores críticos KPSS (cap. 04), las definiciones de causalidad de Granger (cap. 05), las hipótesis alternativas de raíz unitaria en panel, condiciones de estacionariedad SETAR y procedimiento empírico (cap. 07), y las listas de series/λ del filtro HP (cap. 03)~~ ✓ Convertidos a listas Markdown y `**negritas**` (9 bloques + 3 `\textbf`); en cap. 07 se tradujeron al español ítems que estaban en inglés ("Dummy variable...", "Pend: ..."). Los bloques `{=tex}` restantes (caps. 02, 03) son solo ecuaciones y sí se renderizan vía MathJax — no requieren cambio. Los `\textbf` dentro de `\text{}` matemático (cap. 05) también están bien.
+
+### Hallazgos de revisión 2026-07-08 (pendientes)
+
+- [ ] **Citas**: el texto cita en prosa plana ("Sims (1980)", "Engle y Granger (1987)") en vez de `@key`; la bibliografía solo se completa por `nocite: '@*'`. Migrar a citas `@key` (las llaves ya existen en `book.bib`). Faltan entradas: Taylor (1986), Guerrero-Guzmán (2014), Franses y van Dijk (2003), Kirchgässner et al. (2012), Stock (1987), Shrestha y Bhatta (2018).
+- [ ] **03:449**: "Greta, Ljung y Box (1978)" — Greta es el nombre de pila de Ljung, no un tercer autor.
+- [ ] **04**: KPSS describe $\xi_t$ como "ruido blanco" siendo caminata aleatoria; frase "sólo podría ser estacionario si $t=1$"; inconsistencia T=234 vs 282 en fórmula de rezagos; captions fig74/fig75 cruzados; fig73–fig75 sin referenciar en texto.
+- [ ] **06**: captions fig105/fig107 dicen "autocorrelación parcial" pero el código usa `acf()`; fig108/fig109 con captions duplicados; conclusiones fijas en texto con datos vivos de Yahoo (congelar snapshot BTC en `BD/`); texto "GARCH(2,4)" vs `garchOrder=c(4,2)`; pronósticos cambian la media a `armaOrder=c(4,2)` sin explicación.
+- [ ] **Ortografía/consistencia**: unificar "autorregresivo" (doble r, ~46 usos con una sola r); typo "Autorregresicos" en 05:236; "homoscedasticidad"/"homocedasticidad" mezclados (06:63); espacios en "Levendis(2023)", "Neusser(2025)" (01:5).
+- [ ] **Estilo editorial**: salida cruda de R redundante con los cuadros kable (18 `summary()` en cap. 04; `auto.arima`, `boot.garch` en cap. 06) — considerar `results='hide'`; "## Motivación" en 03:2569 debería ser `###`; sección "## Prueba de normalidad" del cap. 06 integrarla a la motivación; tono informal ("Acá una respuesta.", 06:352); `ggsave()` escribe PNGs en la raíz del repo.
+
 ---
 
 ## Tareas de revisión por capítulo (todos los capítulos)

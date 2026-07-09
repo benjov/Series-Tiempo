@@ -2,9 +2,9 @@
 
 ## Sobre estas notas
 
-Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgässner, Wolters y Hassler (2012), Lütkepohl (2005), Wei (2019), entre otros. En algunos casos se incorpora información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).
+Estas notas son un resumen, una síntesis comparativa y, en algunos casos, una interpretación propia de los libros de texto de Brooks (2019), Cowpertwait y Metcalfe (2009), Guerrero-Guzmán (2014), Enders (2015), Franses y van Dijk (2003), Kirchgässner, Wolters y Hassler (2012), Levendis(2023), Lütkepohl (2005), Neusser(2025), Wei (2019), entre otros. En algunos casos se incorporan papers y otra información adicional para efectos de dar contexto al tema analizado (ver sección de Bibliografía para mayores detalles).
 
-El objetivo de este documento es proporcionar un conjunto de apuntes que sirvan de apoyo para la clase de Análisis de Series de Tiempo en la Facultad de Economía de la UNAM. Por esta razón, no deben considerarse como notas exhaustivas ni como un sustituto de la clase y los laboratorios. Es deseable que los alumnos aporten sus observaciones y correcciones; los comentarios a estas notas son siempre bienvenidos y agradecidos.
+El objetivo de este documento es proporcionar un conjunto de apuntes que sirvan de apoyo para las clases de Análisis de Series de Tiempo en la Facultad de Economía de la UNAM y de Econometría II del Tecnológico de Monterrey, Campus Santa Fe. Por esta razón, no deben considerarse como notas exhaustivas ni como un sustituto de la clase, los laboratorios y la lectura de los textos recomendados en clase. Es deseable que los alumnos aporten sus observaciones y correcciones; los comentarios a estas notas son siempre bienvenidos y agradecidos.
 
 Para cualquier comentario o aclaración escribir a los correos benjov@ciencias.unam.mx o omarxalpha@gmail.com.
 
@@ -12,24 +12,24 @@ Para cualquier comentario o aclaración escribir a los correos benjov@ciencias.u
 
 En estas notas se estudian los temas que típicamente se incluyen en un curso estándar de análisis de series de tiempo, además de algunos tópicos adicionales. Los capítulos están organizados de la siguiente manera:
 
-**Capítulo \@ref(cap-eqdiff). Elementos de Ecuaciones en Diferencia** — Se presentan los conceptos fundamentales de las ecuaciones en diferencia, herramienta matemática central para modelar la dinámica de las series de tiempo. Se introduce la notación del operador de rezagos y se estudian las condiciones de estabilidad de procesos lineales.
+**Capítulo \@ref(cap-eqdiff). Elementos de Ecuaciones en Diferencia** — Se presentan los conceptos fundamentales de las ecuaciones en diferencia, herramienta matemática central para modelar la dinámica de las series de tiempo. Se introduce la notación del operador de rezagos y se estudian las condiciones de estabilidad de procesos lineales basados en ecuaciones en diferencia.
 
-**Capítulo \@ref(cap-estacionarios). Procesos Estacionarios y Modelos Univariados** — Se definen formalmente los conceptos de estacionariedad y ergodicidad. Se estudian los modelos autorregresivos $AR(p)$, de medias móviles $MA(q)$, mixtos $ARMA(p,q)$, y su extensión integrada $ARIMA(p,d,q)$. Se incluyen también modelos con variables exógenas $ARIMAX$ y procedimientos de desestacionalización.
+**Capítulo \@ref(cap-estacionarios). Procesos Estacionarios y Modelos Univariados** — Se definen formalmente los conceptos de estacionariedad y ergodicidad. Se estudian los modelos autorregresivos $AR(p)$, de medias móviles $MA(q)$, mixtos $ARMA(p,q)$, y su extensión integrada $ARIMA(p,d,q)$. Se incluyen también modelos con variables exógenas $ARIMAX$ y procedimientos de desestacionalización, así como la extensión $SARIMAX$.
 
-**Capítulo \@ref(cap-noestacionarios). Procesos No Estacionarios Univariados** — Se estudian los procesos con raíz unitaria y las principales pruebas estadísticas para detectarlos: Dickey-Fuller, Dickey-Fuller Aumentada (ADF) y Phillips-Perron, entre otras. Se analiza la diferencia entre tendencia determinística y tendencia estocástica.
+**Capítulo \@ref(cap-noestacionarios). Procesos No Estacionarios Univariados** — Se estudian los procesos con raíz unitaria y las principales pruebas estadísticas para detectarlos: Dickey-Fuller, Dickey-Fuller Aumentada (ADF) y Phillips-Perron, entre otras. Se analiza la diferencia entre tendencia determinística y tendencia estocástica. Finalmente, se introducen pruebas de detección de raíz unitaria bajo escenarios de cambio estructural.
 
-**Capítulo \@ref(cap-var). Modelos Multivariados: VAR y Cointegración** — Se extiende el análisis univariado al caso de múltiples series. Se presentan los Vectores Autoregresivos ($VAR$), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos ($ARDL$).
+**Capítulo \@ref(cap-var). Modelos Multivariados: VAR y Cointegración** — Se extiende el análisis univariado de series al caso de múltiples series o vector de series. Se presentan los Vectores Autoregresivos ($VAR$), el análisis de cointegración de Engle-Granger y Johansen, los Modelos de Corrección de Error (VEC), y los modelos de rezagos distribuidos autorregresivos ($ARDL$).
 
-**Capítulo \@ref(cap-volatilidad). Modelos de Volatilidad** — Se introducen los modelos que capturan heterocedasticidad condicional: $ARCH(r)$, $GARCH(p,q)$ y sus extensiones multivariadas ($M$-$GARCH$). Se discute su aplicación a datos financieros de alta frecuencia.
+**Capítulo \@ref(cap-volatilidad). Modelos de Volatilidad** — Se introducen los modelos univariados que capturan heterocedasticidad condicional: $ARCH(r)$, $GARCH(p,q)$ y sus extensiones multivariadas ($M$-$GARCH$ y $M$-$GARCH$-$M$). Se discute su aplicación a datos financieros de alta frecuencia y otras aplicaciones en el ámbito de la economía.
 
-**Capítulo \@ref(cap-panel). Modelos de Datos Panel y Modelos No Lineales** — Se aborda el análisis de datos panel con dimensión temporal, incluyendo pruebas de raíz unitaria en panel y modelos Panel-VAR. Se introduce también la modelación no lineal mediante modelos de cambio de régimen (Markov-Switching).
+**Capítulo \@ref(cap-panel). Modelos de Datos Panel y Modelos No Lineales** — Se aborda el análisis de datos panel con dimensión temporal, incluyendo pruebas de raíz unitaria en panel y modelos Panel-VAR. Se introduce también la modelación no lineal mediante modelos de cambio de régimen.
 
 ## Prerrequisitos
 
 Estas notas asumen que el lector tiene conocimientos previos de:
 
-- **Probabilidad y estadística**: variables aleatorias, distribuciones de probabilidad, esperanza matemática, varianza y covarianza.
-- **Econometría básica**: regresión lineal por Mínimos Cuadrados Ordinarios (MCO), pruebas de hipótesis, problemas de autocorrelación y heterocedasticidad.
+- **Probabilidad y estadística**: variables aleatorias, distribuciones de probabilidad, esperanza matemática, varianza y covarianza, métodos de estimación, y pruebas de hipótesis para medias y varianzas.
+- **Econometría básica**: regresión lineal por Mínimos Cuadrados Ordinarios (MCO), pruebas de hipótesis simples y conjuntas, problemas de autocorrelación y heterocedasticidad.
 - **Álgebra lineal**: operaciones con matrices, valores y vectores propios.
 - **Cálculo**: derivadas e integrales básicas.
 
@@ -37,7 +37,7 @@ El dominio de R a nivel introductorio es deseable, aunque no indispensable para 
 
 ## Software: R {#sec-R}
 
-Todos los ejemplos y ejercicios en estas notas están programados en **R** [@R-base], un entorno de software libre para cómputo estadístico y gráficos. R puede descargarse gratuitamente desde [https://cran.r-project.org](https://cran.r-project.org). Se recomienda también instalar **RStudio** como entorno de desarrollo integrado (IDE), disponible en [https://posit.co/downloads](https://posit.co/downloads).
+Todos los ejemplos y ejercicios en estas notas están programados en **R** [@R-base], un entorno de software libre para cómputo estadístico y gráficos. R puede descargarse gratuitamente desde [https://cran.r-project.org](https://cran.r-project.org). Se recomienda también instalar **RStudio** como entorno de desarrollo integrado (IDE, por sus siglas en inglés), disponible en [https://posit.co/downloads](https://posit.co/downloads).
 
 Los paquetes de R utilizados con mayor frecuencia a lo largo de estas notas son:
 
@@ -57,8 +57,7 @@ Los paquetes de R utilizados con mayor frecuencia a lo largo de estas notas son:
 Para instalar todos los paquetes necesarios en una sola instrucción:
 
 ```{r install_packages, eval=FALSE}
-install.packages(c("readxl", "ggplot2", "forecast", "tseries", "urca",
-                   "vars", "rugarch", "rmgarch", "plm", "MSwM"))
+install.packages( c( "readxl", "ggplot2", "forecast", "tseries", "urca", "vars", "rugarch", "rmgarch", "plm", "MSwM" ) )
 ```
 
 Los datos empleados en los ejemplos están disponibles en la carpeta `BD/` del repositorio del proyecto en GitHub: [https://github.com/benjov/Series-Tiempo/tree/main/BD](https://github.com/benjov/Series-Tiempo/tree/main/BD).
@@ -74,3 +73,18 @@ A lo largo del texto se usan las siguientes convenciones:
 - $\mathbb{E}[\cdot]$ denota la esperanza matemática (o valor esperado).
 - $\text{Var}(\cdot)$ y $\text{Cov}(\cdot, \cdot)$ denotan la varianza y covarianza, respectivamente.
 - Las ecuaciones numeradas se referencian como, por ejemplo, la ecuación \@ref(eq:Serie).
+
+## Por qué estudiar el análisis de series de tiempo en economía
+
+El análisis de series de tiempo es una herramienta fundamental en la investigación empírica, ya que permite describir y modelar de manera estadísticamente coherente la evolución de una o varias variables a lo largo del tiempo. En economía, está estrechamente relacionado con la macroeconomía y las finanzas, áreas que estudian modelos dinámicos.
+
+En la literatura, existen dos enfoques principales. El primero es descriptivo: utiliza estadísticas como la media, la varianza y la covarianza para identificar regularidades observables en los datos. El segundo busca representar el mecanismo interno que genera los datos. Como en economía este mecanismo suele ser desconocido, se recurre a clases amplias de modelos, especialmente los modelos autorregresivos de medias móviles, conocidos como ARMA, cuyos parámetros se estiman a partir de los datos observados.
+
+Las regularidades encontradas, ya sea mediante estadísticas descriptivas o modelos específicos, son importantes porque permiten contrastar teorías económicas, respaldarlas o descubrir nuevos patrones. Una idea central del análisis de series de tiempo es que las regularidades observadas en una muestra pueden extenderse hacia el futuro. De ahí surge una de sus aplicaciones principales y fundamentales para la economía: la predicción.
+
+A diferencia de los datos de corte transversal, en los que las observaciones se asumen independientes entre sí, las series de tiempo exhiben *dependencia temporal*: el valor de una variable en el período $t$ está correlacionado con sus valores pasados. Esta dependencia, conocida como autocorrelación, invalida los supuestos del modelo de regresión clásico y exige herramientas específicas. Al mismo tiempo, la dependencia temporal es precisamente la que hace posible el pronóstico: si el presente contiene información sistemática sobre el futuro, es posible aprovecharla para anticipar la trayectoria de la variable de interés.
+
+Las aplicaciones en economía son numerosas. En macroeconomía, el análisis de las fluctuaciones del Producto Interno Bruto (PIB), la inflación, el tipo de cambio y la tasa de desempleo requiere metodologías que capten tanto tendencias de largo plazo como ciclos de corto plazo y componentes estacionales. En finanzas, los modelos de series de tiempo se utilizan para estimar la volatilidad de los rendimientos de activos, evaluar el riesgo de carteras de inversión y construir estrategias de cobertura. En política económica, los bancos centrales y las instituciones gubernamentales emplean estos modelos para generar proyecciones de variables clave y evaluar el impacto de sus intervenciones.
+
+En términos generales, el análisis de series de tiempo persigue tres objetivos: (i) *descripción*, que consiste en caracterizar las propiedades estadísticas de la serie —su tendencia, estacionalidad, ciclos y estructura de correlación serial—; (ii) *modelación*, que busca identificar y estimar el proceso estocástico generador de los datos, de modo que el modelo capte fielmente la dinámica observada; y (iii) *pronóstico*, que utiliza el modelo estimado para generar predicciones de valores futuros de la serie. Estos tres objetivos no son excluyentes: la descripción orienta la elección del modelo, y un modelo bien especificado es a la vez una herramienta poderosa de pronóstico.
+

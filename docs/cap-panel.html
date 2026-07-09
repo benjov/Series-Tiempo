@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 7 Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales | Análisis de Series de Tiempo</title>
-<meta name="author" content="Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
+<meta name="author" content="Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz">
 <meta name="description" content="7.1 Modelos de Datos Panel y Panel VAR  7.1.1 Motivación Los datos panel son una extensión natural del análisis de series de tiempo en el que observamos una misma variable a lo largo del tiempo,...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Capítulo 7 Modelos de Datos Panel, Panel VAR y otros Modelos No Lineales | Análisis de Series de Tiempo">
@@ -108,7 +108,7 @@
 </h3>
 <p>Las pruebas de raíces unitarias para panel suelen ser usadas principalmente en casos macroeconómicos. De forma similar al caso de series univariadas, asumiremos una forma de AR(1) para una serie en panel:
 <span class="math display" id="eq:eqARPanel">\[\begin{equation}
-    \Delta Y_{it} = \mu_i + \rho_i Y_{i t-1} + \sum_{i = 1}^{k_i} \varphi_{ij} \Delta Y_{i t-j} + \varepsilon_{it}
+    \Delta Y_{it} = \mu_i + \rho_i Y_{i,t-1} + \sum_{j = 1}^{k_i} \varphi_{ij} \Delta Y_{i,t-j} + \varepsilon_{it}
     \tag{7.1}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(i = 1, \ldots, N\)</span>, <span class="math inline">\(t = 1, \ldots, T\)</span> y <span class="math inline">\(\varepsilon_{it}\)</span> es una v.a. iid que cumple con:
@@ -121,7 +121,12 @@
 <span class="math display">\[\begin{equation}
     H_0 : \rho_i = 0
 \end{equation}\]</span></p>
-Por su parte, en el caso de la hipótesis alternativa tendremos dos:
+<p>Por su parte, en el caso de la hipótesis alternativa tendremos dos:
+- <span class="math inline">\(H_1^A :\)</span> Todas las series son I(0) – caso homogéneo, o</p>
+<ul>
+<li>
+<span class="math inline">\(H_1^B :\)</span> Al menos una de las series es I(0) – caso heterogéneo</li>
+</ul>
 </div>
 <div id="ejemplo-pruebas-de-raíces-unitarias-en-panel" class="section level3" number="7.1.3">
 <h3>
@@ -331,7 +336,14 @@ Figure 7.1: Evolución de la inversión por empresa
 </h3>
 <p>Este ejemplo modela el efecto que tiene que una empresa de laboratorios de análisis clínicos compre a sus competidores en diferentes ciudades del país. Para lo cual usaremos información del Índice Nacional de Precios al Consumidor de los servicios de análisis clínicos.</p>
 <p>Dependencias y configuración:</p>
-Importamos Datos desde un archivo de Excel. Los datos están en formato panel e incluyen:
+<p>Importamos Datos desde un archivo de Excel. Los datos están en formato panel e incluyen:
+- INPC (Índice Nacional de Precios al Consumidor (2QJul2018 = 100)) para un tipo de servicio. Fuente: <a href="https://www.inegi.org.mx/programas/inpc/2018/#Tabulados" class="uri">https://www.inegi.org.mx/programas/inpc/2018/#Tabulados</a></p>
+<ul>
+<li><p>Variable dicotómica que indica el momento en que inició el tratamiento</p></li>
+<li><p>Variable dicotómica que identifica al grupo expuesto al tratamiento</p></li>
+<li><p>Interacción entre el tiempo y el grupo tratado, además de una variable de tendencia</p></li>
+<li><p>Otras variables de control</p></li>
+</ul>
 <p>Partamos de la siguiente ecuación:
 <span class="math display" id="eq:eqDiD">\[\begin{equation}
     y_{it} = \beta_1 + \beta_2 T_t + \beta_3 D_t + \theta T_t \times D_t + \boldsymbol{\gamma} \mathbf{X}_{it} + \varepsilon_{it}
@@ -347,7 +359,7 @@ Importamos Datos desde un archivo de Excel. Los datos están en formato panel e 
 \end{eqnarray}\]</span></p>
 <p>La expresión <a href="cap-panel.html#eq:eqDiDE">(7.3)</a> cuantifica el efecto que tiene el tratamiento como la diferencia de medias de dos grupos: un grupo tratado y otro no tratado. Dentro de los cuales se han comparado las medias respecto de una línea base. Podemos plantear esto desde esta otra perspectiva. Pensemos que solo tenemos dos periodos <span class="math inline">\(t = {1, 2}\)</span>, en el cual en 1 no ha ocurrido el tratamiento y en 2 ya ha ocurrido. Así, el cambio en la variable de respuesta para los individuos tratados será (suponiendo que omitimos la matriz <span class="math inline">\(\mathbf{X}_{it}\)</span> en la ecuación <a href="cap-panel.html#eq:eqDiD">(7.2)</a>):
 <span class="math display" id="eq:eqDiDTreat">\[\begin{eqnarray}
-    \mathbb{E}[ y_{i2} | D_i = 1 ] - \mathbb{E}[ y_{i1} | D_i = 1 ] &amp; = &amp; ( \beta_1 + \beta_2 + \beta_3 + \theta ) - ( \beta_1 + \beta_3 + \theta ) \nonumber \\  
+    \mathbb{E}[ y_{i2} | D_i = 1 ] - \mathbb{E}[ y_{i1} | D_i = 1 ] &amp; = &amp; ( \beta_1 + \beta_2 + \beta_3 + \theta ) - ( \beta_1 + \beta_3 ) \nonumber \\
     &amp; = &amp; \beta_2 + \theta
     \tag{7.4}
 \end{eqnarray}\]</span></p>
@@ -485,7 +497,7 @@ Importamos Datos desde un archivo de Excel. Los datos están en formato panel e 
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span> size <span class="op">=</span> <span class="fl">8</span>, angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/unnamed-chunk-33-1.png" width="672"></div>
-<p>Hagamos una pruebas de Raíces Unitarias.</p>
+<p>Hagamos una prueba de Raíces Unitarias.</p>
 <p>Conversión a formato ancho:</p>
 <pre><code>## # A tibble: 6 × 48
 ##   Fecha    `Acapulco, Gro.` `Aguascalientes, Ags.` Área Metropolitana de la Cd…¹
@@ -682,7 +694,7 @@ Importamos Datos desde un archivo de Excel. Los datos están en formato panel e 
     Var[\varepsilon_{it}] &amp; = &amp; \Sigma_\varepsilon
 \end{eqnarray*}\]</span></p>
 <p>Donde <span class="math inline">\(\Sigma_\varepsilon\)</span> es una matriz definida positiva.</p>
-<p>Para el porceso de estimación, la ecuación <a href="cap-panel.html#eq:eqPVAR">(7.7)</a> se modifica en su versión en diferencias para quedar como:
+<p>Para el proceso de estimación, la ecuación <a href="cap-panel.html#eq:eqPVAR">(7.7)</a> se modifica en su versión en diferencias para quedar como:
 <span class="math display" id="eq:eqDinamicPVAR">\[\begin{equation}
     \Delta \mathbf{Y}_{it} = \sum_{l = 1}^p \mathbf{A}_l \Delta \mathbf{Y}_{i t - l} + \mathbf{B} \Delta \mathbf{X}_{it} + \Delta \varepsilon_{it}
     \tag{7.8}
@@ -701,7 +713,7 @@ Importamos Datos desde un archivo de Excel. Los datos están en formato panel e 
 </h3>
 <p>La estimación sigue la literatura de panel dinámico de Arellano y Bond (1991), Blundell y Bond (1998) y Roodman (2009).
 Este conjunto de datos describe el empleo, los salarios, el capital y la producción de 140 empresas en el Reino Unido durante 1976–1984.
-We estimate: Employment is explained by past values of employment (“l” lags), current and first lag of wages and output and current value of capital.</p>
+Se estima un modelo en el que el empleo (<span class="math inline">\(n\)</span>) es explicado por sus valores pasados (2 rezagos), los valores actuales y el primer rezago de los salarios (<span class="math inline">\(w\)</span>) y la producción (<span class="math inline">\(ys\)</span>), y el valor actual del capital (<span class="math inline">\(k\)</span>).</p>
 <pre><code>##  [1] "c1"       "ind"      "year"     "emp"      "wage"     "cap"     
 ##  [7] "indoutpt" "n"        "w"        "k"        "ys"       "rec"     
 ## [13] "yearm1"   "id"       "nL1"      "nL2"      "wL1"      "kL1"     
@@ -997,10 +1009,7 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <h3>
 <span class="header-section-number">7.2.2</span> Ejemplo 2:<a class="anchor" aria-label="anchor" href="#ejemplo-2"><i class="fas fa-link"></i></a>
 </h3>
-<p>We used the panel data set consists of 265 Swedish municipalities and covers 9 years (1979-1987).
-These variables include total expenditures (expenditures), total own-source revenues (revenues) and intergovernmental grants received by the municipality (grants).
-Source: Dahlberg and Johansson (2000)</p>
-<p>Grants from the central to the local government are of three kinds: support to municipalities with small tax capacity, grants toward the running of certain local government activities and grants toward certain investments.</p>
+<p>Se utiliza un conjunto de datos panel de 265 municipios suecos durante 9 años (1979–1987). Las variables incluyen el gasto total (<code>expenditures</code>), los ingresos propios (<code>revenues</code>) y las transferencias intergubernamentales recibidas por el municipio (<code>grants</code>). Fuente: Dahlberg y Johansson (2000). Las transferencias del gobierno central al gobierno local son de tres tipos: apoyo a municipios con baja capacidad fiscal, transferencias para financiar ciertas actividades del gobierno local, y transferencias destinadas a inversiones específicas.</p>
 <div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Dahlberg"</span><span class="op">)</span></span>
 <span></span>
@@ -1445,9 +1454,46 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <span class="header-section-number">7.3</span> Cointegración<a class="anchor" aria-label="anchor" href="#cointegraci%C3%B3n-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>La extensión de los conceptos de cointegración al contexto panel sigue la misma lógica que en el caso univariado: si las series <span class="math inline">\(Y_{it}\)</span> son <span class="math inline">\(I(1)\)</span> pero existe una combinación lineal estacionaria, se dice que cointegran. El procedimiento más utilizado es el propuesto por Pedroni (1999, 2004), que plantea siete estadísticos de prueba bajo la hipótesis nula de no cointegración, permitiendo tanto coeficientes de cointegración homogéneos como heterogéneos entre individuos.</p>
-<blockquote>
-<p><strong>Nota:</strong> El desarrollo completo de las pruebas de cointegración en panel (Pedroni, Kao, Westerlund) y el modelo de corrección de error en panel (PVEC) se incluirá en una versión posterior de estas notas.</p>
-</blockquote>
+<div id="prueba-de-pedroni-1999-2004" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Prueba de Pedroni (1999, 2004)<a class="anchor" aria-label="anchor" href="#prueba-de-pedroni-1999-2004"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para cada individuo <span class="math inline">\(i = 1, \ldots, N\)</span> se estima la regresión de cointegración de largo plazo:
+<span class="math display" id="eq:eqCointPanel">\[\begin{equation}
+    Y_{it} = \alpha_i + \delta_i t + \boldsymbol{\beta}_i^{\prime} \mathbf{X}_{it} + e_{it}
+    \tag{7.9}
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\mathbf{X}_{it}\)</span> es un vector <span class="math inline">\(m \times 1\)</span> de regresores <span class="math inline">\(I(1)\)</span>, <span class="math inline">\(\alpha_i\)</span> es un efecto fijo individual y <span class="math inline">\(\delta_i t\)</span> es una tendencia determinista individual (que puede omitirse). La hipótesis nula es que los residuales <span class="math inline">\(\hat{e}_{it}\)</span> tienen raíz unitaria, es decir, no existe cointegración para ningún individuo del panel:
+<span class="math display">\[\begin{equation}
+    H_0 : \hat{e}_{it} = \hat{e}_{i,t-1} + v_{it} \quad \forall \, i
+\end{equation}\]</span></p>
+<p>Para construir los estadísticos se estima, para cada <span class="math inline">\(i\)</span>, la regresión auxiliar aumentada sobre los residuales:
+<span class="math display" id="eq:eqResidPanel">\[\begin{equation}
+    \Delta \hat{e}_{it} = \hat{\rho}_i \hat{e}_{i,t-1} + \sum_{j=1}^{k_i} \hat{\psi}_{ij} \Delta \hat{e}_{i,t-j} + \hat{v}_{it}
+    \tag{7.10}
+\end{equation}\]</span></p>
+<p>A partir de los residuales <span class="math inline">\(\hat{v}_{it}\)</span> y de las varianzas de largo plazo <span class="math inline">\(\hat{L}_{11i}^2\)</span> (que corrigen la correlación serial), Pedroni (1999) construye siete estadísticos divididos en dos grupos:</p>
+<p><strong>Estadísticos de dimensión interna (within-dimension).</strong> Imponen un coeficiente autorregresivo <span class="math inline">\(\rho_i = \rho\)</span> común al hacer la suma sobre individuos. Se componen del estadístico Panel-<span class="math inline">\(\nu\)</span> (cociente de varianzas, diverge hacia la derecha bajo <span class="math inline">\(H_1\)</span>), el Panel-<span class="math inline">\(\rho\)</span> (análogo al estadístico <span class="math inline">\(\rho\)</span> de Phillips-Perron), el Panel-<span class="math inline">\(t\)</span> no paramétrico y el Panel-ADF paramétrico.</p>
+<p><strong>Estadísticos de dimensión entre grupos (between-dimension).</strong> Promedian estadísticos individuales sobre los <span class="math inline">\(N\)</span> individuos, permitiendo que <span class="math inline">\(\rho_i\)</span> difiera entre individuos bajo la alternativa. Se componen del Group-<span class="math inline">\(\rho\)</span>, el Group-<span class="math inline">\(t\)</span> no paramétrico y el Group-ADF paramétrico.</p>
+<p>Bajo la hipótesis nula de no cointegración, todos los estadísticos estandarizados convergen en distribución a una normal estándar:
+<span class="math display">\[\begin{equation}
+    \frac{\text{Estadístico} - \mu_{NT}}{\sigma_{NT}} \xrightarrow{d} N(0, 1)
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\mu_{NT}\)</span> y <span class="math inline">\(\sigma_{NT}\)</span> son momentos que dependen del número de regresores <span class="math inline">\(m\)</span> y se tabulan en <span class="citation">Pedroni (<a href="bibliograf%C3%ADa.html#ref-pedroni1999">1999</a>)</span>. Los estadísticos Panel-<span class="math inline">\(\nu\)</span> divergen hacia la derecha bajo la alternativa; los demás seis divergen hacia la izquierda, de modo que valores muy negativos llevan a rechazar <span class="math inline">\(H_0\)</span>.</p>
+<p>La ventaja de los estadísticos between-dimension sobre los within-dimension es que permiten vectores de cointegración heterogéneos entre individuos bajo la hipótesis alternativa, lo que los hace más adecuados en paneles con coeficientes de largo plazo que varían entre individuos.</p>
+</div>
+<div id="prueba-de-kao-1999" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Prueba de Kao (1999)<a class="anchor" aria-label="anchor" href="#prueba-de-kao-1999"><i class="fas fa-link"></i></a>
+</h3>
+<p><span class="citation">Kao (<a href="bibliograf%C3%ADa.html#ref-kao1999">1999</a>)</span> propone pruebas más restrictivas que imponen el mismo vector de cointegración para todos los individuos y no incluyen tendencia determinista individual. Sus estadísticos también se basan en los residuales de la regresión de cointegración y convergen a <span class="math inline">\(N(0,1)\)</span> bajo la hipótesis nula de no cointegración.</p>
+</div>
+<div id="prueba-de-westerlund-2007" class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> Prueba de Westerlund (2007)<a class="anchor" aria-label="anchor" href="#prueba-de-westerlund-2007"><i class="fas fa-link"></i></a>
+</h3>
+<p><span class="citation">Westerlund (<a href="bibliograf%C3%ADa.html#ref-westerlund2007">2007</a>)</span> propone cuatro estadísticos basados en la corrección de errores: en lugar de probar raíz unitaria en los residuales, se estima un modelo de corrección de errores para cada individuo y se prueba si el coeficiente de ajuste <span class="math inline">\(\alpha_i\)</span> es significativamente negativo. Este enfoque tiene mayor potencia que las pruebas residuales cuando la dinámica de corto plazo varía entre individuos, y permite controlar la dependencia transversal mediante remuestreo (<em>bootstrap</em>).</p>
+</div>
 </div>
 <div id="modelos-no-lineales" class="section level2" number="7.4">
 <h2>
@@ -1458,14 +1504,18 @@ GMM-type<br><em>Dependent vars: L(2,6))<br>Collapse = FALSE</em>
 <span class="header-section-number">7.4.1</span> Modelos de cambio de régimen<a class="anchor" aria-label="anchor" href="#modelos-de-cambio-de-r%C3%A9gimen"><i class="fas fa-link"></i></a>
 </h3>
 <p>En años recientes, los modelos de serie de tiempo han sido incorporados en análisis de la existencia de diferentes estados que son generados por procesos estocásticos subyacentes. En esta sección del curso revisaremos algunos modelos de cambio de régimen. Restringimos nuestra revisión a modelos que asuman que la dinámica de las series puede ser descrita por modelos del tipo AR y dejamos fuera procesos del tipo MA.</p>
-En general distinguimos que existen dos tipos de modelos:
+<p>En general distinguimos que existen dos tipos de modelos:
+1. Modelos caracterizados por una variable observable, por lo que tenemos certeza de los regímenes en cada uno de los momentos.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Modelos en los que el régimen no puede ser observado por una variable, pero sí conocemos el proceso estocástico subyacente.</li>
+</ol>
 </div>
 <div id="regímenes-determinados-por-información-observable" class="section level3" number="7.4.2">
 <h3>
 <span class="header-section-number">7.4.2</span> Regímenes determinados por información observable<a class="anchor" aria-label="anchor" href="#reg%C3%ADmenes-determinados-por-informaci%C3%B3n-observable"><i class="fas fa-link"></i></a>
 </h3>
 <p>En estos casos asumimos que el régimen ocurre en un momento <span class="math inline">\(t\)</span> y puede ser determinado por una variable observable. Este modelo es conocido como el modelo autoregresivo con umbral (TAR, Threshold Autoregressive model). En este caso también diremos que cuando el régimen está determinado por la información de la misma serie será llamado Self-Exciting TAR (SETAR).</p>
-<p>Veámos un caso particular. Supongamos que existe un umbral, <span class="math inline">\(c\)</span>, para el régimen que está determinado por <span class="math inline">\(q_t = y_{t-1}\)</span> y que el estado de la naturaleza nos permite establecer dos estados o regímenes:
+<p>Veamos un caso particular. Supongamos que existe un umbral, <span class="math inline">\(c\)</span>, para el régimen que está determinado por <span class="math inline">\(q_t = y_{t-1}\)</span> y que el estado de la naturaleza nos permite establecer dos estados o regímenes:
 <span class="math display">\[\begin{equation}
     y_t =
     \begin{cases}
@@ -1503,7 +1553,14 @@ En general distinguimos que existen dos tipos de modelos:
 <span class="math display">\[\begin{equation}
     AIC(p_1, p_2) = n_1 ln(\hat{\sigma}^2_1) + n_2 ln(\hat{\sigma}^2_2) + 2(p_1 + 1) + 2(p_2 + 1)
 \end{equation}\]</span></p>
-Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan ciertas condiciones. En estas notas nos enfocaremos únicamente en el modelo SETAR; el cual genera en un proceso estacionario cuando:
+<p>Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan ciertas condiciones. En estas notas nos enfocaremos únicamente en el modelo SETAR; el cual genera en un proceso estacionario cuando:
+1. <span class="math inline">\(\phi_{11} &lt; 1\)</span>, <span class="math inline">\(\phi_{12} &lt; 1\)</span>, <span class="math inline">\(\phi_{11} \cdot \phi_{12} &lt; 1\)</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><span class="math inline">\(\phi_{11} = 1\)</span>, <span class="math inline">\(\phi_{12} &lt; 1\)</span>, <span class="math inline">\(\phi_{01} &gt; 0\)</span></p></li>
+<li><p><span class="math inline">\(\phi_{11} &lt; 1\)</span>, <span class="math inline">\(\phi_{12} = 1\)</span>, <span class="math inline">\(\phi_{02} &lt; 0\)</span></p></li>
+<li><p><span class="math inline">\(\phi_{11} = 1\)</span>, <span class="math inline">\(\phi_{12} = 1\)</span>, <span class="math inline">\(\phi_{02} &lt; 0 &lt; \phi_{01}\)</span></p></li>
+<li><p><span class="math inline">\(\phi_{11} \cdot \phi_{12} = 1\)</span>, <span class="math inline">\(\phi_{11} &lt; 0\)</span>, <span class="math inline">\(\phi_{02} + \phi_{12} \cdot \phi_{01} &gt; 0\)</span></p></li>
+</ol>
 <p>Finalmente, en ocasiones podemos estar interesados en modelos donde los regímenes sean más de 2, es decir, digamos <span class="math inline">\(m\)</span> umbrales bajo un modelo SETAR o STAR. Por ejemplo, en el caso de un modelo SETAR podemos verificar que <span class="math inline">\(m\)</span> regímenes implican <span class="math inline">\(m + 1\)</span> umbrales: <span class="math inline">\(c_0, c_1, \ldots, c_m\)</span>. En cuyo caso:
 <span class="math display">\[\begin{equation*}
     -\infty = c_0 &lt; c_1 &lt; \ldots &lt; c_{m-1} &lt; c_m = \infty
@@ -1532,7 +1589,7 @@ Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan cier
     y_t = \phi_{0 s_t} + \phi_{1 s_t} y_{t-1} + \varepsilon_t
 \end{equation}\]</span></p>
 <p>Para complementar el modelo, las propiedades del proceso <span class="math inline">\(s_t\)</span> necesitan ser especificadas. El modelo más popular dentro de esta familia es el propuesto por James Hamilton en 1989, el cual es conocido como Markov Switching Model (MSM), en el cual el proceso <span class="math inline">\(s_t\)</span> se asume como un proceso de Markov de primer orden. Esto implica que el régimen actual <span class="math inline">\(s_t\)</span> sólo depende del período <span class="math inline">\(s_{t-1}\)</span>.</p>
-<p>Así, el modelo es completado mediante la definición de las probabilidades de transición para moverse del un estado a otro:
+<p>Así, el modelo es completado mediante la definición de las probabilidades de transición para moverse de un estado a otro:
 <span class="math display">\[\begin{eqnarray*}
     \mathbb{P}(s_t = 1 | s_{t-1} = 1) &amp; = &amp; p_{11} \\
     \mathbb{P}(s_t = 2 | s_{t-1} = 1) &amp; = &amp; p_{12} \\
@@ -1561,7 +1618,15 @@ Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan cier
 <span class="math display">\[\begin{equation*}
     \sum_{j=1}^m p_{ij} = 1 \text{ para } i = 1, 2, \ldots, m
 \end{equation*}\]</span></p>
-Finalmente, plantearemos el procedimiento empírico seguido para la estimación de este tipo de modelos:
+<p>Finalmente, plantearemos el procedimiento empírico seguido para la estimación de este tipo de modelos:
+1. Estimar un proceso AR(p)</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Probar una hipótesis nula de no linealidad de acuerdo con alguno de los modelos SETAR, STAR o MSM</p></li>
+<li><p>Estimar los parámetros</p></li>
+<li><p>Evaluar los resultados del modelo</p></li>
+<li><p>Ajustar, en su caso, la estimación o modelo</p></li>
+<li><p>Pronosticar o realizar análisis impulso-respuesta</p></li>
+</ol>
 </div>
 </div>
 <div id="ejemplo-modelos-de-cambio-de-régimen-tar" class="section level2" number="7.5">
@@ -1746,7 +1811,13 @@ Finalmente, plantearemos el procedimiento empírico seguido para la estimación 
 <li><a class="nav-link" href="#ejemplo-2"><span class="header-section-number">7.2.2</span> Ejemplo 2:</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#cointegraci%C3%B3n-1"><span class="header-section-number">7.3</span> Cointegración</a></li>
+<li>
+<a class="nav-link" href="#cointegraci%C3%B3n-1"><span class="header-section-number">7.3</span> Cointegración</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prueba-de-pedroni-1999-2004"><span class="header-section-number">7.3.1</span> Prueba de Pedroni (1999, 2004)</a></li>
+<li><a class="nav-link" href="#prueba-de-kao-1999"><span class="header-section-number">7.3.2</span> Prueba de Kao (1999)</a></li>
+<li><a class="nav-link" href="#prueba-de-westerlund-2007"><span class="header-section-number">7.3.3</span> Prueba de Westerlund (2007)</a></li>
+</ul>
+</li>
 <li>
 <a class="nav-link" href="#modelos-no-lineales"><span class="header-section-number">7.4</span> Modelos No Lineales</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#modelos-de-cambio-de-r%C3%A9gimen"><span class="header-section-number">7.4.1</span> Modelos de cambio de régimen</a></li>
@@ -1772,7 +1843,7 @@ Finalmente, plantearemos el procedimiento empírico seguido para la estimación 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on junio de 2026.</p>
+    <p>"<strong>Análisis de Series de Tiempo</strong>" was written by Benjamín Oliva, Jaime Vázquez Alamilla, Omar Alfaro Rivera, Emiliano Pérez Caullieres &amp; Luis Gerardo Ruíz. It was last built on julio de 2026.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

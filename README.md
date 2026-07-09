@@ -30,9 +30,10 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")  # PDF
 
 ## Autores
 
-- Benjamín Oliva — benjov@ciencias.unam.mx
+- Benjamín Oliva Vázquez — benjov@ciencias.unam.mx
+- Jaime Vázquez Alamilla - jaime.vazquez@ciencias.unam.mx
 - Omar Alfaro Rivera — omarxalpha@gmail.com
-- Emiliano Pérez Caullieres
-- Luis Gerardo Ruíz
+- Emiliano Pérez Caullieres - emilianoprzcls@gmail.com
+- Luis Gerardo Ruíz - gerardorg2203@gmail.com 
 
 Para comentarios o correcciones escribir a benjov@ciencias.unam.mx.
