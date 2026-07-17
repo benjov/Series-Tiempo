@@ -320,9 +320,41 @@ Figura 6.4: Densidad de rendimientos del Bitcoin Vs. una distribución normal
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(c_i\)</span> son los coeficientes de la expansión en serie de potencias
 <span class="math inline">\(\frac{\alpha(L)}{1 - \beta(L)} = \sum_{i=1}^\infty c_i L^i\)</span>.</p>
-<div id="ejemplo-arch1" class="section level3" number="6.2.1">
+<div id="propiedades-varianza-no-condicional-y-colas-pesadas" class="section level3" number="6.2.1">
 <h3>
-<span class="header-section-number">6.2.1</span> Ejemplo ARCH(1)<a class="anchor" aria-label="anchor" href="#ejemplo-arch1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.1</span> Propiedades: varianza no condicional y colas pesadas<a class="anchor" aria-label="anchor" href="#propiedades-varianza-no-condicional-y-colas-pesadas"><i class="fas fa-link"></i></a>
+</h3>
+<p>Vale la pena detenerse en las propiedades del caso más simple, el ARCH(1), porque ilustran por qué esta familia de modelos reproduce los hechos estilizados de las series financieras que documentamos en la sección de motivación. Para el ARCH(1), <span class="math inline">\(\sigma^2_t = \omega + \alpha_1 U^2_{t-1}\)</span>, y aplicando esperanzas a ambos lados, la varianza <strong>no condicional</strong> del proceso es constante:</p>
+<p><span class="math display" id="eq:VarNoCond">\[\begin{equation}
+    \bar{\sigma}^2 = \mathbb{E}[U_t^2] = \omega + \alpha_1 \mathbb{E}[U_{t-1}^2]
+    \quad \Longrightarrow \quad
+    \bar{\sigma}^2 = \frac{\omega}{1 - \alpha_1},
+    \tag{6.4}
+\end{equation}\]</span></p>
+<p>siempre que <span class="math inline">\(\alpha_1 &lt; 1\)</span>. Es decir, el proceso <span class="math inline">\(U_t\)</span> es estacionario y homocedástico <em>sin condicionar</em>, aunque su varianza <em>condicional</em> cambie periodo a periodo: la heterocedasticidad es un fenómeno condicional a la información pasada. Esto explica el agrupamiento de volatilidad: un choque grande en <span class="math inline">\(_{t-1}\)</span> eleva <span class="math inline">\(\sigma^2_t\)</span> y hace más probables choques grandes en <span class="math inline">\(_t\)</span>, pero en el largo plazo la varianza revierte a <span class="math inline">\(\bar{\sigma}^2\)</span>.</p>
+<p>Más aún, si el término estandarizado <span class="math inline">\(U_t / \sigma_t\)</span> es normal, la curtosis no condicional del ARCH(1) es:</p>
+<p><span class="math display" id="eq:CurtosisARCH">\[\begin{equation}
+    \kappa = \frac{\mathbb{E}[U_t^4]}{(\mathbb{E}[U_t^2])^2} = \frac{3 (1 - \alpha_1^2)}{1 - 3 \alpha_1^2} &gt; 3,
+    \quad \text{si} \quad 3 \alpha_1^2 &lt; 1.
+    \tag{6.5}
+\end{equation}\]</span></p>
+<p>Es decir, aun cuando las innovaciones condicionales sean normales, la distribución no condicional de <span class="math inline">\(U_t\)</span> tiene <strong>colas más pesadas que la normal</strong>. Esta es exactamente la característica que encontramos en los rendimientos del Bitcoin al inicio del capítulo (curtosis muestral muy superior a 3), y es una de las razones del éxito empírico de los modelos ARCH/GARCH en finanzas.</p>
+</div>
+<div id="estimación-por-máxima-verosimilitud-1" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> Estimación por Máxima Verosimilitud<a class="anchor" aria-label="anchor" href="#estimaci%C3%B3n-por-m%C3%A1xima-verosimilitud-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Los modelos GARCH no pueden estimarse por mínimos cuadrados ordinarios, pues la varianza condicional <span class="math inline">\(\sigma^2_t\)</span> es una función no lineal de los parámetros y no es observable. La estrategia estándar es la estimación por <strong>máxima verosimilitud</strong>. Si suponemos que <span class="math inline">\(U_t | \Omega_{t-1} \sim N(0, \sigma_t^2)\)</span>, la función log-verosimilitud condicional de la muestra es:</p>
+<p><span class="math display" id="eq:VeroGARCH">\[\begin{equation}
+    ln L(\theta) = -\frac{1}{2} \sum_{t=1}^{T} \left[ ln(2\pi) + ln \, \sigma^2_t(\theta) + \frac{U_t^2(\theta)}{\sigma^2_t(\theta)} \right],
+    \tag{6.6}
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\theta\)</span> agrupa los parámetros de la media condicional (<span class="math inline">\(\boldsymbol{\beta}\)</span>) y de la varianza condicional (<span class="math inline">\(\omega, \alpha_i, \beta_j\)</span>). Para cada valor candidato de <span class="math inline">\(\theta\)</span>, la recursión de la ecuación <a href="cap-volatilidad.html#eq:GARCHEffect">(6.2)</a> genera la trayectoria completa de <span class="math inline">\(\sigma^2_t\)</span>, con lo que se evalúa <a href="cap-volatilidad.html#eq:VeroGARCH">(6.6)</a>; un optimizador numérico busca el máximo. Éste es el procedimiento que ejecuta internamente la función <code><a href="https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html">ugarchfit()</a></code> del paquete <code>rugarch</code> que utilizaremos en los ejemplos.</p>
+<p>Dos observaciones prácticas. Primera: si la distribución condicional verdadera no es normal, el estimador anterior se interpreta como de <strong>cuasi-máxima verosimilitud</strong> (QML); sigue siendo consistente, aunque los errores estándar deben corregirse. Segunda: dado que las series financieras suelen exhibir colas pesadas incluso condicionalmente, es común especificar una distribución <span class="math inline">\(t\)</span> de Student para las innovaciones (en <code>rugarch</code>, con el argumento <code>distribution.model = "std"</code>).</p>
+</div>
+<div id="ejemplo-arch1" class="section level3" number="6.2.3">
+<h3>
+<span class="header-section-number">6.2.3</span> Ejemplo ARCH(1)<a class="anchor" aria-label="anchor" href="#ejemplo-arch1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Hasta ahora, las distribuciones utilizadas para medir el Valor en Riesgo de un activo (Bitcoin, en este caso) asumen que no existe correlación serial en los retornos diarios del activo. Observemos un par de gráficas de la función de autocorrelación para corroborar este hecho–ver la Figura <a href="cap-volatilidad.html#fig:fig105">6.5</a>–.</p>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
@@ -610,9 +642,9 @@ shape
 </tbody>
 </table></div>
 </div>
-<div id="ejemplo-garch01" class="section level3" number="6.2.2">
+<div id="ejemplo-garch01" class="section level3" number="6.2.4">
 <h3>
-<span class="header-section-number">6.2.2</span> Ejemplo GARCH(0,1)<a class="anchor" aria-label="anchor" href="#ejemplo-garch01"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.4</span> Ejemplo GARCH(0,1)<a class="anchor" aria-label="anchor" href="#ejemplo-garch01"><i class="fas fa-link"></i></a>
 </h3>
 <p>Estimemos un GARCH(0,1) usando la siguiente especificación:
 <span class="math display">\[\begin{eqnarray*}
@@ -788,17 +820,17 @@ shape
 </tbody>
 </table></div>
 </div>
-<div id="selección-garchpq-óptimo" class="section level3" number="6.2.3">
+<div id="selección-garchpq-óptimo" class="section level3" number="6.2.5">
 <h3>
-<span class="header-section-number">6.2.3</span> Selección GARCH(p,q) óptimo<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-garchpq-%C3%B3ptimo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.5</span> Selección GARCH(p,q) óptimo<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-garchpq-%C3%B3ptimo"><i class="fas fa-link"></i></a>
 </h3>
 <p>¿Cómo seleccionamos el orden adecuado para un GARCH(p,q)? Una respuesta la ofrecen los criterios de información, partiendo de la especificación general:</p>
 <p><span class="math inline">\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)</span></p>
 <p><span class="math inline">\(h_t = \omega+\sum_{i=1}^p\beta_i h_{t-i}+\sum_{j=1}^q\alpha_j\varepsilon^2_{t-j}\)</span></p>
 <p><span class="math inline">\(\varepsilon_t \sim N(0,1)\)</span></p>
-<div id="criterios-de-información" class="section level4" number="6.2.3.1">
+<div id="criterios-de-información" class="section level4" number="6.2.5.1">
 <h4>
-<span class="header-section-number">6.2.3.1</span> Criterios de información<a class="anchor" aria-label="anchor" href="#criterios-de-informaci%C3%B3n"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.5.1</span> Criterios de información<a class="anchor" aria-label="anchor" href="#criterios-de-informaci%C3%B3n"><i class="fas fa-link"></i></a>
 </h4>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">infocriteria</a></span><span class="op">(</span><span class="va">fit.garch.n</span><span class="op">)</span></span>
@@ -856,9 +888,9 @@ Hannan-Quinn
 </tbody>
 </table></div>
 </div>
-<div id="selección-del-modelo-óptimo" class="section level4" number="6.2.3.2">
+<div id="selección-del-modelo-óptimo" class="section level4" number="6.2.5.2">
 <h4>
-<span class="header-section-number">6.2.3.2</span> Selección del modelo óptimo<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-del-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.5.2</span> Selección del modelo óptimo<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-del-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
 </h4>
 <p>Podemos hacer una búsqueda del mejor modelo de entre varios que probemos en un espectro de hasta un GARCH(4,4), manteniendo para la media condicional la misma especificación AR(2) empleada en las estimaciones anteriores. Los resultados son los reportados en el siguiente Cuadro.</p>
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
@@ -1119,9 +1151,9 @@ AIC
 </tbody>
 </table></div>
 </div>
-<div id="estimación-de-modelo-óptimo" class="section level4" number="6.2.3.3">
+<div id="estimación-de-modelo-óptimo" class="section level4" number="6.2.5.3">
 <h4>
-<span class="header-section-number">6.2.3.3</span> Estimación de modelo óptimo<a class="anchor" aria-label="anchor" href="#estimaci%C3%B3n-de-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.5.3</span> Estimación de modelo óptimo<a class="anchor" aria-label="anchor" href="#estimaci%C3%B3n-de-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
 </h4>
 <p>De esta forma, con los datos al corte señalado, el modelo óptimo es un GARCH(3,1). Los resultados de la estimación se muestran en el Cuadro <a href="cap-volatilidad.html#tab:garch-estimates">6.5</a>.</p>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
@@ -1350,10 +1382,17 @@ shape
 </tbody>
 </table></div>
 </div>
-<div id="pronósticos-con-el-modelo-garch-óptimo" class="section level4" number="6.2.3.4">
+<div id="pronósticos-con-el-modelo-garch-óptimo" class="section level4" number="6.2.5.4">
 <h4>
-<span class="header-section-number">6.2.3.4</span> Pronósticos con el modelo GARCH óptimo<a class="anchor" aria-label="anchor" href="#pron%C3%B3sticos-con-el-modelo-garch-%C3%B3ptimo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.5.4</span> Pronósticos con el modelo GARCH óptimo<a class="anchor" aria-label="anchor" href="#pron%C3%B3sticos-con-el-modelo-garch-%C3%B3ptimo"><i class="fas fa-link"></i></a>
 </h4>
+<p>Antes de pasar al código, conviene precisar qué pronostica un GARCH. Para un GARCH(1,1), la varianza condicional esperada a <span class="math inline">\(h\)</span> periodos satisface la recursión <span class="math inline">\(\mathbb{E}_t[\sigma^2_{t+h}] = \omega + (\alpha_1 + \beta_1) \, \mathbb{E}_t[\sigma^2_{t+h-1}]\)</span>, cuya solución es:</p>
+<p><span class="math display" id="eq:PronGARCH">\[\begin{equation}
+    \mathbb{E}_t[\sigma^2_{t+h}] = \bar{\sigma}^2 + (\alpha_1 + \beta_1)^{h-1} \left( \sigma^2_{t+1} - \bar{\sigma}^2 \right),
+    \quad \text{con} \quad \bar{\sigma}^2 = \frac{\omega}{1 - \alpha_1 - \beta_1}.
+    \tag{6.7}
+\end{equation}\]</span></p>
+<p>Es decir, el pronóstico de la varianza <strong>revierte geométricamente</strong> hacia la varianza no condicional <span class="math inline">\(\bar{\sigma}^2\)</span> a una velocidad gobernada por la persistencia <span class="math inline">\(\alpha_1 + \beta_1\)</span>: cuanto más cercana a 1 sea la suma, más lentamente se disipa un episodio de alta volatilidad. La misma lógica se extiende al GARCH(p, q) con persistencia <span class="math inline">\(\sum_i \alpha_i + \sum_j \beta_j\)</span>.</p>
 <p>Para realizar pronósticos con la estimación de un GARCH, utilizando la librería <em>rugarch</em>, es necesario utilizar la función <strong>ugarchforecast()</strong>. Emplearemos el modelo GARCH(3,1) con media AR(2) que resultó óptimo en la sección anterior (objeto <code>model.fit</code>):</p>
 <div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">getspec</a></span><span class="op">(</span><span class="va">model.fit</span><span class="op">)</span></span>
@@ -1420,9 +1459,33 @@ shape
 </div>
 </div>
 </div>
-<div id="modelos-arch-y-garch-multivariados" class="section level2" number="6.3">
+<div id="extensiones-asimetría-y-garch-en-media" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">6.3</span> Modelos ARCH y GARCH Multivariados<a class="anchor" aria-label="anchor" href="#modelos-arch-y-garch-multivariados"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Extensiones: asimetría y GARCH en media<a class="anchor" aria-label="anchor" href="#extensiones-asimetr%C3%ADa-y-garch-en-media"><i class="fas fa-link"></i></a>
+</h2>
+<p>El GARCH(p, q) trata de forma simétrica a los choques: en la ecuación <a href="cap-volatilidad.html#eq:GARCHEffect">(6.2)</a> solo importa la magnitud <span class="math inline">\(U^2_{t-1}\)</span>, no su signo. Sin embargo, un hecho estilizado adicional de los mercados financieros es el <strong>efecto apalancamiento</strong> (<em>leverage effect</em>): las caídas de precios suelen incrementar la volatilidad más que las alzas de la misma magnitud. Existen dos extensiones clásicas para capturar esta asimetría.</p>
+<p>El modelo <strong>TGARCH</strong> o <strong>GJR-GARCH</strong> de Glosten, Jagannathan y Runkle <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-glostenjagannathanrunkle1993">1993</a>)</span> añade un término que solo se activa cuando el choque es negativo:</p>
+<p><span class="math display" id="eq:TGARCH">\[\begin{equation}
+    \sigma^2_t = \omega + \alpha_1 U^2_{t-1} + \gamma \, U^2_{t-1} \, \mathbb{I}(U_{t-1} &lt; 0) + \beta_1 \sigma^2_{t-1},
+    \tag{6.8}
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\mathbb{I}(\cdot)\)</span> es la función indicadora. Si <span class="math inline">\(\gamma &gt; 0\)</span>, un choque negativo incrementa la varianza condicional en <span class="math inline">\(\alpha_1 + \gamma\)</span>, mientras que uno positivo solo en <span class="math inline">\(\alpha_1\)</span>.</p>
+<p>El modelo <strong>EGARCH</strong> de Nelson <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-nelson1991">1991</a>)</span> especifica el logaritmo de la varianza condicional en función de los choques estandarizados <span class="math inline">\(z_t = U_t / \sigma_t\)</span>:</p>
+<p><span class="math display" id="eq:EGARCH">\[\begin{equation}
+    ln \, \sigma^2_t = \omega + \beta_1 \, ln \, \sigma^2_{t-1} + \alpha_1 \left( |z_{t-1}| - \mathbb{E}|z_{t-1}| \right) + \gamma \, z_{t-1},
+    \tag{6.9}
+\end{equation}\]</span></p>
+<p>con dos ventajas: al modelar <span class="math inline">\(ln \, \sigma^2_t\)</span>, no se requieren restricciones de no negatividad sobre los parámetros, y el término <span class="math inline">\(\gamma \, z_{t-1}\)</span> captura la asimetría de forma directa (un <span class="math inline">\(\gamma &lt; 0\)</span> implica efecto apalancamiento).</p>
+<p>Por último, el modelo <strong>GARCH en media (GARCH-M)</strong> de Engle, Lilien y Robins <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-englelilienrobins1987">1987</a>)</span> permite que la varianza condicional afecte a la media condicional:</p>
+<p><span class="math display" id="eq:GARCHM">\[\begin{equation}
+    X_t = \mathbf{Z}_t \boldsymbol{\beta} + \lambda \sigma^2_t + U_t,
+    \tag{6.10}
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\lambda\)</span> se interpreta como el premio al riesgo: si <span class="math inline">\(\lambda &gt; 0\)</span>, los periodos de mayor volatilidad esperada se compensan con mayores rendimientos esperados, en línea con la teoría de portafolios. Todas estas variantes están disponibles en <code>rugarch</code>: basta cambiar el argumento <code>variance.model = list(model = "gjrGARCH")</code> o <code>"eGARCH"</code> en <code><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec()</a></code>, o añadir <code>archm = TRUE</code> en la especificación de la media para el GARCH-M.</p>
+</div>
+<div id="modelos-arch-y-garch-multivariados" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Modelos ARCH y GARCH Multivariados<a class="anchor" aria-label="anchor" href="#modelos-arch-y-garch-multivariados"><i class="fas fa-link"></i></a>
 </h2>
 <p>De forma similar a los modelos univariados, los modelos multivariados de heterocedasticidad condicional asumen una estructura de la media condicional. En este caso, descrita por un VAR(p) cuyo proceso estocástico <span class="math inline">\(\mathbf{X}\)</span> es estacionario de dimensión <span class="math inline">\(k\)</span>. De esta forma, la expresión reducida del modelo o el proceso VAR(p) estará dado por:
 <span class="math display">\[\begin{equation}
@@ -1441,12 +1504,12 @@ shape
     \mathbf{U}_t | \Omega_{t-1} \sim (0, \Sigma_{t | t-1})
 \end{equation*}\]</span></p>
 <p>Dicho lo anterior, entonces, el modelo ARCH(q) multivariado será descrito por:
-<span class="math display">\[\begin{equation}
+<span class="math display" id="eq:M-ARCH">\[\begin{equation}
     Vech(\Sigma_{t | t-1}) = \boldsymbol{\gamma}_0 + \Gamma_1 Vech(\mathbf{U}_{t-1} \mathbf{U}_{t-1}') + \ldots + \Gamma_q Vech(\mathbf{U}_{t-q} \mathbf{U}_{t-q}')
-    (\#eq:M_ARCH)
+    \tag{6.11}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(Vech\)</span> es un operador que apila en un vector la parte triangular inferior (incluyendo la diagonal) de la matriz a la cual se le aplique, <span class="math inline">\(\boldsymbol{\gamma}_0\)</span> es un vector de constantes, <span class="math inline">\(\Gamma_i\)</span>, <span class="math inline">\(i = 1, 2, \ldots\)</span> son matrices de coeficientes asociados a la estimación.</p>
-<p>Para ilustrar la ecuación @ref(eq:M_ARCH), tomemos un ejemplo de <span class="math inline">\(K = 2\)</span>, de esta forma tenemos que un M-ARCH(1) será:
+<p>Para ilustrar la ecuación <a href="cap-volatilidad.html#eq:M-ARCH">(6.11)</a>, tomemos un ejemplo de <span class="math inline">\(K = 2\)</span>, de esta forma tenemos que un M-ARCH(1) será:
 <span class="math display">\[\begin{equation*}
     \Sigma_{t | t-1} =
     \begin{bmatrix}
@@ -1498,10 +1561,10 @@ shape
     \end{bmatrix}
 \end{equation*}\]</span></p>
 <p>Finalmente y de forma análoga al caso univariado, podemos plantear un modelo M-GARCH(p, q) como:
-<span class="math display">\[\begin{eqnarray}
+<span class="math display" id="eq:M-GARCH">\[\begin{eqnarray}
     Vech(\Sigma_{t | t-1}) &amp; = &amp; \boldsymbol{\gamma}_0 + \sum_{j = 1}^q \Gamma_j Vech(\mathbf{U}_{t-j} \mathbf{U}_{t-j}') \nonumber \\
     &amp;  &amp; + \sum_{m = 1}^p \mathbf{G}_m Vech(\Sigma_{t-m | t-m-1})
-        (\#eq:M_GARCH)
+        \tag{6.12}
 \end{eqnarray}\]</span></p>
 <p>Donde cada una de las <span class="math inline">\(\mathbf{G}_m\)</span> es una matriz de coeficientes. Para ilustrar este caso, retomemos el ejemplo anterior, pero ahora para un modelo M-GARCH(1, 1) con <span class="math inline">\(K = 2\)</span> de forma que tendríamos:
 <span class="math display">\[\begin{eqnarray*}
@@ -1526,18 +1589,18 @@ shape
     \end{bmatrix}
 \end{eqnarray*}\]</span></p>
 </div>
-<div id="pruebas-para-detectar-efectos-arch" class="section level2" number="6.4">
+<div id="pruebas-para-detectar-efectos-arch" class="section level2" number="6.5">
 <h2>
-<span class="header-section-number">6.4</span> Pruebas para detectar efectos ARCH<a class="anchor" aria-label="anchor" href="#pruebas-para-detectar-efectos-arch"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.5</span> Pruebas para detectar efectos ARCH<a class="anchor" aria-label="anchor" href="#pruebas-para-detectar-efectos-arch"><i class="fas fa-link"></i></a>
 </h2>
 <p>La prueba que mostraremos es conocida como una ARCH-LM, la cual está basada en una regresión de los residuales estimados de un modelo VAR(p) o cualquier otra estimación que deseemos probar, con el objeto de determinar si existen efectos ARCH –esta prueba se puede simplificar para el caso univariado–.</p>
 <p>Partamos de plantear:
 <span class="math display" id="eq:ARCH-LM">\[\begin{eqnarray}
     Vech(\hat{\mathbf{U}}_t \hat{\mathbf{U}}_t') &amp; = &amp; \mathbf{B}_0 + \mathbf{B}_1 Vech(\hat{\mathbf{U}}_{t-1} \hat{\mathbf{U}}_{t-1}') + \ldots \\ \nonumber
     &amp; &amp; + \mathbf{B}_q Vech(\hat{\mathbf{U}}_{t-q} \hat{\mathbf{U}}_{t-q}') + \varepsilon_t
-    \tag{6.4}
+    \tag{6.13}
 \end{eqnarray}\]</span></p>
-<p>Dada la estimación en la ecuación <a href="cap-volatilidad.html#eq:ARCH-LM">(6.4)</a>, plantearemos la estructura de hipótesis dada por:
+<p>Dada la estimación en la ecuación <a href="cap-volatilidad.html#eq:ARCH-LM">(6.13)</a>, plantearemos la estructura de hipótesis dada por:
 <span class="math display">\[\begin{eqnarray*}
     H_0 &amp; : &amp; \mathbf{B}_1 = \mathbf{B}_2 = \ldots = \mathbf{B}_q = \mathbf{0} \\
     H_a &amp; : &amp; \text{al menos una } \mathbf{B}_i \neq \mathbf{0}
@@ -1546,11 +1609,11 @@ shape
 <span class="math display">\[\begin{equation}
     LM_{M-ARCH} = \frac{1}{2} T K (K + 1) - Traza \left( \hat{\Sigma}_{ARCH} \hat{\Sigma}^{-1}_{0} \right) \sim \chi^2_{[q K^2 (K + 1)^2 / 4]}
 \end{equation}\]</span></p>
-<p>Donde la matriz <span class="math inline">\(\hat{\Sigma}_{ARCH}\)</span> se calcula de acuerdo con la ecuación <a href="cap-volatilidad.html#eq:ARCH-LM">(6.4)</a> y la matriz <span class="math inline">\(\hat{\Sigma}_{0}\)</span> sin considerar una estructura dada para los errores.</p>
+<p>Donde la matriz <span class="math inline">\(\hat{\Sigma}_{ARCH}\)</span> se calcula de acuerdo con la ecuación <a href="cap-volatilidad.html#eq:ARCH-LM">(6.13)</a> y la matriz <span class="math inline">\(\hat{\Sigma}_{0}\)</span> sin considerar una estructura dada para los errores.</p>
 </div>
-<div id="resumen-del-capítulo-2" class="section level2" number="6.5">
+<div id="resumen-del-capítulo-2" class="section level2" number="6.6">
 <h2>
-<span class="header-section-number">6.5</span> Resumen del capítulo<a class="anchor" aria-label="anchor" href="#resumen-del-cap%C3%ADtulo-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6</span> Resumen del capítulo<a class="anchor" aria-label="anchor" href="#resumen-del-cap%C3%ADtulo-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>En este capítulo introdujimos los modelos de heterocedasticidad condicional, diseñados para capturar la variabilidad agrupada (<em>volatility clustering</em>) que caracteriza a las series financieras de alta frecuencia.</p>
 <p><strong>Motivación.</strong> Las series de rendimientos financieros presentan dos hechos estilizados que los modelos ARMA estándar no capturan: (i) períodos de alta volatilidad seguidos de alta volatilidad y períodos de baja volatilidad seguidos de baja volatilidad, y (ii) colas pesadas en la distribución de los rendimientos. La prueba ARCH-LM (Engle, 1982) contrasta formalmente si los residuales al cuadrado presentan autocorrelación, lo que indica efectos ARCH.</p>
@@ -1558,7 +1621,8 @@ shape
 <span class="math display">\[h_t = \omega + \alpha_1 U_{t-1}^2 + \ldots + \alpha_q U_{t-q}^2\]</span>
 El modelo GARCH(<span class="math inline">\(p,q\)</span>) de Bollerslev <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-bollerslev1986">1986</a>)</span> añade términos de varianza condicional rezagada, logrando parsimonia frente al ARCH(<span class="math inline">\(\infty\)</span>) equivalente:
 <span class="math display">\[h_t = \omega + \sum_{i=1}^q \alpha_i U_{t-i}^2 + \sum_{j=1}^p \beta_j h_{t-j}\]</span>
-La condición de estacionariedad débil requiere <span class="math inline">\(\sum_{i} \alpha_i + \sum_{j} \beta_j &lt; 1\)</span>. La selección del orden <span class="math inline">\((p,q)\)</span> se realiza con los criterios AIC, BIC, Shibata y Hannan-Quinn disponibles en la función <code><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">infocriteria()</a></code> del paquete <code>rugarch</code>. En la práctica, el GARCH(1,1) es suficiente para la mayoría de las series financieras.</p>
+La condición de estacionariedad débil requiere <span class="math inline">\(\sum_{i} \alpha_i + \sum_{j} \beta_j &lt; 1\)</span>; bajo ella el proceso tiene varianza no condicional constante <span class="math inline">\(\bar{\sigma}^2 = \omega / (1 - \sum_i \alpha_i - \sum_j \beta_j)\)</span> y colas más pesadas que la normal, y los pronósticos de varianza revierten geométricamente a <span class="math inline">\(\bar{\sigma}^2\)</span> a la velocidad de la persistencia <span class="math inline">\(\sum_i \alpha_i + \sum_j \beta_j\)</span>. La estimación se realiza por máxima verosimilitud (o cuasi-máxima verosimilitud) evaluando recursivamente la varianza condicional. La selección del orden <span class="math inline">\((p,q)\)</span> se realiza con los criterios AIC, BIC, Shibata y Hannan-Quinn disponibles en la función <code><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">infocriteria()</a></code> del paquete <code>rugarch</code>. En la práctica, el GARCH(1,1) es suficiente para la mayoría de las series financieras.</p>
+<p><strong>Extensiones.</strong> El TGARCH/GJR-GARCH y el EGARCH capturan el efecto apalancamiento (los choques negativos elevan la volatilidad más que los positivos), mientras que el GARCH-M incorpora la varianza condicional en la ecuación de la media como premio al riesgo.</p>
 <p><strong>Valor en Riesgo (VaR).</strong> El VaR al nivel <span class="math inline">\(\alpha\)</span> se obtiene como el cuantil <span class="math inline">\(\alpha\)</span> de la distribución de rendimientos. Los modelos GARCH mejoran la estimación dinámica del VaR al actualizar la varianza condicional periodo a periodo.</p>
 <p><strong>Modelos ARCH y GARCH multivariados (M-GARCH).</strong> En sistemas de <span class="math inline">\(K\)</span> variables, el M-GARCH extiende el modelo univariado apilando las varianzas y covarianzas condicionales mediante el operador <span class="math inline">\(Vech(\cdot)\)</span>. La proliferación de parámetros obliga a trabajar con versiones restringidas (matrices diagonales). La prueba M-ARCH-LM generaliza la prueba univariada y sigue una distribución <span class="math inline">\(\chi^2\)</span> bajo la hipótesis nula de no efectos ARCH.</p>
 <p>El capítulo siguiente extiende el análisis a datos en panel, permitiendo explotar tanto la dimensión temporal como la transversal de los datos.</p>
@@ -1580,14 +1644,17 @@ La condición de estacionariedad débil requiere <span class="math inline">\(\su
 </li>
 <li>
 <a class="nav-link" href="#modelos-arch-y-garch-univariados"><span class="header-section-number">6.2</span> Modelos ARCH y GARCH Univariados</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#ejemplo-arch1"><span class="header-section-number">6.2.1</span> Ejemplo ARCH(1)</a></li>
-<li><a class="nav-link" href="#ejemplo-garch01"><span class="header-section-number">6.2.2</span> Ejemplo GARCH(0,1)</a></li>
-<li><a class="nav-link" href="#selecci%C3%B3n-garchpq-%C3%B3ptimo"><span class="header-section-number">6.2.3</span> Selección GARCH(p,q) óptimo</a></li>
+<li><a class="nav-link" href="#propiedades-varianza-no-condicional-y-colas-pesadas"><span class="header-section-number">6.2.1</span> Propiedades: varianza no condicional y colas pesadas</a></li>
+<li><a class="nav-link" href="#estimaci%C3%B3n-por-m%C3%A1xima-verosimilitud-1"><span class="header-section-number">6.2.2</span> Estimación por Máxima Verosimilitud</a></li>
+<li><a class="nav-link" href="#ejemplo-arch1"><span class="header-section-number">6.2.3</span> Ejemplo ARCH(1)</a></li>
+<li><a class="nav-link" href="#ejemplo-garch01"><span class="header-section-number">6.2.4</span> Ejemplo GARCH(0,1)</a></li>
+<li><a class="nav-link" href="#selecci%C3%B3n-garchpq-%C3%B3ptimo"><span class="header-section-number">6.2.5</span> Selección GARCH(p,q) óptimo</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#modelos-arch-y-garch-multivariados"><span class="header-section-number">6.3</span> Modelos ARCH y GARCH Multivariados</a></li>
-<li><a class="nav-link" href="#pruebas-para-detectar-efectos-arch"><span class="header-section-number">6.4</span> Pruebas para detectar efectos ARCH</a></li>
-<li><a class="nav-link" href="#resumen-del-cap%C3%ADtulo-2"><span class="header-section-number">6.5</span> Resumen del capítulo</a></li>
+<li><a class="nav-link" href="#extensiones-asimetr%C3%ADa-y-garch-en-media"><span class="header-section-number">6.3</span> Extensiones: asimetría y GARCH en media</a></li>
+<li><a class="nav-link" href="#modelos-arch-y-garch-multivariados"><span class="header-section-number">6.4</span> Modelos ARCH y GARCH Multivariados</a></li>
+<li><a class="nav-link" href="#pruebas-para-detectar-efectos-arch"><span class="header-section-number">6.5</span> Pruebas para detectar efectos ARCH</a></li>
+<li><a class="nav-link" href="#resumen-del-cap%C3%ADtulo-2"><span class="header-section-number">6.6</span> Resumen del capítulo</a></li>
 </ul>
 
       <div class="book-extra">

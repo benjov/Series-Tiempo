@@ -41,7 +41,7 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 
 ## Temas pendientes de agregar (nuevos capítulos o secciones)
 
-- [ ] **Modelos de cambio de régimen (Markov-switching)** — listado en la intro como tema 8, sin capítulo
+- [x] ~~**Modelos de cambio de régimen (Markov-switching)** — listado en la intro como tema 8, sin capítulo~~ ✓ Resuelto (confirmado por el autor 2026-07-17): el tema se cubre en el cap. 07 (TAR, STAR, MSM) y la Presentación lista 6 temas consistentes con los capítulos; no se requiere capítulo dedicado
 - [ ] **Series de tiempo con datos de alta frecuencia** — datos financieros intraday
 - [ ] **Desestacionalización ampliada** — X-13ARIMA-SEATS, métodos del Census Bureau
 - [ ] *(ML/redes neuronales omitido por ahora)*
@@ -145,6 +145,38 @@ Revisión de apoyo para el envío a pares (Fac. Ciencias, UNAM). Estado al cierr
   2. `index.Rmd`: `options(width = 70)` para que R envuelva sus salidas impresas.
   3. Tablas: 13 `kable` con `escape = FALSE` (antes el PDF mostraba `\$LTC\_t\$` literal en vez de fórmulas — defecto que ya estaba en el PDF publicado); `%` de encabezados escapado condicionalmente (`knitr::is_latex_output()`); en `arima_kable` (cap. 03) los rownames con guion bajo (dummies `D_Sep2017_MA`) se escapan solo para LaTeX; etiquetas de fila sin el prefijo redundante "Modelo"; `row.names = FALSE` en DiagnosVAR (mostraba columna basura "Chi-squared1..." también en HTML); ecuación M-GARCH partida en dos renglones; bloque externo del QPM a una columna.
 - Verificación visual: pág. 137 (tabla DF con math renderizado + código con quiebre) y pág. 228 (chunk BTC con comentarios largos) dentro de márgenes. Ambos formatos compilan sin errores.
+
+### Bibliografía duplicada en PDF y footnotes perdidos en HTML (2026-07-17, sesión 8)
+
+- [x] ~~La página "Bibliografía" aparecía 2 veces en el PDF~~ ✓ Causa: `08-bibliografia.Rmd` generaba un `\chapter*{Bibliografía}` **vacío** (solo el título) y natbib abría después su propio capítulo con las referencias reales. El encabezado del Rmd ahora es condicional vía inline R con `knitr::is_html_output()` (solo HTML, donde sí ancla la página de referencias).
+- [x] ~~Índice del PDF apuntaba a la **última** página de la bibliografía~~ ✓ `toc_bib: yes` de bookdown inserta `\addcontentsline` *después* de `\bibliography`. Solución: `\renewcommand{\bibsection}` en `preamble.tex` con `\phantomsection\addcontentsline` **antes** del `\chapter*` (índice e hipervínculo al inicio, p. 327); `toc_bib` no se usa.
+- [x] ~~6 `\footnote{}` de LaTeX crudo en cap. 03 se perdían por completo en el sitio HTML~~ ✓ (misma clase de bug que los bloques `\begin{itemize}` de la sesión 2026-07-08). Convertidos a notas Markdown `^[...]`: fuente INEGI, tasas no porcentuales, raíces del polinomio característico, demostración de covarianza, URL X13 Census, definiciones INPC/TC/CETE28/IGAE/IPI (las viñetas `*` dentro del footnote además salían como asteriscos literales en el PDF → reformateadas como prosa).
+- [x] ~~Typos dentro de esos footnotes~~ ✓ "pueramente"→"puramente", "está afirmación"→"esta", "esta disponible"→"está", "las definiciones… es"→"son", "Indice"→"Índice", "Note que raíces"→"Note que las raíces".
+- [x] ~~BibTeX minusculizaba nombres propios en títulos~~ ✓ "united kingdom" (engle1982), "u.s." (hodrickprescott1997), "monte carlo" (arellanobond1991) protegidos con llaves en `book.bib`.
+- [x] ~~`.gitignore` sin `Notas-Series-Tiempo.knit.md` ni `Notas-Series-Tiempo_cache/`~~ ✓ Agregados.
+- **Trampa de build (nueva)**: compilar fuera de RStudio requiere `export RSTUDIO_PANDOC=/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/aarch64` (pandoc 3.8.3). Ese pandoc exige `bookmark.sty`, instalado en TinyTeX con: `tlmgr --verify-repo=none install bookmark --repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2023/tlnet-final`.
+- [x] ~~Cap. 07: cada prueba de raíz unitaria en panel (Grunfeld) se imprimía dos veces (`purtest(...)` y `summary(purtest(...))` con tablas por firma)~~ ✓ Eliminados los 4 `summary()` redundantes; queda la impresión concisa con estadístico y p-value, que es lo que discute el texto. El ejemplo del INPC ya usaba llamadas simples.
+- [x] ~~Cap. 02: 15 etiquetas de figuras con "Indice" sin acento (`ylab`, `main`, `legend`)~~ ✓ Unificado a "Índice".
+- [x] ~~`_output.yml` ofrecía descarga "epub" que nunca se compila~~ ✓ Eliminada; solo PDF.
+- [x] ~~Pendiente obsoleto de Markov-switching como "tema 8"~~ ✓ Confirmado por el autor: el tema queda cubierto en cap. 07, sin capítulo dedicado; marcado como resuelto en la lista de temas pendientes.
+
+### Revisión de contenido: figuras, referencias y teoría (2026-07-17, sesión 9)
+
+Correcciones mecánicas:
+
+- [x] ~~Muchas figuras se salían de los márgenes del PDF~~ ✓ Causa: pandoc ≥ 3.5 ya no define `\setkeys{Gin}` global (solo envuelve sus imágenes con `\pandocbounded`), por lo que los 66 `\includegraphics` de figuras knitr con caption salían a tamaño natural (desborde ~4.4 cm). Restaurado `\maxwidth`/`\maxheight` + `\setkeys{Gin}` en `preamble.tex`.
+- [x] ~~`@ref(eq:AR_p)` y otras referencias de ecuación salían literales en el PDF~~ ✓ Trampa de guiones bajos en labels: renombrados `eq:AR_p`→`eq:AR-p` (02), `eq:Pi_Matrix`→`eq:Pi-Matrix` (05), `eq:M_ARCH`→`eq:M-ARCH`, `eq:M_GARCH`→`eq:M-GARCH` (06) con todas sus referencias.
+- [x] ~~Figura 4.6 (y 4.5) encimadas: 10 paneles con nombres largos `LDatos.INPC_Ad` sobrelapados~~ ✓ Nombres cortos de columnas (INPC, TC, CETE28, IGAE, IPI) asignados al crear `Datos` (beneficia también a Figs. 4.2–4.4), prefijos L./DL./DaL. en las comparaciones y `fig.height=8`.
+- [x] ~~Gráfica de estabilidad del PVAR (p. 287-288) sin caption, título en inglés, deformada y con warning de ggplot impreso~~ ✓ Chunk con `fig.cap`, `warning=FALSE`, `coord_fixed()` (círculo unitario circular), etiquetas en español y párrafo explicativo con referencia cruzada.
+- [x] ~~Gráfica del INPC por ciudad (cap. 07) ilegible: 47 colores, leyenda gigante, eje X embarrado con ~250 etiquetas~~ ✓ Líneas grises + promedio en rojo, sin leyenda, breaks anuales en eje X, caption formal y texto explicativo.
+
+Contenido nuevo:
+
+- [x] ~~Sección 5.7 (Kalman): `J_t` del suavizador sin definir; sin estimación de parámetros; sin conexión con ARMA~~ ✓ Agregados: definición de `J_t` con intuición; subsección "Representación Estado-Espacio de modelos ARMA" (AR(2) como ejemplo, nota sobre `arima()`); subsección "Estimación por Máxima Verosimilitud" (descomposición del error de predicción, inicialización difusa); resumen del capítulo actualizado.
+- [x] ~~Cap. 06: teoría insuficiente~~ ✓ Agregados: propiedades del ARCH(1) (varianza no condicional, curtosis > 3 / colas pesadas, ligado a la motivación con BTC); estimación por ML/QML con log-verosimilitud y nota sobre `distribution.model="std"`; teoría del pronóstico de varianza (reversión geométrica a la media, ec. de persistencia); sección "Extensiones: asimetría y GARCH en media" (efecto apalancamiento, GJR-TGARCH, EGARCH, GARCH-M con sus ecuaciones y opciones de `rugarch`). +4 refs: englelilienrobins1987, nelson1991, glostenjagannathanrunkle1993, tobin1969.
+- [x] ~~Panel VAR: teoría de ~20 líneas ("se estima por GMM")~~ ✓ Reescrita en 4 subsecciones: sesgo de Nickell; transformaciones FD vs FOD (Arellano-Bover) con la fórmula y el mapeo al argumento `transformation` de `pvargmm()`; GMM en diferencias (condiciones de momentos) y en sistema (Blundell-Bond, `system_instruments`); proliferación de instrumentos/colapso (Roodman), 1 vs 2 etapas (Windmeijer); diagnóstico (Hansen J, AR(1)/AR(2)) y selección Andrews-Lu. +3 refs: nickell1981, arellanobover1995, windmeijer2005.
+- [x] ~~Sin ejemplo de cointegración en panel~~ ✓ Nuevo ejemplo con Grunfeld (inversión vs valor, q de Tobin): (1) I(1) por Levin-Lin-Chu con nota sobre discrepancia con IPS+tendencia en paneles cortos; (2) relación de largo plazo within (elasticidad ≈ 0.97); (3) ADF agrupado sobre residuales (idea de Kao) con advertencia sobre distribución no estándar; (4) ecuación de corrección de error (idea de Westerlund), α̂ ≈ −0.26. **Nota**: el paquete `pco` (CRAN archive) produce estadísticos patológicos (t ≈ −12,000) — descartado; el ejemplo implementa la mecánica de forma transparente con `plm`.
+- [x] ~~Doble impresión de purtest en ejemplo Grunfeld~~ ✓ (ya corregido en sesión 8).
 
 ### Hallazgos de revisión 2026-07-08 (pendientes)
 

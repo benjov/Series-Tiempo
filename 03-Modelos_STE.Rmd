@@ -987,14 +987,14 @@ ggplot(data = X_t, aes(x = Tiempo)) +
 **Ejemplo**. Para el segundo ejemplo consideremos una aplicación a una
 serie de tiempo en específico: Pasajeros transportados mensualmente en
 el Sistema de Transporte Colectivo Metro (pasajeros medidos en
-millones).\footnote{Fuente: INEGI, \url{https://www.inegi.org.mx/app/indicadores/?tm=0&t=1090}.}
+millones).^[Fuente: INEGI, <https://www.inegi.org.mx/app/indicadores/?tm=0&t=1090>.]
 
 A la serie se le aplicará una metodología de estimación dada por el
 método de Máxima Verosimilitud (ML, por sus siglas en inglés). Antes de
 realizar el proceso de estimación, consideremos una transformación de
 diferencias logarítmicas con el objeto de obtener una serie de tiempo
 expresada en tasas de
-crecimiento\footnote{Estas tasas no son porcentuales, para hacerlas porcentuales faltaría multiplicar por 100 cada valor de la serie.}
+crecimiento^[Estas tasas no son porcentuales, para hacerlas porcentuales faltaría multiplicar por 100 cada valor de la serie.]
 y con un comportamiento parecido a un proceso estacionario.
 
 Así, para cada una de las series que analicemos en diferencias
@@ -1194,7 +1194,7 @@ parámetros $a_0$, $a_1$ y $a_2$. En particular, $\psi_0 = 1$ y
 $\psi_1 = a_1$, como describimos anteriormente. Al igual que en el caso
 del $AR(1)$, en la ecuación \@ref(eq:AR2EqSol) las condiciones de
 estabilidad estarán dadas por las soluciones del siguiente polinomio
-característico:\footnote{Note que raíces son equivalentes al inverso de las del polinomio dado por $\lambda^2 a_2 - \lambda a_1 - 1 = 0$.}
+característico:^[Note que las raíces son equivalentes al inverso de las del polinomio dado por $\lambda^2 a_2 - \lambda a_1 - 1 = 0$.]
 \begin{equation}
     \lambda^2 - \lambda a_1 - a_2 = 0
 \end{equation}
@@ -1221,7 +1221,7 @@ anterior, partamos de: \begin{eqnarray*}
 
 Donde $\tau = 0, 1, 2, 3, \ldots$ y $\mathbb{E}[U_{t} X_{t - \tau}] = 0$
 para todo
-$\tau \neq 0$.\footnote{ Es fácil demostrar está afirmación, sólo requiere de desarrollar la expresión y utilizar el hecho de que $U_t$ es un proceso pueramente aleatorio, por lo que la covarianza es cero (0).}
+$\tau \neq 0$.^[Es fácil demostrar esta afirmación, sólo requiere desarrollar la expresión y utilizar el hecho de que $U_t$ es un proceso puramente aleatorio, por lo que la covarianza es cero (0).]
 Dicho esto, podemos derivar el valor del valor esperado para diferentes
 valores de $\tau$: \begin{eqnarray*}
     \tau = 0 & : & \gamma(0) = a_1 \gamma(1) + a_2 \gamma(2) + \sigma^2 \\
@@ -2573,7 +2573,7 @@ un conjunto de dummies. No obstante, en el caso particular que
 discutiremos en este curso, estará basado en un modelo ARIMA de la
 serie. Este enfoque está basado en el modelo X11 de la oficina del censo
 de Estados Unidos (Census Bureau) el cual es conocido como el modelo
-X13-ARIMA-SEATS.\footnote{ La información y material respecto del modelo esta disponible en la dirección \url{https://www.census.gov/srd/www/x13as/}}
+X13-ARIMA-SEATS.^[La información y material respecto del modelo está disponible en la dirección <https://www.census.gov/srd/www/x13as/>.]
 El modelo X13-ARIMA-SEATS es, como su nombre lo indica, la combinación
 de un modelo ARIMA con componentes estacionales (por la traducción
 literal de la palabra: seasonal).
@@ -2613,13 +2613,7 @@ desestacionalización de una serie.
 
 Como ejemplo utilizaremos la serie del Índice Nacional de Precios al
 Consumidor
-(INPC).\footnote{Las definiciones de las variables ocupadas es:
-* INPC: Indice Nacional de Precios al Consumidor (2QJul2018 = 100)
-* TC: Tipo de Cambio FIX 
-* CETE28: Tasa de rendimiento promedio mensual de los Cetes 28, en por ciento anual
-* IGAE: Indicador global de la actividad económica (2013 = 100)
-* IPI: Industrial Production Index (2012 = 100)
-} Podemos ver que la serie original del INPC y su ajuste estacional bajo
+(INPC).^[Las definiciones de las variables empleadas son: INPC: Índice Nacional de Precios al Consumidor (2QJul2018 = 100); TC: Tipo de Cambio FIX; CETE28: Tasa de rendimiento promedio mensual de los Cetes 28, en por ciento anual; IGAE: Indicador Global de la Actividad Económica (2013 = 100); IPI: Industrial Production Index (2012 = 100).] Podemos ver que la serie original del INPC y su ajuste estacional bajo
 una metodología X13-ARIMA-SEATS son como se muestra en la Figura
 \@ref(fig:fig51).
 

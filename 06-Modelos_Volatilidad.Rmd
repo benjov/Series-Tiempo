@@ -215,7 +215,43 @@ Por lo que la ecuación \@ref(eq:GARCHEffect) del GARCH(p, q) representa un ARCH
 donde $c_i$ son los coeficientes de la expansión en serie de potencias
 $\frac{\alpha(L)}{1 - \beta(L)} = \sum_{i=1}^\infty c_i L^i$.
 
-### Ejemplo ARCH(1) 
+### Propiedades: varianza no condicional y colas pesadas
+
+Vale la pena detenerse en las propiedades del caso más simple, el ARCH(1), porque ilustran por qué esta familia de modelos reproduce los hechos estilizados de las series financieras que documentamos en la sección de motivación. Para el ARCH(1), $\sigma^2_t = \omega + \alpha_1 U^2_{t-1}$, y aplicando esperanzas a ambos lados, la varianza **no condicional** del proceso es constante:
+
+\begin{equation}
+    \bar{\sigma}^2 = \mathbb{E}[U_t^2] = \omega + \alpha_1 \mathbb{E}[U_{t-1}^2]
+    \quad \Longrightarrow \quad
+    \bar{\sigma}^2 = \frac{\omega}{1 - \alpha_1},
+    (\#eq:VarNoCond)
+\end{equation}
+
+siempre que $\alpha_1 < 1$. Es decir, el proceso $U_t$ es estacionario y homocedástico *sin condicionar*, aunque su varianza *condicional* cambie periodo a periodo: la heterocedasticidad es un fenómeno condicional a la información pasada. Esto explica el agrupamiento de volatilidad: un choque grande en $_{t-1}$ eleva $\sigma^2_t$ y hace más probables choques grandes en $_t$, pero en el largo plazo la varianza revierte a $\bar{\sigma}^2$.
+
+Más aún, si el término estandarizado $U_t / \sigma_t$ es normal, la curtosis no condicional del ARCH(1) es:
+
+\begin{equation}
+    \kappa = \frac{\mathbb{E}[U_t^4]}{(\mathbb{E}[U_t^2])^2} = \frac{3 (1 - \alpha_1^2)}{1 - 3 \alpha_1^2} > 3,
+    \quad \text{si} \quad 3 \alpha_1^2 < 1.
+    (\#eq:CurtosisARCH)
+\end{equation}
+
+Es decir, aun cuando las innovaciones condicionales sean normales, la distribución no condicional de $U_t$ tiene **colas más pesadas que la normal**. Esta es exactamente la característica que encontramos en los rendimientos del Bitcoin al inicio del capítulo (curtosis muestral muy superior a 3), y es una de las razones del éxito empírico de los modelos ARCH/GARCH en finanzas.
+
+### Estimación por Máxima Verosimilitud
+
+Los modelos GARCH no pueden estimarse por mínimos cuadrados ordinarios, pues la varianza condicional $\sigma^2_t$ es una función no lineal de los parámetros y no es observable. La estrategia estándar es la estimación por **máxima verosimilitud**. Si suponemos que $U_t | \Omega_{t-1} \sim N(0, \sigma_t^2)$, la función log-verosimilitud condicional de la muestra es:
+
+\begin{equation}
+    ln L(\theta) = -\frac{1}{2} \sum_{t=1}^{T} \left[ ln(2\pi) + ln \, \sigma^2_t(\theta) + \frac{U_t^2(\theta)}{\sigma^2_t(\theta)} \right],
+    (\#eq:VeroGARCH)
+\end{equation}
+
+donde $\theta$ agrupa los parámetros de la media condicional ($\boldsymbol{\beta}$) y de la varianza condicional ($\omega, \alpha_i, \beta_j$). Para cada valor candidato de $\theta$, la recursión de la ecuación \@ref(eq:GARCHEffect) genera la trayectoria completa de $\sigma^2_t$, con lo que se evalúa \@ref(eq:VeroGARCH); un optimizador numérico busca el máximo. Éste es el procedimiento que ejecuta internamente la función `ugarchfit()` del paquete `rugarch` que utilizaremos en los ejemplos.
+
+Dos observaciones prácticas. Primera: si la distribución condicional verdadera no es normal, el estimador anterior se interpreta como de **cuasi-máxima verosimilitud** (QML); sigue siendo consistente, aunque los errores estándar deben corregirse. Segunda: dado que las series financieras suelen exhibir colas pesadas incluso condicionalmente, es común especificar una distribución $t$ de Student para las innovaciones (en `rugarch`, con el argumento `distribution.model = "std"`).
+
+### Ejemplo ARCH(1)
 
 Hasta ahora, las distribuciones utilizadas para medir el Valor en Riesgo de un activo (Bitcoin, en este caso) asumen que no existe correlación serial en los retornos diarios del activo. Observemos un par de gráficas de la función de autocorrelación para corroborar este hecho--ver la Figura \@ref(fig:fig105)--. 
 
@@ -415,6 +451,16 @@ knitr::kable(
 
 #### Pronósticos con el modelo GARCH óptimo
 
+Antes de pasar al código, conviene precisar qué pronostica un GARCH. Para un GARCH(1,1), la varianza condicional esperada a $h$ periodos satisface la recursión $\mathbb{E}_t[\sigma^2_{t+h}] = \omega + (\alpha_1 + \beta_1) \, \mathbb{E}_t[\sigma^2_{t+h-1}]$, cuya solución es:
+
+\begin{equation}
+    \mathbb{E}_t[\sigma^2_{t+h}] = \bar{\sigma}^2 + (\alpha_1 + \beta_1)^{h-1} \left( \sigma^2_{t+1} - \bar{\sigma}^2 \right),
+    \quad \text{con} \quad \bar{\sigma}^2 = \frac{\omega}{1 - \alpha_1 - \beta_1}.
+    (\#eq:PronGARCH)
+\end{equation}
+
+Es decir, el pronóstico de la varianza **revierte geométricamente** hacia la varianza no condicional $\bar{\sigma}^2$ a una velocidad gobernada por la persistencia $\alpha_1 + \beta_1$: cuanto más cercana a 1 sea la suma, más lentamente se disipa un episodio de alta volatilidad. La misma lógica se extiende al GARCH(p, q) con persistencia $\sum_i \alpha_i + \sum_j \beta_j$.
+
 Para realizar pronósticos con la estimación de un GARCH, utilizando la librería _rugarch_, es necesario utilizar la función __ugarchforecast()__. Emplearemos el modelo GARCH(3,1) con media AR(2) que resultó óptimo en la sección anterior (objeto `model.fit`):
 
 ```{r}
@@ -434,6 +480,37 @@ fitted(forecast)
 
 forecast
 ```
+
+## Extensiones: asimetría y GARCH en media
+
+El GARCH(p, q) trata de forma simétrica a los choques: en la ecuación \@ref(eq:GARCHEffect) solo importa la magnitud $U^2_{t-1}$, no su signo. Sin embargo, un hecho estilizado adicional de los mercados financieros es el **efecto apalancamiento** (*leverage effect*): las caídas de precios suelen incrementar la volatilidad más que las alzas de la misma magnitud. Existen dos extensiones clásicas para capturar esta asimetría.
+
+El modelo **TGARCH** o **GJR-GARCH** de Glosten, Jagannathan y Runkle [-@glostenjagannathanrunkle1993] añade un término que solo se activa cuando el choque es negativo:
+
+\begin{equation}
+    \sigma^2_t = \omega + \alpha_1 U^2_{t-1} + \gamma \, U^2_{t-1} \, \mathbb{I}(U_{t-1} < 0) + \beta_1 \sigma^2_{t-1},
+    (\#eq:TGARCH)
+\end{equation}
+
+donde $\mathbb{I}(\cdot)$ es la función indicadora. Si $\gamma > 0$, un choque negativo incrementa la varianza condicional en $\alpha_1 + \gamma$, mientras que uno positivo solo en $\alpha_1$.
+
+El modelo **EGARCH** de Nelson [-@nelson1991] especifica el logaritmo de la varianza condicional en función de los choques estandarizados $z_t = U_t / \sigma_t$:
+
+\begin{equation}
+    ln \, \sigma^2_t = \omega + \beta_1 \, ln \, \sigma^2_{t-1} + \alpha_1 \left( |z_{t-1}| - \mathbb{E}|z_{t-1}| \right) + \gamma \, z_{t-1},
+    (\#eq:EGARCH)
+\end{equation}
+
+con dos ventajas: al modelar $ln \, \sigma^2_t$, no se requieren restricciones de no negatividad sobre los parámetros, y el término $\gamma \, z_{t-1}$ captura la asimetría de forma directa (un $\gamma < 0$ implica efecto apalancamiento).
+
+Por último, el modelo **GARCH en media (GARCH-M)** de Engle, Lilien y Robins [-@englelilienrobins1987] permite que la varianza condicional afecte a la media condicional:
+
+\begin{equation}
+    X_t = \mathbf{Z}_t \boldsymbol{\beta} + \lambda \sigma^2_t + U_t,
+    (\#eq:GARCHM)
+\end{equation}
+
+donde $\lambda$ se interpreta como el premio al riesgo: si $\lambda > 0$, los periodos de mayor volatilidad esperada se compensan con mayores rendimientos esperados, en línea con la teoría de portafolios. Todas estas variantes están disponibles en `rugarch`: basta cambiar el argumento `variance.model = list(model = "gjrGARCH")` o `"eGARCH"` en `ugarchspec()`, o añadir `archm = TRUE` en la especificación de la media para el GARCH-M.
 
 ## Modelos ARCH y GARCH Multivariados
 
@@ -460,12 +537,12 @@ De forma que diremos que:
 Dicho lo anterior, entonces, el modelo ARCH(q) multivariado será descrito por:
 \begin{equation}
     Vech(\Sigma_{t | t-1}) = \boldsymbol{\gamma}_0 + \Gamma_1 Vech(\mathbf{U}_{t-1} \mathbf{U}_{t-1}') + \ldots + \Gamma_q Vech(\mathbf{U}_{t-q} \mathbf{U}_{t-q}')
-    (\#eq:M_ARCH)
+    (\#eq:M-ARCH)
 \end{equation}
 
 Donde $Vech$ es un operador que apila en un vector la parte triangular inferior (incluyendo la diagonal) de la matriz a la cual se le aplique, $\boldsymbol{\gamma}_0$ es un vector de constantes, $\Gamma_i$, $i = 1, 2, \ldots$ son matrices de coeficientes asociados a la estimación.
 
-Para ilustrar la ecuación \@ref(eq:M_ARCH), tomemos un ejemplo de $K = 2$, de esta forma tenemos que un M-ARCH(1) será:
+Para ilustrar la ecuación \@ref(eq:M-ARCH), tomemos un ejemplo de $K = 2$, de esta forma tenemos que un M-ARCH(1) será:
 \begin{equation*}
     \Sigma_{t | t-1} = 
     \begin{bmatrix}
@@ -524,7 +601,7 @@ Finalmente y de forma análoga al caso univariado, podemos plantear un modelo M-
 \begin{eqnarray}
     Vech(\Sigma_{t | t-1}) & = & \boldsymbol{\gamma}_0 + \sum_{j = 1}^q \Gamma_j Vech(\mathbf{U}_{t-j} \mathbf{U}_{t-j}') \nonumber \\
     &  & + \sum_{m = 1}^p \mathbf{G}_m Vech(\Sigma_{t-m | t-m-1})
-        (\#eq:M_GARCH)
+        (\#eq:M-GARCH)
 \end{eqnarray}
 
 Donde cada una de las $\mathbf{G}_m$ es una matriz de coeficientes. Para ilustrar este caso, retomemos el ejemplo anterior, pero ahora para un modelo M-GARCH(1, 1) con $K = 2$ de forma que tendríamos:
@@ -584,7 +661,9 @@ En este capítulo introdujimos los modelos de heterocedasticidad condicional, di
 $$h_t = \omega + \alpha_1 U_{t-1}^2 + \ldots + \alpha_q U_{t-q}^2$$
 El modelo GARCH($p,q$) de Bollerslev [-@bollerslev1986] añade términos de varianza condicional rezagada, logrando parsimonia frente al ARCH($\infty$) equivalente:
 $$h_t = \omega + \sum_{i=1}^q \alpha_i U_{t-i}^2 + \sum_{j=1}^p \beta_j h_{t-j}$$
-La condición de estacionariedad débil requiere $\sum_{i} \alpha_i + \sum_{j} \beta_j < 1$. La selección del orden $(p,q)$ se realiza con los criterios AIC, BIC, Shibata y Hannan-Quinn disponibles en la función `infocriteria()` del paquete `rugarch`. En la práctica, el GARCH(1,1) es suficiente para la mayoría de las series financieras.
+La condición de estacionariedad débil requiere $\sum_{i} \alpha_i + \sum_{j} \beta_j < 1$; bajo ella el proceso tiene varianza no condicional constante $\bar{\sigma}^2 = \omega / (1 - \sum_i \alpha_i - \sum_j \beta_j)$ y colas más pesadas que la normal, y los pronósticos de varianza revierten geométricamente a $\bar{\sigma}^2$ a la velocidad de la persistencia $\sum_i \alpha_i + \sum_j \beta_j$. La estimación se realiza por máxima verosimilitud (o cuasi-máxima verosimilitud) evaluando recursivamente la varianza condicional. La selección del orden $(p,q)$ se realiza con los criterios AIC, BIC, Shibata y Hannan-Quinn disponibles en la función `infocriteria()` del paquete `rugarch`. En la práctica, el GARCH(1,1) es suficiente para la mayoría de las series financieras.
+
+**Extensiones.** El TGARCH/GJR-GARCH y el EGARCH capturan el efecto apalancamiento (los choques negativos elevan la volatilidad más que los positivos), mientras que el GARCH-M incorpora la varianza condicional en la ecuación de la media como premio al riesgo.
 
 **Valor en Riesgo (VaR).** El VaR al nivel $\alpha$ se obtiene como el cuantil $\alpha$ de la distribución de rendimientos. Los modelos GARCH mejoran la estimación dinámica del VaR al actualizar la varianza condicional periodo a periodo.
 

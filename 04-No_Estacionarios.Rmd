@@ -181,9 +181,13 @@ load("BD/Datos_Ad.RData")
 
 #
 ## Conversion a series de tiempo:
-Datos <- ts(Datos_Ad[7: 11], 
-            start = c(2000, 1), 
+Datos <- ts(Datos_Ad[7: 11],
+            start = c(2000, 1),
             freq = 12)
+
+## Nombres cortos para las etiquetas de los paneles de las figuras
+## (las series son las versiones desestacionalizadas *_Ad)
+colnames(Datos) <- c("INPC", "TC", "CETE28", "IGAE", "IPI")
 
 LDatos <- log(Datos)
 
@@ -229,9 +233,13 @@ plot(DaLDatos,
 
 ```
 
-```{r fig74, warning=FALSE, fig.cap="Comparación de Series en Diferencias Mensuales y Anuales (Logarítmicas)", fig.align='center'}
+```{r fig74, warning=FALSE, fig.cap="Comparación de Series en Diferencias Mensuales y Anuales (Logarítmicas)", fig.align='center', fig.height=8}
 
-plot(cbind(DLDatos, DaLDatos),
+Comp_D <- cbind(DLDatos, DaLDatos)
+colnames(Comp_D) <- c(paste0("DL.", colnames(Datos)),
+                      paste0("DaL.", colnames(Datos)))
+
+plot(Comp_D,
      plot.type = "m", nc = 2,
      col = c("darkgreen", "darkblue", "darkred", "orange", "purple"),
      main = "Comparación de Series en Diferencias Mensuales y Anuales",
@@ -239,9 +247,13 @@ plot(cbind(DLDatos, DaLDatos),
 
 ```
 
-```{r fig75, warning=FALSE, fig.cap="Comparación de Series en Niveles (Logaritmos) y en Diferencias Logarítmicas", fig.align='center'}
+```{r fig75, warning=FALSE, fig.cap="Comparación de Series en Niveles (Logaritmos) y en Diferencias Logarítmicas", fig.align='center', fig.height=8}
 
-plot(cbind(LDatos, DLDatos),
+Comp_N <- cbind(LDatos, DLDatos)
+colnames(Comp_N) <- c(paste0("L.", colnames(Datos)),
+                      paste0("DL.", colnames(Datos)))
+
+plot(Comp_N,
      plot.type = "m", nc = 2,
      col = c("darkgreen", "darkblue", "darkred", "orange", "purple"),
      main = "Comparación de Series en Niveles y Diferencias",

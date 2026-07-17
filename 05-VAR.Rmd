@@ -1173,7 +1173,7 @@ Por lo tanto, tenemos que dicha matriz en la ecuación \@ref(eq:VARVEC)
 se puede factorizar como:
 \begin{equation}
     \Pi_{(k \times k)} = \Gamma_{(k \times r)} \boldsymbol{\beta}_{(r \times k)}'
-    (\#eq:Pi_Matrix)
+    (\#eq:Pi-Matrix)
 \end{equation}
 
 Donde $\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}$ son $r$
@@ -2165,6 +2165,15 @@ X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
 (\#eq:Sua)
 \end{equation}
 
+La matriz $J_t$ pondera cuánto se corrige la estimación filtrada con la información posterior y está dada por
+
+\begin{equation}
+J_t = P_{t/t} A' P_{t+1/t}^{-1},
+(\#eq:Jt)
+\end{equation}
+
+es decir, la corrección es mayor cuanto más incierta es la estimación filtrada del estado en $_t$ ($P_{t/t}$ grande) y menor cuanto más incierta es la predicción del estado en $_{t+1}$ ($P_{t+1/t}$ grande). Nótese la analogía con la **Ganancia de Kalman** de la ecuación \@ref(eq:A1): ambas matrices reparten el peso entre la información propia y la nueva evidencia según sus varianzas relativas.
+
 En la *Figura 5.16*, podemos observar los resultados del código de Matlab. Otra de las virtudes del **Filtro Kalman** es que podemos hacer una especie de descomposición de la varianza para, así, observar de donde vinieron los choques:
 
 ```{r, echo = FALSE, out.width='80%', fig.cap = "Simulación de la Descomposición de la Brecha del Producto. Elaboración propia con datos de IMF [-@imf2020].", fig.align='center'}
@@ -2174,6 +2183,52 @@ knitr::include_graphics("Plots/Filtration.png")
 ```
 
 > **Nota:** Para este ejemplo, se ocupa el QPM básico presentado por el IMF [-@imf2020] en su curso "Monetary Policy Analysis and Forecasting" disponible en la plataforma edX. El código de Matlab fue realizado por el IMF.
+
+### Representación Estado-Espacio de modelos ARMA
+
+Aunque motivamos el **Filtro Kalman** con un modelo macroeconómico estructural, la *Forma Estado-Espacio* es mucho más general: prácticamente todos los modelos estudiados en este libro pueden escribirse en ella. Como ilustración, consideremos el proceso $AR(2)$ del Capítulo \@ref(cap-estacionarios):
+
+\begin{equation}
+    Y_t = a_1 Y_{t-1} + a_2 Y_{t-2} + U_t
+\end{equation}
+
+Si definimos el vector de estado $X_t = (Y_t, Y_{t-1})'$, el proceso se escribe como
+
+\begin{equation}
+X_t =
+\begin{pmatrix}
+a_1 & a_2 \\
+1 & 0
+\end{pmatrix} X_{t-1} +
+\begin{pmatrix}
+U_t \\ 0
+\end{pmatrix},
+\quad \quad
+Y_t =
+\begin{pmatrix}
+1 & 0
+\end{pmatrix} X_t,
+(\#eq:ARdosSS)
+\end{equation}
+
+que es exactamente la estructura de las ecuaciones \@ref(eq:Tra) y \@ref(eq:Obs), con $v_t = 0$ (no hay error de medición). Los componentes de medias móviles se incorporan ampliando el vector de estado con los choques rezagados. Esta representación es la base de, por ejemplo, la función `arima()` de R, que estima modelos $ARMA$ por máxima verosimilitud exacta precisamente vía el **Filtro Kalman**; además, permite manejar observaciones faltantes de forma natural, pues en los periodos sin dato simplemente se omite el paso de actualización.
+
+### Estimación por Máxima Verosimilitud
+
+Hasta ahora asumimos que las matrices del sistema ($A$, $C$, $Q$, $R$) son conocidas. En la práctica, éstas dependen de un vector de parámetros $\theta$ que debe estimarse. El propio **Filtro Kalman** proporciona la herramienta para hacerlo mediante la llamada **descomposición del error de predicción**. Definamos la innovación del periodo $_t$ como
+
+\begin{equation}
+u_t = Y_t - Y_{t/t-1},
+\end{equation}
+
+es decir, la parte de $Y_t$ que el modelo no pudo anticipar. Bajo el supuesto de normalidad de los errores, $u_t \sim N(0, F_{t/t-1})$ y las innovaciones no están correlacionadas entre sí, por lo que la función log-verosimilitud de la muestra completa se puede escribir como la suma
+
+\begin{equation}
+ln L(\theta) = -\frac{1}{2} \sum_{t=1}^{T} \left[ n \, ln(2 \pi) + ln |F_{t/t-1}| + u_t' F_{t/t-1}^{-1} u_t \right],
+(\#eq:VeroKalman)
+\end{equation}
+
+donde $n$ es el número de variables observables. Así, para cada valor candidato de $\theta$ se corre el **Filtro Kalman**, se acumulan las innovaciones $u_t$ y sus varianzas $F_{t/t-1}$, y se evalúa la ecuación \@ref(eq:VeroKalman); un algoritmo numérico de optimización busca entonces el $\theta$ que maximiza $ln L(\theta)$. Éste es el procedimiento que utilizan los paquetes de cómputo que estiman modelos estado-espacio (en R, por ejemplo, `StructTS()`, `arima()` o el paquete `KFAS`; en Matlab, el *toolbox* utilizado por el IMF para el QPM). Cuando algún estado es no estacionario (por ejemplo, una tendencia estocástica como el Producto Potencial), las condiciones iniciales se tratan con una *inicialización difusa*: se asigna a $P_{0/0}$ una varianza muy grande para reflejar la ignorancia inicial sobre el nivel del estado.
 
 ## Resumen del capítulo
 
@@ -2189,5 +2244,5 @@ En este capítulo extendimos el análisis univariado a sistemas multivariados, i
 
 **Modelos ARDL.** El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith [-@pesaranshinsmith2001] permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de $I(0)$ e $I(1)$. La prueba de límites (*bounds test*) contrasta si existe una relación de nivel entre las variables.
 
-**Filtro de Kalman y Modelos Estado-Espacio.** El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones.
+**Filtro de Kalman y Modelos Estado-Espacio.** El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones, y la descomposición del error de predicción permite estimar los parámetros del sistema por máxima verosimilitud; los modelos ARMA de los capítulos anteriores son un caso particular de esta representación.
 

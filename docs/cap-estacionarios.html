@@ -1034,13 +1034,13 @@ Figura 3.8: Comportamiento de los Procesos Real y Teórico
 <p><strong>Ejemplo</strong>. Para el segundo ejemplo consideremos una aplicación a una
 serie de tiempo en específico: Pasajeros transportados mensualmente en
 el Sistema de Transporte Colectivo Metro (pasajeros medidos en
-millones).</p>
+millones).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Fuente: INEGI, &lt;a href="https://www.inegi.org.mx/app/indicadores/?tm=0&amp;amp;t=1090" class="uri"&gt;https://www.inegi.org.mx/app/indicadores/?tm=0&amp;amp;t=1090&lt;/a&gt;.&lt;/p&gt;'><sup>3</sup></a></p>
 <p>A la serie se le aplicará una metodología de estimación dada por el
 método de Máxima Verosimilitud (ML, por sus siglas en inglés). Antes de
 realizar el proceso de estimación, consideremos una transformación de
 diferencias logarítmicas con el objeto de obtener una serie de tiempo
 expresada en tasas de
-crecimiento
+crecimiento<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Estas tasas no son porcentuales, para hacerlas porcentuales faltaría multiplicar por 100 cada valor de la serie.&lt;/p&gt;"><sup>4</sup></a>
 y con un comportamiento parecido a un proceso estacionario.</p>
 <p>Así, para cada una de las series que analicemos en diferencias
 logarítmicas respecto del momento <span class="math inline">\(k\)</span> las expresaremos bajo la siguiente
@@ -1336,7 +1336,7 @@ parámetros <span class="math inline">\(a_0\)</span>, <span class="math inline">
 <span class="math inline">\(\psi_1 = a_1\)</span>, como describimos anteriormente. Al igual que en el caso
 del <span class="math inline">\(AR(1)\)</span>, en la ecuación <a href="#eq:AR2EqSol">(<strong>??</strong>)</a> las condiciones de
 estabilidad estarán dadas por las soluciones del siguiente polinomio
-característico:
+característico:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Note que las raíces son equivalentes al inverso de las del polinomio dado por &lt;span class="math inline"&gt;\(\lambda^2 a_2 - \lambda a_1 - 1 = 0\)&lt;/span&gt;.&lt;/p&gt;'><sup>5</sup></a>
 <span class="math display">\[\begin{equation}
     \lambda^2 - \lambda a_1 - a_2 = 0
 \end{equation}\]</span></p>
@@ -1359,7 +1359,7 @@ anterior, partamos de: <span class="math display">\[\begin{eqnarray*}
 \end{eqnarray*}\]</span></p>
 <p>Donde <span class="math inline">\(\tau = 0, 1, 2, 3, \ldots\)</span> y <span class="math inline">\(\mathbb{E}[U_{t} X_{t - \tau}] = 0\)</span>
 para todo
-<span class="math inline">\(\tau \neq 0\)</span>.
+<span class="math inline">\(\tau \neq 0\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Es fácil demostrar esta afirmación, sólo requiere desarrollar la expresión y utilizar el hecho de que &lt;span class="math inline"&gt;\(U_t\)&lt;/span&gt; es un proceso puramente aleatorio, por lo que la covarianza es cero (0).&lt;/p&gt;'><sup>6</sup></a>
 Dicho esto, podemos derivar el valor del valor esperado para diferentes
 valores de <span class="math inline">\(\tau\)</span>: <span class="math display">\[\begin{eqnarray*}
     \tau = 0 &amp; : &amp; \gamma(0) = a_1 \gamma(1) + a_2 \gamma(2) + \sigma^2 \\
@@ -4127,7 +4127,7 @@ un conjunto de dummies. No obstante, en el caso particular que
 discutiremos en este curso, estará basado en un modelo ARIMA de la
 serie. Este enfoque está basado en el modelo X11 de la oficina del censo
 de Estados Unidos (Census Bureau) el cual es conocido como el modelo
-X13-ARIMA-SEATS.
+X13-ARIMA-SEATS.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;La información y material respecto del modelo está disponible en la dirección &lt;a href="https://www.census.gov/srd/www/x13as/" class="uri"&gt;https://www.census.gov/srd/www/x13as/&lt;/a&gt;.&lt;/p&gt;'><sup>7</sup></a>
 El modelo X13-ARIMA-SEATS es, como su nombre lo indica, la combinación
 de un modelo ARIMA con componentes estacionales (por la traducción
 literal de la palabra: seasonal).</p>
@@ -4162,7 +4162,7 @@ como el X11 o X13-ARIMA-SEATS se emplea la formulación de la ecuación
 desestacionalización de una serie.</p>
 <p>Como ejemplo utilizaremos la serie del Índice Nacional de Precios al
 Consumidor
-(INPC). Podemos ver que la serie original del INPC y su ajuste estacional bajo
+(INPC).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Las definiciones de las variables empleadas son: INPC: Índice Nacional de Precios al Consumidor (2QJul2018 = 100); TC: Tipo de Cambio FIX; CETE28: Tasa de rendimiento promedio mensual de los Cetes 28, en por ciento anual; IGAE: Indicador Global de la Actividad Económica (2013 = 100); IPI: Industrial Production Index (2012 = 100).&lt;/p&gt;"><sup>8</sup></a> Podemos ver que la serie original del INPC y su ajuste estacional bajo
 una metodología X13-ARIMA-SEATS son como se muestra en la Figura
 <a href="cap-estacionarios.html#fig:fig51">3.21</a>.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">

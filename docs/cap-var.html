@@ -2397,7 +2397,8 @@ concepto de estacionariedad.</p>
 <p>Si reescribimos la ecuación <a href="cap-var.html#eq:VARCI">(5.7)</a> en su forma de Vector
 Corrector de Errores (VEC, por sus siglas en inglés), restamos
 <span class="math inline">\(\mathbf{Y}_{t-1}\)</span> en ambos lados y usamos la identidad
-<span class="math inline">\(\mathbf{Y}_{t-j} = \mathbf{Y}_{t-1} - \sum_{i=1}^{j-1} \Delta \mathbf{Y}_{t-i}\)</span> válida para <span class="math inline">\(j \geq 2\)</span>:
+<span class="math inline">\(\mathbf{Y}_{t-j} = \mathbf{Y}_{t-1} - \sum_{i=1}^{j-1} \Delta
+\mathbf{Y}_{t-i}\)</span> válida para <span class="math inline">\(j \geq 2\)</span>:
 <span class="math display" id="eq:VARVEC">\[\begin{eqnarray}
     \Delta \mathbf{Y}_t
     &amp; = &amp; \sum_{j=1}^p \mathbf{A}_j \mathbf{Y}_{t-j} + \mathbf{D}_t - \mathbf{Y}_{t-1} + \mathbf{U}_t \nonumber \\
@@ -2414,9 +2415,9 @@ relaciones de largo plazo entre las variables. Para que exista
 cointegración, <span class="math inline">\(\Pi\)</span> debe tener rango reducido <span class="math inline">\(r\)</span>, con <span class="math inline">\(0 \leq r &lt; k\)</span>.
 Por lo tanto, tenemos que dicha matriz en la ecuación <a href="cap-var.html#eq:VARVEC">(5.8)</a>
 se puede factorizar como:
-<span class="math display">\[\begin{equation}
+<span class="math display" id="eq:Pi-Matrix">\[\begin{equation}
     \Pi_{(k \times k)} = \Gamma_{(k \times r)} \boldsymbol{\beta}_{(r \times k)}'
-    (\#eq:Pi_Matrix)
+    \tag{5.9}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\boldsymbol{\beta}_{(r \times k)}' \mathbf{Y}_{t-1}\)</span> son <span class="math inline">\(r\)</span>
 combinaciones linealmente independientes que son estacionarias.</p>
@@ -2930,9 +2931,9 @@ ARDL.</p>
 <p>Consideremos la siguiente ecuación:
 <span class="math display" id="eq:EqARDL">\[\begin{equation}
     Y_t = \alpha + \delta X_t + \gamma Z_t + U_t
-    \tag{5.9}
+    \tag{5.10}
 \end{equation}\]</span></p>
-<p>Dada la ecuación <a href="cap-var.html#eq:EqARDL">(5.9)</a> podemos establecer su forma de
+<p>Dada la ecuación <a href="cap-var.html#eq:EqARDL">(5.10)</a> podemos establecer su forma de
 mecanismo corrector de errores en forma ARDL dada por: <span class="math display">\[\begin{eqnarray*}
     \Delta Y_t &amp; = &amp; \alpha + \sum_{i = 1}^p \beta_i \Delta Y_{t-i} + \sum_{i = 1}^p \delta_i \Delta X_{t-i} + \sum_{i = 1}^p \gamma_i \Delta Z_{t-i} \\
     &amp;  &amp; + \lambda_1 Y_{t-1} + \lambda_2 X_{t-1} + \lambda_3 Z_{t-1} + U_t
@@ -3332,13 +3333,13 @@ r^{*}_{t} = i^{*}_{t} - \pi^{*}_{t} \\[1.5ex]
 <p>La idea general detrás de los <em>Modelos Estado-Espacio</em> es que una (múltiples) variable observable <span class="math inline">\(Y_1,...Y_T\)</span> depende de un posible estado no observable <span class="math inline">\(X_t\)</span> que sigue un proceso estocástico. La relación entre <span class="math inline">\(Y_t\)</span> y <span class="math inline">\(X_t\)</span> es descrita por la <strong>Ecuación de Observación</strong></p>
 <p><span class="math display" id="eq:Obs">\[\begin{equation}
 Y_t = C X_t + v_t
-\tag{5.10}
+\tag{5.11}
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(C\)</span> es una matriz de parámetros conocidos y <span class="math inline">\(v_t\)</span> es un vector de errores observados (si los hay), los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza <span class="math inline">\(R\)</span>, es decir, <span class="math inline">\(v_t \sim iid(0, R)\)</span>. De este modo, la ecuación <a href="cap-var.html#eq:Obs">(5.10)</a> describe la relación estática entre las variables observables y no observables.</p>
+<p>donde <span class="math inline">\(C\)</span> es una matriz de parámetros conocidos y <span class="math inline">\(v_t\)</span> es un vector de errores observados (si los hay), los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza <span class="math inline">\(R\)</span>, es decir, <span class="math inline">\(v_t \sim iid(0, R)\)</span>. De este modo, la ecuación <a href="cap-var.html#eq:Obs">(5.11)</a> describe la relación estática entre las variables observables y no observables.</p>
 <p>La ecuación que describe la dinámica de las variables de estado, también conocida como <strong>Ecuación de Transición</strong>, es definida como</p>
 <p><span class="math display" id="eq:Tra">\[\begin{equation}
 X_t = A X_{t-1} + \varepsilon_t,
-\tag{5.11}
+\tag{5.12}
 \end{equation}\]</span></p>
 <p>en donde <span class="math inline">\(A\)</span> es una matriz de parámetros conocidos, <span class="math inline">\(\varepsilon_t\)</span> es un vector de errores, los cuales son independientes e idénticamente distribuidos con media cero y matriz de covarianza <span class="math inline">\(Q\)</span>, es decir, <span class="math inline">\(\varepsilon_t \sim iid(0,Q)\)</span>. Adicionalmente, se asume que <span class="math inline">\(v_t\)</span> y <span class="math inline">\(\varepsilon_t\)</span> son independientes entre sí, es decir, <span class="math inline">\(Cov(v_t,\varepsilon_t) = 0\)</span>.</p>
 <p>En la <em>Figura 5.15</em> se puede observar un ejemplo de la relación de las variables en los <em>Modelos Estado-Espacio</em> en el <em>QPM</em> básico del IMF <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-imf2020">2020</a>)</span>.</p>
@@ -3544,14 +3545,14 @@ SHK_        equation residual
 <p>Sin embargo, la <strong>Ecuación de Transición</strong> de los estados presentes dependen de los estados pasados, mientras que el <em>Modelo QPM</em> es prospectivo, es decir, las variables dependen de sus expectativas así que la ecuación toma la forma de</p>
 <p><span class="math display" id="eq:Pros">\[\begin{equation}
 F \mathbb{E}_t[X_{t+1}] + G X_t + H X_{t-1} + M \eta_t = 0
-\tag{5.12}
+\tag{5.13}
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(F\)</span>, <span class="math inline">\(G\)</span>, <span class="math inline">\(H\)</span>, <span class="math inline">\(M\)</span> son matrices de parámetros estructurales conocidos, <span class="math inline">\(\mathbb{E}_t\)</span> es el operador de expectativas y <span class="math inline">\(\eta_t\)</span> es un vector de choques estructurales. Para pasar de este modelo a la <em>Forma Estado-Espacio</em>, tenemos que resolver para <em>Expectativas Racionales</em>. Para esto, proponemos una <em>hipótesis de solución</em></p>
 <p><span class="math display" id="eq:Hip">\[\begin{equation}
 X_t = A X_{t-1} + P \eta_t
 \quad \text{con} \quad
 \varepsilon_t \equiv P \eta_t
-\tag{5.13}
+\tag{5.14}
 \end{equation}\]</span></p>
 <p>Ahora, suponemos que <span class="math inline">\(\eta_t\)</span> sigue un proceso autorregresivo, es decir, tiene su propia dinámica:</p>
 <p><span class="math display">\[\begin{equation}
@@ -3563,17 +3564,17 @@ X_t = A X_{t-1} + P \eta_t
 <p><span class="math display">\[\begin{equation}
 \mathbb{E}_t[X_{t+1}] = A X_t + P \mathbb{E}_t[\eta_{t+1}] = A (A X_{t-1} + P \eta_t) + P S \eta_t
 \end{equation}\]</span></p>
-<p>De este modo, si sustituimos la ecuación <a href="cap-var.html#eq:Hip">(5.13)</a> en la <a href="cap-var.html#eq:Pros">(5.12)</a>, tenemos que las matrices deben de satisfacer la identidad</p>
+<p>De este modo, si sustituimos la ecuación <a href="cap-var.html#eq:Hip">(5.14)</a> en la <a href="cap-var.html#eq:Pros">(5.13)</a>, tenemos que las matrices deben de satisfacer la identidad</p>
 <p><span class="math display" id="eq:Iden">\[\begin{equation}
 F [A (A X_{t-1} + P \eta_t) + P (S \eta_t)] + G [A X_{t-1} + P \eta_t] + H X_{t-1} + M \eta_t = 0
-\tag{5.14}
+\tag{5.15}
 \end{equation}\]</span></p>
 <p>para todos los valores <span class="math inline">\(X_{t-1}\)</span> y <span class="math inline">\(\eta_t\)</span>, de tal modo que <span class="math inline">\(A\)</span> y <span class="math inline">\(P\)</span> son las soluciones de ecuaciones</p>
 <p><span class="math display" id="eq:Sol">\[\begin{equation}
 F A^2 + G A + H = 0,
 \quad \quad
 F A P + F P S + G P + M = 0
-\tag{5.15}
+\tag{5.16}
 \end{equation}\]</span></p>
 <p>De esta forma, obtenemos nuestro modelo en la <em>Forma Estado-Espacio</em>.</p>
 </div>
@@ -3582,20 +3583,20 @@ F A P + F P S + G P + M = 0
 <h3>
 <span class="header-section-number">5.7.2</span> Recursión del Filtro Kalman<a class="anchor" aria-label="anchor" href="#recursi%C3%B3n-del-filtro-kalman"><i class="fas fa-link"></i></a>
 </h3>
-<p>Ya que tenemos nuestro modelo en la <em>Forma Estado-Espacio</em> como se muestra en las ecuaciones <a href="cap-var.html#eq:Obs">(5.10)</a> y <a href="cap-var.html#eq:Tra">(5.11)</a>, podemos hacer uso del <strong>Filtro Kalman</strong>.</p>
+<p>Ya que tenemos nuestro modelo en la <em>Forma Estado-Espacio</em> como se muestra en las ecuaciones <a href="cap-var.html#eq:Obs">(5.11)</a> y <a href="cap-var.html#eq:Tra">(5.12)</a>, podemos hacer uso del <strong>Filtro Kalman</strong>.</p>
 <p>Para comenzar, definamos <span class="math inline">\(Y_{t/t-1}\)</span> y <span class="math inline">\(X_{t/t-1}\)</span> como los valores predichos de <span class="math inline">\(Y_t\)</span> y <span class="math inline">\(X_t\)</span>, respectivamente, condicionado a la información del periodo <span class="math inline">\(_{t-1}\)</span>. Además, definamos <span class="math inline">\(X_{t/t}\)</span> como la estimación de <span class="math inline">\(X_t\)</span> condicionada a la información del periodo <span class="math inline">\(_t\)</span>.</p>
 <p>Como se mencionó en un inicio, el <strong>Filtro Kalman</strong> utiliza un algoritmo recursivo para cada periodo <span class="math inline">\(1,2,...,T\)</span>. Cada recursión está compuesta de dos pasos. Supongamos que tenemos los datos observados y las estimaciones del estado para el periodo <span class="math inline">\(_{t-1}\)</span>, es decir, conocemos <span class="math inline">\(Y_{t-1}\)</span> y <span class="math inline">\(X_{t-1/t-1}\)</span>. De este modo, para el periodo <span class="math inline">\(_t\)</span>:</p>
 <ul>
 <li>
-<strong>Paso 1.</strong> Predicción del estado y observación de las variables en el periodo <span class="math inline">\(_t\)</span> dada la información de <span class="math inline">\(_{t-1}\)</span>. Como no tenemos nueva información, el promedio de la predicción se basa en el <em>Modelo Estado-Espacio</em> <a href="cap-var.html#eq:Obs">(5.10)</a> - <a href="cap-var.html#eq:Tra">(5.11)</a>:</li>
+<strong>Paso 1.</strong> Predicción del estado y observación de las variables en el periodo <span class="math inline">\(_t\)</span> dada la información de <span class="math inline">\(_{t-1}\)</span>. Como no tenemos nueva información, el promedio de la predicción se basa en el <em>Modelo Estado-Espacio</em> <a href="cap-var.html#eq:Obs">(5.11)</a> - <a href="cap-var.html#eq:Tra">(5.12)</a>:</li>
 </ul>
 <p><span class="math display" id="eq:Xt">\[\begin{equation}
 X_{t/t-1} = A X_{t-1/t-1}
-\tag{5.16}
+\tag{5.17}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:Yt">\[\begin{equation}
 Y_{t/t-1} = C X_{t/t-1}
-\tag{5.17}
+\tag{5.18}
 \end{equation}\]</span></p>
 <ul>
 <li>
@@ -3603,7 +3604,7 @@ Y_{t/t-1} = C X_{t/t-1}
 </ul>
 <p><span class="math display" id="eq:Xt1">\[\begin{equation}
 X_{t/t} = X_{t/t-1} + K_t (Y_t - Y_{t/t-1})
-\tag{5.18}
+\tag{5.19}
 \end{equation}\]</span></p>
 </div>
 <div id="ganancia-de-kalman" class="section level3" number="5.7.3">
@@ -3627,30 +3628,30 @@ Y_{t/t-1} \\ X_{t/t-1}
 F_{t/t-1} &amp; C P_{t/t-1} \\
 P_{t/t-1} C' &amp; P_{t/t-1}
 \end{pmatrix}\Bigg).
-\tag{5.19}
+\tag{5.20}
 \end{equation}\]</span></p>
-<p>De <a href="cap-var.html#eq:Mat">(5.19)</a>, la distribución condicional de <span class="math inline">\(X_t\)</span> dado <span class="math inline">\(Y_t\)</span> toma la forma de</p>
+<p>De <a href="cap-var.html#eq:Mat">(5.20)</a>, la distribución condicional de <span class="math inline">\(X_t\)</span> dado <span class="math inline">\(Y_t\)</span> toma la forma de</p>
 <p><span class="math display" id="eq:Xt2">\[\begin{equation}
 X_t \mid Y_t, Y_1, ... , Y_{t-1} \sim N
 \begin{aligned}
 ( &amp; X_{t|t-1} + P_{t|t-1} C' F_{t|t-1} {}^{-1} [Y_t - Y_{t|t-1}], \\
 &amp; P_{t|t-1} - P_{t|t-1} C' F_{t|t-1} {}^{-1} C P_{t|t-1} )
 \end{aligned}
-\tag{5.20}
+\tag{5.21}
 \end{equation}\]</span></p>
-<p>Y de la ecuación <a href="cap-var.html#eq:Xt2">(5.20)</a> obtenemos directamente que</p>
+<p>Y de la ecuación <a href="cap-var.html#eq:Xt2">(5.21)</a> obtenemos directamente que</p>
 <p><span class="math display" id="eq:Xt3">\[\begin{equation}
 X_{t|t} = X_{t|t-1} + P_{t|t-1} C' F_{t|t-1} {}^{-1} \left[ Y_t - Y_{t|t-1} \right] = X_{t|t-1} + K_t \left[ Y_t - Y_{t|t-1} \right],
-\tag{5.21}
+\tag{5.22}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:Pt">\[\begin{equation}
 P_{t|t} = P_{t|t-1} - P_{t|t-1} C' F_{t|t-1} {}^{-1} C P_{t|t-1} = (I - K_t C) P_{t|t-1},
-\tag{5.22}
+\tag{5.23}
 \end{equation}\]</span></p>
 <p>en donde la <strong>Ganancia de Kalman</strong> es</p>
 <p><span class="math display" id="eq:Kt">\[\begin{equation}
 K_t = P_{t/t-1} C' F_{t/t-1} {}^{-1}.
-\tag{5.23}
+\tag{5.24}
 \end{equation}\]</span></p>
 <p>Nótese que <span class="math inline">\(F_{t/t-1}\)</span> sigue:</p>
 <p><span class="math display">\[\begin{equation}
@@ -3663,20 +3664,20 @@ P_{t|t-1} &amp;= Var_{t-1} \left[( X_t - X_{t|t-1} \right)]
 \\ &amp;= A P_{t-1|t-1} A' + Q
 \\ &amp;= A (I - K_{t-1} C) P_{t-1|t-2} A' + Q
 \end{align}\]</span></p>
-<p>Y si sustituimos <span class="math inline">\(F_{t/t-1}\)</span> y <span class="math inline">\(P_{t/t-1}\)</span> en las ecuaciones <a href="cap-var.html#eq:Xt3">(5.21)</a> - <a href="cap-var.html#eq:Kt">(5.23)</a>, obtenemos las siguientes ecuaciones para el algoritmo del <strong>Filtro Kalman</strong></p>
+<p>Y si sustituimos <span class="math inline">\(F_{t/t-1}\)</span> y <span class="math inline">\(P_{t/t-1}\)</span> en las ecuaciones <a href="cap-var.html#eq:Xt3">(5.22)</a> - <a href="cap-var.html#eq:Kt">(5.24)</a>, obtenemos las siguientes ecuaciones para el algoritmo del <strong>Filtro Kalman</strong></p>
 <p><span class="math display" id="eq:Kt1">\[\begin{equation}
 K_t = P_{t/t-1} C' (C P_{t/t-1} C' + R)^{-1}
-\tag{5.24}
+\tag{5.25}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:Xt4">\[\begin{equation}
 X_{t/t} = X_{t/t-1} + K_t [Y_t - Y_{t/t-1}]
-\tag{5.25}
+\tag{5.26}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:Pt1">\[\begin{equation}
 P_{t+1|t} = A (I - K_t C) P_{t/t-1} A' + Q
-\tag{5.26}
+\tag{5.27}
 \end{equation}\]</span></p>
-<p>De este modo, la <strong>Ganancia de Kalman</strong> en <a href="cap-var.html#eq:Kt1">(5.24)</a> depende de manera positiva de la varianza del error de predicción del estado (<span class="math inline">\(P_{t/t-1}\)</span>) y de manera negativa de la varianza de la ecuación de observación <span class="math inline">\(R\)</span>. Esto es bastante intuitivo:</p>
+<p>De este modo, la <strong>Ganancia de Kalman</strong> en <a href="cap-var.html#eq:Kt1">(5.25)</a> depende de manera positiva de la varianza del error de predicción del estado (<span class="math inline">\(P_{t/t-1}\)</span>) y de manera negativa de la varianza de la ecuación de observación <span class="math inline">\(R\)</span>. Esto es bastante intuitivo:</p>
 <ul>
 <li><p>Si existen grandes errores en las predicciones del estado <span class="math inline">\(X_{t/t-1}\)</span> en el Paso 1 de la <em>Recursión de Kalman</em>, es decir, <span class="math inline">\(P_{t/t-1}\)</span> es grande, se le da más peso a la nueva información observada <span class="math inline">\(Y_t\)</span>, lo cual significa que la <strong>Ganancia de Kalman</strong> es grande. En particular, esto es cierto para las ecuaciones de transición que no se cumplen de manera estricta, es decir, <span class="math inline">\(Q\)</span> es grande;</p></li>
 <li><p>Si la información es ruidosa, o sea, <span class="math inline">\(R\)</span> es grande, se le da menos peso a la información nueva por lo que <span class="math inline">\(K_t\)</span> es pequeño.</p></li>
@@ -3695,11 +3696,11 @@ P_{t+1|t} = A (I - K_t C) P_{t/t-1} A' + Q
 </ul>
 <p><span class="math display" id="eq:P1">\[\begin{equation}
 X_{t/t-1} = A X_{t-1/t-1},
-\tag{5.27}
+\tag{5.28}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:P2">\[\begin{equation}
 Y_{t/t-1} = C X_{t/t-1}.
-\tag{5.28}
+\tag{5.29}
 \end{equation}\]</span></p>
 <ul>
 <li>
@@ -3707,15 +3708,15 @@ Y_{t/t-1} = C X_{t/t-1}.
 </ul>
 <p><span class="math display" id="eq:A1">\[\begin{equation}
 K_t = P_{t/t-1} C' (C P_{t/t-1} C' + R)^{-1},
-\tag{5.29}
+\tag{5.30}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:A2">\[\begin{equation}
 X_{t/t} = X_{t/t-1} + K_t [Y_t - Y_{t/t-1}],
-\tag{5.30}
+\tag{5.31}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:A3">\[\begin{equation}
 P_{t+1/t} = A (I - K_t C) P_{t/t-1} A' + Q.
-\tag{5.31}
+\tag{5.32}
 \end{equation}\]</span></p>
 <p>El <strong>Filtro Kalman</strong> nos proporciona el estimador lineal óptimo de mínimos cuadrados del estado, dada la información hasta el periodo <span class="math inline">\(_t\)</span>. Si los errores están distribuidos normalmente, es óptimo entre todos los estimadores de <span class="math inline">\(X_t\)</span> condicionados a la información disponible hasta ese periodo.</p>
 <p>Para cada periodo <span class="math inline">\(_t\)</span>, el <strong>Filtro Kalman</strong> utiliza únicamente la información disponible hasta ese periodo para estimar <span class="math inline">\(X_t\)</span>. Dichas estimaciones se encuentran en <span class="math inline">\(X_{t/t-1}\)</span> (del Paso 1) y en <span class="math inline">\(X_{t/t}\)</span> (del Paso 2). Sin embargo, para estimar <span class="math inline">\(X_t\)</span>, comúnmente es deseable utilizar toda la información disponible, hasta el último periodo <span class="math inline">\(T\)</span>. Es decir, podría ser deseable obtener estimaciones <span class="math inline">\(X_{t/T}\)</span>, que se conocen como <strong>estimaciones suavizadas</strong> de los estados. Precisamente eso es lo que hace el <strong>Suavizador de Kalman (Kalman smoother)</strong>.</p>
@@ -3723,8 +3724,14 @@ P_{t+1/t} = A (I - K_t C) P_{t/t-1} A' + Q.
 <p>Después, el algoritmo del <strong>Suavizador de Kalman</strong> funciona recursivamente hacia atrás, desde <span class="math inline">\(T-1, T-2,...,1\)</span>. Para cada periodo <span class="math inline">\(_{t+1}\)</span>, observamos la diferencia entre las estimaciones suavizadas y las estimaciones filtradas de los estados: <span class="math inline">\(X_{t+1/T}-X_{t+1/t}\)</span>. El <strong>Suavizador de Kalman</strong> utiliza la diferencia para actualizar las estimaciones filtradas de los estados en el periodo <span class="math inline">\(_t\)</span>, con el fin de obtener las estimaciones suavizadas:</p>
 <p><span class="math display" id="eq:Sua">\[\begin{equation}
 X_{t/T} = X_{t/t} + J_t [X_{t+1/T} - X_{t+1/t}].
-\tag{5.32}
+\tag{5.33}
 \end{equation}\]</span></p>
+<p>La matriz <span class="math inline">\(J_t\)</span> pondera cuánto se corrige la estimación filtrada con la información posterior y está dada por</p>
+<p><span class="math display" id="eq:Jt">\[\begin{equation}
+J_t = P_{t/t} A' P_{t+1/t}^{-1},
+\tag{5.34}
+\end{equation}\]</span></p>
+<p>es decir, la corrección es mayor cuanto más incierta es la estimación filtrada del estado en <span class="math inline">\(_t\)</span> (<span class="math inline">\(P_{t/t}\)</span> grande) y menor cuanto más incierta es la predicción del estado en <span class="math inline">\(_{t+1}\)</span> (<span class="math inline">\(P_{t+1/t}\)</span> grande). Nótese la analogía con la <strong>Ganancia de Kalman</strong> de la ecuación <a href="cap-var.html#eq:A1">(5.30)</a>: ambas matrices reparten el peso entre la información propia y la nueva evidencia según sus varianzas relativas.</p>
 <p>En la <em>Figura 5.16</em>, podemos observar los resultados del código de Matlab. Otra de las virtudes del <strong>Filtro Kalman</strong> es que podemos hacer una especie de descomposición de la varianza para, así, observar de donde vinieron los choques:</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-18"></span>
@@ -3735,6 +3742,48 @@ Figura 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 <blockquote>
 <p><strong>Nota:</strong> Para este ejemplo, se ocupa el QPM básico presentado por el IMF <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-imf2020">2020</a>)</span> en su curso “Monetary Policy Analysis and Forecasting” disponible en la plataforma edX. El código de Matlab fue realizado por el IMF.</p>
 </blockquote>
+</div>
+<div id="representación-estado-espacio-de-modelos-arma" class="section level3" number="5.7.5">
+<h3>
+<span class="header-section-number">5.7.5</span> Representación Estado-Espacio de modelos ARMA<a class="anchor" aria-label="anchor" href="#representaci%C3%B3n-estado-espacio-de-modelos-arma"><i class="fas fa-link"></i></a>
+</h3>
+<p>Aunque motivamos el <strong>Filtro Kalman</strong> con un modelo macroeconómico estructural, la <em>Forma Estado-Espacio</em> es mucho más general: prácticamente todos los modelos estudiados en este libro pueden escribirse en ella. Como ilustración, consideremos el proceso <span class="math inline">\(AR(2)\)</span> del Capítulo <a href="cap-estacionarios.html#cap-estacionarios">3</a>:</p>
+<p><span class="math display">\[\begin{equation}
+    Y_t = a_1 Y_{t-1} + a_2 Y_{t-2} + U_t
+\end{equation}\]</span></p>
+<p>Si definimos el vector de estado <span class="math inline">\(X_t = (Y_t, Y_{t-1})'\)</span>, el proceso se escribe como</p>
+<p><span class="math display" id="eq:ARdosSS">\[\begin{equation}
+X_t =
+\begin{pmatrix}
+a_1 &amp; a_2 \\
+1 &amp; 0
+\end{pmatrix} X_{t-1} +
+\begin{pmatrix}
+U_t \\ 0
+\end{pmatrix},
+\quad \quad
+Y_t =
+\begin{pmatrix}
+1 &amp; 0
+\end{pmatrix} X_t,
+\tag{5.35}
+\end{equation}\]</span></p>
+<p>que es exactamente la estructura de las ecuaciones <a href="cap-var.html#eq:Tra">(5.12)</a> y <a href="cap-var.html#eq:Obs">(5.11)</a>, con <span class="math inline">\(v_t = 0\)</span> (no hay error de medición). Los componentes de medias móviles se incorporan ampliando el vector de estado con los choques rezagados. Esta representación es la base de, por ejemplo, la función <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> de R, que estima modelos <span class="math inline">\(ARMA\)</span> por máxima verosimilitud exacta precisamente vía el <strong>Filtro Kalman</strong>; además, permite manejar observaciones faltantes de forma natural, pues en los periodos sin dato simplemente se omite el paso de actualización.</p>
+</div>
+<div id="estimación-por-máxima-verosimilitud" class="section level3" number="5.7.6">
+<h3>
+<span class="header-section-number">5.7.6</span> Estimación por Máxima Verosimilitud<a class="anchor" aria-label="anchor" href="#estimaci%C3%B3n-por-m%C3%A1xima-verosimilitud"><i class="fas fa-link"></i></a>
+</h3>
+<p>Hasta ahora asumimos que las matrices del sistema (<span class="math inline">\(A\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(Q\)</span>, <span class="math inline">\(R\)</span>) son conocidas. En la práctica, éstas dependen de un vector de parámetros <span class="math inline">\(\theta\)</span> que debe estimarse. El propio <strong>Filtro Kalman</strong> proporciona la herramienta para hacerlo mediante la llamada <strong>descomposición del error de predicción</strong>. Definamos la innovación del periodo <span class="math inline">\(_t\)</span> como</p>
+<p><span class="math display">\[\begin{equation}
+u_t = Y_t - Y_{t/t-1},
+\end{equation}\]</span></p>
+<p>es decir, la parte de <span class="math inline">\(Y_t\)</span> que el modelo no pudo anticipar. Bajo el supuesto de normalidad de los errores, <span class="math inline">\(u_t \sim N(0, F_{t/t-1})\)</span> y las innovaciones no están correlacionadas entre sí, por lo que la función log-verosimilitud de la muestra completa se puede escribir como la suma</p>
+<p><span class="math display" id="eq:VeroKalman">\[\begin{equation}
+ln L(\theta) = -\frac{1}{2} \sum_{t=1}^{T} \left[ n \, ln(2 \pi) + ln |F_{t/t-1}| + u_t' F_{t/t-1}^{-1} u_t \right],
+\tag{5.36}
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(n\)</span> es el número de variables observables. Así, para cada valor candidato de <span class="math inline">\(\theta\)</span> se corre el <strong>Filtro Kalman</strong>, se acumulan las innovaciones <span class="math inline">\(u_t\)</span> y sus varianzas <span class="math inline">\(F_{t/t-1}\)</span>, y se evalúa la ecuación <a href="cap-var.html#eq:VeroKalman">(5.36)</a>; un algoritmo numérico de optimización busca entonces el <span class="math inline">\(\theta\)</span> que maximiza <span class="math inline">\(ln L(\theta)\)</span>. Éste es el procedimiento que utilizan los paquetes de cómputo que estiman modelos estado-espacio (en R, por ejemplo, <code><a href="https://rdrr.io/r/stats/StructTS.html">StructTS()</a></code>, <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> o el paquete <code>KFAS</code>; en Matlab, el <em>toolbox</em> utilizado por el IMF para el QPM). Cuando algún estado es no estacionario (por ejemplo, una tendencia estocástica como el Producto Potencial), las condiciones iniciales se tratan con una <em>inicialización difusa</em>: se asigna a <span class="math inline">\(P_{0/0}\)</span> una varianza muy grande para reflejar la ignorancia inicial sobre el nivel del estado.</p>
 </div>
 </div>
 <div id="resumen-del-capítulo-1" class="section level2" number="5.8">
@@ -3747,7 +3796,7 @@ Figura 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 <p><strong>VAR Estructural (SVAR).</strong> La identificación de los choques estructurales requiere imponer restricciones adicionales. Los tres enfoques principales son: (i) descomposición de Cholesky (identificación recursiva), que impone una estructura triangular inferior en la matriz de impacto contemporáneo; (ii) restricciones de largo plazo de Blanchard y Quah <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-blanchardquah1989">1989</a>)</span>, que restringen el efecto acumulado permanente de ciertos choques; y (iii) restricciones de signo, que imponen solo la dirección del impacto.</p>
 <p><strong>Cointegración y VEC.</strong> Cuando series no estacionarias <span class="math inline">\(I(1)\)</span> comparten una tendencia estocástica común, se dice que cointegran. El procedimiento de Johansen determina el número de vectores de cointegración (rango de cointegración) mediante las estadísticas de la traza y del máximo valor propio. El modelo VEC (Vector de Corrección de Error) incorpora tanto la dinámica de corto plazo como el ajuste hacia el equilibrio de largo plazo.</p>
 <p><strong>Modelos ARDL.</strong> El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-pesaranshinsmith2001">2001</a>)</span> permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de <span class="math inline">\(I(0)\)</span> e <span class="math inline">\(I(1)\)</span>. La prueba de límites (<em>bounds test</em>) contrasta si existe una relación de nivel entre las variables.</p>
-<p><strong>Filtro de Kalman y Modelos Estado-Espacio.</strong> El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones.</p>
+<p><strong>Filtro de Kalman y Modelos Estado-Espacio.</strong> El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones, y la descomposición del error de predicción permite estimar los parámetros del sistema por máxima verosimilitud; los modelos ARMA de los capítulos anteriores son un caso particular de esta representación.</p>
 
 </div>
 </div>
@@ -3786,6 +3835,8 @@ Figura 5.16: Simulación de la Descomposición de la Brecha del Producto. Elabor
 <li><a class="nav-link" href="#recursi%C3%B3n-del-filtro-kalman"><span class="header-section-number">5.7.2</span> Recursión del Filtro Kalman</a></li>
 <li><a class="nav-link" href="#ganancia-de-kalman"><span class="header-section-number">5.7.3</span> Ganancia de Kalman</a></li>
 <li><a class="nav-link" href="#algoritmo-del-filtro-kalman-y-del-suavizador-de-kalman"><span class="header-section-number">5.7.4</span> Algoritmo del Filtro Kalman y del Suavizador de Kalman</a></li>
+<li><a class="nav-link" href="#representaci%C3%B3n-estado-espacio-de-modelos-arma"><span class="header-section-number">5.7.5</span> Representación Estado-Espacio de modelos ARMA</a></li>
+<li><a class="nav-link" href="#estimaci%C3%B3n-por-m%C3%A1xima-verosimilitud"><span class="header-section-number">5.7.6</span> Estimación por Máxima Verosimilitud</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#resumen-del-cap%C3%ADtulo-1"><span class="header-section-number">5.8</span> Resumen del capítulo</a></li>

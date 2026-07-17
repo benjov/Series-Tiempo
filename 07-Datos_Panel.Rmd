@@ -142,21 +142,15 @@ ts_DLInvest <- diff(ts(log(Invest), start = 1935, end = 1954, freq = 1),
 
 ```{r}
 
-purtest(ts_LInvest, test = "levinlin", exo = "intercept", 
+purtest(ts_LInvest, test = "levinlin", exo = "intercept",
         lags = "AIC", pmax = 4)
-
-summary(purtest(ts_LInvest, test = "levinlin", exo = "intercept", 
-        lags = "AIC", pmax = 4))
 
 ```
 
 ```{r}
 
-purtest(ts_DLInvest, test = "levinlin", exo = "intercept", 
+purtest(ts_DLInvest, test = "levinlin", exo = "intercept",
         lags = "AIC", pmax = 4)
-
-summary(purtest(ts_DLInvest, test = "levinlin", exo = "intercept", 
-        lags = "AIC", pmax = 4))
 
 ```
 
@@ -164,21 +158,15 @@ Consideremos la prueba de raíz unitaria de Im, Pesaran y Shin [-@impeseranshin2
 
 ```{r}
 
-purtest(ts_LInvest, test = "ips", exo = "intercept", 
+purtest(ts_LInvest, test = "ips", exo = "intercept",
         lags = "AIC", pmax = 4)
-
-summary(purtest(ts_LInvest, test = "ips", exo = "intercept", 
-                lags = "AIC", pmax = 4))
 
 ```
 
 ```{r}
 
-purtest(ts_DLInvest, test = "ips", exo = "intercept", 
+purtest(ts_DLInvest, test = "ips", exo = "intercept",
         lags = "AIC", pmax = 4)
-
-summary(purtest(ts_DLInvest, test = "ips", exo = "intercept", 
-                lags = "AIC", pmax = 4))
 
 ```
 
@@ -380,18 +368,19 @@ Data$Periodo <- factor(Data$Fecha, order = TRUE,
 
 ```
 
-Gráfica:
+La Figura \@ref(fig:fig-inpc-ciudades) muestra la evolución del logaritmo del INPC de análisis clínicos para las 47 ciudades del panel (líneas grises); la línea roja es el promedio simple entre ciudades. Se aprecia una tendencia común al alza y una dispersión entre ciudades que se reduce hacia el final de la muestra.
 
-```{r echo = TRUE}
+```{r fig-inpc-ciudades, echo = TRUE, fig.cap="Logaritmo del INPC de análisis clínicos por ciudad (líneas grises) y promedio entre ciudades (línea roja)", fig.align='center'}
 
 Data %>%
-  ggplot( aes(x = Periodo, y = LINPC, group = Ciudad, color = Ciudad )) +
-        geom_line() +
-        theme(legend.title = element_text(color = "black", size = 8),
-          legend.text = element_text(color = "black", size = 5 )) +
-        theme(legend.position="bottom") +
-        theme(axis.text.x = element_text( size = 8, angle = 90))
-
+  ggplot( aes(x = Periodo, y = LINPC, group = Ciudad) ) +
+        geom_line(color = "grey70", linewidth = 0.3) +
+        stat_summary(aes(group = 1), fun = mean, geom = "line",
+                     color = "darkred", linewidth = 0.9) +
+        scale_x_discrete(breaks = levels(Data$Periodo)[
+          seq(1, nlevels(Data$Periodo), by = 12)]) +
+        labs(x = NULL, y = "log(INPC) de análisis clínicos") +
+        theme(axis.text.x = element_text( size = 8, angle = 90, vjust = 0.5))
 
 ```
 
@@ -523,13 +512,47 @@ Donde $\mathbf{Y}_{it}$ es un vector de variables endógenas estacionarias para 
 
 Donde $\Sigma_\varepsilon$ es una matriz definida positiva.
 
-Para el proceso de estimación, la ecuación \@ref(eq:eqPVAR) se modifica en su versión en diferencias para quedar como:
+#### ¿Por qué no estimar por MCO? El sesgo de Nickell
+
+A diferencia del modelo panel estático, en la ecuación \@ref(eq:eqPVAR) los regresores incluyen rezagos de la variable dependiente. Esto invalida a los estimadores tradicionales de panel: el estimador *within* (de efectos fijos) elimina $\mu_i$ restando la media individual, pero la media de $\mathbf{Y}_{it}$ contiene información de todos los periodos, incluidos los errores pasados, por lo que el regresor transformado queda correlacionado con el error transformado. El sesgo resultante, documentado por Nickell [-@nickell1981], es de orden $1/T$: resulta despreciable en paneles largos, pero considerable en los paneles macro y microeconómicos típicos, donde $T$ es pequeño ($T \leq 10$, por ejemplo) aunque $N$ sea grande. Por ello, la literatura de paneles dinámicos estima el PVAR por el método generalizado de momentos (GMM) sobre una transformación del modelo que elimine los efectos fijos sin inducir esa correlación.
+
+#### Transformaciones: primeras diferencias y desviaciones ortogonales
+
+La transformación más directa es la de **primeras diferencias** (FD):
 \begin{equation}
     \Delta \mathbf{Y}_{it} = \sum_{l = 1}^p \mathbf{A}_l \Delta \mathbf{Y}_{i t - l} + \mathbf{B} \Delta \mathbf{X}_{it} + \Delta \varepsilon_{it}
     (\#eq:eqDinamicPVAR)
 \end{equation}
 
-La ecuación \@ref(eq:eqDinamicPVAR) se estima por un GMM.
+que elimina $\mu_i$, pero con dos costos: (i) el nuevo error $\Delta \varepsilon_{it} = \varepsilon_{it} - \varepsilon_{i,t-1}$ sigue por construcción un proceso MA(1), de modo que está correlacionado con $\Delta \mathbf{Y}_{i,t-1}$ y la estimación requiere instrumentos; y (ii) cada hueco en el panel (dato faltante) elimina dos observaciones transformadas.
+
+Una alternativa es la transformación de **desviaciones ortogonales hacia adelante** (FOD, *forward orthogonal deviations*) de Arellano y Bover [-@arellanobover1995]: a cada observación se le resta el promedio de las observaciones *futuras* disponibles de la misma unidad, reescalando para preservar la varianza:
+\begin{equation}
+    \tilde{\mathbf{Y}}_{it} = c_{it} \left[ \mathbf{Y}_{it} - \frac{1}{T - t} \left( \mathbf{Y}_{i,t+1} + \ldots + \mathbf{Y}_{iT} \right) \right],
+    \quad c_{it} = \sqrt{\frac{T-t}{T-t+1}}.
+    (\#eq:eqFOD)
+\end{equation}
+
+Como solo usa información futura, la transformación no introduce autocorrelación en los errores transformados (si $\varepsilon_{it}$ no está autocorrelacionado, $\tilde{\varepsilon}_{it}$ tampoco lo está) y solo se pierde la última observación de cada unidad, lo que la hace preferible en paneles cortos o con huecos. En el paquete `panelvar` de R, el argumento `transformation` de la función `pvargmm()` permite elegir entre ambas: `"fd"` (primeras diferencias) o `"fod"` (desviaciones ortogonales).
+
+#### Estimación GMM: en diferencias y en sistema
+
+Una vez transformado el modelo, el estimador **GMM en diferencias** de Arellano y Bond [-@arrellanobond1991] explota como instrumentos los *niveles rezagados* de las variables: bajo el supuesto de que los errores no están autocorrelacionados, los niveles $\mathbf{Y}_{i,t-s}$ con $s \geq 2$ no están correlacionados con $\Delta \varepsilon_{it}$, lo que genera las condiciones de momentos
+\begin{equation}
+    \mathbb{E}\left[ \mathbf{Y}_{i,t-s} \, \Delta \varepsilon_{it}' \right] = 0, \quad s = 2, 3, \ldots, t-1.
+    (\#eq:eqMomentosPVAR)
+\end{equation}
+
+Cuando las series son muy persistentes (cercanas a raíz unitaria), los niveles rezagados son instrumentos *débiles* de las diferencias y el GMM en diferencias se comporta mal. El estimador **GMM en sistema** de Blundell y Bond [-@blundellbond1998] añade al sistema las ecuaciones en niveles, instrumentadas con las *diferencias rezagadas*, bajo un supuesto adicional sobre las condiciones iniciales del proceso (que las desviaciones iniciales respecto del estado estacionario no estén correlacionadas con los efectos fijos). En `pvargmm()`, esta variante se activa con `system_instruments = TRUE`.
+
+Dos aspectos prácticos completan la especificación:
+
+- **Proliferación de instrumentos.** El número de instrumentos de la ecuación \@ref(eq:eqMomentosPVAR) crece con $T^2$ y con el número de variables. Demasiados instrumentos sobreajustan las variables endógenas y debilitan las pruebas de especificación. Roodman [-@roodman2009] recomienda limitar los rezagos usados como instrumentos (argumentos `max_instr_dependent_vars` y `min_instr_dependent_vars`) o *colapsar* la matriz de instrumentos (`collapse = TRUE`).
+- **Una y dos etapas.** El estimador de dos etapas (`steps = "twostep"`) utiliza la matriz de ponderación óptima estimada en la primera etapa y es más eficiente, aunque sus errores estándar deben corregirse en muestras pequeñas [@windmeijer2005].
+
+#### Diagnóstico y selección de rezagos
+
+La validez del conjunto de instrumentos se evalúa con la prueba de sobreidentificación de **Hansen** ($J$), cuya hipótesis nula es que los instrumentos son válidos (no correlacionados con el error); valores $p$ demasiado bajos indican instrumentos inválidos, pero valores $p$ sospechosamente cercanos a 1 suelen ser síntoma de demasiados instrumentos. Adicionalmente, se examina la autocorrelación de los errores en diferencias: se espera autocorrelación de orden 1 (por construcción del MA(1)), pero **no** de orden 2 — si la hubiera, los instrumentos con $s = 2$ dejarían de ser válidos. Finalmente, el orden $p$ del PVAR se selecciona con los criterios de Andrews y Lu [-@andrewslu2001] (MMSC-AIC, MMSC-BIC, MMSC-HQIC), que son análogos a los criterios de información tradicionales pero se construyen a partir del estadístico $J$ de Hansen; los calcularemos con la función `Andrews_Lu_MMSC()` en los ejemplos.
 
 ## Ejemplos: Panel VAR(p)
 
@@ -654,15 +677,18 @@ Andrews_Lu_MMSC(ex2_dahlberg_data)
 
 ```
 
-Estabilidad del proceso autorregresivo:
+Al igual que en el VAR de series de tiempo (Capítulo \@ref(cap-var)), la estabilidad del Panel VAR se verifica con los eigenvalores de la matriz compañera del sistema: el proceso es estable si todos los módulos son estrictamente menores que 1, es decir, si todas las raíces se encuentran dentro del círculo unitario. La Figura \@ref(fig:fig-stab-pvar) muestra las tres raíces del modelo estimado, todas al interior del círculo, por lo que el PVAR(1) es estable:
 
-```{r}
+```{r fig-stab-pvar, warning = FALSE, message = FALSE, fig.cap="Raíces de la matriz compañera del Panel VAR(1) estimado. El proceso es estable porque todos los eigenvalores están dentro del círculo unitario.", fig.align='center', fig.width=5.5, fig.height=5.5}
 
 stab_ex1_dahlberg_data <- stability(ex1_dahlberg_data)
 
 print(stab_ex1_dahlberg_data)
 
-plot(stab_ex1_dahlberg_data)
+plot(stab_ex1_dahlberg_data) +
+  coord_fixed() +
+  labs(title = "Raíces de la matriz compañera",
+       x = "Parte real", y = "Parte imaginaria")
 
 ```
 
@@ -728,6 +754,81 @@ La ventaja de los estadísticos between-dimension sobre los within-dimension es 
 ### Prueba de Westerlund (2007)
 
 @westerlund2007 propone cuatro estadísticos basados en la corrección de errores: en lugar de probar raíz unitaria en los residuales, se estima un modelo de corrección de errores para cada individuo y se prueba si el coeficiente de ajuste $\alpha_i$ es significativamente negativo. Este enfoque tiene mayor potencia que las pruebas residuales cuando la dinámica de corto plazo varía entre individuos, y permite controlar la dependencia transversal mediante remuestreo (*bootstrap*).
+
+### Ejemplo: inversión y valor de la empresa en el panel de Grunfeld
+
+Ilustremos la mecánica de las pruebas anteriores con el panel de Grunfeld [-@grunfeld1958] que hemos utilizado a lo largo del capítulo (10 empresas, 1935--1954). La teoría de la inversión sugiere una relación de largo plazo entre la inversión de la empresa y su valor de mercado —en el espíritu de la $q$ de Tobin [-@tobin1969]—, de modo que postulamos la regresión de cointegración de la ecuación \@ref(eq:eqCointPanel) con $Y_{it} = ln(inv_{it})$ y $X_{it} = ln(value_{it})$.
+
+**Paso 1: verificar que ambas series son $I(1)$.** Aplicamos la prueba de Levin-Lin-Chu en niveles y en diferencias:
+
+```{r}
+
+LINV <- ts(data.frame(split(log(Grunfeld$inv), Grunfeld$firm)),
+           start = 1935, freq = 1)
+
+LVAL <- ts(data.frame(split(log(Grunfeld$value), Grunfeld$firm)),
+           start = 1935, freq = 1)
+
+purtest(LINV, test = "levinlin", exo = "intercept",
+        lags = "AIC", pmax = 4)
+
+purtest(LVAL, test = "levinlin", exo = "intercept",
+        lags = "AIC", pmax = 4)
+
+purtest(diff(LINV), test = "levinlin", exo = "intercept",
+        lags = "AIC", pmax = 4)
+
+purtest(diff(LVAL), test = "levinlin", exo = "intercept",
+        lags = "AIC", pmax = 4)
+
+```
+
+En niveles no se rechaza la hipótesis nula de raíz unitaria para ninguna de las dos variables, mientras que en diferencias se rechaza contundentemente: ambas series son $I(1)$, el escenario donde tiene sentido preguntarse por cointegración. (En paneles tan cortos como éste, $T = 20$, distintas pruebas pueden arrojar conclusiones encontradas —la prueba IPS con tendencia, por ejemplo, rechaza la raíz unitaria en niveles—, por lo que en la práctica conviene contrastar más de una especificación antes de concluir.)
+
+**Paso 2: estimar la relación de largo plazo.** Estimamos la regresión de cointegración con efectos fijos por empresa:
+
+```{r}
+
+eq_lp <- plm(log(inv) ~ log(value), data = Grunfeld,
+             index = c("firm", "year"), model = "within")
+
+coef(summary(eq_lp))
+
+```
+
+La elasticidad estimada de largo plazo es cercana a uno: en el largo plazo, la inversión crece proporcionalmente con el valor de mercado de la empresa.
+
+**Paso 3: prueba residual (idea de Kao).** Si existe cointegración, los residuales $\hat{e}_{it}$ de la regresión anterior deben ser estacionarios. Siguiendo la lógica de @kao1999, estimamos la regresión ADF *agrupada* sobre los residuales, imponiendo el mismo coeficiente $\rho$ para todas las empresas:
+
+```{r}
+
+ehat <- residuals(eq_lp)
+
+adf_pool <- lm(diff(ehat) ~ lag(ehat) - 1)
+
+coef(summary(adf_pool))
+
+```
+
+El coeficiente de $\hat{e}_{i,t-1}$ es negativo y su estadístico $t$ es grande en valor absoluto. Cabe advertir que, al calcularse sobre residuales estimados, este estadístico no sigue la distribución $t$ estándar: la prueba formal de Kao le aplica correcciones que lo llevan a una $N(0,1)$. Dichas correcciones están implementadas en software especializado (por ejemplo, `xtcointtest` en Stata o las pruebas de panel de EViews); en R, las implementaciones disponibles se encuentran en paquetes archivados, por lo que aquí mostramos la mecánica de la prueba de forma transparente. Con un estadístico de esta magnitud, la evidencia contra la hipótesis nula de no cointegración es clara.
+
+**Paso 4: ecuación de corrección de error (idea de Westerlund).** Como verificación complementaria, estimamos el mecanismo de corrección de error en panel: si hay cointegración, las desviaciones del equilibrio de largo plazo ($\hat{e}_{i,t-1}$) deben corregirse, es decir, su coeficiente $\alpha$ debe ser negativo y significativo:
+
+```{r}
+
+pGrunfeld <- pdata.frame(Grunfeld, index = c("firm", "year"))
+
+pGrunfeld$ehat <- ehat
+
+mce <- plm(diff(log(inv)) ~ lag(ehat) + lag(diff(log(inv))) +
+             diff(log(value)),
+           data = pGrunfeld, model = "within")
+
+coef(summary(mce))
+
+```
+
+El coeficiente de ajuste estimado es $\hat{\alpha} \approx -0.26$ y altamente significativo: cada año se corrige alrededor de una cuarta parte de la desviación respecto del equilibrio de largo plazo, lo que implica una vida media del desequilibrio de poco más de dos años. Ambos enfoques —el residual y el de corrección de error— apuntan a la misma conclusión: la inversión y el valor de la empresa cointegran en este panel.
 
 
 ## Modelos No Lineales

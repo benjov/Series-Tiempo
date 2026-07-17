@@ -1,5 +1,16 @@
 \usepackage{booktabs}
 \usepackage{amsthm}
+\usepackage{graphicx}
+
+% Limitar todas las figuras al ancho de texto. Pandoc >= 3.5 ya no define
+% \setkeys{Gin} global (solo envuelve sus imágenes con \pandocbounded), por lo
+% que los \includegraphics generados por knitr salían a tamaño natural y se
+% desbordaban de los márgenes.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>0.8\textheight0.8\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
 % Quiebre automático de líneas largas en los bloques de código:
 % - Highlighting: código fuente R resaltado por pandoc
@@ -24,6 +35,17 @@
 
 % Incluir todas las entradas de book.bib en la bibliografía aunque no estén citadas
 \nocite{*}
+
+% Bibliografía (natbib): anclar la entrada del índice y el hipervínculo al
+% INICIO del capítulo (por defecto bookdown agrega \addcontentsline después
+% de \bibliography, con lo que el índice apuntaba a la última página)
+\renewcommand{\bibsection}{%
+  \cleardoublepage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\bibname}%
+  \chapter*{\bibname}%
+  \markboth{\bibname}{\bibname}%
+}
 
 % Encabezados de página: número separado del título del capítulo/sección
 \usepackage{fancyhdr}

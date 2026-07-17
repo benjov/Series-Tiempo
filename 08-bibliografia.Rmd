@@ -1,7 +1,9 @@
-# Bibliografía {-}
+`r if (knitr::is_html_output()) '# Bibliografía {-}'`
 
 ```{r include=FALSE}
 # Este capítulo no tiene código; su función es anclar la sección de
-# bibliografía al final del libro en la versión HTML y PDF.
+# bibliografía al final del libro en la versión HTML. En el PDF el
+# encabezado se omite: natbib genera su propio capítulo "Bibliografía"
+# y, si se dejara aquí, aparecería una página duplicada vacía.
 
 ```
