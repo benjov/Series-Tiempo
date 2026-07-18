@@ -1,11 +1,11 @@
 ---
 title: "Análisis de Series de Tiempo"
 author:
-  - "Benjamín Oliva"
+  - "Benjamín Oliva Vázquez"
   - "Jaime Vázquez Alamilla"
   - "Omar Alfaro Rivera"
-  - "Emiliano Pérez Caullieres"
-  - "Luis Gerardo Ruíz"
+  - "Marcos Emiliano Pérez Caullieres"
+  - "Luis Gerardo Ruíz González"
 date: "`r c('enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre')[as.integer(format(Sys.Date(),'%m'))]` de `r format(Sys.Date(),'%Y')`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -35,6 +35,7 @@ library(readxl)
 # Portada del sitio web: estos elementos duplican la portada propia del PDF
 # (\maketitle), por lo que solo se emiten en la salida HTML.
 if (knitr::is_html_output()) cat(
+  "**Facultad de Ciencias, Universidad Nacional Autónoma de México**\\",
   "**Facultad de Economía, Universidad Nacional Autónoma de México**\\",
   "**Departamento de Economía, Tecnológico de Monterrey, Campus Santa Fe**",
   "",
