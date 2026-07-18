@@ -178,6 +178,25 @@ Contenido nuevo:
 - [x] ~~Sin ejemplo de cointegración en panel~~ ✓ Nuevo ejemplo con Grunfeld (inversión vs valor, q de Tobin): (1) I(1) por Levin-Lin-Chu con nota sobre discrepancia con IPS+tendencia en paneles cortos; (2) relación de largo plazo within (elasticidad ≈ 0.97); (3) ADF agrupado sobre residuales (idea de Kao) con advertencia sobre distribución no estándar; (4) ecuación de corrección de error (idea de Westerlund), α̂ ≈ −0.26. **Nota**: el paquete `pco` (CRAN archive) produce estadísticos patológicos (t ≈ −12,000) — descartado; el ejemplo implementa la mecánica de forma transparente con `plm`.
 - [x] ~~Doble impresión de purtest en ejemplo Grunfeld~~ ✓ (ya corregido en sesión 8).
 
+### Revisión integral de coautor (2026-07-17, sesión 10)
+
+Lectura fina de los 7 capítulos: redacción, errores matemáticos y desfases entre texto y datos.
+
+**Errores matemáticos corregidos:**
+
+- Cap. 02: derivada $(p-1)$-ésima de $1/(1-g)$ sin el factorial; suma de solución con raíces repetidas iniciaba en $i=0$ (daba $t^{-1}$); condiciones $|a_p|<1$ y $\sum a_i<1$ presentadas como suficientes cuando son solo **necesarias** (hay contraejemplos) — reescrito con condición exacta $|g_i|<1$ + condición suficiente $\sum|a_i|<1$; notación $\Delta^k$ vs $\Delta_k$ conflacionada (iterada vs estacional); pasaje que etiquetaba $a_1 S_{t-1}$ como "$S_t$"; notación $|{g}<1|$ malformada (×4).
+- Cap. 03: fórmula de **Jarque-Bera con $\hat{S}$ en vez de $\hat{S}^2$**; afirmación invertida sobre no-autocorrelación⇒independencia (solo bajo normalidad); exponentes de la covarianza del AR(1) ($a_1^j$ en vez de $a_1^{2j}$); aproximación $\Delta ln \approx (X_t - X_{t-k})/X_t$ (denominador debía ser $X_{t-k}$); signos en la derivación de $\gamma(0)$ del ARMA(1,1); $\gamma(q)$ del MA(q) sin el signo negativo; condición de invertibilidad del MA con raíces "dentro" (es fuera, o $|\lambda|<1$ en el polinomio recíproco); rezagos intermedios del PACF ($X_{t-k-1}$ → $X_{t-(k-1)}$); condición espuria "$1 - a_1L - \ldots < 1$" en AR(p).
+- Cap. 05: **condición de estabilidad del VAR enunciada al revés** (raíces "dentro" del círculo con $|z| \leq 1$); definición de cointegración escribía $\mathbf{Y}_{it}$ en vez de $\mathbf{Z}_{it}$; casos $r=1$/$r\geq1$ solapados (ahora Engle-Granger vs Johansen).
+- Cap. 06: estadística M-ARCH-LM sin el factor $T$ en la traza; especificaciones mostraban $\varepsilon \sim N(0,1)$ pero el código estima con $t$ de Student (`distribution.model="std"`) — alineado y explicado.
+- Cap. 07: dummy de grupo del DiD indexada como $D_t$ (es $D_i$); subíndice $\phi_{ij}$ en SETAR multi-régimen (es $\phi_{1j}$).
+
+**Desfases texto-datos corregidos (Base_Transporte.xlsx tiene 306 obs. hasta jun-2025 desde ago-2025):**
+
+- Cap. 03: cuadro `tab:foo` hardcodeado con valores de la muestra vieja (T=234/281) → convertido a **cuadro calculado por código**; fechas "mayo 2023 / 281 obs." → "junio 2025 / 306 obs." (texto, captions, subtítulos); texto afirmaba óptimo "modelo 24 = ARMA(4,6)" pero con datos actuales es el 16 = ARMA(3,4) → **texto dinámico con inline R** (`opt_idx`, `opt_p`, `opt_q`) y chunks que usan el óptimo calculado; figuras 412–416 y 52–53 (HP) eran **PNGs estáticos viejos** (`Plots/G_*.png`) → convertidas a gráficas generadas en vivo (raíces, residuales, ACF/PACF, hpfilter); sección de pronóstico decía ARMA(4,6) pero el código usa ARMA(6,6) con dummies COVID → texto corregido y explicado.
+- Cap. 05: fechas "julio 2019" → "junio 2023" (×2); cuadro `SelectVARVEC` hardcodeado con criterios viejos y narrativa "SC elige 1" (elige 2) → cuadro calculado + narrativa corregida; cuadro `TrazaTest` mezclaba estadísticas del modelo con constante con **valores críticos del modelo con tendencia** → cuadro calculado desde `ca.jo` (la conclusión r=1 se sostiene; β verificado vigente).
+
+**Redacción y estilo (selección):** referencias a "el curso/la clase/Clase 13/15/18/GoogleDrive" eliminadas (es un libro); pasos del ejemplo ARDL y títulos de gráficas traducidos al español (flu, Grunfeld, GNP↛"Gross Domestic Product"); caption de fig3 (cap. 02) tenía los paneles invertidos; ylab de tasas de crecimiento decía "Pesos X Dolar"; tabla ACF/PACF (`tab:AcAcp`) reescrita ("se corta después del rezago q" vs "decae gradualmente"); descripción de capítulos en la intro actualizada (Kalman, extensiones GARCH, cointegración en panel, DiD); resumen del cap. 07 ampliado (sesgo de Nickell, Hansen, cointegración en panel); cita formal a Hamilton [-@hamilton1989] en MSM; decenas de typos y frases mal armadas.
+
 ### Hallazgos de revisión 2026-07-08 (pendientes)
 
 - [ ] **Nota menor**: los `[-@key]` dentro de `fig.cap` se renderizan bien en el caption visible (HTML y PDF) pero quedan literales en el atributo `alt` de la imagen — cosmético, sin impacto para el lector.

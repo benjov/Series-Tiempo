@@ -150,10 +150,10 @@ una serie de tiempo como la secuencia mostrada en la ecuación
 \end{equation}\]</span></p>
 <p>El proceso estocástico de dimensión <span class="math inline">\(T\)</span> puede ser completamente descrito
 por su función de distribución multivariada de dimensión <span class="math inline">\(T\)</span>. No
-obstante, esto no resulta ser práctico cuando se opere más adelante en
-el curso. Por ello, en el curso y, en general, en casi todos los textos
-lo hacen, sólo nos enfocaremos en sus primero y segundo momentos. Es
-decir, en sus media o valor esperado: <span class="math display">\[\begin{equation*}
+obstante, esto no resulta práctico para el análisis que desarrollaremos
+más adelante. Por ello, en estas notas –como se hace en casi todos los
+textos– sólo nos enfocaremos en sus primer y segundo momentos. Es
+decir, en su media o valor esperado: <span class="math display">\[\begin{equation*}
     \mathbb{E}[X_t]
 \end{equation*}\]</span></p>
 <p>Para <span class="math inline">\(t = 1, 2, \ldots, T\)</span>; o: <span class="math display">\[\begin{equation*}
@@ -212,11 +212,11 @@ proceso estocástico tiene una distribución normal multivariada, su
 función de distribución estará totalmente descrita por sus momentos de
 primer y segundo orden.</p>
 <p>Ahora introduciremos el concepto de ergodicidad, el cual indica que los
-momentos muestrales, los cuales son calculados en la base de una serie
-de tiempo con un número finito de observaciones, en la medida que
-<span class="math inline">\(T \rightarrow \infty\)</span> sus correspondientes momentos muestrales, tienden
-a los verdaderos valores poblacionales, los cuales definiremos como
-<span class="math inline">\(\mu\)</span>, para la media, y <span class="math inline">\(\sigma^2_X\)</span> para la varianza.</p>
+momentos muestrales –calculados con base en una serie de tiempo con un
+número finito de observaciones– tienden, en la medida en que
+<span class="math inline">\(T \rightarrow \infty\)</span>, a los verdaderos valores poblacionales, los
+cuales definiremos como <span class="math inline">\(\mu\)</span>, para la media, y <span class="math inline">\(\sigma^2_X\)</span> para la
+varianza.</p>
 <p>Este concepto sólo es cierto si asumimos que, por ejemplo, el valor
 esperado y la varianza son como se dice a continuación para todo
 <span class="math inline">\(t = 1, 2, \ldots, T\)</span>: <span class="math display">\[\begin{eqnarray}
@@ -235,11 +235,13 @@ en la media si: <span class="math display">\[\begin{equation}
     \displaystyle\lim_{T \to \infty}{\mathbb{E} \left[ \left( \frac{1}{T} \sum^{T}_{t = 1} (X_t - \mu) ^2 - \sigma^2_X \right) ^2 \right]} = 0
     (\#eq:LIM2)
 \end{equation}\]</span></p>
-<p>Estas condiciones se les conoce como <em>propiedades de consistencia</em> para
-las variables aleatorias. Sin embargo, éstas no pueden ser probadas. Por
-ello se les denomina como un supuesto que pueden cumplir algunas de las
-series. Más importante aún: <strong>un proceso estocástico que tiende a estar
-en equilibrio estadístico en un orden ergódico, es estacionario</strong>.</p>
+<p>A estas condiciones se les conoce como <em>propiedades de consistencia</em>
+para las variables aleatorias. Sin embargo, éstas no pueden ser probadas
+con una única realización del proceso, por lo que se tratan como un
+supuesto de trabajo. Lo relevante para lo que sigue es que <strong>para que
+los momentos muestrales de una serie de tiempo aproximen a los momentos
+poblacionales del proceso, se requiere que éste sea estacionario y
+ergódico</strong>.</p>
 <p>Podemos distinguir dos tipos de estacionariedad. Si asumimos que la
 función común de distribución del proceso estocástico no cambia a lo
 largo del tiempo, se dice que el proceso es <em>estrictamente
@@ -258,18 +260,17 @@ constante y finita para todo <span class="math inline">\(t\)</span>.</p></li>
 <li><p><em>Estacionariedad en covarianza</em>: Un proceso estocástico es
 estacionario en covarianza si
 <span class="math inline">\(Cov[X_t,X_s] = \mathbb{E}[(X_t - \mu_t)(X_s - \mu_s)] = \gamma(|s-t|)\)</span>
-es sólo una función del tiempo y de la distancia entre las dos
-variables aleatorias. Por lo que no depende del tiempo denotado por
-<span class="math inline">\(t\)</span> (no depende de la información contemporánea).</p></li>
+es sólo una función de la distancia <span class="math inline">\(|s-t|\)</span> entre las dos
+variables aleatorias, y no del momento <span class="math inline">\(t\)</span> en que se observa el
+proceso.</p></li>
 <li><p><em>Estacionariedad débil</em>: Como la estacionariedad en varianza resulta
 de forma inmediata de la estacionariedad en covarianza cuando se
 asume que <span class="math inline">\(s = t\)</span>, un proceso estocástico es débilmente estacionario
 cuando es estacionario en media y covarianza.</p></li>
 </ol>
 <p>Puesto que resulta poco factible asumir una estacionariedad diferente a
-la débil, es adelante siempre que digamos que un proceso es estacionario
-se referirá al caso débil y sólo diremos que el proceso es estacionario,
-sin el apelativo de débil.</p>
+la débil, en adelante, siempre que digamos que un proceso es
+estacionario, nos referiremos al caso débil, sin el apelativo de débil.</p>
 <p><strong>Ejemplo</strong>. Supongamos una serie de tiempo denotada por:
 <span class="math inline">\(\{U_t\}^T_{t = 0}\)</span>. Decimos que el proceso estocástico <span class="math inline">\(\{U_t\}\)</span> es un
 <em>proceso estocástico puramente aleatorio</em> o simplemente un <em>proceso de
@@ -296,8 +297,8 @@ como: <span class="math display">\[\begin{equation}
     (\#eq:em1)
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\{ U_t \}\)</span> es un proceso puramente aleatorio. Este proceso
-estocástico, o caminata aleatoria sin tendencia (ajuste - drift), puede
-ser reescrito como: <span class="math display">\[\begin{equation}
+estocástico, conocido como caminata aleatoria sin deriva (<em>drift</em>),
+puede ser reescrito como: <span class="math display">\[\begin{equation}
     X_t = \sum^t_{j = 0} U_j
     (\#eq:em2)
 \end{equation}\]</span></p>
@@ -335,15 +336,17 @@ proceso estocástico se puede ver como: <span class="math display">\[\begin{eqna
     Cov[X_t,X_s] &amp; = &amp; \mathbb{E} \left[ \left( \sum^t_{j=1} U_j - 0 \right) \left( \sum^s_{i=1} U_i - 0 \right) \right] \\
     &amp; = &amp; \mathbb{E}[(U_1 + U_2 + \ldots + U_t)(U_1 + U_2 + \ldots + U_s)] \\
     &amp; = &amp; \sum^t_{j=1} \sum^s_{i=1} \mathbb{E}[U_j U_i] \\
-    &amp; = &amp; \mathbb{E}[U^2_1] + \mathbb{E}[U^2_2] + \ldots + \mathbb{E}[U^2_k] \\
-    &amp; = &amp; \sigma^2 + \sigma^2 + \ldots + \sigma^2 \\
-    &amp; = &amp; 1 + 1 + 1 + 1 \\
+    &amp; = &amp; \mathbb{E}[U^2_1] + \mathbb{E}[U^2_2] + \ldots + \mathbb{E}[U^2_{min(t,s)}] \\
+    &amp; = &amp; min(t,s) \cdot \sigma^2 \\
     &amp; = &amp; min(t,s)
 \end{eqnarray*}\]</span></p>
-<p>Así, el proceso estocástico dado por la caminata aleatoria sin un
-término de ajuste es estacionario en media, pero no en varianza o en
-covarianza, y consecuentemente, en general no estacionario, condición
-que contraria al caso del proceso simple descrito en <span class="math inline">\(U_t\)</span>.</p>
+<p>Donde la última igualdad usa que en este ejemplo <span class="math inline">\(\sigma^2 = 1\)</span>; sólo
+sobreviven los términos cruzados con <span class="math inline">\(i = j\)</span>, que son exactamente
+<span class="math inline">\(min(t,s)\)</span>.</p>
+<p>Así, el proceso estocástico dado por la caminata aleatoria sin deriva
+es estacionario en media, pero no en varianza ni en covarianza y,
+consecuentemente, no es estacionario –condición contraria al caso del
+proceso simple descrito en <span class="math inline">\(U_t\)</span>–.</p>
 <p>Es fácil ver que muchas de las posibilidades de realización de este
 proceso estocástico (series de tiempo) pueden tomar cualquiera de las
 rutas consideradas en la Figura <a href="cap-estacionarios.html#fig:fig31">3.1</a>.</p>
@@ -381,8 +384,8 @@ rutas consideradas en la Figura <a href="cap-estacionarios.html#fig:fig31">3.1</
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig31"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig31-1.png" alt="Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1" width="672"><p class="caption">
-Figura 3.1: Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo es posible cambios de +1 y -1
+<img src="Notas-Series-Tiempo_files/figure-html/fig31-1.png" alt="Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo son posibles cambios de +1 y -1" width="672"><p class="caption">
+Figura 3.1: Ejemplo de 10 trayectorias de la caminata aleatoria, cuando sólo son posibles cambios de +1 y -1
 </p>
 </div>
 </div>
@@ -396,7 +399,7 @@ estocástico, ello mediante el uso de las autocovarianzas. Cuando las
 covarianzas son normalizadas respecto de la varianza, el resultado es un
 término que es independiente de las unidades de medida aplicadas, y se
 conoce como la <em>función de autocorrelación</em>.</p>
-<p>Para procesos estacionarios, dicha función de autocorrelación esta dada
+<p>Para procesos estacionarios, dicha función de autocorrelación está dada
 por: <span class="math display">\[\begin{equation}
     \rho(\tau) = \frac{\mathbb{E}[(X_t - \mu)(X_{t+\tau} - \mu)]}{\mathbb{E}[(X_t - \mu)^2]} = \frac{\gamma(\tau)}{\gamma(0)}
     (\#eq:em5)
@@ -431,7 +434,7 @@ sólo es necesario conocer la función de autocorrelación para el caso de
 <span class="math inline">\(\tau = 1, 2, 3, \ldots\)</span>, ya que de estos casos podemos derivar los
 valores de la función de autocorrelación complementarios de
 <span class="math inline">\(\tau = \ldots, -3, -2, -1\)</span>.</p>
-<p>Partiendo de los supuestos de ergodicidad en relación a la media,
+<p>Partiendo de los supuestos de ergodicidad en relación con la media,
 varianza y covarianzas de un proceso estacionario, podemos estimar
 dichos parámetros con las siguientes formulaciones o propuestas de
 estimadores puntuales: <span class="math display">\[\begin{equation}
@@ -480,10 +483,9 @@ Pierce <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-boxpierce1970
 <p>Bajo la hipótesis nula esta estadística se distribuye asintóticamente
 como una chi cuadrado (<span class="math inline">\(\chi^2\)</span>) con <span class="math inline">\(m-k\)</span> grados de libertad y con <span class="math inline">\(k\)</span>
 que representa al número de parámetros estimados.</p>
-<p>Haciendo una aplicación estricta de la distribución de esta estadística,
-sabemos que esta se mantiene asintóticamente. Ljung y Box
-<span class="citation">(<a href="bibliograf%C3%ADa.html#ref-ljungbox1978">1978</a>)</span> propusieron la siguiente modificación de la estadística
-para muestras pequeñas: <span class="math display">\[\begin{equation}
+<p>La distribución de esta estadística sólo se sostiene asintóticamente.
+Por ello, Ljung y Box <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-ljungbox1978">1978</a>)</span> propusieron la siguiente
+modificación de la estadística para muestras pequeñas: <span class="math display">\[\begin{equation}
     Q = T(T + 2) \sum_{j = 1}^{m} \frac{\hat{\rho} (j)^2}{T - j}
     (\#eq:eqautocorr3)
 \end{equation}\]</span></p>
@@ -497,9 +499,8 @@ los correspondientes valores críticos de la distribución <span class="math inl
 <span class="math inline">\(m-k\)</span> grados de libertad a algún grado dado de significancia.</p>
 <p>Una alternativa para esta prueba es una del tipo Multiplicadores de
 Lagrange (o LM) desarrollada por Breusch <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-breusch1978">1978</a>)</span> y Godfrey
-<span class="citation">(<a href="bibliograf%C3%ADa.html#ref-godfrey1978">1978</a>)</span>. La
-cual, al igual que las estadísticas <span class="math inline">\(Q\)</span> y <span class="math inline">\(Q^*\)</span>, la hipótesis nula está
-dada por:</p>
+<span class="citation">(<a href="bibliograf%C3%ADa.html#ref-godfrey1978">1978</a>)</span>, en la cual, al igual que en las estadísticas <span class="math inline">\(Q\)</span> y
+<span class="math inline">\(Q^*\)</span>, la hipótesis nula está dada por:</p>
 <blockquote>
 <p><span class="math inline">\(H_0\)</span>: Los residuales no están autocorrelacionados.</p>
 </blockquote>
@@ -533,9 +534,9 @@ observaciones, algo que es muy probable que ocurra en la econometría
 tradicional.</p></li>
 </ol>
 <p>El hecho de que los residuales no estén autocorrelacionados no implica
-que estos sean independientes y normalmente distribuidos. La ausencia de
-autocorrelación no implica una independencia estocástica si las
-variables son normalmente distribuidas.</p>
+que estos sean independientes y normalmente distribuidos: la ausencia de
+autocorrelación sólo implica independencia estocástica cuando las
+variables se distribuyen de forma normal.</p>
 <p>A menudo se asume que estos residuales están distribuidos normalmente,
 ya que la mayoría de las pruebas estadísticas tienen este supuesto
 detrás. No obstante, ello también depende de los otros momentos de la
@@ -563,7 +564,7 @@ anchas. En tales casos se ubican los datos financieros.</p>
 de normalidad, la cual puede ser aplicada a series de tiempo en niveles
 o en diferencias indistintamente. Dicha prueba se expresa como:
 <span class="math display" id="eq:eqautocorr8">\[\begin{equation}
-    JB = \frac{T}{6} \left(\hat{S} + \frac{1}{4} (\hat{K} - 3)^2 \right)
+    JB = \frac{T}{6} \left(\hat{S}^2 + \frac{1}{4} (\hat{K} - 3)^2 \right)
     \tag{3.7}
 \end{equation}\]</span></p>
 <p>La cual tiene una distribución <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(2\)</span> grados de libertad y
@@ -574,10 +575,10 @@ valores críticos en tablas.</p>
 <p><strong>Ejemplo</strong>. Veamos un ejemplo para ilustrar el uso de la función de
 autocorrelación. Tomemos como variable al número de pasajeros
 transportados por el sistema de transporte del metro de la
-CDMX.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Los datos y algoritmo está disponible en el
-repositorio de GitHub y corresponde a la Clase 3.&lt;/p&gt;"><sup>2</sup></a> Los datos empleados fueron tomados del INEGI y
-son una serie de tiempo en el período que va de enero de 2000 a mayo de
-2023, es decir, 281 observaciones. Como se puede apreciar en la Figura
+CDMX.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Los datos y el algoritmo están disponibles en el
+repositorio de GitHub del proyecto.&lt;/p&gt;"><sup>2</sup></a> Los datos empleados fueron tomados del INEGI y
+son una serie de tiempo en el período que va de enero de 2000 a junio de
+2025, es decir, 306 observaciones. Como se puede apreciar en la Figura
 <a href="cap-estacionarios.html#fig:fig32">3.2</a>, el número de pasajeros por mes ha oscilado
 significativamente a lo largo del tiempo. Incluso podemos observar un
 cambio estructural de la serie entre 2011 y 2012. Asimismo, podemos
@@ -603,13 +604,13 @@ relevante es la caída asociada a la pandemia de COVID-19 de 2020.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Pasajeros Transportados en el Metro de la CDMX"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"(Ene-2000 a Jul-2021)"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"(Ene-2000 a Jun-2025)"</span>,</span>
 <span>    caption <span class="op">=</span> <span class="st">"Fuente: Elaboración propia con información del INEGI, \nhttps://www.inegi.org.mx/app/indicadores/?tm=0&amp;t=1090"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig32"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig32-1.png" alt="Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023" width="672"><p class="caption">
-Figura 3.2: Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a mayo 2023
+<img src="Notas-Series-Tiempo_files/figure-html/fig32-1.png" alt="Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a junio 2025" width="672"><p class="caption">
+Figura 3.2: Evolución del número de pasajeros en el Metro de la CDMX, enero 2000 a junio 2025
 </p>
 </div>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
@@ -620,76 +621,116 @@ se destaca que se muestra la función de autocorrelación para los tres
 primeros rezagos. Para mayor detalle, en la Figura <a href="cap-estacionarios.html#fig:fig33">3.3</a> se
 muestra la función de autocorrelación, en donde las bandas descritas por
 las líneas azules son el intervalo de confianza dentro de las cuales no
-se puede rechazar la hipótesis nula de que <span class="math inline">\(H_0: \hat{\rho}(p) = 0\)</span>,
+se puede rechazar la hipótesis nula de que <span class="math inline">\(H_0: \rho(\tau) = 0\)</span>,
 para todo <span class="math inline">\(\tau = 1, 2, \ldots, T-1\)</span>.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:foo">Cuadro 3.1: </span> Estadísticas descriptivas del número de pasajeros en el
-Metro de la CDMX, enero de 2000 a junio de 2019</caption>
-<colgroup>
-<col width="50%">
-<col width="50%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Estadística</th>
-<th align="center">Valor</th>
+<span id="tab:foo">Cuadro 3.1: </span>Estadísticas descriptivas del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2025
+</caption>
+<thead><tr>
+<th style="text-align:center;">
+Estadística
+</th>
+<th style="text-align:center;">
+Valor
+</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\hat{\mu} = \frac{1}{T} \sum^T_{t=1} X_t\)</span></td>
-<td align="center">124.3000</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\mu} = \frac{1}{T} \sum^T_{t=1} X_t\)</span>
+</td>
+<td style="text-align:center;">
+115.9972
+</td>
 </tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(\hat{\gamma}(0) = \frac{1}{T} \sum^T_{t=1} (X_t - \hat{\mu})^2\)</span></td>
-<td align="center">103.6400</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\gamma}(0) = \frac{1}{T} \sum^T_{t=1} (X_t - \hat{\mu})^2\)</span>
+</td>
+<td style="text-align:center;">
+428.3240
+</td>
 </tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\hat{\gamma}(1) = \frac{1}{T} \sum^{T - 1}_{t=1} (X_t - \hat{\mu})(X_{t+1} - \hat{\mu})\)</span></td>
-<td align="center">63.1100</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\gamma}(1) = \frac{1}{T} \sum^{T - 1}_{t=1} (X_t - \hat{\mu})(X_{t+1} - \hat{\mu})\)</span>
+</td>
+<td style="text-align:center;">
+381.7028
+</td>
 </tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(\hat{\gamma}(2) = \frac{1}{T} \sum^{T - 2}_{t=1} (X_t - \hat{\mu})(X_{t+2} - \hat{\mu})\)</span></td>
-<td align="center">72.9100</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\gamma}(2) = \frac{1}{T} \sum^{T - 2}_{t=1} (X_t - \hat{\mu})(X_{t+2} - \hat{\mu})\)</span>
+</td>
+<td style="text-align:center;">
+372.1024
+</td>
 </tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\hat{\gamma}(3) = \frac{1}{T} \sum^{T - 3}_{t=1} (X_t - \hat{\mu})(X_{t+3} - \hat{\mu})\)</span></td>
-<td align="center">63.6900</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\gamma}(3) = \frac{1}{T} \sum^{T - 3}_{t=1} (X_t - \hat{\mu})(X_{t+3} - \hat{\mu})\)</span>
+</td>
+<td style="text-align:center;">
+349.3550
+</td>
 </tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(\hat{\rho}(1) = \frac{\sum^{T - 1}_{t=1} (X_t - \hat{\mu})(X_{t+1} - \hat{\mu})}{\sum^T_{t=1} (X_t - \hat{\mu})^2} = \frac{\hat{\gamma}(1)}{\hat{\gamma}(0)}\)</span></td>
-<td align="center">0.6089</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\rho}(1) = \hat{\gamma}(1)/\hat{\gamma}(0)\)</span>
+</td>
+<td style="text-align:center;">
+0.8912
+</td>
 </tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(\hat{\rho}(2) = \frac{\sum^{T - 2}_{t=1} (X_t - \hat{\mu})(X_{t+2} - \hat{\mu})}{\sum^T_{t=1} (X_t - \hat{\mu})^2} = \frac{\hat{\gamma}(2)}{\hat{\gamma}(0)}\)</span></td>
-<td align="center">0.7035</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\rho}(2) = \hat{\gamma}(2)/\hat{\gamma}(0)\)</span>
+</td>
+<td style="text-align:center;">
+0.8687
+</td>
 </tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(\hat{\rho}(3) = \frac{\sum^{T - 3}_{t=1} (X_t - \hat{\mu})(X_{t+3} - \hat{\mu})}{\sum^T_{t=1} (X_t - \hat{\mu})^2} = \frac{\hat{\gamma}(3)}{\hat{\gamma}(0)}\)</span></td>
-<td align="center">0.6145</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\hat{\rho}(3) = \hat{\gamma}(3)/\hat{\gamma}(0)\)</span>
+</td>
+<td style="text-align:center;">
+0.8156
+</td>
 </tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(Q^* = T \sum_{j = 1}^{1} \hat{\rho} (j)^2\)</span></td>
-<td align="center">86.7577</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(Q^* = T \sum_{j = 1}^{1} \hat{\rho}(j)^2\)</span>
+</td>
+<td style="text-align:center;">
+243.0117
+</td>
 </tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(Q^* = T \sum_{j = 1}^{2} \hat{\rho} (j)^2\)</span></td>
-<td align="center">290.9279</td>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(Q^* = T \sum_{j = 1}^{2} \hat{\rho}(j)^2\)</span>
+</td>
+<td style="text-align:center;">
+473.9530
+</td>
 </tr>
 </tbody>
 </table></div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Pax_Metro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">$</span><span class="va">Pax_Metro</span>, </span>
-<span>                start <span class="op">=</span> <span class="fl">2000</span>, </span>
+<code class="sourceCode R"><span><span class="va">Pax_Metro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">$</span><span class="va">Pax_Metro</span>,</span>
+<span>                start <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>                freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">Pax_Metro</span>, </span>
-<span>    lag.max <span class="op">=</span> <span class="fl">150</span>, </span>
-<span>    xlab <span class="op">=</span> <span class="st">'Resagos k en meses'</span>, </span>
-<span>    main <span class="op">=</span> <span class="st">"Funcion de Autocorrelación del número de pasajeros del metro"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">Pax_Metro</span>,</span>
+<span>    lag.max <span class="op">=</span> <span class="fl">150</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="st">'Rezagos k en meses'</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"Función de Autocorrelación del número de pasajeros del metro"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig33"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig33-1.png" alt="Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023" width="672"><p class="caption">
-Figura 3.3: Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a mayo de 2023
+<img src="Notas-Series-Tiempo_files/figure-html/fig33-1.png" alt="Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2025" width="672"><p class="caption">
+Figura 3.3: Función de Autocorrelación: 150 rezagos del número de pasajeros en el Metro de la CDMX, enero de 2000 a junio de 2025
 </p>
 </div>
 </div>
@@ -767,7 +808,7 @@ establecer lo siguiente, empezando con <span class="math inline">\(X_1\)</span>:
 es explicado por dos partes: una que depende del tiempo y otra que
 depende de un proceso estocástico. Asimismo, debe notarse que la
 condición de convergencia es idéntica al caso de ecuaciones en
-diferencia estudiadas al inicio del curso: <span class="math inline">\(|a_1| &lt; 1\)</span>, por lo que
+diferencia estudiadas en el capítulo previo: <span class="math inline">\(|a_1| &lt; 1\)</span>, por lo que
 cuando <span class="math inline">\(t \to \infty\)</span>, la expresión <a href="cap-estacionarios.html#eq:EDOSSol">(3.8)</a> será la siguiente:
 <span class="math display" id="eq:EDOSLP">\[\begin{equation}
     X_t = a_0 \frac{1}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^{j} U_{t - j}
@@ -784,7 +825,7 @@ estacionario, como demostraremos más adelante.</p>
 consideramos la formulación que en la literatura se denomina como la
 descomposición de Wold, en la cual se define que es posible asumir que
 <span class="math inline">\(\psi_j = a_1^j\)</span> y se considera el caso en el cual <span class="math inline">\(|a_1| &lt; 1\)</span>.
-De esta forma tendremos que, por ejemplo, cuando: <span class="math display">\[\begin{equation*}
+De esta forma tendremos, por ejemplo, que: <span class="math display">\[\begin{equation*}
     \sum^{\infty}_{j = 0} \psi^2_j = \sum^{\infty}_{j = 0} a_1^{2j} = \frac{1}{1 - a_1^2}
 \end{equation*}\]</span></p>
 <p>Alternativamente y de forma similar a las ecuaciones en diferencia
@@ -849,15 +890,15 @@ de la ecuación <a href="#eq:AR1Sol">(<strong>??</strong>)</a>: <span class="mat
     (\#eq:AR1Var)
 \end{eqnarray}\]</span></p>
 <p>Previo a analizar la covarianza de la serie de tiempo, recordemos que
-para el proceso puramente aleatorio <span class="math inline">\(U_t\)</span> su varianza y covarianza puede
-verse como <span class="math inline">\(\mathbb{E}[U_t, U_s] = \sigma^2\)</span>, para <span class="math inline">\(t = s\)</span>, y
-<span class="math inline">\(\mathbb{E}[U_t, U_s] = 0\)</span>, para cualquier otro caso, respectivamente.</p>
+para el proceso puramente aleatorio <span class="math inline">\(U_t\)</span> su varianza y covarianza
+pueden verse como <span class="math inline">\(\mathbb{E}[U_t U_s] = \sigma^2\)</span>, para <span class="math inline">\(t = s\)</span>, y
+<span class="math inline">\(\mathbb{E}[U_t U_s] = 0\)</span>, para cualquier otro caso, respectivamente.</p>
 <p>Dicho lo anterior, partiendo de la ecuación <a href="#eq:AR1Sol">(<strong>??</strong>)</a> la
 covarianza de la serie estará dada por: <span class="math display">\[\begin{eqnarray}
     Cov(X_t, X_{t-\tau}) &amp; = &amp; \mathbb{E}[(X_t - \mu)(X_{t-\tau} - \mu)] \nonumber \\
     &amp; = &amp; \mathbb{E} \left[ \left( \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-j} - \frac{a_0}{1 - a_1} \right) \right. \nonumber \\
     &amp;   &amp; \left. \times \left( \frac{a_0}{1 - a_1} + \sum^{\infty}_{j = 0} a_1^j U_{t-\tau-j} - \frac{a_0}{1 - a_1} \right) \right] \nonumber \\
-    &amp; = &amp; a_1^{\tau} \mathbb{E}[U^2_{t-\tau} + a_1 U^2_{t-\tau-1} + a_1^2 U^2_{t-\tau-2} + a_1^3 U^2_{t-\tau-3} + \ldots] \nonumber \\
+    &amp; = &amp; a_1^{\tau} \mathbb{E}[U^2_{t-\tau} + a_1^2 U^2_{t-\tau-1} + a_1^4 U^2_{t-\tau-2} + a_1^6 U^2_{t-\tau-3} + \ldots] \nonumber \\
     &amp; = &amp; a_1^{\tau} \sigma^2 \frac{1}{1 - a_1^2} = \gamma(\tau)
     (\#eq:AR1Cov)
 \end{eqnarray}\]</span></p>
@@ -871,10 +912,10 @@ como sigue: <span class="math display">\[\begin{eqnarray}
 resultado significa que cuando el proceso autorregresivo es de orden 1
 (es decir, AR(1)) la función de autocorrelación teóricamente es igual al
 parámetro <span class="math inline">\(a_1\)</span> elevado al número de rezagos considerados. No obstante,
-note que esto no significa que la autocorrelación observada sea como lo
-expresa en el planteamiento anterior. Por el contrario, una observación
-sencilla mostraría que la autocorrelación observada sería ligeramente
-distinta a la autocorrelación teórica. Ahora veamos algunos ejemplos.</p>
+esto no significa que la autocorrelación estimada en una muestra
+coincida exactamente con la teórica: en muestras finitas, la
+autocorrelación observada será ligeramente distinta. Ahora veamos
+algunos ejemplos.</p>
 <p><strong>Ejemplo</strong>. En el primer ejemplo simularemos una serie y mostraremos el
 análisis de un proceso construido considerando un proceso puramente
 aleatorio como componente <span class="math inline">\(U_t\)</span>. Por su parte, en un segundo ejemplo
@@ -980,25 +1021,25 @@ Figura 3.5: Comportamiento del Proceso Teórico
 </div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">X_t</span><span class="op">$</span><span class="va">XR_t</span>, lag.max <span class="op">=</span> <span class="fl">30</span>, col <span class="op">=</span> <span class="st">"blue"</span>, </span>
-<span>    ylab <span class="op">=</span> <span class="st">"Autocorrelacion"</span>,</span>
+<span>    ylab <span class="op">=</span> <span class="st">"Autocorrelación"</span>,</span>
 <span>    xlab<span class="op">=</span><span class="st">"Rezagos"</span>, </span>
-<span>    main<span class="op">=</span><span class="st">"Funcion de Autocorrelacion Real"</span><span class="op">)</span></span></code></pre></div>
+<span>    main<span class="op">=</span><span class="st">"Función de Autocorrelación Real"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig43"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig43-1.png" alt="Funcion de Autocorrelacion Real" width="672"><p class="caption">
-Figura 3.6: Funcion de Autocorrelacion Real
+<img src="Notas-Series-Tiempo_files/figure-html/fig43-1.png" alt="Función de Autocorrelación Real" width="672"><p class="caption">
+Figura 3.6: Función de Autocorrelación Real
 </p>
 </div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">X_t</span><span class="op">$</span><span class="va">rho</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span>, names.arg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"blue"</span>, </span>
 <span>        border<span class="op">=</span><span class="st">"blue"</span>, density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, </span>
-<span>        ylab <span class="op">=</span> <span class="st">"Autocorrelacion"</span>, </span>
+<span>        ylab <span class="op">=</span> <span class="st">"Autocorrelación"</span>, </span>
 <span>        xlab<span class="op">=</span><span class="st">"Rezagos"</span>, </span>
-<span>        main<span class="op">=</span><span class="st">"Funcion de Autocorrelacion Teórica"</span><span class="op">)</span></span></code></pre></div>
+<span>        main<span class="op">=</span><span class="st">"Función de Autocorrelación Teórica"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig44"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig44-1.png" alt="Funcion de Autocorrelacion Teórica" width="672"><p class="caption">
-Figura 3.7: Funcion de Autocorrelacion Teórica
+<img src="Notas-Series-Tiempo_files/figure-html/fig44-1.png" alt="Función de Autocorrelación Teórica" width="672"><p class="caption">
+Figura 3.7: Función de Autocorrelación Teórica
 </p>
 </div>
 <p>Recordemos que una trayectoria de equilibrio o solución de un <span class="math inline">\(AR(1)\)</span> es
@@ -1050,7 +1091,7 @@ transformación: <span class="math display">\[\begin{equation*}
 <p>Donde <span class="math inline">\(k = 1, 2, 3, \ldots\)</span> y <span class="math inline">\(log(.)\)</span> es la función logaritmo natural.
 Esta expresión se puede interpretar como una tasa de crecimiento, puesto
 que asumimos variaciones pequeñas para las cuales se cumple que:
-<span class="math inline">\(log(X_t) - log(X_{t-k}) \approx \frac{X_t - X_{t-k}}{X_t}\)</span>.</p>
+<span class="math inline">\(log(X_t) - log(X_{t-k}) \approx \frac{X_t - X_{t-k}}{X_{t-k}}\)</span>.</p>
 <p>Primero, para realizar el análisis de una serie de tiempo deberemos
 decidir si éste se realizará para la serie en niveles o en diferencias.
 Por convención, decimos que la serie está en niveles si ésta se analiza
@@ -1060,7 +1101,7 @@ diferencia se hace sin aplicar logaritmos o aplicando logaritmos. Sin
 embargo, la convención es hacer un análisis en diferencias logarítmicas.</p>
 <p>Para decidir cómo analizar la serie de pasajeros en el metro de la CDMX
 en la Figura <a href="cap-estacionarios.html#fig:fig46">3.9</a> se muestra la gráfica de la serie en
-niveles (sin transformación logaritmica y con transformación
+niveles (sin transformación logarítmica y con transformación
 logarítmica) y en diferencias logarítmicas mensuales (es decir, con
 <span class="math inline">\(k = 1\)</span>).</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
@@ -1089,20 +1130,20 @@ logarítmica) y en diferencias logarítmicas mensuales (es decir, con
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Pax_Metro</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
-<span>     main <span class="op">=</span> <span class="st">"Pasajeros transportados (Millones) en el SCM"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Pasajeros transportados (Millones) en el Metro CDMX"</span>,</span>
 <span>     col <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Pax_LMetro</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
-<span>     main <span class="op">=</span> <span class="st">"LN Pasajeros transportados (Millones) en el SCM"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"LN Pasajeros transportados (Millones) en el Metro CDMX"</span>,</span>
 <span>     col <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Pax_DLMetro</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
-<span>     main <span class="op">=</span> <span class="st">"Diff LN Pasajeros transportados (Millones) en el SCM"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Diff LN Pasajeros transportados (Millones) en el Metro CDMX"</span>, </span>
 <span>     col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig46"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig46-1.png" alt="Pasajeros transportados (Millones) en el metro de la CDM en niveles y en diferencias logaritmicas" width="672"><p class="caption">
-Figura 3.9: Pasajeros transportados (Millones) en el metro de la CDM en niveles y en diferencias logaritmicas
+<img src="Notas-Series-Tiempo_files/figure-html/fig46-1.png" alt="Pasajeros transportados (Millones) en el Metro de la CDMX en niveles y en diferencias logarítmicas" width="672"><p class="caption">
+Figura 3.9: Pasajeros transportados (Millones) en el Metro de la CDMX en niveles y en diferencias logarítmicas
 </p>
 </div>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
@@ -1253,8 +1294,8 @@ intercept
 significativo y cumple con la restricción de ser en valor absoluto menor
 a 1, por lo que la solución asociada al proceso será convergente.
 También en ambos casos se reporta la estadística o Criterio de
-Información de Akaike (AIC, por sus siglas en inglés), misma que más
-adelante discutiremos su importancia y aplicación.</p>
+Información de Akaike (AIC, por sus siglas en inglés), cuya importancia y
+aplicación discutiremos más adelante.</p>
 </div>
 <div id="ar2" class="section level3" number="3.4.2">
 <h3>
@@ -1324,17 +1365,17 @@ asociada a cada uno de los casos en que exista un <span class="math inline">\(L^
 <span class="math inline">\(j \neq 0, 1\)</span>, y la cual siempre podremos resolver conociendo que las
 condiciones iniciales son: <span class="math inline">\(\psi_0 = 1\)</span> y <span class="math inline">\(\psi_1 = a_1\)</span>.</p>
 <p>Así, de las relaciones antes mencionadas y considerando que
-<span class="math inline">\(\alpha^{-1} (L)\)</span> aplicada a una constante como <span class="math inline">\(a_0\)</span>, tendrá como
-resultado otra constante. De esta forma podemos escribir que la solución
-del proceso AR(2) en la ecuación <a href="#eq:AR2Eq">(<strong>??</strong>)</a> será dada por una
-expresión como sigue: <span class="math display">\[\begin{equation}
+<span class="math inline">\(\alpha^{-1} (L)\)</span> aplicada a una constante como <span class="math inline">\(a_0\)</span> tendrá como
+resultado otra constante, podemos escribir la solución del proceso
+AR(2) de la ecuación <a href="#eq:AR2Eq">(<strong>??</strong>)</a> mediante una expresión como sigue:
+<span class="math display" id="eq:AR2EqSol">\[\begin{equation}
     X_t = \frac{a_0}{1 - a_1 - a_2} + \sum^{\infty}_{j = 0} \psi_j U_{t - j}
-    (\#eq:AR2EqSol)
+    \tag{3.11}
 \end{equation}\]</span></p>
 <p>Donde todos los parámetros <span class="math inline">\(\psi_i\)</span> están determinados por los
 parámetros <span class="math inline">\(a_0\)</span>, <span class="math inline">\(a_1\)</span> y <span class="math inline">\(a_2\)</span>. En particular, <span class="math inline">\(\psi_0 = 1\)</span> y
 <span class="math inline">\(\psi_1 = a_1\)</span>, como describimos anteriormente. Al igual que en el caso
-del <span class="math inline">\(AR(1)\)</span>, en la ecuación <a href="#eq:AR2EqSol">(<strong>??</strong>)</a> las condiciones de
+del <span class="math inline">\(AR(1)\)</span>, en la ecuación <a href="cap-estacionarios.html#eq:AR2EqSol">(3.11)</a> las condiciones de
 estabilidad estarán dadas por las soluciones del siguiente polinomio
 característico:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Note que las raíces son equivalentes al inverso de las del polinomio dado por &lt;span class="math inline"&gt;\(\lambda^2 a_2 - \lambda a_1 - 1 = 0\)&lt;/span&gt;.&lt;/p&gt;'><sup>5</sup></a>
 <span class="math display">\[\begin{equation}
@@ -1453,8 +1494,8 @@ en la Figura <a href="cap-estacionarios.html#fig:fig47">3.10</a>.</p>
 <span>     col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig47"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig47-1.png" alt="Pasajeros en vuelos de salidas nacionales en niveles y en diferencias logaritmicas" width="672"><p class="caption">
-Figura 3.10: Pasajeros en vuelos de salidas nacionales en niveles y en diferencias logaritmicas
+<img src="Notas-Series-Tiempo_files/figure-html/fig47-1.png" alt="Pasajeros en vuelos de salidas nacionales en niveles y en diferencias logarítmicas" width="672"><p class="caption">
+Figura 3.10: Pasajeros en vuelos de salidas nacionales en niveles y en diferencias logarítmicas
 </p>
 </div>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
@@ -1631,8 +1672,8 @@ las soluciones.</p>
 <span>               main<span class="op">=</span><span class="st">"Inverse AR roots of \nAR(2): Diff LN Pax Nal"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig48"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig48-1.png" alt="Inveso de las Raíces del polinomio característico" width="672"><p class="caption">
-Figura 3.11: Inveso de las Raíces del polinomio característico
+<img src="Notas-Series-Tiempo_files/figure-html/fig48-1.png" alt="Inverso de las Raíces del polinomio característico" width="672"><p class="caption">
+Figura 3.11: Inverso de las Raíces del polinomio característico
 </p>
 </div>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
@@ -1647,12 +1688,12 @@ Esta generalización es conocida como un proceso <span class="math inline">\(AR(
 descrito por la siguiente ecuación en diferencia estocástica:
 <span class="math display" id="eq:ARpEq">\[\begin{equation}
     X_t = a_0 + a_1 X_{t-1} + a_2 X_{t-2} + a_3 X_{t-3} + \ldots + a_p X_{t-p} + U_t
-    \tag{3.11}
+    \tag{3.12}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(a_p \neq 0\)</span>, y <span class="math inline">\(U_t\)</span> es un proceso puramente aleatorio con media
 cero (0), varianza constante (<span class="math inline">\(\sigma^2\)</span>) y covarianza cero (0). Usando
 el operador rezago, <span class="math inline">\(L^k\)</span>, para <span class="math inline">\(k = 0, 1, 2, \ldots, p\)</span>, obtenemos la
-siguiente expresión de la ecuación <a href="cap-estacionarios.html#eq:ARpEq">(3.11)</a>: <span class="math display">\[\begin{equation}
+siguiente expresión de la ecuación <a href="cap-estacionarios.html#eq:ARpEq">(3.12)</a>: <span class="math display">\[\begin{equation}
     (1 - a_1 L - a_2 L^2 - a_3 L^3 - \ldots - a_p L^p) X_t = a_0 + U_t
 \end{equation}\]</span></p>
 <p>Definamos el polinomio <span class="math inline">\(\alpha(L)\)</span> como: <span class="math display">\[\begin{equation}
@@ -1665,8 +1706,7 @@ ecuación característica: <span class="math display">\[\begin{equation}
     \lambda^p - a_1 \lambda^{p-1} - a_2 \lambda^{p-2} - a_3 \lambda^{p-3} - \ldots - a_p = 0
 \end{equation}\]</span></p>
 <p>Así, solo si el polinomio anterior tiene raíces cuyo valor absoluto sea
-menor a uno (<span class="math inline">\(|\lambda_i| &lt; 1\)</span>) y si
-<span class="math inline">\(1 - a_1 L - a_2 L^2 - a_3 L^3 - \ldots - a_p L^p &lt; 1\)</span> podremos decir
+menor a uno (<span class="math inline">\(|\lambda_i| &lt; 1\)</span>) podremos decir
 que el proceso es convergente y estable. Lo anterior significa que la
 ecuación <a href="#eq:PolA">(<strong>??</strong>)</a> puede expresarse en términos de la
 descomposición de Wold o como la suma infinita de términos como:
@@ -1681,10 +1721,10 @@ por: <span class="math display">\[\begin{equation}
     X_t = \frac{a_0}{1 - a_1  - a_2 - a_3  - \ldots - a_p} + \sum^{\infty}_{j = 0} \psi_j U_{t-j}
     (\#eq:ARpEqSol)
 \end{equation}\]</span></p>
-<p>Considerando la solución de la ecuación <a href="cap-estacionarios.html#eq:ARpEq">(3.11)</a> expresada en la
+<p>Considerando la solución de la ecuación <a href="cap-estacionarios.html#eq:ARpEq">(3.12)</a> expresada en la
 ecuación <a href="#eq:ARpEqSol">(<strong>??</strong>)</a> podemos determinar los momentos del proceso
 y que estarán dados por una media como: <span class="math display">\[\begin{equation}
-    \mathbb{E}[X_t] = \mu = \frac{a_o}{1 - a_1  - a_2 - a_3  - \ldots - a_p}
+    \mathbb{E}[X_t] = \mu = \frac{a_0}{1 - a_1  - a_2 - a_3  - \ldots - a_p}
 \end{equation}\]</span></p>
 <p>Lo anterior, considerado que <span class="math inline">\(\mathbb{E}[U_t] = 0\)</span>, para todo <span class="math inline">\(t\)</span>. Para
 determinar la varianza del proceso, sin pérdida de generalidad, podemos
@@ -1806,12 +1846,12 @@ del mes inmediato anterior).</p>
 <span>     col <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">DLPax_Int</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylab <span class="op">=</span> <span class="st">"DLN Pasajeros"</span>,</span>
-<span>     main <span class="op">=</span> <span class="st">"Diff LN Pasajeros en vuelos internacionales de salia"</span>, </span>
+<span>     main <span class="op">=</span> <span class="st">"Diff LN Pasajeros en vuelos internacionales de salida"</span>, </span>
 <span>     col <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig49"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig49-1.png" alt="Pasajeros en vuelos internacionales de salida en niveles y en diferencias logaritmicas" width="672"><p class="caption">
-Figura 3.12: Pasajeros en vuelos internacionales de salida en niveles y en diferencias logaritmicas
+<img src="Notas-Series-Tiempo_files/figure-html/fig49-1.png" alt="Pasajeros en vuelos internacionales de salida en niveles y en diferencias logarítmicas" width="672"><p class="caption">
+Figura 3.12: Pasajeros en vuelos internacionales de salida en niveles y en diferencias logarítmicas
 </p>
 </div>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
@@ -1940,16 +1980,16 @@ solución convergente y estable.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">arroots</span><span class="op">(</span><span class="va">AR_LPax_Nal</span><span class="op">)</span>, </span>
-<span>               main<span class="op">=</span><span class="st">"Inverse AR roots of \nAR(2): LN Pax Int"</span><span class="op">)</span></span>
+<span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">arroots</span><span class="op">(</span><span class="va">AR_LPax_Int</span><span class="op">)</span>,</span>
+<span>               main<span class="op">=</span><span class="st">"Inverse AR roots of \nAR(4): LN Pax Int"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#</span></span>
-<span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">arroots</span><span class="op">(</span><span class="va">AR_DLPax_Nal</span><span class="op">)</span>, </span>
-<span>               main<span class="op">=</span><span class="st">"Inverse AR roots of \nAR(2): Diff LN Pax Int"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">arroots</span><span class="op">(</span><span class="va">AR_DLPax_Int</span><span class="op">)</span>,</span>
+<span>               main<span class="op">=</span><span class="st">"Inverse AR roots of \nAR(4): Diff LN Pax Int"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig410"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig410-1.png" alt="Inveso de las Raíces del polinomio característico" width="672"><p class="caption">
-Figura 3.13: Inveso de las Raíces del polinomio característico
+<img src="Notas-Series-Tiempo_files/figure-html/fig410-1.png" alt="Inverso de las Raíces del polinomio característico" width="672"><p class="caption">
+Figura 3.13: Inverso de las Raíces del polinomio característico
 </p>
 </div>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
@@ -2001,10 +2041,10 @@ un proceso <span class="math inline">\(MA(1)\)</span>. En el caso de la media, o
     &amp;   &amp; + b_1^2 U_{t - 1} U_{t + \tau - 1}] \nonumber \\
     &amp; = &amp; \mathbb{E}[U_t U_{t + \tau}] - b_1 \mathbb{E}[U_t U_{t + \tau - 1}] \nonumber \\
     &amp;   &amp; - b_1 \mathbb{E}[U_{t - 1} U_{t + \tau}] + b_1^2 \mathbb{E}[U_{t - 1} U_{t + \tau - 1}]
-    \tag{3.12}
+    \tag{3.13}
 \end{eqnarray}\]</span></p>
 <p>Si hacemos sustituciones de diferentes valores de <span class="math inline">\(\tau\)</span> en la ecuación
-<a href="cap-estacionarios.html#eq:MA1Cov">(3.12)</a> notaremos que la covarianza será distinta de cero
+<a href="cap-estacionarios.html#eq:MA1Cov">(3.13)</a> notaremos que la covarianza será distinta de cero
 únicamente para el caso de <span class="math inline">\(\tau = 1, -1\)</span>. En ambos casos tendremos como
 resultado: <span class="math display">\[\begin{eqnarray}
     \mathbb{E}[(x_t - \mu)(x_{t + 1} - \mu)] &amp; = &amp; \mathbb{E}[(x_t - \mu)(x_{t - 1} - \mu)] \nonumber \\
@@ -2024,7 +2064,7 @@ expresar como: <span class="math display">\[\begin{eqnarray}
     &amp; = &amp; - \frac{\mu}{1 - b_1} + X_t + b_1 X_{t-1} + b_1^2 X_{t-2} + \ldots \nonumber
 \end{eqnarray}\]</span></p>
 <p>Donde la condición para que se cumpla esta ecuación es que <span class="math inline">\(|b_1| &lt; 1\)</span>. La manera de interpretar esta condición es como una condición
-de estabilidad de la solución y cómo una condición de invertibilidad.
+de estabilidad de la solución y como una condición de invertibilidad.
 Notemos que un <span class="math inline">\(MA(1)\)</span> (y en general un <span class="math inline">\(MA(q)\)</span>) es equivalente a un
 <span class="math inline">\(AR(\infty)\)</span>, es decir, cuando se invierte un MA se genera un AR con
 infinitos rezagos.</p>
@@ -2049,10 +2089,10 @@ rezago. Así, tendremos el proceso de <span class="math inline">\(MA(q)\)</span>
 \end{eqnarray}\]</span></p>
 <p>Donde <span class="math inline">\(U_t\)</span> es un proceso puramente aleatorio con <span class="math inline">\(\mathbb{E}[U_t] = 0\)</span>,
 <span class="math inline">\(Var[U_t] = \mathbb{E}[U_t^2] = \sigma^2\)</span> y
-<span class="math inline">\(Cov[U_t, U_s] = \mathbb{E}[U_t, U_s] = 0\)</span>, y
+<span class="math inline">\(Cov[U_t, U_s] = \mathbb{E}[U_t U_s] = 0\)</span>, y
 <span class="math inline">\(\beta(L) = 1 - b_1 L - b_2 L^2 - \ldots - b_q L^q\)</span> es un polinomio del
 operador rezago <span class="math inline">\(L\)</span>. La ecuación <a href="#eq:MAqRed">(<strong>??</strong>)</a> puede ser interpretada
-como un proceso <span class="math inline">\(AR(q)\)</span> sobre la serie <span class="math inline">\(U_t\)</span>.</p>
+como un polinomio de rezagos de orden <span class="math inline">\(q\)</span> aplicado a la serie <span class="math inline">\(U_t\)</span>.</p>
 <p>Ahora determinemos los momentos de un proceso <span class="math inline">\(MA(q)\)</span>: <span class="math display">\[\begin{eqnarray}
     \mathbb{E}[X_t] &amp; = &amp; \mathbb{E}[\mu + U_t - b_1 U_{t-1} - b_2 U_{t-2} - \ldots - b_q U_{t-q}] \nonumber \\
     &amp; = &amp; \mu + \mathbb{E}[U_t] - b_1 \mathbb{E}[U_{t-1}] - b_2 \mathbb{E}[U_{t-2}] - \ldots - b_q \mathbb{E}[U_{t-q}] \nonumber \\
@@ -2082,7 +2122,7 @@ del <span class="math inline">\(AR(p)\)</span>, construir una expresión general
     \tau = 1 &amp; : &amp; \gamma(1) = (- b_1 + b_1 b_2 + \ldots + b_{q-1} b_q) \sigma^2 \nonumber \\
     \tau = 2 &amp; : &amp; \gamma(2) = (- b_2 + b_1 b_3 + \ldots + b_{q-2} b_q) \sigma^2 \nonumber \\
     &amp; \vdots &amp; \nonumber \\
-    \tau = q &amp; : &amp; \gamma(q) = b_q \sigma^2 \nonumber
+    \tau = q &amp; : &amp; \gamma(q) = - b_q \sigma^2 \nonumber
 \end{eqnarray}\]</span></p>
 <p>Donde <span class="math inline">\(\gamma(\tau) = 0\)</span> para todo <span class="math inline">\(\tau &gt; q\)</span>. Es decir, todas las
 autocovarianzas y autocorrelaciones con órdenes superiores a <span class="math inline">\(q\)</span> son
@@ -2094,20 +2134,22 @@ significativa.</p>
 para la ecuación <a href="#eq:MAqEQ">(<strong>??</strong>)</a>, tenemos que dicha solución estará dada
 por un <span class="math inline">\(AR(\infty)\)</span> en términos de <span class="math inline">\(U_t\)</span>: <span class="math display">\[\begin{eqnarray}
     U_t &amp; = &amp; - \frac{\mu}{1 - b_1 - b_2 - \ldots - b_q} + \beta(L)^{-1} X_t \nonumber \\
-    &amp;   &amp; - \frac{\mu}{1 - b_1 - b_2 - \ldots - b_q} + \sum_{j = 0}^{\infty} c_j X_{t-j}
+    &amp; = &amp; - \frac{\mu}{1 - b_1 - b_2 - \ldots - b_q} + \sum_{j = 0}^{\infty} c_j X_{t-j}
     (\#eq:MAqEQSol)
 \end{eqnarray}\]</span></p>
 <p>Donde se cumple que:
 <span class="math inline">\(1 = (1 - b_1 L^1 - b_2 L^2 - \ldots - b_q L^q)(1 - c_1 L - c_2 L^2 - \ldots)\)</span>
 y los coeficientes <span class="math inline">\(c_j\)</span> se pueden determinar por un método de
 coeficientes indeterminados y en términos de los valores <span class="math inline">\(b_i\)</span>. De igual
-forma que en el caso de la ecuación <a href="cap-estacionarios.html#eq:ARpEq">(3.11)</a>, en la ecuación
+forma que en el caso de la ecuación <a href="cap-estacionarios.html#eq:ARpEq">(3.12)</a>, en la ecuación
 <a href="#eq:MAqEQSol">(<strong>??</strong>)</a> se deben cumplir condiciones de estabilidad asociadas
 con las raíces del polinomio característico dado por: <span class="math display">\[\begin{equation}
     1 - b_1 x - b_2 x^2 - \ldots b_q x^q = 0
 \end{equation}\]</span></p>
-<p>El cual debe cumplir que <span class="math inline">\(|x_i| &lt; 1\)</span> y que
-<span class="math inline">\(1 - b_1 - b_2 - \ldots b_q &lt; 1\)</span>.</p>
+<p>El cual debe cumplir que todas sus raíces se ubiquen fuera del círculo
+unitario (<span class="math inline">\(|x_i| &gt; 1\)</span>) o, equivalentemente, que las raíces del polinomio
+<span class="math inline">\(\lambda^q - b_1 \lambda^{q-1} - \ldots - b_q = 0\)</span> cumplan
+<span class="math inline">\(|\lambda_i| &lt; 1\)</span> –la condición de invertibilidad del proceso–.</p>
 <p><strong>Ejemplo</strong>. Ahora veamos un ejemplo del proceso <span class="math inline">\(MA(q)\)</span>, para lo cual
 retomaremos la serie de Pasajeros transportados en el metro de la CDMX
 (<span class="math inline">\(PaxMetro\)</span>). Estimaremos el <span class="math inline">\(MA(q)\)</span> mediante el método de máxima
@@ -2282,8 +2324,8 @@ D_Oct2017_MA
 </tbody>
 </table></div>
 <p>Entre paréntesis se reportan los errores estándar y el criterio de
-Akaike (AIC). Finalmente, podemos determinar si la solución serán
-convergente, para ello en la Figura <a href="cap-estacionarios.html#fig:fig411">3.14</a> mostramos las
+Akaike (AIC). Finalmente, podemos determinar si la solución será
+convergente; para ello en la Figura <a href="cap-estacionarios.html#fig:fig411">3.14</a> mostramos las
 raíces asociadas a cada uno de los polinomios. De la inspección visual,
 podemos concluir que ambas propuestas de MA(4) representan una solución
 convergente y estable.</p>
@@ -2336,14 +2378,14 @@ convergente y estable.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">maroots</span><span class="op">(</span><span class="va">MA_LPax_Metro</span><span class="op">)</span>, </span>
-<span>               main<span class="op">=</span><span class="st">"Inverse MA roots of \nMA(p): LN PAx Metro"</span><span class="op">)</span></span>
+<span>               main<span class="op">=</span><span class="st">"Inverse MA roots of \nMA(4): LN Pax Metro"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">maroots</span><span class="op">(</span><span class="va">MA_LPax_Metro_2</span><span class="op">)</span>, </span>
-<span>               main<span class="op">=</span><span class="st">"Inverse MA roots of \nMA(p): LN PAx Metro con Dummy"</span><span class="op">)</span></span></code></pre></div>
+<span>               main<span class="op">=</span><span class="st">"Inverse MA roots of \nMA(4): LN Pax Metro con Dummy"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig411"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig411-1.png" alt="Inveso de las Raíces del polinomio característico" width="672"><p class="caption">
-Figura 3.14: Inveso de las Raíces del polinomio característico
+<img src="Notas-Series-Tiempo_files/figure-html/fig411-1.png" alt="Inverso de las Raíces del polinomio característico" width="672"><p class="caption">
+Figura 3.14: Inverso de las Raíces del polinomio característico
 </p>
 </div>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
@@ -2355,13 +2397,13 @@ Figura 3.14: Inveso de las Raíces del polinomio característico
 <span class="header-section-number">3.6</span> Procesos ARMA(p, q) y ARIMA(p, d, q)<a class="anchor" aria-label="anchor" href="#procesos-armap-q-y-arimap-d-q"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hemos establecido algunas relaciones de los procesos AR y los procesos
-MA, es decir, cómo un <span class="math inline">\(MA(q)\)</span> de la serie <span class="math inline">\(X_t\)</span> puede ser reexpresada
-como un <span class="math inline">\(AR(\infty)\)</span> de la serie <span class="math inline">\(U_t\)</span>, y viceversa un <span class="math inline">\(AR(p)\)</span> de la
-serie <span class="math inline">\(X_t\)</span> puede ser reexpresada como un <span class="math inline">\(MA(\infty)\)</span>.</p>
+MA, es decir, cómo un <span class="math inline">\(MA(q)\)</span> de la serie <span class="math inline">\(X_t\)</span> puede ser reexpresado
+como un <span class="math inline">\(AR(\infty)\)</span> de la serie <span class="math inline">\(U_t\)</span> y, viceversa, un <span class="math inline">\(AR(p)\)</span> de la
+serie <span class="math inline">\(X_t\)</span> puede ser reexpresado como un <span class="math inline">\(MA(\infty)\)</span>.</p>
 <p>En este sentido, para cerrar esta sección veamos el caso de la
 especificación que conjunta ambos modelos en un modelo general conocido
 como <span class="math inline">\(ARMA(p, q)\)</span> o <span class="math inline">\(ARIMA(p, d, q)\)</span>. La diferencia entre el primero y
-el segundo es las veces que se tuvo que diferenciar la serie analizada,
+el segundo es el número de veces que se tuvo que diferenciar la serie analizada,
 registro que se lleva en el índice <span class="math inline">\(d\)</span> de los parámetros dentro del
 concepto <span class="math inline">\(ARIMA(p, d, q)\)</span>. No obstante, en general nos referiremos al
 modelo como <span class="math inline">\(ARMA(p, q)\)</span> y dependerá del analista si modela la serie en
@@ -2396,7 +2438,7 @@ descomposición de Wold a partir del componente de la ecuación
     \frac{1 - b_1 L}{1 - a_1 L} = \psi_0 + \psi_1 L + \psi_2 L^2 + \psi_3 L^3 + \ldots
     (\#eq:ARMA11EqWold)
 \end{equation}\]</span></p>
-<p>Está ecuación es equivalente a la expresión: <span class="math display">\[\begin{eqnarray}
+<p>Esta ecuación es equivalente a la expresión: <span class="math display">\[\begin{eqnarray}
     (1 - b_1 L) &amp; = &amp; (1 - a_1 L)(\psi_0 + \psi_1 L + \psi_2 L^2 + \psi_3 L^3 + \ldots) \nonumber \\
     &amp; = &amp; \psi_0 + \psi_1 L + \psi_2 L^2 + \psi_3 L^3 + \ldots \nonumber \\
     &amp;   &amp; - a_1 \psi_0 L - a_1 \psi_1 L^2 - a_1 \psi_2 L^3 - a_1 \psi_3 L^4 - \ldots \nonumber
@@ -2442,8 +2484,8 @@ tendremos: <span class="math display">\[\begin{eqnarray}
 el caso de <span class="math inline">\(\tau = 0\)</span>: <span class="math display">\[\begin{eqnarray}
     \mathbb{E}[X_{t} X_t] &amp; = &amp; \gamma(0) \nonumber \\
     &amp; = &amp; a_1 \gamma(1) + \mathbb{E}[U_t X_t] - b_1 \mathbb{E}[X_t U_{t-1}] \nonumber \\
-    &amp; = &amp; a_1 \gamma(1) + \sigma^2 + b_1 \mathbb{E}[U_{t-1} (a_1 X_{t-1} + U_t - b_1 U_{t-1})] \nonumber \\
-    &amp; = &amp; a_1 \gamma(1) + \sigma^2 - b_1 a_1 \sigma^2 + b_1 \sigma^2 \nonumber \\
+    &amp; = &amp; a_1 \gamma(1) + \sigma^2 - b_1 \mathbb{E}[U_{t-1} (a_1 X_{t-1} + U_t - b_1 U_{t-1})] \nonumber \\
+    &amp; = &amp; a_1 \gamma(1) + \sigma^2 - b_1 a_1 \sigma^2 + b_1^2 \sigma^2 \nonumber \\
     &amp; = &amp; a_1 \gamma(1) + (1 - b_1 (a_1 - b_1)) \sigma^2
 \end{eqnarray}\]</span></p>
 <p>Para el caso en que <span class="math inline">\(\tau = 1\)</span>: <span class="math display">\[\begin{eqnarray}
@@ -2476,13 +2518,13 @@ valores que tome <span class="math inline">\(a_1\)</span> y <span class="math in
 <span class="math display" id="eq:ARMApqEq">\[\begin{eqnarray}
     X_t &amp; = &amp; \delta + a_1 X_{t - 1} + a_2 X_{t - 2} + \ldots + a_p X_{t - p} \nonumber \\
     &amp;   &amp; + U_t - b_1 U_{t - 1} - b_2  U_{t - 2} - \ldots - b_q  U_{t - q}
-    \tag{3.13}
+    \tag{3.14}
 \end{eqnarray}\]</span></p>
 <p>Donde <span class="math inline">\(U_t\)</span> es un proceso puramente aleatorio, y <span class="math inline">\(X_t\)</span> puede ser
 modelada en niveles o en diferencias (ya sea en logaritmos o sin
 transformación logarítmica).</p>
 <p>Mediante el uso del operador rezago se puede escribir la ecuación
-<a href="cap-estacionarios.html#eq:ARMApqEq">(3.13)</a> como: <span class="math display">\[\begin{equation}
+<a href="cap-estacionarios.html#eq:ARMApqEq">(3.14)</a> como: <span class="math display">\[\begin{equation}
     (1 - a_1 L - a_2 L^2 - \ldots - a_p L^p) X_t = \delta + (1 - b_1 L - b_2 L^2 - \ldots - b_q L^q) U_t
     (\#eq:ARMApqEqLag)
 \end{equation}\]</span></p>
@@ -2493,7 +2535,7 @@ reescribir la ecuación <a href="#eq:ARMApqEqLag">(<strong>??</strong>)</a> como
     \alpha(L) X_t = \delta + \beta(L) U_t
 \end{equation}\]</span></p>
 <p>Asumiendo que existe el polinomio inverso tal que:
-<span class="math inline">\(\alpha(L)^{-1}\alpha(L) = 1\)</span>.La solución entonces puede ser escrita
+<span class="math inline">\(\alpha(L)^{-1}\alpha(L) = 1\)</span>. La solución entonces puede ser escrita
 como: <span class="math display">\[\begin{eqnarray}
     X_t &amp; = &amp; \alpha(L)^{-1} \delta + \alpha(L)^{-1} \beta(L) U_t \nonumber \\
     &amp; = &amp; \frac{\delta}{1 - a_1 - a_2 - \ldots - a_p} + \frac{\beta(L)}{\alpha(L)} U_t \nonumber \\
@@ -2503,8 +2545,10 @@ como: <span class="math display">\[\begin{eqnarray}
 <p>Donde la ecuación <a href="#eq:ARMApqWold">(<strong>??</strong>)</a> nos permite interpretar que un
 ARMA(p, q) se puede reexpresar e interpretar como un <span class="math inline">\(MA(\infty)\)</span> y
 donde las condiciones para la estabilidad de la solución y la
-invertibilidad son que las raíces de los polinomios característicos
-<span class="math inline">\(\alpha(L)\)</span> y <span class="math inline">\(\beta(L)\)</span> son en valor absoluto menores a 1.</p>
+invertibilidad son que las raíces de las ecuaciones características
+asociadas a <span class="math inline">\(\alpha(L)\)</span> y <span class="math inline">\(\beta(L)\)</span> sean, en valor absoluto, menores
+a 1 –equivalentemente, que las raíces de los polinomios en <span class="math inline">\(L\)</span> se
+ubiquen fuera del círculo unitario–.</p>
 <p>Adicionalmente, la fracción en la ecuación <a href="#eq:ARMApqWold">(<strong>??</strong>)</a> se puede
 descomponer como en la forma de Wold: <span class="math display">\[\begin{equation}
     \frac{\beta(L)}{\alpha(L)} = 1 + \psi_1 L + \psi_2 L^2 + \ldots
@@ -2706,18 +2750,30 @@ solución convergente y estable. Por su parte, la Figura
 <a href="cap-estacionarios.html#fig:fig413">3.16</a> muestra los residuales de la estimación del
 <span class="math inline">\(ARMA(1, 1)\)</span>.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_Roots_ARMA11.png"</span><span class="op">)</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"maroots.R"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">arroots</span><span class="op">(</span><span class="va">ARMA_DLPax_Nal</span><span class="op">)</span>,</span>
+<span>               main<span class="op">=</span><span class="st">"Inverse AR roots of \nARMA(1,1): Diff LN Pax Nal"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plot.armaroots</span><span class="op">(</span><span class="fu">maroots</span><span class="op">(</span><span class="va">ARMA_DLPax_Nal</span><span class="op">)</span>,</span>
+<span>               main<span class="op">=</span><span class="st">"Inverse MA roots of \nARMA(1,1): Diff LN Pax Nal"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig412"></span>
-<img src="Plots/G_Roots_ARMA11.png" alt="Inveso de las Raíces del polinomio característico de un ARMA(1,1)" width="95%"><p class="caption">
-Figura 3.15: Inveso de las Raíces del polinomio característico de un ARMA(1,1)
+<img src="Notas-Series-Tiempo_files/figure-html/fig412-1.png" alt="Inverso de las Raíces de los polinomios característicos de un ARMA(1,1)" width="672"><p class="caption">
+Figura 3.15: Inverso de las Raíces de los polinomios característicos de un ARMA(1,1)
 </p>
 </div>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_Residuals_ARMA11.png"</span><span class="op">)</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">ARMA_DLPax_Nal</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Residuales"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Residuales del ARMA(1,1) de Diff LN Pax Nal"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig413"></span>
-<img src="Plots/G_Residuals_ARMA11.png" alt="Residuales de un $ARMA(1, 1)$ de la serie $DLPaxNal_t$" width="95%"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig413-1.png" alt="Residuales de un $ARMA(1, 1)$ de la serie $DLPaxNal_t$" width="672"><p class="caption">
 Figura 3.16: Residuales de un <span class="math inline">\(ARMA(1, 1)\)</span> de la serie <span class="math inline">\(DLPaxNal_t\)</span>
 </p>
 </div>
@@ -2751,7 +2807,7 @@ puede responder a este planteamiento como: <span class="math display">\[\begin{e
 son los coeficientes de la autocorrelación parcial (considerando un
 proceso AR(k)). Observemos que la autocorrelación parcial mide la
 correlación entre <span class="math inline">\(X_t\)</span> y <span class="math inline">\(X_{t-k}\)</span> que se mantiene cuando el efecto de
-las variables <span class="math inline">\(X_{t-1}\)</span>, <span class="math inline">\(X_{t-2}\)</span>, <span class="math inline">\(\ldots\)</span> y <span class="math inline">\(X_{t-k-1}\)</span> en <span class="math inline">\(X_{t}\)</span> y
+las variables <span class="math inline">\(X_{t-1}\)</span>, <span class="math inline">\(X_{t-2}\)</span>, <span class="math inline">\(\ldots\)</span> y <span class="math inline">\(X_{t-(k-1)}\)</span> en <span class="math inline">\(X_{t}\)</span> y
 <span class="math inline">\(X_{t-k}\)</span> ha sido eliminado.</p>
 <p>Dada la expresión considerada en la ecuación <a href="#eq:PACFEq">(<strong>??</strong>)</a>, podemos
 resolver el problema de establecer el valor de cada <span class="math inline">\(\phi_{ki}\)</span> mediante
@@ -2816,13 +2872,15 @@ de Autocorrelación Parcial de una serie <span class="math inline">\(X_t\)</span
 <tbody>
 <tr class="odd">
 <td align="center">MA(q)</td>
-<td align="center">Rompimientos en la función</td>
-<td align="center">No hay rompimientos</td>
+<td align="center">Se corta después del rezago <span class="math inline">\(q\)</span>
+</td>
+<td align="center">Decae gradualmente</td>
 </tr>
 <tr class="even">
 <td align="center">AR(p)</td>
-<td align="center">No hay rompimientos</td>
-<td align="center">Rompimientos en la función</td>
+<td align="center">Decae gradualmente</td>
+<td align="center">Se corta después del rezago <span class="math inline">\(p\)</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -2835,14 +2893,24 @@ comportamiento de ambas funciones, resulta complicado determinar cuál
 sería un buen número de parámetros <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span> a considerar en el
 <span class="math inline">\(ARMA(p,q)\)</span>. Por esta razón, a continuación, plantearemos algunas
 pruebas más formales para determinar dichos parámetros.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_ACF_PACF.png"</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">DLPax_Nal</span><span class="op">)</span>, lag.max <span class="op">=</span> <span class="fl">48</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="st">"Rezagos k en meses"</span>,</span>
+<span>    main <span class="op">=</span> <span class="st">"Función de Autocorrelación de Diff LN Pax Nal"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">pacf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">DLPax_Nal</span><span class="op">)</span>, lag.max <span class="op">=</span> <span class="fl">48</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Rezagos k en meses"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Función de Autocorrelación Parcial de Diff LN Pax Nal"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig414"></span>
-<img src="Plots/G_ACF_PACF.png" alt="Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $DLPaxNal_t$" width="95%"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig414-1.png" alt="Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie $DLPaxNal_t$" width="672"><p class="caption">
 Figura 3.17: Función de Autocorrelación y la Función de Autocorrelación Parcial de una serie <span class="math inline">\(DLPaxNal_t\)</span>
 </p>
 </div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="selección-de-las-constantes-p-q-d-en-un-arp-un-maq-un-armap-q-o-un-arimap-d-q" class="section level2" number="3.8">
 <h2>
@@ -2855,12 +2923,12 @@ incluyen variables exógenas– existen diversas formas de estimar los
 parámetros <span class="math inline">\(a_i\)</span> y <span class="math inline">\(b_i\)</span>: i) por máxima verosimilitud y ii) por mínimos
 cuadrados ordinarios. El primer caso requiere que conozcamos la
 distribución del proceso aleatorio <span class="math inline">\(U_t\)</span>. El segundo, por el contrario,
-no requiere el mismo supuesto. No obstante, para el curso utilizaremos
+no requiere el mismo supuesto. No obstante, en estas notas utilizaremos
 el método de máxima verosimilitud.</p>
 <p>Otra duda que debe quedar hasta el momento es ¿cómo determinar el orden
 <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span> del proceso ARMA(p, q)? La manera más convencional y formal
 que existe para tal efecto es utilizar los criterios de información.
-Así, el orden se elige de acuerdo a aquel criterio de información que
+Así, el orden se elige de acuerdo con aquel criterio de información que
 resulta ser el mínimo. En el caso de <span class="math inline">\(d\)</span> se selecciona revisando la
 gráfica que parezca más estacionaria–más adelante mostraremos un
 proceso más formal para su selección.</p>
@@ -2886,7 +2954,7 @@ vista es que los criterios de información cumplen la siguiente relación:
 <span class="math display">\[\begin{equation}
     orden(SC) \leq orden(HQ) \leq orden(AIC)
 \end{equation}\]</span></p>
-<p>Por esta razón, durante el curso solo utilizaremos el criterio de Akaike
+<p>Por esta razón, en estas notas solo utilizaremos el criterio de Akaike
 para determinar el orden óptimo del proceso ARMA, ya que ello garantiza
 el orden más grande posible.</p>
 <p><strong>Ejemplo</strong>. Ahora veamos un ejemplo de estimación del número de rezagos
@@ -2907,7 +2975,7 @@ combinación de procesos <span class="math inline">\(ARMA(p, q)\)</span>. La for
 modelo que reporta el criterio de Akaike menor. En la cuarta columna de
 la tabla se señala el valor del criterio de información que resulta ser
 el mínimo de todos los posibles.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">xreg_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">D_Ene_Nal</span>, <span class="va">D_Feb_Nal</span>, <span class="va">D_Jul_Nal</span>, <span class="va">D_Dic_Nal</span><span class="op">)</span></span>
 <span><span class="va">ciarma_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="fl">36</span><span class="op">)</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">0L</span></span>
@@ -2925,6 +2993,8 @@ el mínimo de todos los posibles.</p>
 <span><span class="op">}</span></span>
 <span><span class="va">df_ciarma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">ciarma_rows</span><span class="op">)</span></span>
 <span><span class="va">opt_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">df_ciarma</span><span class="op">$</span><span class="va">AIC</span><span class="op">)</span></span>
+<span><span class="va">opt_p</span> <span class="op">&lt;-</span> <span class="va">df_ciarma</span><span class="op">$</span><span class="va">AR</span><span class="op">[</span><span class="va">opt_idx</span><span class="op">]</span></span>
+<span><span class="va">opt_q</span> <span class="op">&lt;-</span> <span class="va">df_ciarma</span><span class="op">$</span><span class="va">MA</span><span class="op">[</span><span class="va">opt_idx</span><span class="op">]</span></span>
 <span><span class="va">df_ciarma</span><span class="op">$</span><span class="va">Optimo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_ciarma</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="va">opt_idx</span>, <span class="st">"*"</span>, <span class="st">""</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df_ciarma</span>,</span>
 <span>             col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Modelo"</span>, <span class="st">"$AR(p)$"</span>, <span class="st">"$MA(q)$"</span>, <span class="st">"Akaike (AIC)"</span>, <span class="st">"Óptimo"</span><span class="op">)</span>,</span>
@@ -3533,46 +3603,47 @@ Akaike (AIC)
 </table></div>
 <p>El cuadro anterior reporta un resumen de los resultados para 36
 diferentes modelos, todos incluyen variables exógenas. Como resultado
-del análisis concluimos que el modelo más adecuado es el 24, el cual
-considera un <span class="math inline">\(ARMA(4, 6)\)</span>, con variables dummies para controlar la
-estacionalidad de los meses de enero, febrero, julio y diciembre. Más
-adelante mostramos los resultados del modelo.</p>
+del análisis concluimos que el modelo más adecuado es el
+16, el cual considera un <span class="math inline">\(ARMA(3, 4)\)</span>, con
+variables dummies para controlar la estacionalidad de los meses de
+enero, febrero, julio y diciembre. Más adelante mostramos los
+resultados del modelo.</p>
 <p>No obstante, una inspección de los residuales del modelo nos permite
 sospechar que requiere de incluir un par de dummies más. Ambas,
 asociadas con la caída del transporte aéreo en 2009, principalmente
 asociadas con la crisis mundial de ese año. La Figura <a href="cap-estacionarios.html#fig:fig415">3.18</a>
 muestra los residuales mencionados.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_Residuals_ARMA46.png"</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">DLPax_Nal</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">opt_p</span>, <span class="fl">0</span>, <span class="va">opt_q</span><span class="op">)</span>,</span>
+<span>              xreg <span class="op">=</span> <span class="va">xreg_base</span>, method <span class="op">=</span> <span class="st">"ML"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkred"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Residuales"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>,</span>
+<span>     main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Residuales del ARMA("</span>, <span class="va">opt_p</span>, <span class="st">","</span>, <span class="va">opt_q</span>,</span>
+<span>                   <span class="st">") de Diff LN Pax Nal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig415"></span>
-<img src="Plots/G_Residuals_ARMA46.png" alt="Residuales del ARMA(4, 6) de una serie $DLPaxNal_t$" width="95%"><p class="caption">
-Figura 3.18: Residuales del ARMA(4, 6) de una serie <span class="math inline">\(DLPaxNal_t\)</span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig415-1.png" alt="Residuales del ARMA(3, 4) de una serie $DLPaxNal_t$" width="672"><p class="caption">
+Figura 3.18: Residuales del ARMA(3, 4) de una serie <span class="math inline">\(DLPaxNal_t\)</span>
 </p>
 </div>
-<p>Una vez incluidas dos dummies más para mayo y junio de 2009, analizamos
-un total de 36 modelos ARMA y determinamos que el orden que minimiza el
-criterio de Akaike es un <span class="math inline">\(ARMA(4, 6)\)</span>. El siguiente cuadro muestra los
-resultados para este nuevo modelo. No lo mostramos en esta sección, pero
-ambos modelos reportados tienen raíces de sus respectivos polinomios
-característicos menores a 1 en valor absoluto. En la Figura
-<a href="cap-estacionarios.html#fig:fig416">3.19</a> mostramos los residuales ahora ajustados por las
-dummies de mayo y junio de 2009.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<p>Una vez incluidas dos dummies más para mayo y junio de 2009,
+reestimamos el modelo con el orden óptimo antes seleccionado. El
+siguiente cuadro muestra los resultados de ambas especificaciones. No lo
+mostramos en esta sección, pero ambos modelos reportados tienen raíces
+de sus respectivos polinomios característicos menores a 1 en valor
+absoluto. En la Figura <a href="cap-estacionarios.html#fig:fig416">3.19</a> mostramos los residuales ahora
+ajustados por las dummies de mayo y junio de 2009.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_idx_nal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/time.html">time</a></span><span class="op">(</span><span class="va">DLPax_Nal</span><span class="op">)</span></span>
 <span><span class="va">D_May2009</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t_idx_nal</span> <span class="op">-</span> <span class="op">(</span><span class="fl">2009</span> <span class="op">+</span> <span class="fl">4</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="va">D_Jun2009</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t_idx_nal</span> <span class="op">-</span> <span class="op">(</span><span class="fl">2009</span> <span class="op">+</span> <span class="fl">5</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">DLPax_Nal</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">6</span><span class="op">)</span>,</span>
-<span>              xreg <span class="op">=</span> <span class="va">xreg_base</span>, method <span class="op">=</span> <span class="st">"ML"</span><span class="op">)</span></span>
-<span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">DLPax_Nal</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">0</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">DLPax_Nal</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">opt_p</span>, <span class="fl">0</span>, <span class="va">opt_q</span><span class="op">)</span>,</span>
 <span>              xreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">xreg_base</span>, <span class="va">D_May2009</span>, <span class="va">D_Jun2009</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"ML"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">lbl_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>ar1<span class="op">=</span><span class="st">"$DLPaxNal_{t-1}$"</span>, ar2<span class="op">=</span><span class="st">"$DLPaxNal_{t-2}$"</span>,</span>
-<span>             ar3<span class="op">=</span><span class="st">"$DLPaxNal_{t-3}$"</span>, ar4<span class="op">=</span><span class="st">"$DLPaxNal_{t-4}$"</span>,</span>
-<span>             ma1<span class="op">=</span><span class="st">"$\\hat{U}_{t-1}$"</span>,  ma2<span class="op">=</span><span class="st">"$\\hat{U}_{t-2}$"</span>,</span>
-<span>             ma3<span class="op">=</span><span class="st">"$\\hat{U}_{t-3}$"</span>,  ma4<span class="op">=</span><span class="st">"$\\hat{U}_{t-4}$"</span>,</span>
-<span>             ma5<span class="op">=</span><span class="st">"$\\hat{U}_{t-5}$"</span>,  ma6<span class="op">=</span><span class="st">"$\\hat{U}_{t-6}$"</span>,</span>
+<span><span class="va">lbl_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"$DLPaxNal_{t-"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="st">"}$"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ar"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"$\\hat{U}_{t-"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="st">"}$"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ma"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>             D_Ene_Nal<span class="op">=</span><span class="st">"$DEne_{t}$"</span>, D_Feb_Nal<span class="op">=</span><span class="st">"$DFeb_{t}$"</span>,</span>
 <span>             D_Jul_Nal<span class="op">=</span><span class="st">"$DJul_{t}$"</span>, D_Dic_Nal<span class="op">=</span><span class="st">"$DDic_{t}$"</span>,</span>
 <span>             intercept<span class="op">=</span><span class="st">"Constante"</span>,</span>
@@ -3626,16 +3697,16 @@ SE M2
 <span class="math inline">\(DLPaxNal_{t-1}\)</span>
 </td>
 <td style="text-align:right;">
--0.0689
+-1.0196
 </td>
 <td style="text-align:right;">
-0.1004
+0.0412
 </td>
 <td style="text-align:right;">
--0.0911
+-1.035
 </td>
 <td style="text-align:right;">
-0.0731
+0.0414
 </td>
 </tr>
 <tr>
@@ -3643,16 +3714,16 @@ SE M2
 <span class="math inline">\(DLPaxNal_{t-2}\)</span>
 </td>
 <td style="text-align:right;">
-1.2152
+0.2333
+</td>
+<td style="text-align:right;">
+0.0715
+</td>
+<td style="text-align:right;">
+0.2056
 </td>
 <td style="text-align:right;">
 0.0717
-</td>
-<td style="text-align:right;">
-1.1987
-</td>
-<td style="text-align:right;">
-0.0531
 </td>
 </tr>
 <tr>
@@ -3660,33 +3731,16 @@ SE M2
 <span class="math inline">\(DLPaxNal_{t-3}\)</span>
 </td>
 <td style="text-align:right;">
-0.513
+0.712
 </td>
 <td style="text-align:right;">
-0.0759
+0.0413
 </td>
 <td style="text-align:right;">
-0.5301
+0.6962
 </td>
 <td style="text-align:right;">
-0.0539
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<span class="math inline">\(DLPaxNal_{t-4}\)</span>
-</td>
-<td style="text-align:right;">
--0.6635
-</td>
-<td style="text-align:right;">
-0.1013
-</td>
-<td style="text-align:right;">
--0.6402
-</td>
-<td style="text-align:right;">
-0.0732
+0.0414
 </td>
 </tr>
 <tr>
@@ -3694,16 +3748,16 @@ SE M2
 <span class="math inline">\(DDic_{t}\)</span>
 </td>
 <td style="text-align:right;">
-0.054
-</td>
-<td style="text-align:right;">
-0.0388
-</td>
-<td style="text-align:right;">
-0.0366
+0.0602
 </td>
 <td style="text-align:right;">
 0.0378
+</td>
+<td style="text-align:right;">
+0.0332
+</td>
+<td style="text-align:right;">
+0.037
 </td>
 </tr>
 <tr>
@@ -3711,16 +3765,16 @@ SE M2
 <span class="math inline">\(DEne_{t}\)</span>
 </td>
 <td style="text-align:right;">
--0.1339
+-0.1178
 </td>
 <td style="text-align:right;">
-0.0375
+0.0356
 </td>
 <td style="text-align:right;">
--0.1306
+-0.1175
 </td>
 <td style="text-align:right;">
-0.0369
+0.0353
 </td>
 </tr>
 <tr>
@@ -3728,16 +3782,16 @@ SE M2
 <span class="math inline">\(DFeb_{t}\)</span>
 </td>
 <td style="text-align:right;">
--0.0234
-</td>
-<td style="text-align:right;">
-0.039
-</td>
-<td style="text-align:right;">
--0.0343
+-0.0153
 </td>
 <td style="text-align:right;">
 0.038
+</td>
+<td style="text-align:right;">
+-0.0357
+</td>
+<td style="text-align:right;">
+0.0371
 </td>
 </tr>
 <tr>
@@ -3745,16 +3799,16 @@ SE M2
 <span class="math inline">\(DJul_{t}\)</span>
 </td>
 <td style="text-align:right;">
-0.2766
+0.275
 </td>
 <td style="text-align:right;">
-0.0479
+0.0463
 </td>
 <td style="text-align:right;">
-0.2707
+0.2583
 </td>
 <td style="text-align:right;">
-0.0467
+0.0464
 </td>
 </tr>
 <tr>
@@ -3766,10 +3820,10 @@ SE M2
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.2008
+0.2022
 </td>
 <td style="text-align:right;">
-0.0853
+0.0882
 </td>
 </tr>
 <tr>
@@ -3781,10 +3835,10 @@ SE M2
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
--0.3747
+-0.3776
 </td>
 <td style="text-align:right;">
-0.085
+0.0882
 </td>
 </tr>
 <tr>
@@ -3792,16 +3846,16 @@ SE M2
 Constante
 </td>
 <td style="text-align:right;">
--0.0103
+-0.0127
 </td>
 <td style="text-align:right;">
-0.0091
+0.0088
 </td>
 <td style="text-align:right;">
--0.0069
+-0.0066
 </td>
 <td style="text-align:right;">
-0.0091
+0.0088
 </td>
 </tr>
 <tr>
@@ -3809,16 +3863,15 @@ Constante
 <span class="math inline">\(\hat{U}_{t-1}\)</span>
 </td>
 <td style="text-align:right;">
-0.3536
+1.274
 </td>
 <td style="text-align:right;">
-0.1496
+0.0087
 </td>
 <td style="text-align:right;">
-0.4241
+1.3377
 </td>
 <td style="text-align:right;">
-0.0957
 </td>
 </tr>
 <tr>
@@ -3826,16 +3879,16 @@ Constante
 <span class="math inline">\(\hat{U}_{t-2}\)</span>
 </td>
 <td style="text-align:right;">
--1.5331
+-0.3286
 </td>
 <td style="text-align:right;">
-0.1061
+0.0248
 </td>
 <td style="text-align:right;">
--1.5277
+-0.2815
 </td>
 <td style="text-align:right;">
-0.0683
+0.0099
 </td>
 </tr>
 <tr>
@@ -3843,16 +3896,16 @@ Constante
 <span class="math inline">\(\hat{U}_{t-3}\)</span>
 </td>
 <td style="text-align:right;">
--1.2038
+-1.3947
 </td>
 <td style="text-align:right;">
-0.2427
+0.0181
 </td>
 <td style="text-align:right;">
--1.3132
+-1.4405
 </td>
 <td style="text-align:right;">
-0.1564
+0.0267
 </td>
 </tr>
 <tr>
@@ -3860,50 +3913,14 @@ Constante
 <span class="math inline">\(\hat{U}_{t-4}\)</span>
 </td>
 <td style="text-align:right;">
-0.6889
+-0.5464
 </td>
 <td style="text-align:right;">
-0.2502
 </td>
 <td style="text-align:right;">
-0.6303
+-0.6126
 </td>
 <td style="text-align:right;">
-0.1501
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<span class="math inline">\(\hat{U}_{t-5}\)</span>
-</td>
-<td style="text-align:right;">
-0.6043
-</td>
-<td style="text-align:right;">
-0.1028
-</td>
-<td style="text-align:right;">
-0.6713
-</td>
-<td style="text-align:right;">
-0.0732
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<span class="math inline">\(\hat{U}_{t-6}\)</span>
-</td>
-<td style="text-align:right;">
-0.0903
-</td>
-<td style="text-align:right;">
-0.1476
-</td>
-<td style="text-align:right;">
-0.1155
-</td>
-<td style="text-align:right;">
-0.0886
 </td>
 </tr>
 <tr>
@@ -3911,12 +3928,12 @@ Constante
 <span class="math inline">\(\hat{\sigma}^2\)</span>
 </td>
 <td style="text-align:right;">
-0.015636
+0.015607
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.014699
+0.014659
 </td>
 <td style="text-align:right;">
 </td>
@@ -3926,24 +3943,27 @@ Constante
 AIC
 </td>
 <td style="text-align:right;">
--360.43
+-365.48
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
--375.83
+-381.35
 </td>
 <td style="text-align:right;">
 </td>
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_Residuals_ARMA46_D.png"</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">mod2</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkblue"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Residuales"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>,</span>
+<span>     main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Residuales del ARMA("</span>, <span class="va">opt_p</span>, <span class="st">","</span>, <span class="va">opt_q</span>,</span>
+<span>                   <span class="st">") con dummies de mayo y junio de 2009"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig416"></span>
-<img src="Plots/G_Residuals_ARMA46_D.png" alt="Residuales del ARMA(4, 6) de una serie $DLPaxNal_t$" width="95%"><p class="caption">
-Figura 3.19: Residuales del ARMA(4, 6) de una serie <span class="math inline">\(DLPaxNal_t\)</span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig416-1.png" alt="Residuales del ARMA(3, 4) con dummies de 2009 de una serie $DLPaxNal_t$" width="672"><p class="caption">
+Figura 3.19: Residuales del ARMA(3, 4) con dummies de 2009 de una serie <span class="math inline">\(DLPaxNal_t\)</span>
 </p>
 </div>
 </div>
@@ -3963,9 +3983,14 @@ serie estará dado por una expresión: <span class="math display">\[\begin{eqnar
 componentes MA(q) en la ecuación <a href="#eq:ARMApqFor">(<strong>??</strong>)</a> son cero dado que
 para todo valor <span class="math inline">\(t + \tau\)</span> es cierto que <span class="math inline">\(\mathbb{E}_t[U_{t+\tau}] = 0\)</span>.</p>
 <p>Continuando con el ejemplo, en la Figura <a href="cap-estacionarios.html#fig:fig417">3.20</a> mostramos el
-resultado del pronóstico de la serie a partir del modelo ARMA(4, 6) que
-hemos discutido anteriormente.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+resultado del pronóstico de la serie a 24 meses. Para este ejercicio
+estimamos un <span class="math inline">\(ARMA(6, 6)\)</span> sobre la serie en diferencias logarítmicas
+que, además de las dummies estacionales, incorpora variables dummy para
+los meses atípicos de la pandemia de COVID-19 (marzo, abril, junio y
+julio de 2020, y marzo de 2021); el pronóstico de la tasa de
+crecimiento se acumula después sobre el último nivel observado de la
+serie.</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
@@ -4103,13 +4128,13 @@ hemos discutido anteriormente.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Pasajeros en vuelos nacionales (Salidas)"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"(Ene-2000 a Jun-2019)"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"(Ene-2000 a Jun-2025 y pronóstico a 24 meses)"</span>,</span>
 <span>    caption <span class="op">=</span> <span class="st">"Fuente: Elaboración propia"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig417"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig417-1.png" alt="Pronóstico de la serie $PaxNAl_t$ a partir de una ARMA(4,6) en diferencias logaritmicas" width="672"><p class="caption">
-Figura 3.20: Pronóstico de la serie <span class="math inline">\(PaxNAl_t\)</span> a partir de una ARMA(4,6) en diferencias logaritmicas
+<img src="Notas-Series-Tiempo_files/figure-html/fig417-1.png" alt="Pronóstico de la serie $PaxNal_t$ a partir de un ARMA(6,6) en diferencias logarítmicas" width="672"><p class="caption">
+Figura 3.20: Pronóstico de la serie <span class="math inline">\(PaxNal_t\)</span> a partir de un ARMA(6,6) en diferencias logarítmicas
 </p>
 </div>
 </div>
@@ -4123,8 +4148,8 @@ Figura 3.20: Pronóstico de la serie <span class="math inline">\(PaxNAl_t\)</spa
 </h3>
 <p>Existen múltiples enfoques para la desestacionalización de series.
 Algunos modelos, por ejemplo, pueden estar basados en modelos ARIMA como
-un conjunto de dummies. No obstante, en el caso particular que
-discutiremos en este curso, estará basado en un modelo ARIMA de la
+un conjunto de dummies. No obstante, el caso particular que
+discutiremos en estas notas estará basado en un modelo ARIMA de la
 serie. Este enfoque está basado en el modelo X11 de la oficina del censo
 de Estados Unidos (Census Bureau) el cual es conocido como el modelo
 X13-ARIMA-SEATS.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;La información y material respecto del modelo está disponible en la dirección &lt;a href="https://www.census.gov/srd/www/x13as/" class="uri"&gt;https://www.census.gov/srd/www/x13as/&lt;/a&gt;.&lt;/p&gt;'><sup>7</sup></a>
@@ -4146,26 +4171,26 @@ diferencias. El ARIMA(p, d, q)(P, D, Q) estacional puede ser expresado
 de la siguiente manera utilizando el operador rezago <span class="math inline">\(L\)</span>:
 <span class="math display" id="eq:ARIMAseas">\[\begin{equation}
     \Theta_P(L^s) \theta_p(L) (1 - L^s)^D (1 - L)^d X_t = \Psi_Q(L^s) \psi_q(L) U_t
-    \tag{3.14}
+    \tag{3.15}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\Theta_P(.)\)</span>, <span class="math inline">\(\theta_p(.)\)</span>, <span class="math inline">\(\Psi_Q(.)\)</span> y <span class="math inline">\(\psi_q(.)\)</span> son
 polinomios de <span class="math inline">\(L\)</span> de orden <span class="math inline">\(P\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(Q\)</span> y <span class="math inline">\(q\)</span> respectivamente. En
-general, la representación es de una serie no estacionaria, aunque si
-<span class="math inline">\(D = d = 0\)</span> y las raíces del polinomio característico (de los polinomios
-del lado izquierdo de la ecuación <a href="cap-estacionarios.html#eq:ARIMAseas">(3.14)</a> todas son más
-grandes que 1 en valor absoluto, el proceso modelado será estacionario.</p>
+general, la representación es de una serie no estacionaria; no
+obstante, si <span class="math inline">\(D = d = 0\)</span> y todas las raíces de los polinomios del lado
+izquierdo de la ecuación <a href="cap-estacionarios.html#eq:ARIMAseas">(3.15)</a> son mayores que 1 en valor
+absoluto, el proceso modelado será estacionario.</p>
 <p>Si bien es cierto que existen otras formas de modelar la
 desestacionalización, como la modelación en diferencias con dummies para
 identificar ciertos patrones regulares, en los algoritmos disponibles
 como el X11 o X13-ARIMA-SEATS se emplea la formulación de la ecuación
-<a href="cap-estacionarios.html#eq:ARIMAseas">(3.14)</a>. A continuación, implementaremos la
+<a href="cap-estacionarios.html#eq:ARIMAseas">(3.15)</a>. A continuación, implementaremos la
 desestacionalización de una serie.</p>
 <p>Como ejemplo utilizaremos la serie del Índice Nacional de Precios al
 Consumidor
 (INPC).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Las definiciones de las variables empleadas son: INPC: Índice Nacional de Precios al Consumidor (2QJul2018 = 100); TC: Tipo de Cambio FIX; CETE28: Tasa de rendimiento promedio mensual de los Cetes 28, en por ciento anual; IGAE: Indicador Global de la Actividad Económica (2013 = 100); IPI: Industrial Production Index (2012 = 100).&lt;/p&gt;"><sup>8</sup></a> Podemos ver que la serie original del INPC y su ajuste estacional bajo
 una metodología X13-ARIMA-SEATS son como se muestra en la Figura
 <a href="cap-estacionarios.html#fig:fig51">3.21</a>.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
@@ -4176,7 +4201,7 @@ una metodología X13-ARIMA-SEATS son como se muestra en la Figura
 <pre><code>## The following object is masked from 'package:tibble':
 ## 
 ##     view</code></pre>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.seasonal.website">seasonalview</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'seasonalview'</code></pre>
@@ -4186,7 +4211,7 @@ una metodología X13-ARIMA-SEATS son como se muestra en la Figura
 <pre><code>## The following object is masked from 'package:tibble':
 ## 
 ##     view</code></pre>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">Datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"BD/Base_VAR.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"Datos"</span>, col_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -4210,7 +4235,7 @@ una metodología X13-ARIMA-SEATS son como se muestra en la Figura
 Figura 3.21: Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) y su serie desestacionalizada utilizando un proceso X13-ARIMA-SEATS
 </p>
 </div>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Forma Facil:</span></span>
 <span></span>
 <span><span class="co">#view(Seas_INPC)</span></span>
@@ -4279,8 +4304,8 @@ trabajo de estos autores era determinar una técnica de regresión que
 permitiera utilizar series agregadas o macroeconómicas para separarlas
 en dos componentes: uno de ciclo de negocios y otro de tendencia. En su
 trabajo original, Hodrick y Prescott <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-hodrickprescott1997">1997</a>)</span> utilizaron datos
-trimestrales de algunas series como el Gross Domestic Product (GNP, por
-sus siglas en Inglés), los agregados monetarios M1, empleo, etc., de los
+trimestrales de algunas series como el Producto Nacional Bruto (GNP,
+por sus siglas en inglés), los agregados monetarios M1, empleo, etc., de los
 Estados Unidos que fueron observados posteriormente a la Segunda Guerra
 Mundial.</p>
 <p>El marco conceptual de Hodrick y Prescott <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-hodrickprescott1997">1997</a>)</span> parte de suponer una
@@ -4289,18 +4314,18 @@ crecimiento tendencial, <span class="math inline">\(g_t\)</span>, y su component
 <span class="math inline">\(c_t\)</span>, de esta forma para <span class="math inline">\(t = 1, 2, \ldots, T\)</span> tenemos que:
 <span class="math display" id="eq:HPEq">\[\begin{equation}
     X_t = g_t + c_t
-    \tag{3.15}
+    \tag{3.16}
 \end{equation}\]</span></p>
-<p>En la ecuación <a href="cap-estacionarios.html#eq:HPEq">(3.15)</a> se asume que el ajuste de la ruta seguida
-por <span class="math inline">\(g_t\)</span> es resultado de la suma de los cuadrados de su segunda
-diferencia. En esa misma ecuación asumiremos que <span class="math inline">\(c_t\)</span> son las
+<p>En la ecuación <a href="cap-estacionarios.html#eq:HPEq">(3.16)</a> se asume que la suavidad de la ruta
+seguida por <span class="math inline">\(g_t\)</span> se controla penalizando la suma de los cuadrados de su
+segunda diferencia. En esa misma ecuación asumiremos que <span class="math inline">\(c_t\)</span> son las
 desviaciones de <span class="math inline">\(g_t\)</span>, las cuales en el largo plazo tienen una media
 igual a cero (0). Por esta razón, se suele decir que el filtro de
 Hodrick y Prescott representa una descomposición de la serie en su
 componente de crecimiento natural y de sus desviaciones transitorias que
 en promedio son cero, en el largo plazo.</p>
 <p>Estas consideraciones que hemos mencionado señalan que el procedimiento
-de Hodrick y Prescott <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-hodrickprescott1997">1997</a>)</span> implican resolver el siguiente problema
+de Hodrick y Prescott <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-hodrickprescott1997">1997</a>)</span> implica resolver el siguiente problema de
 minimización para determinar cada uno de los componentes en que <span class="math inline">\(X_t\)</span> se
 puede descomponer: <span class="math display">\[\begin{equation}
     \min_{\{ g_t \}^T_{t = -1} } \left[ \sum^T_{t = 1} c^2_t + \lambda \sum^T_{t = 1} [ \Delta g_t - \Delta g_{t-1}]^2 \right]
@@ -4326,7 +4351,7 @@ positivos como negativos).</p>
 dos series desestacionalizadas: <span class="math inline">\(INPC_t\)</span> y <span class="math inline">\(TC_t\)</span>. Las Figura
 <a href="cap-estacionarios.html#fig:fig52">3.22</a> y Figura <a href="cap-estacionarios.html#fig:fig53">3.23</a> muestran los resultados de la
 implementación del filtro.</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
@@ -4338,7 +4363,7 @@ implementación del filtro.</p>
 <pre><code>## The following objects are masked from 'package:dplyr':
 ## 
 ##     between, lag, lead</code></pre>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"BD/Datos_Ad0.RData"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">INPC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">Datos_Ad</span><span class="op">$</span><span class="va">INPC_Ad</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">1</span><span class="op">)</span>, freq <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
@@ -4347,24 +4372,20 @@ implementación del filtro.</p>
 <span></span>
 <span><span class="va">INPC_hpf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mFilter/man/hpfilter.html">hpfilter</a></span><span class="op">(</span><span class="va">INPC</span>, freq <span class="op">=</span> <span class="fl">14400</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#plot(INPC_hpf)</span></span>
-<span></span>
-<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_INPC_HP.png"</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">INPC_hpf</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig52"></span>
-<img src="Plots/G_INPC_HP.png" alt="Descomposición del Índice Nacional de Precios al Consumidor ($INPC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott [-@hodrickprescott1997]" width="95%"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig52-1.png" alt="Descomposición del Índice Nacional de Precios al Consumidor ($INPC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott [-@hodrickprescott1997]" width="95%"><p class="caption">
 Figura 3.22: Descomposición del Índice Nacional de Precios al Consumidor (<span class="math inline">\(INPC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-hodrickprescott1997">1997</a>)</span>
 </p>
 </div>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TC_hpf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mFilter/man/hpfilter.html">hpfilter</a></span><span class="op">(</span><span class="va">TC</span>, freq <span class="op">=</span> <span class="fl">14400</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#plot(TC_hpf)</span></span>
-<span></span>
-<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"Plots/G_TC_HP.png"</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">TC_hpf</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig53"></span>
-<img src="Plots/G_TC_HP.png" alt="Descomposición del Tipo de Cambio FIX ($TC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott [-@hodrickprescott1997]" width="95%"><p class="caption">
+<img src="Notas-Series-Tiempo_files/figure-html/fig53-1.png" alt="Descomposición del Tipo de Cambio FIX ($TC_t$) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott [-@hodrickprescott1997]" width="95%"><p class="caption">
 Figura 3.23: Descomposición del Tipo de Cambio FIX (<span class="math inline">\(TC_t\)</span>) en su tendencia o trayectoria de largo plazo y su ciclo de corto plazo utilizando un filtro Hodrick y Prescott <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-hodrickprescott1997">1997</a>)</span>
 </p>
 </div>
@@ -4375,7 +4396,7 @@ Figura 3.23: Descomposición del Tipo de Cambio FIX (<span class="math inline">\
 <p>Existe una técnica adicional que soluciona un problema de
 distribuciones de colas pesadas: la planteada por St-Amant y van
 Norden <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-stamantvannorden1997">1997</a>)</span>. Analicemos ese caso. El método tradicional de HP consiste en
-minimizar la serie <span class="math inline">\(\{ \tau_t \}_{t=-1}^T\)</span>:</p>
+elegir la serie <span class="math inline">\(\{ \tau_t \}_{t=-1}^T\)</span> que minimiza:</p>
 <span class="math display">\[\begin{equation}
   \sum_{t=1}^T (y_t - \tau_t)^2 + \lambda \sum_{t=1}^{T} [(\tau_{t} - \tau_{t-1}) - (\tau_{t-1} - \tau_{t-2})]^2
 \end{equation}\]</span>
@@ -4417,15 +4438,15 @@ datos, <span class="math inline">\(\lambda\)</span> es la constante tradicional,
   0 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; 1 \\
   \end{pmatrix}
 \end{equation}\]</span>
-<p>Método modificado de HP consiste en minimizar los valores de la serie
-<span class="math inline">\(\{ \tau_t \}_{t=1}^T\)</span>: <span class="math display">\[\begin{equation}
+<p>El método modificado de HP consiste en elegir la serie
+<span class="math inline">\(\{ \tau_t \}_{t=1}^T\)</span> que minimiza: <span class="math display">\[\begin{equation}
   \sum_{t=1}^T (y_t - \tau_t)^2 + \lambda \sum_{t=2}^{T-1} [(\tau_{t+1} - \tau_t) - (\tau_t     - \tau_{t-1})]^2 + \lambda_{ss} \sum_{t=T-j}^{T} [\Delta \tau_t - u_{ss}]
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(\lambda\)</span> es una parámetro fijo (determinado ex-ante), <span class="math inline">\(\tau_t\)</span> es
+<p>Donde <span class="math inline">\(\lambda\)</span> es un parámetro fijo (determinado ex-ante), <span class="math inline">\(\tau_t\)</span> es
 un componente de tendencia de <span class="math inline">\(y_t\)</span>, y los nuevos parámetros son
-<span class="math inline">\(u_{ss}\)</span> y <span class="math inline">\(\lambda_{ss}\)</span> ajustadas por el procedimiento de Marcet y
+<span class="math inline">\(u_{ss}\)</span> y <span class="math inline">\(\lambda_{ss}\)</span>, ajustados por el procedimiento de Marcet y
 Ravn <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-marcetravn2004">2004</a>)</span>.</p>
-<p>Este procedimiento asume que parte del filtro HP y que esta versión
+<p>Este procedimiento parte del filtro HP y reconoce que esa versión
 tiene el problema de pérdida de información al final y al principio de
 la muestra. La razón es que es un procedimiento univariado que requiere
 de mucha información futura y pasada para mejorar el ajuste.</p>

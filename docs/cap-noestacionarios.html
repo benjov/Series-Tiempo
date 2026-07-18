@@ -125,7 +125,7 @@
     \mathbb{E}[(Y_t - \mu_t)^2] = \mathbb{E}[X_t^2] = \sigma_X^2
     \tag{4.4}
 \end{equation}\]</span></p>
-<p>Así, las ecuaciones <a href="cap-noestacionarios.html#eq:ETrend">(4.2)</a> y <a href="cap-noestacionarios.html#eq:VarTrend">(4.4)</a> significan que el proceso descrito por la ecuación <a href="cap-noestacionarios.html#eq:YTrend">(4.1)</a> es estacionario pero en varianza. De esta forma, a partir de este momento diremos que una serie será estacionaria alrededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones <a href="cap-noestacionarios.html#eq:YTrend">(4.1)</a>, <a href="cap-noestacionarios.html#eq:ETrend">(4.2)</a> y <a href="cap-noestacionarios.html#eq:VarTrend">(4.4)</a>.</p>
+<p>Así, las ecuaciones <a href="cap-noestacionarios.html#eq:ETrend">(4.2)</a> y <a href="cap-noestacionarios.html#eq:VarTrend">(4.4)</a> significan que el proceso descrito por la ecuación <a href="cap-noestacionarios.html#eq:YTrend">(4.1)</a> es estacionario en varianza, aunque no en media. De esta forma, a partir de este momento diremos que una serie será estacionaria alrededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones <a href="cap-noestacionarios.html#eq:YTrend">(4.1)</a>, <a href="cap-noestacionarios.html#eq:ETrend">(4.2)</a> y <a href="cap-noestacionarios.html#eq:VarTrend">(4.4)</a>.</p>
 <p>Dicho lo anterior, estudiaremos el concepto de raíz unitaria de un proceso estocástico o de una serie de tiempo. Partamos de plantear que un proceso AR(1) tiene raíz unitaria cuando el coeficiente <span class="math inline">\(a_1 = 1\)</span>, es decir:
 <span class="math display" id="eq:UR1">\[\begin{equation}
     Y_t = Y_{t-1} + U_t
@@ -184,7 +184,7 @@
 <span class="header-section-number">4.2</span> Simulación: Caminata Aleatoria vs. Proceso Estacionario<a class="anchor" aria-label="anchor" href="#simulaci%C3%B3n-caminata-aleatoria-vs.-proceso-estacionario"><i class="fas fa-link"></i></a>
 </h2>
 <p>Antes de presentar las pruebas formales, resulta útil visualizar la diferencia entre un proceso estacionario y uno con raíz unitaria. El siguiente ejemplo simula dos series de <span class="math inline">\(T = 300\)</span> observaciones generadas con el mismo ruido blanco <span class="math inline">\(U_t \sim N(0,1)\)</span>: un <span class="math inline">\(AR(1)\)</span> estacionario con <span class="math inline">\(\phi = 0.7\)</span> y una caminata aleatoria (<span class="math inline">\(\phi = 1\)</span>).</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2024</span><span class="op">)</span></span>
 <span><span class="cn">T</span>   <span class="op">&lt;-</span> <span class="fl">300</span></span>
 <span><span class="va">e</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="cn">T</span><span class="op">)</span></span>
@@ -213,7 +213,7 @@
 Figura 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el mismo ruido blanco.
 </p>
 </div>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>La figura ilustra dos características clave. Primero, el <span class="math inline">\(AR(1)\)</span> estacionario regresa continuamente a su media (línea roja punteada), mientras que la caminata aleatoria se aleja de ella de forma permanente. Segundo, los choques en el proceso estacionario tienen un efecto transitorio —que se disipa con el tiempo—, en tanto que los choques en la caminata aleatoria se acumulan y tienen un efecto permanente sobre el nivel de la serie.</p>
 <p>En términos de sus momentos, la caminata aleatoria <span class="math inline">\(Y_t = Y_{t-1} + U_t\)</span> con valor inicial <span class="math inline">\(Y_0 = 0\)</span> satisface:
@@ -234,7 +234,7 @@ Figura 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el m
 <li><p>Estacionariedad alrededor del cero.</p></li>
 </ol>
 <p>A continuación, mostraremos como ejemplo la aplicación de las pruebas de raíces unitarias a la serie de Tipo de Cambio en forma logarítmica y de diferencias logarítmicas. Asumamos que determinamos el valor de los rezagos de la prueba con el criterio de <span class="math inline">\(p = int\{ 4 (T/100)^{1/4} \}\)</span>. En la práctica, existen otras formas de determinar el valor de <span class="math inline">\(p\)</span>, como el criterio de AIC, pero es decisión del investigador cuál usar.</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
@@ -269,7 +269,7 @@ Figura 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el m
 <span>                 lag <span class="op">=</span> <span class="fl">12</span>, </span>
 <span>                 differences <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>Como primer paso, exploraremos las series en niveles (bajo una transformación logarítmica), como en la Figura <a href="cap-noestacionarios.html#fig:fig71">4.2</a>, y en diferencias logarítmicas, como en la Figura <a href="cap-noestacionarios.html#fig:fig72">4.3</a>. La Figura <a href="cap-noestacionarios.html#fig:fig73">4.4</a> muestra las diferencias anuales logarítmicas; finalmente, las Figuras <a href="cap-noestacionarios.html#fig:fig74">4.5</a> y <a href="cap-noestacionarios.html#fig:fig75">4.6</a> comparan las transformaciones entre sí. De dicha exploración, podemos concluir que las series parecen estacionarias en diferencias, pero no en niveles.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">LDatos</span>, </span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>, </span>
@@ -281,7 +281,7 @@ Figura 4.1: AR(1) estacionario vs. Caminata Aleatoria. Ambos procesos usan el m
 Figura 4.2: Series en Logaritmos
 </p>
 </div>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DLDatos</span>,</span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>,</span>
@@ -293,7 +293,7 @@ Figura 4.2: Series en Logaritmos
 Figura 4.3: Series en Diferencias Logarítmicas
 </p>
 </div>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">DaLDatos</span>,</span>
 <span>     plot.type <span class="op">=</span> <span class="st">"m"</span>, nc <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"darkblue"</span>, <span class="st">"darkred"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span><span class="op">)</span>,</span>
@@ -305,7 +305,7 @@ Figura 4.3: Series en Diferencias Logarítmicas
 Figura 4.4: Series en Diferencias Anuales Logarítmicas
 </p>
 </div>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Comp_D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">DLDatos</span>, <span class="va">DaLDatos</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Comp_D</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"DL."</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"DaL."</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -321,7 +321,7 @@ Figura 4.4: Series en Diferencias Anuales Logarítmicas
 Figura 4.5: Comparación de Series en Diferencias Mensuales y Anuales (Logarítmicas)
 </p>
 </div>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Comp_N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">LDatos</span>, <span class="va">DLDatos</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Comp_N</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"L."</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"DL."</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Datos</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -351,7 +351,7 @@ Figura 4.6: Comparación de Series en Niveles (Logaritmos) y en Diferencias Loga
     Y_t = \alpha + \delta t + \rho Y_{t-1} + U_t
     \tag{4.12}
 \end{equation}\]</span></p>
-<p>Si, el <span class="math inline">\(AR(1)\)</span> planteado tiene raíz unitaria, es decir, <span class="math inline">\(\rho = 1\)</span>, entonces tendríamos:
+<p>Si el <span class="math inline">\(AR(1)\)</span> planteado tiene raíz unitaria, es decir, <span class="math inline">\(\rho = 1\)</span>, entonces tendríamos:
 <span class="math display">\[\begin{eqnarray*}
     Y_t &amp; = &amp; \alpha + \delta t + Y_{t-1} + U_t \\
     \Delta Y_t &amp; = &amp; \alpha + \delta t + U_t
@@ -378,7 +378,7 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 <p><strong>Ejemplo</strong>. A continuación mostramos los resultados de aplicar las pruebas de raíces unitarias a la serie <span class="math inline">\(LTC_t\)</span> (<span class="math inline">\(T = 282\)</span> observaciones mensuales), considerando <span class="math inline">\(p = int \{ 4 (282/100)^{(1/4)} \} = 5\)</span> para aquellas pruebas que requieren de rezagos: ADF, PP y KPSS. La convención es implementar las pruebas de raíces unitarias iniciando con el modelo más general hasta llegar al más restringido. Es decir, iniciar con el Modelo A, pasar al Modelo B y cerrar con el Modelo C.</p>
 <p>Iniciaremos implementando una prueba de DF simple (o una ADF sin rezagos). En este caso obtenemos los resultados mostrados en la siguiente Tabla. En esta se reportan los resultados de la prueba para cada uno de los 3 modelos (A, B y C) y los valores críticos (CV, por sus siglas en inglés) de la prueba para los niveles 1%, 5% y 10%–estos valores son los reportados por <span class="citation">MacKinnon (<a href="bibliograf%C3%ADa.html#ref-mackinnon1996">1996</a>)</span> para una prueba con distribución de 1 cola (izquierda). La convención es utilizar el nivel del 5% de significancia.</p>
 <p>Los resultados se presentan en el Cuadro <a href="cap-noestacionarios.html#tab:tab-DF-summary">4.1</a>, donde se reportan los estadísticos <span class="math inline">\(\tau\)</span> y los valores críticos de <span class="citation">MacKinnon (<a href="bibliograf%C3%ADa.html#ref-mackinnon1996">1996</a>)</span> para los tres modelos, tanto en niveles (<span class="math inline">\(LTC_t\)</span>) como en primeras diferencias (<span class="math inline">\(\Delta LTC_t\)</span>). Rechazaremos la hipótesis nula cuando el estadístico <span class="math inline">\(t\)</span> sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Dickey-Fuller — Niveles</span></span>
 <span><span class="va">df_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"trend"</span>, lags <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">df_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"drift"</span>, lags <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
@@ -583,7 +583,7 @@ Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</spa
 Buscamos probar si <span class="math inline">\(H_0 : \beta = \rho - 1 = 0\)</span> contra <span class="math inline">\(H_a : \beta &lt; 0\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario sin considerar una constante o una tendencia determinística, es decir, es un proceso puramente aleatorio.</p></li>
 </ol>
 <p><strong>Ejemplo</strong>. El Cuadro <a href="cap-noestacionarios.html#tab:tab-ADF-summary">4.2</a> muestra los resultados de la prueba ADF con 5 rezagos (<span class="math inline">\(p = int \{ 4 (282/100)^{(1/4)} \} = 5\)</span>) para <span class="math inline">\(LTC_t\)</span> y <span class="math inline">\(\Delta LTC_t\)</span>. Al igual que en el caso anterior, rechazaremos la hipótesis nula cuando el estadístico <span class="math inline">\(t\)</span> sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Augmented Dickey-Fuller — Niveles</span></span>
 <span><span class="va">adf_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"trend"</span>, lags <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">adf_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"drift"</span>, lags <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -763,7 +763,7 @@ Y_t = \alpha + \rho Y_{t-1} + U_t
 Buscamos probar si <span class="math inline">\(H_0 : \rho = 1\)</span> contra <span class="math inline">\(H_a : | \rho | &lt; 1\)</span>, por lo que es una prueba de una cola. Otra forma de decirlo es: probamos si el proceso tiene raíz unitaria contra si el proceso es estacionario alrededor de una constante.</p></li>
 </ol>
 <p><strong>Ejemplo</strong>. El Cuadro <a href="cap-noestacionarios.html#tab:tab-PP-summary">4.3</a> muestra los resultados de la prueba PP con 5 rezagos para <span class="math inline">\(LTC_t\)</span> y <span class="math inline">\(\Delta LTC_t\)</span>. Rechazaremos la hipótesis nula cuando el estadístico <span class="math inline">\(Z_\tau\)</span> sea menor que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Phillips-Perron — Niveles</span></span>
 <span><span class="va">pp_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.pp.html">ur.pp</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"Z-tau"</span>, model <span class="op">=</span> <span class="st">"trend"</span>,    use.lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">pp_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.pp.html">ur.pp</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"Z-tau"</span>, model <span class="op">=</span> <span class="st">"constant"</span>, use.lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -900,7 +900,7 @@ CV 10%
 <li><p><strong>Modelo B</strong>: 0.463, para un modelo con constante (estadístico <span class="math inline">\(\mu\)</span>).</p></li>
 </ol>
 <p><strong>Ejemplo</strong>. Finalmente, el Cuadro <a href="cap-noestacionarios.html#tab:tab-KPSS-summary">4.4</a> muestra los resultados de la prueba KPSS para <span class="math inline">\(LTC_t\)</span> y <span class="math inline">\(\Delta LTC_t\)</span>. En este caso se acepta <span class="math inline">\(H_0\)</span> (estacionariedad) cuando el estadístico es <strong>menor</strong> que el valor crítico. La serie se vuelve estacionaria en su primera diferencia.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## KPSS — Niveles</span></span>
 <span><span class="va">kpss_nA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.kpss.html">ur.kpss</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"tau"</span><span class="op">)</span></span>
 <span><span class="va">kpss_nB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.kpss.html">ur.kpss</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"mu"</span><span class="op">)</span></span>
@@ -1040,7 +1040,7 @@ CV 10%
 <p>En cada caso, la hipótesis nula es que la serie tiene una raíz unitaria sin quiebre estructural, contra la alternativa de que es estacionaria con un quiebre en la fecha <span class="math inline">\(\tau^*\)</span>. La fecha del quiebre se determina endógenamente como aquella que minimiza el estadístico <span class="math inline">\(t\)</span> de la prueba.</p>
 <p>El estadístico de la prueba sigue una distribución no estándar cuyos valores críticos al 1%, 5% y 10% son, respectivamente, <span class="math inline">\(-5.34\)</span>, <span class="math inline">\(-4.80\)</span> y <span class="math inline">\(-4.58\)</span> para el Modelo C.</p>
 <p><strong>Ejemplo</strong>. La siguiente Tabla y el código en R muestran la aplicación de la prueba ZA a la serie <span class="math inline">\(LTC_t\)</span>. Rechazamos la hipótesis nula si el estadístico es menor (en valor absoluto más grande) que el valor crítico correspondiente.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Zivot - Andrews: los tres modelos</span></span>
 <span></span>
 <span><span class="va">za_A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/urca/man/ur.za.html">ur.za</a></span><span class="op">(</span><span class="va">LDatos</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, model <span class="op">=</span> <span class="st">"intercept"</span>, lag <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>

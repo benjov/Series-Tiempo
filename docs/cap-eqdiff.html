@@ -94,7 +94,7 @@
 </h2>
 <p>El análisis de series de tiempo tiene muchas aplicaciones en diversos
 campos de la ciencia. Por ejemplo, en la economía continuamente se está
-expuesta a información recopilada de los mercados financieros,
+expuesto a información recopilada de los mercados financieros,
 indicadores de empleo, índices o indicadores del nivel de producción,
 índices de precios, etc. En otros campos de las ciencias sociales se
 emplea el análisis de series de tiempo para analizar la evolución de la
@@ -113,8 +113,8 @@ reconocer cómo lo que sucede hoy es afectado por lo que pasó ayer o, en
 general, en períodos pasados, o cómo lo que pasa hoy afectará los
 eventos futuros. Por otro lado, existe el enfoque del análisis
 frecuentista o de frecuencia, mediante el cual se busca reconocer la
-importancia que tiene para los investigadores los ciclos –por ejemplo,
-ciclos estacionales, momentos de crisis económicas, etc.–</p>
+importancia que tienen para los investigadores los ciclos –por ejemplo,
+ciclos estacionales, momentos de crisis económicas, etc.–.</p>
 </div>
 <div id="ejemplos-y-aplicaciones-de-las-series-de-tiempo" class="section level2" number="2.2">
 <h2>
@@ -174,8 +174,8 @@ algunas temporadas del año.</p>
 <p>Como segundo ejemplo, en la Figura <a href="cap-eqdiff.html#fig:fig2">2.2</a> se ilustra la
 evolución reciente del índice de Confianza del Consumidor (ICC) en dos
 de sus versiones: i) el Índice global y ii) el Índice de confianza de
-los consumidores cuando estos consideran la situación actual en la
-economía en relación el año anterior.</p>
+los consumidores cuando estos consideran la situación actual de la
+economía en relación con el año anterior.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ICC</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, ylab <span class="op">=</span> <span class="st">"Índice"</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">29</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
@@ -191,8 +191,8 @@ economía en relación el año anterior.</p>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig2"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2025" width="672"><p class="caption">
-Figura 2.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2025
+<img src="Notas-Series-Tiempo_files/figure-html/fig2-1.png" alt="Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación económica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-May.2025" width="672"><p class="caption">
+Figura 2.2: Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación económica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-May.2025
 </p>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -222,12 +222,12 @@ invertido en las empresas que cotizan en la BMV.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">IPC_BMV</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, ylab <span class="op">=</span> <span class="st">"Índice"</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, main <span class="op">=</span> <span class="st">"Índice de Precios y \nCotizaciones BMV"</span><span class="op">)</span></span>
 <span><span class="co"># Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">TDC</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"blue"</span>, ylab <span class="op">=</span> <span class="st">"Pesos X Dolar"</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">TDC</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"blue"</span>, ylab <span class="op">=</span> <span class="st">"Pesos por Dólar"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, main <span class="op">=</span> <span class="st">"Tipo de Cambio"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig3"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig3-1.png" alt="índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2025" width="672"><p class="caption">
-Figura 2.3: índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2025
+<img src="Notas-Series-Tiempo_files/figure-html/fig3-1.png" alt="Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (panel izquierdo) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (panel derecho), Ene.2002-May.2025" width="672"><p class="caption">
+Figura 2.3: Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (panel izquierdo) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (panel derecho), Ene.2002-May.2025
 </p>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -280,28 +280,28 @@ de IGAE de la actividad total, el IPC y el TDC.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Indicador Global de la Actividad Económica, base 2008</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">IGAE_2013</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>     col <span class="op">=</span> <span class="st">"darkred"</span>, ylab <span class="op">=</span> <span class="st">"Var. %"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
-<span>     main <span class="op">=</span> <span class="st">"Indicador Global de la Actividad Economica"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">IGAE_2013</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>     col <span class="op">=</span> <span class="st">"darkred"</span>, ylab <span class="op">=</span> <span class="st">"Var. %"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Indicador Global de la Actividad Económica"</span><span class="op">)</span></span>
 <span><span class="co"># Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">IPC_BMV</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>     col <span class="op">=</span> <span class="st">"darkgreen"</span>, ylab <span class="op">=</span> <span class="st">"Var. %"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">"Índice de Precios y Cotizaciones BMV"</span><span class="op">)</span></span>
 <span><span class="co"># Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">TDC</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>     col <span class="op">=</span> <span class="st">"darkblue"</span>, ylab <span class="op">=</span> <span class="st">"Pesos X Dolar"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>, </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">TDC</span><span class="op">)</span>, lag <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>     col <span class="op">=</span> <span class="st">"darkblue"</span>, ylab <span class="op">=</span> <span class="st">"Var. %"</span>, xlab <span class="op">=</span> <span class="st">"Tiempo"</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Tipo de Cambio"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig5"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig5-1.png" alt="Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023" width="672"><p class="caption">
-Figura 2.5: Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023
+<img src="Notas-Series-Tiempo_files/figure-html/fig5-1.png" alt="Tasas de crecimiento mensuales (diferencias logarítmicas) del Indicador Global de la Actividad Económica, el Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores y el Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2025" width="672"><p class="caption">
+Figura 2.5: Tasas de crecimiento mensuales (diferencias logarítmicas) del Indicador Global de la Actividad Económica, el Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores y el Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2025
 </p>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Dichas diferencias se pueden interpretar como una tasa de crecimiento de
 las series por las siguientes razones. Consideremos una serie de tiempo
-dada por <span class="math inline">\(y_t\)</span>, cuya versión logarítmica es <span class="math inline">\(ln(y_t\)</span>). De esta forma, la
+dada por <span class="math inline">\(y_t\)</span>, cuya versión logarítmica es <span class="math inline">\(ln(y_t)\)</span>. De esta forma, la
 diferencia logarítmica está dada por la ecuación <a href="cap-eqdiff.html#eq:difflog">(2.1)</a>:</p>
 <span class="math display" id="eq:difflog">\[\begin{equation}
    \Delta ln(y_t) = ln(y_t) - ln(y_{t-1}) = ln \left( \frac{y_t}{y_{t-1}} \right)
@@ -320,18 +320,19 @@ que:</p>
     \frac{y_t}{y_{t-1}} -1  \approx ln \left( \frac{y_t}{y_{t-1}} \right) = ln(y_t) - ln(y_{t-1})
     \tag{2.3}
 \end{equation}\]</span>
-<p>La ecuación <a href="cap-eqdiff.html#eq:TCDiffLog">(2.3)</a> es cierta cuando los valores de <span class="math inline">\(y_t\)</span> y
-<span class="math inline">\(y_{t-1}\)</span> son muy parecidos, es decir, cuando las variaciones no son tan
-abruptas o suficientemente pequeñas. Otra forma de interpretar la
-ecuación <a href="cap-eqdiff.html#eq:TCDiffLog">(2.3)</a> es que para tasas de crecimiento pequeñas,
-se puede utilizar como una buena aproximación a la diferencia
-logarítmica mostrada en la ecuación <a href="cap-eqdiff.html#eq:difflog">(2.1)</a>.</p>
+<p>La aproximación de la ecuación <a href="cap-eqdiff.html#eq:TCDiffLog">(2.3)</a> es válida cuando los
+valores de <span class="math inline">\(y_t\)</span> y <span class="math inline">\(y_{t-1}\)</span> son muy parecidos, es decir, cuando las
+variaciones entre periodos son suficientemente pequeñas (se deriva de
+que <span class="math inline">\(ln(1 + x) \approx x\)</span> cuando <span class="math inline">\(x\)</span> es cercano a cero). Dicho de otra
+forma: para tasas de crecimiento pequeñas, la diferencia logarítmica de
+la ecuación <a href="cap-eqdiff.html#eq:difflog">(2.1)</a> es una buena aproximación de la tasa de
+crecimiento de la serie.</p>
 <p>En la Figura <a href="cap-eqdiff.html#fig:fig5">2.5</a> se reportan las diferencias logarítmicas
-del IGAE, IPC y TDC, todos, como una media de distintos tipos de
-rendimientos. Es decir, podemos decir que un capitalista promedio
+del IGAE, el IPC y el TDC, todas interpretables como una medida de
+distintos tipos de rendimientos. Es decir, un inversionista promedio
 (suponiendo que solo puede invertir en la actividad económica, en la
-bolsa o en el dólar), puede observar que le es más redituable en función
-de sus preferencias.</p>
+bolsa o en el dólar) puede comparar cuál de las tres alternativas le
+resulta más redituable en función de sus preferencias.</p>
 <p>Nótese que la dinámica de las variaciones de cada una de las series es
 significativamente diferente. Destaca que el TDC es una de las variables
 que, en general, no muestra grandes cambios a lo largo del tiempo. No
@@ -368,11 +369,11 @@ expresiones para la ecuación diferencial: <span class="math display">\[\begin{e
         (\#eq:eqDiff)
 \end{equation}\]</span></p>
 <p>Por otro lado, suponiendo el caso del tiempo en forma discreta, es
-decir, con <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>, entonces el
-comportamiento de la serie de variables dadas por <span class="math inline">\(Z_t\)</span>, la cual se
-puede expresar como: <span class="math display">\[\begin{equation}
+decir, con <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>, el comportamiento de
+la serie de variables dada por <span class="math inline">\(Z_t\)</span> se puede expresar como:
+<span class="math display" id="eq:Diff1">\[\begin{equation}
     \Delta Z_t; \Delta^2 Z_t; \ldots; \Delta^k Z_t
-    (\#eq:Diff1)
+    \tag{2.4}
 \end{equation}\]</span></p>
 <p>Observemos que una forma técnicamente más correcta es escribir las
 expresiones anteriores como: <span class="math display">\[\begin{equation}
@@ -380,13 +381,13 @@ expresiones anteriores como: <span class="math display">\[\begin{equation}
     (\#eq:Diff2)
 \end{equation}\]</span></p>
 <p>No obstante, no pasa desapercibido que <span class="math inline">\(\Delta t = 1\)</span>, por lo que
-resultan equivalentes ambos conjuntos de expresiones <a href="#eq:Diff1">(<strong>??</strong>)</a> y
+resultan equivalentes ambos conjuntos de expresiones <a href="cap-eqdiff.html#eq:Diff1">(2.4)</a> y
 <a href="#eq:Diff2">(<strong>??</strong>)</a>.</p>
 <div id="ecuaciones-en-diferencia-lineales-de-primer-orden" class="section level3" number="2.3.1">
 <h3>
 <span class="header-section-number">2.3.1</span> Ecuaciones en Diferencia Lineales de Primer Orden<a class="anchor" aria-label="anchor" href="#ecuaciones-en-diferencia-lineales-de-primer-orden"><i class="fas fa-link"></i></a>
 </h3>
-<p>El primer caso que se suele estudiar en relación a Ecuaciones en
+<p>El primer caso que se suele estudiar en relación con las Ecuaciones en
 Diferencia es el de las Ecuaciones en Diferencia Lineales de Primer
 Orden. Al respecto, al igual que en el caso continuo, las variaciones de
 la variable <span class="math inline">\(Z_t\)</span> se pueden expresar como se ilustra en el siguiente
@@ -395,11 +396,11 @@ ejemplo. Consideremos la siguiente ecuación: <span class="math display">\[\begi
     (\#eq:EDPO)
 \end{equation}\]</span></p>
 <p>Donde, <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>, y <span class="math inline">\(a_0\)</span> y <span class="math inline">\(a_1 \neq 0\)</span> son
-números reales constantes. De <a href="#eq:EDPO">(<strong>??</strong>)</a> podemos despejar la
-variable <span class="math inline">\(Z_{t-1}\)</span> y obtener una forma de ecuación en diferencia:
+números reales constantes. De <a href="#eq:EDPO">(<strong>??</strong>)</a> podemos reagrupar los
+términos y obtener una forma de ecuación en diferencia:
 <span class="math display" id="eq:EDPO2">\[\begin{equation}
     Z_t - a_1 Z_{t-1} = a_0
-    \tag{2.4}
+    \tag{2.5}
 \end{equation}\]</span></p>
 <p>Ahora denotemos a <span class="math inline">\(L Z_t = Z_{t-1}\)</span>, es decir, mediante el operador <span class="math inline">\(L\)</span>
 se puede rezagar una variable dada—entendiendo como rezago a tomar el
@@ -422,10 +423,10 @@ consecutiva a una misma variable. Es decir,
 rezagos la propiedad de linealidad del operador rezago será:
 <span class="math display" id="eq:LinProp">\[\begin{equation}
     L^p (\alpha Z_{t} + \beta) = \alpha Z_{t-p} + \beta
-   \tag{2.5}
+   \tag{2.6}
 \end{equation}\]</span></p>
 <p>Dicho lo anterior, podemos escribir la solución general de
-<a href="cap-eqdiff.html#eq:EDPO2">(2.4)</a> como: <span class="math display">\[\begin{eqnarray}
+<a href="cap-eqdiff.html#eq:EDPO2">(2.5)</a> como: <span class="math display">\[\begin{eqnarray}
     Z_t - a_1 L Z_t &amp; = &amp; a_0 \nonumber \\
     (1 - a_1 L)Z_t &amp; = &amp; a_0 \nonumber \\
     Z_t &amp; = &amp; a_0 \frac{1}{1 - a_1 L} + s a^t_1 \nonumber \\
@@ -438,7 +439,7 @@ resultado el valor de la misma constante, ya que ésta no depende del
 momento <span class="math inline">\(t\)</span> en el cual observemos a la variable <span class="math inline">\(Z_t\)</span>. En la ecuación
 <a href="#eq:PROC01">(<strong>??</strong>)</a> se adiciona un término <span class="math inline">\(s a^t_1\)</span> que permite ubicar la
 trayectoria inicial de la solución de la ecuación. El componente no
-significa un cambio respecto de la ecuación <a href="cap-eqdiff.html#eq:EDPO2">(2.4)</a> original, ya
+significa un cambio respecto de la ecuación <a href="cap-eqdiff.html#eq:EDPO2">(2.5)</a> original, ya
 que si buscáramos reconstruir esta ecuación tendríamos: <span class="math display">\[\begin{eqnarray}
     (1 - a_1 L) s a^t_1 &amp; = &amp; s a^t_1 - a_1 s L a^{t}_1 \nonumber \\
     &amp; = &amp; s a^t_1 - a_1 s a^{t - 1}_1 \nonumber \\
@@ -485,31 +486,25 @@ período.</p>
 encuentra rezagada en cualquiera de los siguientes casos:
 <span class="math display" id="eq:SUM0">\[\begin{equation}
     Z_t, Z_{t-1}, Z_{t-2}, Z_{t-3}, \ldots, Z_{t-p}, \ldots
-    \tag{2.6}
+    \tag{2.7}
 \end{equation}\]</span></p>
-<p>Por lo que diremos que en adelante el curso versará sobre ecuaciones en
+<p>Por lo que diremos que en adelante el texto versará sobre ecuaciones en
 diferencia lineales y de cualquier orden <span class="math inline">\(p \in \mathbb{N}\)</span>.</p>
-<p>Retomando la ecuación <a href="#eq:SUM">(<strong>??</strong>)</a> y considerando la parte de la suma
-de los términos de <span class="math inline">\(a^i_1\)</span>, de tal forma que buscaremos dar una
-expresión más comprensible a dicho término. Definamos la siguiente
-expresión como: <span class="math display">\[\begin{equation}
+<p>Retomemos la ecuación <a href="#eq:SUM">(<strong>??</strong>)</a> y consideremos la parte de la suma
+de los términos <span class="math inline">\(a^i_1\)</span>, a la cual buscaremos dar una expresión más
+compacta. Definamos: <span class="math display">\[\begin{equation}
     S_{t-1} = \sum^{t-1}_{i = 0}{a^i_1}
     (\#eq:St1)
 \end{equation}\]</span></p>
-<p>Por lo tanto, <span class="math inline">\(S_t\)</span> estaría dado por la siguiente expresión:
-<span class="math display" id="eq:St">\[\begin{eqnarray}
-S_{t} &amp; = &amp; a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
+<p>Multipliquemos ahora <span class="math inline">\(S_{t-1}\)</span> por <span class="math inline">\(a_1\)</span>: <span class="math display">\[\begin{eqnarray}
+a_1 S_{t-1} &amp; = &amp; a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
       &amp; = &amp; a_1 (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) \nonumber \\
-      &amp; = &amp; a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1 \nonumber \\
-      &amp; = &amp; a_1 S_{t-1}
-      \tag{2.7}
+      &amp; = &amp; a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1
+      (\#eq:St)
 \end{eqnarray}\]</span></p>
-<p>Tomando los dos resultados de las ecuaciones <a href="#eq:St1">(<strong>??</strong>)</a> y
-<a href="cap-eqdiff.html#eq:St">(2.7)</a> anteriores, podemos expresar que si a <span class="math inline">\(S_{t-1}\)</span> le restamos
-<span class="math inline">\(S_t\)</span>, y desarrollando ambos lados de la ecuación anterior podemos
-obtener: <span class="math display">\[\begin{eqnarray}
-    S_{t-1} - a_1 S_{t-1} &amp; = &amp; S_{t-1} - S_{t} \nonumber \\
-    (1 - a_1) S_{t-1} &amp; = &amp; (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) - (a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1) \nonumber \\
+<p>Restando la ecuación <a href="#eq:St">(<strong>??</strong>)</a> de la ecuación <a href="#eq:St1">(<strong>??</strong>)</a>, la
+mayoría de los términos se cancelan entre sí: <span class="math display">\[\begin{eqnarray}
+    S_{t-1} - a_1 S_{t-1} &amp; = &amp; (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) - (a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1) \nonumber \\
     (1 - a_1) S_{t-1} &amp; = &amp; 1 - a^{t}_1 \nonumber
 \end{eqnarray}\]</span></p>
 <p>Así, podemos concluir que: <span class="math display">\[\begin{equation}
@@ -522,9 +517,8 @@ iteración: <span class="math display">\[\begin{equation}
     Z_t = a_0 \left( \frac{1 - a^{t}_1}{1 - a_1} \right) + a^t_1 Z_0
     (\#eq:SOLITER)
 \end{equation}\]</span></p>
-<p>De esta forma, la ecuación <a href="#eq:SOLITER">(<strong>??</strong>)</a> es una solución para la
-ecuación <a href="#eq:SUM">(<strong>??</strong>)</a>, que es una ecuación de un proceso de una
-Ecuación en Diferencia planteado en la ecuación <a href="#eq:EDPO">(<strong>??</strong>)</a>. Esta
+<p>De esta forma, la ecuación <a href="#eq:SOLITER">(<strong>??</strong>)</a> es una solución de la
+Ecuación en Diferencia planteada en la ecuación <a href="#eq:EDPO">(<strong>??</strong>)</a>. Esta
 solución aún no es general, en el sentido de que sea válida para
 cualquier tipo de proceso: convergente o divergente. Dicha convergencia
 o divergencia estará determinada por el parámetro <span class="math inline">\(a_1\)</span>. No debe pasar
@@ -563,12 +557,12 @@ tenemos la expresión: <span class="math display">\[\begin{equation}
 (\#eq:SOLGEN)
 \end{equation}\]</span></p>
 <p>No debe pasar desapercibido que esta solución es la misma que la
-mostrada en la ecuación <a href="#eq:SOLITER">(<strong>??</strong>)</a>, por lo que en realidad ambas
-ecuaciones son una solución general indistintamente entre las ecuaciones
-<a href="#eq:SOLITER">(<strong>??</strong>)</a> y <a href="#eq:SOLGEN">(<strong>??</strong>)</a>. Ambas convergen a la expresión
-como la ecuación <a href="#eq:trayec">(<strong>??</strong>)</a>, con la misma condición de
-convergencia <span class="math inline">\(|a_1| &lt; 1\)</span>. Para ilustrar estas ecuaciones, veamos algunos
-ejemplos al respecto.</p>
+mostrada en la ecuación <a href="#eq:SOLITER">(<strong>??</strong>)</a>: ambos caminos —el método
+iterativo y el uso del operador rezago— conducen a la misma solución
+general. En ambos casos la solución converge a la expresión de la
+ecuación <a href="#eq:trayec">(<strong>??</strong>)</a> bajo la misma condición de convergencia
+<span class="math inline">\(|a_1| &lt; 1\)</span>. Para ilustrar estas ecuaciones, veamos algunos ejemplos al
+respecto.</p>
 <p><strong>Ejemplo</strong>. Consideremos que tenemos un proceso <span class="math inline">\(Z_t\)</span> que es descrito
 por una ecuación en diferencia lineal de primer orden dada por:
 <span class="math display" id="eq:ex1">\[\begin{equation}
@@ -595,11 +589,11 @@ obtenemos: <span class="math display">\[\begin{equation}
 \end{equation}\]</span></p>
 <p>Donde asumiremos que el valor inicial es <span class="math inline">\(Z_0 = 10\)</span> y que la ecuación
 converge al valor de <span class="math inline">\(1.3333333 \ldots\)</span>, cuando <span class="math inline">\(t\)</span> es muy grande o
-tiende a infinito. Ahora simulemos el comportamiento de ambos procesos y
-estableceremos los resultados del Cuadro <a href="cap-eqdiff.html#tab:table1">2.1</a>. Notemos que
-el segundo proceso converge de una forma más rápida que el primero. El
-Cuadro <a href="cap-eqdiff.html#tab:table1">2.1</a> se ilustra en las siguientes dos Figura
-<a href="cap-eqdiff.html#fig:fig21">2.6</a> y Figura <a href="cap-eqdiff.html#fig:fig22">2.7</a>.</p>
+tiende a infinito. Ahora simulemos el comportamiento de ambos procesos;
+los resultados se muestran en el Cuadro <a href="cap-eqdiff.html#tab:table1">2.1</a>. Notemos que
+el segundo proceso converge de una forma más rápida que el primero. Los
+resultados del Cuadro <a href="cap-eqdiff.html#tab:table1">2.1</a> se ilustran en las Figuras
+<a href="cap-eqdiff.html#fig:fig21">2.6</a> y <a href="cap-eqdiff.html#fig:fig22">2.7</a>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -823,11 +817,11 @@ que: <span class="math display">\[\begin{eqnarray}
     &amp;  &amp; + (1 - g_1 L)(1 - g_2 L) s_2 g^t_2
     (\#eq:eqcaracteristica1)
 \end{eqnarray}\]</span></p>
-<p>Por lo tanto, buscamos que, para que el proceso sea equivalente y
-podamos interpretar que la ecuación <a href="#eq:SOLGEN2">(<strong>??</strong>)</a> sea una solución
-general, deberá pasar lo siguiente: <span class="math display">\[\begin{equation}
+<p>Por lo tanto, para que la ecuación <a href="#eq:SOLGEN2">(<strong>??</strong>)</a> sea efectivamente
+una solución general, se requiere que se cumpla lo siguiente:
+<span class="math display" id="eq:eqcaracteristica2">\[\begin{equation}
     (1 - g_1 L) (1 - g_2 L) s_1 g^t_1 + (1 - g_1 L) (1 - g_2 L) s_2 g^t_2 = 0
-    (\#eq:eqcaracteristica2)
+    \tag{2.12}
 \end{equation}\]</span></p>
 <p>O, escrito de otra forma: <span class="math display">\[\begin{equation}
     (1 - g_1 L) s_1 g^t_1 = (1 - g_2 L) s_2 g^t_2 = 0
@@ -857,48 +851,48 @@ son:</p>
 <p><strong>Caso I</strong>. Si <span class="math inline">\(a^2_1 + 4 a_2 &gt; 0\)</span>, la ecuación <a href="#eq:POL2">(<strong>??</strong>)</a>
 proporcionará dos valores de raíces reales y distintos, eso es
 <span class="math inline">\(x_1 = g^{-1}_1 \neq x_2 = g^{-1}_2\)</span>. Si por ahora suponemos que
-<span class="math inline">\(|{g_1} &lt; 1|\)</span> y que <span class="math inline">\(|{g_2} &lt; 1|\)</span>, entonces tendremos que:
+<span class="math inline">\(|g_1| &lt; 1\)</span> y que <span class="math inline">\(|g_2| &lt; 1\)</span>, entonces tendremos que:
 <span class="math display" id="eq:eqcaracteristica6">\[\begin{eqnarray}
     (1 - g_1 L)^{-1} (1 - g_2 L)^{-1} a_0 &amp; =&amp;  \left( \sum^{\infty}_{j = 0}{g^j_1 L^j} \right) \left( \sum^{\infty}_{j = 0}{g^j_2 L^j} \right) a_0 \nonumber \\
     &amp; = &amp; \left( \sum^{\infty}_{j = 0}{g^j_1} \right) \left( \sum^{\infty}_{j = 0}{g^j_2} \right) a_0 \nonumber \\
     &amp; = &amp; \frac{a_0}{(1 - g_1)(1 - g_2)} \nonumber \\
     &amp; = &amp; \frac{a_0}{1 - a_1 - a_2}
-    \tag{2.12}
+    \tag{2.13}
 \end{eqnarray}\]</span></p>
 <p>Esto último es el punto de equilibrio de la ecuación <a href="#eq:SOLGEN2">(<strong>??</strong>)</a>;
-considerando que <span class="math inline">\(|{g_1} &lt; 1|\)</span> y que <span class="math inline">\(|{g_2} &lt; 1|\)</span> –notemos que los
+considerando que <span class="math inline">\(|g_1| &lt; 1\)</span> y que <span class="math inline">\(|g_2| &lt; 1\)</span> –notemos que los
 demás casos son divergentes, ya que la suma anterior no convergería–.
 De esta forma, la solución de la ecuación estará dada por:
 <span class="math display" id="eq:Conver">\[\begin{equation}
     \lim_{t \to \infty} Z_t = \frac{a_0}{1 - a_1 - a_2}
-    \tag{2.13}
+    \tag{2.14}
 \end{equation}\]</span></p>
 <p><strong>Caso II</strong>. Si <span class="math inline">\(a_1^2 + 4a_2 &lt; 0\)</span> en la ecuación <a href="#eq:POL2">(<strong>??</strong>)</a>,
 entonces las raíces serán números complejos conjugados, es decir:
 <span class="math display" id="eq:Conver1">\[\begin{equation}
 g_i^{-1}=a \pm ib
-\tag{2.14}
+\tag{2.15}
 \end{equation}\]</span></p>
 <span class="math display" id="eq:Conver2">\[\begin{eqnarray}
     g_i  =  u \pm iv
-    \tag{2.15}
+    \tag{2.16}
 \end{eqnarray}\]</span>
 <p>Dichas raíces las podemos escribir en coordenadas polares como:
 <span class="math display" id="eq:Conver3">\[\begin{eqnarray}
     g_1 = r e^{i \theta} = r (cos(\theta) + i sen(\theta))
-    \tag{2.16}
+    \tag{2.17}
 \end{eqnarray}\]</span> <span class="math display" id="eq:Conver4">\[\begin{eqnarray}
     g_2  =  r e^{-i \theta} = r (cos(\theta) - i sen(\theta))
-    \tag{2.17}
+    \tag{2.18}
 \end{eqnarray}\]</span> Donde: <span class="math inline">\(r = \sqrt{u^2 + v^2}\)</span>, a esta expresión también
 se le conoce como módulo. Alternativamente, podemos escribir que
 <span class="math inline">\(r = \sqrt{g_1 g_2}\)</span>. La única condición es que <span class="math inline">\(r &lt; 1\)</span> para que el
 proceso descrito en la ecuación <a href="#eq:SOLGEN2">(<strong>??</strong>)</a> sea convergente.</p>
 <p>Al igual que en el <strong>Caso I</strong>, el punto de equilibrio de la ecuación se
-debería ubicar alrededor de la ecuación <a href="cap-eqdiff.html#eq:Conver">(2.13)</a>, siempre que
+debería ubicar alrededor de la ecuación <a href="cap-eqdiff.html#eq:Conver">(2.14)</a>, siempre que
 <span class="math inline">\(r &lt; 1\)</span>, por lo que el factor que determina la convergencia es el
 módulo, ya que si el módulo es mayor a 1, el proceso será divergente,
-pero si es menor a 1 convergerá a <a href="cap-eqdiff.html#eq:Conver">(2.13)</a>. Para ilustrar, el
+pero si es menor a 1 convergerá a <a href="cap-eqdiff.html#eq:Conver">(2.14)</a>. Para ilustrar, el
 caso contrario es divergente puesto que representa trayectorias
 senoidales (oscilatorias) que sólo pueden converger si a medida que pasa
 el tiempo las ondas son menos amplias.</p>
@@ -925,7 +919,7 @@ procedimiento. Partimos de la ecuación: <span class="math display">\[\begin{equ
 <p>Donde <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span> se determinan: <span class="math display">\[\begin{equation*}
     x = \frac{-a_1 \pm \sqrt{a_1^2 + 4a_2}}{2 a_2}
 \end{equation*}\]</span></p>
-<p>Asumiendo que obtienen números complejos: <span class="math display">\[\begin{eqnarray*}
+<p>Asumiendo que se obtienen números complejos: <span class="math display">\[\begin{eqnarray*}
     x_1 &amp; = &amp; g_1^{-1} = u + iv  \\
     x_2 &amp; = &amp; g_2^{-1} = u - iv
 \end{eqnarray*}\]</span></p>
@@ -957,10 +951,10 @@ converge si <span class="math inline">\(r &lt; 1\)</span>. Nótese que para que 
 deben ser conjugados complejos, es decir, <span class="math inline">\(s_2 = \bar{s}_1\)</span>. Si
 escribimos <span class="math inline">\(s_1 = p - iq\)</span> con <span class="math inline">\(p, q \in \mathbb{R}\)</span>, entonces
 <span class="math inline">\(A = s_1 + s_2 = 2p\)</span> y <span class="math inline">\(B = i(s_2 - s_1) = i(2iq) = -2q\)</span>, ambos reales,
-lo que garantiza que <span class="math inline">\(Z_t \in \mathbb{R}\)</span>. Finalmente: <span class="math display">\[\begin{eqnarray*}
-    \theta &amp; = &amp; cos^{-1}cos(\theta) \\
-    \theta &amp; = &amp; sen^{-1}sen(\theta)
-\end{eqnarray*}\]</span></p>
+lo que garantiza que <span class="math inline">\(Z_t \in \mathbb{R}\)</span>. Finalmente, el ángulo <span class="math inline">\(\theta\)</span> se recupera de las relaciones
+anteriores: <span class="math display">\[\begin{equation*}
+    \theta = cos^{-1}\left( \frac{u}{s} \right) = sen^{-1}\left( \frac{v}{s} \right)
+\end{equation*}\]</span></p>
 <p><strong>Caso III</strong>. Ahora revisemos el caso en el que <span class="math inline">\(a_1^2 + 4a_2 = 0\)</span>, de
 esta forma las raíces serán idénticas: <span class="math display">\[\begin{equation}
     g = g_1^{-1} = g_2^{-1} = \frac{-a_1}{2 a_2}
@@ -971,7 +965,7 @@ esta forma las raíces serán idénticas: <span class="math display">\[\begin{eq
     (1 - g L)^2 Z_t &amp; = &amp; a_0 \nonumber \\
     Z_t &amp; = &amp; \frac{a_0}{(1 - g L)^2} + s_1 g^t + s_2 t g^t \nonumber \\
     &amp; = &amp; a_0 \sum_{j = 0}^{\infty} (1 + j) g^j + s_1 g^t + s_2 t g^t
-    \tag{2.18}
+    \tag{2.19}
 \end{eqnarray}\]</span></p>
 <p>Para verificar que <span class="math inline">\(t g^t\)</span> es solución independiente de <span class="math inline">\(g^t\)</span> en la
 parte homogénea, aplicamos el operador <span class="math inline">\((1 - gL)^2\)</span> directamente:
@@ -1024,7 +1018,7 @@ la expresión dada por las siguientes expresiones: <span class="math display">\[
 <p>Al final, la ecuación que describe la solución general será:
 <span class="math display" id="eq:Conver9">\[\begin{equation}
     Z_t = 10 + s_1 (0.4)^t + s_2 (0.5)^t
-    \tag{2.19}
+    \tag{2.20}
 \end{equation}\]</span></p>
 <p>Para determinar los valores de <span class="math inline">\(s_1\)</span> y <span class="math inline">\(s_2\)</span> necesitamos obtener dos
 valores iniciales de la ecuación. Para lo cual iniciaremos con <span class="math inline">\(t = 0\)</span>
@@ -1057,7 +1051,7 @@ de la trayectoria para 100 períodos.</p>
 <span><span class="va">Zt1</span><span class="op">=</span><span class="va">Zt</span><span class="op">[</span><span class="va">lista</span><span class="op">]</span></span>
 <span></span>
 <span></span>
-<span><span class="va">tabla1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Tiempo1</span>, <span class="va">Zt1</span><span class="op">)</span></span>
+<span><span class="va">tabla1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">t1</span>, <span class="va">Zt1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tabla1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tiempo"</span>, <span class="st">"$Z_t =10-450(0.4)^t+440(0.5)^t$"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tabla1</span>, </span>
@@ -1194,34 +1188,34 @@ tenemos que la solución general de una ecuación como la descrita en
     (\#eq:EDOPGEN)
 \end{equation}\]</span><br><span class="math display" id="eq:EDOPGEN2">\[\begin{eqnarray}
     Z_t &amp; = &amp; \frac{a_0}{(1 - g_1)(1 - g_2) \ldots (1 - g_p)} + s_1 g^t_1 + s_2 g^t_2 + \ldots + s_p g^t_p
-    \tag{2.20}
+    \tag{2.21}
 \end{eqnarray}\]</span></p>
 <p>Donde <span class="math inline">\(s_1\)</span>, <span class="math inline">\(s_2\)</span>, …, <span class="math inline">\(s_p\)</span> son constantes que se determinan
 utilizando <span class="math inline">\(p\)</span> valores particulares de <span class="math inline">\(Z_t\)</span>, y la solución general
-descrita en las ecuaciones <a href="#eq:EDOPGEN">(<strong>??</strong>)</a> y <a href="cap-eqdiff.html#eq:EDOPGEN2">(2.20)</a>
+descrita en las ecuaciones <a href="#eq:EDOPGEN">(<strong>??</strong>)</a> y <a href="cap-eqdiff.html#eq:EDOPGEN2">(2.21)</a>
 implica encontrar <span class="math inline">\(p\)</span> raíces: <span class="math inline">\(x_1 = g^{-1}_1\)</span>, <span class="math inline">\(x_2 = g^{-1}_2\)</span>, …,
 <span class="math inline">\(x_p = g^{-1}_p\)</span> de los siguientes polinomios equivalentes:
 <span class="math display" id="eq:POLGEN1">\[\begin{eqnarray}
     (1 - g_1 x)(1 - g_2 x) \ldots (1 - g_p x) = 0
-    \tag{2.21}
+    \tag{2.22}
 \end{eqnarray}\]</span></p>
 <span class="math display" id="eq:POLGEN2">\[\begin{eqnarray}
     1 - a_1 x - a_2 x^2 - \ldots - a_p x^p = 0
-    \tag{2.22}
+    \tag{2.23}
 \end{eqnarray}\]</span>
 <span class="math display" id="eq:POLGEN3">\[\begin{eqnarray}
     a_p x^p + \ldots + a_2 x^2 + a_1 x - 1 = 0
-    \tag{2.23}
+    \tag{2.24}
 \end{eqnarray}\]</span>
 <p>Antes de plantear la solución general, analicemos una solución
 particular cuando un conjunto de las <span class="math inline">\(p\)</span> raíces, digamos un total de
 <span class="math inline">\(m\)</span>, son iguales, es decir, cuando sucede que
 <span class="math inline">\(g_1 = g_2 = \ldots = g_m = g\)</span> (con <span class="math inline">\(1 &lt; m \leq p\)</span>). En este caso la
-solución general en la ecuación <a href="cap-eqdiff.html#eq:EDOPGEN2">(2.20)</a> se escribe como:
+solución general en la ecuación <a href="cap-eqdiff.html#eq:EDOPGEN2">(2.21)</a> se escribe como:
 <span class="math display" id="eq:EDOPGEN3">\[\begin{eqnarray}
     Z_t &amp; = &amp; \frac{a_0}{(1 - g)^m(1 - g_{m+1}) \ldots (1 - g_p)} \nonumber \\
     &amp; &amp; + s_1 g^t + s_2 t g^t + \ldots + s_m t^{m-1} g^t + s_{m+1} g^t_{m+1} + \ldots + s_{p} g^t_{p}
-    \tag{2.24}
+    \tag{2.25}
 \end{eqnarray}\]</span></p>
 <p>Definamos: <span class="math display">\[\begin{equation}
     f(g) = \frac{1}{1 - g} = \sum_{j = 0}^{\infty} g^j
@@ -1231,54 +1225,57 @@ solución general en la ecuación <a href="cap-eqdiff.html#eq:EDOPGEN2">(2.20)</
 expresiones. Cuando <span class="math inline">\(m = 2\)</span>: <span class="math display">\[\begin{equation}
     f'(g) = \frac{1}{(1 - g)^2} = \sum_{j = 0}^{\infty} j g^{j-1} = \sum_{j = 0}^{\infty} (1 + j) g^j \nonumber
 \end{equation}\]</span></p>
-<p>En el otro extremo, cuando <span class="math inline">\(m = p\)</span>: <span class="math display">\[\begin{equation}
-    f^{(p-1)}(g) = \frac{p-1}{(1 - g)^p} = \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j
+<p>En el otro extremo, cuando <span class="math inline">\(m = p\)</span>, la derivada de orden <span class="math inline">\(p-1\)</span> es
+<span class="math inline">\(f^{(p-1)}(g) = (p-1)! \, / \, (1-g)^p\)</span>, por lo que: <span class="math display">\[\begin{equation}
+    \frac{1}{(1 - g)^p} = \frac{f^{(p-1)}(g)}{(p-1)!} = \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j
     (\#eq:EDOPGEN5)
 \end{equation}\]</span></p>
 <p>Así, en el extremo cuando <span class="math inline">\(m = p\)</span> la solución general podría estar dada
 por: <span class="math display">\[\begin{eqnarray}
     Z_t &amp; = &amp; a_0 \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j \nonumber \\
-    &amp; &amp; + g^t \sum_{i = 0}^p s_i t^{i-1}
+    &amp; &amp; + g^t \sum_{i = 1}^p s_i t^{i-1}
     (\#eq:EDOPGEN6)
 \end{eqnarray}\]</span></p>
-<p>Donde <span class="math inline">\(|{g} &lt; 1|\)</span>, <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Para finalizar
+<p>Donde <span class="math inline">\(|g| &lt; 1\)</span>, <span class="math inline">\(t = \ldots, -2, -1, 0, 1, 2, \ldots\)</span>. Para finalizar
 esta sección, plantearemos la expresión del polinomio característico que
 nos permitirá hacer el análisis de convergencia de los procesos.
-Partamos de que la ecuación <a href="cap-eqdiff.html#eq:POLGEN3">(2.23)</a> se puede escribir como:
+Partamos de que la ecuación <a href="cap-eqdiff.html#eq:POLGEN3">(2.24)</a> se puede escribir como:
 <span class="math display" id="eq:POLGEN55">\[\begin{equation}
     (x^{-1})^p - a_1 (x^{-1})^{p-1} - a_2 (x^{-1})^{p-2} - \ldots - a_p = 0
-    \tag{2.25}
+    \tag{2.26}
 \end{equation}\]</span></p>
-<p>La ecuación <a href="cap-eqdiff.html#eq:POLGEN55">(2.25)</a> permite interpretar las raíces del
+<p>La ecuación <a href="cap-eqdiff.html#eq:POLGEN55">(2.26)</a> permite interpretar las raíces del
 polinomio característico de forma directa ya que <span class="math inline">\(x^{-1}_1 = g_1\)</span>,
-<span class="math inline">\(x^{-1}_2 = g_2\)</span>, …, <span class="math inline">\(x^{-1}_p = g_p\)</span>. Así, siempre que <span class="math inline">\(p \geq 1\)</span> en
-la ecuación <a href="#eq:EDOP">(<strong>??</strong>)</a>, diremos que el proceso descrito en esa
-ecuación dará como resultado un proceso convergente si se cumplen las
-dos condiciones <a href="#eq:COND1">(<strong>??</strong>)</a> y <a href="#eq:COND2">(<strong>??</strong>)</a>: <span class="math display">\[\begin{equation}
-    |a_p| &lt; 1  
+<span class="math inline">\(x^{-1}_2 = g_2\)</span>, …, <span class="math inline">\(x^{-1}_p = g_p\)</span>. La condición exacta de
+convergencia del proceso descrito en la ecuación <a href="#eq:EDOP">(<strong>??</strong>)</a> es que
+todas las raíces <span class="math inline">\(g_i\)</span> tengan módulo estrictamente menor que uno, como
+se expresa en la ecuación <a href="#eq:COND3">(<strong>??</strong>)</a>: <span class="math display">\[\begin{eqnarray}
+    |g_i| &lt; 1
+    (\#eq:COND3)
+\end{eqnarray}\]</span></p>
+<p>Para todo <span class="math inline">\(i = 1, 2, \ldots, p\)</span> –cuando la raíz es real, el módulo es
+su valor absoluto; cuando es compleja, <span class="math inline">\(g_i = u \pm iv\)</span>, el módulo es
+<span class="math inline">\(\sqrt{u^2 + v^2}\)</span>–. En la práctica, resulta útil disponer de
+condiciones expresadas directamente en términos de los coeficientes. Dos
+condiciones <strong>necesarias</strong> (aunque no suficientes) para la convergencia
+son las ecuaciones <a href="#eq:COND1">(<strong>??</strong>)</a> y <a href="#eq:COND2">(<strong>??</strong>)</a>: <span class="math display">\[\begin{equation}
+    |a_p| &lt; 1
     (\#eq:COND1)
 \end{equation}\]</span> <span class="math display">\[\begin{equation}
     a_1 + a_2 + \ldots + a_p &lt; 1
     (\#eq:COND2)
 \end{equation}\]</span></p>
-<p>Alternativamente, cuando las raíces son reales, lo anterior es
-equivalente a la expresión <a href="#eq:COND3">(<strong>??</strong>)</a>: <span class="math display">\[\begin{eqnarray}
-    |g_i| &lt; 1
-    (\#eq:COND3)
-\end{eqnarray}\]</span></p>
-<p>Para <span class="math inline">\(\forall i = 1, 2, \ldots, p\)</span>. Cuando las raíces son imaginarias,
-las dos condiciones <a href="#eq:COND1">(<strong>??</strong>)</a> y <a href="#eq:COND2">(<strong>??</strong>)</a> son equivalentes a
-la expresión <a href="#eq:COND4">(<strong>??</strong>)</a>: <span class="math display">\[\begin{eqnarray}
-    \sqrt{g_i g_j} = \sqrt{u^2 + v^2} &lt; 1
-    (\#eq:COND4)
-\end{eqnarray}\]</span></p>
-<p>Para <span class="math inline">\(\forall i \neq j\)</span> y <span class="math inline">\(i, j = 1, 2, \ldots, p\)</span>. Cuando
-<span class="math inline">\(g_1 = g_2 = \ldots = g_p = g\)</span>, la condición de la ecuación
-<a href="#eq:COND3">(<strong>??</strong>)</a> se resume a que <span class="math inline">\(|g| &lt; 1\)</span>. En resumen, las condiciones
-descritas en las ecuaciones <a href="#eq:COND3">(<strong>??</strong>)</a> y <a href="#eq:COND4">(<strong>??</strong>)</a> se pueden
-ilustrar mediante un circulo unitario como el de la Figura
-<a href="cap-eqdiff.html#fig:fig24">2.9</a> en que sí las raíces se ubican dentro de éste, podemos
-decir que el proceso es convergente en el largo plazo.</p>
+<p>Si alguna de ellas falla, el proceso es divergente; sin embargo, su
+cumplimiento no garantiza la convergencia, por lo que la verificación
+definitiva requiere calcular las raíces. Por otra parte, una condición
+<strong>suficiente</strong> (aunque no necesaria) es que
+<span class="math inline">\(|a_1| + |a_2| + \ldots + |a_p| &lt; 1\)</span>.</p>
+<p>Cuando <span class="math inline">\(g_1 = g_2 = \ldots = g_p = g\)</span>, la condición de la ecuación
+<a href="#eq:COND3">(<strong>??</strong>)</a> se resume a que <span class="math inline">\(|g| &lt; 1\)</span>. En resumen, la condición
+descrita en la ecuación <a href="#eq:COND3">(<strong>??</strong>)</a> se puede ilustrar mediante un
+círculo unitario como el de la Figura <a href="cap-eqdiff.html#fig:fig24">2.9</a>: si todas las
+raíces <span class="math inline">\(g_i\)</span> se ubican dentro de éste, podemos decir que el proceso es
+convergente en el largo plazo.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Crear datos para el círculo</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span><span class="op">*</span><span class="va">pi</span>, length.out<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
@@ -1294,8 +1291,8 @@ decir que el proceso es convergente en el largo plazo.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig24"></span>
-<img src="Notas-Series-Tiempo_files/figure-html/fig24-1.png" alt="Circulo unitario en el que se cumple que $|g_i|&lt;1$ y $(g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1$" width="384"><p class="caption">
-Figura 2.9: Circulo unitario en el que se cumple que <span class="math inline">\(|g_i|&lt;1\)</span> y <span class="math inline">\((g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} &lt; 1\)</span>
+<img src="Notas-Series-Tiempo_files/figure-html/fig24-1.png" alt="Círculo unitario en el que se cumple que $|g_i|&lt;1$" width="384"><p class="caption">
+Figura 2.9: Círculo unitario en el que se cumple que <span class="math inline">\(|g_i|&lt;1\)</span>
 </p>
 </div>
 </div>
@@ -1319,11 +1316,11 @@ operador rezago antes definido, el resultado deberá ser que cada uno de
 los valores de la serie es retardado o regresado un período. Es decir:</p>
 <span class="math display" id="eq:Lag1">\[\begin{equation}
     L Z_t = Z_{t-1}
-    \tag{2.26}
+    \tag{2.27}
 \end{equation}\]</span>
 <p>De esta forma, si aplicamos el operador rezago <span class="math inline">\(L\)</span> a la nueva serie de
 tiempo dada por <span class="math inline">\(Z_{t-1}\)</span> podemos obtener <span class="math inline">\(Z_{t-2}\)</span>. Haciendo uso de la
-ecuación <a href="cap-eqdiff.html#eq:Lag1">(2.26)</a> podemos obtener: <span class="math display">\[\begin{equation}
+ecuación <a href="cap-eqdiff.html#eq:Lag1">(2.27)</a> podemos obtener: <span class="math display">\[\begin{equation}
     L Z_{t-1} = L(L Z_t) = L^2 Z_t = Z_{t-2}
     (\#eq:Lag2)
 \end{equation}\]</span></p>
@@ -1344,7 +1341,7 @@ cuando aplican para el caso de rezagar como para cuando se adelanta una
 serie. Como primera propiedad tomemos a la siguiente propiedad:
 <span class="math display" id="eq:Lag4">\[\begin{equation}
     L^{m} Z_{t-n} = L^{m} (L^{n} Z_{t}) = L^{m + n} Z_{t} = Z_{t-(n + m)}
-    \tag{2.27}
+    \tag{2.28}
 \end{equation}\]</span></p>
 <p>De lo anterior, podemos inferir el siguiente resultado: <span class="math display">\[\begin{equation}
     \Delta Z_{t} = Z_{t} - Z_{t-1} = (1 - L) Z_{t}
@@ -1355,22 +1352,25 @@ expresar como: <span class="math display">\[\begin{equation}
     \Delta_{4} Z_{t} = Z_{t} - Z_{t-4} = (1 - L^4) Z_{t}
 (\#eq:Diff4)
 \end{equation}\]</span></p>
-<p>Al respecto, vale la pena aclarar que en ocasiones se hará uso de una
-notación alternativa dada por: <span class="math inline">\(\Delta^k\)</span> o <span class="math inline">\(\Delta_k\)</span>, donde
-<span class="math inline">\(k = 1, 2, 3, \ldots\)</span>, indistintamente, ya que en ambos casos se
-referirá a una diferencia de orden <span class="math inline">\(k\)</span>. Esta notación resulta de gran
-utilidad cuando se quiere comparar períodos equivalentes como, por
-ejemplo, el mismo trimestre pero de un año anterior. De forma similar,
-para el caso de logaritmos podemos escribir la ecuación <a href="#eq:Diff4">(<strong>??</strong>)</a>
-como: <span class="math display">\[\begin{equation}
-    \Delta^{4} ln(Z_{t}) = \Delta_{4} ln(Z_{t}) = ln(Z_{t}) - ln(Z_{t-4}) = (1 - L^4) ln(Z_{t})
-    (\#eq:Diff5)
+<p>Al respecto, vale la pena distinguir dos notaciones que suelen
+confundirse: <span class="math inline">\(\Delta_k Z_t = (1 - L^k) Z_t = Z_t - Z_{t-k}\)</span> denota la
+diferencia respecto del periodo <span class="math inline">\(t-k\)</span> –también llamada diferencia
+estacional cuando <span class="math inline">\(k\)</span> coincide con la periodicidad de los datos–,
+mientras que <span class="math inline">\(\Delta^k Z_t = (1 - L)^k Z_t\)</span> denota la aplicación
+iterada <span class="math inline">\(k\)</span> veces de la primera diferencia. Ambas coinciden únicamente
+cuando <span class="math inline">\(k = 1\)</span>. La primera notación resulta de gran utilidad cuando se
+quiere comparar períodos equivalentes como, por ejemplo, el mismo
+trimestre pero de un año anterior (<span class="math inline">\(k = 4\)</span> con datos trimestrales). En
+logaritmos, la ecuación <a href="#eq:Diff4">(<strong>??</strong>)</a> se escribe como:
+<span class="math display" id="eq:Diff5">\[\begin{equation}
+    \Delta_{4} ln(Z_{t}) = ln(Z_{t}) - ln(Z_{t-4}) = (1 - L^4) ln(Z_{t})
+    \tag{2.29}
 \end{equation}\]</span></p>
 <p>Para el caso de una serie de tiempo que se le ha transformado mediante
 medias móviles, digamos de <span class="math inline">\(4\)</span> periodos, podemos escribirla como:
 <span class="math display" id="eq:Diff6">\[\begin{equation}
     Zs_{t} = \frac{1}{4}(Z_{t} + Z_{t-1} + Z_{t-2} + Z_{t-3}) = \frac{1}{4}(1 + L + L^2 + L^3)Z_{t}
-    \tag{2.28}
+    \tag{2.30}
 \end{equation}\]</span></p>
 <p>Una generalización del anterior caso puede ser escrita como un polinomio
 de orden <span class="math inline">\(p\)</span> con el operador rezago <span class="math inline">\(L\)</span> dado como: <span class="math display">\[\begin{eqnarray}
@@ -1398,12 +1398,12 @@ para una serie de <span class="math inline">\(Z_t\)</span>: <span class="math di
 <p>y un proceso de medias móviles para la misma serie de <span class="math inline">\(Z_t\)</span>:
 <span class="math display" id="eq:Diff9">\[\begin{equation}
     Zs_{t} = \frac{1}{4}(1 + L^1 + L^2 + L^3) Z_{t} = \frac{1}{4}(Z_{t} + Z_{t-1} + Z_{t-2} + Z_{t-3})
-    \tag{2.29}
+    \tag{2.31}
 \end{equation}\]</span></p>
 <p>De tal forma que el producto de ambos procesos se puede escribir como:
 <span class="math display" id="eq:Diff10">\[\begin{equation}
 (1 - L) \times \frac{1}{4}(1 + L^1 + L^2 + L^3) Z_{t} = \frac{1}{4}(1 - L^4) Z_{t}
-\tag{2.30}
+\tag{2.32}
 \end{equation}\]</span></p>
 <p>Es decir, que el producto de dos polinomios, uno de diferencias y otro
 más de medias móviles, resulta en uno de diferencias pero de mayor

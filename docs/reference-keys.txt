@@ -6,10 +6,10 @@ fig:fig5
 eq:difflog
 eq:TC
 eq:TCDiffLog
+eq:Diff1
 eq:EDPO2
 eq:LinProp
 eq:SUM0
-eq:St
 eq:Z0
 eq:ex1
 tab:table1
@@ -17,6 +17,7 @@ fig:fig21
 fig:fig22
 eq:EDSOSOL
 eq:a2
+eq:eqcaracteristica2
 eq:eqcaracteristica6
 eq:Conver
 eq:Conver1
@@ -36,6 +37,7 @@ eq:POLGEN55
 fig:fig24
 eq:Lag1
 eq:Lag4
+eq:Diff5
 eq:Diff6
 eq:Diff9
 eq:Diff10
@@ -61,6 +63,7 @@ fig:fig45
 fig:fig46
 tab:AR01
 tab:AR0101
+eq:AR2EqSol
 fig:fig47
 tab:AR02
 tab:AR0201
@@ -280,7 +283,7 @@ ejemplo
 descripción-del-problema
 importamos-datos-desde-un-dataset-de-r
 procedimiento
-make-the-plot
+gráfica-de-la-ecuación-de-cointegración
 filtro-kalman
 modelos-estado-espacio-y-teoría-económica
 modelo-de-proyección-trimestral-qpm-del-imf-2020

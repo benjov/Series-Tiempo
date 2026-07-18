@@ -98,7 +98,7 @@
 <li><p>los datos corresponden a información de alta frecuencia.</p></li>
 </ol>
 <p>Iniciemos por las bibliotecas necesarias:</p>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://R-Forge.R-project.org/projects/expm/">expm</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
@@ -117,7 +117,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.unstarched.net">rmgarch</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.rcpp.org">Rcpp</a></span><span class="op">)</span></span></code></pre></div>
 <p>Para el análisis de temas financieros existe una librería de mucha utilidad llamada <strong>quantmod</strong>. En primer lugar esta librería permite acceder a datos financieros de un modo muy simple, es posible descargar series financieras desde <em>yahoo</em>, la <em>FRED (Federal Reserve Economic Data)</em>, <em>google</em>, etc. Por otro lado, también es una librería que permite realizar gráficos altamente estéticos con unas cuantas líneas de código. Usaremos datos de la cotización del bitcoin (ticker: “BTC-USD”) descargados de Yahoo Finance, con corte al 7 de julio de 2026; la serie está almacenada en la carpeta <code>BD/</code> del repositorio para garantizar la reproducibilidad de los resultados que se discuten en el texto.</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Datos congelados (corte: 2026-07-07) para reproducibilidad.</span></span>
 <span><span class="co">## Quien desee replicar el ejercicio con datos vivos puede descomentar</span></span>
 <span><span class="co">## las siguientes líneas para descargar la serie actualizada desde</span></span>
@@ -136,7 +136,7 @@
 <span><span class="st">                    addMACD()'</span>,<span class="co"># subset='2021',</span></span>
 <span>                theme<span class="op">=</span><span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/Data_ARCH-1.png" width="672"></div>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close
 ## 2014-09-17      465.864      468.174     452.422       457.334
@@ -152,7 +152,7 @@
 ## 2014-09-20       36863600          408.904
 ## 2014-09-21       26580100          398.821
 ## 2014-09-22       24127600          402.152</code></pre>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close
 ## 2026-07-02     60004.77     62117.88    59532.32      61485.30
@@ -169,7 +169,7 @@
 ## 2026-07-06    36552222303         63995.02
 ## 2026-07-07    31026493556         63297.39</code></pre>
 <p>Para fines del ejercicio de este capítulo, usaremos el precio ajustado del activo. Esto nos servirá para calcular el rendimiento diario, o puesto en lenguaje de series temporales podemos decir que usaremos la serie en diferencias logarítmicas.</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">$</span><span class="va">`BTC-USD.Adjusted`</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig101"></span>
@@ -178,7 +178,7 @@ Figura 6.1: Evolución del precio del Bitcoin
 </p>
 </div>
 <p>Una de las preguntas relevantes al observar la serie en diferencias, es si podríamos afirmar que esta serie cumple con el supuesto de homocedasticidad. Para ello, la Figura <a href="cap-volatilidad.html#fig:fig102">6.2</a> muestra que las variaciones en el precio del Bitcoin muestran un escenario en el que no se cumple dicho supuesto.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">logret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">$</span><span class="va">`BTC-USD.Adjusted`</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span></code></pre></div>
@@ -193,7 +193,7 @@ Figura 6.2: Evolución del rendimiento (diferencias logarítmicas) del Bitcoin
 <span class="header-section-number">6.1.1</span> Value at Risk (VaR)<a class="anchor" aria-label="anchor" href="#value-at-risk-var"><i class="fas fa-link"></i></a>
 </h3>
 <p>Utilicemos como ejemplo el Valor en Riesgo. Este es básicamente un cálculo que nos permite estimar el monto que una acción o portafolio podría perder dada una probabilidad <span class="math inline">\((1-\alpha)\)</span>. Supongamos un <span class="math inline">\(\alpha = 0.05\)</span>, de esta forma, la Figura <a href="cap-volatilidad.html#fig:fig103">6.3</a> ilustra la región de la distribución que consideraríamos como el VaR.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span></span>
 <span><span class="va">VaR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span> <span class="va">logret</span>, <span class="va">alpha</span> <span class="op">)</span></span>
@@ -201,7 +201,7 @@ Figura 6.2: Evolución del rendimiento (diferencias logarítmicas) del Bitcoin
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span> <span class="va">VaR</span>, <span class="fl">4</span> <span class="op">)</span><span class="op">*</span><span class="fl">100</span></span></code></pre></div>
 <pre><code>##   5% 
 ## -5.4</code></pre>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">logret</span> , geom <span class="op">=</span> <span class="st">'histogram'</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">'lightblue'</span> , bins <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">logret</span><span class="op">[</span><span class="va">logret</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">logret</span> , <span class="fl">0.05</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> , </span>
@@ -214,7 +214,7 @@ Figura 6.3: Histograma de rendimientos del Bitcoin
 </p>
 </div>
 <p>Ahora bien, una de las preguntas que nos podemos hacer es si los rendimientos del Bitcoin se aproximan a una distribución normal. Para ello, la Figura <a href="cap-volatilidad.html#fig:fig104">6.4</a> ilustra esta comparación, de la cual podemos observar que una prueba de normalidad rechaza esa hipótesis–el estadístico Jarque-Bera indica que la serie de rendimientos no tiene una distribución normal–.</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">normal_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100000</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">VaR_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">normal_dist</span>, <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">ES_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">normal_dist</span><span class="op">[</span><span class="va">normal_dist</span><span class="op">&lt;</span><span class="va">VaR</span><span class="op">]</span><span class="op">)</span></span>
@@ -228,13 +228,13 @@ Figura 6.3: Histograma de rendimientos del Bitcoin
 Figura 6.4: Densidad de rendimientos del Bitcoin Vs. una distribución normal
 </p>
 </div>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vector_ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">##Kurtosis</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 14.86</code></pre>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##Sesgo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.71</code></pre>
@@ -244,7 +244,7 @@ Figura 6.4: Densidad de rendimientos del Bitcoin Vs. una distribución normal
 <span class="header-section-number">6.1.2</span> Prueba de normalidad<a class="anchor" aria-label="anchor" href="#prueba-de-normalidad"><i class="fas fa-link"></i></a>
 </h3>
 <p>Formalicemos la observación anterior con la prueba de Jarque-Bera, cuya hipótesis nula es que la serie se distribuye como una normal, es decir, <span class="math inline">\(H_0: K = S = 0\)</span>, donde <span class="math inline">\(K\)</span> es el exceso de curtosis y <span class="math inline">\(S\)</span> el sesgo:</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/jarque.test.html">jarque.test</a></span><span class="op">(</span><span class="va">vector_ret</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Jarque-Bera Normality Test
@@ -357,7 +357,7 @@ Figura 6.4: Densidad de rendimientos del Bitcoin Vs. una distribución normal
 <span class="header-section-number">6.2.3</span> Ejemplo ARCH(1)<a class="anchor" aria-label="anchor" href="#ejemplo-arch1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Hasta ahora, las distribuciones utilizadas para medir el Valor en Riesgo de un activo (Bitcoin, en este caso) asumen que no existe correlación serial en los retornos diarios del activo. Observemos un par de gráficas de la función de autocorrelación para corroborar este hecho–ver la Figura <a href="cap-volatilidad.html#fig:fig105">6.5</a>–.</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig105"></span>
@@ -366,7 +366,7 @@ Figura 6.5: Función de autocorrelación de los rendimientos del Bitcoin
 </p>
 </div>
 <p>La idea de clusterización de volatilidad asume que períodos de alta volatilidad serán seguidos por alta volatilidad y viceversa. Por esta razón, la función de autocorrelación útil para saber si existen clústers de volatilidad es utilizando el valor absoluto, ya que lo que importa es saber si la serie está autocorrelacionada en la magnitud de los movimientos. La Figura <a href="cap-volatilidad.html#fig:fig106">6.6</a> muestra el comportamiento de los rendimientos en valor absoluto y la Figura <a href="cap-volatilidad.html#fig:fig107">6.7</a> su función de autocorrelación.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig106"></span>
@@ -374,7 +374,7 @@ Figura 6.5: Función de autocorrelación de los rendimientos del Bitcoin
 Figura 6.6: Evolución de los rendimientos del Bitcoin en valor absoluto
 </p>
 </div>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fig107"></span>
@@ -383,7 +383,7 @@ Figura 6.7: Función de autocorrelación de los rendimientos del Bitcoin en valo
 </p>
 </div>
 <p>Otra manera de corroborar esta idea es volviendo IID nuestra serie de datos y observar que de este modo se pierde la autocorrelación serial, lo que refuerza la idea de que en esta serie existen clusters de volatilidad.</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">logret_random</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span>, size <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">logret_random</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -393,7 +393,7 @@ Figura 6.7: Función de autocorrelación de los rendimientos del Bitcoin en valo
 Figura 6.8: Función de autocorrelación del valor absoluto de los rendimientos del Bitcoin reordenados aleatoriamente
 </p>
 </div>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">logret</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">logret_random</span>, type <span class="op">=</span> <span class="st">'l'</span><span class="op">)</span></span></code></pre></div>
@@ -404,7 +404,7 @@ Figura 6.9: Rendimientos del Bitcoin: serie original vs. serie reordenada aleat
 </p>
 </div>
 <p>Ahora busquemos una prueba formal. El primer enfoque para comprobar si debemos aceptar o rechazar la hipótesis de que necesitamos estimar un ARCH(q) es realizar una prueba de efectos ARCH. De acuerdo con esta, nuestros datos de Bitcoin muestran que se rechaza la hipótesis de no efectos ARCH. Esta prueba resulta del siguiente código de R:</p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">logret_mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynlm/man/dynlm.html">dynlm</a></span><span class="op">(</span><span class="va">logret</span><span class="op">~</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/urca/man/summary-methods.html">summary</a></span><span class="op">(</span><span class="va">logret_mean</span><span class="op">)</span></span></code></pre></div>
@@ -426,7 +426,7 @@ Figura 6.9: Rendimientos del Bitcoin: serie original vs. serie reordenada aleat
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.03505 on 4310 degrees of freedom</code></pre>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ehatsq</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">logret_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ARCH_m</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynlm/man/dynlm.html">dynlm</a></span><span class="op">(</span><span class="va">ehatsq</span><span class="op">~</span><span class="fu">L</span><span class="op">(</span><span class="va">ehatsq</span><span class="op">)</span><span class="op">)</span></span>
@@ -453,13 +453,13 @@ Figura 6.9: Rendimientos del Bitcoin: serie original vs. serie reordenada aleat
 ## Residual standard error: 0.004531 on 4308 degrees of freedom
 ## Multiple R-squared:  0.01829,    Adjusted R-squared:  0.01806 
 ## F-statistic: 80.27 on 1 and 4308 DF,  p-value: &lt; 0.00000000000000022</code></pre>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">ARCH_m</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/ArchTest-1.png" width="672"></div>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">ARCH_m</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="Notas-Series-Tiempo_files/figure-html/ArchTest-2.png" width="672"></div>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/FinTS/man/ArchTest.html">ArchTest</a></span><span class="op">(</span><span class="va">logret</span>, lags <span class="op">=</span> <span class="fl">1</span>, demean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  ARCH LM-test; Null hypothesis: no ARCH effects
@@ -470,10 +470,10 @@ Figura 6.9: Rendimientos del Bitcoin: serie original vs. serie reordenada aleat
 <p><span class="math display">\[\begin{eqnarray*}
     Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
     h_t &amp; = &amp; \omega+\alpha_1 \varepsilon_{t-1}^2 \\
-    \varepsilon_t &amp; \sim &amp; N(0,1)
+    \varepsilon_t &amp; \sim &amp; iid(0,1)
 \end{eqnarray*}\]</span></p>
-<p>Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro <a href="cap-volatilidad.html#tab:arima-summary">6.1</a>.</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<p>Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro <a href="cap-volatilidad.html#tab:arima-summary">6.1</a>. En la estimación empleamos una distribución <span class="math inline">\(t\)</span> de Student estandarizada para las innovaciones (argumento <code>distribution.model = "std"</code> de <code>rugarch</code>), en línea con las colas pesadas de los rendimientos que documentamos al inicio del capítulo.</p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.unstarched.net">rugarch</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model.spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec</a></span><span class="op">(</span>variance.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">'sGARCH'</span>, garchOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -650,10 +650,10 @@ shape
 <span class="math display">\[\begin{eqnarray*}
 Y_t &amp; = &amp; \mu+\sqrt{h_t}\varepsilon_t \\
     h_t &amp; = &amp; \omega+\beta_1 \sigma^2_{t-1} \\
-    \varepsilon_t &amp; \sim &amp; N(0,1)
+    \varepsilon_t &amp; \sim &amp; iid(0,1)
 \end{eqnarray*}\]</span></p>
 <p>Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro <a href="cap-volatilidad.html#tab:estimaciones">6.2</a>.</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model.spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec</a></span><span class="op">(</span>variance.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">'sGARCH'</span>, garchOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                        mean.model     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>armaOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                        distribution.model <span class="op">=</span> <span class="st">"std"</span><span class="op">)</span></span>
@@ -827,12 +827,12 @@ shape
 <p>¿Cómo seleccionamos el orden adecuado para un GARCH(p,q)? Una respuesta la ofrecen los criterios de información, partiendo de la especificación general:</p>
 <p><span class="math inline">\(Y_t = \mu+\sqrt{h_t}\varepsilon_t\)</span></p>
 <p><span class="math inline">\(h_t = \omega+\sum_{i=1}^p\beta_i h_{t-i}+\sum_{j=1}^q\alpha_j\varepsilon^2_{t-j}\)</span></p>
-<p><span class="math inline">\(\varepsilon_t \sim N(0,1)\)</span></p>
+<p><span class="math inline">\(\varepsilon_t \sim iid(0,1)\)</span></p>
 <div id="criterios-de-información" class="section level4" number="6.2.5.1">
 <h4>
 <span class="header-section-number">6.2.5.1</span> Criterios de información<a class="anchor" aria-label="anchor" href="#criterios-de-informaci%C3%B3n"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">infocriteria</a></span><span class="op">(</span><span class="va">fit.garch.n</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Criterio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">ic</span><span class="op">)</span>, Valor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">ic</span><span class="op">)</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -893,7 +893,7 @@ Hannan-Quinn
 <span class="header-section-number">6.2.5.2</span> Selección del modelo óptimo<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-del-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
 </h4>
 <p>Podemos hacer una búsqueda del mejor modelo de entre varios que probemos en un espectro de hasta un GARCH(4,4), manteniendo para la media condicional la misma especificación AR(2) empleada en las estimaciones anteriores. Los resultados son los reportados en el siguiente Cuadro.</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"lag_opt_GARCH.R"</span><span class="op">)</span></span>
 <span><span class="va">crit_garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu">Lag_Opt_GARCH</span><span class="op">(</span><span class="va">logret</span>, <span class="fl">4</span>, <span class="fl">4</span>, arma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
@@ -1156,7 +1156,7 @@ AIC
 <span class="header-section-number">6.2.5.3</span> Estimación de modelo óptimo<a class="anchor" aria-label="anchor" href="#estimaci%C3%B3n-de-modelo-%C3%B3ptimo"><i class="fas fa-link"></i></a>
 </h4>
 <p>De esta forma, con los datos al corte señalado, el modelo óptimo es un GARCH(3,1). Los resultados de la estimación se muestran en el Cuadro <a href="cap-volatilidad.html#tab:garch-estimates">6.5</a>.</p>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model.spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec</a></span><span class="op">(</span>variance.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">'sGARCH'</span>, garchOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                        mean.model     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>armaOrder <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                        distribution.model <span class="op">=</span> <span class="st">"std"</span><span class="op">)</span></span>
@@ -1394,12 +1394,12 @@ shape
 \end{equation}\]</span></p>
 <p>Es decir, el pronóstico de la varianza <strong>revierte geométricamente</strong> hacia la varianza no condicional <span class="math inline">\(\bar{\sigma}^2\)</span> a una velocidad gobernada por la persistencia <span class="math inline">\(\alpha_1 + \beta_1\)</span>: cuanto más cercana a 1 sea la suma, más lentamente se disipa un episodio de alta volatilidad. La misma lógica se extiende al GARCH(p, q) con persistencia <span class="math inline">\(\sum_i \alpha_i + \sum_j \beta_j\)</span>.</p>
 <p>Para realizar pronósticos con la estimación de un GARCH, utilizando la librería <em>rugarch</em>, es necesario utilizar la función <strong>ugarchforecast()</strong>. Emplearemos el modelo GARCH(3,1) con media AR(2) que resultó óptimo en la sección anterior (objeto <code>model.fit</code>):</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spec</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">getspec</a></span><span class="op">(</span><span class="va">model.fit</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">setfixed</span><span class="op">(</span><span class="va">spec</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">model.fit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Esta función precisa como argumentos nuestra estimación del modelo GARCH, con una modificación en la manera en que se presentan los coeficientes, realizada en la última línea del código anterior y que llamamos <em>spec</em>. <em>n.ahead</em> es el número de periodos que vamos a pronosticar, <em>n.roll</em> señala el número de pronósticos móviles que utilizaremos, en caso de que haya más información para realizar el pronóstico. Finalmente damos como input nuestro set de datos y como producto obtendremos el pronostico de Sigma tanto como de la serie.</p>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecast</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/ugarchforecast-methods.html">ugarchforecast</a></span><span class="op">(</span><span class="va">spec</span>, n.ahead <span class="op">=</span> <span class="fl">12</span>, n.roll <span class="op">=</span> <span class="fl">0</span>, <span class="va">logret</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">sigma</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span></span></code></pre></div>
@@ -1416,7 +1416,7 @@ shape
 ## T+10 0.02423233
 ## T+11 0.02455141
 ## T+12 0.02486508</code></pre>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">forecast</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##       4311-01-01
 ## T+1  0.001665495
@@ -1431,7 +1431,7 @@ shape
 ## T+10 0.001138287
 ## T+11 0.001138287
 ## T+12 0.001138287</code></pre>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecast</span></span></code></pre></div>
 <pre><code>## 
 ## *------------------------------------*
@@ -1607,7 +1607,7 @@ shape
 \end{eqnarray*}\]</span></p>
 <p>La estadística de prueba será determinada por:
 <span class="math display">\[\begin{equation}
-    LM_{M-ARCH} = \frac{1}{2} T K (K + 1) - Traza \left( \hat{\Sigma}_{ARCH} \hat{\Sigma}^{-1}_{0} \right) \sim \chi^2_{[q K^2 (K + 1)^2 / 4]}
+    LM_{M-ARCH} = \frac{1}{2} T K (K + 1) - T \cdot Traza \left( \hat{\Sigma}_{ARCH} \hat{\Sigma}^{-1}_{0} \right) \sim \chi^2_{[q K^2 (K + 1)^2 / 4]}
 \end{equation}\]</span></p>
 <p>Donde la matriz <span class="math inline">\(\hat{\Sigma}_{ARCH}\)</span> se calcula de acuerdo con la ecuación <a href="cap-volatilidad.html#eq:ARCH-LM">(6.13)</a> y la matriz <span class="math inline">\(\hat{\Sigma}_{0}\)</span> sin considerar una estructura dada para los errores.</p>
 </div>

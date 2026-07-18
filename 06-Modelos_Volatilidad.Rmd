@@ -318,10 +318,10 @@ La prueba puede repetirse para diferentes especificaciones de ARCH, sin embargo,
 \begin{eqnarray*}
     Y_t & = & \mu+\sqrt{h_t}\varepsilon_t \\
     h_t & = & \omega+\alpha_1 \varepsilon_{t-1}^2 \\
-    \varepsilon_t & \sim & N(0,1)
+    \varepsilon_t & \sim & iid(0,1)
 \end{eqnarray*}
 
-Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro \@ref(tab:arima-summary).
+Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro \@ref(tab:arima-summary). En la estimación empleamos una distribución $t$ de Student estandarizada para las innovaciones (argumento `distribution.model = "std"` de `rugarch`), en línea con las colas pesadas de los rendimientos que documentamos al inicio del capítulo.
 
 ```{r arima-summary, warning=FALSE, message=FALSE}
 library(rugarch)
@@ -354,7 +354,7 @@ Estimemos un GARCH(0,1) usando la siguiente especificación:
 \begin{eqnarray*}
 Y_t & = & \mu+\sqrt{h_t}\varepsilon_t \\
     h_t & = & \omega+\beta_1 \sigma^2_{t-1} \\
-    \varepsilon_t & \sim & N(0,1)
+    \varepsilon_t & \sim & iid(0,1)
 \end{eqnarray*}
 
 Considerando que la media es una AR(2), los resultados de esta estimación se muestran en el Cuadro \@ref(tab:estimaciones).
@@ -390,7 +390,7 @@ $Y_t = \mu+\sqrt{h_t}\varepsilon_t$
 
 $h_t = \omega+\sum_{i=1}^p\beta_i h_{t-i}+\sum_{j=1}^q\alpha_j\varepsilon^2_{t-j}$
 
-$\varepsilon_t \sim N(0,1)$
+$\varepsilon_t \sim iid(0,1)$
 
 #### Criterios de información 
 
@@ -646,7 +646,7 @@ Dada la estimación en la ecuación \@ref(eq:ARCH-LM), plantearemos la estructur
 
 La estadística de prueba será determinada por:
 \begin{equation}
-    LM_{M-ARCH} = \frac{1}{2} T K (K + 1) - Traza \left( \hat{\Sigma}_{ARCH} \hat{\Sigma}^{-1}_{0} \right) \sim \chi^2_{[q K^2 (K + 1)^2 / 4]}
+    LM_{M-ARCH} = \frac{1}{2} T K (K + 1) - T \cdot Traza \left( \hat{\Sigma}_{ARCH} \hat{\Sigma}^{-1}_{0} \right) \sim \chi^2_{[q K^2 (K + 1)^2 / 4]}
 \end{equation}
 
 Donde la matriz $\hat{\Sigma}_{ARCH}$ se calcula de acuerdo con la ecuación \@ref(eq:ARCH-LM) y la matriz $\hat{\Sigma}_{0}$ sin considerar una estructura dada para los errores.

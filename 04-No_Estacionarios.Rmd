@@ -44,7 +44,7 @@ Utilizando el resultado de la ecuación \@ref(eq:CovTrend) podemos establecer qu
     (\#eq:VarTrend)
 \end{equation}
 
-Así, las ecuaciones \@ref(eq:ETrend) y \@ref(eq:VarTrend) significan que el proceso descrito por la ecuación \@ref(eq:YTrend) es estacionario pero en varianza. De esta forma, a partir de este momento diremos que una serie será estacionaria alrededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones  \@ref(eq:YTrend), \@ref(eq:ETrend) y \@ref(eq:VarTrend).
+Así, las ecuaciones \@ref(eq:ETrend) y \@ref(eq:VarTrend) significan que el proceso descrito por la ecuación \@ref(eq:YTrend) es estacionario en varianza, aunque no en media. De esta forma, a partir de este momento diremos que una serie será estacionaria alrededor de una tendencia determinística si cumple con las condiciones establecidas en las ecuaciones  \@ref(eq:YTrend), \@ref(eq:ETrend) y \@ref(eq:VarTrend).
 
 Dicho lo anterior, estudiaremos el concepto de raíz unitaria de un proceso estocástico o de una serie de tiempo. Partamos de plantear que un proceso AR(1) tiene raíz unitaria cuando el coeficiente $a_1 = 1$, es decir:
 \begin{equation}
@@ -275,7 +275,7 @@ Donde $X_t$ es un $ARMA(p, q)$ con media cero. Esta prueba asume que $m = 1$, po
     (\#eq:URDF)
 \end{equation}
 
-Si, el $AR(1)$ planteado tiene raíz unitaria, es decir, $\rho = 1$, entonces tendríamos:
+Si el $AR(1)$ planteado tiene raíz unitaria, es decir, $\rho = 1$, entonces tendríamos:
 \begin{eqnarray*}
     Y_t & = & \alpha + \delta t + Y_{t-1} + U_t \\
     \Delta Y_t & = & \alpha + \delta t + U_t

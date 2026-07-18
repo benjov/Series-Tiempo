@@ -8,7 +8,7 @@ Granger. Mediante esta metodología discutiremos cuándo dos series se
 causan estadísticamente. Posteriormente, introduciremos una técnica más
 sofisticada conocida como la metodología de Vectores Autorregresivos
 (VAR), la cual es una generalización de los procesos Autorregresivos (AR)
-que analizamos al principio del curso. Finalmente, introduciremos la
+que analizamos en los primeros capítulos. Finalmente, introduciremos la
 técnica de cointegración y de rezagos distribuidos (ARDL) para los casos
 en que las series que analicemos sean procesos no estacionarios.
 
@@ -56,7 +56,7 @@ error estimado de una regresión dada. Dicho lo anterior, digamos que:
     \end{equation}
 
 La definición anterior aplica de igual forma si se reemplaza a $X$ por
-$Y$ y a $Y$ por $X$, respectivamente. De acuerdo a la definición
+$Y$ y a $Y$ por $X$, respectivamente. De acuerdo con la definición
 anterior, existen 5 diferentes posibilidades de relaciones causales
 entre las dos series:
 
@@ -119,7 +119,7 @@ Donde $k_0 = 1$ y, en general, se asume que $k_1 = k_2$. Asimismo, el
 valor de estas constantes se puede determinar con el criterio de Akaike
 (o cualquier otro criterio de información). No obstante, algunos autores
 sugieren que una buena práctica es considerar valores de $k_1$ y $k_2$
-que recorran al 4, 8, 12 y 16.
+que recorran los valores 4, 8, 12 y 16.
 
 Dicho lo anterior, el test de causalidad de Granger se establece con una
 prueba F, en la cual se prueba la siguiente hipótesis nula:
@@ -130,8 +130,8 @@ prueba F, en la cual se prueba la siguiente hipótesis nula:
 **Ejemplo**. Consideremos como variables analizadas al Índice
 Nacional de Precios al Consumidor ($INPC_t$), al Tipo de Cambio
 ($TDC_t$) y al rendimiento anual de los Cetes a 28 días ($CETE28_t$),
-todas desestacionalizadas para el periodo de enero de 2000 a julio de
-2019. Dado que la metodología de Granger supone que las series son
+todas desestacionalizadas para el periodo de enero de 2000 a junio de
+2023. Dado que la metodología de Granger supone que las series son
 estacionarias, utilizaremos las diferencias logarítmicas de cada una de
 las tres series (es decir, utilizaremos una transformación del tipo
 $ln(X_t) - ln(X_{t-1})$). La Figura \@ref(fig:fig61) muestra las series
@@ -188,7 +188,7 @@ plot(DLTC, xlab = "Tiempo",
      col = "darkblue")
 
 plot(DLCETE28, xlab = "Tiempo", 
-     main = "Diferencias Logarítmicas de los Cetes a 28 dias",
+     main = "Diferencias Logarítmicas de los Cetes a 28 días",
      col = "darkred")
 
 par(mfrow=c(1, 1))
@@ -229,8 +229,8 @@ De acuerdo con el Cuadro \@ref(tab:Granger), podemos concluir que existe
 información estadísticamente significativa para concluir que la
 inflación causa a la tasa de depreciación cambiaria, ambas medidas como
 las diferencias logarítmicas. El resto de los resultados para las otras
-combinaciones de causalidad se encuentran en el R Markdown llamado Clase
-13 ubicado en el repositorio de GitHub.
+combinaciones de causalidad se puede replicar con el código disponible
+en el repositorio de GitHub del proyecto.
 
 ## Definición y representación del Sistema o Modelo de Vectores Autorregresivos (VAR(p))
 
@@ -260,9 +260,9 @@ Adicionalmente, el segundo supuesto que estableceremos es que requerimos
 que las variables que tengamos consideradas sean estacionarias.
 
 Por lo anterior, diremos que un modelo de Vectores Autorregresivos (VAR)
-es un procedimiento que sigue fundado en el supuesto de que las
-variables consideradas son estacionarias. Así, hasta este momento del
-curso hemos pasado de modelos univariados a modelos multivariados, pero
+es un procedimiento fundado en el supuesto de que las
+variables consideradas son estacionarias. Así, hasta este momento
+hemos pasado de modelos univariados a modelos multivariados, pero
 no hemos podido dejar de asumir que las series son estacionarias.
 
 En lo subsecuente asumiremos que las series empleadas son estacionarias
@@ -398,21 +398,22 @@ residuales $\mathbf{U}_t$ pueden estar correlacionados entre ellos solo
 en el caso de que la información sea contemporánea, pero no tienen
 información en común entre residuales de otros periodos.
 
-Al igual que en el caso del modelo o especificación $AR(p)$ en la
+Al igual que en el caso del modelo o especificación $AR(p)$, en la
 especificación del modelo $VAR(p)$ existen condiciones de estabilidad.
-Dichas condiciones están dadas por lo siguiente, definamos el siguiente
-polinomio que resulta de tomar la matriz $\mathbf{A}(L)$ en la ecuación
-\@ref(eq:VARCorto): \begin{equation}
-    Det[I_k - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0
+El proceso es estable si el determinante del polinomio matricial
+asociado a $\mathbf{A}(L)$ en la ecuación \@ref(eq:VARCorto) no se
+anula sobre el círculo unitario ni en su interior: \begin{equation}
+    Det[I_k - A_1 z - A_2 z^2 - \ldots - A_p z^p] \neq 0 \quad \text{para todo} \quad |z| \leq 1
 \end{equation}
 
-Donde las raíces del polinomio cumplen que $|z| \leq 1$, es decir, se
-ubican dentro del círculo unitario.
+Es decir, todas las raíces del polinomio determinante deben ubicarse
+fuera del círculo unitario o, equivalentemente, todos los eigenvalores
+de la matriz compañera del sistema deben tener módulo menor que 1.
 
 La ecuación \@ref(eq:VARCorto) puede ser reescrita en una forma similar
-al un proceso de MA. Al respecto, de forma similar a la siguiente
+a un proceso de MA. Al respecto, de forma similar a la siguiente
 ecuación podemos construir un modelo $VARMA(p,q)$, el cual no estudiamos
-en este curso.
+en estas notas.
 
 Retomando el primer planteamiento, podemos escribir: 
 \begin{eqnarray}
@@ -424,7 +425,7 @@ Retomando el primer planteamiento, podemos escribir:
 Donde $\boldsymbol{\mu}$ es un vector de $k \times 1$ constantes y
 $\boldsymbol{\beta}(L)$ es una matriz que depende de $L$.
 
-Por el lado de las matrices que representan la autocovarianza, estás
+Por el lado de las matrices que representan la autocovarianza, éstas
 resultan de resolver lo siguiente: \begin{equation}
     \Gamma_X(\tau) = E[(\mathbf{X}_t - \mu)(\mathbf{X}_{t-\tau} - \mu)'] 
 \end{equation}
@@ -476,10 +477,10 @@ por: \begin{equation*}
 Para el ejemplo utilizaremos las series de INPC, Tipo de Cambio,
 rendimiento de los Cetes a 28 días, el IGAE y el Índice de Producción
 Industrial de los Estados Unidos, todas desestacionalizadas y para el
-período de enero de 2000 a julio de 2019. Dado que el supuesto
+período de enero de 2000 a junio de 2023. Dado que el supuesto de
 estacionariedad sigue presente en nuestro análisis, emplearemos cada una
 de las series en su versión de diferencias logarítmicas. Las Figuras
-\@ref(fig:fig62) y \@ref(fig:fig63) muestra las series referidas.
+\@ref(fig:fig62) y \@ref(fig:fig63) muestran las series referidas.
 
 ```{r warning=FALSE, message=FALSE}
 
@@ -743,10 +744,10 @@ plot(IR_DLTC)
 ```
 
 Los resultados muestran que la respuesta de $DLTC_t$ ante impulsos en
-los términos de error fue estadísticamente significativo sólo para
+los términos de error fue estadísticamente significativa sólo para
 algunos de los casos y en periodos cortos de tiempo. El resto de los
-resultados de Impulso-Respuesta se encuentra en el Script llamado Clase
-15 que se ubica en el repositorio de GitHub.
+resultados de Impulso-Respuesta se puede replicar con el código
+disponible en el repositorio de GitHub del proyecto.
 
 ## Identificación de los Choques Estructurales en los Modelos VAR
 
@@ -834,13 +835,13 @@ El método para recuperar dicha matriz ha generado gran debate en el análisis m
 
 *3. Imposición de restricciones de signo*
 
-***Nota: RStudio es un poco limitado en cuanto a los métodos de identificación de las innovaciones estructurales relacionados con la teoría económica. En realidad, en los trabajos actuales de macroeconometría suele ocuparse, mayoritariamente, el método de Identificación Recursiva. Sin embargo, para ver los métodos de Restricción de largo plazo e Imposición de restricciones de signo, ver el Script de MatLab de estos.***
+***Nota: Los paquetes disponibles en R son un poco limitados en cuanto a los métodos de identificación de las innovaciones estructurales relacionados con la teoría económica. En los trabajos actuales de macroeconometría suele ocuparse, mayoritariamente, el método de Identificación Recursiva. Para los métodos de Restricción de largo plazo y de Imposición de restricciones de signo, el repositorio del proyecto incluye un script de Matlab complementario.***
 
 ### VAR Recursivo - Identificación Recursiva
 
 Una de las formas más populares para recuperar las innovaciones estructurales es mediante la *identificación recursiva*, un caso particular de las restricciones de corto plazo que se implementa utilizando la **descomposición de Cholesky**.
 
-La idea detrás de este método es simple e intuitivo: queremos recuperar las innovaciones estructurales $w_t$ a partir de las innovaciones de forma reducida $u_t$. Para lograr esto, buscamos *ortogonalizar* los errores de forma reducida, lo que en este contexto significa transformarlos en un conjunto de choques no correlacionados contemporáneamente. Es decir, deseamos que $\mathbb{E}[w_t w_t'] = I$. 
+La idea detrás de este método es simple e intuitiva: queremos recuperar las innovaciones estructurales $w_t$ a partir de las innovaciones de forma reducida $u_t$. Para lograr esto, buscamos *ortogonalizar* los errores de forma reducida, lo que en este contexto significa transformarlos en un conjunto de choques no correlacionados contemporáneamente. Es decir, deseamos que $\mathbb{E}[w_t w_t'] = I$. 
 
 Para lograr esto, definimos una matriz $P$ de tamaño $K \times K$, triangular inferior y con diagonal principal positiva, de tal modo que: 
 
@@ -848,7 +849,7 @@ Para lograr esto, definimos una matriz $P$ de tamaño $K \times K$, triangular i
 \Sigma_u = \mathbb{E}[u_t u_t'] = P P'
 \end{equation}
 
-La matriz $P$ es conocida como la **descomposción de Cholesky inferior de $\Sigma_u$**. Por ejemplo, en un VAR con tres variables, $P$ tendría la forma:
+La matriz $P$ es conocida como la **descomposición de Cholesky inferior de $\Sigma_u$**. Por ejemplo, en un VAR con tres variables, $P$ tendría la forma:
 
 \[
 P = 
@@ -865,7 +866,7 @@ Ahora, si recordamos que en el modelo estructural los errores están relacionado
 \Sigma_u = B_0^{-1} \mathbb{E}[w_t w_t'] B_0^{-1'} = B_0^{-1} B_0^{-1'}
 \end{equation}
 
-entonces una solución válida al problema de identificación estructural es asumir que $B_0^{-1} = P$. Dado que $P$ es triangular inferior, contiene exactamente $\frac{K(K-1)}{2}$ ceros impuestos, lo que cumple la condición de orden para identificar todos los elementos libres de la matriz $B_0^{-1}$. Por simetría. si $B_0^{-1}$ es triangular inferior, entonces $B_0$ también lo es -aunque triangular superior-.
+entonces una solución válida al problema de identificación estructural es asumir que $B_0^{-1} = P$. Dado que $P$ es triangular inferior, contiene exactamente $\frac{K(K-1)}{2}$ ceros impuestos, lo que cumple la condición de orden para identificar todos los elementos libres de la matriz $B_0^{-1}$. Por simetría, si $B_0^{-1}$ es triangular inferior, entonces $B_0$ también lo es -aunque triangular superior-.
 
 Sin embargo, es importante destacar que esta ortogonalización de los errores solo es válida si la estructura recursiva impuesta por la matriz $P$ se puede justificar con fundamentos económicos. El método impone que la primera variable del sistema responde solo a su propio shock contemporáneo, la segunda puede responder al shock de la primera, la tercera a los dos primeros, y así sucesivamente. Por eso se dice que el modelo estructural resultante es recursivo: se impone una estructura jerárquica de causalidad contemporánea, en lugar de inferirla directamente de los datos.
 
@@ -1072,7 +1073,7 @@ La paquetería del código de MatLab, VAR Toolbox, ocupa el enfoque de **Matrice
 
 ## Cointegración
 
-Hasta ahora en el curso hemos usado el supuesto de que las series son
+Hasta ahora hemos usado el supuesto de que las series son
 estacionarias para el conjunto de técnicas $ARMA(p,q)$ y $VAR(p)$. No
 obstante, dado que relajamos el supuesto de estacionariedad (incluyendo
 la estacionariedad en varianza) y que establecimos una serie de pruebas
@@ -1098,7 +1099,7 @@ $\mathbf{Y}$ son series integradas de orden d, I(d), y si existe al
 menos una combinación lineal no trivial $\mathbf{Z}$ de esas variables
 que es de orden I(d - c), donde $d \geq c > 0$, si y sólo si:
 \begin{equation}
-    \boldsymbol{\beta}_i' \mathbf{Y}_t = \mathbf{Y}_{it} \sim I(d-c)
+    \boldsymbol{\beta}_i' \mathbf{Y}_t = \mathbf{Z}_{it} \sim I(d-c)
 \end{equation}
 
 Donde $i = 1, 2, \ldots, r$ y $r < k$.
@@ -1121,16 +1122,17 @@ estacionarias.
 
 ### Cointegración para modelos de más de una ecuación o para modelos basados en Vectores Autorregresivos
 
-Sean $Y_1, Y_2, \ldots, Y_k$ son series que forman $\mathbf{Y}$ y que
-todas son I(1), entonces los siguientes casos son posibles:
+Sean $Y_1, Y_2, \ldots, Y_k$ las series que forman $\mathbf{Y}$, todas
+ellas I(1); entonces los siguientes casos son posibles:
 
-1.  Si $r = 1$ entonces se trata de un caso de cointegración de Granger.
+1.  Si $r = 1$ entonces existe una única relación de cointegración y el
+    caso puede analizarse con el enfoque de Engle y Granger.
 
-2.  Si $r \geq 1$ entonces se trata de un caso de cointegración múltiple
-    de Johansen.
+2.  Si $r > 1$ entonces se trata de un caso de cointegración múltiple,
+    que requiere el enfoque de Johansen.
 
-Por lo anterior, en este curso analizaremos el caso de Cointegración de
-Johansen. Ahora plantearemos la forma de estimar el proceso de
+Por lo anterior, en estas notas analizaremos el caso de Cointegración de
+Johansen, que cubre ambas situaciones. Ahora plantearemos la forma de estimar el proceso de
 cointegración. El primer paso para ello es determinar un modelo VAR(p)
 con las k-series no estacionarias (series en niveles)--en este punto se
 vuelve fundamental caracterizar las series a través de pruebas de raíces
@@ -1278,23 +1280,33 @@ plot(cbind(LDatos, DLDatos),
 Posteriormente, determinamos cuál es el orden adecuado de un VAR(p) en
 niveles. En el Cuadro \@ref(tab:SelectVARVEC) mostramos los resultados
 de los criterios de información para determinar el número de rezagos
-óptimos, el cual resultó en $p = 3$ para los criterios AIC y FPE,
-$p = 2$ para el criterio HQ y $p = 1$ para el criterio SC. Por lo tanto,
-decidiremos utilizar un VAR(3) con tendencia y constante. Note que es
-posible elegir otros modelos de VAR que incluyan: solo tendencia, solo
-constante o ninguno de estos elementos.
+óptimos, el cual resultó en $p = 3$ para los criterios AIC y FPE, y
+$p = 2$ para los criterios HQ y SC. Por lo tanto, decidiremos utilizar
+un VAR(3) con tendencia y constante. Note que es posible elegir otros
+modelos de VAR que incluyan: solo tendencia, solo constante o ninguno de
+estos elementos.
 
-| Rezagos |      AIC      |      HQ       |      SC       |     FPE      |
-|:-------:|:-------------:|:-------------:|:-------------:|:------------:|
-|    1    | -4.606707e+01 | -4.585260e+01 | -4.553568e+01 | 9.848467e-21 |
-|    2    | -4.643287e+01 | -4.606521e+01 | -4.552191e+01 | 6.834064e-21 |
-|    3    | -4.647783e+01 | -4.595697e+01 | -4.518730e+01 | 6.539757e-21 |
-|    4    | -4.645834e+01 | -4.578428e+01 | -4.478824e+01 | 6.679778e-21 |
-| \vdots  |    \vdots     |    \vdots     |    \vdots     |    \vdots    |
-
-: (#tab:SelectVARVEC) Criterios de información para diferentes
-especificaciones de modelos VAR(p) con término constante y tendencia de
-las series $LINPC_t$, $LTC_t$, $LCETE28_t$, $LIGAE_t$ y $LIPI_t$.
+```{r SelectVARVEC, warning=FALSE, message=FALSE}
+vs_niv   <- VARselect(LDatos, lag.max = 10, type = "both")
+crit_niv <- as.data.frame(t(vs_niv$criteria))
+tab_niv  <- data.frame(
+  Rezagos = seq_len(nrow(crit_niv)),
+  AIC     = round(crit_niv[, 1], 4),
+  HQ      = round(crit_niv[, 2], 4),
+  SC      = round(crit_niv[, 3], 4),
+  FPE     = formatC(crit_niv[, 4], format = "e", digits = 3))
+knitr::kable(
+  tab_niv,
+  col.names = c("Rezagos", "AIC", "HQ", "SC", "FPE"),
+  caption   = paste("Criterios de información para diferentes",
+                    "especificaciones de modelos VAR(p) con término",
+                    "constante y tendencia de las series $LINPC_t$,",
+                    "$LTC_t$, $LCETE28_t$, $LIGAE_t$ y $LIPI_t$."),
+  align     = c("c", "r", "r", "r", "r"),
+  booktabs  = TRUE,
+  row.names = FALSE
+)
+```
 
 ```{r warning=FALSE, message=FALSE}
 ### Selección de rezagos VAR(p)
@@ -1316,19 +1328,35 @@ mostraremos uno de los casos en que las series cointegran y únicamente
 para el caso de la prueba de la traza (el otro caso está disponible en
 el código de R disponible abajo). En el Cuadro \@ref(tab:TrazaTest)
 reportamos los resultados del Test de Cointegración para un modelo con 3
-rezagos.
+rezagos y término constante en la relación de largo plazo.
 
-Cuadro: (#tab:TrazaTest) Prueba de la traza para cointegración
-considerando un VAR(p) con término constante y tendencia de las series
-$LINPC_t$, $LTC_t$, $LCETE28_t$, $LIGAE_t$ y $LIPI_t$.
+```{r TrazaTest, warning=FALSE, message=FALSE}
+library(urca)
 
-| r $\leq$ | Estadística |  10%  |  5%   |  1%   |
-|:--------:|:-----------:|:-----:|:-----:|:-----:|
-|    4     |    4.79     | 10.49 | 12.25 | 16.26 |
-|    3     |    13.97    | 22.76 | 25.32 | 30.45 |
-|    2     |    27.45    | 39.06 | 42.44 | 48.45 |
-|    1     |    48.14    | 59.14 | 62.99 | 70.05 |
-|    0     |   118.98    | 83.20 | 87.31 | 96.58 |
+CA_1 <- ca.jo(LDatos, type = "trace", ecdet = "const", K = 3,
+              spec = "longrun")
+
+pct_cv  <- if (knitr::is_latex_output()) "\\%" else "%"
+cv_cols <- paste0(c("10", "5", "1"), pct_cv)
+
+traza_df <- data.frame(
+  Hip  = c("$r \\leq 4$", "$r \\leq 3$", "$r \\leq 2$",
+           "$r \\leq 1$", "$r = 0$"),
+  Stat = round(as.numeric(CA_1@teststat), 2),
+  round(CA_1@cval, 2))
+
+knitr::kable(
+  traza_df,
+  col.names = c("Hipótesis nula", "Estadística", cv_cols),
+  caption   = paste("Prueba de la traza para cointegración considerando",
+                    "un VAR(3) con término constante de las series",
+                    "$LINPC_t$, $LTC_t$, $LCETE28_t$, $LIGAE_t$ y $LIPI_t$."),
+  align     = c("c", "c", "c", "c", "c"),
+  booktabs  = TRUE,
+  escape    = FALSE,
+  row.names = FALSE
+)
+```
 
 Los resultados del Cuadro \@ref(tab:TrazaTest) indican que aceptamos la
 hipótesis nula para el caso de $r \leq 1$ al $5\%$, por lo que podemos
@@ -1378,8 +1406,6 @@ VAR_1 <- VAR(LDatos, p = 3, type = "both")
 
 #summary(ca.jo(LDatos, type = "trace", ecdet = "none", K = 3, spec = "longrun"))
 
-CA_1 <- ca.jo(LDatos, type = "trace", ecdet = "const", K = 3, spec = "longrun")
-
 summary(CA_1)
 
 ```
@@ -1387,11 +1413,12 @@ summary(CA_1)
 Considerando lo anterior, podemos determinar $\hat{U}_t$ para esta
 ecuación de cointegración. En la Figura \@ref(fig:fig84) mostramos los
 residuales estimados. Derivado de la inspección visual, parecería que
-estos no son estacionarios, condición que debería ser cierta. De esta
-forma, una prueba deseable es aplicar todas las pruebas de raíces
-unitarias a esta serie para mostrar que es I(0). En el Script llamado
-Clase 18 en la carpeta de GoogleDrive se muestran algunas pruebas sobre
-esta serie y se encuentra que es posible que no sea estacionaria.
+estos no son estacionarios --cuando, de existir cointegración, deberían
+serlo--. De esta forma, una prueba deseable es aplicar todas las pruebas
+de raíces unitarias a esta serie para verificar que es I(0); al hacerlo
+(el código está disponible en el repositorio del proyecto) se encuentra
+que es posible que no sea estacionaria, por lo que la evidencia de
+cointegración debe tomarse con cautela.
 
 ```{r fig84, fig.cap = "Residuales estimados de la ecuación de cointegración", fig.align='center'}
 
@@ -1483,15 +1510,15 @@ Utilizaremos un dataset integrado en la biblioteca ARDL de R. Se trata
 de un dataframe con 55 renglones y 5 variables en el período de 1974:Q1
 a 1987:Q3 de las siguientes variables:
 
-LRM: logarithm of real money, M2
+- LRM: logaritmo del dinero real (M2)
 
-LRY: logarithm of real income
+- LRY: logaritmo del ingreso real
 
-LPY: logarithm of price deflator
+- LPY: logaritmo del deflactor de precios
 
-IBO: bond rate
+- IBO: tasa de los bonos
 
-IDE: bank deposit rate
+- IDE: tasa de los depósitos bancarios
 
 ```{r warning=FALSE, message=FALSE}
 
@@ -1533,7 +1560,7 @@ summary(BestMod)
 
 ```
 
-2.  UECM (Unrestricted Error Correction Model) of the underlying ARDL.
+2.  Estimamos el UECM (Modelo de Corrección de Error No Restringido) del ARDL subyacente.
 
 ```{r warning=FALSE}
 
@@ -1543,9 +1570,10 @@ summary(UECM_BestMod)
 
 ```
 
-3.  RECM (Restricted Error Correction Model) of the underlying ARDL Obs:
-    allowing the constant to join the short-run relationship (case 2),
-    instead of the long-run (case 3)
+3.  Estimamos el RECM (Modelo de Corrección de Error Restringido) del
+    ARDL subyacente. Nota: se permite que la constante forme parte de la
+    relación de corto plazo (caso 2), en lugar de la de largo plazo
+    (caso 3).
 
 ```{r warning=FALSE}
 
@@ -1555,7 +1583,7 @@ summary(RECM_BestMod)
 
 ```
 
-4.  long-run levels relationship (cointegration)
+4.  Aplicamos la prueba de límites (*bounds test*) para la relación de largo plazo en niveles (cointegración).
 
 ```{r warning=FALSE}
 
@@ -1563,8 +1591,8 @@ bounds_f_test(BestMod, case = 2)
 
 ```
 
-5.  Long-run multipliers (with standard errors, t-statistics and
-    p-values)
+5.  Calculamos los multiplicadores de largo plazo (con errores
+    estándar, estadísticos $t$ y valores $p$).
 
 ```{r warning=FALSE}
 
@@ -1575,7 +1603,7 @@ Result <- coint_eq(BestMod, case = 2)
 
 ```
 
-#### Make the plot
+#### Gráfica de la ecuación de cointegración
 
 ```{r fig92, out.width='95%', fig.cap = "Gráfica de la ecuación de cointegración", fig.align='center'}
 
@@ -1589,7 +1617,7 @@ plot(Datos, legend.loc = "right")
 
 ## Filtro Kalman
 
-En secciones pasadas, entendimos la naturaleza del filtrado univariado como, por ejemplo, el *Filtro Hodrick-Prescott*. Este ha sido utilizado ampliamente en la literatura macroeconométrica, sobre todo para la estimación del Producto Potencial y, de este modo, la Brecha del Producto. Sin embargo, este método presenta dos limitaciones importantes: 1) es univariado, es decir, únicamente se explica por sí mismo y, 2) el llamado "problema de colas", que sí bien entendimos que se puede solucionar aplicando la metodología de "colas pesadas", la estimación del $\lambda$ es un tanto ambigua.
+En secciones pasadas, entendimos la naturaleza del filtrado univariado como, por ejemplo, el *Filtro Hodrick-Prescott*. Este ha sido utilizado ampliamente en la literatura macroeconométrica, sobre todo para la estimación del Producto Potencial y, de este modo, la Brecha del Producto. Sin embargo, este método presenta dos limitaciones importantes: 1) es univariado, es decir, únicamente se explica por sí mismo y, 2) el llamado "problema de colas", que si bien entendimos que se puede solucionar aplicando la metodología de "colas pesadas", la estimación del $\lambda$ es un tanto ambigua.
 
 De este modo, el **Filtro Kalman** puede ser una alternativa viable y metodológicamente robusta, sobre todo si queremos trabajar con variables no observables como el *Producto Potencial* o, incluso, la *Tasa de interés neutral*, variable clave en la decisión de Política Monetaria de los Bancos Centrales.
 

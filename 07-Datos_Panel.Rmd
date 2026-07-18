@@ -102,7 +102,7 @@ Gráfica:
 ```{r fig111, fig.cap = "Evolución de la inversión por empresa", fig.align='center'}
 
 plot(Invest$Firm_1, type = "l", col = 1, ylim = c(0, 1500), lty = 1,
-     xlab = "Tiempo", ylab = "Real gross investment")
+     xlab = "Tiempo", ylab = "Inversión bruta real")
 lines(Invest$Firm_2, type = "l", col = 2, lty = 2)
 lines(Invest$Firm_3, type = "l", col = 3, lty = 1)
 lines(Invest$Firm_4, type = "l", col = 4, lty = 2)
@@ -204,13 +204,13 @@ Importamos Datos desde un archivo de Excel. Los datos están en formato panel e 
 
 Partamos de la siguiente ecuación:
 \begin{equation}
-    y_{it} = \beta_1 + \beta_2 T_t + \beta_3 D_t + \theta T_t \times D_t + \boldsymbol{\gamma} \mathbf{X}_{it} + \varepsilon_{it}
+    y_{it} = \beta_1 + \beta_2 T_t + \beta_3 D_i + \theta T_t \times D_i + \boldsymbol{\gamma} \mathbf{X}_{it} + \varepsilon_{it}
     (\#eq:eqDiD)
 \end{equation}
 
 Donde $y_{it}$ es la variable sobre la cual queremos evaluar el efecto de un tratamiento, $\mathbf{X}_{it}$ es un conjunto de variables de control, que incluye a las variables de efectos fijos (temporales, de individuos o del tipo que se decida) y, en su caso, una tendencia, entre otras. Finalmente, las variables $T_t$ y $D_i$ son variables dicotómicas que identifican con el valor de 1 el momento a partir del cual se observa el tratamiento y con 0 en cualquier otro caso, y con 1 los individuos que fueron tratados y con 0 en cualquier otro caso, respectivamente. 
 
-De esta forma, el producto $T_t \times D_t$ sería una variable dicotómica que indicaría con un 1 a aquellos individuos que fueron tratados a partir del momento en que se implementó el tratamiento y con 0 en cualquier otro caso. Bajo este escenario, $\theta$ es un coeficiente que captura el efecto del tratamiento, condicional a que se ha controlado por una serie de factores.
+De esta forma, el producto $T_t \times D_i$ sería una variable dicotómica que indicaría con un 1 a aquellos individuos que fueron tratados a partir del momento en que se implementó el tratamiento y con 0 en cualquier otro caso. Bajo este escenario, $\theta$ es un coeficiente que captura el efecto del tratamiento, condicional a que se ha controlado por una serie de factores.
 
 Otra forma de ver lo que se indica en la ecuación \@ref(eq:eqDiD) es como la comparación de la diferencia en diferencia descrita por:
 \begin{eqnarray}
@@ -687,8 +687,9 @@ print(stab_ex1_dahlberg_data)
 
 plot(stab_ex1_dahlberg_data) +
   coord_fixed() +
-  labs(title = "Raíces de la matriz compañera",
-       x = "Parte real", y = "Parte imaginaria")
+  scale_x_continuous(name = "Parte real") +
+  scale_y_continuous(name = "Parte imaginaria") +
+  labs(title = "Raíces de la matriz compañera")
 
 ```
 
@@ -891,7 +892,7 @@ De igual forma que en el caso de los modelos ARIMA y VAR, el número de rezagos 
     AIC(p_1, p_2) = n_1 ln(\hat{\sigma}^2_1) + n_2 ln(\hat{\sigma}^2_2) + 2(p_1 + 1) + 2(p_2 + 1)
 \end{equation}
 
-Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan ciertas condiciones. En estas notas nos enfocaremos únicamente en el modelo SETAR; el cual genera en un proceso estacionario cuando:
+Los modelos SETAR y STAR generan procesos estacionarios siempre que cumplan ciertas condiciones. En estas notas nos enfocaremos únicamente en el modelo SETAR, el cual genera un proceso estacionario cuando:
 1. $\phi_{11} < 1$, $\phi_{12} < 1$, $\phi_{11} \cdot \phi_{12} < 1$
 
 2. $\phi_{11} = 1$, $\phi_{12} < 1$, $\phi_{01} > 0$
@@ -909,7 +910,7 @@ Finalmente, en ocasiones podemos estar interesados en modelos donde los regímen
 
 Así, tendríamos ecuaciones:
 \begin{equation}
-    y_t = \phi_{0j} + \phi_{ij} y_{t-1} + \varepsilon_t \text{ si } c_{j-1} < y_{t-1} < c_j
+    y_t = \phi_{0j} + \phi_{1j} y_{t-1} + \varepsilon_t \text{ si } c_{j-1} < y_{t-1} < c_j
 \end{equation}
 
 Para $j = 1, 2, \ldots, m$. De forma similar, podemos recomponer el modelo STAR.
@@ -931,7 +932,7 @@ O en un formato más corto de notación:
     y_t = \phi_{0 s_t} + \phi_{1 s_t} y_{t-1} + \varepsilon_t
 \end{equation}
 
-Para complementar el modelo, las propiedades del proceso $s_t$ necesitan ser especificadas. El modelo más popular dentro de esta familia es el propuesto por James Hamilton en 1989, el cual es conocido como Markov Switching Model (MSM), en el cual el proceso $s_t$ se asume como un proceso de Markov de primer orden. Esto implica que el régimen actual $s_t$ sólo depende del período $s_{t-1}$. 
+Para complementar el modelo, las propiedades del proceso $s_t$ necesitan ser especificadas. El modelo más popular dentro de esta familia es el propuesto por Hamilton [-@hamilton1989], el cual es conocido como Markov Switching Model (MSM), en el cual el proceso $s_t$ se asume como un proceso de Markov de primer orden. Esto implica que el régimen actual $s_t$ sólo depende del período $s_{t-1}$. 
 
 Así, el modelo es completado mediante la definición de las probabilidades de transición para moverse de un estado a otro:
 \begin{eqnarray*}
@@ -1017,10 +1018,10 @@ Gráficas:
 ```{r}
 
 plot(flu, type = "b", col = "darkred", ylab = "", 
-     main = "Monthly rates of deaths due to flu in the United States")
+     main = "Tasas mensuales de muertes por gripe en Estados Unidos")
 
 plot(D_flu, type="b", col = "darkred", ylab = "", 
-     main = "Diff Monthly rates of deaths due to flu in the United States")
+     main = "Diferencias de las tasas mensuales de muertes por gripe en EE.UU.")
 
 ```
 
@@ -1062,7 +1063,9 @@ Este capítulo amplió el análisis de series de tiempo a dos dimensiones adicio
 
 **Diferencia en diferencias (DiD).** El estimador DiD identifica el efecto causal de un tratamiento comparando la variación en el tiempo del grupo tratado con la del grupo de control. Su validez descansa en el supuesto de tendencias paralelas: en ausencia del tratamiento, ambos grupos habrían seguido trayectorias paralelas.
 
-**Panel VAR.** El Panel VAR (PVAR) combina las ventajas del VAR clásico con la dimensión transversal del panel. Se estima mediante GMM con instrumentos basados en los rezagos de las propias variables, controlando por efectos fijos mediante transformación de primeras diferencias o desviaciones ortogonales. La selección del número de rezagos sigue el criterio de Andrews y Lu [-@andrewslu2001].
+**Panel VAR.** El Panel VAR (PVAR) combina las ventajas del VAR clásico con la dimensión transversal del panel. Dado que el estimador *within* es sesgado en paneles dinámicos con $T$ pequeño (sesgo de Nickell), se estima mediante GMM con instrumentos basados en los rezagos de las propias variables, controlando por efectos fijos mediante transformación de primeras diferencias o desviaciones ortogonales; la validez de los instrumentos se evalúa con la prueba de Hansen y las pruebas de autocorrelación de orden 1 y 2. La selección del número de rezagos sigue el criterio de Andrews y Lu [-@andrewslu2001].
+
+**Cointegración en panel.** Cuando las series del panel son $I(1)$, las pruebas de Pedroni, Kao y Westerlund permiten contrastar la existencia de relaciones de largo plazo. Las pruebas residuales verifican la estacionariedad de los residuales de la regresión de cointegración, mientras que el enfoque de corrección de errores verifica que las desviaciones del equilibrio se corrijan ($\alpha < 0$); ambos enfoques se ilustraron con el panel de Grunfeld.
 
 **Modelos no lineales.** Cuando la dinámica de una serie cambia de forma discreta según el estado del sistema, los modelos de cambio de régimen son más apropiados que los modelos lineales.
 

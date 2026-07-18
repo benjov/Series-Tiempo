@@ -10,7 +10,7 @@ editor_options:
 
 El análisis de series de tiempo tiene muchas aplicaciones en diversos
 campos de la ciencia. Por ejemplo, en la economía continuamente se está
-expuesta a información recopilada de los mercados financieros,
+expuesto a información recopilada de los mercados financieros,
 indicadores de empleo, índices o indicadores del nivel de producción,
 índices de precios, etc. En otros campos de las ciencias sociales se
 emplea el análisis de series de tiempo para analizar la evolución de la
@@ -30,8 +30,8 @@ reconocer cómo lo que sucede hoy es afectado por lo que pasó ayer o, en
 general, en períodos pasados, o cómo lo que pasa hoy afectará los
 eventos futuros. Por otro lado, existe el enfoque del análisis
 frecuentista o de frecuencia, mediante el cual se busca reconocer la
-importancia que tiene para los investigadores los ciclos --por ejemplo,
-ciclos estacionales, momentos de crisis económicas, etc.--
+importancia que tienen para los investigadores los ciclos --por ejemplo,
+ciclos estacionales, momentos de crisis económicas, etc.--.
 
 ## Ejemplos y aplicaciones de las Series de Tiempo
 
@@ -88,10 +88,10 @@ algunas temporadas del año.
 Como segundo ejemplo, en la Figura \@ref(fig:fig2) se ilustra la
 evolución reciente del índice de Confianza del Consumidor (ICC) en dos
 de sus versiones: i) el Índice global y ii) el Índice de confianza de
-los consumidores cuando estos consideran la situación actual en la
-economía en relación el año anterior.
+los consumidores cuando estos consideran la situación actual de la
+economía en relación con el año anterior.
 
-```{r fig2, fig.cap = "Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación economica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-may.2025",  echo=TRUE, fig.align='center'}
+```{r fig2, fig.cap = "Índice de Confianza del Consumidor (ICC): General y resultado de ¿Cómo considera usted la situación económica del país hoy en día comparada con la de hace 12 meses? (puntos), Ene.2002-May.2025",  echo=TRUE, fig.align='center'}
 
 plot(ICC, type = "l", lwd = 1, col = "red", ylab = "Índice", 
      xlab = "Tiempo", ylim = c(29, 50))
@@ -129,14 +129,14 @@ acciones comercializadas, en conjunto. En el mundo de las finanzas se ha
 interpretado que el IPC refleja el rendimiento del capital promedio
 invertido en las empresas que cotizan en la BMV.
 
-```{r fig3,fig.cap = "índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (Panel izquierdo), Ene.2002-May.2025",  echo=TRUE, fig.align='center'}
+```{r fig3,fig.cap = "Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (panel izquierdo) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, pesos por dólar (panel derecho), Ene.2002-May.2025",  echo=TRUE, fig.align='center'}
 par(mfrow=c(1,2))
 
 # Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores
 plot(IPC_BMV, type = "l", lwd = 1, col = "red", ylab = "Índice", 
      xlab = "Tiempo", main = "Índice de Precios y \nCotizaciones BMV")
 # Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera
-plot(TDC, type = "l", lwd = 1, col = "blue", ylab = "Pesos X Dolar", 
+plot(TDC, type = "l", lwd = 1, col = "blue", ylab = "Pesos por Dólar",
      xlab = "Tiempo", main = "Tipo de Cambio")
 par(mfrow=c(1,1))
 
@@ -187,27 +187,27 @@ datos de alta frecuencia y de comportamiento no regular. En la Figura
 \@ref(fig:fig5) se muestran las diferencias logarítmicas de las series
 de IGAE de la actividad total, el IPC y el TDC.
 
-```{r fig5, fig.cap = "Tasas de Crecimiento mensuales (diferencias logarítmicas) de Indicador Global de la Actividad Económica, Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores (Panel Derecho) y Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2023",  echo=TRUE, fig.align='center'}
+```{r fig5, fig.cap = "Tasas de crecimiento mensuales (diferencias logarítmicas) del Indicador Global de la Actividad Económica, el Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores y el Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera, Ene.2002-May.2025",  echo=TRUE, fig.align='center'}
 
 par(mfrow=c(3,1))
 # Indicador Global de la Actividad Económica, base 2008
-plot(diff(log(IGAE_2013), lag = 1), type = "l", lwd = 1, 
-     col = "darkred", ylab = "Var. %", xlab = "Tiempo", 
-     main = "Indicador Global de la Actividad Economica") 
+plot(diff(log(IGAE_2013), lag = 1), type = "l", lwd = 1,
+     col = "darkred", ylab = "Var. %", xlab = "Tiempo",
+     main = "Indicador Global de la Actividad Económica")
 # Índice de Precios y Cotizaciones de la Bolsa Mexicana de Valores
 plot(diff(log(IPC_BMV), lag = 1), type = "l", lwd = 1, 
      col = "darkgreen", ylab = "Var. %", xlab = "Tiempo", 
      main = "Índice de Precios y Cotizaciones BMV")
 # Tipo de Cambio para Solventar Obligaciones en Moneda Extranjera
-plot(diff(log(TDC), lag = 1), type = "l", lwd = 1, 
-     col = "darkblue", ylab = "Pesos X Dolar", xlab = "Tiempo", 
+plot(diff(log(TDC), lag = 1), type = "l", lwd = 1,
+     col = "darkblue", ylab = "Var. %", xlab = "Tiempo",
      main = "Tipo de Cambio")
 par(mfrow=c(1,1))
 ```
 
 Dichas diferencias se pueden interpretar como una tasa de crecimiento de
 las series por las siguientes razones. Consideremos una serie de tiempo
-dada por $y_t$, cuya versión logarítmica es $ln(y_t$). De esta forma, la
+dada por $y_t$, cuya versión logarítmica es $ln(y_t)$. De esta forma, la
 diferencia logarítmica está dada por la ecuación \@ref(eq:difflog):
 
 ```{=tex}
@@ -235,19 +235,20 @@ De esta forma, si tomamos el logaritmo de la expresión de la ecuación
     (\#eq:TCDiffLog)
 \end{equation}
 ```
-La ecuación \@ref(eq:TCDiffLog) es cierta cuando los valores de $y_t$ y
-$y_{t-1}$ son muy parecidos, es decir, cuando las variaciones no son tan
-abruptas o suficientemente pequeñas. Otra forma de interpretar la
-ecuación \@ref(eq:TCDiffLog) es que para tasas de crecimiento pequeñas,
-se puede utilizar como una buena aproximación a la diferencia
-logarítmica mostrada en la ecuación \@ref(eq:difflog).
+La aproximación de la ecuación \@ref(eq:TCDiffLog) es válida cuando los
+valores de $y_t$ y $y_{t-1}$ son muy parecidos, es decir, cuando las
+variaciones entre periodos son suficientemente pequeñas (se deriva de
+que $ln(1 + x) \approx x$ cuando $x$ es cercano a cero). Dicho de otra
+forma: para tasas de crecimiento pequeñas, la diferencia logarítmica de
+la ecuación \@ref(eq:difflog) es una buena aproximación de la tasa de
+crecimiento de la serie.
 
 En la Figura \@ref(fig:fig5) se reportan las diferencias logarítmicas
-del IGAE, IPC y TDC, todos, como una media de distintos tipos de
-rendimientos. Es decir, podemos decir que un capitalista promedio
+del IGAE, el IPC y el TDC, todas interpretables como una medida de
+distintos tipos de rendimientos. Es decir, un inversionista promedio
 (suponiendo que solo puede invertir en la actividad económica, en la
-bolsa o en el dólar), puede observar que le es más redituable en función
-de sus preferencias.
+bolsa o en el dólar) puede comparar cuál de las tres alternativas le
+resulta más redituable en función de sus preferencias.
 
 Nótese que la dinámica de las variaciones de cada una de las series es
 significativamente diferente. Destaca que el TDC es una de las variables
@@ -286,9 +287,9 @@ expresiones para la ecuación diferencial: \begin{equation}
 \end{equation}
 
 Por otro lado, suponiendo el caso del tiempo en forma discreta, es
-decir, con $t = \ldots, -2, -1, 0, 1, 2, \ldots$, entonces el
-comportamiento de la serie de variables dadas por $Z_t$, la cual se
-puede expresar como: \begin{equation}
+decir, con $t = \ldots, -2, -1, 0, 1, 2, \ldots$, el comportamiento de
+la serie de variables dada por $Z_t$ se puede expresar como:
+\begin{equation}
     \Delta Z_t; \Delta^2 Z_t; \ldots; \Delta^k Z_t
     (\#eq:Diff1)
 \end{equation}
@@ -305,7 +306,7 @@ resultan equivalentes ambos conjuntos de expresiones \@ref(eq:Diff1) y
 
 ### Ecuaciones en Diferencia Lineales de Primer Orden
 
-El primer caso que se suele estudiar en relación a Ecuaciones en
+El primer caso que se suele estudiar en relación con las Ecuaciones en
 Diferencia es el de las Ecuaciones en Diferencia Lineales de Primer
 Orden. Al respecto, al igual que en el caso continuo, las variaciones de
 la variable $Z_t$ se pueden expresar como se ilustra en el siguiente
@@ -315,8 +316,8 @@ ejemplo. Consideremos la siguiente ecuación: \begin{equation}
 \end{equation}
 
 Donde, $t = \ldots, -2, -1, 0, 1, 2, \ldots$, y $a_0$ y $a_1 \neq 0$ son
-números reales constantes. De \@ref(eq:EDPO) podemos despejar la
-variable $Z_{t-1}$ y obtener una forma de ecuación en diferencia:
+números reales constantes. De \@ref(eq:EDPO) podemos reagrupar los
+términos y obtener una forma de ecuación en diferencia:
 \begin{equation}
     Z_t - a_1 Z_{t-1} = a_0
     (\#eq:EDPO2)
@@ -421,32 +422,26 @@ encuentra rezagada en cualquiera de los siguientes casos:
     (\#eq:SUM0)
 \end{equation}
 
-Por lo que diremos que en adelante el curso versará sobre ecuaciones en
+Por lo que diremos que en adelante el texto versará sobre ecuaciones en
 diferencia lineales y de cualquier orden $p \in \mathbb{N}$.
 
-Retomando la ecuación \@ref(eq:SUM) y considerando la parte de la suma
-de los términos de $a^i_1$, de tal forma que buscaremos dar una
-expresión más comprensible a dicho término. Definamos la siguiente
-expresión como: \begin{equation}
+Retomemos la ecuación \@ref(eq:SUM) y consideremos la parte de la suma
+de los términos $a^i_1$, a la cual buscaremos dar una expresión más
+compacta. Definamos: \begin{equation}
     S_{t-1} = \sum^{t-1}_{i = 0}{a^i_1}
     (\#eq:St1)
 \end{equation}
 
-Por lo tanto, $S_t$ estaría dado por la siguiente expresión:
-\begin{eqnarray}
-S_{t} & = & a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
+Multipliquemos ahora $S_{t-1}$ por $a_1$: \begin{eqnarray}
+a_1 S_{t-1} & = & a_1 \sum^{t-1}_{i = 0}{a^i_1} \nonumber \\
       & = & a_1 (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) \nonumber \\
-      & = & a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1 \nonumber \\
-      & = & a_1 S_{t-1}
+      & = & a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1
       (\#eq:St)
 \end{eqnarray}
 
-Tomando los dos resultados de las ecuaciones \@ref(eq:St1) y
-\@ref(eq:St) anteriores, podemos expresar que si a $S_{t-1}$ le restamos
-$S_t$, y desarrollando ambos lados de la ecuación anterior podemos
-obtener: \begin{eqnarray}
-    S_{t-1} - a_1 S_{t-1} & = & S_{t-1} - S_{t} \nonumber \\
-    (1 - a_1) S_{t-1} & = & (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) - (a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1) \nonumber \\
+Restando la ecuación \@ref(eq:St) de la ecuación \@ref(eq:St1), la
+mayoría de los términos se cancelan entre sí: \begin{eqnarray}
+    S_{t-1} - a_1 S_{t-1} & = & (1 + a_1 + a^2_1 + \ldots + a^{t-1}_1) - (a_1 + a^2_1 + a^3_1 + \ldots + a^{t}_1) \nonumber \\
     (1 - a_1) S_{t-1} & = & 1 - a^{t}_1 \nonumber
 \end{eqnarray}
 
@@ -462,9 +457,8 @@ iteración: \begin{equation}
     (\#eq:SOLITER)
 \end{equation}
 
-De esta forma, la ecuación \@ref(eq:SOLITER) es una solución para la
-ecuación \@ref(eq:SUM), que es una ecuación de un proceso de una
-Ecuación en Diferencia planteado en la ecuación \@ref(eq:EDPO). Esta
+De esta forma, la ecuación \@ref(eq:SOLITER) es una solución de la
+Ecuación en Diferencia planteada en la ecuación \@ref(eq:EDPO). Esta
 solución aún no es general, en el sentido de que sea válida para
 cualquier tipo de proceso: convergente o divergente. Dicha convergencia
 o divergencia estará determinada por el parámetro $a_1$. No debe pasar
@@ -508,12 +502,12 @@ tenemos la expresión: \begin{equation}
 \end{equation}
 
 No debe pasar desapercibido que esta solución es la misma que la
-mostrada en la ecuación \@ref(eq:SOLITER), por lo que en realidad ambas
-ecuaciones son una solución general indistintamente entre las ecuaciones
-\@ref(eq:SOLITER) y \@ref(eq:SOLGEN). Ambas convergen a la expresión
-como la ecuación \@ref(eq:trayec), con la misma condición de
-convergencia $|a_1| < 1$. Para ilustrar estas ecuaciones, veamos algunos
-ejemplos al respecto.
+mostrada en la ecuación \@ref(eq:SOLITER): ambos caminos —el método
+iterativo y el uso del operador rezago— conducen a la misma solución
+general. En ambos casos la solución converge a la expresión de la
+ecuación \@ref(eq:trayec) bajo la misma condición de convergencia
+$|a_1| < 1$. Para ilustrar estas ecuaciones, veamos algunos ejemplos al
+respecto.
 
 **Ejemplo**. Consideremos que tenemos un proceso $Z_t$ que es descrito
 por una ecuación en diferencia lineal de primer orden dada por:
@@ -546,11 +540,11 @@ obtenemos: \begin{equation}
 
 Donde asumiremos que el valor inicial es $Z_0 = 10$ y que la ecuación
 converge al valor de $1.3333333 \ldots$, cuando $t$ es muy grande o
-tiende a infinito. Ahora simulemos el comportamiento de ambos procesos y
-estableceremos los resultados del Cuadro \@ref(tab:table1). Notemos que
-el segundo proceso converge de una forma más rápida que el primero. El
-Cuadro \@ref(tab:table1) se ilustra en las siguientes dos Figura
-\@ref(fig:fig21) y Figura \@ref(fig:fig22).
+tiende a infinito. Ahora simulemos el comportamiento de ambos procesos;
+los resultados se muestran en el Cuadro \@ref(tab:table1). Notemos que
+el segundo proceso converge de una forma más rápida que el primero. Los
+resultados del Cuadro \@ref(tab:table1) se ilustran en las Figuras
+\@ref(fig:fig21) y \@ref(fig:fig22).
 
 ```{r table1, echo=TRUE, message=FALSE, warning=FALSE, results='asis'}
 library(knitr)
@@ -663,9 +657,9 @@ que: \begin{eqnarray}
     (\#eq:eqcaracteristica1)
 \end{eqnarray}
 
-Por lo tanto, buscamos que, para que el proceso sea equivalente y
-podamos interpretar que la ecuación \@ref(eq:SOLGEN2) sea una solución
-general, deberá pasar lo siguiente: \begin{equation}
+Por lo tanto, para que la ecuación \@ref(eq:SOLGEN2) sea efectivamente
+una solución general, se requiere que se cumpla lo siguiente:
+\begin{equation}
     (1 - g_1 L) (1 - g_2 L) s_1 g^t_1 + (1 - g_1 L) (1 - g_2 L) s_2 g^t_2 = 0
     (\#eq:eqcaracteristica2)
 \end{equation}
@@ -703,7 +697,7 @@ son:
 **Caso I**. Si $a^2_1 + 4 a_2 > 0$, la ecuación \@ref(eq:POL2)
 proporcionará dos valores de raíces reales y distintos, eso es
 $x_1 = g^{-1}_1 \neq x_2 = g^{-1}_2$. Si por ahora suponemos que
-$|{g_1} < 1|$ y que $|{g_2} < 1|$, entonces tendremos que:
+$|g_1| < 1$ y que $|g_2| < 1$, entonces tendremos que:
 \begin{eqnarray}
     (1 - g_1 L)^{-1} (1 - g_2 L)^{-1} a_0 & =&  \left( \sum^{\infty}_{j = 0}{g^j_1 L^j} \right) \left( \sum^{\infty}_{j = 0}{g^j_2 L^j} \right) a_0 \nonumber \\
     & = & \left( \sum^{\infty}_{j = 0}{g^j_1} \right) \left( \sum^{\infty}_{j = 0}{g^j_2} \right) a_0 \nonumber \\
@@ -713,7 +707,7 @@ $|{g_1} < 1|$ y que $|{g_2} < 1|$, entonces tendremos que:
 \end{eqnarray}
 
 Esto último es el punto de equilibrio de la ecuación \@ref(eq:SOLGEN2);
-considerando que $|{g_1} < 1|$ y que $|{g_2} < 1|$ --notemos que los
+considerando que $|g_1| < 1$ y que $|g_2| < 1$ --notemos que los
 demás casos son divergentes, ya que la suma anterior no convergería--.
 De esta forma, la solución de la ecuación estará dada por:
 \begin{equation}
@@ -784,7 +778,7 @@ Donde $g_1$ y $g_2$ se determinan: \begin{equation*}
     x = \frac{-a_1 \pm \sqrt{a_1^2 + 4a_2}}{2 a_2}
 \end{equation*}
 
-Asumiendo que obtienen números complejos: \begin{eqnarray*}
+Asumiendo que se obtienen números complejos: \begin{eqnarray*}
     x_1 & = & g_1^{-1} = u + iv  \\
     x_2 & = & g_2^{-1} = u - iv 
 \end{eqnarray*}
@@ -820,10 +814,10 @@ converge si $r < 1$. Nótese que para que $Z_t$ sea real, $s_1$ y $s_2$
 deben ser conjugados complejos, es decir, $s_2 = \bar{s}_1$. Si
 escribimos $s_1 = p - iq$ con $p, q \in \mathbb{R}$, entonces
 $A = s_1 + s_2 = 2p$ y $B = i(s_2 - s_1) = i(2iq) = -2q$, ambos reales,
-lo que garantiza que $Z_t \in \mathbb{R}$. Finalmente: \begin{eqnarray*}
-    \theta & = & cos^{-1}cos(\theta) \\
-    \theta & = & sen^{-1}sen(\theta)
-\end{eqnarray*}
+lo que garantiza que $Z_t \in \mathbb{R}$. Finalmente, el ángulo $\theta$ se recupera de las relaciones
+anteriores: \begin{equation*}
+    \theta = cos^{-1}\left( \frac{u}{s} \right) = sen^{-1}\left( \frac{v}{s} \right)
+\end{equation*}
 
 **Caso III**. Ahora revisemos el caso en el que $a_1^2 + 4a_2 = 0$, de
 esta forma las raíces serán idénticas: \begin{equation}
@@ -935,7 +929,7 @@ t1 = t[lista]
 Zt1=Zt[lista]
 
 
-tabla1 = data.frame(Tiempo1, Zt1)
+tabla1 = data.frame(t1, Zt1)
 colnames(tabla1) <- c("Tiempo", "$Z_t =10-450(0.4)^t+440(0.5)^t$")
 
 kable(tabla1, 
@@ -1029,19 +1023,20 @@ expresiones. Cuando $m = 2$: \begin{equation}
     f'(g) = \frac{1}{(1 - g)^2} = \sum_{j = 0}^{\infty} j g^{j-1} = \sum_{j = 0}^{\infty} (1 + j) g^j \nonumber
 \end{equation}
 
-En el otro extremo, cuando $m = p$: \begin{equation}
-    f^{(p-1)}(g) = \frac{p-1}{(1 - g)^p} = \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j
+En el otro extremo, cuando $m = p$, la derivada de orden $p-1$ es
+$f^{(p-1)}(g) = (p-1)! \, / \, (1-g)^p$, por lo que: \begin{equation}
+    \frac{1}{(1 - g)^p} = \frac{f^{(p-1)}(g)}{(p-1)!} = \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j
     (\#eq:EDOPGEN5)
 \end{equation}
 
 Así, en el extremo cuando $m = p$ la solución general podría estar dada
 por: \begin{eqnarray}
     Z_t & = & a_0 \sum_{j = 0}^{\infty} \frac{(p-1+j)(p-2+j) \ldots (2+j)(1+j)}{(p-1)!} g^j \nonumber \\
-    & & + g^t \sum_{i = 0}^p s_i t^{i-1}
+    & & + g^t \sum_{i = 1}^p s_i t^{i-1}
     (\#eq:EDOPGEN6)
 \end{eqnarray}
 
-Donde $|{g} < 1|$, $t = \ldots, -2, -1, 0, 1, 2, \ldots$. Para finalizar
+Donde $|g| < 1$, $t = \ldots, -2, -1, 0, 1, 2, \ldots$. Para finalizar
 esta sección, plantearemos la expresión del polinomio característico que
 nos permitirá hacer el análisis de convergencia de los procesos.
 Partamos de que la ecuación \@ref(eq:POLGEN3) se puede escribir como:
@@ -1052,39 +1047,41 @@ Partamos de que la ecuación \@ref(eq:POLGEN3) se puede escribir como:
 
 La ecuación \@ref(eq:POLGEN55) permite interpretar las raíces del
 polinomio característico de forma directa ya que $x^{-1}_1 = g_1$,
-$x^{-1}_2 = g_2$, ..., $x^{-1}_p = g_p$. Así, siempre que $p \geq 1$ en
-la ecuación \@ref(eq:EDOP), diremos que el proceso descrito en esa
-ecuación dará como resultado un proceso convergente si se cumplen las
-dos condiciones \@ref(eq:COND1) y \@ref(eq:COND2): \begin{equation}
-    |a_p| < 1  
+$x^{-1}_2 = g_2$, ..., $x^{-1}_p = g_p$. La condición exacta de
+convergencia del proceso descrito en la ecuación \@ref(eq:EDOP) es que
+todas las raíces $g_i$ tengan módulo estrictamente menor que uno, como
+se expresa en la ecuación \@ref(eq:COND3): \begin{eqnarray}
+    |g_i| < 1
+    (\#eq:COND3)
+\end{eqnarray}
+
+Para todo $i = 1, 2, \ldots, p$ --cuando la raíz es real, el módulo es
+su valor absoluto; cuando es compleja, $g_i = u \pm iv$, el módulo es
+$\sqrt{u^2 + v^2}$--. En la práctica, resulta útil disponer de
+condiciones expresadas directamente en términos de los coeficientes. Dos
+condiciones **necesarias** (aunque no suficientes) para la convergencia
+son las ecuaciones \@ref(eq:COND1) y \@ref(eq:COND2): \begin{equation}
+    |a_p| < 1
     (\#eq:COND1)
 \end{equation} \begin{equation}
     a_1 + a_2 + \ldots + a_p < 1
     (\#eq:COND2)
 \end{equation}
 
-Alternativamente, cuando las raíces son reales, lo anterior es
-equivalente a la expresión \@ref(eq:COND3): \begin{eqnarray}
-    |g_i| < 1
-    (\#eq:COND3)
-\end{eqnarray}
+Si alguna de ellas falla, el proceso es divergente; sin embargo, su
+cumplimiento no garantiza la convergencia, por lo que la verificación
+definitiva requiere calcular las raíces. Por otra parte, una condición
+**suficiente** (aunque no necesaria) es que
+$|a_1| + |a_2| + \ldots + |a_p| < 1$.
 
-Para $\forall i = 1, 2, \ldots, p$. Cuando las raíces son imaginarias,
-las dos condiciones \@ref(eq:COND1) y \@ref(eq:COND2) son equivalentes a
-la expresión \@ref(eq:COND4): \begin{eqnarray}
-    \sqrt{g_i g_j} = \sqrt{u^2 + v^2} < 1 
-    (\#eq:COND4)
-\end{eqnarray}
+Cuando $g_1 = g_2 = \ldots = g_p = g$, la condición de la ecuación
+\@ref(eq:COND3) se resume a que $|g| < 1$. En resumen, la condición
+descrita en la ecuación \@ref(eq:COND3) se puede ilustrar mediante un
+círculo unitario como el de la Figura \@ref(fig:fig24): si todas las
+raíces $g_i$ se ubican dentro de éste, podemos decir que el proceso es
+convergente en el largo plazo.
 
-Para $\forall i \neq j$ y $i, j = 1, 2, \ldots, p$. Cuando
-$g_1 = g_2 = \ldots = g_p = g$, la condición de la ecuación
-\@ref(eq:COND3) se resume a que $|g| < 1$. En resumen, las condiciones
-descritas en las ecuaciones \@ref(eq:COND3) y \@ref(eq:COND4) se pueden
-ilustrar mediante un circulo unitario como el de la Figura
-\@ref(fig:fig24) en que sí las raíces se ubican dentro de éste, podemos
-decir que el proceso es convergente en el largo plazo.
-
-```{r fig24,fig.cap="Circulo unitario en el que se cumple que $|g_i|<1$ y $(g_i g_j)^{1/2} = (u^2 + v^2)^{1/2} < 1$", echo=TRUE, fig.height=4.5, fig.width=4, message=FALSE, warning=FALSE, fig.align='center'}
+```{r fig24,fig.cap="Círculo unitario en el que se cumple que $|g_i|<1$", echo=TRUE, fig.height=4.5, fig.width=4, message=FALSE, warning=FALSE, fig.align='center'}
 # Crear datos para el círculo
 theta <- seq(0, 2*pi, length.out=100)
 x <- cos(theta)
@@ -1162,15 +1159,18 @@ expresar como: \begin{equation}
 (\#eq:Diff4)
 \end{equation}
 
-Al respecto, vale la pena aclarar que en ocasiones se hará uso de una
-notación alternativa dada por: $\Delta^k$ o $\Delta_k$, donde
-$k = 1, 2, 3, \ldots$, indistintamente, ya que en ambos casos se
-referirá a una diferencia de orden $k$. Esta notación resulta de gran
-utilidad cuando se quiere comparar períodos equivalentes como, por
-ejemplo, el mismo trimestre pero de un año anterior. De forma similar,
-para el caso de logaritmos podemos escribir la ecuación \@ref(eq:Diff4)
-como: \begin{equation}
-    \Delta^{4} ln(Z_{t}) = \Delta_{4} ln(Z_{t}) = ln(Z_{t}) - ln(Z_{t-4}) = (1 - L^4) ln(Z_{t}) 
+Al respecto, vale la pena distinguir dos notaciones que suelen
+confundirse: $\Delta_k Z_t = (1 - L^k) Z_t = Z_t - Z_{t-k}$ denota la
+diferencia respecto del periodo $t-k$ --también llamada diferencia
+estacional cuando $k$ coincide con la periodicidad de los datos--,
+mientras que $\Delta^k Z_t = (1 - L)^k Z_t$ denota la aplicación
+iterada $k$ veces de la primera diferencia. Ambas coinciden únicamente
+cuando $k = 1$. La primera notación resulta de gran utilidad cuando se
+quiere comparar períodos equivalentes como, por ejemplo, el mismo
+trimestre pero de un año anterior ($k = 4$ con datos trimestrales). En
+logaritmos, la ecuación \@ref(eq:Diff4) se escribe como:
+\begin{equation}
+    \Delta_{4} ln(Z_{t}) = ln(Z_{t}) - ln(Z_{t-4}) = (1 - L^4) ln(Z_{t})
     (\#eq:Diff5)
 \end{equation}
 
