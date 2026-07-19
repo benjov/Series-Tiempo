@@ -16,11 +16,11 @@ Tecnología: R + bookdown (Rmd) → HTML (GitBook) + PDF (XeLaTeX)
 
 | Autor | Correo |
 |-------|--------|
-| Benjamín Oliva (coordinador) | benjov@ciencias.unam.mx |
+| Benjamín Oliva Vázquez (coordinador) | benjov@ciencias.unam.mx |
 | Jaime Vázquez Alamilla | jaime.vazquez@ciencias.unam.mx |
 | Omar Alfaro Rivera | omarxalpha@gmail.com |
-| Emiliano Pérez Caullieres | emilianoprzcls@gmail.com |
-| Luis Gerardo Ruíz | gerardorg2203@gmail.com |
+| Marcos Emiliano Pérez Caullieres | emilianoprzcls@gmail.com |
+| Luis Gerardo Ruíz González | gerardorg2203@gmail.com |
 
 ---
 

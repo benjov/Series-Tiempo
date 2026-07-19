@@ -39,7 +39,7 @@ if (knitr::is_html_output()) cat(
   "**Facultad de Economía, Universidad Nacional Autónoma de México**\\",
   "**Departamento de Economía, Tecnológico de Monterrey, Campus Santa Fe**",
   "",
-  "Benjamín Oliva · Jaime Vázquez Alamilla · Omar Alfaro Rivera · Emiliano Pérez Caullieres · Luis Gerardo Ruíz",
+  "Benjamín Oliva Vázquez · Jaime Vázquez Alamilla · Omar Alfaro Rivera · Marcos Emiliano Pérez Caullieres · Luis Gerardo Ruíz González",
   "",
   "*Versión: Julio 2026*",
   sep = "\n")
