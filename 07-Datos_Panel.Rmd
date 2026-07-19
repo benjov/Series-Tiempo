@@ -1076,3 +1076,48 @@ Este capítulo amplió el análisis de series de tiempo a dos dimensiones adicio
 - *Markov Switching (MSM):* el régimen $s_t$ es una variable latente que sigue una cadena de Markov de primer orden. Las probabilidades de transición $p_{ij} = \mathbb{P}(s_t = j \mid s_{t-1} = i)$ son estimadas junto con los parámetros del modelo AR condicional al régimen.
 
 En todos los casos, el procedimiento empírico incluye: estimar un AR(p) lineal, probar la hipótesis de linealidad, estimar el modelo no lineal seleccionado, evaluar resultados y, finalmente, generar pronósticos o funciones de impulso-respuesta.
+
+## Ejercicios
+
+Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como *(Teórico)* se resuelven analíticamente; los marcados como *(Computacional)* utilizan los paquetes `plm` y `tsDyn` empleados en este capítulo, así como las bases de datos incluidas en `plm`.
+
+1. **(Teórico)** Considere el modelo de efectos fijos $Y_{it} = \alpha_i + \beta X_{it} + U_{it}$, con $i = 1, \ldots, N$ y $t = 1, \ldots, T$.
+
+    a. Demuestre que la transformación *within* —restar a cada variable su media por individuo, por ejemplo $Y_{it} - \bar{Y}_i$ con $\bar{Y}_i = \frac{1}{T}\sum_t Y_{it}$— elimina el efecto fijo $\alpha_i$.
+    b. Suponga ahora un panel dinámico: $Y_{it} = \alpha_i + \rho Y_{i,t-1} + U_{it}$. Explique por qué, tras la transformación *within*, el regresor transformado $Y_{i,t-1} - \bar{Y}_{i,-1}$ queda mecánicamente correlacionado con el error transformado, lo que genera el sesgo de Nickell.
+    c. ¿Qué ocurre con ese sesgo cuando $T \to \infty$? ¿Por qué es especialmente preocupante en paneles macroeconómicos con $T$ pequeño?
+    d. Describa la solución de Arellano y Bond: qué transformación se aplica, qué se utiliza como instrumento y qué condiciones deben cumplir los instrumentos para ser válidos.
+
+2. **(Teórico)** Sobre las pruebas de raíces unitarias en panel estudiadas en este capítulo:
+
+    a. Escriba la hipótesis nula y la alternativa de la prueba de Levin, Lin y Chu (caso homogéneo, $H_1^A$) y de la prueba de Im, Pesaran y Shin (caso heterogéneo, $H_1^B$), en términos de los coeficientes $\rho_i$ de la ecuación \@ref(eq:eqARPanel).
+    b. Explique con precisión qué se puede concluir al rechazar $H_0$ en la prueba IPS. ¿Es correcto afirmar que "todas las series del panel son estacionarias"?
+    c. ¿Cuál de las dos pruebas resulta más apropiada cuando se sospecha que la velocidad de reversión a la media difiere entre individuos? Justifique.
+    d. Explique cuál es la ventaja de las pruebas en panel frente a aplicar una prueba ADF individual a cada una de las $N$ series.
+
+3. **(Teórico)** Considere el modelo de diferencia en diferencias $Y_{it} = \beta_0 + \beta_1 D_i + \beta_2 P_t + \beta_3 (D_i \times P_t) + U_{it}$, donde $D_i$ indica pertenencia al grupo de tratamiento y $P_t$ el periodo posterior a la intervención.
+
+    a. Exprese las cuatro medias condicionales $\mathbb{E}[Y_{it} | D_i, P_t]$ en términos de los parámetros del modelo.
+    b. Demuestre que $\beta_3$ es igual a la doble diferencia de medias: la variación del grupo tratado antes-después menos la variación del grupo de control antes-después.
+    c. Enuncie el supuesto de tendencias paralelas y explique por qué es una condición de identificación no verificable directamente. ¿Qué evidencia empírica previa a la intervención suele presentarse para hacerlo plausible?
+
+4. **(Computacional)** Utilice la base `Grunfeld` del paquete `plm` (inversión, valor de mercado y capital de 10 empresas estadounidenses, 1935-1954) para estimar el modelo $inv_{it} = \alpha_i + \beta_1 value_{it} + \beta_2 capital_{it} + U_{it}$.
+
+    a. Estime el modelo por *pooling*, por efectos fijos (*within*) y por efectos aleatorios con `plm()`, y compare los coeficientes estimados.
+    b. Aplique la prueba de Hausman con `phtest()` y concluya qué especificación es preferible.
+    c. Interprete económicamente el coeficiente de $value_{it}$ en la especificación elegida.
+    d. Extraiga los efectos fijos estimados con `fixef()` y comente qué tan heterogéneas son las empresas del panel.
+
+5. **(Computacional)** Utilice la base `Produc` del paquete `plm` (producto estatal bruto y otras variables para 48 estados de Estados Unidos, 1970-1986) y analice el orden de integración del logaritmo del producto estatal bruto, $ln(gsp_{it})$.
+
+    a. Construya la matriz de series por estado, como se hizo en este capítulo con la base Grunfeld, y aplique la prueba de Levin, Lin y Chu con `purtest(..., test = "levinlin")`, con especificaciones de intercepto y de tendencia.
+    b. Aplique la prueba de Im, Pesaran y Shin (`test = "ips"`) con las mismas especificaciones.
+    c. Repita ambas pruebas sobre las primeras diferencias de las series.
+    d. Concluya el orden de integración del panel y comente si las conclusiones de ambas pruebas coinciden. En caso contrario, explique la discrepancia a la luz de las hipótesis alternativas de cada prueba.
+
+6. **(Computacional)** Continúe con la serie de diferencias del logaritmo de los casos de influenza (`D_flu`) empleada en el ejemplo SETAR de este capítulo.
+
+    a. Aplique la prueba de linealidad de Hansen con `setarTest()` del paquete `tsDyn` y concluya si se justifica un modelo de umbral frente a un AR lineal.
+    b. Estime un modelo SETAR con `m = 2` y umbral buscado automáticamente, y compárelo mediante el criterio AIC con el modelo SETAR de `m = 4` estimado en el capítulo y con un AR lineal del mismo orden (función `linear()` de `tsDyn`).
+    c. Interprete los regímenes del modelo seleccionado: ¿cuántas observaciones caen en cada régimen y qué dinámica exhibe cada uno?
+    d. Explique por qué un modelo lineal resulta insuficiente para una serie epidemiológica como esta, en la que los brotes generan episodios de crecimiento explosivo seguidos de reversiones rápidas.

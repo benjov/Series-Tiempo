@@ -234,6 +234,7 @@ ecuaciones-en-diferencia-lineales-de-primer-orden
 ecuaciones-en-diferencia-lineales-de-segundo-orden-y-de-orden-superior
 operador-de-rezago-l
 de-las-ecuaciones-en-diferencia-a-los-procesos-estocásticos
+ejercicios
 cap-estacionarios
 definición-de-ergodicidad-y-estacionariedad
 función-de-autocorrelación
@@ -256,6 +257,7 @@ motivación
 filtro-hodrick-prescott
 filtro-hodrick-prescott-planteado-por-st-amant-y-van-norden
 resumen-del-capítulo
+ejercicios-1
 cap-noestacionarios
 definición-y-formas-de-no-estacionariedad
 simulación-caminata-aleatoria-vs.-proceso-estacionario
@@ -266,6 +268,7 @@ phillips---perron-pp
 kwiatkowski---phillips---schmidt---shin-kpss
 zivot---andrews-za
 resumen-y-guía-de-decisión
+ejercicios-2
 cap-var
 causalidad-de-granger
 definición-y-representación-del-sistema-o-modelo-de-vectores-autorregresivos-varp
@@ -294,6 +297,7 @@ algoritmo-del-filtro-kalman-y-del-suavizador-de-kalman
 representación-estado-espacio-de-modelos-arma
 estimación-por-máxima-verosimilitud
 resumen-del-capítulo-1
+ejercicios-3
 cap-volatilidad
 motivación-1
 value-at-risk-var
@@ -312,6 +316,7 @@ extensiones-asimetría-y-garch-en-media
 modelos-arch-y-garch-multivariados
 pruebas-para-detectar-efectos-arch
 resumen-del-capítulo-2
+ejercicios-4
 cap-panel
 modelos-de-datos-panel-y-panel-var
 motivación-2
@@ -337,3 +342,4 @@ regímenes-determinados-por-información-observable
 regímenes-determinados-por-variables-no-observables
 ejemplo-modelos-de-cambio-de-régimen-tar
 resumen-del-capítulo-3
+ejercicios-5

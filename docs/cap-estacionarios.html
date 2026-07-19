@@ -4542,7 +4542,66 @@ pérdida de información en los extremos de la muestra.</p>
 presenta las pruebas de raíz unitaria que determinan si es necesario
 diferenciar una serie antes de modelarla con las herramientas aquí
 desarrolladas.</p>
-
+</div>
+<div id="ejercicios-1" class="section level2" number="3.12">
+<h2>
+<span class="header-section-number">3.12</span> Ejercicios<a class="anchor" aria-label="anchor" href="#ejercicios-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como <em>(Teórico)</em> se resuelven analíticamente; los marcados como <em>(Computacional)</em> utilizan los datos y las funciones empleadas en este capítulo.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>(Teórico)</strong> Considere el proceso AR(1) dado por <span class="math inline">\(X_t = a_0 + a_1 X_{t-1} + U_t\)</span>, donde <span class="math inline">\(|a_1| &lt; 1\)</span> y <span class="math inline">\(U_t\)</span> es un proceso puramente aleatorio con media cero y varianza <span class="math inline">\(\sigma^2\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Demuestre que la media del proceso es <span class="math inline">\(\mu = a_0 / (1 - a_1)\)</span>.</li>
+<li>Demuestre que la varianza es <span class="math inline">\(\gamma(0) = \sigma^2 / (1 - a_1^2)\)</span>.</li>
+<li>Demuestre que la función de autocorrelación es <span class="math inline">\(\rho(\tau) = a_1^{\tau}\)</span>, <span class="math inline">\(\tau = 1, 2, \ldots\)</span>, y compare la velocidad de decaimiento para <span class="math inline">\(a_1 = 0.5\)</span> y <span class="math inline">\(a_1 = 0.9\)</span> calculando los primeros cinco valores en cada caso.</li>
+<li>¿Qué ocurre con <span class="math inline">\(\gamma(0)\)</span> y con <span class="math inline">\(\rho(\tau)\)</span> cuando <span class="math inline">\(a_1 \to 1\)</span>? Relacione su respuesta con la discusión de procesos no estacionarios del Capítulo <a href="cap-noestacionarios.html#cap-noestacionarios">4</a>.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere el proceso MA(2) dado por <span class="math inline">\(X_t = \mu + U_t - b_1 U_{t-1} - b_2 U_{t-2}\)</span>, con <span class="math inline">\(U_t\)</span> puramente aleatorio con media cero y varianza <span class="math inline">\(\sigma^2\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Calcule la media y la varianza <span class="math inline">\(\gamma(0)\)</span> del proceso.</li>
+<li>Demuestre que <span class="math inline">\(\gamma(1) = (-b_1 + b_1 b_2) \sigma^2\)</span>, que <span class="math inline">\(\gamma(2) = -b_2 \sigma^2\)</span> y que <span class="math inline">\(\gamma(\tau) = 0\)</span> para todo <span class="math inline">\(\tau &gt; 2\)</span>.</li>
+<li>Con base en el inciso anterior, ¿qué patrón debe exhibir la función de autocorrelación muestral de un MA(2)? ¿En qué difiere del patrón de un AR(2)?</li>
+<li>Explique por qué el proceso es estacionario sin necesidad de imponer restricciones sobre <span class="math inline">\(b_1\)</span> y <span class="math inline">\(b_2\)</span>, mientras que la invertibilidad sí las requiere. Enuncie la condición de invertibilidad para el caso MA(1).</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere el proceso ARMA(1,1) dado por <span class="math inline">\(X_t = a_1 X_{t-1} + U_t - b_1 U_{t-1}\)</span>, estacionario e invertible.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Demuestre que para <span class="math inline">\(\tau \geq 2\)</span> las autocovarianzas satisfacen la recursión <span class="math inline">\(\gamma(\tau) = a_1 \gamma(\tau - 1)\)</span>.</li>
+<li>Concluya que la ACF decae geométricamente a partir de <span class="math inline">\(\tau = 1\)</span>, de modo que ni la ACF ni la PACF se cortan de manera abrupta.</li>
+<li>Con base en lo anterior y en el Cuadro <a href="cap-estacionarios.html#tab:AcAcp">3.9</a>, explique cómo distinguiría en la práctica un ARMA(1,1) de un AR(1) puro y de un MA(1) puro.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Utilice la función <code><a href="https://rdrr.io/r/stats/arima.sim.html">arima.sim()</a></code> de R para simular <span class="math inline">\(T = 500\)</span> observaciones de los siguientes procesos: (i) un AR(2) con <span class="math inline">\(a_1 = 0.6\)</span> y <span class="math inline">\(a_2 = 0.2\)</span>; (ii) un MA(2) con <span class="math inline">\(b_1 = 0.7\)</span> y <span class="math inline">\(b_2 = 0.3\)</span>; y (iii) un ARMA(1,1) con <span class="math inline">\(a_1 = 0.8\)</span> y <span class="math inline">\(b_1 = 0.4\)</span>. Tenga presente que la convención de signos de <code><a href="https://rdrr.io/r/stats/arima.sim.html">arima.sim()</a></code> para el componente MA es contraria a la utilizada en este capítulo (el argumento <code>ma</code> corresponde a <span class="math inline">\(-b_i\)</span>).</p>
+<ol style="list-style-type: lower-alpha">
+<li>Grafique cada serie simulada y sus funciones ACF y PACF con <code><a href="https://rdrr.io/r/stats/acf.html">acf()</a></code> y <code><a href="https://rdrr.io/r/stats/acf.html">pacf()</a></code>.</li>
+<li>Verifique que los patrones muestrales coinciden con los patrones teóricos resumidos en el Cuadro <a href="cap-estacionarios.html#tab:AcAcp">3.9</a>.</li>
+<li>Repita el ejercicio con <span class="math inline">\(T = 100\)</span> y comente cómo afecta el tamaño de muestra a la claridad de los patrones.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> El archivo <code>BD/Base_Transporte.xlsx</code> incluye la serie mensual de pasajeros transportados en vuelos nacionales (columna <code>Pax_Nal</code>), enero de 2000 a junio de 2025. Replique para esta serie la metodología aplicada al Metro de la CDMX en este capítulo:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Grafique la serie en niveles y en logaritmos. ¿Considera necesaria la transformación logarítmica?</li>
+<li>Calcule la diferencia logarítmica mensual y grafique su ACF y PACF. ¿Qué órdenes <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span> sugieren los correlogramas?</li>
+<li>Estime al menos cuatro especificaciones ARMA(<span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span>) alternativas con <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> y compare sus criterios AIC y BIC. Considere incluir una variable dummy para la caída asociada a la pandemia por COVID-19 (abril y mayo de 2020), construyéndola usted mismo como se hizo en este capítulo con <code>D_Abr2020</code> y <code>D_May2020</code>.</li>
+<li>Para el modelo seleccionado, aplique a los residuales la prueba de Ljung-Box y la prueba de normalidad de Jarque-Bera, e interprete los resultados.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Continúe con el modelo seleccionado en el ejercicio anterior.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Genere un pronóstico a 24 meses con <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> y grafíquelo junto con la serie observada, incluyendo el intervalo de predicción de <span class="math inline">\(\pm 2\)</span> errores estándar.</li>
+<li>Explique por qué el intervalo de predicción se amplía conforme crece el horizonte <span class="math inline">\(h\)</span>.</li>
+<li>Por separado, aplique el filtro Hodrick-Prescott a la serie en logaritmos con la función <code><a href="https://rdrr.io/pkg/mFilter/man/hpfilter.html">hpfilter()</a></code> del paquete <code>mFilter</code>, usando <span class="math inline">\(\lambda = 14400\)</span> por tratarse de datos mensuales. Grafique la tendencia y el ciclo resultantes.</li>
+<li>Comente qué limitación presenta el filtro HP en los extremos de la muestra y cómo la aborda la variante de St-Amant y van Norden discutida en este capítulo.</li>
+</ol>
+</li>
+</ol>
 </div>
 </div>
 
@@ -4585,6 +4644,7 @@ desarrolladas.</p>
 </ul>
 </li>
 <li><a class="nav-link" href="#resumen-del-cap%C3%ADtulo"><span class="header-section-number">3.11</span> Resumen del capítulo</a></li>
+<li><a class="nav-link" href="#ejercicios-1"><span class="header-section-number">3.12</span> Ejercicios</a></li>
 </ul>
 
       <div class="book-extra">

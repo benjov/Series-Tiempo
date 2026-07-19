@@ -3023,3 +3023,47 @@ El siguiente capítulo extiende este marco a series no estacionarias y
 presenta las pruebas de raíz unitaria que determinan si es necesario
 diferenciar una serie antes de modelarla con las herramientas aquí
 desarrolladas.
+
+## Ejercicios
+
+Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como *(Teórico)* se resuelven analíticamente; los marcados como *(Computacional)* utilizan los datos y las funciones empleadas en este capítulo.
+
+1. **(Teórico)** Considere el proceso AR(1) dado por $X_t = a_0 + a_1 X_{t-1} + U_t$, donde $|a_1| < 1$ y $U_t$ es un proceso puramente aleatorio con media cero y varianza $\sigma^2$.
+
+    a. Demuestre que la media del proceso es $\mu = a_0 / (1 - a_1)$.
+    b. Demuestre que la varianza es $\gamma(0) = \sigma^2 / (1 - a_1^2)$.
+    c. Demuestre que la función de autocorrelación es $\rho(\tau) = a_1^{\tau}$, $\tau = 1, 2, \ldots$, y compare la velocidad de decaimiento para $a_1 = 0.5$ y $a_1 = 0.9$ calculando los primeros cinco valores en cada caso.
+    d. ¿Qué ocurre con $\gamma(0)$ y con $\rho(\tau)$ cuando $a_1 \to 1$? Relacione su respuesta con la discusión de procesos no estacionarios del Capítulo \@ref(cap-noestacionarios).
+
+2. **(Teórico)** Considere el proceso MA(2) dado por $X_t = \mu + U_t - b_1 U_{t-1} - b_2 U_{t-2}$, con $U_t$ puramente aleatorio con media cero y varianza $\sigma^2$.
+
+    a. Calcule la media y la varianza $\gamma(0)$ del proceso.
+    b. Demuestre que $\gamma(1) = (-b_1 + b_1 b_2) \sigma^2$, que $\gamma(2) = -b_2 \sigma^2$ y que $\gamma(\tau) = 0$ para todo $\tau > 2$.
+    c. Con base en el inciso anterior, ¿qué patrón debe exhibir la función de autocorrelación muestral de un MA(2)? ¿En qué difiere del patrón de un AR(2)?
+    d. Explique por qué el proceso es estacionario sin necesidad de imponer restricciones sobre $b_1$ y $b_2$, mientras que la invertibilidad sí las requiere. Enuncie la condición de invertibilidad para el caso MA(1).
+
+3. **(Teórico)** Considere el proceso ARMA(1,1) dado por $X_t = a_1 X_{t-1} + U_t - b_1 U_{t-1}$, estacionario e invertible.
+
+    a. Demuestre que para $\tau \geq 2$ las autocovarianzas satisfacen la recursión $\gamma(\tau) = a_1 \gamma(\tau - 1)$.
+    b. Concluya que la ACF decae geométricamente a partir de $\tau = 1$, de modo que ni la ACF ni la PACF se cortan de manera abrupta.
+    c. Con base en lo anterior y en el Cuadro \@ref(tab:AcAcp), explique cómo distinguiría en la práctica un ARMA(1,1) de un AR(1) puro y de un MA(1) puro.
+
+4. **(Computacional)** Utilice la función `arima.sim()` de R para simular $T = 500$ observaciones de los siguientes procesos: (i) un AR(2) con $a_1 = 0.6$ y $a_2 = 0.2$; (ii) un MA(2) con $b_1 = 0.7$ y $b_2 = 0.3$; y (iii) un ARMA(1,1) con $a_1 = 0.8$ y $b_1 = 0.4$. Tenga presente que la convención de signos de `arima.sim()` para el componente MA es contraria a la utilizada en este capítulo (el argumento `ma` corresponde a $-b_i$).
+
+    a. Grafique cada serie simulada y sus funciones ACF y PACF con `acf()` y `pacf()`.
+    b. Verifique que los patrones muestrales coinciden con los patrones teóricos resumidos en el Cuadro \@ref(tab:AcAcp).
+    c. Repita el ejercicio con $T = 100$ y comente cómo afecta el tamaño de muestra a la claridad de los patrones.
+
+5. **(Computacional)** El archivo `BD/Base_Transporte.xlsx` incluye la serie mensual de pasajeros transportados en vuelos nacionales (columna `Pax_Nal`), enero de 2000 a junio de 2025. Replique para esta serie la metodología aplicada al Metro de la CDMX en este capítulo:
+
+    a. Grafique la serie en niveles y en logaritmos. ¿Considera necesaria la transformación logarítmica?
+    b. Calcule la diferencia logarítmica mensual y grafique su ACF y PACF. ¿Qué órdenes $p$ y $q$ sugieren los correlogramas?
+    c. Estime al menos cuatro especificaciones ARMA($p$, $q$) alternativas con `arima()` y compare sus criterios AIC y BIC. Considere incluir una variable dummy para la caída asociada a la pandemia por COVID-19 (abril y mayo de 2020), construyéndola usted mismo como se hizo en este capítulo con `D_Abr2020` y `D_May2020`.
+    d. Para el modelo seleccionado, aplique a los residuales la prueba de Ljung-Box y la prueba de normalidad de Jarque-Bera, e interprete los resultados.
+
+6. **(Computacional)** Continúe con el modelo seleccionado en el ejercicio anterior.
+
+    a. Genere un pronóstico a 24 meses con `predict()` y grafíquelo junto con la serie observada, incluyendo el intervalo de predicción de $\pm 2$ errores estándar.
+    b. Explique por qué el intervalo de predicción se amplía conforme crece el horizonte $h$.
+    c. Por separado, aplique el filtro Hodrick-Prescott a la serie en logaritmos con la función `hpfilter()` del paquete `mFilter`, usando $\lambda = 14400$ por tratarse de datos mensuales. Grafique la tendencia y el ciclo resultantes.
+    d. Comente qué limitación presenta el filtro HP en los extremos de la muestra y cómo la aborda la variante de St-Amant y van Norden discutida en este capítulo.

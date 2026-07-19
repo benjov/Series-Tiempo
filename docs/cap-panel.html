@@ -1862,7 +1862,67 @@ Figura 7.3: Raíces de la matriz compañera del Panel VAR(1) estimado. El proces
 <li><p><em>Markov Switching (MSM):</em> el régimen <span class="math inline">\(s_t\)</span> es una variable latente que sigue una cadena de Markov de primer orden. Las probabilidades de transición <span class="math inline">\(p_{ij} = \mathbb{P}(s_t = j \mid s_{t-1} = i)\)</span> son estimadas junto con los parámetros del modelo AR condicional al régimen.</p></li>
 </ul>
 <p>En todos los casos, el procedimiento empírico incluye: estimar un AR(p) lineal, probar la hipótesis de linealidad, estimar el modelo no lineal seleccionado, evaluar resultados y, finalmente, generar pronósticos o funciones de impulso-respuesta.</p>
-
+</div>
+<div id="ejercicios-5" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> Ejercicios<a class="anchor" aria-label="anchor" href="#ejercicios-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como <em>(Teórico)</em> se resuelven analíticamente; los marcados como <em>(Computacional)</em> utilizan los paquetes <code>plm</code> y <code>tsDyn</code> empleados en este capítulo, así como las bases de datos incluidas en <code>plm</code>.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>(Teórico)</strong> Considere el modelo de efectos fijos <span class="math inline">\(Y_{it} = \alpha_i + \beta X_{it} + U_{it}\)</span>, con <span class="math inline">\(i = 1, \ldots, N\)</span> y <span class="math inline">\(t = 1, \ldots, T\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Demuestre que la transformación <em>within</em> —restar a cada variable su media por individuo, por ejemplo <span class="math inline">\(Y_{it} - \bar{Y}_i\)</span> con <span class="math inline">\(\bar{Y}_i = \frac{1}{T}\sum_t Y_{it}\)</span>— elimina el efecto fijo <span class="math inline">\(\alpha_i\)</span>.</li>
+<li>Suponga ahora un panel dinámico: <span class="math inline">\(Y_{it} = \alpha_i + \rho Y_{i,t-1} + U_{it}\)</span>. Explique por qué, tras la transformación <em>within</em>, el regresor transformado <span class="math inline">\(Y_{i,t-1} - \bar{Y}_{i,-1}\)</span> queda mecánicamente correlacionado con el error transformado, lo que genera el sesgo de Nickell.</li>
+<li>¿Qué ocurre con ese sesgo cuando <span class="math inline">\(T \to \infty\)</span>? ¿Por qué es especialmente preocupante en paneles macroeconómicos con <span class="math inline">\(T\)</span> pequeño?</li>
+<li>Describa la solución de Arellano y Bond: qué transformación se aplica, qué se utiliza como instrumento y qué condiciones deben cumplir los instrumentos para ser válidos.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Sobre las pruebas de raíces unitarias en panel estudiadas en este capítulo:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Escriba la hipótesis nula y la alternativa de la prueba de Levin, Lin y Chu (caso homogéneo, <span class="math inline">\(H_1^A\)</span>) y de la prueba de Im, Pesaran y Shin (caso heterogéneo, <span class="math inline">\(H_1^B\)</span>), en términos de los coeficientes <span class="math inline">\(\rho_i\)</span> de la ecuación <a href="cap-panel.html#eq:eqARPanel">(7.1)</a>.</li>
+<li>Explique con precisión qué se puede concluir al rechazar <span class="math inline">\(H_0\)</span> en la prueba IPS. ¿Es correcto afirmar que “todas las series del panel son estacionarias”?</li>
+<li>¿Cuál de las dos pruebas resulta más apropiada cuando se sospecha que la velocidad de reversión a la media difiere entre individuos? Justifique.</li>
+<li>Explique cuál es la ventaja de las pruebas en panel frente a aplicar una prueba ADF individual a cada una de las <span class="math inline">\(N\)</span> series.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere el modelo de diferencia en diferencias <span class="math inline">\(Y_{it} = \beta_0 + \beta_1 D_i + \beta_2 P_t + \beta_3 (D_i \times P_t) + U_{it}\)</span>, donde <span class="math inline">\(D_i\)</span> indica pertenencia al grupo de tratamiento y <span class="math inline">\(P_t\)</span> el periodo posterior a la intervención.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Exprese las cuatro medias condicionales <span class="math inline">\(\mathbb{E}[Y_{it} | D_i, P_t]\)</span> en términos de los parámetros del modelo.</li>
+<li>Demuestre que <span class="math inline">\(\beta_3\)</span> es igual a la doble diferencia de medias: la variación del grupo tratado antes-después menos la variación del grupo de control antes-después.</li>
+<li>Enuncie el supuesto de tendencias paralelas y explique por qué es una condición de identificación no verificable directamente. ¿Qué evidencia empírica previa a la intervención suele presentarse para hacerlo plausible?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Utilice la base <code>Grunfeld</code> del paquete <code>plm</code> (inversión, valor de mercado y capital de 10 empresas estadounidenses, 1935-1954) para estimar el modelo <span class="math inline">\(inv_{it} = \alpha_i + \beta_1 value_{it} + \beta_2 capital_{it} + U_{it}\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Estime el modelo por <em>pooling</em>, por efectos fijos (<em>within</em>) y por efectos aleatorios con <code><a href="https://rdrr.io/pkg/plm/man/plm.html">plm()</a></code>, y compare los coeficientes estimados.</li>
+<li>Aplique la prueba de Hausman con <code><a href="https://rdrr.io/pkg/plm/man/phtest.html">phtest()</a></code> y concluya qué especificación es preferible.</li>
+<li>Interprete económicamente el coeficiente de <span class="math inline">\(value_{it}\)</span> en la especificación elegida.</li>
+<li>Extraiga los efectos fijos estimados con <code><a href="https://rdrr.io/pkg/nlme/man/fixed.effects.html">fixef()</a></code> y comente qué tan heterogéneas son las empresas del panel.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Utilice la base <code>Produc</code> del paquete <code>plm</code> (producto estatal bruto y otras variables para 48 estados de Estados Unidos, 1970-1986) y analice el orden de integración del logaritmo del producto estatal bruto, <span class="math inline">\(ln(gsp_{it})\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Construya la matriz de series por estado, como se hizo en este capítulo con la base Grunfeld, y aplique la prueba de Levin, Lin y Chu con <code>purtest(..., test = "levinlin")</code>, con especificaciones de intercepto y de tendencia.</li>
+<li>Aplique la prueba de Im, Pesaran y Shin (<code>test = "ips"</code>) con las mismas especificaciones.</li>
+<li>Repita ambas pruebas sobre las primeras diferencias de las series.</li>
+<li>Concluya el orden de integración del panel y comente si las conclusiones de ambas pruebas coinciden. En caso contrario, explique la discrepancia a la luz de las hipótesis alternativas de cada prueba.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Continúe con la serie de diferencias del logaritmo de los casos de influenza (<code>D_flu</code>) empleada en el ejemplo SETAR de este capítulo.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Aplique la prueba de linealidad de Hansen con <code>setarTest()</code> del paquete <code>tsDyn</code> y concluya si se justifica un modelo de umbral frente a un AR lineal.</li>
+<li>Estime un modelo SETAR con <code>m = 2</code> y umbral buscado automáticamente, y compárelo mediante el criterio AIC con el modelo SETAR de <code>m = 4</code> estimado en el capítulo y con un AR lineal del mismo orden (función <code>linear()</code> de <code>tsDyn</code>).</li>
+<li>Interprete los regímenes del modelo seleccionado: ¿cuántas observaciones caen en cada régimen y qué dinámica exhibe cada uno?</li>
+<li>Explique por qué un modelo lineal resulta insuficiente para una serie epidemiológica como esta, en la que los brotes generan episodios de crecimiento explosivo seguidos de reversiones rápidas.</li>
+</ol>
+</li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
@@ -1904,6 +1964,7 @@ Figura 7.3: Raíces de la matriz compañera del Panel VAR(1) estimado. El proces
 </li>
 <li><a class="nav-link" href="#ejemplo-modelos-de-cambio-de-r%C3%A9gimen-tar"><span class="header-section-number">7.5</span> Ejemplo: Modelos de Cambio de Régimen (TAR)</a></li>
 <li><a class="nav-link" href="#resumen-del-cap%C3%ADtulo-3"><span class="header-section-number">7.6</span> Resumen del capítulo</a></li>
+<li><a class="nav-link" href="#ejercicios-5"><span class="header-section-number">7.7</span> Ejercicios</a></li>
 </ul>
 
       <div class="book-extra">

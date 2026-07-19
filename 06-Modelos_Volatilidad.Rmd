@@ -671,3 +671,45 @@ La condición de estacionariedad débil requiere $\sum_{i} \alpha_i + \sum_{j} \
 
 El capítulo siguiente extiende el análisis a datos en panel, permitiendo explotar tanto la dimensión temporal como la transversal de los datos.
 
+
+## Ejercicios
+
+Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como *(Teórico)* se resuelven analíticamente; los marcados como *(Computacional)* utilizan los paquetes `quantmod`, `FinTS` y `rugarch` empleados en este capítulo. Tenga presente que los ejercicios con datos descargados en vivo producirán resultados distintos según la fecha de descarga.
+
+1. **(Teórico)** Considere un proceso ARCH(1): $\sigma^2_t = \omega + \alpha_1 U^2_{t-1}$, con $\omega > 0$ y $0 \leq \alpha_1 < 1$.
+
+    a. Defina $\nu_t = U^2_t - \sigma^2_t$ y demuestre que el cuadrado del error sigue un proceso AR(1): $U^2_t = \omega + \alpha_1 U^2_{t-1} + \nu_t$. Verifique que $\mathbb{E}[\nu_t | \Omega_{t-1}] = 0$.
+    b. A partir del inciso anterior, obtenga la varianza no condicional $\bar{\sigma}^2 = \omega / (1 - \alpha_1)$ y explique por qué se requiere $\alpha_1 < 1$.
+    c. Explique por qué las condiciones $\omega > 0$ y $\alpha_1 \geq 0$ son necesarias para que la varianza condicional esté bien definida.
+    d. Utilice la ecuación del inciso a. para explicar el fenómeno de agrupamiento de volatilidad (*volatility clustering*): ¿por qué un choque grande en $t-1$ hace más probable observar choques grandes en $t$?
+
+2. **(Teórico)** Considere un proceso GARCH(1,1): $\sigma^2_t = \omega + \alpha_1 U^2_{t-1} + \beta_1 \sigma^2_{t-1}$, con $\alpha_1 + \beta_1 < 1$.
+
+    a. Demuestre que el pronóstico de la varianza condicional a $h$ pasos satisface $\mathbb{E}[\sigma^2_{t+h} | \Omega_t] - \bar{\sigma}^2 = (\alpha_1 + \beta_1)^{h-1} \left( \sigma^2_{t+1} - \bar{\sigma}^2 \right)$, donde $\bar{\sigma}^2 = \omega / (1 - \alpha_1 - \beta_1)$.
+    b. Concluya que los pronósticos de varianza revierten geométricamente a $\bar{\sigma}^2$ y que la velocidad de reversión depende de la persistencia $\alpha_1 + \beta_1$.
+    c. Defina la *vida media* de un choque de volatilidad como el horizonte $h^*$ tal que $(\alpha_1 + \beta_1)^{h^*} = 0.5$, es decir, $h^* = ln(0.5) / ln(\alpha_1 + \beta_1)$. Calcúlela para $\alpha_1 + \beta_1 = 0.95$ y para $\alpha_1 + \beta_1 = 0.99$, y comente la diferencia.
+
+3. **(Teórico)** Sobre las extensiones asimétricas estudiadas en este capítulo:
+
+    a. Escriba la especificación de la varianza condicional del modelo GJR-GARCH(1,1), incluyendo la variable indicadora de choques negativos.
+    b. Explique qué signo se espera para el coeficiente de asimetría cuando existe efecto apalancamiento (*leverage effect*) en una serie de rendimientos accionarios y cuál es la intuición económica de dicho efecto.
+    c. Señale dos diferencias entre el GJR-GARCH y el EGARCH, incluyendo la razón por la cual el EGARCH no requiere restricciones de no negatividad sobre sus parámetros.
+    d. Explique en qué situación es preferible estimar el modelo con una distribución $t$ de Student en lugar de una normal, y cómo se relaciona esta elección con la curtosis de los rendimientos financieros.
+
+4. **(Computacional)** Replique el análisis exploratorio de este capítulo con un activo distinto al Bitcoin, por ejemplo el Ethereum: descargue la serie ETH-USD con `getSymbols()` del paquete `quantmod` (o utilice cualquier otro activo financiero líquido de su interés).
+
+    a. Calcule los rendimientos diarios como diferencias logarítmicas del precio ajustado y grafique el precio y los rendimientos. ¿Observa episodios de agrupamiento de volatilidad?
+    b. Grafique el histograma de los rendimientos junto con la densidad normal de igual media y varianza, calcule la curtosis y aplique la prueba de Jarque-Bera. ¿Presenta la serie colas pesadas?
+    c. Estime un modelo AR para la media de los rendimientos y aplique la prueba de efectos ARCH con `ArchTest()` del paquete `FinTS`. ¿Se justifica modelar la varianza condicional?
+
+5. **(Computacional)** Continúe con la serie de rendimientos del ejercicio anterior.
+
+    a. Estime un GARCH(1,1) con media AR(1) mediante `ugarchspec()` y `ugarchfit()`, primero con distribución normal (`distribution.model = "norm"`) y después con $t$ de Student (`distribution.model = "std"`). Compare ambos ajustes con `infocriteria()`.
+    b. Reporte la persistencia estimada $\hat{\alpha}_1 + \hat{\beta}_1$ y calcule la vida media de los choques de volatilidad definida en el Ejercicio 2.
+    c. Busque el orden GARCH($p$, $q$) óptimo con $p, q \leq 3$ comparando criterios de información (puede adaptar la función `Lag_Opt_GARCH()` utilizada en este capítulo). ¿Confirma la afirmación de que el GARCH(1,1) suele ser suficiente en la práctica?
+
+6. **(Computacional)** Con el modelo GARCH óptimo del ejercicio anterior:
+
+    a. Genere un pronóstico de la varianza condicional a 30 días con `ugarchforecast()` y grafique la volatilidad pronosticada ($\hat{\sigma}_{t+h}$). ¿Se observa la reversión a la media derivada en el Ejercicio 2?
+    b. Calcule el VaR al 5% para cada día del horizonte de pronóstico utilizando la varianza condicional pronosticada y la distribución estimada del modelo.
+    c. Compare el VaR dinámico del inciso anterior con el VaR incondicional calculado como el cuantil histórico del 5% de los rendimientos. ¿Qué ventaja ofrece el enfoque GARCH para la administración de riesgos?

@@ -1274,3 +1274,46 @@ el Capítulo \@ref(cap-estacionarios), en el que se estudiarán
 formalmente los procesos estocásticos estacionarios, sus propiedades y
 los métodos de estimación e identificación de modelos $AR(p)$, $MA(q)$ y
 $ARMA(p,q)$.
+
+## Ejercicios
+
+Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como *(Teórico)* se resuelven analíticamente, con lápiz y papel; los marcados como *(Computacional)* requieren replicar o extender el código desarrollado en este capítulo.
+
+1. **(Teórico)** Considere la ecuación en diferencia de primer orden $Z_t = 2 + 0.5 Z_{t-1}$, con condición inicial $Z_0 = 10$.
+
+    a. Encuentre la solución general de la ecuación mediante el método iterativo (sustitución recursiva hacia atrás).
+    b. Determine el punto de equilibrio de largo plazo $Z^*$.
+    c. Describa la trayectoria de $Z_t$ desde la condición inicial: ¿es monótona u oscilatoria?, ¿converge al equilibrio?
+    d. Repita los incisos anteriores para la ecuación $Z_t = 2 - 0.5 Z_{t-1}$ (mismo $a_0$, pero $a_1 = -0.5$) y explique en qué cambia la forma de la trayectoria.
+
+2. **(Teórico)** Considere la ecuación en diferencia de segundo orden $Z_t = 4 + 0.9 Z_{t-1} - 0.2 Z_{t-2}$.
+
+    a. Factorice el polinomio $1 - 0.9 L + 0.2 L^2 = (1 - g_1 L)(1 - g_2 L)$ y encuentre los valores de $g_1$ y $g_2$.
+    b. Verifique si se cumple la condición de convergencia $|g_i| < 1$, $i = 1, 2$.
+    c. Calcule el punto de equilibrio de largo plazo.
+    d. Plantee la solución general de la ecuación en términos de $g_1$, $g_2$ y las constantes $s_1$ y $s_2$ que dependen de las condiciones iniciales.
+
+3. **(Teórico)** Considere ahora la ecuación $Z_t = 5 + 1.2 Z_{t-1} - 0.85 Z_{t-2}$.
+
+    a. Muestre que las raíces $g_1$ y $g_2$ son un par de números complejos conjugados.
+    b. Calcule el módulo $r = \sqrt{g_1 g_2} = \sqrt{-a_2}$ y determine si la trayectoria es convergente.
+    c. Describa cualitativamente la trayectoria de $Z_t$: ¿qué papel juega la parte imaginaria de las raíces?
+    d. Calcule el punto de equilibrio de largo plazo.
+
+4. **(Teórico)** En este capítulo se argumentó que las condiciones $\sum_{i} a_i < 1$ y $|a_p| < 1$ son **necesarias** pero no **suficientes** para la convergencia de una ecuación en diferencia de orden $p$. Considere la ecuación $Z_t = a_0 - 0.5 Z_{t-1} + 0.6 Z_{t-2}$.
+
+    a. Verifique que ambas condiciones necesarias se cumplen.
+    b. Encuentre las raíces $g_1$ y $g_2$ y muestre que una de ellas es mayor que 1 en valor absoluto, por lo que la trayectoria es divergente.
+    c. Verifique que la condición suficiente $\sum_{i} |a_i| < 1$ no se cumple en este caso. ¿Qué ilustra este ejemplo sobre la diferencia entre condiciones necesarias y suficientes?
+
+5. **(Computacional)** Escriba una función en R que simule una ecuación en diferencia de primer orden $Z_t = a_0 + a_1 Z_{t-1}$ dados $a_0$, $a_1$, la condición inicial $Z_0$ y el número de periodos $T$.
+
+    a. Simule 50 periodos con $a_0 = 1$, $Z_0 = 0$ y cada uno de los valores $a_1 \in \{0.5, -0.5, 0.95, 1, 1.05\}$.
+    b. Grafique las cinco trayectorias y clasifique cada una como: convergente monótona, convergente oscilatoria, divergente o caso frontera.
+    c. Relacione cada trayectoria con la condición $|a_1| < 1$ estudiada en el capítulo. ¿Qué tiene de especial el caso $a_1 = 1$?
+
+6. **(Computacional)** Utilice el archivo `BD/Base_1_TimeSeries.xlsx` empleado en este capítulo.
+
+    a. Grafique el IGAE (columna `IGAE_2013`) y el IPC de la Bolsa Mexicana de Valores (columna `IPC_BMV`) en niveles.
+    b. Para cada serie, calcule y grafique la variación porcentual anual, es decir, la diferencia logarítmica respecto al mismo mes del año anterior: $\Delta_{12} ln(X_t) = ln(X_t) - ln(X_{t-12})$.
+    c. Compare las gráficas en niveles con las de variaciones anuales: ¿cuál de las dos transformaciones parece fluctuar alrededor de una media constante? ¿Qué componente (tendencia o estacionalidad) elimina la diferencia anual? Este contraste anticipa la discusión de estacionariedad del Capítulo \@ref(cap-estacionarios).

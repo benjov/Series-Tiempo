@@ -4043,7 +4043,67 @@ ln L(\theta) = -\frac{1}{2} \sum_{t=1}^{T} \left[ n \, ln(2 \pi) + ln |F_{t/t-1}
 <p><strong>Cointegración y VEC.</strong> Cuando series no estacionarias <span class="math inline">\(I(1)\)</span> comparten una tendencia estocástica común, se dice que cointegran. El procedimiento de Johansen determina el número de vectores de cointegración (rango de cointegración) mediante las estadísticas de la traza y del máximo valor propio. El modelo VEC (Vector de Corrección de Error) incorpora tanto la dinámica de corto plazo como el ajuste hacia el equilibrio de largo plazo.</p>
 <p><strong>Modelos ARDL.</strong> El enfoque de rezagos distribuidos autorregresivos (ARDL) de Pesaran, Shin y Smith <span class="citation">(<a href="bibliograf%C3%ADa.html#ref-pesaranshinsmith2001">2001</a>)</span> permite estimar relaciones de largo plazo incluso cuando las variables son una mezcla de <span class="math inline">\(I(0)\)</span> e <span class="math inline">\(I(1)\)</span>. La prueba de límites (<em>bounds test</em>) contrasta si existe una relación de nivel entre las variables.</p>
 <p><strong>Filtro de Kalman y Modelos Estado-Espacio.</strong> El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones, y la descomposición del error de predicción permite estimar los parámetros del sistema por máxima verosimilitud; los modelos ARMA de los capítulos anteriores son un caso particular de esta representación.</p>
-
+</div>
+<div id="ejercicios-3" class="section level2" number="5.9">
+<h2>
+<span class="header-section-number">5.9</span> Ejercicios<a class="anchor" aria-label="anchor" href="#ejercicios-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como <em>(Teórico)</em> se resuelven analíticamente; los marcados como <em>(Computacional)</em> utilizan la base <code>BD/Datos_Ad.RData</code> y las funciones de los paquetes <code>vars</code>, <code>urca</code> y <code>ARDL</code> empleadas en este capítulo.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>(Teórico)</strong> Considere el VAR(1) bivariado <span class="math inline">\(\mathbf{X}_t = \boldsymbol{\delta} + A_1 \mathbf{X}_{t-1} + \mathbf{U}_t\)</span>, con
+<span class="math inline">\(A_1 = \begin{bmatrix} 0.5 &amp; 0.3 \\ 0.2 &amp; 0.4 \end{bmatrix}\)</span> y <span class="math inline">\(\boldsymbol{\delta} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Calcule los valores propios de <span class="math inline">\(A_1\)</span> y determine si el sistema es estable (estacionario).</li>
+<li>Calcule la media incondicional del proceso, <span class="math inline">\(\boldsymbol{\mu} = (I - A_1)^{-1} \boldsymbol{\delta}\)</span>.</li>
+<li>Muestre cómo un VAR(2) bivariado puede reescribirse como un VAR(1) de dimensión 4 (forma <em>companion</em>) y enuncie la condición de estabilidad en términos de la matriz acompañante.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere un VAR(2) bivariado <span class="math inline">\(\mathbf{X}_t = A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \mathbf{U}_t\)</span> cuyas variables son <span class="math inline">\(I(1)\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Demuestre que el sistema puede reescribirse en la forma de corrección de error <span class="math inline">\(\Delta \mathbf{X}_t = \Pi \mathbf{X}_{t-1} + \Gamma_1 \Delta \mathbf{X}_{t-1} + \mathbf{U}_t\)</span>, con <span class="math inline">\(\Pi = A_1 + A_2 - I\)</span> y <span class="math inline">\(\Gamma_1 = -A_2\)</span>.</li>
+<li>Explique qué implica cada uno de los casos <span class="math inline">\(rango(\Pi) = 0\)</span>, <span class="math inline">\(rango(\Pi) = 1\)</span> y <span class="math inline">\(rango(\Pi) = 2\)</span> sobre la relación entre las dos variables.</li>
+<li>Suponga que <span class="math inline">\(rango(\Pi) = 1\)</span>, de modo que <span class="math inline">\(\Pi = \boldsymbol{\alpha} \boldsymbol{\beta}'\)</span> con <span class="math inline">\(\boldsymbol{\beta} = (1, -1)'\)</span>. Escriba las dos ecuaciones del VEC resultante e interprete el papel de los coeficientes de ajuste <span class="math inline">\(\boldsymbol{\alpha}\)</span>. ¿Qué signo esperaría para el coeficiente de ajuste de la primera ecuación y por qué?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Siguiendo la representación estado-espacio del AR(2) dada en la ecuación <a href="cap-var.html#eq:ARdosSS">(5.35)</a>, construya la representación estado-espacio de un proceso ARMA(1,1): <span class="math inline">\(Y_t = a_1 Y_{t-1} + U_t - b_1 U_{t-1}\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Proponga un vector de estado apropiado y escriba las matrices de la ecuación de transición y de la ecuación de observación.</li>
+<li>Explique la función que cumplen las etapas de predicción y de actualización del Filtro de Kalman al recorrer la muestra con esta representación.</li>
+<li>Explique cómo se utiliza la descomposición del error de predicción de la ecuación <a href="cap-var.html#eq:VeroKalman">(5.36)</a> para estimar <span class="math inline">\(a_1\)</span> y <span class="math inline">\(b_1\)</span> por máxima verosimilitud, y por qué esto implica que la función <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> de R es, en el fondo, una aplicación del Filtro de Kalman.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Utilice las series en diferencias logarítmicas del INPC, del tipo de cambio y de los CETES a 28 días (<span class="math inline">\(DLINPC_t\)</span>, <span class="math inline">\(DLTC_t\)</span> y <span class="math inline">\(DLCETE28_t\)</span>) construidas en este capítulo a partir de <code>BD/Datos_Ad.RData</code>, y estime un VAR trivariado:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Seleccione el número de rezagos con <code><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect()</a></code> (criterios AIC, HQ, SC y FPE) y justifique su elección.</li>
+<li>Estime el VAR con <code><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR()</a></code> y verifique la estabilidad del sistema con <code><a href="https://rdrr.io/pkg/vars/man/roots.html">roots()</a></code>.</li>
+<li>Aplique pruebas de causalidad de Granger con <code><a href="https://rdrr.io/pkg/vars/man/causality.html">causality()</a></code> para cada variable y resuma qué relaciones de precedencia temporal encuentra.</li>
+<li>Calcule y grafique las funciones de impulso-respuesta con <code><a href="https://rdrr.io/pkg/vars/man/irf.html">irf()</a></code> a 12 meses, con bandas de confianza bootstrap, para el efecto de un choque del tipo de cambio sobre la inflación. Interprete el resultado en términos del traspaso (<em>pass-through</em>) cambiario.</li>
+<li>Compare sus resultados con los del VAR de cinco variables estimado en este capítulo: ¿son robustas las conclusiones a la reducción del sistema?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Con las mismas tres series pero <strong>en niveles logarítmicos</strong> (<span class="math inline">\(LINPC_t\)</span>, <span class="math inline">\(LTC_t\)</span> y <span class="math inline">\(LCETE28_t\)</span>):</p>
+<ol style="list-style-type: lower-alpha">
+<li>Verifique que las tres series son <span class="math inline">\(I(1)\)</span> (puede retomar la metodología del Capítulo <a href="cap-noestacionarios.html#cap-noestacionarios">4</a>).</li>
+<li>Aplique el procedimiento de Johansen con <code><a href="https://rdrr.io/pkg/urca/man/ca.jo.html">ca.jo()</a></code>, usando la estadística de la traza y la del máximo valor propio, con <code>ecdet = "const"</code> y el número de rezagos elegido por los criterios de información. Determine el rango de cointegración.</li>
+<li>Si encuentra al menos un vector de cointegración, normalícelo respecto a <span class="math inline">\(LINPC_t\)</span> e interprete los coeficientes de largo plazo.</li>
+<li>Estime el VEC asociado con <code><a href="https://rdrr.io/pkg/urca/man/cajorls.html">cajorls()</a></code> e interprete los coeficientes de ajuste: ¿qué variables corrigen las desviaciones del equilibrio de largo plazo?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Replique la metodología ARDL de este capítulo con datos mexicanos: analice la relación entre la actividad económica y la producción industrial usando <span class="math inline">\(LIGAE_t\)</span> y <span class="math inline">\(LIPI_t\)</span> (logaritmos de <code>IGAE_Ad</code> e <code>IPI_Ad</code> de <code>BD/Datos_Ad.RData</code>).</p>
+<ol style="list-style-type: lower-alpha">
+<li>Seleccione la especificación óptima con <code><a href="https://rdrr.io/pkg/ARDL/man/auto_ardl.html">auto_ardl()</a></code>, con <span class="math inline">\(LIGAE_t\)</span> como variable dependiente y un máximo de 5 rezagos.</li>
+<li>Aplique la prueba de límites (<em>bounds test</em>) con <code><a href="https://rdrr.io/pkg/ARDL/man/bounds_f_test.html">bounds_f_test()</a></code> y concluya si existe una relación de largo plazo entre las dos series.</li>
+<li>En caso afirmativo, calcule los multiplicadores de largo plazo e interprete la elasticidad estimada.</li>
+<li>Explique qué ventaja tiene el enfoque ARDL sobre el procedimiento de Johansen cuando no se tiene certeza de que todas las series sean <span class="math inline">\(I(1)\)</span>.</li>
+</ol>
+</li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
@@ -4086,6 +4146,7 @@ ln L(\theta) = -\frac{1}{2} \sum_{t=1}^{T} \left[ n \, ln(2 \pi) + ln |F_{t/t-1}
 </ul>
 </li>
 <li><a class="nav-link" href="#resumen-del-cap%C3%ADtulo-1"><span class="header-section-number">5.8</span> Resumen del capítulo</a></li>
+<li><a class="nav-link" href="#ejercicios-3"><span class="header-section-number">5.9</span> Ejercicios</a></li>
 </ul>
 
       <div class="book-extra">

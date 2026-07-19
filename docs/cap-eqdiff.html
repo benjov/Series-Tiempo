@@ -1455,7 +1455,65 @@ el Capítulo <a href="cap-estacionarios.html#cap-estacionarios">3</a>, en el que
 formalmente los procesos estocásticos estacionarios, sus propiedades y
 los métodos de estimación e identificación de modelos <span class="math inline">\(AR(p)\)</span>, <span class="math inline">\(MA(q)\)</span> y
 <span class="math inline">\(ARMA(p,q)\)</span>.</p>
-
+</div>
+<div id="ejercicios" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Ejercicios<a class="anchor" aria-label="anchor" href="#ejercicios"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como <em>(Teórico)</em> se resuelven analíticamente, con lápiz y papel; los marcados como <em>(Computacional)</em> requieren replicar o extender el código desarrollado en este capítulo.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>(Teórico)</strong> Considere la ecuación en diferencia de primer orden <span class="math inline">\(Z_t = 2 + 0.5 Z_{t-1}\)</span>, con condición inicial <span class="math inline">\(Z_0 = 10\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Encuentre la solución general de la ecuación mediante el método iterativo (sustitución recursiva hacia atrás).</li>
+<li>Determine el punto de equilibrio de largo plazo <span class="math inline">\(Z^*\)</span>.</li>
+<li>Describa la trayectoria de <span class="math inline">\(Z_t\)</span> desde la condición inicial: ¿es monótona u oscilatoria?, ¿converge al equilibrio?</li>
+<li>Repita los incisos anteriores para la ecuación <span class="math inline">\(Z_t = 2 - 0.5 Z_{t-1}\)</span> (mismo <span class="math inline">\(a_0\)</span>, pero <span class="math inline">\(a_1 = -0.5\)</span>) y explique en qué cambia la forma de la trayectoria.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere la ecuación en diferencia de segundo orden <span class="math inline">\(Z_t = 4 + 0.9 Z_{t-1} - 0.2 Z_{t-2}\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Factorice el polinomio <span class="math inline">\(1 - 0.9 L + 0.2 L^2 = (1 - g_1 L)(1 - g_2 L)\)</span> y encuentre los valores de <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span>.</li>
+<li>Verifique si se cumple la condición de convergencia <span class="math inline">\(|g_i| &lt; 1\)</span>, <span class="math inline">\(i = 1, 2\)</span>.</li>
+<li>Calcule el punto de equilibrio de largo plazo.</li>
+<li>Plantee la solución general de la ecuación en términos de <span class="math inline">\(g_1\)</span>, <span class="math inline">\(g_2\)</span> y las constantes <span class="math inline">\(s_1\)</span> y <span class="math inline">\(s_2\)</span> que dependen de las condiciones iniciales.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere ahora la ecuación <span class="math inline">\(Z_t = 5 + 1.2 Z_{t-1} - 0.85 Z_{t-2}\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Muestre que las raíces <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span> son un par de números complejos conjugados.</li>
+<li>Calcule el módulo <span class="math inline">\(r = \sqrt{g_1 g_2} = \sqrt{-a_2}\)</span> y determine si la trayectoria es convergente.</li>
+<li>Describa cualitativamente la trayectoria de <span class="math inline">\(Z_t\)</span>: ¿qué papel juega la parte imaginaria de las raíces?</li>
+<li>Calcule el punto de equilibrio de largo plazo.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> En este capítulo se argumentó que las condiciones <span class="math inline">\(\sum_{i} a_i &lt; 1\)</span> y <span class="math inline">\(|a_p| &lt; 1\)</span> son <strong>necesarias</strong> pero no <strong>suficientes</strong> para la convergencia de una ecuación en diferencia de orden <span class="math inline">\(p\)</span>. Considere la ecuación <span class="math inline">\(Z_t = a_0 - 0.5 Z_{t-1} + 0.6 Z_{t-2}\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Verifique que ambas condiciones necesarias se cumplen.</li>
+<li>Encuentre las raíces <span class="math inline">\(g_1\)</span> y <span class="math inline">\(g_2\)</span> y muestre que una de ellas es mayor que 1 en valor absoluto, por lo que la trayectoria es divergente.</li>
+<li>Verifique que la condición suficiente <span class="math inline">\(\sum_{i} |a_i| &lt; 1\)</span> no se cumple en este caso. ¿Qué ilustra este ejemplo sobre la diferencia entre condiciones necesarias y suficientes?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Escriba una función en R que simule una ecuación en diferencia de primer orden <span class="math inline">\(Z_t = a_0 + a_1 Z_{t-1}\)</span> dados <span class="math inline">\(a_0\)</span>, <span class="math inline">\(a_1\)</span>, la condición inicial <span class="math inline">\(Z_0\)</span> y el número de periodos <span class="math inline">\(T\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Simule 50 periodos con <span class="math inline">\(a_0 = 1\)</span>, <span class="math inline">\(Z_0 = 0\)</span> y cada uno de los valores <span class="math inline">\(a_1 \in \{0.5, -0.5, 0.95, 1, 1.05\}\)</span>.</li>
+<li>Grafique las cinco trayectorias y clasifique cada una como: convergente monótona, convergente oscilatoria, divergente o caso frontera.</li>
+<li>Relacione cada trayectoria con la condición <span class="math inline">\(|a_1| &lt; 1\)</span> estudiada en el capítulo. ¿Qué tiene de especial el caso <span class="math inline">\(a_1 = 1\)</span>?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Utilice el archivo <code>BD/Base_1_TimeSeries.xlsx</code> empleado en este capítulo.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Grafique el IGAE (columna <code>IGAE_2013</code>) y el IPC de la Bolsa Mexicana de Valores (columna <code>IPC_BMV</code>) en niveles.</li>
+<li>Para cada serie, calcule y grafique la variación porcentual anual, es decir, la diferencia logarítmica respecto al mismo mes del año anterior: <span class="math inline">\(\Delta_{12} ln(X_t) = ln(X_t) - ln(X_{t-12})\)</span>.</li>
+<li>Compare las gráficas en niveles con las de variaciones anuales: ¿cuál de las dos transformaciones parece fluctuar alrededor de una media constante? ¿Qué componente (tendencia o estacionalidad) elimina la diferencia anual? Este contraste anticipa la discusión de estacionariedad del Capítulo <a href="cap-estacionarios.html#cap-estacionarios">3</a>.</li>
+</ol>
+</li>
+</ol>
 </div>
 </div>
 
@@ -1476,6 +1534,7 @@ los métodos de estimación e identificación de modelos <span class="math inlin
 </li>
 <li><a class="nav-link" href="#operador-de-rezago-l"><span class="header-section-number">2.4</span> Operador de rezago L</a></li>
 <li><a class="nav-link" href="#de-las-ecuaciones-en-diferencia-a-los-procesos-estoc%C3%A1sticos"><span class="header-section-number">2.5</span> De las Ecuaciones en Diferencia a los Procesos Estocásticos</a></li>
+<li><a class="nav-link" href="#ejercicios"><span class="header-section-number">2.6</span> Ejercicios</a></li>
 </ul>
 
       <div class="book-extra">

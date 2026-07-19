@@ -1626,7 +1626,64 @@ La condición de estacionariedad débil requiere <span class="math inline">\(\su
 <p><strong>Valor en Riesgo (VaR).</strong> El VaR al nivel <span class="math inline">\(\alpha\)</span> se obtiene como el cuantil <span class="math inline">\(\alpha\)</span> de la distribución de rendimientos. Los modelos GARCH mejoran la estimación dinámica del VaR al actualizar la varianza condicional periodo a periodo.</p>
 <p><strong>Modelos ARCH y GARCH multivariados (M-GARCH).</strong> En sistemas de <span class="math inline">\(K\)</span> variables, el M-GARCH extiende el modelo univariado apilando las varianzas y covarianzas condicionales mediante el operador <span class="math inline">\(Vech(\cdot)\)</span>. La proliferación de parámetros obliga a trabajar con versiones restringidas (matrices diagonales). La prueba M-ARCH-LM generaliza la prueba univariada y sigue una distribución <span class="math inline">\(\chi^2\)</span> bajo la hipótesis nula de no efectos ARCH.</p>
 <p>El capítulo siguiente extiende el análisis a datos en panel, permitiendo explotar tanto la dimensión temporal como la transversal de los datos.</p>
-
+</div>
+<div id="ejercicios-4" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> Ejercicios<a class="anchor" aria-label="anchor" href="#ejercicios-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como <em>(Teórico)</em> se resuelven analíticamente; los marcados como <em>(Computacional)</em> utilizan los paquetes <code>quantmod</code>, <code>FinTS</code> y <code>rugarch</code> empleados en este capítulo. Tenga presente que los ejercicios con datos descargados en vivo producirán resultados distintos según la fecha de descarga.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>(Teórico)</strong> Considere un proceso ARCH(1): <span class="math inline">\(\sigma^2_t = \omega + \alpha_1 U^2_{t-1}\)</span>, con <span class="math inline">\(\omega &gt; 0\)</span> y <span class="math inline">\(0 \leq \alpha_1 &lt; 1\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Defina <span class="math inline">\(\nu_t = U^2_t - \sigma^2_t\)</span> y demuestre que el cuadrado del error sigue un proceso AR(1): <span class="math inline">\(U^2_t = \omega + \alpha_1 U^2_{t-1} + \nu_t\)</span>. Verifique que <span class="math inline">\(\mathbb{E}[\nu_t | \Omega_{t-1}] = 0\)</span>.</li>
+<li>A partir del inciso anterior, obtenga la varianza no condicional <span class="math inline">\(\bar{\sigma}^2 = \omega / (1 - \alpha_1)\)</span> y explique por qué se requiere <span class="math inline">\(\alpha_1 &lt; 1\)</span>.</li>
+<li>Explique por qué las condiciones <span class="math inline">\(\omega &gt; 0\)</span> y <span class="math inline">\(\alpha_1 \geq 0\)</span> son necesarias para que la varianza condicional esté bien definida.</li>
+<li>Utilice la ecuación del inciso a. para explicar el fenómeno de agrupamiento de volatilidad (<em>volatility clustering</em>): ¿por qué un choque grande en <span class="math inline">\(t-1\)</span> hace más probable observar choques grandes en <span class="math inline">\(t\)</span>?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere un proceso GARCH(1,1): <span class="math inline">\(\sigma^2_t = \omega + \alpha_1 U^2_{t-1} + \beta_1 \sigma^2_{t-1}\)</span>, con <span class="math inline">\(\alpha_1 + \beta_1 &lt; 1\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Demuestre que el pronóstico de la varianza condicional a <span class="math inline">\(h\)</span> pasos satisface <span class="math inline">\(\mathbb{E}[\sigma^2_{t+h} | \Omega_t] - \bar{\sigma}^2 = (\alpha_1 + \beta_1)^{h-1} \left( \sigma^2_{t+1} - \bar{\sigma}^2 \right)\)</span>, donde <span class="math inline">\(\bar{\sigma}^2 = \omega / (1 - \alpha_1 - \beta_1)\)</span>.</li>
+<li>Concluya que los pronósticos de varianza revierten geométricamente a <span class="math inline">\(\bar{\sigma}^2\)</span> y que la velocidad de reversión depende de la persistencia <span class="math inline">\(\alpha_1 + \beta_1\)</span>.</li>
+<li>Defina la <em>vida media</em> de un choque de volatilidad como el horizonte <span class="math inline">\(h^*\)</span> tal que <span class="math inline">\((\alpha_1 + \beta_1)^{h^*} = 0.5\)</span>, es decir, <span class="math inline">\(h^* = ln(0.5) / ln(\alpha_1 + \beta_1)\)</span>. Calcúlela para <span class="math inline">\(\alpha_1 + \beta_1 = 0.95\)</span> y para <span class="math inline">\(\alpha_1 + \beta_1 = 0.99\)</span>, y comente la diferencia.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Sobre las extensiones asimétricas estudiadas en este capítulo:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Escriba la especificación de la varianza condicional del modelo GJR-GARCH(1,1), incluyendo la variable indicadora de choques negativos.</li>
+<li>Explique qué signo se espera para el coeficiente de asimetría cuando existe efecto apalancamiento (<em>leverage effect</em>) en una serie de rendimientos accionarios y cuál es la intuición económica de dicho efecto.</li>
+<li>Señale dos diferencias entre el GJR-GARCH y el EGARCH, incluyendo la razón por la cual el EGARCH no requiere restricciones de no negatividad sobre sus parámetros.</li>
+<li>Explique en qué situación es preferible estimar el modelo con una distribución <span class="math inline">\(t\)</span> de Student en lugar de una normal, y cómo se relaciona esta elección con la curtosis de los rendimientos financieros.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Replique el análisis exploratorio de este capítulo con un activo distinto al Bitcoin, por ejemplo el Ethereum: descargue la serie ETH-USD con <code><a href="https://rdrr.io/pkg/quantmod/man/getSymbols.html">getSymbols()</a></code> del paquete <code>quantmod</code> (o utilice cualquier otro activo financiero líquido de su interés).</p>
+<ol style="list-style-type: lower-alpha">
+<li>Calcule los rendimientos diarios como diferencias logarítmicas del precio ajustado y grafique el precio y los rendimientos. ¿Observa episodios de agrupamiento de volatilidad?</li>
+<li>Grafique el histograma de los rendimientos junto con la densidad normal de igual media y varianza, calcule la curtosis y aplique la prueba de Jarque-Bera. ¿Presenta la serie colas pesadas?</li>
+<li>Estime un modelo AR para la media de los rendimientos y aplique la prueba de efectos ARCH con <code><a href="https://rdrr.io/pkg/FinTS/man/ArchTest.html">ArchTest()</a></code> del paquete <code>FinTS</code>. ¿Se justifica modelar la varianza condicional?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Continúe con la serie de rendimientos del ejercicio anterior.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Estime un GARCH(1,1) con media AR(1) mediante <code><a href="https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html">ugarchspec()</a></code> y <code><a href="https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html">ugarchfit()</a></code>, primero con distribución normal (<code>distribution.model = "norm"</code>) y después con <span class="math inline">\(t\)</span> de Student (<code>distribution.model = "std"</code>). Compare ambos ajustes con <code><a href="https://rdrr.io/pkg/rugarch/man/uGARCHfit-class.html">infocriteria()</a></code>.</li>
+<li>Reporte la persistencia estimada <span class="math inline">\(\hat{\alpha}_1 + \hat{\beta}_1\)</span> y calcule la vida media de los choques de volatilidad definida en el Ejercicio 2.</li>
+<li>Busque el orden GARCH(<span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span>) óptimo con <span class="math inline">\(p, q \leq 3\)</span> comparando criterios de información (puede adaptar la función <code>Lag_Opt_GARCH()</code> utilizada en este capítulo). ¿Confirma la afirmación de que el GARCH(1,1) suele ser suficiente en la práctica?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Con el modelo GARCH óptimo del ejercicio anterior:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Genere un pronóstico de la varianza condicional a 30 días con <code><a href="https://rdrr.io/pkg/rugarch/man/ugarchforecast-methods.html">ugarchforecast()</a></code> y grafique la volatilidad pronosticada (<span class="math inline">\(\hat{\sigma}_{t+h}\)</span>). ¿Se observa la reversión a la media derivada en el Ejercicio 2?</li>
+<li>Calcule el VaR al 5% para cada día del horizonte de pronóstico utilizando la varianza condicional pronosticada y la distribución estimada del modelo.</li>
+<li>Compare el VaR dinámico del inciso anterior con el VaR incondicional calculado como el cuantil histórico del 5% de los rendimientos. ¿Qué ventaja ofrece el enfoque GARCH para la administración de riesgos?</li>
+</ol>
+</li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
@@ -1655,6 +1712,7 @@ La condición de estacionariedad débil requiere <span class="math inline">\(\su
 <li><a class="nav-link" href="#modelos-arch-y-garch-multivariados"><span class="header-section-number">6.4</span> Modelos ARCH y GARCH Multivariados</a></li>
 <li><a class="nav-link" href="#pruebas-para-detectar-efectos-arch"><span class="header-section-number">6.5</span> Pruebas para detectar efectos ARCH</a></li>
 <li><a class="nav-link" href="#resumen-del-cap%C3%ADtulo-2"><span class="header-section-number">6.6</span> Resumen del capítulo</a></li>
+<li><a class="nav-link" href="#ejercicios-4"><span class="header-section-number">6.7</span> Ejercicios</a></li>
 </ul>
 
       <div class="book-extra">

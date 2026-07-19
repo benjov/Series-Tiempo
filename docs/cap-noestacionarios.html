@@ -1231,6 +1231,64 @@ C (ambos)
 <li><p><strong>En todos los casos</strong>: reportar los tres modelos (A, B y C) y los valores críticos al 1%, 5% y 10% para transparencia y replicabilidad.</p></li>
 </ol>
 </div>
+<div id="ejercicios-2" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Ejercicios<a class="anchor" aria-label="anchor" href="#ejercicios-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como <em>(Teórico)</em> se resuelven analíticamente; los marcados como <em>(Computacional)</em> utilizan las funciones del paquete <code>urca</code> empleadas en este capítulo y la base <code>BD/Datos_Ad.RData</code>.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>(Teórico)</strong> Considere una caminata aleatoria con deriva: <span class="math inline">\(X_t = \delta + X_{t-1} + U_t\)</span>, con condición inicial <span class="math inline">\(X_0\)</span> conocida y <span class="math inline">\(U_t\)</span> un proceso puramente aleatorio con media cero y varianza <span class="math inline">\(\sigma^2\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Mediante sustitución recursiva, demuestre que <span class="math inline">\(X_t = X_0 + \delta t + \sum_{i=1}^{t} U_i\)</span>.</li>
+<li>Calcule <span class="math inline">\(\mathbb{E}[X_t]\)</span> y <span class="math inline">\(Var[X_t]\)</span> y explique por qué el proceso viola la definición de estacionariedad débil.</li>
+<li>Muestre que un choque <span class="math inline">\(U_s\)</span> ocurrido en el periodo <span class="math inline">\(s &lt; t\)</span> tiene un efecto <strong>permanente</strong> sobre <span class="math inline">\(X_t\)</span>, y contraste este resultado con el efecto de un choque en un proceso AR(1) estacionario con <span class="math inline">\(|a_1| &lt; 1\)</span>.</li>
+<li>Explique por qué la primera diferencia <span class="math inline">\(\Delta X_t\)</span> sí es estacionaria y qué significa, en consecuencia, que <span class="math inline">\(X_t\)</span> sea un proceso <span class="math inline">\(I(1)\)</span>.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Considere un proceso estacionario alrededor de una tendencia determinista (TS): <span class="math inline">\(X_t = \alpha + \beta t + U_t\)</span>, con <span class="math inline">\(U_t\)</span> puramente aleatorio.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Muestre que el proceso que resulta de remover la tendencia, <span class="math inline">\(X_t - \alpha - \beta t\)</span>, es estacionario.</li>
+<li>Suponga que, en lugar de remover la tendencia, se decide diferenciar la serie. Muestre que <span class="math inline">\(\Delta X_t = \beta + U_t - U_{t-1}\)</span>, es decir, un proceso MA(1) con coeficiente unitario, que no es invertible.</li>
+<li>Con base en los incisos anteriores, explique por qué es importante distinguir entre procesos TS y procesos DS (estacionarios en diferencias) antes de transformar una serie, y qué consecuencias tiene sobrediferenciar.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Teórico)</strong> Las pruebas ADF y KPSS plantean hipótesis nulas opuestas, por lo que suelen aplicarse de forma conjunta. Construya una tabla de <span class="math inline">\(2 \times 2\)</span> con los cuatro resultados posibles de aplicar ambas pruebas a una misma serie (rechazar / no rechazar en cada prueba) y, para cada celda:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Indique la conclusión que se obtendría sobre el orden de integración de la serie.</li>
+<li>Señale cuáles combinaciones son concluyentes y cuáles resultan contradictorias.</li>
+<li>Explique en qué caso la prueba de Zivot-Andrews ayudaría a resolver la aparente contradicción y por qué un quiebre estructural no modelado sesga a las pruebas ADF y PP hacia el no rechazo de la raíz unitaria.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Diseñe un ejercicio de Monte Carlo para estudiar el comportamiento de la prueba Dickey-Fuller.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Simule 500 caminatas aleatorias puras con <span class="math inline">\(T = 250\)</span> y, a cada una, aplique <code><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df()</a></code> con especificación <code>type = "drift"</code> y <code>lags = 0</code>. Calcule la proporción de réplicas en las que el estadístico rechaza la hipótesis nula al 5%. ¿Se aproxima esa proporción al tamaño teórico de la prueba?</li>
+<li>Repita el ejercicio simulando procesos AR(1) estacionarios con <span class="math inline">\(a_1 = 0.95\)</span>. La proporción de rechazos estima ahora la <strong>potencia</strong> de la prueba. ¿Qué tan frecuentemente detecta la prueba que la serie es estacionaria?</li>
+<li>Repita el inciso anterior con <span class="math inline">\(T = 1000\)</span> y comente cómo cambia la potencia. ¿Qué implica este resultado para el trabajo aplicado con muestras cortas?</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Utilice la serie del IGAE contenida en <code>BD/Datos_Ad.RData</code> (columna <code>IGAE_Ad</code>, serie desestacionalizada) y construya su logaritmo, <span class="math inline">\(LIGAE_t\)</span>. Determine el orden de integración de la serie siguiendo la guía de decisión de este capítulo:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Grafique la serie en niveles y en primeras diferencias.</li>
+<li>Aplique las pruebas ADF (<code><a href="https://rdrr.io/pkg/urca/man/ur.df.html">ur.df()</a></code>), PP (<code><a href="https://rdrr.io/pkg/urca/man/ur.pp.html">ur.pp()</a></code>) y KPSS (<code><a href="https://rdrr.io/pkg/urca/man/ur.kpss.html">ur.kpss()</a></code>) en niveles, considerando especificaciones con constante y con constante y tendencia. Reporte estadísticos y valores críticos al 1%, 5% y 10%.</li>
+<li>Repita las pruebas sobre la primera diferencia de la serie.</li>
+<li>Concluya el orden de integración de <span class="math inline">\(LIGAE_t\)</span> y justifique su respuesta con base en el conjunto de resultados.</li>
+</ol>
+</li>
+<li>
+<p><strong>(Computacional)</strong> Continúe con la serie <span class="math inline">\(LIGAE_t\)</span> del ejercicio anterior. La economía mexicana registró contracciones severas en 2008-2009 y en 2020, por lo que es razonable sospechar la presencia de quiebres estructurales.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Aplique la prueba de Zivot-Andrews (<code><a href="https://rdrr.io/pkg/urca/man/ur.za.html">ur.za()</a></code>) con los tres modelos: intercepto, tendencia y ambos.</li>
+<li>Reporte, para cada modelo, el estadístico de prueba, los valores críticos y la fecha de quiebre estimada. ¿Coincide la fecha detectada con alguno de los episodios mencionados?</li>
+<li>Compare la conclusión de la prueba ZA con la que obtuvo mediante ADF en el ejercicio anterior. ¿Cambia la evidencia sobre la raíz unitaria una vez que se permite un quiebre estructural?</li>
+</ol>
+</li>
+</ol>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="cap-estacionarios.html"><span class="header-section-number">3</span> Procesos Estacionarios y Modelos Univariados</a></div>
@@ -1251,6 +1309,7 @@ C (ambos)
 </ul>
 </li>
 <li><a class="nav-link" href="#resumen-y-gu%C3%ADa-de-decisi%C3%B3n"><span class="header-section-number">4.4</span> Resumen y Guía de Decisión</a></li>
+<li><a class="nav-link" href="#ejercicios-2"><span class="header-section-number">4.5</span> Ejercicios</a></li>
 </ul>
 
       <div class="book-extra">

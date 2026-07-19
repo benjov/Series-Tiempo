@@ -197,6 +197,20 @@ Lectura fina de los 7 capítulos: redacción, errores matemáticos y desfases en
 
 **Redacción y estilo (selección):** referencias a "el curso/la clase/Clase 13/15/18/GoogleDrive" eliminadas (es un libro); pasos del ejemplo ARDL y títulos de gráficas traducidos al español (flu, Grunfeld, GNP↛"Gross Domestic Product"); caption de fig3 (cap. 02) tenía los paneles invertidos; ylab de tasas de crecimiento decía "Pesos X Dolar"; tabla ACF/PACF (`tab:AcAcp`) reescrita ("se corta después del rezago q" vs "decae gradualmente"); descripción de capítulos en la intro actualizada (Kalman, extensiones GARCH, cointegración en panel, DiD); resumen del cap. 07 ampliado (sesgo de Nickell, Hansen, cointegración en panel); cita formal a Hamilton [-@hamilton1989] en MSM; decenas de typos y frases mal armadas.
 
+### Ejercicios de fin de capítulo (2026-07-18, sesión 11)
+
+- [x] ~~El libro prometía "ejemplos y ejercicios" en la intro (`01-intro.Rmd:40`) pero ningún capítulo tenía ejercicios~~ ✓ Agregada sección `## Ejercicios` al final de los caps. 02–07 (después del resumen/guía de decisión): 6 ejercicios por capítulo con etiqueta **(Teórico)**/**(Computacional)** (02: 4T+2C; 03–07: 3T+3C). **Sin soluciones** en el libro (decisión de la sesión: solucionario opcional como scripts en el repo, no impreso). Los coautores revisarán el contenido.
+- Diseño: los teóricos usan la notación exacta de cada capítulo ($g_i$ y $a_i$ en 02; $b_i$ con signo negativo en MA de 03; $\omega, \alpha, \beta$ en 06; $\rho_i$ de `eq:eqARPanel` en 07) y los computacionales solo requieren datos ya en `BD/` o bases de `plm` (Grunfeld, Produc) — series *distintas* a las de los ejemplos del texto: `Pax_Nal` (03), `IGAE_Ad` (04), subsistema INPC/TC/CETE28 y ARDL IGAE~IPI (05), ETH-USD (06), `Produc`/`gsp` y `D_flu` con `setarTest` (07).
+- Verificado: 36 ejercicios; pandoc compila las secciones sin errores (listas anidadas a./b./c., math inline con `bmatrix`); referencias cruzadas usadas existen (`tab:AcAcp`, `eq:ARdosSS`, `eq:VeroKalman`, `eq:eqARPanel`); factibilidad probada en R (ADF/ZA sobre LIGAE — ZA detecta quiebre en mar-2020; `purtest` LLC/IPS sobre log(gsp)). Solo texto Markdown, **sin chunks nuevos** → no afecta tiempos de build ni cachés.
+- Nota de contenido para revisión de coautores: en 03-ej.4 se advierte la convención de signos de `arima.sim()` (contraria a los $b_i$ del libro); en 02-ej.4 el contraejemplo $a_1=-0.5, a_2=0.6$ muestra que $\sum a_i < 1$ y $|a_p|<1$ son solo necesarias.
+
+### Limpieza del historial git: atribución de Claude eliminada (2026-07-18, sesión 11)
+
+- [x] ~~GitHub mostraba a Claude como colaborador del repo~~ ✓ Causa: 29 de 61 commits llevaban el trailer `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`. Historial reescrito con `git filter-branch --msg-filter` (solo mensajes: árboles, autores y fechas intactos — verificado con el hash del árbol de HEAD antes/después) y publicado con `git push --force-with-lease` (2026-07-18, confirmado). Autores restantes: benjov y gerardorg2 únicamente.
+- **Importante para colaboradores**: los SHA de todos los commits cambiaron. Cualquier clon anterior al 2026-07-18 debe resincronizarse con `git fetch origin && git reset --hard origin/main` (respaldando antes trabajo local no subido). Aplica a gerardorg2.
+- Prevención: Claude Code configurado globalmente (`~/.claude/settings.json`, `attribution.commit: ""`) para no volver a agregar trailers de coautoría. Convención del proyecto: los commits los hace el coordinador, sin atribución de herramientas.
+- Respaldos temporales (rama local y copia en /tmp) eliminados tras confirmar el push; `reflog` purgado y `gc` ejecutado.
+
 ### Hallazgos de revisión 2026-07-08 (pendientes)
 
 - [ ] **Nota menor**: los `[-@key]` dentro de `fig.cap` se renderizan bien en el caption visible (HTML y PDF) pero quedan literales en el atributo `alt` de la imagen — cosmético, sin impacto para el lector.

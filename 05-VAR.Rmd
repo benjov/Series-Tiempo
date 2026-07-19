@@ -2274,3 +2274,48 @@ En este capítulo extendimos el análisis univariado a sistemas multivariados, i
 
 **Filtro de Kalman y Modelos Estado-Espacio.** El Filtro de Kalman es un algoritmo recursivo de dos pasos —predicción y actualización— que estima variables de estado no observables a partir de observaciones ruidosas. Sus aplicaciones incluyen la estimación de brechas del producto, tendencias estocásticas y parámetros variables en el tiempo. El Suavizador de Kalman extiende el filtro al usar toda la información muestral para refinar las estimaciones, y la descomposición del error de predicción permite estimar los parámetros del sistema por máxima verosimilitud; los modelos ARMA de los capítulos anteriores son un caso particular de esta representación.
 
+
+## Ejercicios
+
+Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como *(Teórico)* se resuelven analíticamente; los marcados como *(Computacional)* utilizan la base `BD/Datos_Ad.RData` y las funciones de los paquetes `vars`, `urca` y `ARDL` empleadas en este capítulo.
+
+1. **(Teórico)** Considere el VAR(1) bivariado $\mathbf{X}_t = \boldsymbol{\delta} + A_1 \mathbf{X}_{t-1} + \mathbf{U}_t$, con
+$A_1 = \begin{bmatrix} 0.5 & 0.3 \\ 0.2 & 0.4 \end{bmatrix}$ y $\boldsymbol{\delta} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$.
+
+    a. Calcule los valores propios de $A_1$ y determine si el sistema es estable (estacionario).
+    b. Calcule la media incondicional del proceso, $\boldsymbol{\mu} = (I - A_1)^{-1} \boldsymbol{\delta}$.
+    c. Muestre cómo un VAR(2) bivariado puede reescribirse como un VAR(1) de dimensión 4 (forma *companion*) y enuncie la condición de estabilidad en términos de la matriz acompañante.
+
+2. **(Teórico)** Considere un VAR(2) bivariado $\mathbf{X}_t = A_1 \mathbf{X}_{t-1} + A_2 \mathbf{X}_{t-2} + \mathbf{U}_t$ cuyas variables son $I(1)$.
+
+    a. Demuestre que el sistema puede reescribirse en la forma de corrección de error $\Delta \mathbf{X}_t = \Pi \mathbf{X}_{t-1} + \Gamma_1 \Delta \mathbf{X}_{t-1} + \mathbf{U}_t$, con $\Pi = A_1 + A_2 - I$ y $\Gamma_1 = -A_2$.
+    b. Explique qué implica cada uno de los casos $rango(\Pi) = 0$, $rango(\Pi) = 1$ y $rango(\Pi) = 2$ sobre la relación entre las dos variables.
+    c. Suponga que $rango(\Pi) = 1$, de modo que $\Pi = \boldsymbol{\alpha} \boldsymbol{\beta}'$ con $\boldsymbol{\beta} = (1, -1)'$. Escriba las dos ecuaciones del VEC resultante e interprete el papel de los coeficientes de ajuste $\boldsymbol{\alpha}$. ¿Qué signo esperaría para el coeficiente de ajuste de la primera ecuación y por qué?
+
+3. **(Teórico)** Siguiendo la representación estado-espacio del AR(2) dada en la ecuación \@ref(eq:ARdosSS), construya la representación estado-espacio de un proceso ARMA(1,1): $Y_t = a_1 Y_{t-1} + U_t - b_1 U_{t-1}$.
+
+    a. Proponga un vector de estado apropiado y escriba las matrices de la ecuación de transición y de la ecuación de observación.
+    b. Explique la función que cumplen las etapas de predicción y de actualización del Filtro de Kalman al recorrer la muestra con esta representación.
+    c. Explique cómo se utiliza la descomposición del error de predicción de la ecuación \@ref(eq:VeroKalman) para estimar $a_1$ y $b_1$ por máxima verosimilitud, y por qué esto implica que la función `arima()` de R es, en el fondo, una aplicación del Filtro de Kalman.
+
+4. **(Computacional)** Utilice las series en diferencias logarítmicas del INPC, del tipo de cambio y de los CETES a 28 días ($DLINPC_t$, $DLTC_t$ y $DLCETE28_t$) construidas en este capítulo a partir de `BD/Datos_Ad.RData`, y estime un VAR trivariado:
+
+    a. Seleccione el número de rezagos con `VARselect()` (criterios AIC, HQ, SC y FPE) y justifique su elección.
+    b. Estime el VAR con `VAR()` y verifique la estabilidad del sistema con `roots()`.
+    c. Aplique pruebas de causalidad de Granger con `causality()` para cada variable y resuma qué relaciones de precedencia temporal encuentra.
+    d. Calcule y grafique las funciones de impulso-respuesta con `irf()` a 12 meses, con bandas de confianza bootstrap, para el efecto de un choque del tipo de cambio sobre la inflación. Interprete el resultado en términos del traspaso (*pass-through*) cambiario.
+    e. Compare sus resultados con los del VAR de cinco variables estimado en este capítulo: ¿son robustas las conclusiones a la reducción del sistema?
+
+5. **(Computacional)** Con las mismas tres series pero **en niveles logarítmicos** ($LINPC_t$, $LTC_t$ y $LCETE28_t$):
+
+    a. Verifique que las tres series son $I(1)$ (puede retomar la metodología del Capítulo \@ref(cap-noestacionarios)).
+    b. Aplique el procedimiento de Johansen con `ca.jo()`, usando la estadística de la traza y la del máximo valor propio, con `ecdet = "const"` y el número de rezagos elegido por los criterios de información. Determine el rango de cointegración.
+    c. Si encuentra al menos un vector de cointegración, normalícelo respecto a $LINPC_t$ e interprete los coeficientes de largo plazo.
+    d. Estime el VEC asociado con `cajorls()` e interprete los coeficientes de ajuste: ¿qué variables corrigen las desviaciones del equilibrio de largo plazo?
+
+6. **(Computacional)** Replique la metodología ARDL de este capítulo con datos mexicanos: analice la relación entre la actividad económica y la producción industrial usando $LIGAE_t$ y $LIPI_t$ (logaritmos de `IGAE_Ad` e `IPI_Ad` de `BD/Datos_Ad.RData`).
+
+    a. Seleccione la especificación óptima con `auto_ardl()`, con $LIGAE_t$ como variable dependiente y un máximo de 5 rezagos.
+    b. Aplique la prueba de límites (*bounds test*) con `bounds_f_test()` y concluya si existe una relación de largo plazo entre las dos series.
+    c. En caso afirmativo, calcule los multiplicadores de largo plazo e interprete la elasticidad estimada.
+    d. Explique qué ventaja tiene el enfoque ARDL sobre el procedimiento de Johansen cuando no se tiene certeza de que todas las series sean $I(1)$.

@@ -609,3 +609,45 @@ La convención en la práctica econométrica es aplicar las pruebas siguiendo el
 
 5. **En todos los casos**: reportar los tres modelos (A, B y C) y los valores críticos al 1\%, 5\% y 10\% para transparencia y replicabilidad.
 
+
+## Ejercicios
+
+Los siguientes ejercicios combinan preguntas teóricas con aplicaciones en R. Los marcados como *(Teórico)* se resuelven analíticamente; los marcados como *(Computacional)* utilizan las funciones del paquete `urca` empleadas en este capítulo y la base `BD/Datos_Ad.RData`.
+
+1. **(Teórico)** Considere una caminata aleatoria con deriva: $X_t = \delta + X_{t-1} + U_t$, con condición inicial $X_0$ conocida y $U_t$ un proceso puramente aleatorio con media cero y varianza $\sigma^2$.
+
+    a. Mediante sustitución recursiva, demuestre que $X_t = X_0 + \delta t + \sum_{i=1}^{t} U_i$.
+    b. Calcule $\mathbb{E}[X_t]$ y $Var[X_t]$ y explique por qué el proceso viola la definición de estacionariedad débil.
+    c. Muestre que un choque $U_s$ ocurrido en el periodo $s < t$ tiene un efecto **permanente** sobre $X_t$, y contraste este resultado con el efecto de un choque en un proceso AR(1) estacionario con $|a_1| < 1$.
+    d. Explique por qué la primera diferencia $\Delta X_t$ sí es estacionaria y qué significa, en consecuencia, que $X_t$ sea un proceso $I(1)$.
+
+2. **(Teórico)** Considere un proceso estacionario alrededor de una tendencia determinista (TS): $X_t = \alpha + \beta t + U_t$, con $U_t$ puramente aleatorio.
+
+    a. Muestre que el proceso que resulta de remover la tendencia, $X_t - \alpha - \beta t$, es estacionario.
+    b. Suponga que, en lugar de remover la tendencia, se decide diferenciar la serie. Muestre que $\Delta X_t = \beta + U_t - U_{t-1}$, es decir, un proceso MA(1) con coeficiente unitario, que no es invertible.
+    c. Con base en los incisos anteriores, explique por qué es importante distinguir entre procesos TS y procesos DS (estacionarios en diferencias) antes de transformar una serie, y qué consecuencias tiene sobrediferenciar.
+
+3. **(Teórico)** Las pruebas ADF y KPSS plantean hipótesis nulas opuestas, por lo que suelen aplicarse de forma conjunta. Construya una tabla de $2 \times 2$ con los cuatro resultados posibles de aplicar ambas pruebas a una misma serie (rechazar / no rechazar en cada prueba) y, para cada celda:
+
+    a. Indique la conclusión que se obtendría sobre el orden de integración de la serie.
+    b. Señale cuáles combinaciones son concluyentes y cuáles resultan contradictorias.
+    c. Explique en qué caso la prueba de Zivot-Andrews ayudaría a resolver la aparente contradicción y por qué un quiebre estructural no modelado sesga a las pruebas ADF y PP hacia el no rechazo de la raíz unitaria.
+
+4. **(Computacional)** Diseñe un ejercicio de Monte Carlo para estudiar el comportamiento de la prueba Dickey-Fuller.
+
+    a. Simule 500 caminatas aleatorias puras con $T = 250$ y, a cada una, aplique `ur.df()` con especificación `type = "drift"` y `lags = 0`. Calcule la proporción de réplicas en las que el estadístico rechaza la hipótesis nula al 5%. ¿Se aproxima esa proporción al tamaño teórico de la prueba?
+    b. Repita el ejercicio simulando procesos AR(1) estacionarios con $a_1 = 0.95$. La proporción de rechazos estima ahora la **potencia** de la prueba. ¿Qué tan frecuentemente detecta la prueba que la serie es estacionaria?
+    c. Repita el inciso anterior con $T = 1000$ y comente cómo cambia la potencia. ¿Qué implica este resultado para el trabajo aplicado con muestras cortas?
+
+5. **(Computacional)** Utilice la serie del IGAE contenida en `BD/Datos_Ad.RData` (columna `IGAE_Ad`, serie desestacionalizada) y construya su logaritmo, $LIGAE_t$. Determine el orden de integración de la serie siguiendo la guía de decisión de este capítulo:
+
+    a. Grafique la serie en niveles y en primeras diferencias.
+    b. Aplique las pruebas ADF (`ur.df()`), PP (`ur.pp()`) y KPSS (`ur.kpss()`) en niveles, considerando especificaciones con constante y con constante y tendencia. Reporte estadísticos y valores críticos al 1%, 5% y 10%.
+    c. Repita las pruebas sobre la primera diferencia de la serie.
+    d. Concluya el orden de integración de $LIGAE_t$ y justifique su respuesta con base en el conjunto de resultados.
+
+6. **(Computacional)** Continúe con la serie $LIGAE_t$ del ejercicio anterior. La economía mexicana registró contracciones severas en 2008-2009 y en 2020, por lo que es razonable sospechar la presencia de quiebres estructurales.
+
+    a. Aplique la prueba de Zivot-Andrews (`ur.za()`) con los tres modelos: intercepto, tendencia y ambos.
+    b. Reporte, para cada modelo, el estadístico de prueba, los valores críticos y la fecha de quiebre estimada. ¿Coincide la fecha detectada con alguno de los episodios mencionados?
+    c. Compare la conclusión de la prueba ZA con la que obtuvo mediante ADF en el ejercicio anterior. ¿Cambia la evidencia sobre la raíz unitaria una vez que se permite un quiebre estructural?
